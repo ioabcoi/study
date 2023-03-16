@@ -1,0 +1,187 @@
+    <!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <title>tab_scroll</title>
+</head>
+<body>
+
+<!-- event -->
+<style type="text/css">
+    #wrap {overflow:hidden;position:relative;width:100%;min-width:1080px;background:#fff;letter-spacing:-0.04em;}
+    #wrap .inner {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:column;-webkit-flex-direction:column;box-sizing:border-box;width:100%;min-height:1500px;color:#fff;font-size:50px;}
+    #wrap .top {background:#333;}
+    #wrap .scroll_out {width:100%;}
+    #wrap .scroll_out1 {background:#e07667;}
+    #wrap .scroll_out2 {background:#e29632;}
+    #wrap .scroll_out3 {background:#f7e712;}
+    #wrap .scroll_out4 {background:#2574db;}
+    #wrap .scroll_in {width:100%;}
+    #wrap .scroll_in1 {background:#108b39;}
+    #wrap .scroll_in2 {background:#2374dd;}
+    #wrap .scroll_in3 {background:#141c94;}
+    #wrap .bottom {background:#333;}
+
+    #wrap .quick_out {position:fixed;z-index:2;right:-150px;top:0;width:100px;height:100%;background:#333;flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;-webkit-flex-direction:column;box-sizing:border-box;-webkit-transition:all 0.10s ease-in-out;transition:all 0.10s ease-in-out;}
+    #wrap .quick_out ul {width:100%;}
+    #wrap .quick_out ul li a {display:-webkit-flex;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;height:125px;background:#333;color:#fff;font-size:20px;text-decoration:none;}
+    #wrap .quick_out ul li.on a {background:#333;color:#ff0;text-decoration:underline;}
+    #wrap .quick_out.fixed {position:fixed;right:0;}
+
+    #wrap .quick_in {position:relative;width:100%;height:100px;}
+    #wrap .quick_in ul {position:absolute;left:50%;top:0;width:1080px;height:100px;margin-left:-540px;display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:row;-webkit-flex-direction:row;-webkit-transition:all 0.10s ease-in-out;transition:all 0.10s ease-in-out;}
+    #wrap .quick_in ul li {flex:1;}
+    #wrap .quick_in ul li a {display:-webkit-flex;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;height:100px;background:#333;color:#fff;font-size:20px;text-decoration:none;}
+    #wrap .quick_in ul li.on a {background:#333;color:#ff0;text-decoration:underline;}
+    #wrap .quick_in:before {position:absolute;left:0;top:0;right:0;content:'';display:block;width:100%;height:100px;background:#333;}
+    #wrap .quick_in.fixed > ul,
+    #wrap .quick_in.fixed:before {position:fixed;}
+
+</style>
+<!-- wrap -->
+<div id="wrap">
+    <!-- top -->
+    <div class="cont_box top">
+        <div class="inner">
+            top
+        </div>
+    </div>
+    <!-- // top -->
+    <!-- cont_wrap -->
+    <div class="cont_wrap">
+        <!-- cont1 -->
+        <div class="scroll_out scroll_out1">
+            <!-- quick_out -->
+            <div class="quick_out">
+                <ul>
+                    <li><a href="javascript:scrollMove('.scroll_out1', 0);">out1</a></li>
+                    <li><a href="javascript:scrollMove('.scroll_out2', 0);">out2</a></li>
+                    <li><a href="javascript:scrollMove('.scroll_out3', 0);">out3</a></li>
+                    <li><a href="javascript:scrollMove('.scroll_out4', 0);">out4</a></li>
+                </ul>
+            </div>
+            <!-- // quick_out -->
+            <div class="inner">
+                scroll_out1
+            </div>
+        </div>
+        <!-- // cont1 -->
+        <!-- cont2 -->
+        <div class="scroll_out scroll_out2">
+            <div class="inner">
+                scroll_out2
+            </div>
+            <!-- cont1 -->
+            <div class="scroll_in scroll_in1">
+                <!-- quick_in -->
+                <div class="quick_in">
+                    <ul>
+                        <li><a href="javascript:scrollMove('.scroll_in1', 0);">in1</a></li>
+                        <li><a href="javascript:scrollMove('.scroll_in2', 0);">in2</a></li>
+                        <li><a href="javascript:scrollMove('.scroll_in3', 0);">in3</a></li>
+                    </ul>
+                </div>
+                <!-- // quick_in -->
+                <div class="inner">
+                    scroll_in1
+                </div>
+            </div>
+            <!-- // cont1 -->
+            <!-- cont2 -->
+            <div class="scroll_in scroll_in2">
+                <div class="inner">
+                    scroll_in2
+                </div>
+            </div>
+            <!-- // cont2 -->
+            <!-- cont3 -->
+            <div class="scroll_in scroll_in3">
+                <div class="inner">
+                    scroll_in3
+                </div>
+            </div>
+            <!-- // cont3 -->
+        </div>
+        <!-- // cont2 -->
+        <!-- cont3 -->
+        <div class="scroll_out scroll_out3">
+            <div class="inner">
+                scroll_out3
+            </div>
+        </div>
+        <!-- // cont3 -->
+        <!-- cont4 -->
+        <div class="scroll_out scroll_out4">
+            <div class="inner">
+                scroll_out4
+            </div>
+        </div>
+        <!-- // cont4 -->
+    </div>
+    <!-- // cont_wrap -->
+    <!-- bottom -->
+    <div class="cont_box bottom">
+        <div class="inner">
+            bottom
+        </div>
+    </div>
+    <!-- // bottom -->
+</div>
+<!-- // wrap --> 
+<script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+    // scroll_function
+    jQuery(window).scroll(function() {
+        scrollEvent();
+    });
+
+    // scroll_move
+    function scrollMove(target, margin){
+        jQuery('html, body').animate({ scrollTop : (jQuery(target).offset().top) + margin }, 750, 'swing');
+    }
+
+    // scroll_event
+    function scrollEvent() {
+        var scroll_top = jQuery(window).scrollTop();
+
+        // scroll_tab
+        function scrollTab(start, end, target) {
+            let start_top = jQuery(start).offset().top;
+            let end_top = jQuery(end).offset().top + jQuery(end).outerHeight();
+            if (scroll_top >= start_top && scroll_top < end_top) {
+                jQuery(target).addClass('fixed');
+            } else {
+                jQuery(target).removeClass('fixed');
+            }
+        }
+
+        // scroll_cont
+        function scrollCont(conts, target) {
+            jQuery(conts).each(function(i){
+                let start_top = jQuery(this).offset().top;
+                let end_top = start_top + jQuery(this).outerHeight();
+                if (scroll_top >= start_top && scroll_top < end_top) {
+                    jQuery(target).find('ul li').removeClass('on').eq(i).addClass('on');
+                }
+            });
+        }
+        
+        // out
+        scrollTab('.scroll_out1', '.scroll_out4', '.quick_out');
+        scrollCont('.scroll_out', '.quick_out');
+
+        // in
+        scrollTab('.scroll_in1', '.scroll_in3', '.quick_in');
+        scrollCont('.scroll_in', '.quick_in');
+    }
+    
+</script>
+<!-- // event -->
+
+</body>
+</html>

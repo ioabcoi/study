@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+}
+function draw(){
+	ctx.beginPath();
+	ctx.moveTo(14, 152);
+	ctx.arcTo(90, 0, 180, 180, 20);
+	ctx.arcTo(180, 180, 0, 180, 20);
+	ctx.arcTo(0, 180, 90, 0, 20);
+	ctx.stroke();
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+	<div>
+		<img src="https://www.w3schools.com/tags/img_canvas_arcto.png" alt="" /><br />
+		context.arcTo(x1, y1, x2, y2, r);
+	</div>
+</div>
+</body>
+</html>

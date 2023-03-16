@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+}
+function draw(){
+	ctx.beginPath();
+	ctx.moveTo(100, 10);
+	ctx.bezierCurveTo(300, 10, 10, 300, 200, 150);
+	ctx.stroke();
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+	<div>
+		<img src="https://www.w3schools.com/tags/img_beziercurve.gif" alt="" /><br />
+		context.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);<br /><br />
+
+		<div style="float:left;background-color:#ff9000;width:4px;height:4px;margin:5px;"></div>
+		Start point: moveTo(<strong>20, 20</strong>)<br />
+
+		<div style="float:left;background-color:#FF0000;width:4px;height:4px;margin:5px;"></div>
+		Control point 1: bezierCurveTo(<strong>20, 100</strong>, 200, 100, 200, 20)<br />
+
+		<div style="float:left;background-color:#FF0000;width:4px;height:4px;margin:5px;"></div>
+		Control point 2: bezierCurveTo(20, 100, <strong>200, 100</strong>, 200, 20)<br />
+
+		<div style="float:left;background-color:#b0ef4e;width:4px;height:4px;margin:5px;"></div>
+		End point: bezierCurveTo(20, 100, 200, 100, <strong>200, 20</strong>)<br />
+	</div>
+</div>
+</body>
+</html>

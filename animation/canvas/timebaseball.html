@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+var x = 10, y = 10;	//현재 위치
+var dx = 1, dy = 1;	//이동 방향
+var vx = 100, vy = 60;	//초당 이동 속도
+var r = 10;
+var oldTime;
+
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	ctx.fillStyle = 'blue';
+	ctx.lineWidth = 2;
+	ctx.strokeStyle = 'red';
+
+	oldTime = getTime();
+	setInterval(draw, 30);
+}
+
+//현재 시간 구함
+function getTime(){
+	var date = new Date();
+	var time = date.getTime();
+	delete date;
+	return time;
+}
+
+function draw(){
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	ctx.beginPath();
+	ctx.arc(x, y, r, 0, 2 * Math.PI, true);
+	ctx.fill();
+	ctx.stroke();
+
+	if( x < r ) dx = 1;
+	if( x + r > canvas.width ) dx = -1;
+	if( y < r ) dy = 1;
+	if( y + r > canvas.height ) dy = -1;
+
+	//경과 시간 구함
+	var ellapse = getTime() - oldTime;
+	oldTime = getTime();
+
+	//이동할 거리 계산
+	var mx = vx * ellapse / 1000;
+	var my = vy * ellapse / 1000;
+
+	//현재 위치 이동
+	x += mx * dx;
+	y += my * dy;
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+</div>
+</body>
+</html>

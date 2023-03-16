@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+
+	var capture = document.getElementById('capture');
+	capture.addEventListener('click', function(e){
+		window.open(canvas.toDataURL(), 'capture', 'width=' + canvas.width + ', height=' + canvas.height);
+	});
+}
+function draw(){
+	var brush = ctx.createLinearGradient(0, 0, 0, canvas.height);
+	brush.addColorStop(0, 'yellow');
+	brush.addColorStop(1, 'red');
+	ctx.fillStyle = brush;
+	ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+	ctx.beginPath();
+	ctx.arc(200, 100, 80, 0, 2 * Math.PI, true);
+	var brush = ctx.createRadialGradient(200, 100, 0, 200, 100, 80);
+	brush.addColorStop(0, 'white');
+	brush.addColorStop(1, 'gray');
+	ctx.fillStyle = brush;
+	ctx.fill();
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<form action="">
+		<input type="button" id="capture" value="capture" />
+	</form>
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+}
+function draw(){
+	ctx.font = '20pt arial';
+	ctx.fillStyle = 'blue';
+	ctx.fillRect(0, 50, 400, 2);
+	ctx.fillRect(0, 150, 400, 2);
+	ctx.fillStyle = 'black';
+
+	ctx.textBaseline = 'top';
+	ctx.fillText('top', 0, 50);
+	ctx.textBaseline = 'middle';
+	ctx.fillText('middle', 120, 50);
+	ctx.textBaseline = 'bottom';
+	ctx.fillText('bottom', 250, 50);
+
+	ctx.textBaseline = 'hanging';
+	ctx.fillText('hanging', 0, 150);
+	ctx.textBaseline = 'alphabetic';
+	ctx.fillText('alphabetic', 120, 150);
+	ctx.textBaseline = 'ideographic';
+	ctx.fillText('ideographic', 250, 150);
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+</div>
+</body>
+</html>

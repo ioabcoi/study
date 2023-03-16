@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/code.css">
+    <title>form</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>input</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">common</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    select,
+    input[type="checkbox"], 
+    input[type="radio"],
+    input[type="text"],
+    textarea,
+    label {box-sizing:border-box;display:inline-block;margin:0;padding:0;vertical-align:middle;}
+    label {font-size:15px;font-weight:400;line-height:20px;}
+
+    /* input:disabled, textarea:disabled {opacity:0.4;} 기본 적용 - only ​ios(safari) */
+    select:disabled,
+    input:disabled,
+    textarea:disabled {opacity:0.6;}
+
+    /* placeholder */
+    input:disabled, 
+    textarea:disabled, 
+    input:disabled::placeholder, 
+    textarea:disabled::placeholder {
+        -webkit-text-fill-color: currentcolor; /* 1. sets text fill to current `color` for safari */
+        opacity: 1; /* 2. correct opacity on iOS */
+    }
+
+    /* 기본 style 제거 */
+    .reset {        
+        appearance:none;-moz-appearance:none;-o-appearance:none;-webkit-appearance:none; 
+        border-radius:0;-webkit-border-radius:0;
+        background:#fff;border:1px solid #ddd;
+    }
+
+    form > div {margin:10px 0;}
+</style>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">select</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    select.reset {padding:5px 20px 5px 5px;background:#fff url('../images/select_arr.png') no-repeat right center;border:1px solid #ddd;}
+
+    /* 기본 style 제거 */
+    select.reset {appearance:none;-moz-appearance:none;-o-appearance:none;-webkit-appearance:none;}
+
+    /* 기본 화살표 없애기 - ie */
+    select.reset::-ms-expand {display:none;} 
+
+    /* 가운데 정렬 - only chrome */
+    select.reset {text-align-last:center;} 
+
+    select.hover:hover {border-color:#f00;outline:none;}
+    select.focus:focus {border-color:#f0f;box-shadow:0 0 5px 5px #f0f inset;color:#222;outline:none;}
+
+    /* check, hover 스타일 설정 - ie, chrome */
+    select.option option:checked,
+    select.option option:hover {background:#ff00ff;color:#fff;}
+
+    /* check, hover 스타일 설정 - firefox */
+    select option:checked,
+    select.option option:hover {box-shadow:0 0 10px 100px #ff00ff inset;color:#fff;}
+
+    /*  Mac 에서는 option style 구현 X - JQuery Dropdown plugin, 자바스크립트를 사용 추천 */
+</style>
+<form>
+    <div>
+        <label for="fruit"> 좋아하는 과일 </label>
+        <select id="fruit" name="fruit">
+            <option value="">-- 선택하세요 --</option>
+            <optgroup label="여름">
+                <option value="strawberry">딸기</option>
+                <option value="banana">바나나</option>
+            </optgroup>
+            <optgroup label="여름">
+                <option value="mango">망고</option>
+                <option value="melon">멜론</option>
+                <option value="grape">포도</option>
+                <option value="watermelon">수박</option>
+            </optgroup>
+            <optgroup label="가을">
+                <option value="apple">사과</option>
+                <option value="pear">배</option>
+            </optgroup>
+            <optgroup label="겨울">
+                <option value="mandarine">귤</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div>
+        <select class="reset">
+            <option value="strawberry">딸기</option>
+            <option value="banana">바나나</option>
+        </select>
+        <select class="reset hover">
+            <option value="strawberry">딸기</option>
+            <option value="banana">바나나</option>
+        </select>
+        <select class="reset focus">
+            <option value="strawberry">딸기</option>
+            <option value="banana">바나나</option>
+        </select>
+        <select class="reset option">
+            <option value="strawberry">딸기</option>
+            <option value="banana">바나나</option>
+        </select>
+        <select class="reset" disabled>
+            <option value="strawberry">딸기</option>
+            <option value="banana">바나나</option>
+        </select>
+    </div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">radio, checkbox</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .check_box {position:relative;}
+    .check_box input[type="checkbox"] {position:absolute;left:0;top:0;width:0;height:0;opacity:0;}
+    .check_box input[type="checkbox"] + label {position:relative;height:20px;padding-left:20px;background:url('../images/check_off.png') no-repeat left center;}
+    .check_box input[type="checkbox"]:checked + label {background:url('../images/check_on.png') no-repeat left center;}
+    .check_box input[type="checkbox"]:disabled + label {opacity:0.3;}
+
+    .radio_box {position:relative;}
+    .radio_box input[type="radio"] {position:absolute;left:0px;top:0;width:0;height:0;opacity:0;}
+    .radio_box input[type="radio"] + label {position:relative;height:20px;padding-left:20px;background:url('../images/radio_off.png') no-repeat left center;}
+    .radio_box input[type="radio"]:checked + label {background:url('../images/radio_on.png') no-repeat left center;}
+    .radio_box input[type="radio"]:disabled + label {opacity:0.3;}
+
+    /* checked, unchecked style */
+    /* 아직 지원 안되는 브라우저가 많음 https://caniuse.com/?search=has */
+    .code_ui_box:has(:checked) [type="checkbox"] + label {color:#333;}
+    .code_ui_box:has(:checked) [type="checkbox"]:checked + label {color:red;}
+    .code_ui_box:has(:checked) [type="radio"] + label {color:#333;}
+    .code_ui_box:has(:checked) [type="radio"]:checked + label {color:red;}
+</style>
+<form name="" action="" method="" autocomplete="">
+    <div><input type="checkbox" id="cookie0" name="cookie0" checked> <label for="cookie0">checkbox</label></div>
+    <div><input type="radio" id="apple0" name="apple0" checked> <label for="apple0">radio</label></div>
+
+    <div class="check_box"><input type="checkbox" id="cookie1" name="cookie"><label for="cookie1">checkbox</label></div>
+    <div class="check_box"><input type="checkbox" id="cookie2" name="cookie"><label for="cookie2">checkbox</label></div>
+    <div class="check_box"><input type="checkbox" id="cookie3" name="cookie" checked><label for="cookie3">checkbox</label></div>
+    <div class="check_box"><input type="checkbox" id="cookie4" name="cookie" disabled><label for="cookie4">checkbox</label></div>
+
+    <div class="radio_box"><input type="radio" id="apple1" name="apple"><label for="apple1">radio</label></div>
+    <div class="radio_box"><input type="radio" id="apple2" name="apple"><label for="apple2">radio</label></div>
+    <div class="radio_box"><input type="radio" id="apple3" name="apple" checked><label for="apple3">radio</label></div>
+    <div class="radio_box"><input type="radio" id="apple4" name="apple" disabled><label for="apple4">radio</label></div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">textarea</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    textarea {padding:10px;resize:none;}
+    textarea.reset {padding:10px;background-color:#fff;border:1px solid #ddd;}
+
+    /* placeholder */
+    textarea::placeholder {color:#999;}
+    textarea:focus::placeholder {color:transparent;}
+    textarea:focus::-webkit-input-placeholder {color:transparent;}
+    textarea:focus::-moz-placeholder {color:transparent;}
+    textarea:focus:-ms-input-placeholder {color:transparent;}
+    textarea:focus:-ms-input-placeholder {color:transparent;}    
+
+    /* text-fill */
+    textarea.text-fill {
+        -webkit-text-fill-color:#f0f; /* Override iOS / Android font color change */
+        -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+        color:#f0f; /* Override IE font color change */
+        opacity:1; /* required on iOS */       
+    }    
+</style>
+<form name="" action="" method="" autocomplete="">
+    <div>
+        <textarea name="" id="" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+        <textarea name="" id="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
+    </div>
+    <div>
+        <textarea class="reset" name="" id="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
+        <textarea class="text-fill" name="" id="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
+    </div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">text, number, tel, password, email</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    input[type="text"] {width:100%;}
+    input[type="text"].reset {padding:10px;background-color:#fff;border:1px solid #ddd;}
+
+    /* X 버튼 없애기 - ie */
+    input[type="text"]:-ms-clear {display:none;} 
+
+    /* placeholder */
+    input[type="text"]::placeholder {color:#999;}
+    input[type="text"]::-webkit-input-placeholder {color:#999;}
+    input[type="text"]::-moz-placeholder {color:#999;}
+    input[type="text"]:-ms-input-placeholder {color:#999;}
+    input[type="text"]:-moz-placeholder {color:#999;}
+    input[type="text"]:focus::placeholder {color:transparent;}
+    input[type="text"]:focus::-webkit-input-placeholder {color:transparent;}
+    input[type="text"]:focus::-moz-placeholder {color:transparent;}
+    input[type="text"]:focus:-ms-input-placeholder {color:transparent;}
+    input[type="text"]:focus:-ms-input-placeholder {color:transparent;}    
+
+    /* text-fill */
+    input[type="text"].text-fill {
+        -webkit-text-fill-color:#f0f; /* Override iOS / Android font color change */
+        -webkit-opacity:1; /* Override iOS opacity change affecting text & background color */
+        color:#f0f; /* Override IE font color change */
+        opacity:1; /* required on iOS */       
+    }
+
+    /* autofill css 없애기 */
+
+    /* Change the color to your own background color */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {transition:background-color 5000s;-webkit-text-fill-color:#fff !important;}
+
+    /* box-shadow */
+    input:-webkit-autofill {-webkit-box-shadow:0 0 0 30px #fff inset;-webkit-text-fill-color:#000;}
+    input:-webkit-autofill, 
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {transition:background-color 5000s ease-in-out 0s;}    
+</style>
+<form name="" action="" method="" autocomplete="">
+    <div><input type="text" placeholder="내용을 입력해주세요." size="10" maxlength="5" /></div>
+    <div><input type="text" placeholder="내용을 입력해주세요." value="write email or phone number" size="10" maxlength="5" /></div>
+    <div><input type="text" placeholder="내용을 입력해주세요." class="text-fill" /></div>
+
+    <div><input class="reset" type="text" placeholder="내용을 입력해주세요." size="10" maxlength="5" /></div>
+    <div><input class="reset" type="text" placeholder="내용을 입력해주세요." value="write email or phone number" size="10" maxlength="5" /></div>
+
+    <div><input type="number" name="quantity" min="2" max="10" step="2" value="2" /></div>
+    <div><input type="tel" name="mytel" /></div>
+    <div><input name="password" required type="password" placeholder="password" /></div>
+    <div><input type="email" id="useremail" name="useremail" /></div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">hidden, url, file, search, range</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+
+</style>
+<form name="" action="" method="" autocomplete="">
+    <div><input type="hidden" name="country" value="Norway" /></div>
+    <div><input type="url" /></div>
+    <div><input type="file" name="myfile" /></div>
+    <div><input type="search" /></div>
+    <div><input type="range" id="volume" name="volume" min="0" max="11" /></div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">button, submit, image, reset, color</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+
+</style>
+<form name="" action="" method="" autocomplete="">
+    <div><input type="button" value="click" onclick="alert('Hello world!')"></div>
+    <div><input type="submit" value="Log In" /></div>
+    <div><input type="image" src="img/img_submit.gif" alt="Submit" width="48" height="48" /></div>
+    <div><input type="reset" /></div>
+    <div><input type="color" name="color"></div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">month, week, time, date, datetime, datetime-local</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+
+</style>
+<form name="" action="" method="" autocomplete="">
+    <div><input type="month" name="month"></div>
+    <div><input type="week" name="week"></div>
+    <div><input type="date" id="start" name="trip-start" value="2018-07-22" min="2018-01-01" max="2018-12-31"></div>
+    <div><input type="date" name="date"></div>
+    <div><input type="datetime" name="datetime"></div>
+    <div><input type="datetime-local" name="datetimelocal"></div>
+</form>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">rating <span class="sub">- img X</span></div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+	.rating {display:inline-block;padding:0 50px;vertical-align:middle;}
+    .rating:not(:checked) > input {position:absolute;left:-9999px;clip:rect(0,0,0,0);}
+    .rating:not(:checked) > label {float:right;width:0.89em;margin:0 2px 0 0;overflow:hidden;white-space:nowrap;cursor:pointer;font-size:23px;color:#ccc;}
+    .rating:not(:checked) > label:before {content: '\2605';}
+    .rating > input:checked ~ label {color: #10947c;}
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {color: #10947c;}
+    .rating > input:checked + label:hover,
+    .rating > input:checked + label:hover ~ label,
+    .rating > input:checked ~ label:hover,
+    .rating > input:checked ~ label:hover ~ label,
+    .rating > label:hover ~ input:checked ~ label {color: #10947c;}
+</style>
+<div class="rating">
+    <input type="radio" id="star5" name="rating" value="5"><label for="star5">★★★★★</label>
+    <input type="radio" id="star4" name="rating" value="4"><label for="star4">★★★★</label>
+    <input type="radio" id="star3" name="rating" value="3"><label for="star3">★★★</label>
+    <input type="radio" id="star2" name="rating" value="2"><label for="star2">★★</label>
+    <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+</div>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">rating <span class="sub">- img X</span></div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    .img_rating {display:inline-block;padding:0 50px;vertical-align:middle;}
+    .img_rating:not(:checked) > input {position:absolute;left:-9999px;}
+    .img_rating:not(:checked) > label {float:right;width:23px;height:23px;margin:0 2px 0 0;overflow:hidden;white-space:nowrap;cursor:pointer;font-size:0;color:transparent;background:#fff url('http://img247.etoos.com/web/w247/images/lms2017/common/star_off.png') no-repeat center center;}
+    .img_rating:not(:checked) > label:before {content: normal;}
+    .img_rating > input:checked ~ label {background:url('../images/star_off.png') no-repeat center center;}
+    .img_rating:not(:checked) > label:hover,
+    .img_rating:not(:checked) > label:hover ~ label {background:url('../images/star_on.png') no-repeat center center;}
+    .img_rating > input:checked + label:hover,
+    .img_rating > input:checked + label:hover ~ label,
+    .img_rating > input:checked ~ label:hover,
+    .img_rating > input:checked ~ label:hover ~ label,
+    .img_rating > label:hover ~ input:checked ~ label {background:url('../images/star_on.png') no-repeat center center;}
+</style>
+<div class="img_rating">
+    <input type="radio" id="img_star5" name="img_rating" value="5"><label for="img_star5">★★★★★</label>
+    <input type="radio" id="img_star4" name="img_rating" value="4"><label for="img_star4">★★★★</label>
+    <input type="radio" id="img_star3" name="img_rating" value="3"><label for="img_star3">★★★</label>
+    <input type="radio" id="img_star2" name="img_rating" value="2"><label for="img_star2">★★</label>
+    <input type="radio" id="img_star1" name="img_rating" value="1"><label for="img_star1">★</label>
+</div>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../common/js/code.js"></script>
+</body>
+</html>

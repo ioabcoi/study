@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/code.css">
+    <title>card</title>
+</head>
+<body data-theme="light">
+    
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>card</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">flip</div>
+    <div class="code_area">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .card_list {position:relative;top:-50px;}
+    .card_list ul {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;}
+    .card_list ul li,
+    .card_list ul li img {width:182px;height:280px;}
+    .card_list ul li {position:relative;-webkit-transform:skew(0, -9.5deg);transform:skew(0, -9.5deg);list-style:none;}
+    .card_list ul li .flipper > div {border-radius:10px;overflow:hidden;box-shadow:0 5px 5px rgba(0,0,0,0.1);}
+    .card_list ul li:nth-child(1) {top:99px;}
+    .card_list ul li:nth-child(2) {top:66px;}
+    .card_list ul li:nth-child(3) {top:33px;}
+    .card_list ul li + li {margin-left:8px;}
+
+    .flip-cont {position:relative;display:block;width:182px;height:280px;}
+    .flip-cont .flip-container {width:100%;
+        -webkit-perspective: 1000;
+        -moz-perspective: 1000;
+        -o-perspective: 1000;
+        perspective: 1000;
+    }
+    .flip-cont .flip-container .back,
+    .flip-cont:hover .flip-container .back {
+        -webkit-transform: rotateY(360deg);
+        -moz-transform: rotateY(360deg);
+        -o-transform: rotateY(360deg);
+        transform: rotateY(360deg);
+    }
+    .flip-cont .flip-container .back,
+    .flip-cont:hover .flip-container .flipper .front {
+        -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        -o-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+    .flip-cont .flipper,
+    .flip-cont .flip-container,
+    .flip-cont .flip-container .front, 
+    .flip-cont .flip-container .back {position:relative;width:100%;height:280px;}
+    .flip-cont .flip-container .flipper .front,
+    .flip-cont .flip-container .flipper .back {
+        -webkit-transition: 0.6s;
+        -webkit-transform-style: preserve-3d;
+        -moz-transition: 0.6s;
+        -moz-transform-style: preserve-3d;
+        -o-transition: 0.6s;
+        -o-transform-style: preserve-3d;
+        transition: 0.6s;
+        transform-style: preserve-3d;	
+    }
+    .flip-cont .flip-container .front, 
+    .flip-cont .flip-container .back {position:absolute;top:0;left:0;background:#e9e9e9;box-shadow:0 10px 10px rgba(0,0,0,0.1);
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+    .flip-cont .flip-container .front {z-index:2;}
+</style>
+<!-- card_list -->
+<div class="card_list">
+    <ul>
+        <li>
+            <div class="flip-cont">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><img src="https://source.unsplash.com/random/182x280?sig=1" alt=""></div>
+                        <div class="back"><img src="https://source.unsplash.com/random/182x280?sig=2" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="flip-cont">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><img src="https://source.unsplash.com/random/182x280?sig=3" alt=""></div>
+                        <div class="back"><img src="https://source.unsplash.com/random/182x280?sig=4" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="flip-cont">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><img src="https://source.unsplash.com/random/182x280?sig=5" alt=""></div>
+                        <div class="back"><img src="https://source.unsplash.com/random/182x280?sig=6" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="flip-cont">
+                <div class="flip-container">
+                    <div class="flipper">
+                        <div class="front"><img src="https://source.unsplash.com/random/182x280?sig=7" alt=""></div>
+                        <div class="back"><img src="https://source.unsplash.com/random/182x280?sig=8" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // card_list -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">flip</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .card_flip {
+        display: inline-block;
+        background-color: transparent;
+        width: 300px;
+        height: 300px;
+        perspective: 1000px;
+    }
+
+    .card_flip_inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .card_flip.rotate_x:hover .card_flip_inner {
+        transform: rotateX(180deg);
+    }
+
+    .card_flip.rotate_y:hover .card_flip_inner {
+        transform: rotateY(180deg);
+    }
+
+    .card_flip .card_flip_front,
+    .card_flip .card_flip_back {
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        -webkit-flex-direction: column;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .card_flip .card_flip_front {
+        background-color: #e9e9e9;
+        color: black;
+    }
+
+    .card_flip.rotate_x .card_flip_back {
+        background-color: #333;
+        color: #fff;
+        transform: rotateX(180deg);
+    }
+
+    .card_flip.rotate_y .card_flip_back {
+        background-color: #333;
+        color: #fff;
+        transform: rotateY(180deg);
+    }
+</style>
+<!-- card_flip -->
+<div class="card_flip rotate_x">
+    <div class="card_flip_inner">
+        <div class="card_flip_front">
+            <img src="https://source.unsplash.com/random/300x300?sig=1" alt="" style="width:300px;height:300px;">
+        </div>
+        <div class="card_flip_back">
+            <h1>title</h1>
+            <p>description</p>
+        </div>
+    </div>
+</div>
+<!-- //card_flip -->
+<!-- card_flip -->
+<div class="card_flip rotate_y">
+    <div class="card_flip_inner">
+        <div class="card_flip_front">
+            <img src="https://source.unsplash.com/random/300x300?sig=2" alt="" style="width:300px;height:300px;">
+        </div>
+        <div class="card_flip_back">
+            <h1>title</h1>
+            <p>description</p>
+        </div>
+    </div>
+</div>
+<!-- //card_flip -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+        
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../common/js/code.js"></script>
+</body>
+</html>

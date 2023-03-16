@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/code.css">
+    <title>canvas</title>
+</head>
+<body data-theme="light">
+    
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>canvas</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">ball</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    .canvas_wrap {overflow:hidden;position:relative;width:100%;height:100%;border:1px solid #ccc;}
+</style>
+<div class="canvas_wrap">
+	<canvas id="canvas" width="100%" height="100%">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // $('#canvas').attr('width', $(window).width() ).attr('height', $(window).height() );
+        $('#canvas').attr('width', $('#wrap').width()).attr('height', $('#wrap').height());
+    });
+
+    var canvas;
+    var ctx;
+    var x = 15, y = 15;
+    var dx = 1, dy = 1;
+    var r = 10;
+
+    window.onload = function () {
+        canvas = document.getElementById('canvas');
+        if (canvas == null || canvas.getContext == null) return;
+        ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'blue';
+        setInterval(draw, 5);
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI, true);
+        ctx.fill();
+
+        if (x < r || x + r > canvas.width) {
+            dx = -dx;
+        }
+        if (y < r || y + r > canvas.height) {
+            dy = -dy;
+        }
+        x += dx;
+        y += dy;
+    }
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">coin</div>
+    <div class="code_area">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    .canvas_wrap {overflow:hidden;position:relative;width:100%;height:100%;border:1px solid #ccc;}
+</style>
+<div class="canvas_wrap">
+    <img src="http://blocksjs.com/demos/block/images/coin.png" alt="" />
+    <section id="demo" class="demo_section"></section>
+</div>
+<script type="text/javascript" src="http://williammalone.github.io/BlocksJS/build/0.3.20/js/blocksjs-0.3.20.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
+        (function () {
+            var clock, block, layer;
+            // Create a canvas to draw on
+            layer = BLOCKS.layer({
+                parentElement: document.getElementById("demo")
+            });
+            // Create a block
+            block = BLOCKS.block();
+            // Add a slice to the block
+            block.addSlice({
+                layer: layer,
+                imageSrc: "http://blocksjs.com/demos/block/images/coin.png", // Define sprite sheet location
+                numberOfFrames: 10, // Define number of frames of animation
+                loop: true
+            });
+            // Create a clock
+            clock = BLOCKS.clock();
+            // Update and render the block on each tick of the clock
+            clock.addEventListener("tick", function () {
+                block.update();
+                if (block.dirty) { // Clear the layer if the block is dirty
+                    layer.clear();
+                }
+                block.render();
+            });
+            // Start the clock
+            clock.start();
+        }());
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+        
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../common/js/code.js"></script>
+</body>
+</html>

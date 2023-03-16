@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/code.css">
+    <title>button</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>button</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">common</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .btnbox {margin-top:50px;text-align:center;}
+
+    .sbtn, 
+    .mbtn, 
+    .lbtn {position:relative;display:inline-block;background:#fff;border:1px solid #999;color:#999;text-align:center;}
+    .sbtn span, 
+    .mbtn span, 
+    .lbtn span {position:relative;display:inline-block;vertical-align:top;}
+    .sbtn {min-width:100px;height:28px;padding:0 10px;font-size:12px;line-height:28px;}
+    .mbtn {min-width:100px;height:38px;padding:0 15px;font-size:13px;line-height:38px;}
+    .lbtn {min-width:100px;height:48px;padding:0 20px;font-size:14px;line-height:48px;}
+
+    .bd_black {border:1px solid #000;color:#000;}
+    .bd_red {border:1px solid #c61111;color:#c61111;}
+    .bd_blue {border:1px solid #000a6e;color:#000a6e;}
+    .bd_green {border:1px solid #23400a;color:#23400a;}
+
+    .sbtn[class*="bg"], 
+    .mbtn[class*="bg"], 
+    .lbtn[class*="bg"] {color:#fff;}
+    .bg_gray {background:#999;border:1px solid #999;}
+    .bg_black {background:#000;border:1px solid #000;}
+    .bg_red {background:#c61111;border:1px solid #c61111;}
+    .bg_blue {background:#000a6e;border:1px solid #000a6e;}
+    .bg_green {background:#23400a;border:1px solid #23400a;}
+
+    .ico_arr span {padding-right:10px;}
+    .ico_arr span:before,
+    .ico_arr span:after {position:absolute;right:0;top:50%;content:'';display:inline-block;width:7px;height:1px;background:#999;}
+    .ico_arr span:before {margin-top:-2px;-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+    .ico_arr span:after {margin-top:2px;-webkit-transform: rotate(-45deg);transform: rotate(-45deg);}
+
+    .ico_arr.bd_black span:before, 
+    .ico_arr.bd_black span:after {background:#000;}
+    .ico_arr.bd_red span:before, 
+    .ico_arr.bd_red span:after {background:#c61111;}
+    .ico_arr.bd_blue span:before, 
+    .ico_arr.bd_blue span:after {background:#000a6e;}
+    .ico_arr.bd_green span:before, 
+    .ico_arr.bd_green span:after {background:#23400a;}
+    .ico_arr[class*="bg"] span:before, 
+    .ico_arr[class*="bg"] span:after {background:#fff;}
+
+    .ico_file span {padding-right:10px;}
+    .ico_down span {padding-right:10px;}
+    .ico_point span {padding-right:10px;}
+    .ico_question span {padding-right:10px;}
+    .ico_play span {padding-right:10px;}
+    .ico_stop span {padding-right:10px;}
+    .ico_pause span {padding-right:10px;}
+</style>
+<div class="btnbox txt_l">
+    <a href="#" class="sbtn"><span>예약하기</span></a>
+    <a href="#" class="sbtn bd_black"><span>예약확인</span></a>
+    <a href="#" class="sbtn bd_red"><span>예약확인</span></a>
+    <a href="#" class="sbtn bd_blue"><span>예약확인</span></a>
+    <a href="#" class="sbtn bd_green"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="sbtn bg_gray"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_black"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_red"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_blue"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_green"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="sbtn ico_arr"><span>예약하기</span></a>
+    <a href="#" class="sbtn bd_black ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bd_red ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bd_blue ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bd_green ico_arr"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="sbtn bg_gray ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_black ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_red ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_blue ico_arr"><span>예약확인</span></a>
+    <a href="#" class="sbtn bg_green ico_arr"><span>예약확인</span></a>
+</div>
+
+<div class="btnbox txt_l">
+    <a href="#" class="mbtn"><span>예약하기</span></a>
+    <a href="#" class="mbtn bd_black"><span>예약확인</span></a>
+    <a href="#" class="mbtn bd_red"><span>예약확인</span></a>
+    <a href="#" class="mbtn bd_blue"><span>예약확인</span></a>
+    <a href="#" class="mbtn bd_green"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="mbtn bg_gray"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_black"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_red"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_blue"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_green"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="mbtn ico_arr"><span>예약하기</span></a>
+    <a href="#" class="mbtn bd_black ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bd_red ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bd_blue ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bd_green ico_arr"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="mbtn bg_gray ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_black ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_red ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_blue ico_arr"><span>예약확인</span></a>
+    <a href="#" class="mbtn bg_green ico_arr"><span>예약확인</span></a>
+</div>
+
+<div class="btnbox txt_l">
+    <a href="#" class="lbtn"><span>예약하기</span></a>
+    <a href="#" class="lbtn bd_black"><span>예약확인</span></a>
+    <a href="#" class="lbtn bd_red"><span>예약확인</span></a>
+    <a href="#" class="lbtn bd_blue"><span>예약확인</span></a>
+    <a href="#" class="lbtn bd_green"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="lbtn bg_gray"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_black"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_red"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_blue"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_green"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="lbtn ico_arr"><span>예약하기</span></a>
+    <a href="#" class="lbtn bd_black ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bd_red ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bd_blue ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bd_green ico_arr"><span>예약확인</span></a>
+    <br />
+    <a href="#" class="lbtn bg_gray ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_black ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_red ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_blue ico_arr"><span>예약확인</span></a>
+    <a href="#" class="lbtn bg_green ico_arr"><span>예약확인</span></a>
+</div>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">jp</div>
+    <div class="code_area">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../common/js/code.js"></script>
+</body>
+</html>

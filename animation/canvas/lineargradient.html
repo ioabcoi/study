@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+}
+function draw(){
+	var brush = ctx.createLinearGradient(10, 10, 150, 10);
+	brush.addColorStop(0, 'white');
+	brush.addColorStop(1, 'black');
+	ctx.fillStyle = brush;
+	ctx.fillRect(10, 10, 140, 140);
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+	<div>
+		context.createLinearGradient(x0, y0, x1, y1);<br />
+		context.fillRect(x, y, width, height);<br />
+		gradient.addColorStop(stop, color);<br />
+	</div>
+</div>
+</body>
+</html>

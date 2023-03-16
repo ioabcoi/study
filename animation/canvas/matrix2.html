@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+}
+CanvasRenderingContext2D.prototype.rotateCenter = function(deg, x, y){
+	ctx.translate(x, y);
+	ctx.rotate(deg * Math.PI / 180);
+	ctx.translate(-x, -y);
+}
+function draw(){
+	var img = new Image();
+	img.src = 'hodori.jpg';
+	img.onload = function() {
+		ctx.fillStyle = 'blue';
+		ctx.fillRect(10, 10, 30, 30);
+
+		//ctx.translate(50, 50);
+		//ctx.scale(2, 2);
+
+		ctx.setTransform(2, 0, 0, 2, 50, 50);
+		ctx.fillStyle = 'red';
+		ctx.fillRect(10, 10, 30, 30);
+	}
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+	<div>
+		<img src="https://www.w3schools.com/tags/img_translate.gif" alt="" /><br />
+		context.translate(x, y);<br />
+		context.rotate(angle);<br />
+		context.rotate(degrees * Math.PI / 180);<br />
+		context.setTransform(h scaling, h skewing, v skewing, v scaling, h moving, v moving);<br />
+		<a href="https://www.w3schools.com/tags/playcanvas.asp?filename=playcanvas_setTransforma&preval=1,0,0,1,0,0">h scaling</a>
+		<a href="https://www.w3schools.com/tags/playcanvas.asp?filename=playcanvas_setTransformb&preval=1,0,0,1,0,0">h skewing</a>
+		<a href="https://www.w3schools.com/tags/playcanvas.asp?filename=playcanvas_setTransformc&preval=1,0,0,1,0,0">v skewing</a>
+		<a href="https://www.w3schools.com/tags/playcanvas.asp?filename=playcanvas_setTransformd&preval=1,0,0,1,0,0">v scaling</a>
+		<a href="https://www.w3schools.com/tags/playcanvas.asp?filename=playcanvas_setTransforme&preval=1,0,0,1,0,0">h moving</a>
+		<a href="https://www.w3schools.com/tags/playcanvas.asp?filename=playcanvas_setTransformf&preval=1,0,0,1,0,0">v moving</a>
+	</div>
+</div>
+</body>
+</html>

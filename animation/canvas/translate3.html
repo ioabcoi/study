@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<title>canvas</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript" src="../../common/js/excanvas.js"></script>
+<![endif]-->    
+<style type="text/css">
+canvas {border:5px solid magenta;}
+</style>
+<script type="text/javascript">
+var canvas;
+var ctx;
+window.onload = function() {
+	canvas = document.getElementById('canvas');
+	if( canvas == null || canvas.getContext == null ) return;
+	ctx = canvas.getContext('2d');
+	draw();
+}
+function draw(){
+	ctx.fillStyle = 'blue';
+	ctx.translate( canvas.width/2, canvas.height/2 );
+	ctx.beginPath();
+	ctx.arc(0, 0, 80, 0, 2 * Math.PI);
+	ctx.fill();
+}
+</script>
+</head>
+<body>
+<div class="wrap">
+	<canvas id="canvas" width="400" height="200">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+	<div>
+		<img src="https://www.w3schools.com/tags/img_translate.gif" alt="" /><br />
+		context.translate(x, y);<br />
+		The translate() method remaps the (0,0) position on the canvas. <br />
+		Note: When you call a method such as fillRect() after translate(), the value is added to the x- and y-coordinate values.
+	</div>
+</div>
+</body>
+</html>
