@@ -29,7 +29,7 @@
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-    $(function () {
+    $(document).ready(function(){
         // $('#canvas').attr('width', $(window).width() ).attr('height', $(window).height() );
         $('#canvas').attr('width', $('#wrap').width()).attr('height', $('#wrap').height());
     });
@@ -87,9 +87,10 @@
     <img src="http://blocksjs.com/demos/block/images/coin.png" alt="" />
     <section id="demo" class="demo_section"></section>
 </div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="http://williammalone.github.io/BlocksJS/build/0.3.20/js/blocksjs-0.3.20.min.js"></script>
 <script type="text/javascript">
-    $(function () {
+    $(document).ready(function(){
         // http://www.williammalone.com/articles/create-html5-canvas-javascript-sprite-animation/
         (function () {
             var clock, block, layer;
@@ -133,7 +134,6 @@
 </div>
 <!-- // code_wrap -->
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="../common/js/code.js"></script>
 </body>
 </html>

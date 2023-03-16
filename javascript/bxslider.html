@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/code.css">
+    <title>bxslider</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>bxslider</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">common</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" /> -->
+<!-- https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.css -->
+<style>
+    /* cont_slide */
+    .cont_slide {position:relative;margin:0 auto;}
+    .cont_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+</style>
+<!-- cont_slide -->
+<!-- //cont_slide -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+<!-- https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.js -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">img</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* cont_slide */
+    .cont_slide {position:relative;width:400px;height:400px;background:#eee;margin:0 auto;}
+    .cont_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .cont_slide .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:100px;background:rgba(0,0,0,0.2);margin-top:-52px;text-indent:-100000px;*text-indent:0;white-space:nowrap;text-shadow:none;color:transparent;}
+    .cont_slide .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:'';display:inline-block;margin-top:-6px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
+    .cont_slide .bx-controls-direction > a.bx-prev {left:-50px;}
+    .cont_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .cont_slide .bx-controls-direction > a.bx-next {right:-50px;}
+    .cont_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+    .cont_slide .bx-pager {position:absolute;bottom:-30px;width:100%;height:15px;padding-top:0;text-align:center;box-sizing:border-box;}
+    .cont_slide .bx-pager-item {display:inline-block;overflow:hidden;width:auto;height:15px;margin:0 6px;vertical-align:top;}
+    .cont_slide .bx-pager-item > a {display:block;width:13px;height:13px;margin:0;background:transparent;border:1px solid #111336;border-radius:8px;-webkit-border-radius:8px;text-indent:-100000px;*text-indent:0;white-space:nowrap;text-shadow:none;color:transparent;-webkit-transition: all 0.20s ease-in-out;transition: all 0.20s ease-in-out;}
+    .cont_slide .bx-pager-item > a.active {width:33px !important;background:#111336;border-color:#111336;}
+</style>
+<!-- cont_slide -->
+<div class="cont_slide">
+    <ul>
+        <li><img src="https://source.unsplash.com/random/400x400?sig=1" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/400x400?sig=2" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/400x400?sig=3" alt="" /></li>
+    </ul>
+</div>
+<!-- // cont_slide -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // cont_slide_array
+        var cont_slide_array = new Array;
+        jQuery('.cont_slide').each(function(i){
+            jQuery(this).addClass('cont_slide'+i);
+            var $this_slide = jQuery('.cont_slide'+i);
+            cont_slide_array[i] = $this_slide.find('> ul').bxSlider({
+                mode: 'fade',
+                pause: 3500,
+                infiniteLoop: true,
+                auto: true,
+                controls: true,
+                touchEnabled: false,
+                adaptiveHeight: true, 
+                autoHover : true,
+                pager: true
+            });
+            $this_slide.bind('mouseenter', function(){
+                cont_slide_array[i].stopAuto();
+            }).bind('mouseleave', function(){
+                cont_slide_array[i].startAuto();
+            });
+            $this_slide.find('a').bind('click', function(){
+                cont_slide_array[i].stopAuto();
+                setTimeout(function(){
+                    cont_slide_array[i].startAuto();
+                }, 500);
+            });
+        });
+
+        /*
+        // cont_slide
+        var cont_slide = jQuery('.cont_slide > ul').bxSlider({
+            mode: 'fade',
+            pause: 3500,
+            infiniteLoop: true,
+            auto: true,
+            controls: true,
+            touchEnabled: false,
+            adaptiveHeight: true, 
+            autoHover : true,
+            pager: true
+        });
+        jQuery('.cont_slide > ul').bind('click mouseenter', function(){
+            cont_slide.stopAuto();
+        }).bind('mouseleave', function(){
+            cont_slide.startAuto();
+        });
+        jQuery('.cont_slide a').bind('click', function(){
+            cont_slide.stopAuto();
+            setTimeout(function(){
+                cont_slide.startAuto();
+            }, 500);
+        });
+        */
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">custom</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* custom_slide */
+    .custom_tab ul {display:-webkit-flex;display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;width:500px;margin:0 auto;}
+    .custom_tab ul li {flex:1;}
+    .custom_tab ul li a {display:-webkit-flex;display:flex;align-items:center;justify-content:center;padding:10px;border:1px solid #333;background:#d1d1d1;color:#252525;font-size:20px;font-weight:300;text-align:center;text-decoration:none;box-sizing:border-box;}
+    .custom_tab ul li a strong {font-weight:700;}
+    .custom_tab ul li + li a {border-left:0;}
+    .custom_tab ul li a.active {background:#fff;color:#557ee9;font-weight:700;}
+    .custom_slide {position:relative;width:500px;height:300px;background:#eee;margin:0 auto;}
+    .custom_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .custom_slide .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:100px;background:rgba(0,0,0,0.2);margin-top:-52px;text-indent:-100000px;*text-indent:0;white-space:nowrap;text-shadow:none;color:transparent;}
+    .custom_slide .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:'';display:inline-block;margin-top:-3px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
+    .custom_slide .bx-controls-direction > a.bx-prev {left:-50px;}
+    .custom_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .custom_slide .bx-controls-direction > a.bx-next {right:-50px;}
+    .custom_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+    .custom_slide .bx-pager {position:absolute;bottom:-30px;width:100%;height:15px;padding-top:0;text-align:center;box-sizing:border-box;}
+    .custom_slide .bx-pager-item {display:inline-block;overflow:hidden;width:auto;height:15px;margin:0 6px;vertical-align:top;}
+    .custom_slide .bx-pager-item > a {display:block;width:13px;height:13px;margin:0;background:transparent;border:1px solid #111336;border-radius:8px;-webkit-border-radius:8px;text-indent:-100000px;*text-indent:0;white-space:nowrap;text-shadow:none;color:transparent;-webkit-transition: all 0.20s ease-in-out;transition: all 0.20s ease-in-out;}
+    .custom_slide .bx-pager-item > a.active {width:33px !important;background:#111336;border-color:#111336;}
+</style>
+<!-- custom_slide -->
+<div class="custom_wrap">
+    <div class="custom_tab">
+        <ul>
+            <li class="on"><a href="#" class="tab_box on" data-slide-index="0">1</a></li>
+            <li><a href="#" class="tab_box on" data-slide-index="1">2</a></li>
+            <li><a href="#" class="tab_box on" data-slide-index="2">3</a></li>
+        </ul>
+    </div>
+    <div class="custom_slide">
+        <ul>
+            <li><img src="https://source.unsplash.com/random/500x300?sig=1" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/500x300?sig=2" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/500x300?sig=3" alt="" /></li>
+        </ul>
+    </div>
+</div>
+<!-- // custom_slide -->
+<script type='text/javascript'>
+    $(document).ready(function(){
+        // custom_slide_array
+        var custom_slide_array = new Array;
+        jQuery('.custom_wrap').each(function(i){
+            jQuery(this).find('.custom_slide').addClass('custom_slide'+i);
+            jQuery(this).find('.custom_tab').addClass('custom_tab'+i);
+            var $this_slide = jQuery('.custom_slide'+i);
+            var $this_tab = jQuery('.custom_tab'+i);
+            custom_slide_array[i] = $this_slide.find('> ul').bxSlider({
+                pause: 3500,
+                // speed: 150,
+                mode: 'fade', 
+                infiniteLoop: true,
+                auto: false,
+                controls: true,
+                touchEnabled: true,
+                adaptiveHeight: true, 
+                autoHover : true,
+                pager: true,
+                pagerCustom: '.custom_tab'+i,
+                useCSS: false,
+                onSliderLoad: function(currentIndex){
+                    $this_tab.find('> ul li').eq(0).addClass('on');
+                    resetTab();
+                    activeTab(0);
+                },
+                onSlideAfter: function($slideElement, oldIndex, newIndex){
+                    resetTab();
+                    activeTab(newIndex);
+                }
+            });
+            function resetTab(){
+                $this_tab.find('> ul li').removeClass('on');
+                $this_tab.find('> ul li').each(function(){
+                    // jQuery(this).find('img').attr('src', jQuery(this).find('img').attr('src').replace('_on.png', '_off.png'));	
+                });
+            }
+            function activeTab(num){
+                $this_tab.find('> ul li').eq(num).addClass('on');
+                // $this_tab.find('> ul li').eq(num).find('img').attr('src', $this_tab.find('> ul li').eq(num).find('img').attr('src').replace('_off.png', '_on.png'));	
+            }
+            $this_tab.find('> ul li').find('.tab_box').bind('click', function(){
+                var idx = jQuery(this).parent().index();
+                if( jQuery(this).hasClass('on') ){
+                    resetTab();
+                    activeTab(idx);
+                    custom_slide.goToSlide(idx);
+                }else{
+                    alert('준비중입니다.');				
+                }
+                return false;
+            });
+            $this_tab.bind('mouseenter', function(){
+                custom_slide_array[i].stopAuto();
+            }).bind('mouseleave', function(){
+                custom_slide_array[i].startAuto();										
+            });
+        });
+    });
+
+    /*
+    $(document).ready(function(){
+        // custom_slide
+        var custom_slide = jQuery('#custom_slide ul').bxSlider({
+            pause: 3500,
+            // speed: 150,
+            mode: 'fade', 
+            infiniteLoop: true,
+            auto: false,
+            controls: true,
+            touchEnabled: true,
+            adaptiveHeight: true, 
+            autoHover : true,
+            pager: true,
+            pagerCustom: '#custom_tab',
+            useCSS: false,
+            onSliderLoad: function(currentIndex){
+                jQuery('#custom_tab ul li').eq(0).addClass('on');
+                resetTab();
+                activeTab(0);
+            },
+            onSlideAfter: function($slideElement, oldIndex, newIndex){
+                resetTab();
+                activeTab(newIndex);
+            }
+        });
+        function resetTab(){
+            jQuery('#custom_tab ul li').removeClass('on');
+            jQuery('#custom_tab ul li').each(function(){
+                // jQuery(this).find('img').attr('src', jQuery(this).find('img').attr('src').replace('_on.png', '_off.png'));	
+            });
+        }
+        function activeTab(num){
+            jQuery('#custom_tab ul li').eq(num).addClass('on');
+            // jQuery('#custom_tab ul li').eq(num).find('img').attr('src', jQuery('#custom_tab ul li').eq(num).find('img').attr('src').replace('_off.png', '_on.png'));	
+        }
+        jQuery('#custom_tab ul li').find('.tab_box').bind('click', function(){
+            var idx = jQuery(this).parent().index();
+            if( jQuery(this).hasClass('on') ){
+                resetTab();
+                activeTab(idx);
+                custom_slide.goToSlide(idx);
+            }else{
+                alert('준비중입니다.');				
+            }
+            return false;
+        });
+        jQuery('#custom_tab').bind('mouseenter', function(){
+            custom_slide.stopAuto();
+        }).bind('mouseleave', function(){
+            custom_slide.startAuto();										
+        });
+    });
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">table</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* table_slide */
+    .table_slide {position:relative;width:100%;border:1px solid #ccc;border-top:0;}
+    .table_slide ul li {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;box-sizing:border-box;width:100%;background:#fff;}
+    .table_slide ul li em {flex:1;box-sizing:border-box;height:40px;padding:7px 0;color:#494949;font-size:14px;font-weight:300;text-align:center;}
+    .table_slide ul li + li em {border-top:1px solid #ccc;}
+    .table_slide ul li em + em {border-left:1px solid #ccc;}
+    .table_slide.head {z-index:1;}
+    .table_slide.head ul li em {background:#ebebeb;}
+    .table_slide + .table_slide {margin-top:-1px;}
+</style>
+<!-- table_slide -->
+<div class="table_slide head">
+    <ul>
+        <!-- <li><em>ㅇㅇㅇㅇ</em><em>ㅇㅇㅇ</em></li>
+        <li><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>ㅇㅇ</em><em>ㅇㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇㅇ</em></li> -->
+        <li><em>No.</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+    </ul>
+</div>
+<div class="table_slide">
+    <ul>
+        <!-- <li><em>ㅇㅇㅇㅇ</em><em>ㅇㅇㅇ</em></li>
+        <li><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>ㅇㅇ</em><em>ㅇㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇㅇ</em></li> -->
+        <li><em>1</em><em>ㅇㅇㅇ</em><em>ㅇㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>2</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>3</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em></li>
+        <li><em>4</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>5</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+        <li><em>6</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></li>
+    </ul>
+</div>
+<!-- // table_slide -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // table_slide_array
+        var table_slide_array = new Array;
+        jQuery('.table_slide').each(function(i){
+            var $this_slide = jQuery(this);
+            table_slide_array[i] = $this_slide.find('> ul').bxSlider({
+                pause: 2000,
+                auto: true,
+                mode: 'vertical',
+                controls: false,
+                pager: false,
+                minSlides: 3,
+                maxSlides: 3,
+                moveSlides: 1
+            });
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">vertical</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* vertical_slide */
+    .vertical_slide {position:relative;background:rgba(0,0,0,0.1);}
+    .vertical_slide .bx-wrapper {margin:0 auto;}
+    .vertical_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .vertical_slide .bx-wrapper .bx-viewport p {padding:30px;color:#000;font-size:20px;text-align:center;}
+    .vertical_slide .bx-wrapper .bx-viewport p span {display:block;color:#000;font-size:16px;}
+</style>
+<!-- vertical_slide -->
+<div class="vertical_slide">
+    <ul>
+        <li><p>후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>222후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>333후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>444후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+    </ul>
+</div>
+<!-- // vertical_slide -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // vertical_slide_array
+        var vertical_slide_array = new Array;
+        jQuery('.vertical_slide').each(function(i){
+            var $this_slide = jQuery(this);
+            vertical_slide_array[i] = $this_slide.find('> ul').bxSlider({
+                mode: 'vertical',
+                pause: 3500,
+                infiniteLoop: true,
+                auto: true,
+                controls: false,
+                touchEnabled: false,
+                adaptiveHeight: true, 
+                autoHover : true,
+                pager: false
+            });
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">ticker</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* ticker_slide */
+    .ticker_wrap {position:relative;width:100%;height:180px;}
+    .ticker_wrap .ticker_slide {position:absolute;top:0;left:50%;width:1300px;margin-left:-650px;}
+    .ticker_wrap .ticker_slide .bx-viewport {overflow:visible !important;}
+    .ticker_wrap .ticker_slide .bx-viewport ul li {width:120px;}
+</style>
+<!-- ticker_slide -->
+<div class="ticker_wrap">
+    <div class="ticker_slide">
+        <ul>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=1" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=2" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=3" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=4" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=5" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=6" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=7" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=8" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=9" alt="" /></li>
+            <li><img src="https://source.unsplash.com/random/120x180?sig=10" alt="" /></li>
+        </ul>
+    </div>
+</div>
+<!-- // ticker_slide -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // ticker_slide_array
+        var ticker_slide_array = new Array;
+        jQuery('.ticker_slide').each(function(i){
+            var $this_slide = jQuery(this);
+            ticker_slide_array[i] = $this_slide.find('> ul').bxSlider({
+                minSlides: 10,
+                maxSlides: 10,
+                slideWidth: 120,
+                slideMargin: 10,
+                ticker: true,
+                autoDirection: 'prev',
+                speed: 20000
+            });
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">vertical + ticker</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* vertical_ticker_slide */
+    .vertical_ticker_slide {position:relative;background:rgba(0,0,0,0.1);}
+    .vertical_ticker_slide .bx-wrapper {margin:0 auto;}
+    .vertical_ticker_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .vertical_ticker_slide .bx-wrapper .bx-viewport p {padding:30px;color:#000;font-size:20px;text-align:center;}
+    .vertical_ticker_slide .bx-wrapper .bx-viewport p span {display:block;color:#000;font-size:16px;}
+</style>
+<!-- vertical_ticker_slide -->
+<div class="vertical_ticker_slide">
+    <ul>
+        <li><p>후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>222후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>333후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>444후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+    </ul>
+</div>
+<!-- // vertical_ticker_slide -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // vertical_ticker_slide_array
+        var vertical_ticker_slide_array = new Array;
+        jQuery('.vertical_ticker_slide').each(function(i){
+            var $this_slide = jQuery(this);
+            vertical_ticker_slide_array[i] = $this_slide.find('> ul').bxSlider({
+                mode: 'vertical',
+                ticker: true,
+                speed: 10000
+            });
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">text</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* text_slide */
+    .text_slide {position:relative;padding:20px 0;background:rgba(0,0,0,0.1);}
+    .text_slide ul li p {color:#333;font-size:20px;line-height:53px;text-align:center;letter-spacing:-1px;-webkit-transition:all 0.45s ease-in-out;transition:all 0.45s ease-in-out;}
+    .text_slide ul li.active p {font-size:30px;font-weight:800;}
+    .text_slide .bx-wrapper {margin:0 auto;}
+    .text_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+</style>
+<!-- text_slide -->
+<div class="text_slide">
+    <ul>
+        <li><p>첫번째 문구가 들어갑니다.</p></li>
+        <li><p>두번째 두번째 문구가 들어갑니다.</p></li>
+        <li><p>세번째 문구가 들어갑니다.</p></li>
+        <li><p>네번째 네번째 문구가 들어갑니다.</p></li>
+    </ul>
+</div>
+<!-- // text_slide -->
+<script type="text/javascript">
+    $(document).ready(function(){
+        // text_slide
+        var txt_slide = jQuery('.text_slide > ul').bxSlider({
+            mode: 'vertical',
+            pause: 2500,
+            minSlides: 3,
+            maxSlides: 3,
+            moveSlides: 1,
+            infiniteLoop: true,
+            auto: true,
+            controls: false,
+            touchEnabled: false,
+            adaptiveHeight: false, 
+            autoHover : true,
+            pager: false,
+            onSliderLoad: function(currentIndex) {     
+                jQuery(".text_slide .bx-viewport ul li:not('.bx-clone')").eq(1).addClass("active");
+            },
+            onSlideBefore: function($slideElement){
+                jQuery(".text_slide .bx-viewport ul li").removeClass("active");
+                $slideElement.next().addClass("active");
+            }
+        });
+    });
+</script>                
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">title</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../common/js/code.js"></script>
+</body>
+</html>
