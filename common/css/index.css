@@ -3,15 +3,22 @@
 h1 {padding:100px 0;font-size:30px;font-weight:700;text-align:center;}
 
 .index_area {padding:20px;}
-.index_area table {width:100%;table-layout:auto;border-collapse:collapse;border-spacing:0;}
-.index_area table tr th,
-.index_area table tr td {padding:2px 4px;border:1px solid #ccc;}
-.index_area table tr th {background-color:#f5f5f5;font-size:12px;}
-.index_area table tr td {color:#666;font-size:11px;text-align:left;}
-.index_area table tr td a {margin-right:10px;text-decoration:none;}
-.index_area table tr td:last-child {text-align:center;}
-.index_area table tr:hover {background-color:#fff8e6;}
-.index_area table + table {margin-top:20px;}
+
+.index_area ul li {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;-webkit-flex-direction:column;box-sizing:border-box;width:100%;margin-top:-1px;border:1px solid #ccc;}
+.index_area ul li > div {width:100%;padding:3px 4px;color:#666;font-size:11px;text-align:left;}
+.index_area ul li > div a {margin-right:10px;text-decoration:none;}
+.index_area ul li:hover {background-color:#fff8e6;}
+.index_area .tit {display:none;}
+
+@media(min-width:768px){
+    .index_area ul li {flex-direction:row;-webkit-flex-direction:row;}
+    .index_area ul li > div {width:37%;min-height:21px;padding:2px 4px;color:#666;font-size:11px;text-align:left;}
+    .index_area ul li > div:first-child {width:16%;}
+    .index_area ul li > div:last-child {width:10%;text-align:center;}
+    .index_area ul li > div + div {border-left:1px solid #ccc;}
+    .index_area .tit {display:block;}
+    .index_area .tit li > div {background-color:#f5f5f5;font-size:12px;text-align:center;}
+}
 
 @media(min-width:1280px){
     .index_area {padding:0 80px 80px;}
