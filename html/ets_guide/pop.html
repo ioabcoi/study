@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/code.css">
+    <title>pop</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>pop</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">common</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* common */
+    .popup_wrap {border:2px solid #333;color:#555;font-size:12px;line-height:16px;}
+    .popup_wrap *, .popup_wrap a {font-family:'Noto Sans KR','Malgun Gothic','맑은고딕',sans-serif;}
+    .popup_wrap .blind {display:block;overflow:hidden;position:absolute;top:-1000em;left:0;text-indent:-1000em;}
+    .popup_wrap .popup_head {position:relative;padding:23px 25px 15px;}
+    .popup_wrap .popup_head .title {color:#000;font-size:22px;line-height:30px;letter-spacing:-0.05em;}
+    .popup_wrap .popup_head .title span {font-size:16px;font-weight:300;}
+    .popup_wrap .popup_head .close {position:absolute;top:28px;right:30px;display:block;width:19px;height:19px;background:url('https://img.etoos.com/lecture/promotion/2014/11/mania_freepass/pop_btn_close.gif') no-repeat;}
+    .popup_wrap .popup_body {padding:20px 30px 30px;border-top:1px dashed #717171;}
+
+    /* text */
+    .popup_wrap .border_line {display:block;width:100%;margin:30px 0;border-top:1px solid #d9d9d9;} 
+    .popup_wrap .txt_l {text-align:left !important;} 
+    .popup_wrap .txt_c {text-align:center !important;}
+    .popup_wrap .txt_r {text-align:right !important;}
+    .popup_wrap .underline {text-decoration:underline;}
+    .popup_wrap .color_red {color:#ff0000 !important;}
+    .popup_wrap .color_blue {color:#0000ff !important;}
+    .popup_wrap .color_green {color:#12938e !important;}
+    .popup_wrap .color_black {color:#000000 !important;}
+    .popup_wrap strong {font-weight:normal;font-weight:700;}
+
+    /* list */
+    .popup_wrap .desc_list li {position:relative;color:#666;}
+    .popup_wrap .desc_list li:before {position:absolute;left:0;top:0;}
+    .popup_wrap .desc_list.dot li {padding-left:8px;}
+    .popup_wrap .desc_list.dot li:before {content:'·';}
+
+    /* list */
+    .popup_wrap .desc_tit {margin-bottom:10px;color:#000;font-size:16px;font-weight:700;line-height:20px;}
+    .popup_wrap .desc_sub {margin-bottom:10px;color:#000;font-size:14px;font-weight:600;line-height:18px;}
+    .popup_wrap .desc {margin-top:2px;font-size:12px;line-height:16px;}
+    .popup_wrap .desc_small {margin-top:2px;font-size:11px;line-height:15px;}
+    .popup_wrap .desc_right {margin-top:2px;font-size:11px;line-height:15px;text-align:right;}
+    .popup_wrap .desc_list li {position:relative;color:#666;}
+    .popup_wrap .desc_list li:before {position:absolute;left:0;top:0;}
+    .popup_wrap .desc_list li table {margin:5px 0;}
+    .popup_wrap .desc_list li strong {color:#00f;font-size:12px;font-weight:500;}
+    .popup_wrap .desc_list li .alink {color:#333;font-weight:600;text-decoration:underline;}
+    .popup_wrap .desc_list.dot li {padding-left:8px;}
+    .popup_wrap .desc_list.dot li:before {content:'·';}
+    .popup_wrap .desc_list.dash li {padding-left:8px;}
+    .popup_wrap .desc_list.dash li:before {content:'-';}
+    .popup_wrap .desc_list.star li {padding-left:8px;}
+    .popup_wrap .desc_list.star li:before {content:'*';}
+    .popup_wrap .desc_list.point li {padding-left:15px;}
+    .popup_wrap .desc_list.point li:before {content:'※';}
+
+    /* btn */
+    .popup_wrap .btn_wrap {margin-top:20px;text-align:center}
+    .popup_wrap .btn {display:inline-block;width:100px;height:26px;margin:0 2px;color:#fff;font-size:12px;font-family:'Noto Sans KR';font-weight:300;line-height:26px;text-align:center;text-decoration:none;vertical-align:middle;}
+    .popup_wrap .btn.bg_gray {border:1px solid #979b9e;background:#979b9e;}
+    .popup_wrap .btn.bg_darkgray {border:1px solid #2c2c2c;background:#2c2c2c;}
+    .popup_wrap .btn.bg_green {border:1px solid #12938e;background:#12938e;}
+    .popup_wrap .btn.bg_darkgreen {border:1px solid #047e88;background:#047e88;}
+    .popup_wrap .btn.bd_gray {border:1px solid #ccc;background:#fff;color:#555;}
+</style>
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">공통</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_gray">취소</a>
+			<a href="#" class="btn bg_darkgray">취소</a>
+			<a href="#" class="btn bg_green">등록</a>
+			<a href="#" class="btn bg_darkgreen">등록</a>
+			<a href="#" class="btn bd_gray">등록</a>
+		</div>
+		<!-- // btn -->
+
+		<ul class="desc_list">
+			<li>ㅇㅇㅇㅇㅇㅇ</li>
+		</ul>
+		<ul class="desc_list dot">
+			<li>ㅇㅇㅇㅇㅇㅇ</li>
+		</ul>
+		<ul class="desc_list dash">
+			<li>ㅇㅇㅇㅇㅇㅇ</li>
+		</ul>
+		<ul class="desc_list star">
+			<li>ㅇㅇㅇㅇㅇㅇ</li>
+		</ul>
+		<ul class="desc_list point">
+			<li>ㅇㅇㅇㅇㅇㅇ</li>
+		</ul>
+
+		<p class="desc_tit">ㅇㅇㅇㅇㅇ</p>
+		<p class="desc">ㅇㅇㅇㅇㅇ</p>
+		<p class="desc_small">ㅇㅇㅇㅇㅇ</p>
+		<p class="desc_right">ㅇㅇㅇㅇㅇ</p>
+	</div>
+</div>
+<!-- //popup -->      
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">agree</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* 개인정보동의 */
+    .popup_wrap .agree_box .term_tit {color:#ff0000;text-align:center;}
+    .popup_wrap .agree_box .term_sub {margin-top:20px;}
+    .popup_wrap .agree_box .term_sub:after {content:'';display:block;height:0px;clear:both;visibility:hidden;}
+    .popup_wrap .agree_box .term_sub .tit {float:left;display:inline-block;color:#333;font-size:13px;vertical-align:middle;}
+    .popup_wrap .agree_box .term_sub .agree {float:right;}
+    .popup_wrap .agree_box .term_sub .agree input {margin-left:10px;}
+    .popup_wrap .agree_box .term_box {margin:5px auto;padding:10px 15px;background-color:#fff;border:1px solid #ddd;color:#818181;font-size:11px;}
+    .popup_wrap .agree_box .term_desc {padding-left:15px;margin-top:2px;background:none;text-indent:-15px;}
+</style>
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">개인 정보 수집 및 이용 동의</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<!-- agree -->
+		<div class="agree_box">
+			<p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 이용 동의가 필요 합니다.</strong></p>
+			<div class="term_sub">
+				<strong class="tit">개인 정보 수집 및 이용 동의 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
+					<input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>수집목적 : ㅇㅇㅇㅇㅇ</li>
+					<li>수집항목 : ㅇㅇㅇㅇㅇ</li>
+					<li>보유기간 : <strong>ㅇㅇㅇㅇㅇ</strong></li>
+				</ul>
+			</div>
+			<div class="term_sub">
+				<strong class="tit">개인 정보 위탁 제공 동의 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
+					<input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>ㅇㅇㅇㅇㅇㅇ</li>
+					<li>ㅇㅇㅇㅇㅇㅇ</li>
+				</ul>
+			</div>
+			<ul class="desc_list point">
+				<li>개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의 거부 시 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
+			</ul>
+		</div>
+		<!-- // agree -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_gray">취소</a>
+			<a href="#" class="btn bg_green">확인</a>
+		</div>
+		<!-- // btn -->
+	</div>
+</div>
+<!-- // popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">table</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* table */
+    .popup_wrap table {width:100%;table-layout:fixed;border-collapse:collapse;}
+    .popup_wrap table caption {position:absolute;z-index:0;left:-100000px;top:-10000px;overflow:hidden;width:0;height:0;font-size:0;line-height:0;}
+    .popup_wrap .table_tit {margin-top:15px;color:#333;font-size:16px;font-weight:700;}
+    .popup_wrap .table_style {width:100%;margin-top:10px;border-bottom:1px solid #d0d0d0;border-right:1px solid #d0d0d0;}
+    .popup_wrap .table_style caption {display:none;}
+    .popup_wrap .table_style th, 
+    .popup_wrap .table_style td {padding:8px;border-left:1px solid #d0d0d0;border-top:1px solid #d0d0d0;text-align:center;vertical-align:middle;}
+    .popup_wrap .table_style th {background-color:#eee;color:#363636;font-size:13px;}
+    .popup_wrap .table_style td {color:#666;font-size:12px;}
+    .popup_wrap .table_style + .table_tit {margin-top:15px;}
+</style>
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">ㅇㅇㅇㅇㅇㅇㅇㅇ</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<!-- table -->
+		<p class="table_tit">ㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+		<table class="table_style" cellpadding="0" cellspacing="0">
+			<colgroup>
+				<col style="width:30%">
+				<col style="">
+				<col style="width:30%">
+			</colgroup>
+			<thead>
+				<tr>
+					<th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+					<th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+					<th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+			</tbody>
+		</table>
+		<table class="table_style" cellpadding="0" cellspacing="0">
+			<colgroup>
+				<col style="width:30%">
+				<col style="">
+				<col style="width:30%">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+				</tr>
+				<tr>
+					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+				</tr>
+				<tr>
+					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+					<td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+				</tr>
+				<tr>
+					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
+					<td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
+				</tr>
+				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
+			</tbody>
+		</table>
+		<!-- // table -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_green">확인</a>
+		</div>
+		<!-- // btn -->
+	</div>
+</div>
+<!-- // popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">table</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* status_box */
+    .popup_wrap .status_box {padding:15px;background-color:#ffedd9;color:#000;font-size:18px;font-weight:600;text-align:center;}
+    .popup_wrap .status_box strong {color:#f00;}
+    .popup_wrap .table_style .minus {color:#f00;}
+    .popup_wrap .table_style .plus {color:#00f;}
+</style>
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">나의 응모 내역</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<p class="status_box">현재 보유 응모 기회 <strong>NN</strong>회</p>
+		<!-- table -->
+		<table class="table_style" cellpadding="0" cellspacing="0">
+			<colgroup>
+				<col>
+				<col style="width:10%">
+				<col style="width:20%">
+			</colgroup>
+			<tbody>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[크리스피크림도넛] 오리지널 글레이즈드 하프더즌% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="plus">+ NN</strong></td><td>2022-01-06</td></tr>
+				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="plus">+ NN</strong></td><td>2022-01-06</td></tr>
+			</tbody>
+		</table>
+		<!-- // table -->
+	</div>
+</div>
+<!-- // popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">gift</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* gift_box */
+    .popup_wrap .gift_box {padding:10px 0 50px;text-align:center;}
+    .popup_wrap .gift_box .gift_txt {color:#333;line-height:50px;letter-spacing:-1px;}
+    .popup_wrap .gift_box .gift_txt strong {display:block;color:#f82a34;font-size:35px;font-weight:700;}
+    .popup_wrap .gift_box .gift_txt span {display:block;color:#333;font-size:45px;font-weight:700;}
+    .popup_wrap .gift_box .gift_desc {color:#0000ff;line-height:30px;letter-spacing:-1px;}
+    .popup_wrap .gift_box .gift_desc strong {display:block;font-size:25px;font-weight:700;}
+    .popup_wrap .gift_box .gift_desc span {display:block;font-size:20px;font-weight:500;}
+</style>
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">당첨현황 안내</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body" style="padding:0;border-top:0 none;">
+		<!-- gift_box -->
+		<div class="gift_box">
+			<p class="gift_txt"><strong>%선물명%</strong><span>당첨을 축하합니다.</span></p>
+			<p class="gift_img"><img src="https://img.etoos.com/lecture/promotion/2019/06/hard_study/pop_gift01.png" alt="BHC 뿌링클" /></p>
+			<p class="gift_desc"><strong>애플세트</strong><span>(아이폰11+아이패드+에어팟pro)</span></p>
+			<p class="gift_desc"><strong>전동킥보드</strong></p>
+			<p class="gift_desc"><strong>문화상품권 1만원</strong></p>
+		</div>
+		<!-- // gift_box -->
+	</div>
+</div>
+<!-- //popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">info</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">이벤트 안내사항</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<ul class="desc_list dot">
+			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
+			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
+			<li><strong>ㅇㅇㅇㅇㅇ</strong>
+				<ul class="desc_list dash">
+					<li>ㅇㅇㅇㅇㅇ</li>
+					<li>ㅇㅇㅇㅇㅇ</li>
+				</ul>
+				<table class="table_style">
+					<colgroup>
+						<col />
+						<col width="40%;" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">ㅇㅇㅇ</th>
+							<th scope="col">ㅇㅇㅇ</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>ㅇㅇㅇ</td>
+							<td>ㅇㅇㅇ</td>
+						</tr>
+						<tr>
+							<td>ㅇㅇㅇ</td>
+							<td>ㅇㅇㅇ</td>
+						</tr>
+					</tbody>
+				</table>
+			</li>
+			<li><strong>유의사항</strong>
+				<ul class="desc_list dash">
+					<li><em class="color_red">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
+					<li>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ <a href="#none" class="alink">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ &gt;</a></li>
+					<li><em class="color_blue">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- // popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">apply</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* form */
+    .popup_wrap input, 
+    .popup_wrap textarea,
+    .popup_wrap select {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:0;-webit-border-radius:0;vertical-align:middle;}
+    .popup_wrap select {appearance:none;-moz-appearance:none;-o-appearance:none;-webkit-appearance:none;}
+    .popup_wrap select::-ms-expand {display:none;}
+    .popup_wrap input[type="text"] {height:28px;padding:5px;border:1px solid #d0d0d0;}
+    .popup_wrap input[type="file"] {min-height:22px;}
+    .popup_wrap textarea {width:100%;height:125px;padding:10px;border:1px solid #d0d0d0;resize:none;}
+    .popup_wrap select {height:28px;border:1px solid #d0d0d0;}
+    .popup_wrap label {font-size:12px;vertical-align:middle;}
+    .popup_wrap .alink {text-decoration:underline;}
+    .popup_wrap .fileBox {margin-bottom:8px;}
+    .popup_wrap .file a {display:inline-block;color:#0000ff !important;}
+    .popup_wrap .del {position:relative;display:inline-block;padding-right:20px;text-decoration:underline;}
+    .popup_wrap .del:after,
+    .popup_wrap .del:before {position:absolute;right:5px;top:50%;content:"";display:block;width:9px;height:1px;background:#4e4e4e;}
+    .popup_wrap .del:after {-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+    .popup_wrap .del:before {-webkit-transform: rotate(135deg);transform: rotate(135deg);}
+
+    .popup_wrap select {height:28px;padding-right:30px;background:#fff url('http://img.etoos.com/m/book/new/sub/select_style.gif') no-repeat right center;background-size:24px auto;border:1px solid #d0d0d0;}
+</style>
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">이벤트 신청하기</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<!-- table -->
+		<table class="table_style">
+			<colgroup>
+				<col width="30%;" />
+				<col />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">이름(아이디)</th>
+					<td class="txt_l">홍길동(ID노출)</td>
+				</tr>
+				<tr>
+					<th scope="row">연락처<span class="color_red">*</span></th>
+					<td class="txt_l">
+						<p>
+							<input type="text" style="width:50px">
+							<span>-</span>
+							<input type="text" style="width:50px">
+							<span>-</span>
+							<input type="text" style="width:50px">
+						</p>
+						<ul class="desc_list star">
+							<li>입력하시는 연락처 정보는 본 프로젝트 신청 관련 외의 용도로 사용되지 않습니다. 반드시 정확한 정보를 입력해주세요.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">생년월일</th>
+					<td class="txt_l">YYYY년 MM월 DD일</td>
+				</tr>
+				<tr>
+					<th scope="row">선택계열<span class="color_red">*</span></th>
+					<td class="txt_l">
+						<select name="" id="">
+							<option value="">계열선택</option>
+							<option value="">이과(가형)</option>
+							<option value="">문과(나형)</option>
+						</select>
+						<ul class="desc_list star">
+							<li>최종 선발 후 본 정보에 따라 이미지 선생님 6주 트레이닝 프로그램에 참여하게 됩니다.</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">목표 등급<span class="color_red">*</span></th>
+					<td class="txt_l">
+						<div class="dp_tbl">
+							<input type="text" style="width:50px"> 등급
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row"><span class="color_red">신청내용*</span><br/>지원동기 및 다짐</th>
+					<td class="txt_l">
+						<textarea name="" id=""></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- // table -->
+		<br/>
+		<!-- agree -->
+		<div class="agree_box">
+			<p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 활용 동의가 필요 합니다.</strong></p>
+			<div class="term_sub">
+				<strong class="tit">개인 정보 수집 및 활용 동의 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
+					<input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>수집목적 : ㅇㅇㅇㅇㅇ</li>
+					<li>수집항목 : ㅇㅇㅇㅇㅇ</li>
+					<li>보유기간 : <strong>ㅇㅇㅇㅇㅇ</strong></li>
+				</ul>
+			</div>
+			<div class="term_sub">
+				<strong class="tit">개인정보 위탁 제공 동의서 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
+					<input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>ㅇㅇㅇㅇㅇㅇ</li>
+					<li>ㅇㅇㅇㅇㅇㅇ</li>
+				</ul>
+			</div>
+			<ul class="desc_list point">
+				<li>개인정보 수집, 활용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의를 거부할 경우 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
+			</ul>
+		</div>
+		<!-- // agree -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_gray">취소</a>
+			<a href="#" class="btn bg_green">신청하기</a>
+		</div>
+		<!-- // btn -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_gray">닫기</a>
+			<a href="#" class="btn bg_green">수정하기</a>
+		</div>
+		<!-- // btn -->
+	</div>
+</div>
+<!-- //popup -->
+
+<br/><br/><br/>
+
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">ㅇㅇㅇㅇㅇㅇ</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<p class="desc_tit">향상된 성적표를 <span class="color_red">자랑</span>해주세요. <span class="color_red">수강료를 돌려드립니다.</span></p>
+		<p class="desc">중간고사 성적 뿜뿜 자랑해봐<br>① 1학기 기말 → 2학기 중간 10점 이상 향상<br>② 과목 100점 (만점)</p>
+		<!-- table -->
+		<table class="table_style">
+			<colgroup>
+				<col width="30%;" />
+				<col />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">이름</th>
+					<td class="txt_l">%회원명%</td>
+				</tr>
+				<tr>
+					<th scope="row">페이백<br>대상 과목</th>
+					<td class="txt_l">
+						%과목명% %페이백금액%<br>
+						%과목명% %페이백금액%<br>
+						%과목명% %페이백금액%<br>
+						%과목명% %페이백금액%<br>
+						%과목명% %페이백금액%
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">파일첨부</th>
+					<td class="txt_l">
+						<div class="fileBox">
+							<input type="text" style="width:200px">
+							<a href="#" class="btn bd_gray">찾아보기</a>
+							<p class="file"><a href="#" class="alink del">이미지1.jpg</a></p>
+						</div>
+						<div class="fileBox">
+							<input type="text" style="width:200px">
+							<a href="#" class="btn bd_gray">찾아보기</a>
+							<p class="file"><a href="#" class="alink del">이미지1.jpg</a></p>
+						</div>
+						<p class="desc_right">* 하나의 파일로 업로드해주세요.</p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- // table -->
+		<ul class="desc_list star">
+			<li>성적표 인증 시, 회원의 이름과 중간고사 점수(기말고사 점수)가 모두 나와야 인정됩니다.</li>
+			<li>구매한 강좌의 판매가 기준 제공되는 페이백 금액은 상이합니다.</li>
+		</ul>		
+		<br/>
+		<!-- agree -->
+		<div class="agree_box">
+			<p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 활용 동의가 필요 합니다.</strong></p>
+			<div class="term_sub">
+				<strong class="tit">개인 정보 수집 및 활용 동의 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
+					<input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>수집목적 : ㅇㅇㅇㅇㅇ</li>
+					<li>수집항목 : ㅇㅇㅇㅇㅇ</li>
+					<li>보유기간 : ㅇㅇㅇㅇㅇ</li>
+				</ul>
+			</div>
+			<ul class="desc_list point">
+				<li>개인정보 수집, 활용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의를 거부할 경우 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
+			</ul>
+		</div>
+		<!-- // agree -->
+		<br/>
+		<!-- table -->
+		<table class="table_style">
+			<colgroup><col width="30%;" /><col /></colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">승인상태</th>
+					<td class="txt_l">%승인 대기%</td>
+				</tr>
+				<tr>
+					<th scope="row">반려사유</th>
+					<td class="txt_l">%승인반려일 경우 관리자가 입력한 반려사유 노출%</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- // table -->
+		<!-- table -->
+		<table class="table_style">
+			<colgroup><col width="30%;" /><col /></colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">승인상태</th>
+					<td class="txt_l">
+						<input type="radio" id="state1" name="state" class="inp_radio"><label onclick="" for="state1"> 승인 대기</label>&nbsp;&nbsp;
+						<input type="radio" id="state2" name="state" class="inp_radio"><label onclick="" for="state2"> 승인 완료</label>&nbsp;&nbsp;
+						<input type="radio" id="state3" name="state" class="inp_radio"><label onclick="" for="state3"> 승인 반려</label>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">반려사유</th>
+					<td class="txt_l"><textarea name="" id="" cols="30" rows="10"></textarea></td>
+				</tr>
+			</tbody>
+		</table>		
+		<!-- // table -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_gray">취소</a>
+			<a href="#" class="btn bg_green">등록</a>
+		</div>
+		<!-- // btn -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_green">확인</a>
+		</div>
+		<!-- // btn -->
+	</div>
+</div>
+<!-- // popup -->
+
+<br/><br/><br/>
+
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">ㅇㅇㅇㅇㅇㅇ</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<!-- table -->
+		<table class="table_style">
+			<colgroup>
+				<col style="width:90px">
+				<col style="width:130px">
+				<col style="width:90px">
+				<col style="">
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">이름(아이디)</th>
+					<td class="txt_l">%이름%(%아이디%)</td>
+					<th scope="row">학년</th>
+					<td class="txt_l">
+						<input type="radio" id="type1" name="type" class=""><label for="type1"> 재수이상</label>&nbsp;&nbsp;&nbsp;
+						<input type="radio" id="type2" name="type" class=""><label for="type2"> 고3</label>					
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">연락처</th>
+					<td class="txt_l"><input type="text" class="inp_txt" style="width:105px;"></td>
+					<th scope="row">이메일</th>
+					<td class="txt_l">
+						<input type="text" class="inp_txt" style="width:120px;">
+						<select class="sys_select" style="width:100px">
+						<option value="">직접입력</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">주소</th>
+					<td class="txt_l" colspan="3">
+						<input type="text" class="inp_txt" style="width:80px"> <input type="text" class="inp_txt" style="width:80px"> <a href="#" class="btn">주소찾기</a>
+						<input type="text" class="inp_txt" style="width:350px;margin-top:5px">
+						<input type="text" class="inp_txt" style="width:350px;margin-top:5px">
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">신청후기</th>
+					<td class="txt_l" colspan="3">
+						<textarea class="sys_textarea" style="width:430px;height:100px"></textarea>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">인증샷 등록</th>
+					<td class="txt_l" colspan="3">
+						<div><input type="text" style="width:220px;"><a href="#" class="btn bg_gray">찾아보기</a>&nbsp;&nbsp; <a href="#" class="file">이미지파일명.jpg</a></div>
+						<div style="margin-top:5px;"><input type="text" style="width:220px;"><a href="#" class="btn bg_gray">찾아보기</a>&nbsp;&nbsp; <a href="#" class="file">이미지파일명.jpg</a></div>
+						<div style="margin-top:5px;"><input type="text" style="width:220px;"><a href="#" class="btn bg_gray">찾아보기</a>&nbsp;&nbsp; <a href="#" class="file">이미지파일명.jpg</a></div>
+						<div style="margin-top:5px;"><input type="text" style="width:220px;"><a href="#" class="btn bg_gray">찾아보기</a>&nbsp;&nbsp; <a href="#" class="file">이미지파일명.jpg</a></div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br />	
+		<p class="desc_tit">※ 유의사항</p>
+		<ul class="desc_list dash">
+			<li>모든 항목을 정확하게 입력하셔야 신청이 가능하며, 불분명하거나 허위 정보 입력시 선정대상에서 제외될 수 있습니다.</li>
+			<li>이미지는 최대 4개까지 등록 가능하며, 내용 확인이 가능하도록 선명한 이미지를 등록하셔야 합니다.</li>
+			<li>작성해 주신 내용은 승제쌤과 함께하는 특별한 하루 참여건 외에는 사용되지 않습니다.</li>
+			<li>최종 제출하신 내용은 수정 및 삭제 불가능하니 최종 제출전 작성하신 내용을 다시 한번 꼼꼼히 확인해주세요.</li>
+		</ul>
+		<!-- // table -->
+		<span class="border_line"></span>
+		<!-- agree -->
+		<div class="agree_box">
+			<p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 이용 동의가 필요 합니다.</strong></p>
+			<div class="term_sub">
+				<strong class="tit">개인 정보 수집 및 이용 동의 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
+					<input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>수집목적 : ㅇㅇㅇㅇㅇ</li>
+					<li>수집항목 : ㅇㅇㅇㅇㅇ</li>
+					<li>보유기간 : ㅇㅇㅇㅇㅇ</li>
+				</ul>
+			</div>
+			<div class="term_sub">
+				<strong class="tit">개인정보 위탁 제공 동의서 (필수)</strong>
+				<div class="agree">
+					<input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
+					<input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
+				</div>
+			</div>
+			<div class="term_box">
+				<ul class="desc_list dot">
+					<li>ㅇㅇㅇㅇㅇㅇ</li>
+					<li>ㅇㅇㅇㅇㅇㅇ</li>
+				</ul>
+			</div>
+			<ul class="desc_list point">
+				<li>개인정보 수집, 이용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의를 거부할 경우 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
+			</ul>
+		</div>
+		<!-- // agree -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_gray">취소</a>
+			<a href="#" class="btn bg_green">등록</a>
+			<a href="#" class="btn bg_green">수정</a>
+		</div>
+		<!-- // btn -->
+	</div>
+</div>
+<!-- // popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">file</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+
+<!-- popup -->
+<div class="popup_wrap">
+	<div class="popup_head">
+		<strong class="title">흥미 진진 역사 이야기</strong>
+		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
+	</div>
+	<div class="popup_body">
+		<!-- table -->
+		<table class="table_style">
+			<colgroup>
+				<col width="25%;" />
+				<col />
+			</colgroup>
+			<tbody>
+				<tr>
+					<th scope="row">웹 상단 제목</th>
+					<td class="txt_l"><input type="text" style="width:380px"></td>
+				</tr>
+				<tr>
+					<th scope="row">웹 상세 제목</th>
+					<td class="txt_l"><input type="text" style="width:380px"></td>
+				</tr>
+				<tr>
+					<th scope="row">모바일 상단 제목</th>
+					<td class="txt_l"><input type="text" style="width:380px"></td>
+				</tr>
+				<tr>
+					<th scope="row">모바일 상세 제목</th>
+					<td class="txt_l"><input type="text" style="width:380px"></td>
+				</tr>
+				<tr>
+					<th scope="row">MID</th>
+					<td class="txt_l"><input type="text" style="width:380px"></td>
+				</tr>
+				<tr>
+					<th scope="row">QR주소</th>
+					<td class="txt_l"><input type="text" style="width:380px"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지1</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지2</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지3</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지4</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지5</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지6</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지7</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">이미지8</th>
+					<td class="txt_l"><input type="file" style="width:380px;"></td>
+				</tr>
+				<tr>
+					<th scope="row">공개여부</th>
+					<td>
+						<input type="radio" id="open" name="open_type"><label for="open"> 공개</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" id="closed" name="open_type"><label for="closed"> 비공개</label>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- // table -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_green">등록하기</a>
+		</div>
+		<!-- // btn -->
+		<!-- btn -->
+		<div class="btn_wrap">
+			<a href="#" class="btn bg_green">수정하기</a>
+		</div>
+		<!-- // btn -->
+	</div>
+</div>
+<!-- // popup -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../../common/js/code.js"></script>
+</body>
+</html>

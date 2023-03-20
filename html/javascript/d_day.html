@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/code.css">
+    <title>d_day</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>d_day</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">num</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .time {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:row;-webkit-flex-direction:row;height:50px;font-size:50px;}
+    .time strong {display:-webkit-flex;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 10px;background:#000;color:#fff;font-size:50px;font-weight:800;line-height:50px;letter-spacing:0.1em;}
+</style>
+<div id="countdown" class="time">D-<strong>00</strong>, <strong>00</strong>:<strong>00</strong>:<strong>00</strong></div>
+<script type="text/javascript" >
+    // Set the date we're counting down to
+    var countDownDate = new Date("May 21, 2023 15:10:00").getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // num 
+        days = pad(days, 2);
+        hours = pad(hours, 2);
+        minutes = pad(minutes, 2);
+        seconds = pad(seconds, 2);
+
+        // console.log('1.', days, hours, minutes, seconds);
+
+        // Output the result in an element with id="demo"
+        document.getElementById("countdown").innerHTML = "D-<strong>" + days + "</strong>,<strong>" + hours + "</strong>:<strong>" + minutes + "</strong>:<strong>" + seconds + "</strong>";
+
+        // If the count down is over, write some text 
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+        }
+
+        // num size
+        function pad(num, size) {
+            var s = "0000" + num;
+            return s.substr(s.length - size);
+        }
+    }, 1000);
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">img</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .time_cnt {color:#000;font-size:50px;}
+    .time_cnt dl {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:row;-webkit-flex-direction:row;box-sizing:border-box;}
+    .time_cnt dd,
+    .time_cnt dd em {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:row;-webkit-flex-direction:row;}
+    .time_cnt dd span {overflow:hidden;display:-webkit-flex;display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:50px;height:50px;margin:0 2px;background:#000;}
+    .time_cnt dd span img {vertical-align:middle;}
+    .time_cnt dd .hour {margin-left:20px;}
+</style>
+<div id="time_cnt" class="time_cnt">
+    <dl>
+        <dt>D-</dt>
+        <dd>
+            <em class="day">
+                <span></span>
+                <span></span>
+            </em>,
+            <em class="hour">
+                <span></span>
+                <span></span>
+            </em> : 
+            <em class="min">
+                <span></span>
+                <span></span>
+            </em> : 
+            <em class="sec">
+                <span></span>
+                <span></span>
+            </em>
+        </dd>
+    </dl>
+</div>
+<script type="text/javascript" >
+    // D-day 설정
+    var dday = new Date("May 21, 2023 15:10:00").getTime();
+    var y = setInterval(function() {
+        // 초기화
+        $(".time_cnt em").html('');
+
+        // 시간 셋팅 및 한 숫자씩 자르기
+        var today = new Date().getTime();
+        var gap = dday - today;
+        var day_ary = String(Math.floor(gap / (1000 * 60 * 60 * 24))).split("");
+        var hour_ary = String(Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).split("");
+        var min_ary = String(Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60))).split("");
+        var sec_ary = String(Math.floor((gap % (1000 * 60)) / 1000)).split("");
+
+        for (i=0; day_ary.length > i; i++){
+            if(day_ary.length < 2 && i == 0) $(".time_cnt .day").append('<span><img src="../../images/num0.png" alt="0"></span>');
+            $(".time_cnt .day").append('<span><img src="../../images/num'+day_ary[i]+'.png" alt="'+day_ary[i]+'"></span>');
+        }
+        for (i=0; hour_ary.length > i; i++){
+            if(hour_ary.length < 2 && i == 0) $(".time_cnt .hour").append('<span><img src="../../images/num0.png" alt="0"></span>');
+            $(".time_cnt .hour").append('<span><img src="../../images/num'+hour_ary[i]+'.png" alt="'+hour_ary[i]+'"></span>');
+        }
+        for (i=0; min_ary.length > i; i++){
+            if(min_ary.length < 2 && i == 0) $(".time_cnt .min").append('<span><img src="../../images/num0.png" alt="0"></span>');
+            $(".time_cnt .min").append('<span><img src="../../images/num'+min_ary[i]+'.png" alt="'+min_ary[i]+'"></span>');
+        }
+        for (i=0; sec_ary.length > i; i++){
+            if(sec_ary.length < 2 && i == 0) $(".time_cnt .sec").append('<span><img src="../../images/num0.png" alt="0"></span>');
+            $(".time_cnt .sec").append('<span><img src="../../images/num'+sec_ary[i]+'.png" alt="'+sec_ary[i]+'"></span>');
+        }
+
+        // console.log('2.', day_ary, hour_ary, min_ary, sec_ary);
+
+        // If the count down is over, write some text 
+        if (gap < 0) {
+            clearInterval(y);
+            document.getElementById("time_cnt").innerHTML = "EXPIRED";
+        }
+    }, 1000);
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../../common/js/code.js"></script>
+</body>
+</html>

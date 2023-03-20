@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/code.css">
+    <title>button</title>
+</head>
+<body data-theme="dark">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>button</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">common</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* button */
+    a.btn {position:relative;z-index:0;display:inline-block;width:200px;height:60px;margin:10px;background:#000;color:#fff;font-size:18px;font-weight:bold;text-align:center;line-height:60px;vertical-align:top;}
+    a.btn span {position:absolute;z-index:0;left:0;top:0;display:inline-block;width:100%;height:100%;font-weight:bold;text-align:center}
+
+    a.btn,
+    a.btn:before,
+    a.btn:after,
+    a.btn span,
+    a.btn span:before, 
+    a.btn span:after {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+
+    a.btn,
+    a.btn:before,
+    a.btn:after,
+    a.btn span:before, 
+    a.btn span:after {
+        -webkit-transition: all 0.30s;
+        transition: all 0.30s;
+    }
+
+    a.btn:before,
+    a.btn:after,
+    a.btn span:before,
+    a.btn span:after {position:absolute;z-index:-1;content:'';display:inline-block;}
+
+    a.bd {border:1px solid #000;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}    
+</style>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">fade</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* fade */
+    a.fade:hover {background:#fff;color:#333;}
+
+    a.fade-shadow:hover {box-shadow:5px 5px 5px rgba(256,256,256,1.0);}
+    a.fade-shadow-box:hover {box-shadow:5px 5px 0px rgba(256,256,256,1.0);}
+    a.fade-shadow-text:hover {text-shadow:2px 2px 2px rgba(256,256,256,0.7);}
+
+    a.fade-border:before {left:0;top:0;width:100%;height:100%;border:2px solid #fff;opacity:0.0;}
+    a.fade-border:hover:before {opacity:1.0;}
+
+    a.fade-border-dashed:before {left:0;top:0;width:100%;height:100%;border:2px dashed #fff;opacity:0.0;}
+    a.fade-border-dashed:hover:before {opacity:1.0;}
+
+    a.fade-border-dotted:before {left:0;top:0;width:100%;height:100%;border:2px dotted #fff;opacity:0.0;}
+    a.fade-border-dotted:hover:before {opacity:1.0;}
+
+    a.fade-radius:hover {border-radius:30px;-webkit-border-radius:30px;}
+
+    a.fade-border-radius:before {left:0;top:0;width:100%;height:100%;border:2px solid #fff;opacity:0.0;}
+    a.fade-border-radius:hover {border-radius:30px;-webkit-border-radius:30px;}
+    a.fade-border-radius:hover:before {border-radius:30px;-webkit-border-radius:30px;opacity:1.0;}
+
+    a.fade-border-double:before {left:0;top:0;width:100%;height:100%;border:2px solid #fff;opacity:0.0;}
+    a.fade-border-double:after {left:50%;top:50%;width:94%;height:80%;margin:-12% 0 0 -47%;border:2px solid #fff;opacity:0.0;}
+    a.fade-border-double:hover:after {opacity:1.0;}
+    a.fade-border-double:hover:before {opacity:1.0;}
+
+    a.fade-border-bg:before {left:0;top:0;width:100%;height:100%;border:2px solid #000;opacity:0.0;}
+    a.fade-border-bg:hover {background:#fff;color:#333;}
+    a.fade-border-bg:hover:before {opacity:1.0;}
+
+    a.fade-border-bg-double:before {left:0;top:0;width:100%;height:100%;border:2px solid #000;opacity:0.0;}
+    a.fade-border-bg-double:after {left:50%;top:50%;width:94%;height:80%;margin:-12% 0 0 -47%;border:2px solid #000;opacity:0.0;}
+    a.fade-border-bg-double:hover {background:#fff;color:#333;}
+    a.fade-border-bg-double:hover:before {opacity:1.0;}
+    a.fade-border-bg-double:hover:after {opacity:1.0;}
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn fade"><span>button</span></a>
+        <a href="#" class="btn fade-shadow"><span>button</span></a>
+        <a href="#" class="btn fade-shadow-box"><span>button</span></a>
+        <a href="#" class="btn fade-shadow-text"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn fade-border"><span>button</span></a>
+        <a href="#" class="btn fade-border-double"><span>button</span></a>
+        <a href="#" class="btn fade-border-bg"><span>button</span></a>
+        <a href="#" class="btn fade-border-bg-double"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn fade-border-dashed"><span>button</span></a>
+        <a href="#" class="btn fade-border-dotted"><span>button</span></a>
+        <a href="#" class="btn fade-radius"><span>button</span></a>
+        <a href="#" class="btn fade-border-radius"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">background</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* background */
+    a.bg-top-bottom {color:#fff;}
+    a.bg-top-bottom:before {left:0;top:0;width:100%;height:0;background:#fff;opacity:0.0;}
+    a.bg-top-bottom:hover {color:#333;}
+    a.bg-top-bottom:hover:before {height:100%;opacity:1.0;}
+
+    a.bg-bottom-top {color:#fff;}
+    a.bg-bottom-top:before {left:0;bottom:0;width:100%;height:0;background:#fff;opacity:0.0;}
+    a.bg-bottom-top:hover {color:#333;}
+    a.bg-bottom-top:hover:before {height:100%;opacity:1.0;}
+
+    a.bg-left-right {color:#fff;}
+    a.bg-left-right:before {left:0;top:0;width:0;height:100%;background:#fff;opacity:0.0;}
+    a.bg-left-right:hover {color:#333;}
+    a.bg-left-right:hover:before {width:100%;opacity:1.0;}
+
+    a.bg-right-left {color:#fff;}
+    a.bg-right-left:before {right:0;top:0;width:0;height:100%;background:#fff;opacity:0.0;}
+    a.bg-right-left:hover {color:#333;}
+    a.bg-right-left:hover:before {width:100%;opacity:1.0;}
+
+    a.bg-vertical {color:#fff;}
+    a.bg-vertical:before {left:50%;top:0;width:0;height:100%;background:#fff;opacity:0.0;}
+    a.bg-vertical:hover {color:#333;}
+    a.bg-vertical:hover:before {left:0;width:100%;opacity:1.0;}
+
+    a.bg-horizontal {color:#fff;}
+    a.bg-horizontal:before {left:0;top:50%;width:100%;height:0;background:#fff;opacity:0.0;}
+    a.bg-horizontal:hover {color:#333;}
+    a.bg-horizontal:hover:before {top:0;height:100%;opacity:1.0;}
+
+    a.bg-vertical-back {color:#fff;}
+    a.bg-vertical-back:before {left:0;top:0;width:0;height:100%;background:#fff;opacity:0.0;}
+    a.bg-vertical-back:after {right:0;top:0;width:0;height:100%;background:#fff;opacity:0.0;}
+    a.bg-vertical-back:hover {color:#333;}
+    a.bg-vertical-back:hover:before {left:0;width:50%;opacity:1.0;}
+    a.bg-vertical-back:hover:after {right:0;width:50%;opacity:1.0;}
+
+    a.bg-horizontal-back {color:#fff;}
+    a.bg-horizontal-back:before {left:0;top:0;width:100%;height:0;background:#fff;opacity:0.0;}
+    a.bg-horizontal-back:after {left:0;bottom:0;width:100%;height:0;background:#fff;opacity:0.0;}
+    a.bg-horizontal-back:hover {color:#333;}
+    a.bg-horizontal-back:hover:before {top:0;height:50%;opacity:1.0;}
+    a.bg-horizontal-back:hover:after {bottom:0;height:50%;opacity:1.0;}
+
+    a.bg-skew01 {overflow:hidden;color:#fff;}
+    a.bg-skew01:before {left:-100%;top:0;width:100%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(135deg);
+        transform:skewX(135deg);
+    }
+    a.bg-skew01:hover {color:#333;}
+    a.bg-skew01:hover:before {left:0;opacity:1.0;}
+
+    a.bg-skew02 {overflow:hidden;color:#fff;}
+    a.bg-skew02:before {left:100%;top:0;width:100%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(45deg);
+        transform:skewX(45deg);
+    }
+    a.bg-skew02:hover {color:#333;}
+    a.bg-skew02:hover:before {left:0;opacity:1.0;}
+
+    a.bg-skew03 {overflow:hidden;color:#fff;}
+    a.bg-skew03:after {left:100%;top:0;width:100%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(135deg);
+        transform:skewX(135deg);
+    }
+    a.bg-skew03:hover {color:#333;}
+    a.bg-skew03:hover:after {left:0;opacity:1.0;}
+
+    a.bg-skew04 {overflow:hidden;color:#fff;}
+    a.bg-skew04:after {left:-100%;top:0;width:100%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(45deg);
+        transform:skewX(45deg);
+    }
+    a.bg-skew04:hover {color:#333;}
+    a.bg-skew04:hover:after {left:0;opacity:1.0;}
+
+    a.bg-skew05 {overflow:hidden;color:#fff;}
+    a.bg-skew05:after {left:50%;top:0;width:0;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(135deg);
+        transform:skewX(135deg);
+    }
+    a.bg-skew05:hover {color:#333;}
+    a.bg-skew05:hover:after {left:0;width:100%;opacity:1.0;}
+
+    a.bg-skew06 {overflow:hidden;color:#fff;}
+    a.bg-skew06:after {left:50%;top:0;width:0;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(45deg);
+        transform:skewX(45deg);
+    }
+    a.bg-skew06:hover {color:#333;}
+    a.bg-skew06:hover:after {left:0;width:100%;opacity:1.0;}
+
+    a.bg-skew07 {overflow:hidden;color:#fff;}
+    a.bg-skew07:before {left:-50%;top:0;width:51%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(135deg);
+        transform:skewX(135deg);
+    }
+    a.bg-skew07:after {left:100%;top:0;width:50%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(135deg);
+        transform:skewX(135deg);
+    }
+    a.bg-skew07:hover {color:#333;}
+    a.bg-skew07:hover:before {left:0;opacity:1.0;}
+    a.bg-skew07:hover:after {left:50%;opacity:1.0;}
+
+    a.bg-skew08 {overflow:hidden;color:#fff;}
+    a.bg-skew08:before {left:-50%;top:0;width:51%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(45deg);
+        transform:skewX(45deg);
+    }
+    a.bg-skew08:after {left:100%;top:0;width:50%;height:100%;background:#fff;opacity:0.0;
+        -webkit-transform:skewX(45deg);
+        transform:skewX(45deg);
+    }
+    a.bg-skew08:hover {color:#333;}
+    a.bg-skew08:hover:before {left:0;opacity:1.0;}
+    a.bg-skew08:hover:after {left:50%;opacity:1.0;}
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn bg-top-bottom"><span>button</span></a>
+        <a href="#" class="btn bg-bottom-top"><span>button</span></a>
+        <a href="#" class="btn bg-horizontal"><span>button</span></a>
+        <a href="#" class="btn bg-horizontal-back"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn bg-left-right"><span>button</span></a>
+        <a href="#" class="btn bg-right-left"><span>button</span></a>
+        <a href="#" class="btn bg-vertical"><span>button</span></a>
+        <a href="#" class="btn bg-vertical-back"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn bg-skew01"><span>button</span></a>
+        <a href="#" class="btn bg-skew03"><span>button</span></a>
+        <a href="#" class="btn bg-skew05"><span>button</span></a>
+        <a href="#" class="btn bg-skew07"><span>button</span></a>
+        <a href="#" class="btn bg-skew01 bg-skew03"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn bg-skew02"><span>button</span></a>
+        <a href="#" class="btn bg-skew04"><span>button</span></a>
+        <a href="#" class="btn bg-skew06"><span>button</span></a>
+        <a href="#" class="btn bg-skew08"><span>button</span></a>
+        <a href="#" class="btn bg-skew02 bg-skew04"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">text</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* text */
+    a.text-motion-leftright {overflow:hidden;color:#666;}
+    a.text-motion-leftright:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;overflow:hidden;color:#fff;text-align:center;opacity:0.0;
+        -webkit-transform: translateX(-100%);
+        transform: translateX(-100%);
+        -webkit-transition: all 0.30s;
+        transition: all 0.30s;
+    }
+    a.text-motion-leftright:hover:before {opacity:1.0;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    a.text-motion-rightleft {overflow:hidden;color:#666;}
+    a.text-motion-rightleft:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;overflow:hidden;color:#fff;text-align:center;opacity:0.0;
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+        -webkit-transition: all 0.30s;
+        transition: all 0.30s;
+    }
+    a.text-motion-rightleft:hover:before {opacity:1.0;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    a.text-motion-topbottom {overflow:hidden;color:#666;}
+    a.text-motion-topbottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;overflow:hidden;color:#fff;text-align:center;opacity:0.0;
+        -webkit-transform: translateY(-100%);
+        transform: translateY(-100%);
+        -webkit-transition: all 0.30s;
+        transition: all 0.30s;
+    }
+    a.text-motion-topbottom:hover:before {opacity:1.0;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    a.text-motion-bottomtop {overflow:hidden;color:#666;}
+    a.text-motion-bottomtop:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;overflow:hidden;color:#fff;text-align:center;opacity:0.0;
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+        -webkit-transition: all 0.30s;
+        transition: all 0.30s;
+    }
+    a.text-motion-bottomtop:hover:before {opacity:1.0;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+
+    a.motion-double span {
+        -webkit-transition: all 0.30s;
+        transition: all 0.30s;
+    }
+    a.text-motion-leftright.motion-double:hover span {left:100%;}
+    a.text-motion-rightleft.motion-double:hover span {left:-100%;}
+    a.text-motion-topbottom.motion-double:hover span {top:100%;}
+    a.text-motion-bottomtop.motion-double:hover span {top:-100%;}    
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn text-motion-leftright" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn text-motion-rightleft" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn text-motion-topbottom" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn text-motion-bottomtop" data-hover="button"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn text-motion-leftright motion-double" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn text-motion-rightleft motion-double" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn text-motion-topbottom motion-double" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn text-motion-bottomtop motion-double" data-hover="button"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">line</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* line */
+    a.line-top-fade:before {left:0;top:0;width:100%;height:2px;background:#fff;opacity:0.0;}
+    a.line-top-fade:hover:before {opacity:1.0;}
+
+    a.line-top-leftright:before {left:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-top-leftright:hover:before {width:100%;opacity:1.0;}
+
+    a.line-top-rightleft:before {right:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-top-rightleft:hover:before {width:100%;opacity:1.0;}
+
+    a.line-top-centeredge:before {left:50%;top:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-top-centeredge:hover:before {left:0;width:100%;opacity:1.0;}
+
+
+    a.line-bottom-fade:after {left:0;bottom:0;width:100%;height:2px;background:#fff;opacity:0.0;}
+    a.line-bottom-fade:hover:after {opacity:1.0;}
+
+    a.line-bottom-centeredge:after {left:50%;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-bottom-centeredge:hover:after {left:0;width:100%;opacity:1.0;}
+
+    a.line-bottom-leftright:after {left:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-bottom-leftright:hover:after {width:100%;opacity:1.0;}
+
+    a.line-bottom-rightleft:after {right:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-bottom-rightleft:hover:after {width:100%;opacity:1.0;}
+
+
+    a.line-left-fade:before {left:0;top:0;width:2px;height:100%;background:#fff;opacity:0.0;}
+    a.line-left-fade:hover:before {opacity:1.0;}
+
+    a.line-left-topbottom:before {left:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-left-topbottom:hover:before {height:100%;opacity:1.0;}
+
+    a.line-left-bottomtop:before {left:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-left-bottomtop:hover:before {height:100%;opacity:1.0;}
+
+    a.line-left-centeredge:before {left:0;top:50%;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-left-centeredge:hover:before {top:0;height:100%;opacity:1.0;}
+
+
+    a.line-right-fade:after {right:0;top:0;width:2px;height:100%;background:#fff;opacity:0.0;}
+    a.line-right-fade:hover:after {opacity:1.0;}
+
+    a.line-right-centeredge:after {right:0;top:50%;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-right-centeredge:hover:after {top:0;height:100%;opacity:1.0;}
+
+    a.line-right-topbottom:after {right:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-right-topbottom:hover:after {height:100%;opacity:1.0;}
+
+    a.line-right-bottomtop:after {right:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-right-bottomtop:hover:after {height:100%;opacity:1.0;}
+
+    a.line-all-fade:before {left:0;top:0;width:100%;height:2px;background:#fff;opacity:0.0;}
+    a.line-all-fade span:before {left:0;bottom:0;width:100%;height:2px;background:#fff;opacity:0.0;}
+    a.line-all-fade:after {left:0;top:0;width:2px;height:100%;background:#fff;opacity:0.0;}
+    a.line-all-fade span:after {right:0;top:0;width:2px;height:100%;background:#fff;opacity:0.0;}
+    a.line-all-fade:hover:before {opacity:1.0;}
+    a.line-all-fade:hover span:before {opacity:1.0;}
+    a.line-all-fade:hover:after {opacity:1.0;}
+    a.line-all-fade:hover span:after {opacity:1.0;}
+
+    a.line-all:before {left:50%;top:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-all span:before {left:50%;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-all:after {left:0;top:50%;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-all span:after {right:0;top:50%;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-all:hover:before {left:0;width:100%;opacity:1.0;}
+    a.line-all:hover span:before {left:0;width:100%;opacity:1.0;}
+    a.line-all:hover:after {top:0;height:100%;opacity:1.0;}
+    a.line-all:hover span:after {top:0;height:100%;opacity:1.0;}
+
+    a.line-start:before {left:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-start span:before {right:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-start:after {right:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-start span:after {left:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-start:hover:before {width:100%;opacity:1.0;}
+    a.line-start:hover span:before {height:100%;opacity:1.0;}
+    a.line-start:hover:after {width:100%;opacity:1.0;}
+    a.line-start:hover span:after {height:100%;opacity:1.0;}
+
+    a.line-start-back:before {right:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-start-back span:before {right:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-start-back:after {left:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;}
+    a.line-start-back span:after {left:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;}
+    a.line-start-back:hover:before {width:100%;opacity:1.0;}
+    a.line-start-back:hover span:before {height:100%;opacity:1.0;}
+    a.line-start-back:hover:after {width:100%;opacity:1.0;}
+    a.line-start-back:hover span:after {height:100%;opacity:1.0;}
+
+    a.line-start-lefttop:before {left:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.15s;
+        transition-delay: 0.15s;
+    }
+    a.line-start-lefttop span:before {right:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.30s;
+        transition-delay: 0.30s;
+    }
+    a.line-start-lefttop:after {right:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.45s;
+        transition-delay: 0.45s;
+    }
+    a.line-start-lefttop span:after {left:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.60s;
+        transition-delay: 0.60s;
+    }
+    a.line-start-lefttop:hover:before {width:100%;opacity:1.0;}
+    a.line-start-lefttop:hover span:before {height:100%;opacity:1.0;}
+    a.line-start-lefttop:hover:after {width:100%;opacity:1.0;}
+    a.line-start-lefttop:hover span:after {height:100%;opacity:1.0;}
+
+    a.line-start-righttop:before {right:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.15s;
+        transition-delay: 0.15s;
+    }
+    a.line-start-righttop span:before {left:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.30s;
+        transition-delay: 0.30s;
+    }
+    a.line-start-righttop:after {left:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.45s;
+        transition-delay: 0.45s;
+    }
+    a.line-start-righttop span:after {right:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.60s;
+        transition-delay: 0.60s;
+    }
+    a.line-start-righttop:hover:before {width:100%;opacity:1.0;}
+    a.line-start-righttop:hover span:before {height:100%;opacity:1.0;}
+    a.line-start-righttop:hover:after {width:100%;opacity:1.0;}
+    a.line-start-righttop:hover span:after {height:100%;opacity:1.0;}
+
+    a.line-start-leftbottom:before {left:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.15s;
+        transition-delay: 0.15s;
+    }
+    a.line-start-leftbottom span:before {right:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.30s;
+        transition-delay: 0.30s;
+    }
+    a.line-start-leftbottom:after {right:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.45s;
+        transition-delay: 0.45s;
+    }
+    a.line-start-leftbottom span:after {left:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.60s;
+        transition-delay: 0.60s;
+    }
+    a.line-start-leftbottom:hover:before {width:100%;opacity:1.0;}
+    a.line-start-leftbottom:hover span:before {height:100%;opacity:1.0;}
+    a.line-start-leftbottom:hover:after {width:100%;opacity:1.0;}
+    a.line-start-leftbottom:hover span:after {height:100%;opacity:1.0;}
+
+    a.line-start-rightbottom:before {right:0;bottom:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.15s;
+        transition-delay: 0.15s;
+    }
+    a.line-start-rightbottom span:before {left:0;bottom:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.30s;
+        transition-delay: 0.30s;
+    }
+    a.line-start-rightbottom:after {left:0;top:0;width:0;height:2px;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.45s;
+        transition-delay: 0.45s;
+    }
+    a.line-start-rightbottom span:after {right:0;top:0;width:2px;height:0;background:#fff;opacity:0.0;
+        -webkit-transition-delay: 0.60s;
+        transition-delay: 0.60s;
+    }
+    a.line-start-rightbottom:hover:before {width:100%;opacity:1.0;}
+    a.line-start-rightbottom:hover span:before {height:100%;opacity:1.0;}
+    a.line-start-rightbottom:hover:after {width:100%;opacity:1.0;}
+    a.line-start-rightbottom:hover span:after {height:100%;opacity:1.0;}
+
+    a.line-box-lefttop:before {left:0;top:0;width:100%;height:100%;border:2px solid #666;opacity:1.0;}
+    a.line-box-lefttop:after {left:-6px;top:-6px;width:100%;height:100%;border:2px solid #fff;opacity:0.8;}
+    a.line-box-lefttop:hover:before {left:6px;top:6px;opacity:0.5;}
+    a.line-box-lefttop:hover:after {left:0;top:0;opacity:1.0;}
+
+    a.line-box-righttop:before {left:0;top:0;width:100%;height:100%;border:2px solid #666;opacity:1.0;}
+    a.line-box-righttop:after {left:6px;top:-6px;width:100%;height:100%;border:2px solid #fff;opacity:0.8;}
+    a.line-box-righttop:hover:before {left:-6px;top:6px;opacity:0.5;}
+    a.line-box-righttop:hover:after {left:0;top:0;opacity:1.0;}
+
+    a.line-box-leftbottom:before {left:0;top:0;width:100%;height:100%;border:2px solid #666;opacity:1.0;}
+    a.line-box-leftbottom:after {left:-6px;top:6px;width:100%;height:100%;border:2px solid #fff;opacity:0.8;}
+    a.line-box-leftbottom:hover:before {left:6px;top:-6px;opacity:0.5;}
+    a.line-box-leftbottom:hover:after {left:0;top:0;opacity:1.0;}
+
+    a.line-box-rightbottom:before {left:0;top:0;width:100%;height:100%;border:2px solid #666;opacity:1.0;}
+    a.line-box-rightbottom:after {left:6px;top:6px;width:100%;height:100%;border:2px solid #fff;opacity:0.8;}
+    a.line-box-rightbottom:hover:before {left:-6px;top:-6px;opacity:0.5;}
+    a.line-box-rightbottom:hover:after {left:0;top:0;opacity:1.0;}    
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn line-top-fade"><span>button</span></a>
+        <a href="#" class="btn line-top-leftright"><span>button</span></a>
+        <a href="#" class="btn line-top-rightleft"><span>button</span></a>
+        <a href="#" class="btn line-top-centeredge"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-bottom-fade"><span>button</span></a>
+        <a href="#" class="btn line-bottom-leftright"><span>button</span></a>
+        <a href="#" class="btn line-bottom-rightleft"><span>button</span></a>
+        <a href="#" class="btn line-bottom-centeredge"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-left-fade"><span>button</span></a>
+        <a href="#" class="btn line-left-topbottom"><span>button</span></a>
+        <a href="#" class="btn line-left-bottomtop"><span>button</span></a>
+        <a href="#" class="btn line-left-centeredge"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-right-fade"><span>button</span></a>
+        <a href="#" class="btn line-right-topbottom"><span>button</span></a>
+        <a href="#" class="btn line-right-bottomtop"><span>button</span></a>
+        <a href="#" class="btn line-right-centeredge"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-top-fade line-bottom-fade"><span>button</span></a>
+        <a href="#" class="btn line-top-leftright line-bottom-leftright"><span>button</span></a>
+        <a href="#" class="btn line-top-rightleft line-bottom-rightleft"><span>button</span></a>
+        <a href="#" class="btn line-top-centeredge line-bottom-centeredge"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-left-fade line-right-fade"><span>button</span></a>
+        <a href="#" class="btn line-left-topbottom line-right-topbottom"><span>button</span></a>
+        <a href="#" class="btn line-left-bottomtop line-right-bottomtop"><span>button</span></a>
+        <a href="#" class="btn line-left-centeredge line-right-centeredge"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-all-fade"><span>button</span></a>
+        <a href="#" class="btn line-all"><span>button</span></a>
+        <a href="#" class="btn line-start"><span>button</span></a>
+        <a href="#" class="btn line-start-back"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-start-lefttop"><span>button</span></a>
+        <a href="#" class="btn line-start-righttop"><span>button</span></a>
+        <a href="#" class="btn line-start-leftbottom"><span>button</span></a>
+        <a href="#" class="btn line-start-rightbottom"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn line-box-lefttop"><span>button</span></a>
+        <a href="#" class="btn line-box-righttop"><span>button</span></a>
+        <a href="#" class="btn line-box-leftbottom"><span>button</span></a>
+        <a href="#" class="btn line-box-rightbottom"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">scale</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* scale */
+    a.scale-up:hover {
+        -webkit-transform: scale(1.1, 1.1);
+        transform: scale(1.1, 1.1);
+    }
+
+    a.scale-down:hover {
+        -webkit-transform: scale(0.9, 0.9);
+        transform: scale(0.9, 0.9);
+    }
+
+    a.scale-scaleup:hover {
+        -webkit-animation: scaleup 0.50s 0.00s ease-in-out both infinite;
+        animation: scaleup 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes scaleup {
+        0% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+
+        50% {
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+
+        100% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+
+    @keyframes scaleup {
+        0% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+
+        50% {
+            -webkit-transform: scale(1.1, 1.1);
+            transform: scale(1.1, 1.1);
+        }
+
+        100% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+
+    a.scale-scaledown:hover {
+        -webkit-animation: scaledown 0.50s 0.00s ease-in-out both infinite;
+        animation: scaledown 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes scaledown {
+        0% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+
+        50% {
+            -webkit-transform: scale(0.9, 0.9);
+            transform: scale(0.9, 0.9);
+        }
+
+        100% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+
+    @keyframes scaledown {
+        0% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+
+        50% {
+            -webkit-transform: scale(0.9, 0.9);
+            transform: scale(0.9, 0.9);
+        }
+
+        100% {
+            -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+        }
+    }
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn scale-up"><span>button</span></a>
+        <a href="#" class="btn scale-down"><span>button</span></a>
+        <a href="#" class="btn scale-scaleup"><span>button</span></a>
+        <a href="#" class="btn scale-scaledown"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">rotate</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* rotate */
+    a.rotate-5deg:hover {
+        -webkit-transform: rotate(5deg);
+        transform: rotate(5deg);
+    }
+
+    a.rotate-m5deg:hover {
+        -webkit-transform: rotate(-5deg);
+        transform: rotate(-5deg);
+    }
+
+    a.rotate-rotate5deg:hover {
+        -webkit-animation: rotate5deg 0.50s 0.00s ease-in-out both infinite;
+        animation: rotate5deg 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes rotate5deg {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes rotate5deg {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(5deg);
+            transform: rotate(5deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+    }
+
+    a.rotate-rotatem5deg:hover {
+        -webkit-animation: rotatem5deg 0.50s 0.00s ease-in-out both infinite;
+        animation: rotatem5deg 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes rotatem5deg {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+    }
+
+    @keyframes rotatem5deg {
+        0% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+
+        50% {
+            -webkit-transform: rotate(-5deg);
+            transform: rotate(-5deg);
+        }
+
+        100% {
+            -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+    }
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn rotate-5deg"><span>button</span></a>
+        <a href="#" class="btn rotate-m5deg"><span>button</span></a>
+        <a href="#" class="btn rotate-rotate5deg"><span>button</span></a>
+        <a href="#" class="btn rotate-rotatem5deg"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">move</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* move */
+    a.move-up:hover {
+        -webkit-transform: translateY(-5px);
+        transform: translateY(-5px);
+    }
+
+    a.move-down:hover {
+        -webkit-transform: translateY(5px);
+        transform: translateY(5px);
+    }
+
+    a.move-moveup:hover {
+        -webkit-animation: moveup 0.50s 0.00s ease-in-out both infinite;
+        animation: moveup 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes moveup {
+        0% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        50% {
+            -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+        }
+
+        100% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes moveup {
+        0% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        50% {
+            -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+        }
+
+        100% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    a.move-movedown:hover {
+        -webkit-animation: movedown 0.50s 0.00s ease-in-out both infinite;
+        animation: movedown 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes movedown {
+        0% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        50% {
+            -webkit-transform: translateY(5px);
+            transform: translateY(5px);
+        }
+
+        100% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes movedown {
+        0% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        50% {
+            -webkit-transform: translateY(5px);
+            transform: translateY(5px);
+        }
+
+        100% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    a.move-left:hover {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+
+    a.move-right:hover {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+
+    a.move-moveleft:hover {
+        -webkit-animation: moveleft 0.50s 0.00s ease-in-out both infinite;
+        animation: moveleft 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes moveleft {
+        0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        50% {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes moveleft {
+        0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        50% {
+            -webkit-transform: translateX(-5px);
+            transform: translateX(-5px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    a.move-moveright:hover {
+        -webkit-animation: moveright 0.50s 0.00s ease-in-out both infinite;
+        animation: moveright 0.50s 0.00s ease-in-out both infinite;
+    }
+
+    @-webkit-keyframes moveright {
+        0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        50% {
+            -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes moveright {
+        0% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        50% {
+            -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+        }
+
+        100% {
+            -webkit-transform: translateX(0);
+            transform: translateX(0);
+        }
+    }
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn move-up"><span>button</span></a>
+        <a href="#" class="btn move-down"><span>button</span></a>
+        <a href="#" class="btn move-moveup"><span>button</span></a>
+        <a href="#" class="btn move-movedown"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn move-left"><span>button</span></a>
+        <a href="#" class="btn move-right"><span>button</span></a>
+        <a href="#" class="btn move-moveleft"><span>button</span></a>
+        <a href="#" class="btn move-moveright"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">2d</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* 2d */
+    a.btn-2d-topbottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+        -webkit-transform: rotateX(90deg);
+        transform: rotateX(90deg);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+    }
+    a.btn-2d-topbottom:hover:before {
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+    }
+
+    a.btn-2d-bottomtop:before {content:attr(data-hover);left:0;bottom:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+        -webkit-transform: rotateX(90deg);
+        transform: rotateX(90deg);
+        -webkit-transform-origin: 0% 100%;
+        transform-origin: 0% 100%;
+    }
+    a.btn-2d-bottomtop:hover:before {
+        -webkit-transform: rotateX(0deg);
+        transform: rotateX(0deg);
+    }
+
+    a.btn-2d-leftright:before {content:attr(data-hover);left:0;bottom:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+        -webkit-transform: rotateY(90deg);
+        transform: rotateY(90deg);
+        -webkit-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+    }
+    a.btn-2d-leftright:hover:before {
+        -webkit-transform: rotateY(0);
+        transform: rotateY(0);
+    }
+
+    a.btn-2d-rightleft:before {content:attr(data-hover);right:0;bottom:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+        -webkit-transform: rotateY(90deg);
+        transform: rotateY(90deg);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+    }
+    a.btn-2d-rightleft:hover:before {
+        -webkit-transform: rotateY(0);
+        transform: rotateY(0);
+    }    
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn btn-2d-topbottom" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-2d-bottomtop" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-2d-leftright" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-2d-rightleft" data-hover="button"><span>button</span></a>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">3d</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* 3d */
+a.btn-3d-lefttop-topbottom {overflow:hidden;}
+a.btn-3d-lefttop-topbottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(-90deg);
+	transform: rotateZ(-90deg);
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+a.btn-3d-lefttop-topbottom:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+a.btn-3d-lefttop-bottomtop {overflow:hidden;}
+a.btn-3d-lefttop-bottomtop:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(90deg);
+	transform: rotateZ(90deg);
+	-webkit-transform-origin: 0% 0%;
+	transform-origin: 0% 0%;
+}
+a.btn-3d-lefttop-bottomtop:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+a.btn-3d-righttop-topbottom {overflow:hidden;}
+a.btn-3d-righttop-topbottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(90deg);
+	transform: rotateZ(90deg);
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+a.btn-3d-righttop-topbottom:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+a.btn-3d-righttop-bottomtop {overflow:hidden;}
+a.btn-3d-righttop-bottomtop:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(-90deg);
+	transform: rotateZ(-90deg);
+	-webkit-transform-origin: 100% 0%;
+	transform-origin: 100% 0%;
+}
+a.btn-3d-righttop-bottomtop:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+
+a.btn-3d-leftbottom-topbottom {overflow:hidden;}
+a.btn-3d-leftbottom-topbottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(-90deg);
+	transform: rotateZ(-90deg);
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+}
+a.btn-3d-leftbottom-topbottom:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+a.btn-3d-leffbottom-bottomtop {overflow:hidden;}
+a.btn-3d-leffbottom-bottomtop:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(90deg);
+	transform: rotateZ(90deg);
+	-webkit-transform-origin: 0% 100%;
+	transform-origin: 0% 100%;
+}
+a.btn-3d-leffbottom-bottomtop:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+a.btn-3d-rightbottom-topbottom {overflow:hidden;}
+a.btn-3d-rightbottom-topbottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(90deg);
+	transform: rotateZ(90deg);
+	-webkit-transform-origin: 100% 100%;
+	transform-origin: 100% 100%;
+}
+a.btn-3d-rightbottom-topbottom:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+a.btn-3d-rightbottom-bottomtop {overflow:hidden;}
+a.btn-3d-rightbottom-bottomtop:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+	-webkit-transform: rotateZ(-90deg);
+	transform: rotateZ(-90deg);
+	-webkit-transform-origin: 100% 100%;
+	transform-origin: 100% 100%;
+}
+a.btn-3d-rightbottom-bottomtop:hover:before {
+	-webkit-transform: rotateZ(0deg);
+	transform: rotateZ(0deg);
+}
+
+
+.btnBox-3d {display:-moz-inline-stack;display:inline-block;zoom:1;*display:inline;
+    -webkit-perspective: 1000px;
+    -moz-perspective: 1000px;
+    perspective: 1000px;
+}
+
+a.btn-3d-box-top {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: translateZ(-30px);
+	transform: translateZ(-30px);
+}
+a.btn-3d-box-top:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#000;color:#fff;text-align:center;opacity:1.0;
+    -webkit-transform: rotateY(0deg) translateZ(30px);
+    -moz-transform: rotateY(0deg) translateZ(30px);
+    -ms-transform: rotateY(0deg) translateZ(30px);
+    -o-transform: rotateY(0deg) translateZ(30px);
+    transform: rotateY(0deg) translateZ(30px);
+}
+a.btn-3d-box-top:after {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+    -webkit-transform: rotateX(90deg) translateZ(30px);
+    -moz-transform: rotateX(90deg) translateZ(30px);
+    -ms-transform: rotateX(90deg) translateZ(30px);
+    -o-transform: rotateX(90deg) translateZ(30px);
+    transform: rotateX(90deg) translateZ(30px);
+}
+a.btn-3d-box-top:hover {opacity:1.0;
+    -webkit-transform: translateZ(-30px) rotateX(-90deg);
+    -moz-transform: translateZ(-30px) rotateX(-90deg);
+    -ms-transform: translateZ(-30px) rotateX(-90deg);
+    -o-transform: translateZ(-30px) rotateX(-90deg);
+    transform: translateZ(-30px) rotateX(-90deg);
+}
+
+a.btn-3d-box-bottom {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: translateZ(-30px);
+	transform: translateZ(-30px);
+}
+a.btn-3d-box-bottom:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#000;color:#fff;text-align:center;opacity:1.0;
+    -webkit-transform: rotateY(0deg) translateZ(30px);
+    -moz-transform: rotateY(0deg) translateZ(30px);
+    -ms-transform: rotateY(0deg) translateZ(30px);
+    -o-transform: rotateY(0deg) translateZ(30px);
+    transform: rotateY(0deg) translateZ(30px);
+}
+a.btn-3d-box-bottom:after {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+    -webkit-transform: rotateX(-90deg) translateZ(30px);
+    -moz-transform: rotateX(-90deg) translateZ(30px);
+    -ms-transform: rotateX(-90deg) translateZ(30px);
+    -o-transform: rotateX(-90deg) translateZ(30px);
+    transform: rotateX(-90deg) translateZ(30px);
+}
+a.btn-3d-box-bottom:hover {opacity:1.0;
+    -webkit-transform: translateZ(-30px) rotateX(90deg);
+    -moz-transform: translateZ(-30px) rotateX(90deg);
+    -ms-transform: translateZ(-30px) rotateX(90deg);
+    -o-transform: translateZ(-30px) rotateX(90deg);
+    transform: translateZ(-30px) rotateX(90deg);
+}
+
+a.btn-3d-box-left {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: translateZ(-100px);
+	transform: translateZ(-100px);
+}
+a.btn-3d-box-left:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#000;color:#fff;text-align:center;opacity:1.0;
+    -webkit-transform: rotateX(0deg) translateZ(100px);
+    -moz-transform: rotateX(0deg) translateZ(100px);
+    -ms-transform: rotateX(0deg) translateZ(100px);
+    -o-transform: rotateX(0deg) translateZ(100px);
+    transform: rotateX(0deg) translateZ(100px);
+}
+a.btn-3d-box-left:after {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+    -webkit-transform: rotateY(-90deg) translateZ(100px);
+    -moz-transform: rotateY(-90deg) translateZ(100px);
+    -ms-transform: rotateY(-90deg) translateZ(100px);
+    -o-transform: rotateY(-90deg) translateZ(100px);
+    transform: rotateY(-90deg) translateZ(100px);
+}
+a.btn-3d-box-left:hover {opacity:1.0;
+    -webkit-transform: translateZ(-100px) rotateY(90deg);
+    -moz-transform: translateZ(-100px) rotateY(90deg);
+    -ms-transform: translateZ(-100px) rotateY(90deg);
+    -o-transform: translateZ(-100px) rotateY(90deg);
+    transform: translateZ(-100px) rotateY(90deg);
+}
+
+a.btn-3d-box-right {
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: translateZ(-100px);
+	transform: translateZ(-100px);
+}
+a.btn-3d-box-right:before {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#000;color:#fff;text-align:center;opacity:1.0;
+    -webkit-transform: rotateX(0deg) translateZ(100px);
+    -moz-transform: rotateX(0deg) translateZ(100px);
+    -ms-transform: rotateX(0deg) translateZ(100px);
+    -o-transform: rotateX(0deg) translateZ(100px);
+    transform: rotateX(0deg) translateZ(100px);
+}
+a.btn-3d-box-right:after {content:attr(data-hover);left:0;top:0;z-index:1;width:100%;height:100%;background:#fff;color:#333;text-align:center;opacity:1.0;
+    -webkit-transform: rotateY(90deg) translateZ(100px);
+    -moz-transform: rotateY(90deg) translateZ(100px);
+    -ms-transform: rotateY(90deg) translateZ(100px);
+    -o-transform: rotateY(90deg) translateZ(100px);
+    transform: rotateY(90deg) translateZ(100px);
+}
+a.btn-3d-box-right:hover {opacity:1.0;
+    -webkit-transform: translateZ(-100px) rotateY(-90deg);
+    -moz-transform: translateZ(-100px) rotateY(-90deg);
+    -ms-transform: translateZ(-100px) rotateY(-90deg);
+    -o-transform: translateZ(-100px) rotateY(-90deg);
+    transform: translateZ(-100px) rotateY(-90deg);
+}
+</style>
+<!-- btn_wrap -->
+<div class="btn_wrap">
+    <div class="btn_box">
+        <a href="#" class="btn btn-3d-lefttop-topbottom" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-3d-lefttop-bottomtop" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-3d-righttop-topbottom" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-3d-righttop-bottomtop" data-hover="button"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <a href="#" class="btn btn-3d-leftbottom-topbottom" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-3d-leffbottom-bottomtop" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-3d-rightbottom-topbottom" data-hover="button"><span>button</span></a>
+        <a href="#" class="btn btn-3d-rightbottom-bottomtop" data-hover="button"><span>button</span></a>
+    </div>
+    <div class="btn_box">
+        <div class="btn_box-3d">
+            <a href="#" class="btn btn-3d-box-top" data-hover="button"><span>button</span></a>
+        </div>
+        <div class="btn_box-3d">
+            <a href="#" class="btn btn-3d-box-bottom" data-hover="button"><span>button</span></a>
+        </div>
+        <div class="btn_box-3d">
+            <a href="#" class="btn btn-3d-box-left" data-hover="button"><span>button</span></a>
+        </div>
+        <div class="btn_box-3d">
+            <a href="#" class="btn btn-3d-box-right" data-hover="button"><span>button</span></a>
+        </div>
+    </div>
+</div>
+<!-- // btn_wrap -->
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../../common/js/code.js"></script>
+</body>
+</html>

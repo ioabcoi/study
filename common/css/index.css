@@ -10,6 +10,14 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 .index_area ul li:hover {background-color:#fff8e6;}
 .index_area .tit {display:none;}
 
+.mobile_area {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:center;padding:20px;}
+.mobile_area > div {padding:20px 5px;background:#ddd;border-radius:10px;}
+.mobile_area > div > div {width:320px;height:540px;margin:0 auto;background:#fff;border-radius:6px;}
+.mobile_preview {margin:0;padding:0;border:0;overflow-x:hidden;overflow-y:scroll;}
+.mobile_size {text-align:center;}
+.mobile_size .tit {display:block;margin-top:10px;}
+.mobile_size ul li {margin-top:5px;}
+
 @media(min-width:768px){
     .index_area ul li {flex-direction:row;-webkit-flex-direction:row;}
     .index_area ul li > div {width:37%;min-height:21px;padding:2px 4px;font-size:11px;text-align:left;}
@@ -33,6 +41,8 @@ body[data-theme="dark"] .index_area ul li > div + div {border-color:#020202;}
 body[data-theme="dark"] .index_area ul li:hover,
 body[data-theme="dark"] .index_area ul li > div:first-child,
 body[data-theme="dark"] .index_area .tit {background-color:#020202;}
+
+body[data-theme="dark"] .mobile_size ul li a {color:#aaa;}
 
 @media(min-width:768px){
     body[data-theme="dark"] .index_area ul li > div:first-child {background-color:transparent;color:#aaa;}
