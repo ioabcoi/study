@@ -16,7 +16,7 @@
     <h1>text_typing</h1>
 
     <!-- code_area -->
-    <div class="code_tit">only javascript <span class="sub">- tag X</span></div>
+    <div class="code_tit">jQuery <span class="sub">- tag X</span></div>
     <div class="code_area" data-style="vertical">
         <!-- code_ui -->
         <div class="code_ui">
@@ -86,6 +86,9 @@
             loop: false
         });
         typing1.stop();
+        setTimeout(function(){
+            typing1.start();
+        }, 1500);
 
         var typing2 = new Typed('#typing_jq_2', {
             strings: ['원하는 글씨를 <strong>순서대로</strong> 출력해 줍니다.'],
@@ -98,10 +101,6 @@
             loop: false
         });
         typing2.stop();
-
-        setTimeout(function(){
-            typing1.start();
-        }, 1500);
         setTimeout(function(){
             typing2.start();
         }, 2500);
@@ -117,7 +116,7 @@
     <!-- // code_area -->
     
     <!-- code_area -->
-    <div class="code_tit">only javascript - typing + rolling</div>
+    <div class="code_tit">jQuery - typing + rolling</div>
     <div class="code_area" data-style="vertical">
         <!-- code_ui -->
         <div class="code_ui">
@@ -128,18 +127,27 @@
     .rolling_typing ul li.on {background:#fff;}
 </style>
 <!-- rolling_typing -->
-<div id="rolling_typing" class="rolling_typing">
+<div id="rolling_typing1" class="rolling_typing">
     <ul>
-        <li class="typing0"><p>자기주도적 자율 학습 시간 확대로 능동적 학습 완성</p></li>
-        <li class="typing1"><p>필수수업 축소로 꼭 필요한 수업만</p></li>
-        <li class="typing2"><p>스스로 학습을 설계할 수 있는 선택수업 강화</p></li>
-        <li class="typing3"><p>프리미엄 무제한 인강 이투스PASS 무료 제공</p></li>
+        <li>자기주도적 자율 학습 시간 확대로 능동적 학습 완성</li>
+        <li>필수수업 축소로 꼭 필요한 수업만</li>
+        <li>스스로 학습을 설계할 수 있는 선택수업 강화</li>
+        <li>프리미엄 무제한 인강 이투스PASS 무료 제공</li>
+    </ul>
+</div>
+<br>
+<div id="rolling_typing2" class="rolling_typing">
+    <ul>
+        <li>안녕하세요</li>
+        <li>오늘은</li>
+        <li>2023년 3월 20일</li>
+        <li>미세먼지 최악!!!</li>
     </ul>
 </div>
 <!-- // rolling_typing -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
-    /* rolling_typing */
+    // rolling_typing
     function fntypeing(obg, ttl){
         var typeing = ttl,
             typeingarr = typeing.split(''),
@@ -156,70 +164,66 @@
             }
         }, 45);
     }
-    jQuery.fn.rollingTypingFunc = function() {
+    // fntypeing('target', '문구문구');
+
+    // rolling_typing_func
+    jQuery.fn.rollingTypingFunc = function(speed) {
         return this.each(function() {
             var $rolling = jQuery(this);
-            var $steplist = $rolling.find('> ul li');
+            var rolling_id = '#'+ jQuery(this).attr('id');
+            var $steplist = jQuery(rolling_id +' > ul li');
             var step_length = $steplist.length;
+            var step_array = new Array;
             var step_index = 0;
+            var step_speed = speed;
             var timer;
+            
+            // setting
+            $steplist.each(function(i){
+                var $this_typing = jQuery(this).addClass('typing'+i);
+                this_text = $this_typing.text();
+                step_array[i] = this_text;
+            });
+
+            // start
             function stepStart(obj){
                 step_index = obj;
-                $steplist.removeClass('on');
-                $steplist.eq(step_index).addClass('on');
                 timer = setInterval(function(){
                     stepRolling(step_index);
-                }, 4000);
+                }, step_speed);
             }
+
+            // stop
             function stepStop(){
                 step_index = 0;
                 $steplist.removeClass('on');
                 clearInterval(timer);
             }
+
+            // rolling
             function stepRolling(num){
                 step_index = num;
-                step_text = '';
-                $steplist.removeClass('on');
+                step_text = step_array[step_index];
+                $steplist.removeClass('on').eq(step_index).addClass('on');
+                jQuery(rolling_id +' .typing'+ step_index).text('');
+                fntypeing(rolling_id +' .typing'+ step_index, step_text);
 
                 if( step_index >= step_length-1 ){
                     step_index = 0;
                 }else{
                     step_index++;
                 }
-
-                if( step_index === 0 ){
-                    step_text = '자기주도적 자율 학습 시간 확대로 능동적 학습 완성';
-                }else if( step_index === 1 ){
-                    step_text = '필수수업 축소로 꼭 필요한 수업만';
-                }else if( step_index === 2 ){
-                    step_text = '스스로 학습을 설계할 수 있는 선택수업 강화';
-                }else if( step_index === 3 ){
-                    step_text = '프리미엄 무제한 인강 이투스PASS 무료 제공';
-                }
-
-                $steplist.eq(step_index).addClass('on');
-                jQuery('.typing'+step_index+' p').text('');
-                fntypeing('.typing'+step_index+' p', step_text);
             }
             setTimeout(function(){
                 stepStart(0);
             }, 500);
-            
-            // option
-            if( $rolling.hasClass('enterstop') ){
-                var overIdx = 0;
-                $steplist.find('a').bind('mouseenter', function(){
-                    overIdx = jQuery(this).parent().index();
-                    stepStop();
-                    $steplist.eq(overIdx).addClass('on');
-                }).bind('mouseleave', function(){
-                    stepStart(overIdx);
-                });
-            }
-        
         });
     }
-    jQuery("#rolling_typing").rollingTypingFunc(1000);
+
+    $(document).ready(function(){
+        jQuery("#rolling_typing1").rollingTypingFunc(4000);
+        jQuery("#rolling_typing2").rollingTypingFunc(2000);
+    });
 </script>
 
             </div>

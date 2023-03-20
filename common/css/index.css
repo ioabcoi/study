@@ -10,11 +10,11 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 .index_area ul li:hover {background-color:#fff8e6;}
 .index_area .tit {display:none;}
 
-.mobile_area {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:center;padding:20px;}
+.mobile_area {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;width:100%;padding:20px;}
 .mobile_area > div {padding:20px 5px;background:#ddd;border-radius:10px;}
-.mobile_area > div > div {width:320px;height:540px;margin:0 auto;background:#fff;border-radius:6px;}
+.mobile_area > div > div {overflow:hidden;width:337px;height:540px;margin:0 auto;background:#fff;border-radius:6px;}
 .mobile_preview {margin:0;padding:0;border:0;overflow-x:hidden;overflow-y:scroll;}
-.mobile_size {text-align:center;}
+.mobile_size {box-sizing:border-box;width:100%;text-align:center;}
 .mobile_size .tit {display:block;margin-top:10px;}
 .mobile_size ul li {margin-top:5px;}
 
