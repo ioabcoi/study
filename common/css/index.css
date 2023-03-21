@@ -7,6 +7,7 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 .index_area ul li > div {width:100%;padding:3px 4px;font-size:11px;font-weight:400;text-align:left;}
 .index_area ul li > div a {margin-right:10px;text-decoration:none;}
 .index_area ul li > div:first-child {padding:3px 4px 0;background-color:#f2f2f2;border-bottom:1px solid #f2f2f2;font-size:20px;font-weight:700;}
+.index_area ul li.line {background-color:#f2f2f2;}
 .index_area ul li:hover {background-color:#fff8e6;}
 .index_area .tit {display:none;}
 

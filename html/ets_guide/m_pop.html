@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <link rel="stylesheet" href="../../common/css/reset.css">
     <link rel="stylesheet" href="../../common/css/code.css">
-    <title>pop</title>
+    <title>m_pop</title>
 </head>
 <body data-theme="light">
 
 <!-- code_wrap -->
 <div class="code_wrap">
-    <h1>pop</h1>
+    <h1>m_pop</h1>
 
     <!-- code_area -->
     <div class="code_tit">common</div>
@@ -23,14 +23,13 @@
             <div class="code_ui_box">
 <style>
     /* common */
-    .popup_wrap {border:2px solid #333;color:#555;font-size:12px;line-height:16px;}
-    .popup_wrap *, .popup_wrap a {font-family:'Noto Sans KR','Malgun Gothic','맑은고딕',sans-serif;}
+    .popup_wrap {position:relative;border:2px solid #000;}
     .popup_wrap .blind {display:block;overflow:hidden;position:absolute;top:-1000em;left:0;text-indent:-1000em;}
-    .popup_wrap .popup_head {position:relative;padding:23px 25px 15px;}
-    .popup_wrap .popup_head .title {color:#000;font-size:22px;line-height:30px;letter-spacing:-0.05em;}
-    .popup_wrap .popup_head .title span {font-size:16px;font-weight:300;}
-    .popup_wrap .popup_head .close {position:absolute;top:28px;right:30px;display:block;width:19px;height:19px;background:url('../../images/ico_close.gif') no-repeat;}
-    .popup_wrap .popup_body {padding:20px 30px 30px;border-top:1px dashed #717171;}
+    .popup_wrap .popup_head {position:relative;padding:15px 45px 15px 20px;}}
+    .popup_wrap .popup_head .title {color:#222;font-size:16px;line-height:24px;letter-spacing:-0.05em;}
+    .popup_wrap .popup_head .title span {font-size:14px;font-weight:300;}
+    .popup_wrap .popup_head .close {position:absolute;top:0;right:0;display:block;width:45px;height:45px;background:url('../../images/ico_close2.png') no-repeat 50% 50%;background-size:19px auto;}
+    .popup_wrap .popup_body {padding:15px;border-top:1px dashed #717171;}
 
     /* text */
     .popup_wrap .border_line {display:block;width:100%;margin:30px 0;border-top:1px solid #d9d9d9;} 
@@ -57,6 +56,7 @@
     .popup_wrap .desc {margin-top:2px;font-size:12px;line-height:16px;}
     .popup_wrap .desc_small {margin-top:2px;font-size:11px;line-height:15px;}
     .popup_wrap .desc_right {margin-top:2px;font-size:11px;line-height:15px;text-align:right;}
+    .popup_wrap .desc_list {margin-top:5px;}
     .popup_wrap .desc_list li {position:relative;color:#666;}
     .popup_wrap .desc_list li:before {position:absolute;left:0;top:0;}
     .popup_wrap .desc_list li table {margin:5px 0;}
@@ -72,8 +72,11 @@
     .popup_wrap .desc_list.point li:before {content:'※';}
 
     /* btn */
-    .popup_wrap .btn_wrap {margin-top:20px;text-align:center}
-    .popup_wrap .btn {display:inline-block;width:100px;height:26px;margin:0 2px;border:1px solid #ccc;background:#fff;color:#555;font-size:12px;font-family:'Noto Sans KR';font-weight:300;line-height:26px;text-align:center;text-decoration:none;vertical-align:middle;}
+    .popup_wrap .btn_wrap {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:center;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:100%;margin-top:20px;}
+    .popup_wrap .btn_wrap + .btn_wrap {margin-top:5px;}
+    .popup_wrap .btn_box {flex:1;}
+    .popup_wrap .btn_box + .btn_box {padding-left:5px;}
+    .popup_wrap .btn {overflow:hidden;display:block;height:40px;background:#fff;border:1px solid #cccccc;border-radius:2px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:center;-webkit-appearance:none;color:#222222;font-size:15px;line-height:40px;cursor:pointer;text-decoration:none;}
     .popup_wrap .bd_gray {border:1px solid #ccc;background:#fff;color:#555;}
     .popup_wrap .bg_gray {border:1px solid #979b9e;background:#979b9e;color:#fff;}
     .popup_wrap .bg_black {border:1px solid #2c2c2c;background:#2c2c2c;color:#fff;}
@@ -88,13 +91,24 @@
 	<div class="popup_body">
 
 		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_gray">취소</a>
-			<a href="#" class="btn bg_darkgray">취소</a>
-			<a href="#" class="btn bg_green">등록</a>
-			<a href="#" class="btn bg_darkgreen">등록</a>
-			<a href="#" class="btn bd_gray">등록</a>
-		</div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">취소</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bg_green">확인</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bg_black">취소</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">취소</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">확인</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn">취소</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">확인</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_black">등록</a></div>
+        </div>
 		<!-- // btn -->
 
 		<ul class="desc_list">
@@ -119,7 +133,7 @@
 		<p class="desc_right">ㅇㅇㅇㅇㅇ</p>
 	</div>
 </div>
-<!-- //popup -->      
+<!-- // popup -->      
             </div>
         </div>
         <!-- // code_ui -->
@@ -139,62 +153,61 @@
     /* agree */
     .popup_wrap .agree_box .term_tit {color:#ff0000;text-align:center;}
     .popup_wrap .agree_box .term_sub {margin-top:20px;}
-    .popup_wrap .agree_box .term_sub:after {content:'';display:block;height:0px;clear:both;visibility:hidden;}
-    .popup_wrap .agree_box .term_sub .tit {float:left;display:inline-block;color:#333;font-size:13px;vertical-align:middle;}
-    .popup_wrap .agree_box .term_sub .agree {float:right;}
-    .popup_wrap .agree_box .term_sub .agree input {margin-left:10px;}
+    .popup_wrap .agree_box .term_sub .tit {display:inline-block;color:#333;font-size:13px;vertical-align:middle;}
+    .popup_wrap .agree_box .agree {margin:10px 0;}
+    .popup_wrap .agree_box .agree input {vertical-align:middle;}
     .popup_wrap .agree_box .term_box {margin:5px auto;padding:10px 15px;background-color:#fff;border:1px solid #ddd;color:#818181;font-size:11px;}
     .popup_wrap .agree_box .term_desc {padding-left:15px;margin-top:2px;background:none;text-indent:-15px;}
 </style>
 <!-- popup -->
 <div class="popup_wrap">
-	<div class="popup_head">
-		<strong class="title">개인 정보 수집 및 이용 동의</strong>
-		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
-	</div>
-	<div class="popup_body">
-		<!-- agree -->
-		<div class="agree_box">
-			<p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 이용 동의가 필요 합니다.</strong></p>
-			<div class="term_sub">
-				<strong class="tit">개인 정보 수집 및 이용 동의 (필수)</strong>
-				<div class="agree">
-					<input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
-					<input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
-				</div>
-			</div>
-			<div class="term_box">
-				<ul class="desc_list dot">
-					<li>수집목적 : ㅇㅇㅇㅇㅇ</li>
-					<li>수집항목 : ㅇㅇㅇㅇㅇ</li>
-					<li>보유기간 : <strong>ㅇㅇㅇㅇㅇ</strong></li>
-				</ul>
-			</div>
-			<div class="term_sub">
-				<strong class="tit">개인 정보 위탁 제공 동의 (필수)</strong>
-				<div class="agree">
-					<input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
-					<input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
-				</div>
-			</div>
-			<div class="term_box">
-				<ul class="desc_list dot">
-					<li>ㅇㅇㅇㅇㅇㅇ</li>
-					<li>ㅇㅇㅇㅇㅇㅇ</li>
-				</ul>
-			</div>
-			<ul class="desc_list point">
-				<li>개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의 거부 시 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
-			</ul>
-		</div>
-		<!-- // agree -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_gray">취소</a>
-			<a href="#" class="btn bg_green">확인</a>
-		</div>
-		<!-- // btn -->
-	</div>
+    <div class="popup_head">
+        <strong class="title">개인 정보 수집 및 이용 동의</strong>
+        <a href="#" class="close"><span class="blind">팝업닫기</span></a>
+    </div>
+    <div class="popup_body">
+        <!-- agree -->
+        <div class="agree_box">
+            <p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 이용 동의가 필요 합니다.</strong></p>
+            <div class="term_sub">
+                <strong class="tit">개인 정보 수집 및 이용 동의 (필수)</strong>
+            </div>
+            <div class="term_box">
+                <ul class="desc_list dot">
+                    <li>수집목적 : ㅇㅇㅇㅇㅇ</li>
+                    <li>수집항목 : ㅇㅇㅇㅇㅇ</li>
+                    <li>보유기간 : <strong>ㅇㅇㅇㅇㅇ</strong></li>
+                </ul>
+            </div>
+            <div class="agree">
+                <input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
+                <input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
+            </div>
+            <div class="term_sub">
+                <strong class="tit">개인정보 위탁 제공 동의서 (필수)</strong>
+            </div>
+            <div class="term_box">
+                <ul class="desc_list dot">
+                    <li>ㅇㅇㅇㅇㅇㅇ</li>
+                    <li>ㅇㅇㅇㅇㅇㅇ</li>
+                </ul>
+            </div>
+            <ul class="desc_list point">
+                <li>개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의를 거부할 경우 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
+            </ul>
+            <div class="agree">
+                <input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
+                <input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
+            </div>
+        </div>
+        <!-- // agree -->
+        <!-- btn -->
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">취소</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">확인</a></div>
+        </div>
+        <!-- // btn -->
+    </div>
 </div>
 <!-- // popup -->
             </div>
@@ -214,15 +227,16 @@
             <div class="code_ui_box">
 <style>
     /* table */
-    .popup_wrap table {width:100%;table-layout:fixed;border-collapse:collapse;}
-    .popup_wrap table caption {position:absolute;z-index:0;left:-100000px;top:-10000px;overflow:hidden;width:0;height:0;font-size:0;line-height:0;}
-    .popup_wrap .table_tit {margin-top:15px;color:#333;font-size:16px;font-weight:700;}
+    .popup_wrap table {width:100%;table-layout:fixed !important;border-collapse:collapse;}
+    .popup_wrap table caption {position:absolute;z-index:0;left:-100000px;top:-10000px;overflow:hidden;width:0;height:0;font-size:0;line-height:0}
+    .popup_wrap .table_tit {margin-top:15px;color:#333;font-size:13px;font-weight:700;}
     .popup_wrap .table_style {width:100%;margin-top:10px;border-bottom:1px solid #d0d0d0;border-right:1px solid #d0d0d0;}
     .popup_wrap .table_style caption {display:none;}
     .popup_wrap .table_style th, 
-    .popup_wrap .table_style td {padding:8px;border-left:1px solid #d0d0d0;border-top:1px solid #d0d0d0;text-align:center;vertical-align:middle;word-wrap:break-word;}
-    .popup_wrap .table_style th {background-color:#eee;color:#363636;font-size:13px;}
-    .popup_wrap .table_style td {color:#666;font-size:12px;}
+    .popup_wrap .table_style td {padding:4px;border-left:1px solid #d0d0d0;border-top:1px solid #d0d0d0;text-align:center;vertical-align:middle;word-wrap:break-word;}
+    .popup_wrap .table_style th {background-color:#eee;color:#363636;font-size:12px;}
+    .popup_wrap .table_style td {color:#666;font-size:11px;}
+    .popup_wrap .table_style td .btn {display:inline-block;min-width:60px;width:30%;height:28px;font-size:11px;line-height:28px;vertical-align:middle;}
     .popup_wrap .table_style + .table_tit {margin-top:15px;}
 </style>
 <!-- popup -->
@@ -232,70 +246,56 @@
 		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
 	</div>
 	<div class="popup_body">
-		<!-- table -->
-		<p class="table_tit">ㅇㅇㅇㅇㅇㅇㅇㅇ</p>
-		<table class="table_style" cellpadding="0" cellspacing="0">
-			<colgroup>
-				<col style="width:30%">
-				<col>
-				<col style="width:30%">
-			</colgroup>
-			<thead>
-				<tr>
-					<th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-					<th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-					<th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-			</tbody>
-		</table>
-		<table class="table_style" cellpadding="0" cellspacing="0">
-			<colgroup>
-				<col style="width:30%">
-				<col>
-				<col style="width:30%">
-			</colgroup>
-			<tbody>
-				<tr>
-					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-				</tr>
-				<tr>
-					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-				</tr>
-				<tr>
-					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-					<td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-				</tr>
-				<tr>
-					<th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th>
-					<td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-					<td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td>
-				</tr>
-				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-				<tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td></tr>
-			</tbody>
-		</table>
-		<!-- // table -->
+        <!-- table -->
+        <p class="table_tit">ㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+        <table class="table_style">
+            <caption>ㅇㅇㅇㅇㅇㅇㅇㅇ</caption>
+            <colgroup>
+                <col style="width:30%">
+                <col>
+                <col style="width:30%">
+            </colgroup>
+            <thead>
+                <tr><th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><th scope="col">ㅇㅇㅇㅇㅇㅇㅇㅇ</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+            </tbody>
+        </table>
+        <!-- // table -->
+
+        <!-- table -->
+        <p class="table_tit">ㅇㅇㅇㅇㅇㅇㅇㅇ</p>
+        <table class="table_style">
+            <caption>ㅇㅇㅇㅇㅇㅇㅇㅇ</caption>
+            <colgroup>
+                <col style="width:30%">
+                <col>
+                <col style="width:30%">
+            </colgroup>
+            <tbody>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td>ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+                <tr><th scope="row">ㅇㅇㅇㅇㅇㅇㅇㅇ</th><td class="txt_l">ㅇㅇㅇㅇㅇㅇㅇㅇ</td><td>ㅇㅇㅇㅇㅇㅇㅇㅇ%</td></tr>
+            </tbody>
+        </table>
+        <!-- // table -->
 		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_green">확인</a>
-		</div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bg_green">확인</a></div>
+        </div>
 		<!-- // btn -->
 	</div>
 </div>
@@ -330,27 +330,27 @@
 	</div>
 	<div class="popup_body">
 		<p class="status_box">현재 보유 응모 기회 <strong>NN</strong>회</p>
-		<!-- table -->
-		<table class="table_style" cellpadding="0" cellspacing="0">
-			<colgroup>
-				<col>
-				<col style="width:10%">
-				<col style="width:20%">
-			</colgroup>
-			<tbody>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[크리스피크림도넛] 오리지널 글레이즈드 하프더즌% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="plus">+ NN</strong></td><td>2022-01-06</td></tr>
-				<tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="plus">+ NN</strong></td><td>2022-01-06</td></tr>
-			</tbody>
-		</table>
-		<!-- // table -->
+        <!-- table -->
+        <table class="table_style" cellpadding="0" cellspacing="0">
+            <colgroup>
+                <col>
+                <col style="width:10%">
+                <col style="width:20%">
+            </colgroup>
+            <tbody>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[크리스피크림도넛] 오리지널 글레이즈드 하프더즌% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="minus">- NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="plus">+ NN</strong></td><td>2022-01-06</td></tr>
+                <tr><td>%[빽다방] 완전딸기 빽스치노(소프트)% 응모</td><td><strong class="plus">+ NN</strong></td><td>2022-01-06</td></tr>
+            </tbody>
+        </table>
+        <!-- // table -->
 	</div>
 </div>
 <!-- // popup -->
@@ -372,13 +372,13 @@
 <style>
     /* gift_box */
     .popup_wrap .gift_box {padding:10px 0 50px;text-align:center;}
-    .popup_wrap .gift_box .gift_txt {color:#333;line-height:50px;letter-spacing:-1px;}
-    .popup_wrap .gift_box .gift_txt strong {display:block;color:#f82a34;font-size:35px;font-weight:700;}
-    .popup_wrap .gift_box .gift_txt span {display:block;color:#333;font-size:45px;font-weight:700;}
-    .popup_wrap .gift_box .gift_img img {max-width:100%;}
-    .popup_wrap .gift_box .gift_desc {color:#0000ff;line-height:30px;letter-spacing:-1px;}
-    .popup_wrap .gift_box .gift_desc strong {display:block;font-size:25px;font-weight:700;}
-    .popup_wrap .gift_box .gift_desc span {display:block;font-size:20px;font-weight:500;}
+    .popup_wrap .gift_box .gift_img img {width:100%;}
+    .popup_wrap .gift_box .gift_txt {color:#333;line-height:30px;letter-spacing:-1px;}
+    .popup_wrap .gift_box .gift_txt strong {display:block;color:#f82a34;font-size:20px;font-weight:700;}
+    .popup_wrap .gift_box .gift_txt span {display:block;color:#333;font-size:25px;font-weight:700;}
+    .popup_wrap .gift_box .gift_desc {color:#0000ff;line-height:22px;letter-spacing:-1px;}
+    .popup_wrap .gift_box .gift_desc strong {display:block;font-size:18px;font-weight:700;}
+    .popup_wrap .gift_box .gift_desc span {display:block;font-size:12px;font-weight:500;}
 </style>
 <!-- popup -->
 <div class="popup_wrap">
@@ -387,15 +387,15 @@
 		<a href="#" class="close"><span class="blind">팝업닫기</span></a>
 	</div>
 	<div class="popup_body" style="padding:0;border-top:0 none;">
-		<!-- gift_box -->
-		<div class="gift_box">
-			<p class="gift_txt"><strong>%선물명%</strong><span>당첨을 축하합니다.</span></p>
+        <!-- gift_box -->
+        <div class="gift_box">
+            <p class="gift_txt"><strong>%선물명%</strong><span>당첨을 축하합니다.</span></p>
 			<p class="gift_img"><img src="../../images/pop_gift01.png" alt="BHC 뿌링클" /></p>
-			<p class="gift_desc"><strong>애플세트</strong><span>(아이폰11+아이패드+에어팟pro)</span></p>
-			<p class="gift_desc"><strong>전동킥보드</strong></p>
-			<p class="gift_desc"><strong>문화상품권 1만원</strong></p>
-		</div>
-		<!-- // gift_box -->
+            <p class="gift_desc"><strong>애플세트</strong><span>(아이폰11+아이패드+에어팟pro)</span></p>
+            <p class="gift_desc"><strong>전동킥보드</strong></p>
+            <p class="gift_desc"><strong>문화상품권 1만원</strong></p>
+        </div>
+        <!-- // gift_box -->        
 	</div>
 </div>
 <!-- //popup -->
@@ -422,87 +422,87 @@
 	</div>
 	<div class="popup_body">
         <!-- desc_list -->
-		<ul class="desc_list dot">
-			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li><strong>ㅇㅇㅇㅇㅇ</strong>
-				<ul class="desc_list dash">
-					<li>ㅇㅇㅇㅇㅇ</li>
-					<li>ㅇㅇㅇㅇㅇ</li>
-				</ul>
-				<table class="table_style">
-					<colgroup>
-						<col>
-						<col width="40%;" >
-					</colgroup>
-					<thead>
-						<tr>
-							<th scope="col">ㅇㅇㅇ</th>
-							<th scope="col">ㅇㅇㅇ</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>ㅇㅇㅇ</td>
-							<td>ㅇㅇㅇ</td>
-						</tr>
-						<tr>
-							<td>ㅇㅇㅇ</td>
-							<td>ㅇㅇㅇ</td>
-						</tr>
-					</tbody>
-				</table>
-			</li>
-			<li><strong>유의사항</strong>
-				<ul class="desc_list dash">
-					<li><em class="color_red">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
-					<li>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ <a href="#none" class="alink">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ &gt;</a></li>
-					<li><em class="color_blue">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
-				</ul>
-			</li>
-		</ul>
+        <p class="desc_tit">ㅇㅇㅇㅇㅇ</p>
+        <ul class="desc_list">
+            <li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
+            <li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
+            <li><strong>ㅇㅇㅇㅇㅇ</strong>
+                <ul class="desc_list dash">
+                    <li>ㅇㅇㅇㅇㅇ</li>
+                    <li>ㅇㅇㅇㅇㅇ</li>
+                </ul>
+                <table class="table_style">
+                    <colgroup>
+                        <col>
+                        <col width="40%;" >
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">ㅇㅇㅇ</th>
+                            <th scope="col">ㅇㅇㅇ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ㅇㅇㅇ</td>
+                            <td>ㅇㅇㅇ</td>
+                        </tr>
+                        <tr>
+                            <td>ㅇㅇㅇ</td>
+                            <td>ㅇㅇㅇ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li><strong>유의사항</strong>
+                <ul class="desc_list dash">
+                    <li><em class="color_red">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
+                    <li>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ <a href="#none" class="alink">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ &gt;</a></li>
+                    <li><em class="color_blue">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
+                </ul>
+            </li>
+        </ul>
         <!-- // desc_list -->
 
-		<!-- desc_list -->
-		<ul class="desc_list ">
-			<li>1) <strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li>2) <strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li>3) <strong>ㅇㅇㅇㅇㅇ</strong>
-				<ul class="desc_list dash">
-					<li>ㅇㅇㅇㅇㅇ</li>
-					<li>ㅇㅇㅇㅇㅇ</li>
-				</ul>
-			</li>
-			<li>4) <strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li>5) <strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li>* <strong>유의사항</strong>
-				<ul class="desc_list dash">
-					<li><em class="color_red">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
-					<li>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ <a href="#none" class="alink">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ &gt;</a></li>
-					<li><em class="color_blue">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
-				</ul>
-			</li>
-		</ul>
-		<ul class="desc_list">
-			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li><strong>ㅇㅇㅇㅇㅇ</strong>
-				<ul class="desc_list dash">
-					<li>ㅇㅇㅇㅇㅇ</li>
-					<li>ㅇㅇㅇㅇㅇ</li>
-				</ul>
-			</li>
-			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
-			<li><strong>유의사항</strong>
-				<ul class="desc_list dash">
-					<li><em class="color_red">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
-					<li>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ <a href="#none" class="alink">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ &gt;</a></li>
-					<li><em class="color_blue">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
-				</ul>
-			</li>
-		</ul>
-		<!-- // desc_list -->        
+        <!-- desc_list -->
+        <p class="desc_tit">ㅇㅇㅇㅇㅇ</p>
+        <ul class="desc_list">
+            <li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
+            <li><strong>ㅇㅇㅇㅇㅇ</strong> : ㅇㅇㅇㅇㅇ</li>
+            <li><strong>ㅇㅇㅇㅇㅇ</strong>
+                <ul class="desc_list dash">
+                    <li>ㅇㅇㅇㅇㅇ</li>
+                    <li>ㅇㅇㅇㅇㅇ</li>
+                </ul>
+                <table class="table_style">
+                    <colgroup><col><col width="40%;" ></colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">ㅇㅇㅇ</th>
+                            <th scope="col">ㅇㅇㅇ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ㅇㅇㅇ</td>
+                            <td>ㅇㅇㅇ</td>
+                        </tr>
+                        <tr>
+                            <td>ㅇㅇㅇ</td>
+                            <td>ㅇㅇㅇ</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li><strong>유의사항</strong>
+                <ul class="desc_list dash">
+                    <li><em class="color_red">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
+                    <li>ㅇㅇㅇㅇㅇㅇㅇㅇㅇ <a href="#none" class="alink">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ &gt;</a></li>
+                    <li><em class="color_blue">ㅇㅇㅇㅇㅇㅇㅇㅇㅇ</em></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- // desc_list -->
 	</div>
 </div>
 <!-- // popup -->
@@ -525,24 +525,28 @@
     /* form */
     .popup_wrap input, 
     .popup_wrap textarea,
-    .popup_wrap select {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border-radius:0;-webit-border-radius:0;display:inline-block;vertical-align:middle;max-width:100%;}
-    .popup_wrap select {appearance:none;-moz-appearance:none;-o-appearance:none;-webkit-appearance:none;}
-    .popup_wrap select::-ms-expand {display:none;}
-    .popup_wrap input[type="text"] {height:28px;padding:5px;border:1px solid #d0d0d0;}
-    .popup_wrap input[type="file"] {min-height:22px;}
+    .popup_wrap select {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;max-width:100%;vertical-align:middle;}
+    .popup_wrap textarea,
+    .popup_wrap select {border-radius:0;-webkit-border-radius:0;appearance:none;-moz-appearance:none;-o-appearance:none;-webkit-appearance:none;}
+    .popup_wrap input[type="text"] {max-width:100%;height:28px;padding:5px;border:1px solid #d0d0d0;}
     .popup_wrap textarea {width:100%;height:125px;padding:10px;border:1px solid #d0d0d0;resize:none;}
-    .popup_wrap select {height:28px;border:1px solid #d0d0d0;}
+    .popup_wrap select {height:28px;padding:0 24px 0 10px;background:#fff url('../../images/select_style.gif') no-repeat right center;background-size:24px auto;border:1px solid #d0d0d0;color:#000;font-size:12px;}
     .popup_wrap label {font-size:12px;vertical-align:middle;}
+    .popup_wrap .sel {position:relative;}
+    .popup_wrap .sel:after {position:absolute;right:10px;top:50%;content:'';display:inline-block;margin-top:-3px;display:inline-block;padding:3px;border:solid #000;border-width:0 1px 1px 0;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
     .popup_wrap .alink {text-decoration:underline;}
-    .popup_wrap .file_box {margin-bottom:10px;}
-    .popup_wrap .file {display:block;margin-top:5px;}
     .popup_wrap .del {position:relative;display:inline-block;padding-right:20px;text-decoration:underline;}
     .popup_wrap .del:after,
     .popup_wrap .del:before {position:absolute;right:5px;top:50%;content:"";display:block;width:9px;height:1px;background:#4e4e4e;}
     .popup_wrap .del:after {-webkit-transform: rotate(45deg);transform: rotate(45deg);}
     .popup_wrap .del:before {-webkit-transform: rotate(135deg);transform: rotate(135deg);}
-
-    .popup_wrap select {height:28px;padding-right:30px;background:#fff url('../../images/select_style.gif') no-repeat right center;background-size:24px auto;border:1px solid #d0d0d0;}
+    .popup_wrap .file_box {margin-bottom:8px;}
+    .popup_wrap .file {display:inline-block;margin:5px 0;}
+    .popup_wrap .del {position:relative;display:inline-block;padding-right:20px;text-decoration:underline;}
+    .popup_wrap .del:after,
+    .popup_wrap .del:before {position:absolute;right:5px;top:50%;content:"";display:block;width:9px;height:1px;background:#4e4e4e;}
+    .popup_wrap .del:after {-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+    .popup_wrap .del:before {-webkit-transform: rotate(135deg);transform: rotate(135deg);}
 </style>
 <!-- popup -->
 <div class="popup_wrap">
@@ -554,7 +558,7 @@
 		<!-- table -->
 		<table class="table_style">
 			<colgroup>
-				<col style="width:15%">
+				<col width="30%;" >
 				<col>
 			</colgroup>
 			<tbody>
@@ -612,53 +616,51 @@
 		</table>
 		<!-- // table -->
 		<br/>
-		<!-- agree -->
-		<div class="agree_box">
-			<p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 활용 동의가 필요 합니다.</strong></p>
-			<div class="term_sub">
-				<strong class="tit">개인 정보 수집 및 활용 동의 (필수)</strong>
-				<div class="agree">
-					<input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
-					<input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
-				</div>
-			</div>
-			<div class="term_box">
-				<ul class="desc_list dot">
-					<li>수집목적 : ㅇㅇㅇㅇㅇ</li>
-					<li>수집항목 : ㅇㅇㅇㅇㅇ</li>
-					<li>보유기간 : <strong>ㅇㅇㅇㅇㅇ</strong></li>
-				</ul>
-			</div>
-			<div class="term_sub">
-				<strong class="tit">개인정보 위탁 제공 동의서 (필수)</strong>
-				<div class="agree">
-					<input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
-					<input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
-				</div>
-			</div>
-			<div class="term_box">
-				<ul class="desc_list dot">
-					<li>ㅇㅇㅇㅇㅇㅇ</li>
-					<li>ㅇㅇㅇㅇㅇㅇ</li>
-				</ul>
-			</div>
-			<ul class="desc_list point">
-				<li>개인정보 수집, 활용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의를 거부할 경우 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
-			</ul>
-		</div>
-		<!-- // agree -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_gray">취소</a>
-			<a href="#" class="btn bg_green">신청하기</a>
-		</div>
-		<!-- // btn -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_gray">닫기</a>
-			<a href="#" class="btn bg_green">수정하기</a>
-		</div>
-		<!-- // btn -->
+        <!-- agree -->
+        <div class="agree_box">
+            <p class="term_tit"><strong>본 이벤트 참여를 위해<br/>개인정보 수집 및 이용 동의가 필요 합니다.</strong></p>
+            <div class="term_sub">
+                <strong class="tit">개인 정보 수집 및 이용 동의 (필수)</strong>
+            </div>
+            <div class="term_box">
+                <ul class="desc_list dot">
+                    <li>수집목적 : ㅇㅇㅇㅇㅇ</li>
+                    <li>수집항목 : ㅇㅇㅇㅇㅇ</li>
+                    <li>보유기간 : <strong>ㅇㅇㅇㅇㅇ</strong></li>
+                </ul>
+            </div>
+            <div class="agree">
+                <input type="radio" id="radio1" name="radio"><label for="radio1"> 동의함</label>
+                <input type="radio" id="radio2" name="radio"><label for="radio2"> 동의하지 않음</label>
+            </div>
+            <div class="term_sub">
+                <strong class="tit">개인정보 위탁 제공 동의서 (필수)</strong>
+            </div>
+            <div class="term_box">
+                <ul class="desc_list dot">
+                    <li>ㅇㅇㅇㅇㅇㅇ</li>
+                    <li>ㅇㅇㅇㅇㅇㅇ</li>
+                </ul>
+            </div>
+            <ul class="desc_list point">
+                <li>개인정보 수집 및 이용에 동의하지 않을 권리가 있습니다.<br/>다만, 동의를 거부할 경우 이벤트 참여 및 경품을 제공 받으실 수 없습니다.</li>
+            </ul>
+            <div class="agree">
+                <input type="radio" id="radio3" name="radio2"><label for="radio3"> 동의함</label>
+                <input type="radio" id="radio4" name="radio2"><label for="radio4"> 동의하지 않음</label>
+            </div>
+        </div>
+        <!-- // agree -->
+        <!-- btn -->
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">취소</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">신청하기</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">닫기</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">수정하기</a></div>
+        </div>
+        <!-- // btn -->
 	</div>
 </div>
 <!-- //popup -->
@@ -677,7 +679,7 @@
 		<!-- table -->
 		<table class="table_style">
 			<colgroup>
-				<col style="width:15%">
+				<col width="30%;" >
 				<col>
 			</colgroup>
 			<tbody>
@@ -744,10 +746,7 @@
 		<br/>
 		<!-- table -->
 		<table class="table_style">
-			<colgroup>
-				<col style="width:15%">
-                <col>
-            </colgroup>
+			<colgroup><col width="30%;" ><col></colgroup>
 			<tbody>
 				<tr>
 					<th scope="row">승인상태</th>
@@ -762,10 +761,7 @@
 		<!-- // table -->
 		<!-- table -->
 		<table class="table_style">
-			<colgroup>
-				<col style="width:15%">
-                <col>
-            </colgroup>
+			<colgroup><col width="30%;" ><col></colgroup>
 			<tbody>
 				<tr>
 					<th scope="row">승인상태</th>
@@ -782,17 +778,15 @@
 			</tbody>
 		</table>		
 		<!-- // table -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_gray">취소</a>
-			<a href="#" class="btn bg_green">등록</a>
-		</div>
-		<!-- // btn -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_green">확인</a>
-		</div>
-		<!-- // btn -->
+        <!-- btn -->
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">취소</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">등록</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bg_green">확인</a></div>
+        </div>
+        <!-- // btn -->
 	</div>
 </div>
 <!-- // popup -->
@@ -809,15 +803,15 @@
 		<!-- table -->
 		<table class="table_style">
 			<colgroup>
-				<col style="width:15%">
-				<col style="width:35%">
-				<col style="width:15%">
-				<col style="width:35%">
+				<col style="width:30%">
+				<col>
 			</colgroup>
 			<tbody>
 				<tr>
 					<th scope="row">이름(아이디)</th>
 					<td class="txt_l">%이름%(%아이디%)</td>
+				</tr>
+				<tr>
 					<th scope="row">학년</th>
 					<td class="txt_l">
 						<input type="radio" id="type1" name="type" class=""><label for="type1"> 재수이상</label>&nbsp;&nbsp;&nbsp;
@@ -827,6 +821,8 @@
 				<tr>
 					<th scope="row">연락처</th>
 					<td class="txt_l"><input type="text" style="width:100%;"></td>
+				</tr>
+				<tr>
 					<th scope="row">이메일</th>
 					<td class="txt_l">
 						<input type="text" style="width:50%;">
@@ -837,7 +833,7 @@
 				</tr>
 				<tr>
 					<th scope="row">주소</th>
-					<td class="txt_l" colspan="3">
+					<td class="txt_l" >
 						<input type="text" style="width:25%"> <input type="text" style="width:25%"> <a href="#" class="btn">주소찾기</a>
 						<input type="text" style="width:50%;margin-top:5px">
 						<input type="text" style="width:50%;margin-top:5px">
@@ -845,25 +841,20 @@
 				</tr>
 				<tr>
 					<th scope="row">신청후기</th>
-					<td class="txt_l" colspan="3">
+					<td class="txt_l">
 						<textarea style="width:100%;height:100px"></textarea>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row">인증샷 등록</th>
-					<td class="txt_l" colspan="3">
+					<td class="txt_l">
 						<div class="file_box">
-							<input type="text" style="width:200px">
+							<input type="text" style="width:60%">
 							<a href="#" class="btn bg_gray">찾아보기</a>
 							<p class="file"><a href="#" class="alink del">이미지1.jpg</a></p>
 						</div>
 						<div class="file_box">
-							<input type="text" style="width:200px">
-							<a href="#" class="btn bg_gray">찾아보기</a>
-							<p class="file"><a href="#" class="alink del">이미지1.jpg</a></p>
-						</div>
-						<div class="file_box">
-							<input type="text" style="width:200px">
+							<input type="text" style="width:60%">
 							<a href="#" class="btn bg_gray">찾아보기</a>
 							<p class="file"><a href="#" class="alink del">이미지1.jpg</a></p>
 						</div>
@@ -916,13 +907,13 @@
 			</ul>
 		</div>
 		<!-- // agree -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_gray">취소</a>
-			<a href="#" class="btn bg_green">등록</a>
-			<a href="#" class="btn bg_green">수정</a>
-		</div>
-		<!-- // btn -->
+        <!-- btn -->
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bd_gray">취소</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_green">등록</a></div>
+            <div class="btn_box"><a href="#" class="btn bg_gray">수정</a></div>
+        </div>
+        <!-- // btn -->
 	</div>
 </div>
 <!-- // popup -->
@@ -941,7 +932,6 @@
         <!-- code_ui -->
         <div class="code_ui">
             <div class="code_ui_box">
-
 <!-- popup -->
 <div class="popup_wrap">
 	<div class="popup_head">
@@ -952,7 +942,7 @@
 		<!-- table -->
 		<table class="table_style">
 			<colgroup>
-				<col style="width:15%;" >
+				<col width="25%;" >
 				<col>
 			</colgroup>
 			<tbody>
@@ -982,35 +972,35 @@
 				</tr>
 				<tr>
 					<th scope="row">이미지1</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지2</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지3</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지4</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지5</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지6</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지7</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">이미지8</th>
-					<td class="txt_l"><input type="file" style="width:80%;"></td>
+					<td class="txt_l"><input type="file" style="width:80%"></td>
 				</tr>
 				<tr>
 					<th scope="row">공개여부</th>
@@ -1023,16 +1013,14 @@
 			</tbody>
 		</table>
 		<!-- // table -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_green">등록하기</a>
-		</div>
-		<!-- // btn -->
-		<!-- btn -->
-		<div class="btn_wrap">
-			<a href="#" class="btn bg_green">수정하기</a>
-		</div>
-		<!-- // btn -->
+        <!-- btn -->
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bg_green">등록</a></div>
+        </div>
+        <div class="btn_wrap">
+            <div class="btn_box"><a href="#" class="btn bg_gray">수정</a></div>
+        </div>
+        <!-- // btn -->
 	</div>
 </div>
 <!-- // popup -->
