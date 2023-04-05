@@ -118,17 +118,78 @@ const solution = n => Math.ceil(n / 7);
 */
 ```
 
-### 피자 나눠 먹기 (2)
+### 피자 나눠 먹기 (2) - 못풀었어!!!! ㅠㅠ
 #### 머쓱이네 피자가게는 피자를 여섯 조각으로 잘라 줍니다. 피자를 나눠먹을 사람의 수 n이 매개변수로 주어질 때, n명이 주문한 피자를 남기지 않고 모두 같은 수의 피자 조각을 먹어야 한다면 최소 몇 판을 시켜야 하는지를 return 하도록 solution 함수를 완성해보세요.
 ```javascript
+/* 
+function solution(n) {
+    var num1 = n;
+    var num2 = 6;
+    const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+    const lcm = (a, b) => a * b / gcd(a, b);
+    // console.log([gcd(num1, num2), lcm(num1, num2)]);    
+    return lcm(num1, num2) / 6;
+}
+*/ 
 
+function solution (n) {
+    const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+    const lcm = (a, b) => a * b / gcd(a, b);
+    return lcm(n, 6) / 6;
+}
+
+/* good
+const solution = (n) => {
+    let piece = 6
+    while(true) {
+        if (piece % n === 0) {
+            break
+        }
+        piece += 6
+    }
+    return piece / 6
+}
+
+function solution(n) {
+    for(let i = 1 ; i<=n; i++){
+        if(6*i%n==0) return i
+    }
+}
+
+function solution(n) {
+    let count = 1;
+    while (!Number.isInteger(count*6/n)) count++;
+    return count;
+}
+
+function solution(n) {
+    let pizza = 1;
+    while (pizza * 6 % n) {
+        pizza++;
+    }
+    return pizza;
+}
+
+function solution(n) {
+    return Array(6).fill(n).map((v,idx) => v = v * (idx + 1)).find((v) => v % 6 === 0 ) / 6;
+}
+
+function solution(n) {
+    let count = 1;
+    while (!Number.isInteger(count*6/n)) count++;
+    return count;
+}
+*/
 
 /* memo 
 최대공약수 gcd  
 최소공배수 lcm 
 
-const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
-const lcm = (a, b) => a * b / gcd(a, b);
+function solution(num1, num2) {
+    const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+    const lcm = (a, b) => a * b / gcd(a, b);
+    return [gcd(num1, num2), lcm(num1, num2)];
+}
 
 function gcdlcm(a, b) {
     var gcd = calc_gcd(a, b);
@@ -139,6 +200,27 @@ function calc_gcd(a, b) {
     if (b == 0) return a;
     return a > b ? calc_gcd(b, a % b) : calc_gcd(a, b % a);
 }
+
+let getGCD = (num1, num2) => {
+    let gcd = 1;
+    for(let i=2; i<=Math.min(num1, num2); i++){
+        if(num1 % i === 0 && num2 % i === 0){
+            gcd = i;
+        }
+    }
+    return gcd;
+}
+let getLCM = (num1, num2) =>{
+	let lcm = 1;
+    while(true){
+        if((lcm % num1 == 0) && (lcm % num2 == 0)){
+            break;
+        }
+        lcm++;
+    }
+  	return lcm
+}
+
 */
 ```
 
