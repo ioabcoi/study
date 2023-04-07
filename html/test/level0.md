@@ -97,6 +97,7 @@ Math.ceil()     올림. 주어진 숫자보다 크거나 같은 숫자 중 가�
 Math.round()    반올림. 반올림한 수와 가장 가까운 정수 값을 반환
 Math.abs()      절대값. 주어진 숫자의 절대값을 반환합니다.
 Math.sign()     부호. 주어진 수의 부호를 나타내는 +/-1을 반환합니다. 단, Math.sign()에 제공한 수가 0일 경우 부호에 따라 +/-0을 반환합니다.
+Math.sqrt()     함수는 숫자의 제곱근을 반환합니다.
 */
 ```
 
@@ -135,7 +136,7 @@ const solution = n => Math.ceil(n / 7);
 */
 ```
 
-### 피자 나눠 먹기 (2) - 못풀었어!!!! ㅠㅠ
+### 피자 나눠 먹기 (2)
 #### 머쓱이네 피자가게는 피자를 여섯 조각으로 잘라 줍니다. 피자를 나눠먹을 사람의 수 n이 매개변수로 주어질 때, n명이 주문한 피자를 남기지 않고 모두 같은 수의 피자 조각을 먹어야 한다면 최소 몇 판을 시켜야 하는지를 return 하도록 solution 함수를 완성해보세요.
 ```javascript
 /* 
@@ -211,6 +212,13 @@ function solution(num1, num2) {
     const lcm = (a, b) => a * b / gcd(a, b);
     return [gcd(num1, num2), lcm(num1, num2)];
 }
+*/
+```
+
+```javascript
+/* memo 
+최대공약수 gcd  
+최소공배수 lcm 
 
 function gcdlcm(a, b) {
     var gcd = calc_gcd(a, b);
@@ -221,7 +229,6 @@ function calc_gcd(a, b) {
     if (b == 0) return a;
     return a > b ? calc_gcd(b, a % b) : calc_gcd(a, b % a);
 }
-
 let getGCD = (num1, num2) => {
     let gcd = 1;
     for(let i=2; i<=Math.min(num1, num2); i++){
@@ -242,6 +249,21 @@ let getLCM = (num1, num2) =>{
   	return lcm
 }
 */
+```
+
+### 분수의 덧셈
+#### 첫 번째 분수의 분자와 분모를 뜻하는 numer1, denom1, 두 번째 분수의 분자와 분모를 뜻하는 numer2, denom2가 매개변수로 주어집니다. 두 분수를 더한 값을 기약 분수로 나타냈을 때 분자와 분모를 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+function solution(numer1, denom1, numer2, denom2) {
+    const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
+    const lcm = (a, b) => a * b / gcd(a, b);
+    
+    const numer = (numer1 * denom2) + (numer2 * denom1);
+    const denom = denom1 * denom2;
+    
+    const answer = [numer / gcd(numer, denom), denom / gcd(numer, denom)];
+    return answer;
+}
 ```
 
 ### 피자 나눠 먹기 (3)
@@ -380,6 +402,18 @@ Date가 기준 시간 이전을 나타낼 경우 음수 값을 반환합니다.
 */
 ```
 
+### 배열 원소의 길이 
+#### 문자열 배열 strlist가 매개변수로 주어집니다. strlist 각 원소의 길이를 담은 배열을 retrun하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(strlist) {
+    return strlist.map(x => x.length);
+}
+*/
+
+const solution = strlist => strlist.map(x => x.length);
+```
+
 ### 각도기
 #### 각에서 0도 초과 90도 미만은 예각, 90도는 직각, 90도 초과 180도 미만은 둔각 180도는 평각으로 분류합니다. 각 angle이 매개변수로 주어질 때 예각일 때 1, 직각일 때 2, 둔각일 때 3, 평각일 때 4를 return하도록 solution 함수를 완성해주세요.
 - 예각 : 0 < angle < 90
@@ -414,6 +448,67 @@ function solution(angle) {
 }
 
 const solution = angle => [0, 90, 91, 180].filter(x => angle >= x).length;
+*/
+```
+
+### 점의 위치 구하기
+#### 사분면은 한 평면을 x축과 y축을 기준으로 나눈 네 부분입니다. 사분면은 아래와 같이 1부터 4까지 번호를매깁니다.
+- x 좌표와 y 좌표가 모두 양수이면 제1사분면에 속합니다.
+- x 좌표가 음수, y 좌표가 양수이면 제2사분면에 속합니다.
+- x 좌표와 y 좌표가 모두 음수이면 제3사분면에 속합니다.
+- x 좌표가 양수, y 좌표가 음수이면 제4사분면에 속합니다.
+> x 좌표 (x, y)를 차례대로 담은 정수 배열 dot이 매개변수로 주어집니다. 
+> 좌표 dot이 사분면 중 어디에 속하는지 1, 2, 3, 4 중 하나를 return 하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(dot) {
+    var answer = dot[0] > 0 && dot[1] > 0 ? 1 : dot[0] < 0 && dot[1] > 0 ? 2 : dot[0] > 0 && dot[1] < 0 ? 3 : 4;
+    return answer;
+}
+*/
+
+const solution = dot => dot[0] > 0 && dot[1] > 0 ? 1 : dot[0] < 0 && dot[1] > 0 ? 2 : dot[0] < 0 && dot[1] < 0 ? 3 : 4;
+```
+
+```javascript
+/* good
+function solution(dot) {
+    const [num,num2] = dot;
+    const check = num * num2 > 0;
+    return num > 0 ? (check ? 1 : 4) : (check ? 3 : 2);
+}
+
+function solution(dot) {
+    return dot[0] > 0 ? dot[1] > 0 ? 1 : 4 : dot[1] > 0 ? 2 : 3;
+}
+*/
+```
+
+### 짝수 홀수 개수
+#### 정수가 담긴 리스트 num_list가 주어질 때, num_list의 원소 중 짝수와 홀수의 개수를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+/*
+function solution(num_list) {
+    var answer = [];
+    var even = num_list.filter(x => x % 2 === 0);
+    var odd = num_list.filter(x => x % 2 !== 0);
+    answer = [even.length, odd.length]
+    return answer;
+}
+*/
+
+const solution = num_list => [num_list.filter(x => x % 2 === 0).length, num_list.filter(x => x % 2 !== 0).length];
+```
+
+```javascript
+/* good
+function solution(num_list) {
+    var answer = [0,0];
+    for(let a of num_list){
+        answer[a%2] += 1
+    }
+    return answer;
+}
 */
 ```
 
@@ -819,14 +914,6 @@ console.log(Math.max(...array1));   // Expected output: 3
 ```javascript
 ```
 
-### 분수의 덧셈
-#### 첫 번째 분수의 분자와 분모를 뜻하는 numer1, denom1, 두 번째 분수의 분자와 분모를 뜻하는 numer2, denom2가 매개변수로 주어집니다. 두 분수를 더한 값을 기약 분수로 나타냈을 때 분자와 분모를 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
-```javascript
-
-/* memo - 최대공약수
-*/
-```
-
 ### 문자열 뒤집기
 #### 문자열 my_string이 매개변수로 주어집니다. my_string을 거꾸로 뒤집은 문자열을 return하도록 solution 함수를 완성해주세요.
 ```javascript
@@ -889,6 +976,7 @@ console.log(arr);               // Apple,Banana,Orange
 String.prototype.
 split()     메서드는 String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눕니다.
 join()      메서드는 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
+match()     메서드는 문자열이 정규식과 매치되는 부분을 검색합니다.
 
 Array.prototype.
 push()      메서드는 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
@@ -906,6 +994,125 @@ var sports = ['축구', '야구'];
 var total = sports.push('미식축구', '수영');
 console.log(sports); // ['축구', '야구', '미식축구', '수영']
 console.log(total);  // 4
+*/
+```
+
+### 문자열안에 문자열
+#### 문자열 str1, str2가 매개변수로 주어집니다. str1 안에 str2가 있다면 1을 없다면 2를 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(str1, str2) {
+    var answer = str1.match(str2) ? 1 : 2;
+    return answer;
+}
+*/
+
+const solution = (str1, str2) => str1.match(str2) ? 1 : 2;
+```
+
+```javascript
+/* good
+function solution(str1, str2) {
+    return str1.split(str2).length > 1 ? 1 : 2
+}
+
+function solution(str1, str2) {
+    return str1.indexOf(str2) === -1 ? 2 : 1;
+}
+
+function solution(str1, str2) {
+    return str1.includes(str2) ? 1 : 2;
+}
+
+function solution(str1, str2) {
+    return str1.search(str2) !== -1 ? 1 : 2
+}
+*/
+```
+
+```javascript
+/* memo
+*/
+```
+
+### 자릿수 더하기
+#### 정수 n이 매개변수로 주어질 때 n의 각 자리 숫자의 합을 return하도록 solution 함수를 완성해주세요
+```javascript
+/*
+function solution(n) {
+    return n.toString().split("").map(x => parseInt(x)).reduce((x, y) => x + y);
+}
+*/
+
+const solution = n => n.toString().split("").map(x => parseInt(x)).reduce((x, y) => x + y);
+```
+
+```javascript
+/* good
+function solution(n) {
+  return n
+    .toString()
+    .split("")
+    .reduce((acc, cur) => acc + Number(cur), 0);
+}
+*/
+```
+
+### 숨어있는 숫자의 덧셈 (1)
+#### 문자열 my_string이 매개변수로 주어집니다. my_string안의 모든 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(my_string) {
+    var answer = 0;
+    var regex = /[^0-9]/g;
+    var str = my_string.replace(regex, "").split("");
+    var num = str.map(x => parseInt(x));
+    answer = num.reduce((x, y) => x + y);
+    return answer;
+}
+
+function solution(my_string) {
+    var answer = my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).reduce((x, y) => x + y);
+    return answer;
+}
+*/
+
+const solution = my_string => my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).reduce((x, y) => x + y);
+```
+
+```javascript
+/* good
+function solution(my_string) {
+    const answer = my_string.replace(/[^0-9]/g, '')
+                            .split('')
+                            .reduce((acc, curr) => acc + Number(curr), 0);
+    return answer;
+}
+
+function solution(my_string) {
+    return my_string.replaceAll(/[^\d]/g, '').split('').map(v=>+v).reduce((a,v)=>a+v,0);
+}
+
+function solution(my_string) {
+    return my_string.match(/\d/g).reduce((acc, cur) => acc + Number(cur), 0)
+}
+*/
+```
+
+### 숨어있는 숫자의 덧셈 (2)
+#### 문자열 my_string이 매개변수로 주어집니다. my_string은 소문자, 대문자, 자연수로만 구성되어있습니다. my_string안의 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
+
+
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
 */
 ```
 
@@ -1062,15 +1269,114 @@ function solution(s1, s2) {
 ```javascript
 ```
 
-### 점의 위치 구하기
-#### 사분면은 한 평면을 x축과 y축을 기준으로 나눈 네 부분입니다. 사분면은 아래와 같이 1부터 4까지 번호를매깁니다.
-- x 좌표와 y 좌표가 모두 양수이면 제1사분면에 속합니다.
-- x 좌표가 음수, y 좌표가 양수이면 제2사분면에 속합니다.
-- x 좌표와 y 좌표가 모두 음수이면 제3사분면에 속합니다.
-- x 좌표가 양수, y 좌표가 음수이면 제4사분면에 속합니다.
-> x 좌표 (x, y)를 차례대로 담은 정수 배열 dot이 매개변수로 주어집니다. 
-> 좌표 dot이 사분면 중 어디에 속하는지 1, 2, 3, 4 중 하나를 return 하도록 solution 함수를 완성해주세요.
 ```javascript
+/* memo
+const str = "Hello_123_World_456_!!!";
+const regex = /[^0-9]/g;
+const result = str.replace(regex, "");
+const number = parseInt(result);
+console.log(result);
+console.log(typeof(result));
+console.log(number);
+console.log(typeof(number));
+*/
+```
+
+### 개미 군단
+#### 개미 군단이 사냥을 나가려고 합니다. 개미군단은 사냥감의 체력에 딱 맞는 병력을 데리고 나가려고 합니다. 장군개미는 5의 공격력을, 병정개미는 3의 공격력을 일개미는 1의 공격력을 가지고 있습니다. 예를 들어 체력 23의 여치를 사냥하려고 할 때, 일개미 23마리를 데리고 가도 되지만, 장군개미 네 마리와 병정개미 한 마리를 데리고 간다면 더 적은 병력으로 사냥할 수 있습니다. 사냥감의 체력 hp가 매개변수로 주어질 때, 사냥감의 체력에 딱 맞게 최소한의 병력을 구성하려면 몇 마리의 개미가 필요한지를 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(hp) {
+    var answer = 0;
+    var a = Math.trunc(hp / 5);
+    var b = Math.trunc(hp % 5 / 3);
+    var c = Math.trunc(hp % 5 % 3);
+    answer = a + b + c;
+    return answer;
+}
+
+function solution(hp) {
+    var answer = Math.trunc(hp / 5) + Math.trunc(hp % 5 / 3) + Math.trunc(hp % 5 % 3);
+    return answer;
+}
+*/
+
+const solution = hp => Math.trunc(hp / 5) + Math.trunc(hp % 5 / 3) + Math.trunc(hp % 5 % 3);
+```
+
+### 제곱수 판별하기
+#### 어떤 자연수를 제곱했을 때 나오는 정수를 제곱수라고 합니다. 정수 n이 매개변수로 주어질 때, n이 제곱수라면 1을 아니라면 2를 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(n) {
+    var answer = Math.trunc(Math.sqrt(n)) * Math.trunc(Math.sqrt(n)) === n ? 1 : 2;
+    return answer;
+}
+*/
+
+const solution = n => Math.trunc(Math.sqrt(n)) * Math.trunc(Math.sqrt(n)) === n ? 1 : 2;
+```
+
+```javascript
+/* good
+function solution(n) {
+    return Number.isInteger(Math.sqrt(n)) ? 1 : 2;
+}
+*/
+```
+
+```javascript
+/* memo
+Number.isInteger()      메서드는 주어진 값이 정수인지 판별합니다.
+
+function fits(x, y) {
+    if (Number.isInteger(y / x)) {
+        return 'Fits!';
+    }
+    return 'Does NOT fit!';
+}
+console.log(fits(5, 10));
+// Expected output: "Fits!"
+console.log(fits(5, 11));
+// Expected output: "Does NOT fit!"
+*/
+```
+
+### 암호 해독
+#### 군 전략가 머쓱이는 전쟁 중 적군이 다음과 같은 암호 체계를 사용한다는 것을 알아냈습니다.
+> 암호화된 문자열 cipher를 주고받습니다.
+> 그 문자열에서 code의 배수 번째 글자만 진짜 암호입니다.
+> 문자열 cipher와 정수 code가 매개변수로 주어질 때 해독된 암호 문자열을 return하도록 solution 함수를 완성해주세요.
+```javascript
+function solution(cipher, code) {
+    let answer = [];
+    let arr = cipher.split("");
+    for (let i = 1; i*code <= cipher.length; i++) {
+        answer.push(arr[(code*i)-1]);
+    }
+    return answer.join("");
+}
+```
+
+```javascript
+/* good
+function solution(cipher, code) {
+    var answer = "";
+    for (let i = code - 1; i < cipher.length; i += code) {
+        answer += cipher[i];
+    }
+    return answer;
+}
+
+function solution(cipher, code) {
+    return cipher.split('').filter((v,i)=>(i+1)%code===0).join('');
+}
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 ### 
@@ -1078,9 +1384,14 @@ function solution(s1, s2) {
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 ### 
@@ -1088,9 +1399,14 @@ function solution(s1, s2) {
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 ### 
@@ -1098,9 +1414,14 @@ function solution(s1, s2) {
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 

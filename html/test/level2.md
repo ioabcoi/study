@@ -7,9 +7,14 @@ Link : [level2](https://school.programmers.co.kr/learn/challenges?order=acceptan
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 ### 
@@ -17,9 +22,14 @@ Link : [level2](https://school.programmers.co.kr/learn/challenges?order=acceptan
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 ### 
@@ -27,9 +37,14 @@ Link : [level2](https://school.programmers.co.kr/learn/challenges?order=acceptan
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
 ```
 
 ### 
@@ -37,14 +52,12 @@ Link : [level2](https://school.programmers.co.kr/learn/challenges?order=acceptan
 ```javascript
 ```
 
-### 
-#### 
 ```javascript
+/* good
+*/
 ```
 
-### 
-#### 
 ```javascript
+/* memo
+*/
 ```
-
-
