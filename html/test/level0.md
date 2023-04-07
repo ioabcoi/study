@@ -1424,4 +1424,34 @@ function solution(cipher, code) {
 */
 ```
 
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
+```
+
 
