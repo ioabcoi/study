@@ -4,6 +4,7 @@ Link : [level0](https://school.programmers.co.kr/learn/challenges?order=acceptan
 
 ### 두 수의 합
 #### 정수 num1과 num2가 주어질 때, num1과 num2의 합을 return하도록 soltuion 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120802
 ```javascript
 /*
 function solution(num1, num2) {
@@ -21,6 +22,7 @@ const solution = (num1, num2) => num1 + num2;
 
 ### 두 수의 차
 #### 정수 num1과 num2가 주어질 때, num1에서 num2를 뺀 값을 return하도록 soltuion 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120803
 ```javascript
 /*
 function solution(num1, num2) {
@@ -38,6 +40,7 @@ const solution = (num1, num2) => num1 - num2;
 
 ### 두 수의 곱
 #### 정수 num1, num2가 매개변수 주어집니다. num1과 num2를 곱한 값을 return 하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120804
 ```javascript
 /*
 function solution(num1, num2) {
@@ -55,6 +58,7 @@ const solution = (num1, num2) => num1 * num2;
 
 ### 두 수의 나눗셈
 #### 정수 num1과 num2가 매개변수로 주어질 때, num1을 num2로 나눈 값에 1,000을 곱한 후 정수 부분을 return 하도록 soltuion 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120806
 ```javascript
 /*
 function solution(num1, num2) {
@@ -91,13 +95,39 @@ const solution = (num1, num2) => Math.trunc(num1 / num2);
 
 ```javascript
 /* memo
-Math.trunc()    소수점버림. 주어진 숫자의 정수부분 (양수, 음수 상관없이 소수점 이하 우측부분을 제거)
-Math.floor()    내림. 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환
-Math.ceil()     올림. 주어진 숫자보다 크거나 같은 숫자 중 가장 작은 숫자를 integer 로 반환
-Math.round()    반올림. 반올림한 수와 가장 가까운 정수 값을 반환
-Math.abs()      절대값. 주어진 숫자의 절대값을 반환합니다.
-Math.sign()     부호. 주어진 수의 부호를 나타내는 +/-1을 반환합니다. 단, Math.sign()에 제공한 수가 0일 경우 부호에 따라 +/-0을 반환합니다.
-Math.sqrt()     함수는 숫자의 제곱근을 반환합니다.
+Math.trunc()                소수점버림. 주어진 숫자의 정수부분 (양수, 음수 상관없이 소수점 이하 우측부분을 제거)
+Math.floor()                내림. 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환
+Math.ceil()                 올림. 주어진 숫자보다 크거나 같은 숫자 중 가장 작은 숫자를 integer 로 반환
+Math.round()                반올림. 반올림한 수와 가장 가까운 정수 값을 반환
+Math.abs()                  절대값. 주어진 숫자의 절대값을 반환합니다.
+Math.sign()                 부호. 주어진 수의 부호를 나타내는 +/-1을 반환합니다. 단, Math.sign()에 제공한 수가 0일 경우 부호에 따라 +/-0을 반환합니다.
+Math.sqrt()                 함수는 숫자의 제곱근을 반환합니다.
+Math.pow(x, y)              x의 y 제곱을 반환합니다.
+Math.max([x[, y[, …]]])    0개 이상의 인수에서 제일 큰 수를 반환합니다.
+Math.min([x[, y[, …]]])    0개 이상의 인수에서 제일 작은 수를 반환합니다.
+Math.random()               0과 1 사이의 난수를 반환합니다.
+Math.round(x)               숫자에서 가장 가까운 정수를 반환합니다.
+*/
+```
+
+### 세균 증식
+#### 어떤 세균은 1시간에 두배만큼 증식한다고 합니다. 처음 세균의 마리수 n과 경과한 시간 t가 매개변수로 주어질 때 t시간 후 세균의 수를 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(n, t) {
+    var answer = n * Math.pow(2, t);
+    return answer;
+}
+*/
+
+const solution = (n, t) => n * Math.pow(2, t);
+```
+
+```javascript
+/* good
+function solution(n, t) {
+    return n << t;
+}
 */
 ```
 
@@ -451,6 +481,53 @@ const solution = angle => [0, 90, 91, 180].filter(x => angle >= x).length;
 */
 ```
 
+### n의 배수 고르기
+#### 정수 n과 정수 배열 numlist가 매개변수로 주어질 때, numlist에서 n의 배수가 아닌 수들을 제거한 배열을 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(n, numlist) {
+    var answer = [];
+    answer = numlist.filter(x => x % n === 0)
+    return answer;
+}
+*/
+
+const solution = (n, numlist) => numlist.filter(x => x % n === 0);
+```
+
+### 인덱스 바꾸기
+#### 문자열 my_string과 정수 num1, num2가 매개변수로 주어질 때, my_string에서 인덱스 num1과 인덱스 num2에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+function solution(my_string, num1, num2) {
+    let answer = [];
+    answer = my_string.split("");
+    let n1 = answer[num1];
+    let n2 = answer[num2];
+    answer[num1] = n2;
+    answer[num2] = n1;    
+    return answer.join("");
+}
+```
+
+```javascript
+/* good
+function solution(my_string, num1, num2) {
+    my_string = my_string.split('');
+    [my_string[num1], my_string[num2]] = [my_string[num2], my_string[num1]];
+    return my_string.join('');
+}
+
+function solution(my_string, num1, num2) {
+    let temp = '';
+    const strArray = my_string.split('');
+    temp = strArray[num1];
+    strArray[num1] = strArray[num2];
+    strArray[num2] = temp;
+    return strArray.join('');
+}
+*/
+```
+
 ### 점의 위치 구하기
 #### 사분면은 한 평면을 x축과 y축을 기준으로 나눈 네 부분입니다. 사분면은 아래와 같이 1부터 4까지 번호를매깁니다.
 - x 좌표와 y 좌표가 모두 양수이면 제1사분면에 속합니다.
@@ -560,6 +637,34 @@ const array1 = [1, 4, 9, 16];
 const map1 = array1.map(x => x * 2);
 console.log(map1);
 // Expected output: Array [2, 8, 18, 32]
+*/
+```
+
+### 가위 바위 보
+#### 가위는 2 바위는 0 보는 5로 표현합니다. 가위 바위 보를 내는 순서대로 나타낸 문자열 rsp가 매개변수로 주어질 때, rsp에 저장된 가위 바위 보를 모두 이기는 경우를 순서대로 나타낸 문자열을 return하도록 solution 함수를 완성해보세요.
+```javascript
+/*
+function solution(rsp) {
+    var answer = [];
+    answer = rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(x) === 0 ? 5 : 2).join("");
+    return answer;
+}
+*/
+
+const solution = rsp => rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(x) === 0 ? 5 : 2).join("");
+```
+
+```javascript
+/* good
+function solution(rsp) {
+    let arr = {
+        2: 0,
+        0: 5,
+        5: 2
+    };
+    var answer = [...rsp].map(v => arr[v]).join("");
+    return answer;
+}
 */
 ```
 
@@ -997,6 +1102,45 @@ console.log(total);  // 4
 */
 ```
 
+### 배열 회전시키기
+#### 정수가 담긴 배열 numbers와 문자열 direction가 매개변수로 주어집니다. 배열 numbers의 원소를 direction방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
+```javascript
+/*
+function solution(numbers, direction) {
+    var answer = [];
+    direction === "right" ? numbers.unshift(numbers.pop()) : numbers.push(numbers.shift())
+    answer = numbers;
+    return answer;
+}
+*/
+
+const solution = (numbers, direction) =>  {
+    direction === "right" ? numbers.unshift(numbers.pop()) : numbers.push(numbers.shift())
+    return numbers;
+}
+```
+
+```javascript
+/* good
+function solution(numbers, direction) {
+    return direction === "right"
+        ? [numbers[numbers.length - 1], ...numbers.slice(0, numbers.length - 1)]
+        : [...numbers.slice(1), numbers[0]];
+}
+*/
+```
+
+### 외계행성의 나이
+#### 우주여행을 하던 머쓱이는 엔진 고장으로 PROGRAMMERS-962 행성에 불시착하게 됐습니다. 입국심사에서 나이를 말해야 하는데, PROGRAMMERS-962 행성에서는 나이를 알파벳으로 말하고 있습니다. a는 0, b는 1, c는 2, ..., j는 9입니다. 예를 들어 23살은 cd, 51살은 fb로 표현합니다. 나이 age가 매개변수로 주어질 때 PROGRAMMER-962식 나이를 return하도록 solution 함수를 완성해주세요.
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+
 ### 문자열안에 문자열
 #### 문자열 str1, str2가 매개변수로 주어집니다. str1 안에 str2가 있다면 1을 없다면 2를 return하도록 solution 함수를 완성해주세요.
 ```javascript
@@ -1101,9 +1245,22 @@ function solution(my_string) {
 
 ### 숨어있는 숫자의 덧셈 (2)
 #### 문자열 my_string이 매개변수로 주어집니다. my_string은 소문자, 대문자, 자연수로만 구성되어있습니다. my_string안의 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
-
-
 ```javascript
+function solution(my_string) {
+    var answer = 0;
+    var regex = /[^0-9]/g;
+    var str = my_string.replace(regex, "").split("");
+    var num = str.map(x => parseInt(x));
+    answer = num.reduce((x, y) => x + y);
+    return answer;
+}
+
+function solution(my_string) {
+    var answer = my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).reduce((x, y) => x + y);
+    return answer;
+}
+
+const solution = my_string => my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).reduce((x, y) => x + y);
 ```
 
 ```javascript
@@ -1113,6 +1270,105 @@ function solution(my_string) {
 
 ```javascript
 /* memo
+정규표현식 
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions
+
+참고 블로그
+https://eadgnus.tistory.com/87
+https://velog.io/@jangws/JS-정규표현식특수문자-숫자-등-6766k8d6
+
+확장문자 (: backslash)
+    s : 공백 문자(스페이스, 탭, 폼 피드, 라인 피드)
+    b : 단어의 경계
+    B 이를 제외한 모든 문자 매칭
+    d : 숫자
+    D : 숫자가 아닌 문자 [^0-9] 와 동일
+    w : 알파벳, 숫자로 된 문자, 밑줄 기호(_) [A-Za-z0-9]
+    W : w의 반대 문자 [^a-za-z0-9]
+    특수문자 : 특수문자 자체를 의미 예) + (+ 기호 자체)
+특수문자
+    * : 0회 이상 반복
+    + : 1회 이상 반복
+    ? : 0 또는 1개의 문자 매칭
+    . : 정확히 1개 문자 매칭
+플래그
+    g : 전역매칭
+    https://stackoverflow.com/questions/15610251/why-pattern-testname-opposite-results-on-consecutive-calls
+    i : 대소문자 무시
+    m : 여러 줄 매칭
+기타
+    () : 괄호로 묶인 패턴은 매칭된 다음, 그 부분을 기억한다.
+    $1,...,$9 : 괄호로 갭처한 부분 문자열이 저장 됨.
+    | : ~또는~
+    {} : 반복 횟수
+
+const re = /a/              --a 가 있는 문자열
+const re = /a/i             --a 가 있는 문자열, 대소문자 구분 안함
+const re = /apple/          -- apple가 있는 문자열
+const re = /[a-z]/          -- a~z 사이의 모든 문자
+const re = /[a-zA-Z0-9]/    -- a~z, A~Z 0~9 사이의 모든 문자
+const re = /[a-z]|[0-9]/    -- a~z 혹은 0~9사이의 문자
+const re = /a|b|c/          --  a 혹은 b 혹은 c인 문자
+const re = /[^a-z]/         -- a~z까지의 문자가 아닌 문자("^" 부정)
+const re = /^[a-z]/         -- 문자의 처음이 a~z로 시작되는 문장
+const re = /[a-z]$/         -- 문자가 a~z로 끝남
+
+특수문자 체크 정규식
+const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
+
+모든 공백 체크 정규식
+const regExp = /\s/g;
+
+숫자만 체크 정규식
+const regExp = /[0-9]/g;
+
+이메일 체크 정규식
+const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+핸드폰번호 정규식
+const regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+
+일반 전화번호 정규식
+const regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+
+아이디나 비밀번호 정규식
+const regExp = /^[a-z0-9_]{4,20}$/;
+
+휴대폰번호 체크 정규식
+const regExp = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+*/
+```
+
+### 문자열 정렬하기 (1)
+#### 문자열 my_string이 매개변수로 주어질 때, my_string 안에 있는 숫자만 골라 오름차순 정렬한 리스트를 return 하도록 solution 함수를 작성해보세요.
+```javascript
+/*
+function solution(my_string) {
+    var answer = my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).sort((a, b) => a - b);
+    return answer;
+}
+*/
+
+const solution = my_string => my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).sort((a, b) => a - b);
+```
+
+```javascript
+/* good
+function solution(my_string) {
+    return my_string.match(/\d/g).sort((a, b) => a - b).map(n => Number(n));
+}
+
+function solution(my_string) {
+    return my_string.split("").filter((v) => !isNaN(v)).map((v) => v*1).sort((a,b) => a-b)
+}
+
+function solution(my_string) {
+    return Array.from(my_string).filter(v => !isNaN(+v)).sort((a,b) => a - b).map(v => +v);
+}
+
+function solution(my_string) {
+    return my_string.replace(/[^\d]/g,'').split('').map(v=>+v).sort();
+}
 */
 ```
 
@@ -1351,7 +1607,7 @@ console.log(fits(5, 11));
 function solution(cipher, code) {
     let answer = [];
     let arr = cipher.split("");
-    for (let i = 1; i*code <= cipher.length; i++) {
+    for (let i = 1; i * code <= cipher.length; i++) {
         answer.push(arr[(code*i)-1]);
     }
     return answer.join("");
@@ -1374,13 +1630,56 @@ function solution(cipher, code) {
 */
 ```
 
+### 주사위의 개수
+#### 머쓱이는 직육면체 모양의 상자를 하나 가지고 있는데 이 상자에 정육면체 모양의 주사위를 최대한 많이 채우고 싶습니다. 상자의 가로, 세로, 높이가 저장되어있는 배열 box와 주사위 모서리의 길이 정수 n이 매개변수로 주어졌을 때, 상자에 들어갈 수 있는 주사위의 최대 개수를 return 하도록 solution 함수를 완성해주세요.
 ```javascript
-/* memo
+// chatGPT 
+function solution(box, n) {
+    // 주어진 상자의 가로, 세로, 높이 중 가장 작은 값과 주사위 모서리의 길이 n을 비교하여 n이 더 큰 경우 0을 리턴
+    if (n > Math.min(...box)) {
+        return 0;
+    }
+    
+    // 최대 변 길이 계산
+    const max_length = Math.max(...box);
+    
+    // 각 면에서 넣을 수 있는 주사위의 개수 계산
+    const count_x = Math.floor((box[0] - n) / n) + 1;
+    const count_y = Math.floor((box[1] - n) / n) + 1;
+    const count_z = Math.floor((box[2] - n) / n) + 1;
+    
+    // 최소값을 찾아서 반환
+    return Math.min(count_x * count_y * Math.floor(box[2] / n), count_y * count_z * Math.floor(box[0] / n), count_z * count_x * Math.floor(box[1] / n));
+}
+```
+
+```javascript
+/* good
+function solution(box, n) {
+    let [width, length, height] = box;
+    return Math.floor(width / n) * Math.floor(length / n) * Math.floor(height / n);
+}
+
+function solution(box, n) {
+    return box.reduce((acc,v) => acc * Math.floor(v / n), 1);
+}
+
+function solution(box, n) {
+    return box.map(v=>~~(v/n)).reduce((a,v)=>a*v,1);
+}
+
+function solution(box, n) {
+    return Math.floor(box[0]/n)*Math.floor(box[1]/n)*Math.floor(box[2]/n);
+}
+
+function solution(box, n) {
+    return box.map(num => Math.floor(num/n)).reduce((acc, cur) => acc * cur, 1);
+}
 */
 ```
 
-### 
-#### 
+### 대문자와 소문자
+#### 문자열 my_string이 매개변수로 주어질 때, 대문자는 소문자로 소문자는 대문자로 변환한 문자열을 return하도록 solution 함수를 완성해주세요.
 ```javascript
 ```
 
