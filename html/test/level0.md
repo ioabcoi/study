@@ -274,6 +274,15 @@ Math.max()                  // 0개 이상의 인수에서 제일 큰 수를 반
 Math.min()                  // 0개 이상의 인수에서 제일 작은 수를 반환합니다.
 Math.random()               // 0과 1 사이의 난수를 반환합니다.
 Math.round(x)               // 숫자에서 가장 가까운 정수를 반환합니다.
+
+비트연산자
+비트 AND	                a & b       // 두 피연산자의 각 자리 비트의 값이 모두 1인 위치에 1을 반환합니다.
+비트 OR     	            a | b       // 두 피연산자의 각 자리 비트의 값이 모두 0인 위치에 0을 반환합니다.
+비트 XOR	                a ^ b       // 두 피연산자의 각 자리 비트의 값이 서로 같은 위치에 0을 반환합니다. [두 피연산자의 각 자리 비트의 값이 서로 다른 위치에 1을 반환합니다.]
+비트 NOT	                ~ a         // 피연산자의 각 자리의 비트를 뒤집습니다.
+왼쪽 시프트	                a << b      // a의 이진 표현을 b만큼 왼쪽으로 이동하고, 오른쪽은 0으로 채웁니다.
+오른쪽 시프트	            a >> b      // a의 이진 표현을 b만큼 오른쪽으로 이동하고, 1 미만으로 이동한 비트는 버립니다.
+부호 없는 오른쪽 시프트     a >>> b     // a의 이진 표현을 b만큼 오른쪽으로 이동하고, 1 미만으로 이동한 비트는 버립니다. 왼쪽은 0으로 채웁니다.
 */
 ```
 
@@ -776,7 +785,8 @@ const solution = age => 2022 - age + 1;/
 ## Array
 ```javascript
 /* memo
-Array.prototype.map()           // map() 메서드는 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
+Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
+Array.prototype.map()           // 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
 Array.prototype.filter()        // 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
 Array.prototype.reduce()        // 배열의 각 요소에 대해 주어진 리듀서 (reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
 Array.prototype.push()          // 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
@@ -785,10 +795,10 @@ Array.prototype.shift()         // 배열에서 첫 번째 요소를 제거하�
 Array.prototype.unshift()       // 새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
 Array.prototype.concat()        // 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
 Array.prototype.splice()        // 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
-Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
 Array.prototype.join()          // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
 Array.prototype.sort()          // 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 
                                 // 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+Array.prototype.findIndex()     // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 -1을 반환합니다.
 */
 ```
 
@@ -1348,9 +1358,46 @@ function solution(my_string, n) {
 */
 ```
 
+### 가장 큰 수 찾기
+#### 정수 배열 array가 매개변수로 주어질 때, 가장 큰 수와 그 수의 인덱스를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+/*
+function solution(array) {
+    var answer = [];
+    answer.push(Math.max(...array), array.indexOf(Math.max(...array)));
+    return answer;
+}
+
+function solution(array) {
+    var answer = [Math.max(...array), array.indexOf(Math.max(...array))];
+    return answer;
+}
+*/
+
+const solution = array => [Math.max(...array), array.indexOf(Math.max(...array))];
+```
+
+```javascript
+/* good
+function solution(array) {
+    let max = Math.max(...array);
+    return [max, array.indexOf(max)];
+}
+
+function solution(array) {
+    return [Math.max(...array), array.indexOf(Math.max(...array))]
+}
+
+function solution(array) {
+    return [Math.max(...array), array.findIndex(el => el === Math.max(...array))];
+}
+*/
+```
+
 ## String
 ```javascript
 /* memo
+String.fromCharCode()                   //  UTF-16 코드 유닛의 시퀀스로부터 문자열을 생성해 반환합니다.
 String.prototype.concat()               // 매개변수로 전달된 모든 문자열을 호출 문자열에 붙인 새로운 문자열을 반환합니다.
 String.prototype.split()                // String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눕니다.
 String.prototype.slice()                // 문자열의 일부를 추출하면서 새로운 문자열을 반환합니다.
@@ -1388,6 +1435,25 @@ const str3 = arr.join('');      // AppleBananaOrange
 const arr = ['Apple', 'Banana', 'Orange'];
 console.log(arr.toString());    // Apple,Banana,Orange
 console.log(arr);               // Apple,Banana,Orange
+
+UTF-16 -> 문자
+
+String.fromCharCode(65, 66, 67);  // "ABC"
+
+문자 -> 숫자
+parseInt()                      // 문자열 인자를 파싱하여 특정 진수(수의 진법 체계에서 기준이 되는 값)의 정수를 반환합니다.
+parseFloat()                    // 주어진 값을 필요한 경우 문자열로 변환한 후 부동소수점 실수로 파싱해 반환합니다.
+
+Math로 문자열을 숫자로 변환 (정수로 변환)
+const str = '1234.1';
+const num1 = Math.ceil(str);
+const num2 = Math.floor('1234.6');
+const num3 = Math.round('1234.5');
+const num4 = Math.round('1234.4');
+console.log(num1 + ', ' + typeof num1);
+console.log(num2 + ', ' + typeof num2);
+console.log(num3 + ', ' + typeof num3);
+console.log(num4 + ', ' + typeof num4);
 */
 ```
 
@@ -1498,6 +1564,40 @@ function solution(str1, str2) {
 */
 ```
 
+### 외계행성의 나이
+#### 우주여행을 하던 머쓱이는 엔진 고장으로 PROGRAMMERS-962 행성에 불시착하게 됐습니다. 입국심사에서 나이를 말해야 하는데, PROGRAMMERS-962 행성에서는 나이를 알파벳으로 말하고 있습니다. a는 0, b는 1, c는 2, ..., j는 9입니다. 예를 들어 23살은 cd, 51살은 fb로 표현합니다. 나이 age가 매개변수로 주어질 때 PROGRAMMER-962식 나이를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120834
+```javascript
+/* 
+// String.fromCharCode(65, 66, 67);  // "ABC"
+
+function solution(age) {
+    var answer = '';
+    answer = age.toString().split("").map(n => String.fromCharCode(65 + parseInt(n)).toLowerCase()).join("");
+    return answer;
+}
+*/
+
+const solution = age => age.toString().split("").map(n => String.fromCharCode(65 + parseInt(n)).toLowerCase()).join("");
+```
+
+```javascript
+/* good
+function solution(age) {
+  return age
+    .toString()
+    .split("")
+    .map((v) => "abcdefghij"[v])
+    .join("");
+}
+
+function solution(age) {
+    let char = 'abcdefghij'
+    return Array.from(age.toString()).map(t => char[+t]).join('');
+}
+*/
+```
+
 ## 정규표현식
 
 ```javascript
@@ -1550,7 +1650,7 @@ const re = /apple/          -- apple가 있는 문자열
 const re = /[a-z]/          -- a~z 사이의 모든 문자
 const re = /[a-zA-Z0-9]/    -- a~z, A~Z 0~9 사이의 모든 문자
 const re = /[a-z]|[0-9]/    -- a~z 혹은 0~9사이의 문자
-const re = /a|b|c/          --  a 혹은 b 혹은 c인 문자
+const re = /a|b|c/          -- a 혹은 b 혹은 c인 문자
 const re = /[^a-z]/         -- a~z까지의 문자가 아닌 문자("^" 부정)
 const re = /^[a-z]/         -- 문자의 처음이 a~z로 시작되는 문장
 const re = /[a-z]$/         -- 문자가 a~z로 끝남
@@ -1705,9 +1805,23 @@ function solution(my_string) {
 */
 ```
 
-### 외계행성의 나이
-#### 우주여행을 하던 머쓱이는 엔진 고장으로 PROGRAMMERS-962 행성에 불시착하게 됐습니다. 입국심사에서 나이를 말해야 하는데, PROGRAMMERS-962 행성에서는 나이를 알파벳으로 말하고 있습니다. a는 0, b는 1, c는 2, ..., j는 9입니다. 예를 들어 23살은 cd, 51살은 fb로 표현합니다. 나이 age가 매개변수로 주어질 때 PROGRAMMER-962식 나이를 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120834
+### 369게임
+#### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+```javascript
+/* memo
+*/
+```
+
+### 
+#### 
 ```javascript
 ```
 
