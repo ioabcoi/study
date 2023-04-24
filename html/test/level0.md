@@ -798,6 +798,7 @@ Array.prototype.splice()        // 배열의 기존 요소를 삭제 또는 교�
 Array.prototype.join()          // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
 Array.prototype.sort()          // 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 
                                 // 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+Array.prototype.indexOf()       // 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환합니다.         
 Array.prototype.findIndex()     // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 -1을 반환합니다.
 */
 ```
@@ -1394,6 +1395,108 @@ function solution(array) {
 */
 ```
 
+### 369게임
+#### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
+```javascript
+/*
+function solution(order) {
+    var answer = 0;
+    answer = order.toString().split("").filter(n => parseInt(n) === 3 || parseInt(n) === 6 || parseInt(n) === 9).length;
+    return answer;
+}
+*/
+
+const solution = order => order.toString().split("").filter(n => parseInt(n) === 3 || parseInt(n) === 6 || parseInt(n) === 9).length;
+```
+
+```javascript
+/* good
+function solution(order) {
+    var answer = [...order.toString().matchAll(/[3|6|9]/g)].length;
+    return answer;
+}
+
+function solution(order) {
+    return (''+order).split(/[369]/).length-1;
+}
+
+function solution(order) {
+    const mySet = new Set([3,6,9]);
+    return String(order).split('')
+                        .filter(num => mySet.has(Number(num)))
+                        .length;
+}
+
+function solution(order) {
+    return Array.from(order.toString()).filter(t => ['3', '6', '9'].includes(t)).length;
+}
+
+function solution(order) {
+    var answer = String(order).split(/[369]/g).length - 1;
+    return answer;
+}
+*/
+```
+
+### 숫자 찾기
+#### 정수 num과 k가 매개변수로 주어질 때, num을 이루는 숫자 중에 k가 있으면 num의 그 숫자가 있는 자리 수를 return하고 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+/*
+function solution(num, k) {
+    var answer = 0;
+    if ( [...''+num].findIndex(n => parseInt(n) === k) !== -1 ) {
+        answer = [...''+num].findIndex(n => parseInt(n) === k) + 1;
+    }else{
+        answer = -1;
+    }
+
+    return answer;
+}
+
+function solution(num, k) {
+    var answer = 0;
+    answer = [-1].concat([...''+num]).findIndex(n => parseInt(n) === k);
+    return answer;
+}
+*/
+
+const solution = (num, k) => [-1].concat([...''+num]).findIndex(n => parseInt(n) === k);
+```
+
+```javascript
+/* good
+function solution(num, k) {
+    return num.toString().split("").map((el) => Number(el)).indexOf(k) + 1 || -1
+}
+
+function solution(num, k) {
+    let ind = (''+num).indexOf(k);
+    return ind === -1 ? -1 : ind+1;
+}
+
+function solution(num, k) {
+    var answer = num.toString()
+    if (answer.includes(k)) {
+        return answer.indexOf(k) + 1;
+    } else {
+        return -1;
+    }
+}
+
+function solution(num, k) {
+    var answer = num.toString().indexOf(k);
+    return answer === -1 ? -1 : answer += 1;
+}
+
+function solution(num, k) {
+    let result = Array.from(num.toString())
+        .findIndex(t => t === k.toString());
+
+    return result < 0 ? result : result + 1
+}
+*/
+```
+
 ## String
 ```javascript
 /* memo
@@ -1805,8 +1908,8 @@ function solution(my_string) {
 */
 ```
 
-### 369게임
-#### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
+### 약수 구하기
+#### 정수 n이 매개변수로 주어질 때, n의 약수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
 ```javascript
 ```
 
@@ -1815,8 +1918,23 @@ function solution(my_string) {
 */
 ```
 
+### 합성수 찾기
+#### 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
 ```javascript
-/* memo
+```
+
+```javascript
+/* good
+*/
+```
+
+### 문자열 정렬하기 (2)
+#### 영어 대소문자로 이루어진 문자열 my_string이 매개변수로 주어질 때, my_string을 모두 소문자로 바꾸고 알파벳 순서대로 정렬한 문자열을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+```
+
+```javascript
+/* good
 */
 ```
 
@@ -1830,8 +1948,13 @@ function solution(my_string) {
 */
 ```
 
+### 
+#### 
 ```javascript
-/* memo
+```
+
+```javascript
+/* good
 */
 ```
 
@@ -1845,8 +1968,13 @@ function solution(my_string) {
 */
 ```
 
+### 
+#### 
 ```javascript
-/* memo
+```
+
+```javascript
+/* good
 */
 ```
 
@@ -1860,8 +1988,13 @@ function solution(my_string) {
 */
 ```
 
+### 
+#### 
 ```javascript
-/* memo
+```
+
+```javascript
+/* good
 */
 ```
 
@@ -1875,8 +2008,13 @@ function solution(my_string) {
 */
 ```
 
+### 
+#### 
 ```javascript
-/* memo
+```
+
+```javascript
+/* good
 */
 ```
 
@@ -1890,9 +2028,13 @@ function solution(my_string) {
 */
 ```
 
+### 
+#### 
 ```javascript
-/* memo
-*/
 ```
 
+```javascript
+/* good
+*/
+```
 
