@@ -115,7 +115,7 @@ const solution = (num1, num2) => num1 % num2;
 ```
 
 ## 비교연산자
-
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Expressions_and_Operators
 ```javascript
 /* memo
 삼항(조건) 연산자
@@ -136,6 +136,15 @@ num === 10 ? true : false;
 &&
 ||
 !
+
+비트연산자
+비트 AND	                a & b       // 두 피연산자의 각 자리 비트의 값이 모두 1인 위치에 1을 반환합니다.
+비트 OR     	            a | b       // 두 피연산자의 각 자리 비트의 값이 모두 0인 위치에 0을 반환합니다.
+비트 XOR	                a ^ b       // 두 피연산자의 각 자리 비트의 값이 서로 같은 위치에 0을 반환합니다. [두 피연산자의 각 자리 비트의 값이 서로 다른 위치에 1을 반환합니다.]
+비트 NOT	                ~ a         // 피연산자의 각 자리의 비트를 뒤집습니다.
+왼쪽 시프트	                a << b      // a의 이진 표현을 b만큼 왼쪽으로 이동하고, 오른쪽은 0으로 채웁니다.
+오른쪽 시프트	            a >> b      // a의 이진 표현을 b만큼 오른쪽으로 이동하고, 1 미만으로 이동한 비트는 버립니다.
+부호 없는 오른쪽 시프트     a >>> b     // a의 이진 표현을 b만큼 오른쪽으로 이동하고, 1 미만으로 이동한 비트는 버립니다. 왼쪽은 0으로 채웁니다.
 */
 ```
 
@@ -274,15 +283,6 @@ Math.max()                  // 0개 이상의 인수에서 제일 큰 수를 반
 Math.min()                  // 0개 이상의 인수에서 제일 작은 수를 반환합니다.
 Math.random()               // 0과 1 사이의 난수를 반환합니다.
 Math.round(x)               // 숫자에서 가장 가까운 정수를 반환합니다.
-
-비트연산자
-비트 AND	                a & b       // 두 피연산자의 각 자리 비트의 값이 모두 1인 위치에 1을 반환합니다.
-비트 OR     	            a | b       // 두 피연산자의 각 자리 비트의 값이 모두 0인 위치에 0을 반환합니다.
-비트 XOR	                a ^ b       // 두 피연산자의 각 자리 비트의 값이 서로 같은 위치에 0을 반환합니다. [두 피연산자의 각 자리 비트의 값이 서로 다른 위치에 1을 반환합니다.]
-비트 NOT	                ~ a         // 피연산자의 각 자리의 비트를 뒤집습니다.
-왼쪽 시프트	                a << b      // a의 이진 표현을 b만큼 왼쪽으로 이동하고, 오른쪽은 0으로 채웁니다.
-오른쪽 시프트	            a >> b      // a의 이진 표현을 b만큼 오른쪽으로 이동하고, 1 미만으로 이동한 비트는 버립니다.
-부호 없는 오른쪽 시프트     a >>> b     // a의 이진 표현을 b만큼 오른쪽으로 이동하고, 1 미만으로 이동한 비트는 버립니다. 왼쪽은 0으로 채웁니다.
 */
 ```
 
@@ -441,21 +441,20 @@ function solution(box, n) {
 ```
 
 ## Number
-
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number
 ```javascript
 /* memo
-Number.isInteger()          // 주어진 값이 정수인지 판별합니다.
-
-function fits(x, y) {
-    if (Number.isInteger(y / x)) {
-        return 'Fits!';
-    }
-    return 'Does NOT fit!';
-}
-console.log(fits(5, 10));
-// Expected output: "Fits!"
-console.log(fits(5, 11));
-// Expected output: "Does NOT fit!"
+Number.isFinite()                       // 주어진 값이 유한수인지 판별합니다.
+Number.isInteger()                      // 주어진 값이 정수인지 판별합니다.
+Number.isNaN()                          // 주어진 값이 NaN인지 판별합니다. 기존부터 존재한 전역 isNaN() 함수의 더 엄격한 버전입니다.
+Number.isSafeInteger()                  // 전달된 값이 안전한 정숫값인지 확인합니다.
+Number.parseFloat()                     // 주어진 값을 필요한 경우 문자열로 변환한 후 부동소수점 실수로 파싱해 반환합니다. 숫자를 파싱할 수 없는 경우 NaN을 반환합니다.
+Number.parseInt()                       // 문자열 인자를 파싱하여 특정 진수(수의 진법 체계에서 기준이 되는 값)의 정수를 반환합니다.
+Number.prototype.toExponential()        //숫자를 지수 표기법으로 표기해 반환합니다.
+Number.prototype.toFixed()              // 숫자를 고정 소수점 표기법(fixed-point notation)으로 표시합니다.
+Number.prototype.toPrecision()          // Number 객체를 지정된 정밀도로 나타내는 문자열을 반환한다.
+Number.prototype.toString()             // 특정한 Number 객체를 나타내는 문자열을 반환합니다.
+Number.prototype.valueOf()              // Number 객체가 감싼(wrapped) 원시 값을 반환합니다.
 */
 ```
 
@@ -719,6 +718,7 @@ function solution(n) {
 
 ### 분수의 덧셈
 #### 첫 번째 분수의 분자와 분모를 뜻하는 numer1, denom1, 두 번째 분수의 분자와 분모를 뜻하는 numer2, denom2가 매개변수로 주어집니다. 두 분수를 더한 값을 기약 분수로 나타냈을 때 분자와 분모를 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120808
 ```javascript
 function solution(numer1, denom1, numer2, denom2) {
     const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
@@ -733,6 +733,7 @@ function solution(numer1, denom1, numer2, denom2) {
 ```
 
 ## Date
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Date
 ```javascript
 /* memo
 const today = new Date();
@@ -783,6 +784,7 @@ const solution = age => 2022 - age + 1;/
 ```
 
 ## Array
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
 ```javascript
 /* memo
 Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
@@ -1361,6 +1363,7 @@ function solution(my_string, n) {
 
 ### 가장 큰 수 찾기
 #### 정수 배열 array가 매개변수로 주어질 때, 가장 큰 수와 그 수의 인덱스를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120899
 ```javascript
 /*
 function solution(array) {
@@ -1397,6 +1400,7 @@ function solution(array) {
 
 ### 369게임
 #### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120891
 ```javascript
 /*
 function solution(order) {
@@ -1440,6 +1444,7 @@ function solution(order) {
 
 ### 숫자 찾기
 #### 정수 num과 k가 매개변수로 주어질 때, num을 이루는 숫자 중에 k가 있으면 num의 그 숫자가 있는 자리 수를 return하고 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120904
 ```javascript
 /*
 function solution(num, k) {
@@ -1498,6 +1503,7 @@ function solution(num, k) {
 ```
 
 ## String
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 ```javascript
 /* memo
 String.fromCharCode()                   //  UTF-16 코드 유닛의 시퀀스로부터 문자열을 생성해 반환합니다.
@@ -1526,6 +1532,11 @@ String.prototype.replaceAll()           // pattern의 모든 일치 항목이 re
 String.prototype.trim()                 // 문자열 양 끝의 공백을 제거하고 원본 문자열을 수정하지 않고 새로운 문자열을 반환합니다. 
                                         // 여기서 말하는 공백이란 모든 공백문자(space, tab, NBSP 등)와 모든 개행문자(LF, CR 등)를 의미합니다.
 
+*/
+```
+
+```javascript
+/* memo
 배열 -> 문자열
 
 1. arr.join(separator)
@@ -1702,7 +1713,7 @@ function solution(age) {
 ```
 
 ## 정규표현식
-
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions
 ```javascript
 /* memo
 replace()의 정규표현식 
@@ -1714,9 +1725,6 @@ console.log(newstr);  // Twas the night before Christmas...
 정규 표현식, 또는 정규식은 문자열에서 특정 문자 조합을 찾기 위한 패턴입니다. 
 JavaScript에서는 정규 표현식도 객체로서, RegExp의 exec()와 test() 메서드를 사용할 수 있습니다. 
 String의 match(), matchAll() (en-US), replace(), replaceAll(), search(), split() 메서드와도 함께 사용할 수 있습니다. 
-
-정규표현식 
-https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions
 
 참고 블로그
 https://eadgnus.tistory.com/87
@@ -1751,7 +1759,7 @@ const re = /a/              --a 가 있는 문자열
 const re = /a/i             --a 가 있는 문자열, 대소문자 구분 안함
 const re = /apple/          -- apple가 있는 문자열
 const re = /[a-z]/          -- a~z 사이의 모든 문자
-const re = /[a-zA-Z0-9]/    -- a~z, A~Z 0~9 사이의 모든 문자
+const re = /[a-zA-Z0-9]/    -- a~z, A~Z, 0~9 사이의 모든 문자
 const re = /[a-z]|[0-9]/    -- a~z 혹은 0~9사이의 문자
 const re = /a|b|c/          -- a 혹은 b 혹은 c인 문자
 const re = /[^a-z]/         -- a~z까지의 문자가 아닌 문자("^" 부정)
@@ -1856,6 +1864,38 @@ function solution(my_string) {
 */
 ```
 
+### 문자열 정렬하기 (2)
+#### 영어 대소문자로 이루어진 문자열 my_string이 매개변수로 주어질 때, my_string을 모두 소문자로 바꾸고 알파벳 순서대로 정렬한 문자열을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120911
+```javascript
+/*
+function solution(my_string) {
+    var answer = '';
+    answer = [...my_string.toLowerCase()].sort().join("");
+    return answer;
+}
+*/
+
+const solution = my_string => [...my_string.toLowerCase()].sort().join("");
+```
+
+```javascript
+/* good
+function solution(my_string) {
+    var answer = my_string.toLowerCase().split('').sort().join('')
+    return answer;
+}
+
+function solution(my_string) {
+    return my_string.toLowerCase().split('').sort().join('');
+}
+
+function solution(my_string) {
+    return Array.from(my_string.toLowerCase()).sort().join('');
+}
+*/
+```
+
 ### 대문자와 소문자
 #### 문자열 my_string이 매개변수로 주어질 때, 대문자는 소문자로 소문자는 대문자로 변환한 문자열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120893
@@ -1897,6 +1937,145 @@ function solution(my_string) {
 */
 ```
 
+### A로 B 만들기
+#### 문자열 before와 after가 매개변수로 주어질 때, before의 순서를 바꾸어 after를 만들 수 있으면 1을, 만들 수 없으면 0을 return 하도록 solution 함수를 완성해보세요.
+```javascript
+/*
+function solution(before, after) {
+    var answer = 0;
+    answer = before.split("").reverse().join("") === after ? 1 : 0;
+    return answer;
+}
+
+const solution = (before, after) => before.split("").reverse().join("") === after ? 1 : 0;
+*/
+
+/*
+function solution(before, after) {
+    var answer = 0;
+    answer = [...before].sort().join("") === [...after].sort().join("") ? 1 : 0;
+    return answer;
+}
+*/
+
+const solution = (before, after) => [...before].sort().join("") === [...after].sort().join("") ? 1 : 0;
+```
+
+## Object
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object
+```javascript
+/* memo
+Object.prototype.toString()     // 문자열을 반환하는 object의 대표적인 방법이다
+Object.keys()                   // 주어진 객체의 속성 이름들을 일반적인 반복문과 동일한 순서로 순회되는 열거할 수 있는 배열로 반환합니다.
+Object.values()                 // 전달된 파라미터 객체가 가지는 (열거 가능한) 속성의 값들로 이루어진 배열을 리턴합니다. 
+                                // 이 배열은 for...in 구문과 동일한 순서를 가집니다. (for in 반복문은 프로토타입 체인 또한 열거한다는 점에서 차이가 있습니다.)
+Object.entries()                // for...in와 같은 순서로 주어진 객체 자체의 enumerable 속성 [key, value] 쌍의 배열을 반환합니다. 
+                                // (for-in 루프가 다른점은 프로토 타입 체인의 속성도 열거한다는 점입니다).
+*/
+```
+
+### 모스부호 (1)
+#### 머쓱이는 친구에게 모스부호를 이용한 편지를 받았습니다. 그냥은 읽을 수 없어 이를 해독하는 프로그램을 만들려고 합니다. 문자열 letter가 매개변수로 주어질 때, letter를 영어 소문자로 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
+> 모스부호는 다음과 같습니다.
+> morse = { 
+>     '.-':'a','-...':'b','-.-.':'c','-..':'d','.':'e','..-.':'f',
+>     '--.':'g','....':'h','..':'i','.---':'j','-.-':'k','.-..':'l',
+>     '--':'m','-.':'n','---':'o','.--.':'p','--.-':'q','.-.':'r',
+>     '...':'s','-':'t','..-':'u','...-':'v','.--':'w','-..-':'x',
+>     '-.--':'y','--..':'z'
+> } 
+> ".... . .-.. .-.. ---" => "hello"
+> ".--. -.-- - .... --- -."	=> "python"
+> 입출력 예 #1
+> .... = h
+> . = e
+> .-.. = l
+> .-.. = l
+> --- = o
+> 따라서 "hello"를 return 합니다.
+> 입출력 예 #2
+> .--. = p
+> -.-- = y
+> - = t
+> .... = h
+> --- = o
+> -. = n
+> 따라서 "python"을 return 합니다.
+> a ~ z에 해당하는 모스부호가 순서대로 담긴 배열입니다.
+> {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."}
+> https://school.programmers.co.kr/learn/courses/30/lessons/120838
+```javascript
+const morse = { 
+    '.-':'a','-...':'b','-.-.':'c','-..':'d','.':'e','..-.':'f',
+    '--.':'g','....':'h','..':'i','.---':'j','-.-':'k','.-..':'l',
+    '--':'m','-.':'n','---':'o','.--.':'p','--.-':'q','.-.':'r',
+    '...':'s','-':'t','..-':'u','...-':'v','.--':'w','-..-':'x',
+    '-.--':'y','--..':'z'
+}
+
+/*
+function solution(letter) {
+    var answer = '';
+    answer = letter.split(" ").map(n => Object.values(morse)[Object.keys(morse).indexOf(n)]).join("");
+    return answer;
+}
+*/
+
+const solution = letter => letter.split(" ").map(n => Object.values(morse)[Object.keys(morse).indexOf(n)]).join("");
+```
+
+```javascript
+/* good
+function solution(letter) {
+    return letter.split(' ').reduce((prev, curr) => prev + morse[curr], '')
+}
+
+function solution(letter) {
+    return letter.split(' ').map(v=>morse[v]).join('');
+}
+*/
+```
+
+## Set
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Set
+```javascript
+/* memo
+Set 객체는 자료형에 관계 없이 원시 값과 객체 참조 모두 유일한 값을 저장할 수 있습니다.
+Set 객체는 값 콜렉션으로, 삽입 순서대로 요소를 순회할 수 있습니다. 
+하나의 Set 내 값은 한 번만 나타날 수 있습니다. 
+즉, 어떤 값은 그 Set 콜렉션 내에서 유일합니다.
+Set.prototype[@@iterator]()         // Set 인스턴스의 [@@iterator]() 메서드는 반복 가능한 프로토콜을 구현하고 
+                                    // spread 구문 및 for... 루프의. 집합의 값을 생성하는 집합 반복자 개체를 반환합니다.
+                                    // 이 속성의 초기 값은 Set.prototype.values 속성의 초기 값과 동일한 함수 객체입니다.
+Set.prototype.add()                 // Set 개체의 맨 뒤에 주어진 value의 새 요소를 추가합니다.
+Set.prototype.clear()               // Set 객체를 비웁니다.
+Set.prototype.delete()              // 지정한 요소를 Set 객체에서 제거합니다.
+Set.prototype.entries()             // Set 객체의 각각의 요소를 삽입순서대로 [값, 값]의 형태로 가진 배열의 새로운 Iterator 객체를 반환합니다. 
+                                    // Set객체에는 Map객체의 key가 없습니다. 그러나, Map 객체의 API와 비슷하게 유지하기 위해, 
+                                    // 각각의 "요소"는 "키"와 "값" 자리에 같은 값을 가지게 됩니다. 결과적으로 [값, 값] 형태의 배열이 반환되게 됩니다.
+Set.prototype.forEach()             // 주어진 함수를 Set 요소 각각에 대해 삽입 순서대로 실행합니다.
+Set.prototype.has()                 // Set 객체에 주어진 요소가 존재하는지 여부를 판별해 반환합니다.
+Set.prototype.keys()                // values() 메서드의 별칭입니다.
+Set.prototype.values()              // Set 객체에 요소가 삽입된 순서대로 각 요소의 값을 순환할 수 있는 새로운 Iterator 객체를 반환합니다.
+*/
+```
+
+### 중복된 문자 제거
+#### 문자열 my_string이 매개변수로 주어집니다. my_string에서 중복된 문자를 제거하고 하나의 문자만 남긴 문자열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120888
+```javascript
+/*
+function solution(my_string) {
+    let anwser = '';
+     answer = [...new Set(my_string)].join("");
+    return answer;
+}
+*/
+
+const solution = my_string => [...new Set(my_string)].join("");
+```
+
+
 ### 최빈값 구하기
 #### 최빈값은 주어진 값 중에서 가장 자주 나오는 값을 의미합니다. 정수 배열 array가 매개변수로 주어질 때, 최빈값을 return 하도록 solution 함수를 완성해보세요. 최빈값이 여러 개면 -1을 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120812
@@ -1910,6 +2089,7 @@ function solution(my_string) {
 
 ### 약수 구하기
 #### 정수 n이 매개변수로 주어질 때, n의 약수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120897
 ```javascript
 ```
 
@@ -1920,6 +2100,7 @@ function solution(my_string) {
 
 ### 합성수 찾기
 #### 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120846
 ```javascript
 ```
 
@@ -1928,48 +2109,12 @@ function solution(my_string) {
 */
 ```
 
-### 문자열 정렬하기 (2)
-#### 영어 대소문자로 이루어진 문자열 my_string이 매개변수로 주어질 때, my_string을 모두 소문자로 바꾸고 알파벳 순서대로 정렬한 문자열을 return 하도록 solution 함수를 완성해보세요.
-```javascript
-```
+### 2차원으로 만들기
 
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
+#### 정수 배열 num_list와 정수 n이 매개변수로 주어집니다. num_list를 다음 설명과 같이 2차원 배열로 바꿔 return하도록 solution 함수를 완성해주세요.
+#### num_list가 [1, 2, 3, 4, 5, 6, 7, 8] 로 길이가 8이고 n이 2이므로 num_list를 2 * 4 배열로 다음과 같이 변경합니다. 2차원으로 바꿀 때에는 num_list의 원소들을 앞에서부터 n개씩 나눠 2차원 배열로 변경합니다.
+> num_list	                    n	    result
+>[1, 2, 3, 4, 5, 6, 7, 8]	    2	    [[1, 2], [3, 4], [5, 6], [7, 8]]
 ```javascript
 ```
 
