@@ -1502,6 +1502,107 @@ function solution(num, k) {
 */
 ```
 
+### 2차원으로 만들기
+
+#### 정수 배열 num_list와 정수 n이 매개변수로 주어집니다. num_list를 다음 설명과 같이 2차원 배열로 바꿔 return하도록 solution 함수를 완성해주세요.
+#### num_list가 [1, 2, 3, 4, 5, 6, 7, 8] 로 길이가 8이고 n이 2이므로 num_list를 2 * 4 배열로 다음과 같이 변경합니다. 2차원으로 바꿀 때에는 num_list의 원소들을 앞에서부터 n개씩 나눠 2차원 배열로 변경합니다.
+> num_list	                    n	    result
+> [1, 2, 3, 4, 5, 6, 7, 8]	    2	    [[1, 2], [3, 4], [5, 6], [7, 8]]
+> https://school.programmers.co.kr/learn/courses/30/lessons/120842
+```javascript
+function solution(num_list, n) {
+    var answer = new Array(num_list.length / n);
+    for (let i = 0; i < num_list.length / n; i++) {
+        answer[i] = new Array(n);
+        for (let j = 0; j < n; j++) {
+            // console.log(i, j, i * n + j, num_list[i * n + j])
+            answer[i][j] = num_list[i * n + j];
+        }
+    }
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(num_list, n) {
+    return Array
+        .from({length: num_list.length / n})
+        .map((v, i) => num_list.slice(i * n, i * n + n));
+}
+
+function solution(num_list, n) {
+    return Array(num_list.length / n).fill([]).map(() => num_list.splice(0, n));
+}
+
+function solution(num_list, n) {
+    var answer = [];
+    for (let i = 0; i < num_list.length; i += n) {
+        answer.push(num_list.slice(i, i + n));
+    }
+    return answer;
+}
+
+function solution(num_list, n) {
+    const m=Array.from(Array(num_list.length/n),()=>Array(n).fill(0))
+    num_list.forEach((e,i)=>m[~~(i/n)][i%n]=e);
+    return m
+}
+
+var solution=(a,n)=>a.reduce((t,v,i)=>(!(i%n)?t.push([v]):t[t.length-1].push(v))&&t,[]);
+*/
+```
+
+### k의 개수
+#### 1부터 13까지의 수에서, 1은 1, 10, 11, 12, 13 이렇게 총 6번 등장합니다. 정수 i, j, k가 매개변수로 주어질 때, i부터 j까지 k가 몇 번 등장하는지 return 하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120887
+```javascript
+function solution(i, j, k) {
+    var answer = 0;
+    // console.log([...Array(j+1).keys()].slice(i, j+1));
+    // console.log([...Array(j+1).keys()].slice(i, j+1).map(n => n.toString().split("")));
+    [...Array(j+1).keys()].slice(i, j+1).map(n => n.toString().split("").map(n => n.includes(k) === true ? answer++ : answer));
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(i, j, k) {
+    let a ='';
+    for(i;i<=j;i++){
+        a += i;
+    }
+    return a.split(k).length-1;
+}
+
+function solution(i, j, k) {
+    let str = Array(j - i + 1).fill(i).map((v, i) => v + i).join('')
+    return Array.from(str).filter(t => +t === k).length;
+}
+
+function solution(i, j, k) {
+    return Array(j-i+1).fill(i).map((v,i)=>v+i).join('').split(k).length-1;
+}
+
+function solution(i, j, k) {
+    let count = 0
+    for(; i <= j; i++){
+        if((i+'').includes(k)) count += (i+'').split('').filter(n => n === k+'').length
+    }
+    return count;
+}
+
+var solution=(i,j,k)=>new Array(j-i+1).fill(0).map((_,n)=>n+i).join('').split('').filter(n=>n==k).length
+
+function solution(i, j, k) {
+    var answer = 0;
+    var arr = Array(j-i+1).fill().map((m,idx) => idx+=i).join('').split('').filter(f=> f == k);
+    return arr.length;
+}
+*/
+```
+
 ## String
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 ```javascript
@@ -2075,7 +2176,6 @@ function solution(my_string) {
 const solution = my_string => [...new Set(my_string)].join("");
 ```
 
-
 ### 최빈값 구하기
 #### 최빈값은 주어진 값 중에서 가장 자주 나오는 값을 의미합니다. 정수 배열 array가 매개변수로 주어질 때, 최빈값을 return 하도록 solution 함수를 완성해보세요. 최빈값이 여러 개면 -1을 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120812
@@ -2109,32 +2209,11 @@ const solution = my_string => [...new Set(my_string)].join("");
 */
 ```
 
-### 2차원으로 만들기
+### 팩토리얼
 
-#### 정수 배열 num_list와 정수 n이 매개변수로 주어집니다. num_list를 다음 설명과 같이 2차원 배열로 바꿔 return하도록 solution 함수를 완성해주세요.
-#### num_list가 [1, 2, 3, 4, 5, 6, 7, 8] 로 길이가 8이고 n이 2이므로 num_list를 2 * 4 배열로 다음과 같이 변경합니다. 2차원으로 바꿀 때에는 num_list의 원소들을 앞에서부터 n개씩 나눠 2차원 배열로 변경합니다.
-> num_list	                    n	    result
->[1, 2, 3, 4, 5, 6, 7, 8]	    2	    [[1, 2], [3, 4], [5, 6], [7, 8]]
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
+#### i팩토리얼 (i!)은 1부터 i까지 정수의 곱을 의미합니다. 예를들어 5! = 5 * 4 * 3 * 2 * 1 = 120 입니다. 정수 n이 주어질 때 다음 조건을 만족하는 가장 큰 정수 i를 return 하도록 solution 함수를 완성해주세요.
+> i! ≤ n
+> https://school.programmers.co.kr/learn/courses/30/lessons/120848
 ```javascript
 ```
 
