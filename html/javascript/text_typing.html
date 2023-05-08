@@ -16,6 +16,35 @@
     <h1>text_typing</h1>
 
     <!-- code_area -->
+    <div class="code_tit">javascript <span class="sub">- tag X</span></div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<div id="typing-text"></div>
+<script type="text/javascript" >
+    var text = "Hello, World! Hello, World! Hello, World! Hello, World!";
+    var i = 0;
+    var speed = 100; // 타이핑 속도를 조절할 수 있습니다. 
+    function typingEffect() {
+        if (i < text.length) {
+            document.getElementById("typing-text").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typingEffect, speed);
+        }
+    }
+    typingEffect();
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
     <div class="code_tit">jQuery <span class="sub">- tag X</span></div>
     <div class="code_area" data-style="vertical">
         <!-- code_ui -->
@@ -43,10 +72,10 @@
         }
         
         setTimeout(function(){
-            fntypeing('#typing_js_1','단도직입적으로 물어볼게');
+            fntypeing('#typing_js_1','Hello, World!');
         }, 500);
         setTimeout(function(){
-            fntypeing('#typing_js_2','“의미 있는 공부를 하고있니?”');
+            fntypeing('#typing_js_2','Hello, World! Hello, World! Hello, World! Hello, World!');
         }, 1500);
     });
 </script>

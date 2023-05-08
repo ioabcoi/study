@@ -278,6 +278,7 @@ Math.round()                // 반올림. 반올림한 수와 가장 가까운 �
 Math.abs()                  // 절대값. 주어진 숫자의 절대값을 반환합니다.
 Math.sign()                 // 부호. 주어진 수의 부호를 나타내는 +/-1을 반환합니다. 단, Math.sign()에 제공한 수가 0일 경우 부호에 따라 +/-0을 반환합니다.
 Math.sqrt()                 // 함수는 숫자의 제곱근을 반환합니다.
+Math.cbrt()                 // 함수는 주어진 수의 세제곱근을 반환합니다.
 Math.pow(x, y)              // x의 y 제곱을 반환합니다.
 Math.max()                  // 0개 이상의 인수에서 제일 큰 수를 반환합니다.
 Math.min()                  // 0개 이상의 인수에서 제일 작은 수를 반환합니다.
@@ -444,13 +445,14 @@ function solution(box, n) {
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number
 ```javascript
 /* memo
+Number(value)                           // 문자열이나 다른 값을 Number 타입으로 변환합니다. 만약 만약 인수를 숫자로 변환할 수 없으면 NaN을 리턴합니다.
 Number.isFinite()                       // 주어진 값이 유한수인지 판별합니다.
 Number.isInteger()                      // 주어진 값이 정수인지 판별합니다.
 Number.isNaN()                          // 주어진 값이 NaN인지 판별합니다. 기존부터 존재한 전역 isNaN() 함수의 더 엄격한 버전입니다.
 Number.isSafeInteger()                  // 전달된 값이 안전한 정숫값인지 확인합니다.
 Number.parseFloat()                     // 주어진 값을 필요한 경우 문자열로 변환한 후 부동소수점 실수로 파싱해 반환합니다. 숫자를 파싱할 수 없는 경우 NaN을 반환합니다.
 Number.parseInt()                       // 문자열 인자를 파싱하여 특정 진수(수의 진법 체계에서 기준이 되는 값)의 정수를 반환합니다.
-Number.prototype.toExponential()        //숫자를 지수 표기법으로 표기해 반환합니다.
+Number.prototype.toExponential()        // 숫자를 지수 표기법으로 표기해 반환합니다.
 Number.prototype.toFixed()              // 숫자를 고정 소수점 표기법(fixed-point notation)으로 표시합니다.
 Number.prototype.toPrecision()          // Number 객체를 지정된 정밀도로 나타내는 문자열을 반환한다.
 Number.prototype.toString()             // 특정한 Number 객체를 나타내는 문자열을 반환합니다.
@@ -787,7 +789,15 @@ const solution = age => 2022 - age + 1;/
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
 ```javascript
 /* memo
-Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
+Array.of()                      // 인자의 수나 유형에 관계없이 가변 인자를 갖는 새 Array 인스턴스를 만듭니다.
+                                // Array.of()와 Array 생성자의 차이는 정수형 인자의 처리 방법에 있습니다. 
+                                // Array.of(7)은 하나의 요소 7을 가진 배열을 생성하지만 Array(7)은 length 속성이 7인 빈 배열을 생성합니다.
+Array.from()                    // 유사 배열 객체(array-like object)나 반복 가능한 객체(iterable object)를 얕게 복사해 새로운Array 객체를 만듭니다.
+Array.isArray()                 // 인자가 Array인지 판별합니다.
+
+Array.prototype.keys()          // 배열의 각 인덱스를 키 값으로 가지는 새로운 Array Iterator 객체를 반환합니다.
+Array.prototype.values()        // 배열에서 각 인덱스에 대한 값을 순회하는 array iterator 객체를 반환합니다.
+Array.prototype.entries()       // 배열의 각 인덱스에 대한 키/값 쌍을 가지는 새로운 Array Iterator 객체를 반환합니다.
 Array.prototype.map()           // 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
 Array.prototype.filter()        // 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
 Array.prototype.reduce()        // 배열의 각 요소에 대해 주어진 리듀서 (reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
@@ -798,10 +808,66 @@ Array.prototype.unshift()       // 새로운 요소를 배열의 맨 앞쪽에 �
 Array.prototype.concat()        // 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
 Array.prototype.splice()        // 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
 Array.prototype.join()          // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
+Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
 Array.prototype.sort()          // 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 
                                 // 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
 Array.prototype.indexOf()       // 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환합니다.         
 Array.prototype.findIndex()     // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 -1을 반환합니다.
+Array.prototype.includes()      // 배열이 특정 요소를 포함하고 있는지 판별합니다.
+Array.prototype.every()         // 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
+Array.prototype.some()          // 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 
+                                // 만약 배열에서 주어진 함수가 true을 반환하면 true를 반환합니다. 그렇지 않으면 false를 반환합니다. 이 메서드는 배열을 변경하지 않습니다.
+*/
+```
+```javascript
+/* memo
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+
+구문
+arr.map(callback(currentValue[, index[, array]])[, thisArg])
+
+매개변수
+callback                // 새로운 배열 요소를 생성하는 함수. 
+    다음 세 가지 인수를 가집니다.
+    currentValue        // 처리할 현재 요소.
+    index Optional      // 처리할 현재 요소의 인덱스.
+    array Optional      // map()을 호출한 배열.
+    thisArg Optional    // callback을 실행할 때 this로 사용되는 값.
+
+반환 값
+배열의 각 요소에 대해 실행한 callback의 결과를 모은 새로운 배열.
+
+ex)
+var numbers = [1, 4, 9];
+var roots = numbers.map(Math.sqrt);
+// roots는 [1, 2, 3]
+// numbers는 그대로 [1, 4, 9]
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+
+구문
+arr.filter(callback(element[, index[, array]])[, thisArg])
+
+매개변수
+callback                // 각 요소를 시험할 함수. true를 반환하면 요소를 유지하고, false를 반환하면 버립니다.
+    다음 세 가지 매개변수를 받습니다.
+    element             // 처리할 현재 요소.
+    index Optional      // 처리할 현재 요소의 인덱스.
+    array Optional      // filter를 호출한 배열.
+    thisArg Optional    // callback을 실행할 때 this로 사용하는 값.
+
+반환 값
+테스트를 통과한 요소로 이루어진 새로운 배열. 어떤 요소도 테스트를 통과하지 못했으면 빈 배열을 반환합니다.
+
+ex)
+function isBigEnough(value) {
+    return value >= 10;
+}
+var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+// filtered 는 [12, 130, 44]
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 */
 ```
 
@@ -818,222 +884,10 @@ function solution(num_list) {
 const solution = num_list => num_list.reverse();
 ```
 
-### 배열 두배 만들기
-#### 정수 배열 numbers가 매개변수로 주어집니다. numbers의 각 원소에 두배한 원소를 가진 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120809
-```javascript
-/*
-function solution(numbers) {
-    var answer = [];
-    answer = numbers.map(x => x * 2);
-    return answer;
-}
-
-function solution(numbers) {
-    return numbers.map(x => x * 2);
-}
-*/
-
-const solution = numbers => numbers.map(x => x * 2);
-```
-
-### 머쓱이보다 키 큰 사람
-#### 머쓱이는 학교에서 키 순으로 줄을 설 때 몇 번째로 서야 하는지 궁금해졌습니다. 머쓱이네 반 친구들의 키가 담긴 정수 배열 array와 머쓱이의 키 height가 매개변수로 주어질 때, 머쓱이보다 키 큰 사람 수를 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120585
-```javascript
-/*
-function solution(array, height) {
-    return array.filter(x => x > height).length;
-}
-*/
-
-const solution = (array, height) => array.filter(x => x > height).length;
-```
-
-### 배열 원소의 길이 
-#### 문자열 배열 strlist가 매개변수로 주어집니다. strlist 각 원소의 길이를 담은 배열을 retrun하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120854
-```javascript
-/*
-function solution(strlist) {
-    return strlist.map(x => x.length);
-}
-*/
-
-const solution = strlist => strlist.map(x => x.length);
-```
-
-### n의 배수 고르기
-#### 정수 n과 정수 배열 numlist가 매개변수로 주어질 때, numlist에서 n의 배수가 아닌 수들을 제거한 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120905
-```javascript
-/*
-function solution(n, numlist) {
-    var answer = [];
-    answer = numlist.filter(x => x % n === 0)
-    return answer;
-}
-*/
-
-const solution = (n, numlist) => numlist.filter(x => x % n === 0);
-```
-
-### 짝수 홀수 개수
-#### 정수가 담긴 리스트 num_list가 주어질 때, num_list의 원소 중 짝수와 홀수의 개수를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120824
-```javascript
-/*
-function solution(num_list) {
-    var answer = [];
-    var even = num_list.filter(x => x % 2 === 0);
-    var odd = num_list.filter(x => x % 2 !== 0);
-    answer = [even.length, odd.length]
-    return answer;
-}
-*/
-
-const solution = num_list => [num_list.filter(x => x % 2 === 0).length, num_list.filter(x => x % 2 !== 0).length];
-```
-
-```javascript
-/* good
-function solution(num_list) {
-    var answer = [0,0];
-    for(let a of num_list){
-        answer[a%2] += 1
-    }
-    return answer;
-}
-*/
-```
-
-### 가위 바위 보
-#### 가위는 2 바위는 0 보는 5로 표현합니다. 가위 바위 보를 내는 순서대로 나타낸 문자열 rsp가 매개변수로 주어질 때, rsp에 저장된 가위 바위 보를 모두 이기는 경우를 순서대로 나타낸 문자열을 return하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120839
-```javascript
-/*
-function solution(rsp) {
-    var answer = [];
-    answer = rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(x) === 0 ? 5 : 2).join("");
-    return answer;
-}
-*/
-
-const solution = rsp => rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(x) === 0 ? 5 : 2).join("");
-```
-
-```javascript
-/* good
-function solution(rsp) {
-    let arr = {
-        2: 0,
-        0: 5,
-        5: 2
-    };
-    var answer = [...rsp].map(v => arr[v]).join("");
-    return answer;
-}
-*/
-```
-
-### 배열의 평균값
-#### 정수 배열 numbers가 매개변수로 주어집니다. numbers의 원소의 평균값을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120817
-```javascript
-/*
-function solution(numbers) {
-    return numbers.reduce((p, c) => p + c) / numbers.length;
-}
-*/
-
-const solution = numbers => numbers.reduce((p, c) => p + c) / numbers.length;
-```
-
-### 중복된 숫자 개수
-#### 정수가 담긴 배열 array와 정수 n이 매개변수로 주어질 때, array에 n이 몇 개 있는 지를 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120583
-```javascript
-/*
-function solution(array, n) {
-    var answer = 0;
-    var newArray = array.filter(x => x === n);
-    answer = newArray.length
-    return answer;
-}
-
-function solution(array, n) {
-    return array.filter(x => x === n).length;
-}
-*/
-
-const solution = (array, n) => array.filter(x => x === n).length;
-```
-
-### 짝수는 싫어요
-#### 정수 n이 매개변수로 주어질 때, n 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120813
-```javascript
-/*
-function solution(n) {
-    var answer = [];
-    var range = [...Array(n+1).keys()].map(i => i); // [0, 1, ...., n]
-    var range2 = range.filter((v) => (v % 2 === 1)); // [1, 3, ...., n]
-    return range2;
-}
-
-function solution(n) {
-    return [...Array(n+1).keys()].map(i => i).filter((v) => (v % 2 === 1));
-}
-*/
-
-const solution = n => [...Array(n+1).keys()].map(i => i).filter((v) => (v % 2 === 1));
-```
-
-```javascript
-/* good
-function solution(n) {
-    var answer = [];
-    for (let i = 1; i<=n; i+=2) answer.push(i)
-    return answer;
-}
-*/
-```
-
-### 짝수의 합
-#### 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120831
-```javascript
-/*
-function solution(n) {
-    var answer = 0;
-    for (var i = 0; i <= n; i++) {
-        i % 2 === 0 ? answer = answer + i : answer;
-    }
-    return answer;
-}
-
-function solution(n) {
-    var answer = 0;
-    var range = [...Array(n+1).keys()].map(i => i); // [0, 1, ...., n]
-    var range2 = range.filter((v) => (v % 2 === 0)); // [2, 4, ...., n]
-    var range3 = range2.reduce((p, c) => p + c);
-    answer = range3;
-    return answer;
-}
-
-function solution(n) {
-    return [...Array(n+1).keys()].map(i => i).filter((v) => (v % 2 === 0)).reduce((p, c) => p + c);
-}
-*/
-
-const solution = n => [...Array(n+1).keys()].map(i => i).filter((v) => (v % 2 === 0)).reduce((p, c) => p + c);
-```
-
 ### 문자열 뒤집기
 #### 문자열 my_string이 매개변수로 주어집니다. my_string을 거꾸로 뒤집은 문자열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120822
 ```javascript
-
 /*
 function solution(my_string) {
     var answer = '';
@@ -1076,100 +930,247 @@ function solution(my_string) {
 */
 ```
 
-### 배열 회전시키기
-#### 정수가 담긴 배열 numbers와 문자열 direction가 매개변수로 주어집니다. 배열 numbers의 원소를 direction방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/challenges/beginner?order=acceptance_desc&page=3
+### 배열 두배 만들기
+#### 정수 배열 numbers가 매개변수로 주어집니다. numbers의 각 원소에 두배한 원소를 가진 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120809
 ```javascript
 /*
-function solution(numbers, direction) {
+function solution(numbers) {
     var answer = [];
-    direction === "right" ? numbers.unshift(numbers.pop()) : numbers.push(numbers.shift())
-    answer = numbers;
+    answer = numbers.map(x => x * 2);
+    return answer;
+}
+
+function solution(numbers) {
+    return numbers.map(x => x * 2);
+}
+*/
+
+const solution = numbers => numbers.map(x => x * 2);
+```
+
+### 배열 원소의 길이 
+#### 문자열 배열 strlist가 매개변수로 주어집니다. strlist 각 원소의 길이를 담은 배열을 retrun하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120854
+```javascript
+/*
+function solution(strlist) {
+    return strlist.map(x => x.length);
+}
+*/
+
+const solution = strlist => strlist.map(x => x.length);
+```
+
+### 가위 바위 보
+#### 가위는 2 바위는 0 보는 5로 표현합니다. 가위 바위 보를 내는 순서대로 나타낸 문자열 rsp가 매개변수로 주어질 때, rsp에 저장된 가위 바위 보를 모두 이기는 경우를 순서대로 나타낸 문자열을 return하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120839
+```javascript
+/*
+function solution(rsp) {
+    var answer = [];
+    answer = rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(x) === 0 ? 5 : 2).join("");
     return answer;
 }
 */
 
-const solution = (numbers, direction) =>  {
-    direction === "right" ? numbers.unshift(numbers.pop()) : numbers.push(numbers.shift())
-    return numbers;
-}
+const solution = rsp => rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(x) === 0 ? 5 : 2).join("");
+```
+
+### 직각삼각형 출력하기
+#### "*"의 높이와 너비를 1이라고 했을 때, "*"을 이용해 직각 이등변 삼각형을 그리려고합니다. 정수 n 이 주어지면 높이와 너비가 n 인 직각 이등변 삼각형을 출력하도록 코드를 작성해보세요.
+> 입력 #1 
+> 3
+> 출력 #1
+> *
+> **
+> ***
+> https://school.programmers.co.kr/learn/courses/30/lessons/120823
+```javascript
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+let input = [];
+
+rl.on('line', function (line) {
+    input = line.split(' ');
+}).on('close', function () {
+    /*
+    // console.log(Number(input[0]));
+    const arr = [...Array(Number(input[0])+1).keys()].map(i => i); // [0, 1, ...., n]
+    arr.shift();
+    // console.log(arr);
+    console.log(arr.map(e => [...Array(e).keys()].map(e => "*").join("")).join("\n"));
+    
+    for(let i = 1; i < Number(input[0]) + 1; i++) {
+        console.log('*'.repeat(i));
+    }
+    
+    console.log([...Array(Number(input[0])).keys()]);
+    console.log([...Array(Number(input[0])).keys()].map(e => [...Array(e+1).keys()]));
+    console.log([...Array(Number(input[0])).keys()].map(e => [...Array(e+1).keys()].map(e => "*")));
+    console.log([...Array(Number(input[0])).keys()].map(e => [...Array(e+1).keys()].map(e => "*").join("")));
+    */
+    
+    console.log([...Array(Number(input[0])).keys()].map(e => [...Array(e+1).keys()].map(e => "*").join("")).join("\n"));
+});
 ```
 
 ```javascript
 /* good
-function solution(numbers, direction) {
-    return direction === "right"
-        ? [numbers[numbers.length - 1], ...numbers.slice(0, numbers.length - 1)]
-        : [...numbers.slice(1), numbers[0]];
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let input = [];
+rl.on('line', function (line) {
+    input = line.split(' ');
+}).on('close', function () {
+    for(let i = 1 ; i <= input[0] ; i++){
+        console.log('*'.repeat(i));
+    }
+});
+
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let input = [];
+rl.on('line', function (line) {
+    input = line.split(' ');
+}).on('close', function () {
+    solution(Number(input[0]));
+});
+function solution(n) {
+    for(let i = 1; i < n + 1; i++) {
+        console.log('*'.repeat(i));
+    }
 }
+
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let input = [];
+rl.on('line', function (line) {
+    input = line.split(' ');
+}).on('close', function () {
+    const text = Array(+input[0]).fill(0)
+        .map((v, i) => Array(i + 1).fill('*').join(''))
+        .join('\n');
+    console.log(text)
+});
+
+const readline = require('readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+let input = [];
+rl.on('line', function (line) {
+    input = line.split(' ');
+}).on('close', function () {
+    [...new Array(Number(input[0])).keys()].forEach(i=>console.log(new Array(i+1).fill('*').join('')))
+});
 */
 ```
 
-### 배열 자르기
-#### 정수 배열 numbers와 정수 num1, num2가 매개변수로 주어질 때, numbers의 num1번 째 인덱스부터 num2번째 인덱스까지 자른 정수 배열을 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120833
+### n의 배수 고르기
+#### 정수 n과 정수 배열 numlist가 매개변수로 주어질 때, numlist에서 n의 배수가 아닌 수들을 제거한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120905
 ```javascript
 /*
-function solution(numbers, num1, num2) {
-    return numbers.splice(num1, num2 - num1 + 1);
+function solution(n, numlist) {
+    var answer = [];
+    answer = numlist.filter(x => x % n === 0)
+    return answer;
 }
 */
 
-const solution = (numbers, num1, num2) => numbers.splice(num1, num2 - num1 + 1);
+const solution = (n, numlist) => numlist.filter(x => x % n === 0);
 ```
 
-```javascript
-/* good
-function solution(numbers, num1, num2) {
-    return numbers.splice(num1, num2-num1+1);
-}
-
-function solution(numbers, num1, num2) {
-    return numbers.slice(num1, num2 + 1);
-}
-
-function solution(numbers, num1, num2) {
-    return numbers.filter((n, i) => num1 <= i && i <= num2);
-}
-*/
-```
-
-### 배열의 유사도
-#### 두 배열이 얼마나 유사한지 확인해보려고 합니다. 문자열 배열 s1과 s2가 주어질 때 같은 원소의 개수를 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120903
+### 머쓱이보다 키 큰 사람
+#### 머쓱이는 학교에서 키 순으로 줄을 설 때 몇 번째로 서야 하는지 궁금해졌습니다. 머쓱이네 반 친구들의 키가 담긴 정수 배열 array와 머쓱이의 키 height가 매개변수로 주어질 때, 머쓱이보다 키 큰 사람 수를 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120585
 ```javascript
 /*
-function solution(s1, s2) {
+function solution(array, height) {
+    return array.filter(x => x > height).length;
+}
+*/
+
+const solution = (array, height) => array.filter(x => x > height).length;
+```
+
+### 중복된 숫자 개수
+#### 정수가 담긴 배열 array와 정수 n이 매개변수로 주어질 때, array에 n이 몇 개 있는 지를 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120583
+```javascript
+/*
+function solution(array, n) {
     var answer = 0;
-    for (var i = 0; i < s1.length; i++) {
-        for (var j = 0; j < s2.length; j++) {
-            s1[i] === s2[j] ? answer++ : answer;
-        }
+    var newArray = array.filter(x => x === n);
+    answer = newArray.length
+    return answer;
+}
+
+function solution(array, n) {
+    return array.filter(x => x === n).length;
+}
+*/
+
+const solution = (array, n) => array.filter(x => x === n).length;
+```
+
+### 짝수 홀수 개수
+#### 정수가 담긴 리스트 num_list가 주어질 때, num_list의 원소 중 짝수와 홀수의 개수를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120824
+```javascript
+/*
+function solution(num_list) {
+    var answer = [];
+    var even = num_list.filter(x => x % 2 === 0);
+    var odd = num_list.filter(x => x % 2 !== 0);
+    answer = [even.length, odd.length]
+    return answer;
+}
+*/
+
+const solution = num_list => [num_list.filter(x => x % 2 === 0).length, num_list.filter(x => x % 2 !== 0).length];
+```
+
+```javascript
+/* good
+function solution(num_list) {
+    var answer = [0,0];
+    for(let a of num_list){
+        answer[a%2] += 1
     }
     return answer;
 }
 */
-
-function solution(s1, s2) {
-    var answer = 0;
-    for (var i = 0; i < s1.length; i++) for (var j = 0; j < s2.length; j++) s1[i] === s2[j] ? answer++ : answer;
-    return answer;
-}
 ```
 
+### 7의 개수
+#### 머쓱이는 행운의 숫자 7을 가장 좋아합니다. 정수 배열 array가 매개변수로 주어질 때, 7이 총 몇 개 있는지 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120912
 ```javascript
-/* good
-function solution(s1, s2) {
-    return s1.filter((v) => s2.includes(v)).length;
-}
-
-function solution(s1, s2) {
-    const concat = [...s1, ...s2];
-    const setConcat = Array.from(new Set(concat));
-
-    return concat.length - setConcat.length;
+/*
+function solution(array) {
+    var answer = 0;
+    answer = array.join("").split("").filter(x => parseInt(x) === 7).length
+    return answer;
 }
 */
+
+const solution = array => array.join("").split("").filter(x => parseInt(x) === 7).length;
 ```
 
 ### 순서쌍의 개수
@@ -1212,37 +1213,280 @@ function solution(n) {
 */
 ```
 
-### 암호 해독
-#### 군 전략가 머쓱이는 전쟁 중 적군이 다음과 같은 암호 체계를 사용한다는 것을 알아냈습니다.
-> 암호화된 문자열 cipher를 주고받습니다.
-> 그 문자열에서 code의 배수 번째 글자만 진짜 암호입니다.
-> 문자열 cipher와 정수 code가 매개변수로 주어질 때 해독된 암호 문자열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120892
 ```javascript
-function solution(cipher, code) {
-    let answer = [];
-    let arr = cipher.split("");
-    for (let i = 1; i * code <= cipher.length; i++) {
-        answer.push(arr[(code*i)-1]);
-    }
-    return answer.join("");
+/* good
+function solution(rsp) {
+    let arr = {
+        2: 0,
+        0: 5,
+        5: 2
+    };
+    var answer = [...rsp].map(v => arr[v]).join("");
+    return answer;
+}
+*/
+```
+
+### 짝수는 싫어요
+#### 정수 n이 매개변수로 주어질 때, n 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120813
+```javascript
+/*
+function solution(n) {
+    var answer = [];
+    var range = [...Array(n+1).keys()].map(i => i); // [0, 1, ...., n]
+    var range2 = range.filter(v => v % 2 === 1); // [1, 3, ...., n]
+    return range2;
+}
+
+function solution(n) {
+    return [...Array(n+1).keys()].filter(v => v % 2 === 1);
+}
+*/
+
+const solution = n => [...Array(n+1).keys()].filter(v => v % 2 === 1);
+```
+
+```javascript
+/* good
+function solution(n) {
+    var answer = [];
+    for (let i = 1; i<=n; i+=2) answer.push(i)
+    return answer;
+}
+*/
+```
+
+### 약수 구하기
+#### 정수 n이 매개변수로 주어질 때, n의 약수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120897
+```javascript
+/*
+function solution(n) {
+    var answer = [];
+    answer = [...Array(n+1).keys()].filter(x => n % x === 0)
+    return answer;
+}
+*/
+
+const solution = n => [...Array(n+1).keys()].filter(x => n % x === 0);
+```
+
+```javascript
+/* good
+function solution(n) {
+    return Array(n).fill(0).map((v, index) => v+index+1).filter((v) => n%v===0);
+}
+
+var solution=n=>new Array(n).fill(1).map((_,i)=>i+1).filter(a=>!(n%a))
+*/
+```
+
+### 합성수 찾기
+#### 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/12084
+```javascript
+/*
+function solution(n) {
+    var answer = 0;
+    answer = [...Array(n+1).keys()]
+    answer = [...Array(n+1).keys()].filter(x => [...Array(x+1).keys()].filter(e => x % e === 0).length >= 3)
+    // answer = [...Array(n+1).keys()].filter(x => [...Array(x+1).keys()].filter(e => x % e === 0).length >= 3).length
+    return answer;
+}
+*/
+
+const solution = n => [...Array(n+1).keys()].filter(x => [...Array(x+1).keys()].filter(e => x % e === 0).length >= 3).length;
+```
+
+### 369게임
+#### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120891
+```javascript
+/*
+function solution(order) {
+    var answer = 0;
+    answer = order.toString().split("").filter(n => parseInt(n) === 3 || parseInt(n) === 6 || parseInt(n) === 9).length;
+    return answer;
+}
+*/
+
+const solution = order => order.toString().split("").filter(n => parseInt(n) === 3 || parseInt(n) === 6 || parseInt(n) === 9).length;
+```
+
+```javascript
+/* good
+function solution(order) {
+    var answer = [...order.toString().matchAll(/[3|6|9]/g)].length;
+    return answer;
+}
+
+function solution(order) {
+    return (''+order).split(/[369]/).length-1;
+}
+
+function solution(order) {
+    const mySet = new Set([3,6,9]);
+    return String(order).split('')
+                        .filter(num => mySet.has(Number(num)))
+                        .length;
+}
+
+function solution(order) {
+    return Array.from(order.toString()).filter(t => ['3', '6', '9'].includes(t)).length;
+}
+
+function solution(order) {
+    var answer = String(order).split(/[369]/g).length - 1;
+    return answer;
+}
+*/
+```
+
+### k의 개수
+#### 1부터 13까지의 수에서, 1은 1, 10, 11, 12, 13 이렇게 총 6번 등장합니다. 정수 i, j, k가 매개변수로 주어질 때, i부터 j까지 k가 몇 번 등장하는지 return 하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120887
+```javascript
+function solution(i, j, k) {
+    var answer = 0;
+    // console.log([...Array(j+1).keys()].slice(i, j+1));
+    // console.log([...Array(j+1).keys()].slice(i, j+1).map(n => n.toString().split("")));
+    [...Array(j+1).keys()].slice(i, j+1).map(n => n.toString().split("").map(n => n.includes(k) === true ? answer++ : answer));
+    return answer;
 }
 ```
 
 ```javascript
 /* good
-function solution(cipher, code) {
-    var answer = "";
-    for (let i = code - 1; i < cipher.length; i += code) {
-        answer += cipher[i];
+function solution(i, j, k) {
+    let a ='';
+    for(i;i<=j;i++){
+        a += i;
+    }
+    return a.split(k).length-1;
+}
+
+function solution(i, j, k) {
+    let str = Array(j - i + 1).fill(i).map((v, i) => v + i).join('')
+    return Array.from(str).filter(t => +t === k).length;
+}
+
+function solution(i, j, k) {
+    return Array(j-i+1).fill(i).map((v,i)=>v+i).join('').split(k).length-1;
+}
+
+function solution(i, j, k) {
+    let count = 0
+    for(; i <= j; i++){
+        if((i+'').includes(k)) count += (i+'').split('').filter(n => n === k+'').length
+    }
+    return count;
+}
+
+var solution=(i,j,k)=>new Array(j-i+1).fill(0).map((_,n)=>n+i).join('').split('').filter(n=>n==k).length
+
+function solution(i, j, k) {
+    var answer = 0;
+    var arr = Array(j-i+1).fill().map((m,idx) => idx+=i).join('').split('').filter(f=> f == k);
+    return arr.length;
+}
+*/
+```
+
+### 삼각형의 완성조건 (2)
+#### 선분 세 개로 삼각형을 만들기 위해서는 다음과 같은 조건을 만족해야 합니다. 가장 긴 변의 길이는 다른 두 변의 길이의 합보다 작아야 합니다. 삼각형의 두 변의 길이가 담긴 배열 sides이 매개변수로 주어집니다. 나머지 한 변이 될 수 있는 정수의 개수를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120868
+```javascript
+/*
+function solution(sides) {
+    var answer = 0;
+    num1 = [...Array(sides[0] + sides[1]).keys()];
+    // console.log(num1);
+    num2 = [...Array(Math.max(...sides) - Math.min(...sides) + 1).keys()];
+    // console.log(num2);
+    
+    // for(let i = 0; i < num2.length; i ++) num1.shift();
+    // answer = num1;
+    // return answer.length;
+       
+    console.log(num1.slice(num2.length))
+    return num1.slice(num2.length).length;
+}
+*/
+
+const solution = sides => [...Array(sides[0] + sides[1]).keys()].slice([...Array(Math.max(...sides) - Math.min(...sides) + 1).keys()].length).length;
+```
+
+```javascript
+/* good
+function solution(sides) {
+    return Math.min(...sides)*2-1
+}
+
+function solution(sides) {
+    return 2 * Math.min(...sides) - 1;
+}
+
+function solution(sides) {
+    sides.sort((a,b) => b - a);
+    return sides[1] + sides[1] -1;
+}
+
+function solution(sides) {
+    var num = [...sides].sort((a,b)=>b-a);
+    var answer = num[1]*2 - 1;
+    return answer;
+}
+
+function solution(sides) {
+    return (sides[0] +sides[1] -Math.max(...sides) +Math.min(...sides) -1)
+}
+
+const solution = (sides) => sides[0] + sides[1] - Math.abs(sides[0] - sides[1]) - 1
+*/
+```
+
+### 배열의 평균값
+#### 정수 배열 numbers가 매개변수로 주어집니다. numbers의 원소의 평균값을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120817
+```javascript
+/*
+function solution(numbers) {
+    return numbers.reduce((p, c) => p + c) / numbers.length;
+}
+*/
+
+const solution = numbers => numbers.reduce((p, c) => p + c) / numbers.length;
+```
+
+### 짝수의 합
+#### 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120831
+```javascript
+/*
+function solution(n) {
+    var answer = 0;
+    for (var i = 0; i <= n; i++) {
+        i % 2 === 0 ? answer = answer + i : answer;
     }
     return answer;
 }
 
-function solution(cipher, code) {
-    return cipher.split('').filter((v,i)=>(i+1)%code===0).join('');
+function solution(n) {
+    var answer = 0;
+    var range = [...Array(n+1).keys()].map(i => i); // [0, 1, ...., n]
+    var range2 = range.filter((v) => (v % 2 === 0)); // [2, 4, ...., n]
+    var range3 = range2.reduce((p, c) => p + c);
+    answer = range3;
+    return answer;
+}
+
+function solution(n) {
+    return [...Array(n+1).keys()].map(i => i).filter((v) => (v % 2 === 0)).reduce((p, c) => p + c);
 }
 */
+
+const solution = n => [...Array(n+1).keys()].map(i => i).filter((v) => (v % 2 === 0)).reduce((p, c) => p + c);
 ```
 
 ### 자릿수 더하기
@@ -1311,6 +1555,245 @@ function solution(my_string) {
 */
 ```
 
+### 숨어있는 숫자의 덧셈 (2)
+#### 문자열 my_string이 매개변수로 주어집니다. my_string은 소문자, 대문자, 자연수로만 구성되어있습니다. my_string안의 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120864
+```javascript
+/*
+function solution(my_string) {
+    var answer = 0;
+    var regex = /[a-zA-Z]/g;
+    var str = my_string.replace(regex, " ").split(" ");
+    var num = str.filter(x => x !== "").map(x => parseInt(x));
+    answer = num.length > 0 ? num.reduce((x, y) => x + y) : 0;
+    return answer;
+}
+
+function solution(my_string) {
+    var answer = 0;
+    var regex = /[a-zA-Z]/g;
+    var str = my_string.replace(regex, " ").split(" ");
+    var num = str.map(x => x === "" ? 0 : parseInt(x));
+    answer = num.reduce((x, y) => x + y);
+    return answer;
+}
+*/
+
+const solution = my_string => my_string.replace(/[a-zA-Z]/g, " ").split(" ").map(x => x === "" ? 0 : parseInt(x)).reduce((x, y) => x + y);
+```
+
+```javascript
+/* good
+function solution(my_string) {
+    return my_string.split(/\D+/).reduce((acc, cur) => acc + Number(cur), 0);
+}
+
+function solution(my_string) {
+    return my_string.toLowerCase().replace(/[a-z]/g, " ").split(" ").map((v) => v*1).reduce((a,b) => a+b)
+}
+
+function solution(s) {
+    return s.match(/(\d+)/g)?.reduce((t,m)=>t+Number(m),0) || 0;
+}
+
+function solution(my_string) {
+    return my_string.split(/[a-z]|[A-Z]/g).reduce((a,b) => { if(b.length == 0 ) b = 0; return parseInt(a) + parseInt(b)}, 0);
+}
+
+*/
+```
+
+### 컨트롤 제트
+#### 숫자와 "Z"가 공백으로 구분되어 담긴 문자열이 주어집니다. 문자열에 있는 숫자를 차례대로 더하려고 합니다. 이 때 "Z"가 나오면 바로 전에 더했던 숫자를 뺀다는 뜻입니다. 숫자와 "Z"로 이루어진 문자열 s가 주어질 때, 머쓱이가 구한 값을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120853
+- 1 ≤ s의 길이 ≤ 200
+- -1,000 < s의 원소 중 숫자 < 1,000
+- s는 숫자, "Z", 공백으로 이루어져 있습니다.
+- s에 있는 숫자와 "Z"는 서로 공백으로 구분됩니다.
+- 연속된 공백은 주어지지 않습니다.
+- 0을 제외하고는 0으로 시작하는 숫자는 없습니다.
+- s는 "Z"로 시작하지 않습니다.
+- s의 시작과 끝에는 공백이 없습니다.
+- "Z"가 연속해서 나오는 경우는 없습니다.
+```javascript
+/*
+function solution(s) {
+    var answer = 0;
+    answer = s.split(" ").map((x, idx) => x === "Z" ? -parseInt(s.split(" ")[idx-1]) : parseInt(x)).reduce((a, b) => a + b);
+    return answer;
+}
+*/
+
+const solution = s => s.split(" ").map((x, idx) => x === "Z" ? -parseInt(s.split(" ")[idx-1]) : parseInt(x)).reduce((a, b) => a + b);
+```
+
+```javascript
+/* good
+function solution(s) {
+    s = s.split(' ');
+    let arr = [];
+    for (let v of s) v === 'Z' ? arr.length ? arr.pop() : '' : arr.push(v);
+    return arr.reduce((a,v)=>a+ +v,0);
+}
+
+var solution=s=>s.split(' ').reduce((t,c)=>c=='Z'?t.slice(0,-1):[...t,c],[]).map(Number).reduce((a,b)=>a+b,0)
+*/
+```
+
+### 영어가 싫어요
+#### 영어가 싫은 머쓱이는 영어로 표기되어있는 숫자를 수로 바꾸려고 합니다. 문자열 numbers가 매개변수로 주어질 때, numbers를 정수로 바꿔 return 하도록 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120894
+```javascript
+function solution(numbers) {    
+    let answer = 0;
+    const str = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+    for (let i = 0; i < str.length; i++) {
+        numbers = numbers.replaceAll(str[i], i);
+        // console.log(numbers, answer, i, str[i]);
+    }
+    answer = parseInt(numbers);
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(numbers) {
+    const obj = {
+        zero: 0, one: 1, two: 2, three: 3, four: 4,
+        five: 5, six: 6, seven: 7, eight: 8, nine: 9
+    };
+    const num = numbers.replace(/zero|one|two|three|four|five|six|seven|eight|nine/g, (v) => {
+        return obj[v];
+    });
+    return Number(num);
+}
+
+function solution(numbers) {
+    const number = ["zero","one","two","three", "four", "five", "six", "seven", "eight", "nine"]
+    for(let i = 0 ; i<number.length; i++){
+        numbers = numbers.split(number[i]).join(i)
+    }
+    return +numbers
+}
+
+
+var solution=n=>Number(['zero','one','two','three','four','five','six','seven','eight','nine'].reduce((t,s,i)=>t.replaceAll(s,i),n))
+*/
+```
+
+### 배열 회전시키기
+#### 정수가 담긴 배열 numbers와 문자열 direction가 매개변수로 주어집니다. 배열 numbers의 원소를 direction방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/challenges/beginner?order=acceptance_desc&page=3
+```javascript
+/*
+function solution(numbers, direction) {
+    var answer = [];
+    direction === "right" ? numbers.unshift(numbers.pop()) : numbers.push(numbers.shift())
+    answer = numbers;
+    return answer;
+}
+*/
+
+const solution = (numbers, direction) =>  {
+    direction === "right" ? numbers.unshift(numbers.pop()) : numbers.push(numbers.shift())
+    return numbers;
+}
+```
+
+```javascript
+/* good
+function solution(numbers, direction) {
+    return direction === "right"
+        ? [numbers[numbers.length - 1], ...numbers.slice(0, numbers.length - 1)]
+        : [...numbers.slice(1), numbers[0]];
+}
+*/
+```
+
+### 암호 해독
+#### 군 전략가 머쓱이는 전쟁 중 적군이 다음과 같은 암호 체계를 사용한다는 것을 알아냈습니다.
+> 암호화된 문자열 cipher를 주고받습니다.
+> 그 문자열에서 code의 배수 번째 글자만 진짜 암호입니다.
+> 문자열 cipher와 정수 code가 매개변수로 주어질 때 해독된 암호 문자열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120892
+```javascript
+function solution(cipher, code) {
+    let answer = [];
+    let arr = cipher.split("");
+    for (let i = 1; i * code <= cipher.length; i++) {
+        answer.push(arr[(code*i)-1]);
+    }
+    return answer.join("");
+}
+```
+
+```javascript
+/* good
+function solution(cipher, code) {
+    var answer = "";
+    for (let i = code - 1; i < cipher.length; i += code) {
+        answer += cipher[i];
+    }
+    return answer;
+}
+
+function solution(cipher, code) {
+    return cipher.split('').filter((v,i)=>(i+1)%code===0).join('');
+}
+*/
+```
+
+### 배열 자르기
+#### 정수 배열 numbers와 정수 num1, num2가 매개변수로 주어질 때, numbers의 num1번 째 인덱스부터 num2번째 인덱스까지 자른 정수 배열을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120833
+```javascript
+/*
+function solution(numbers, num1, num2) {
+    return numbers.splice(num1, num2 - num1 + 1);
+}
+*/
+
+const solution = (numbers, num1, num2) => numbers.splice(num1, num2 - num1 + 1);
+```
+
+```javascript
+/* good
+function solution(numbers, num1, num2) {
+    return numbers.splice(num1, num2-num1+1);
+}
+
+function solution(numbers, num1, num2) {
+    return numbers.slice(num1, num2 + 1);
+}
+
+function solution(numbers, num1, num2) {
+    return numbers.filter((n, i) => num1 <= i && i <= num2);
+}
+*/
+```
+
+### 잘라서 배열로 저장하기
+#### 문자열 my_str과 n이 매개변수로 주어질 때, my_str을 길이 n씩 잘라서 저장한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120913
+```javascript
+function solution(my_str, n) {
+    var answer = [];
+    for (let i = 0; i < Math.ceil(my_str.length / n); i++) {
+        answer.push(my_str.slice(n * i, (n * i) + n));
+    }
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(my_str, n) {
+    return my_str.match(new RegExp(`.{1,${n}}`, "g"));
+}
+*/
+```
+
 ### 문자 반복 출력하기
 #### 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string에 들어있는 각 문자를 n만큼 반복한 문자열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120825
@@ -1361,6 +1844,44 @@ function solution(my_string, n) {
 */
 ```
 
+### 배열의 유사도
+#### 두 배열이 얼마나 유사한지 확인해보려고 합니다. 문자열 배열 s1과 s2가 주어질 때 같은 원소의 개수를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120903
+```javascript
+/*
+function solution(s1, s2) {
+    var answer = 0;
+    for (var i = 0; i < s1.length; i++) {
+        for (var j = 0; j < s2.length; j++) {
+            s1[i] === s2[j] ? answer++ : answer;
+        }
+    }
+    return answer;
+}
+*/
+
+function solution(s1, s2) {
+    var answer = 0;
+    for (var i = 0; i < s1.length; i++) for (var j = 0; j < s2.length; j++) s1[i] === s2[j] ? answer++ : answer;
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(s1, s2) {
+    return s1.filter((v) => s2.includes(v)).length;
+}
+
+function solution(s1, s2) {
+    const concat = [...s1, ...s2];
+    const setConcat = Array.from(new Set(concat));
+
+    return concat.length - setConcat.length;
+}
+*/
+```
+
 ### 가장 큰 수 찾기
 #### 정수 배열 array가 매개변수로 주어질 때, 가장 큰 수와 그 수의 인덱스를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120899
@@ -1394,50 +1915,6 @@ function solution(array) {
 
 function solution(array) {
     return [Math.max(...array), array.findIndex(el => el === Math.max(...array))];
-}
-*/
-```
-
-### 369게임
-#### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120891
-```javascript
-/*
-function solution(order) {
-    var answer = 0;
-    answer = order.toString().split("").filter(n => parseInt(n) === 3 || parseInt(n) === 6 || parseInt(n) === 9).length;
-    return answer;
-}
-*/
-
-const solution = order => order.toString().split("").filter(n => parseInt(n) === 3 || parseInt(n) === 6 || parseInt(n) === 9).length;
-```
-
-```javascript
-/* good
-function solution(order) {
-    var answer = [...order.toString().matchAll(/[3|6|9]/g)].length;
-    return answer;
-}
-
-function solution(order) {
-    return (''+order).split(/[369]/).length-1;
-}
-
-function solution(order) {
-    const mySet = new Set([3,6,9]);
-    return String(order).split('')
-                        .filter(num => mySet.has(Number(num)))
-                        .length;
-}
-
-function solution(order) {
-    return Array.from(order.toString()).filter(t => ['3', '6', '9'].includes(t)).length;
-}
-
-function solution(order) {
-    var answer = String(order).split(/[369]/g).length - 1;
-    return answer;
 }
 */
 ```
@@ -1550,56 +2027,6 @@ function solution(num_list, n) {
 }
 
 var solution=(a,n)=>a.reduce((t,v,i)=>(!(i%n)?t.push([v]):t[t.length-1].push(v))&&t,[]);
-*/
-```
-
-### k의 개수
-#### 1부터 13까지의 수에서, 1은 1, 10, 11, 12, 13 이렇게 총 6번 등장합니다. 정수 i, j, k가 매개변수로 주어질 때, i부터 j까지 k가 몇 번 등장하는지 return 하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120887
-```javascript
-function solution(i, j, k) {
-    var answer = 0;
-    // console.log([...Array(j+1).keys()].slice(i, j+1));
-    // console.log([...Array(j+1).keys()].slice(i, j+1).map(n => n.toString().split("")));
-    [...Array(j+1).keys()].slice(i, j+1).map(n => n.toString().split("").map(n => n.includes(k) === true ? answer++ : answer));
-    return answer;
-}
-```
-
-```javascript
-/* good
-function solution(i, j, k) {
-    let a ='';
-    for(i;i<=j;i++){
-        a += i;
-    }
-    return a.split(k).length-1;
-}
-
-function solution(i, j, k) {
-    let str = Array(j - i + 1).fill(i).map((v, i) => v + i).join('')
-    return Array.from(str).filter(t => +t === k).length;
-}
-
-function solution(i, j, k) {
-    return Array(j-i+1).fill(i).map((v,i)=>v+i).join('').split(k).length-1;
-}
-
-function solution(i, j, k) {
-    let count = 0
-    for(; i <= j; i++){
-        if((i+'').includes(k)) count += (i+'').split('').filter(n => n === k+'').length
-    }
-    return count;
-}
-
-var solution=(i,j,k)=>new Array(j-i+1).fill(0).map((_,n)=>n+i).join('').split('').filter(n=>n==k).length
-
-function solution(i, j, k) {
-    var answer = 0;
-    var arr = Array(j-i+1).fill().map((m,idx) => idx+=i).join('').split('').filter(f=> f == k);
-    return arr.length;
-}
 */
 ```
 
@@ -1813,6 +2240,33 @@ function solution(age) {
 */
 ```
 
+### 한 번만 등장한 문자
+#### 문자열 s가 매개변수로 주어집니다. s에서 한 번만 등장하는 문자를 사전 순으로 정렬한 문자열을 return 하도록 solution 함수를 완성해보세요. 한 번만 등장하는 문자가 없을 경우 빈 문자열을 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120896
+```javascript
+/*
+function solution(s) {
+    var answer = '';
+    answer = [...s].sort().filter(x => s.indexOf(x) === s.lastIndexOf(x)).join("");
+    return answer;
+}
+*/
+
+const solution = s => [...s].sort().filter(x => s.indexOf(x) === s.lastIndexOf(x)).join("");
+```
+
+```javascript
+/* good
+function solution(s) {
+    let res = [];
+    for (let c of s) if (s.indexOf(c) === s.lastIndexOf(c)) res.push(c);
+    return res.sort().join('');
+}
+
+var solution=s=>[...s].filter(c=>s.match(new RegExp(c,'g')).length==1).sort().join('')
+*/
+```
+
 ## 정규표현식
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions
 ```javascript
@@ -1885,6 +2339,7 @@ const re = /[a-z]$/         -- 문자가 a~z로 끝남
 #### 문자열 my_string이 매개변수로 주어집니다. my_string은 소문자, 대문자, 자연수로만 구성되어있습니다. my_string안의 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120864
 ```javascript
+/*
 function solution(my_string) {
     var answer = 0;
     var regex = /[^0-9]/g;
@@ -1898,6 +2353,7 @@ function solution(my_string) {
     var answer = my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).reduce((x, y) => x + y);
     return answer;
 }
+*/
 
 const solution = my_string => my_string.replace(/[^0-9]/g, "").split("").map(x => parseInt(x)).reduce((x, y) => x + y);
 ```
@@ -1927,6 +2383,62 @@ function solution(my_string) {
 
 function solution(my_string) {
     return Array.from(my_string).filter(t => !['a', 'e', 'i', 'o', 'u'].includes(t)).join('');
+}
+*/
+```
+
+### 소문자로 바꾸기
+#### 알파벳으로 이루어진 문자열 myString이 주어집니다. 모든 알파벳을 소문자로 변환하여 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181876
+```javascript
+/*
+function solution(myString) {
+    var answer = '';
+    answer = myString.toLowerCase();
+    return answer;
+}
+*/
+
+const solution = myString => myString.toLowerCase();
+```
+
+### 대문자와 소문자
+#### 문자열 my_string이 매개변수로 주어질 때, 대문자는 소문자로 소문자는 대문자로 변환한 문자열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120893
+```javascript
+/*
+대문자 /[A-Z]/g
+소문자 /[a-z]/g
+String.prototype.toUpperCase() 
+String.prototype.toLowerCase()
+
+function solution(my_string) {
+    var answer = '';
+    // answer = [...my_string].map(n => n.match(/[A-Z]/g) ? n.toLowerCase() : n.toUpperCase()).join("")
+    answer = [...my_string].map(n => n.match(/[a-z]/g) ? n.toUpperCase() : n.toLowerCase()).join("")
+    return answer;
+}
+
+const solution = my_string => [...my_string].map(n => n.match(/[a-z]/g) ? n.toUpperCase() : n.toLowerCase()).join("");
+*/
+
+const solution = my_string => [...my_string].map(n => n.match(/[A-Z]/g) ? n.toLowerCase() : n.toUpperCase()).join("");
+```
+
+```javascript
+/* good
+function solution(my_string) {
+    var answer = '';
+    for (let c of my_string) answer += c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase();
+    return answer;
+}
+
+function solution(my_string) {
+    return my_string.split('').map(n => n === n.toUpperCase() ? n.toLowerCase() : n.toUpperCase()).join('')
+}
+
+function solution(my_string) {
+    return my_string.split("").map((v, index) => my_string.charCodeAt(index) < 97 ? v.toLowerCase() : v.toUpperCase()).join("");
 }
 */
 ```
@@ -1997,47 +2509,6 @@ function solution(my_string) {
 */
 ```
 
-### 대문자와 소문자
-#### 문자열 my_string이 매개변수로 주어질 때, 대문자는 소문자로 소문자는 대문자로 변환한 문자열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120893
-```javascript
-/*
-대문자 /[A-Z]/g
-소문자 /[a-z]/g
-String.prototype.toUpperCase() 
-String.prototype.toLowerCase()
-
-function solution(my_string) {
-    var answer = '';
-    // answer = [...my_string].map(n => n.match(/[A-Z]/g) ? n.toLowerCase() : n.toUpperCase()).join("")
-    answer = [...my_string].map(n => n.match(/[a-z]/g) ? n.toUpperCase() : n.toLowerCase()).join("")
-    return answer;
-}
-
-const solution = my_string => [...my_string].map(n => n.match(/[a-z]/g) ? n.toUpperCase() : n.toLowerCase()).join("");
-*/
-
-const solution = my_string => [...my_string].map(n => n.match(/[A-Z]/g) ? n.toLowerCase() : n.toUpperCase()).join("");
-```
-
-```javascript
-/* good
-function solution(my_string) {
-    var answer = '';
-    for (let c of my_string) answer += c === c.toLowerCase() ? c.toUpperCase() : c.toLowerCase();
-    return answer;
-}
-
-function solution(my_string) {
-    return my_string.split('').map(n => n === n.toUpperCase() ? n.toLowerCase() : n.toUpperCase()).join('')
-}
-
-function solution(my_string) {
-    return my_string.split("").map((v, index) => my_string.charCodeAt(index) < 97 ? v.toLowerCase() : v.toUpperCase()).join("");
-}
-*/
-```
-
 ### A로 B 만들기
 #### 문자열 before와 after가 매개변수로 주어질 때, before의 순서를 바꾸어 after를 만들 수 있으면 1을, 만들 수 없으면 0을 return 하도록 solution 함수를 완성해보세요.
 ```javascript
@@ -2060,6 +2531,21 @@ function solution(before, after) {
 */
 
 const solution = (before, after) => [...before].sort().join("") === [...after].sort().join("") ? 1 : 0;
+```
+
+### 진료 순서 정하기
+#### 외과의사 머쓱이는 응급실에 온 환자의 응급도를 기준으로 진료 순서를 정하려고 합니다. 정수 배열 emergency가 매개변수로 주어질 때 응급도가 높은 순서대로 진료 순서를 정한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120835
+```javascript
+/*
+function solution(emergency) {
+    var answer = [...emergency];
+    answer = answer.map(n => emergency.sort((a, b) => b - a).indexOf(n) + 1);
+    return answer;
+}
+*/
+
+const solution = emergency => [...emergency].map(n => emergency.sort((a, b) => b - a).indexOf(n) + 1);
 ```
 
 ## Object
@@ -2187,33 +2673,97 @@ const solution = my_string => [...new Set(my_string)].join("");
 */
 ```
 
-### 약수 구하기
-#### 정수 n이 매개변수로 주어질 때, n의 약수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120897
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 합성수 찾기
-#### 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120846
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
 ### 팩토리얼
-
 #### i팩토리얼 (i!)은 1부터 i까지 정수의 곱을 의미합니다. 예를들어 5! = 5 * 4 * 3 * 2 * 1 = 120 입니다. 정수 n이 주어질 때 다음 조건을 만족하는 가장 큰 정수 i를 return 하도록 solution 함수를 완성해주세요.
 > i! ≤ n
 > https://school.programmers.co.kr/learn/courses/30/lessons/120848
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 가까운 수
+#### 정수 배열 array와 정수 n이 매개변수로 주어질 때, array에 들어있는 정수 중 n과 가장 가까운 수를 return 하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120890
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 이진수 더하기
+#### 이진수를 의미하는 두 개의 문자열 bin1과 bin2가 매개변수로 주어질 때, 두 이진수의 합을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120885
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 공 던지기
+#### 머쓱이는 친구들과 동그랗게 서서 공 던지기 게임을 하고 있습니다. 공은 1번부터 던지며 오른쪽으로 한 명을 건너뛰고 그다음 사람에게만 던질 수 있습니다. 친구들의 번호가 들어있는 정수 배열 numbers와 정수 K가 주어질 때, k번째로 공을 던지는 사람의 번호는 무엇인지 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120843
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 소인수분해
+#### 소인수분해란 어떤 수를 소수들의 곱으로 표현하는 것입니다. 예를 들어 12를 소인수 분해하면 2 * 2 * 3 으로 나타낼 수 있습니다. 따라서 12의 소인수는 2와 3입니다. 자연수 n이 매개변수로 주어질 때 n의 소인수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120852
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 문자열 계산하기
+#### my_string은 "3 + 5"처럼 문자열로 된 수식입니다. 문자열 my_string이 매개변수로 주어질 때, 수식을 계산한 값을 return 하는 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120902
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 외계어 사전
+#### PROGRAMMERS-962 행성에 불시착한 우주비행사 머쓱이는 외계행성의 언어를 공부하려고 합니다. 알파벳이 담긴 배열 spell과 외계어 사전 dic이 매개변수로 주어집니다. spell에 담긴 알파벳을 한번씩만 모두 사용한 단어가 dic에 존재한다면 1, 존재하지 않는다면 2를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120869
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 직사각형 넓이 구하기
+#### 2차원 좌표 평면에 변이 축과 평행한 직사각형이 있습니다. 직사각형 네 꼭짓점의 좌표 [[x1, y1], [x2, y2], [x3, y3], [x4, y4]]가 담겨있는 배열 dots가 매개변수로 주어질 때, 직사각형의 넓이를 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120860
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
 ```javascript
 ```
 
