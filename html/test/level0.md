@@ -816,6 +816,8 @@ Array.of()                      // 인자의 수나 유형에 관계없이 가�
                                 // Array.of(7)은 하나의 요소 7을 가진 배열을 생성하지만 Array(7)은 length 속성이 7인 빈 배열을 생성합니다.
 Array.from()                    // 유사 배열 객체(array-like object)나 반복 가능한 객체(iterable object)를 얕게 복사해 새로운Array 객체를 만듭니다.
 Array.isArray()                 // 인자가 Array인지 판별합니다.
+Array.length                    // 배열의 길이를 반환합니다. 반환값은 부호 없는 32비트 정수형이며, 배열의 최대 인덱스보다 항상 큽니다. 
+                                // length 속성에 값을 설정할 경우 배열의 길이를 변경합니다.
 
 Array.prototype.keys()          // 배열의 각 인덱스를 키 값으로 가지는 새로운 Array Iterator 객체를 반환합니다.
 Array.prototype.values()        // 배열에서 각 인덱스에 대한 값을 순회하는 array iterator 객체를 반환합니다.
@@ -1215,6 +1217,7 @@ function solution(i, j, k) {
 ### 등수 매기기
 #### 영어 점수와 수학 점수의 평균 점수를 기준으로 학생들의 등수를 매기려고 합니다. 영어 점수와 수학 점수를 담은 2차원 정수 배열 score가 주어질 때, 영어 점수와 수학 점수의 평균을 기준으로 매긴 등수를 담은 배열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120882
+> blog
 ```javascript
 function solution(score) {
     let average = [...score].map(x => (x[0] + x[1]) / 2);
@@ -1235,6 +1238,22 @@ function solution(score) {
 
 var solution=s=>s.map(([a,b])=>(a+b)/2).map((n,_,r)=>[...r].sort((a, b)=>b-a).indexOf(n)+1)
 */
+```
+
+### 진료 순서 정하기
+#### 외과의사 머쓱이는 응급실에 온 환자의 응급도를 기준으로 진료 순서를 정하려고 합니다. 정수 배열 emergency가 매개변수로 주어질 때 응급도가 높은 순서대로 진료 순서를 정한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120835
+> blog
+```javascript
+/*
+function solution(emergency) {
+    var answer = [...emergency];
+    answer = answer.map(n => emergency.sort((a, b) => b - a).indexOf(n) + 1);
+    return answer;
+}
+*/
+
+const solution = emergency => [...emergency].map(n => emergency.sort((a, b) => b - a).indexOf(n) + 1);
 ```
 
 ### n의 배수 고르기
@@ -1270,6 +1289,7 @@ const solution = (array, height) => array.filter(x => x > height).length;
 ### 중복된 숫자 개수
 #### 정수가 담긴 배열 array와 정수 n이 매개변수로 주어질 때, array에 n이 몇 개 있는 지를 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120583
+> blog
 ```javascript
 /*
 function solution(array, n) {
@@ -1290,6 +1310,7 @@ const solution = (array, n) => array.filter(x => x === n).length;
 ### 짝수 홀수 개수
 #### 정수가 담긴 리스트 num_list가 주어질 때, num_list의 원소 중 짝수와 홀수의 개수를 담은 배열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120824
+> blog
 ```javascript
 /*
 function solution(num_list) {
@@ -1319,6 +1340,7 @@ function solution(num_list) {
 ### 7의 개수
 #### 머쓱이는 행운의 숫자 7을 가장 좋아합니다. 정수 배열 array가 매개변수로 주어질 때, 7이 총 몇 개 있는지 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120912
+> blog
 ```javascript
 /*
 function solution(array) {
@@ -1334,6 +1356,7 @@ const solution = array => array.join("").split("").filter(x => parseInt(x) === 7
 ### 순서쌍의 개수
 #### 순서쌍이란 두 개의 숫자를 순서를 정하여 짝지어 나타낸 쌍으로 (a, b)로 표기합니다. 자연수 n이 매개변수로 주어질 때 두 숫자의 곱이 n인 자연수 순서쌍의 개수를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120836
+> blog
 ```javascript
 /*
 function solution(n) {
@@ -1388,6 +1411,7 @@ function solution(rsp) {
 ### 짝수는 싫어요
 #### 정수 n이 매개변수로 주어질 때, n 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120813
+> blog
 ```javascript
 /*
 function solution(n) {
@@ -1418,6 +1442,7 @@ function solution(n) {
 ### 약수 구하기
 #### 정수 n이 매개변수로 주어질 때, n의 약수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120897
+> blog
 ```javascript
 /*
 function solution(n) {
@@ -1442,7 +1467,8 @@ var solution=n=>new Array(n).fill(1).map((_,i)=>i+1).filter(a=>!(n%a))
 
 ### 합성수 찾기
 #### 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/12084
+> https://school.programmers.co.kr/learn/courses/30/lessons/120846
+> blog
 ```javascript
 /*
 function solution(n) {
@@ -1460,6 +1486,7 @@ const solution = n => [...Array(n+1).keys()].filter(x => [...Array(x+1).keys()].
 ### 369게임
 #### 머쓱이는 친구들과 369게임을 하고 있습니다. 369게임은 1부터 숫자를 하나씩 대며 3, 6, 9가 들어가는 숫자는 숫자 대신 3, 6, 9의 개수만큼 박수를 치는 게임입니다. 머쓱이가 말해야하는 숫자 order가 매개변수로 주어질 때, 머쓱이가 쳐야할 박수 횟수를 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120891
+> blog
 ```javascript
 /*
 function solution(order) {
@@ -1617,6 +1644,66 @@ function solution(n) {
     .toString()
     .split("")
     .reduce((acc, cur) => acc + Number(cur), 0);
+}
+*/
+```
+
+### 연속된 수의 합
+#### 연속된 세 개의 정수를 더해 12가 되는 경우는 3, 4, 5입니다. 두 정수 num과 total이 주어집니다. 연속된 수 num개를 더한 값이 total이 될 때, 정수 배열을 오름차순으로 담아 return하도록 solution함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120923
+```javascript
+/*
+function solution(num, total) {
+    var answer = [];
+    // answer = [...Array(num).keys()];
+    // answer = [...Array(num).keys()].reduce((a, b) => a + b);
+    // (num * n) + [...Array(num).keys()].reduce((a, b) => a + b) = total
+    var start = (total - [...Array(num).keys()].reduce((a, b) => a + b)) / num;
+    // answer = start;
+    answer = [...Array(num).keys()].map(n => n + start);
+    return answer;
+}
+
+function solution(num, total) {
+    const answer = [...Array(num).keys()].map(n => n + (total - [...Array(num).keys()].reduce((a, b) => a + b)) / num);
+    return answer;
+}
+*/
+
+const solution = (num, total) => answer = [...Array(num).keys()].map(n => n + (total - [...Array(num).keys()].reduce((a, b) => a + b)) / num);
+
+/*
+num = 1
+n
+
+num = 2
+n + (n+1)
+2n + (1)
+
+num = 3
+n + (n+1) + (n+2)
+3n + (1+2)
+
+num = 4
+n + (n+1) + (n+2) + (n+3) = 4n + (1+2+3)
+
+num = 5
+n + (n+1) + (n+2) + (n+3) + (n+4)
+5n + (1+2+3+4)
+*/
+```
+
+```javascript
+/* good
+function solution(num, total) {
+    var min = Math.ceil(total/num - Math.floor(num/2));
+    var max = Math.floor(total/num + Math.floor(num/2));
+    return new Array(max-min+1).fill(0).map((el,i)=>{return i+min;});
+}
+
+function solution(num, total) {
+    const a = (2 * total / num + 1 - num) / 2
+    return Array(num).fill().map((_, i) => i + a)
 }
 */
 ```
@@ -2510,21 +2597,6 @@ function solution(before, after) {
 const solution = (before, after) => [...before].sort().join("") === [...after].sort().join("") ? 1 : 0;
 ```
 
-### 진료 순서 정하기
-#### 외과의사 머쓱이는 응급실에 온 환자의 응급도를 기준으로 진료 순서를 정하려고 합니다. 정수 배열 emergency가 매개변수로 주어질 때 응급도가 높은 순서대로 진료 순서를 정한 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120835
-```javascript
-/*
-function solution(emergency) {
-    var answer = [...emergency];
-    answer = answer.map(n => emergency.sort((a, b) => b - a).indexOf(n) + 1);
-    return answer;
-}
-*/
-
-const solution = emergency => [...emergency].map(n => emergency.sort((a, b) => b - a).indexOf(n) + 1);
-```
-
 ## Object
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object
 ```javascript
@@ -2958,6 +3030,17 @@ function solution(chicken) {
 */
 ```
 
+### 특이한 정렬
+#### 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120880
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
 ### 외계어 사전
 #### PROGRAMMERS-962 행성에 불시착한 우주비행사 머쓱이는 외계행성의 언어를 공부하려고 합니다. 알파벳이 담긴 배열 spell과 외계어 사전 dic이 매개변수로 주어집니다. spell에 담긴 알파벳을 한번씩만 모두 사용한 단어가 dic에 존재한다면 1, 존재하지 않는다면 2를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120869
@@ -2984,6 +3067,56 @@ function solution(chicken) {
 #### 소수점 아래 숫자가 계속되지 않고 유한개인 소수를 유한소수라고 합니다. 분수를 소수로 고칠 때 유한소수로 나타낼 수 있는 분수인지 판별하려고 합니다. 유한소수가 되기 위한 분수의 조건은 다음과 같습니다. 두 정수 a와 b가 매개변수로 주어질 때, a/b가 유한소수이면 1을, 무한소수라면 2를 return하도록 solution 함수를 완성해주세요.
 > 기약분수로 나타내었을 때, 분모의 소인수가 2와 5만 존재해야 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120878
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 저주의 숫자 3
+#### 3x 마을 사람들은 3을 저주의 숫자라고 생각하기 때문에 3의 배수와 숫자 3을 사용하지 않습니다. 3x 마을 사람들의 숫자는 다음과 같습니다.
+10진법	3x 마을에서 쓰는 숫자	10진법	3x 마을에서 쓰는 숫자
+1	    1	                    6	    8
+2	    2	                    7	    10
+3	    4	                    8	    11
+4	    5	                    9	    14
+5	    7	                    10	    16
+#### 정수 n이 매개변수로 주어질 때, n을 3x 마을에서 사용하는 숫자로 바꿔 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120871
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 문자열 밀기
+#### 문자열 "hello"에서 각 문자를 오른쪽으로 한 칸씩 밀고 마지막 문자는 맨 앞으로 이동시키면 "ohell"이 됩니다. 이것을 문자열을 민다고 정의한다면 문자열 A와 B가 매개변수로 주어질 때, A를 밀어서 B가 될 수 있다면 밀어야 하는 최소 횟수를 return하고 밀어서 B가 될 수 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120921
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 안전지대
+#### 다음 그림과 같이 지뢰가 있는 지역과 지뢰에 인접한 위, 아래, 좌, 우 대각선 칸을 모두 위험지역으로 분류합니다. 지뢰는 2차원 배열 board에 1로 표시되어 있고 board에는 지뢰가 매설 된 지역 1과, 지뢰가 없는 지역 0만 존재합니다. 지뢰가 매설된 지역의 지도 board가 매개변수로 주어질 때, 안전한 지역의 칸 수를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120866
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
 ```javascript
 ```
 
