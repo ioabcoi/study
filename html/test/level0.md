@@ -476,6 +476,35 @@ Number.prototype.toPrecision()          // Number 객체를 지정된 정밀도�
 Number.prototype.toString()             // 특정한 Number 객체를 나타내는 문자열을 반환합니다.
 Number.prototype.valueOf()              // Number 객체가 감싼(wrapped) 원시 값을 반환합니다.
 */
+/* memo
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/parseInt
+parseInt(string)
+parseInt(string, radix)
+    string
+        파싱할 값입니다. 
+        문자열이 아닐 경우 ToString 추상 연산을 사용해 문자열로 변환합니다. 
+        문자열의 선행 공백은 무시합니다.
+    radix Optional
+        string의 진수를 나타내는 2부터 36까지의 정수입니다. 주의하세요. 
+        기본 값이 10이 아닙니다! Number 자료형이 아닌 경우 Number로 변환합니다.
+    parseInt 함수는 첫 번째 인자를 문자열로 변환하고, 
+    그 값을 파싱하여 정수나 NaN을 반환합니다.
+    NaN을 반환할 것이 아니면, parseInt는 첫 번째 인자를 지정한 radix 진수로 표현한 정수를 반환합니다. 
+    예를 들어 radix가 10인 경우 10진수, 8인 경우는 8진수, 16인 경우 16진수 등등으로 변환합니다.
+
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Number/toString
+numObj.toString([radix])
+    radix Optional
+        수의 값을 나타내기 위해 사용되기 위한 기준을 정하는 2와 36사이의 정수. (진수를 나타내는 기수의 값.)
+    반환 값
+        Number 객체를 명시하는 문자열.
+    Number 객체는 Object 객체의 toString()메소드를 오버라이딩하며, Object.prototype.toString() 를 상속받지 않습니다. 
+    Number 객체에서 toString() 메소드는 특정 진수로 객체를 표현한 문자열을 환원합니다.
+    toString() 메소드는 메소드의 첫 번째 아규먼트를 파싱하여, 메소드는 특정 기수(radix)를 기준으로 한 진수 값의 문자열을 환원하기 위한 시도를 합니다. 
+    진수를 나타내는 기수 값(radix) 이 10 이상의 값일 때는, 알파벳의 글자는 9보다 큰 수를 나타냅니다. 
+    예를 들면, 16진수(base 16)는, 알파벳 f 까지 사용하여 표현됩니다.
+    만약에 radix값 이 지정되지 않으면, 임의로 10진수로 가정하게 됩니다.
+*/
 ```
 
 ### 제곱수 판별하기
@@ -3104,10 +3133,67 @@ var solution=eval
 #### 이진수를 의미하는 두 개의 문자열 bin1과 bin2가 매개변수로 주어질 때, 두 이진수의 합을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120885
 ```javascript
+function solution(bin1, bin2) {
+    var answer = [];
+    const sum = bin => [...bin].reverse().map((x, i) => x * Math.pow(2, i)).reduce((a, b) => a + b);
+    const dec1 = sum(bin1);
+    const dec2 = sum(bin2);
+    const dec3 = dec1 + dec2;
+    // console.log(`${dec1} + ${dec2} = ${dec3}`);
+    let num0 = dec3;
+    while (Math.trunc(num0 / 2) > 0) {
+        let num1 = Math.trunc(num0 / 2);
+        let num2 = Math.trunc(num0 % 2);
+        answer.unshift(num2);
+        // console.log(`${num0} ${num1} ${num2} [${answer}]`);
+        num0 = num1;
+    }
+    num0 > 0 ? answer.unshift(1) : answer.unshift(0);
+    // console.log(`${num0} [${answer}]`);
+    const bin3 = answer.join("");
+    // console.log(`${dec1} + ${dec2} = ${dec3}, ${bin1} + ${bin2} = ${bin3}`);
+    return bin3;
+}
 ```
 
 ```javascript
 /* good
+function solution(bin1, bin2) {
+    return (parseInt(bin1, 2) + parseInt(bin2, 2)).toString(2)
+}
+
+function solution(bin1, bin2) {
+   const a = parseInt(bin1, 2)
+   const b = parseInt(bin2, 2)
+    return (a+b).toString(2)
+}
+
+function solution(bin1, bin2) {
+    const sum = parseInt(bin1, 2) + parseInt(bin2, 2)
+    return sum.toString(2)
+}
+
+var solution=(i,j)=>(parseInt(i,2)+parseInt(j,2)).toString(2)
+
+function solution(bin1, bin2) {
+  let temp = Number(bin1) + Number(bin2);
+  temp = [...temp.toString()].reverse().map((v) => +v);
+
+  for (let i = temp.length; i < 11; i++) {
+    temp.push(0);
+  }
+
+  for (let i = 0; i < temp.length; i++) {
+    if (temp[i] === 2) {
+      temp[i] = 0;
+      temp[i + 1]++;
+    } else if (temp[i] === 3) {
+      temp[i] = 1;
+      temp[i + 1]++;
+    }
+  }
+  return Number(temp.reverse().join("")).toString();
+}
 */
 ```
 
