@@ -281,19 +281,19 @@ function solution(price) {
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Math
 ```javascript
 /* memo
-Math.trunc()                // 소수점버림. 주어진 숫자의 정수부분 (양수, 음수 상관없이 소수점 이하 우측부분을 제거)
-Math.floor()                // 내림. 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환
-Math.ceil()                 // 올림. 주어진 숫자보다 크거나 같은 숫자 중 가장 작은 숫자를 integer 로 반환
-Math.round()                // 반올림. 반올림한 수와 가장 가까운 정수 값을 반환
-Math.abs()                  // 절대값. 주어진 숫자의 절대값을 반환합니다.
-Math.sign()                 // 부호. 주어진 수의 부호를 나타내는 +/-1을 반환합니다. 단, Math.sign()에 제공한 수가 0일 경우 부호에 따라 +/-0을 반환합니다.
-Math.sqrt()                 // 함수는 숫자의 제곱근을 반환합니다.
-Math.cbrt()                 // 함수는 주어진 수의 세제곱근을 반환합니다.
-Math.pow(x, y)              // x의 y 제곱을 반환합니다.
-Math.max()                  // 0개 이상의 인수에서 제일 큰 수를 반환합니다.
-Math.min()                  // 0개 이상의 인수에서 제일 작은 수를 반환합니다.
-Math.random()               // 0과 1 사이의 난수를 반환합니다.
-Math.round(x)               // 숫자에서 가장 가까운 정수를 반환합니다.
+Math.trunc()                    // 소수점버림. 주어진 숫자의 정수부분 (양수, 음수 상관없이 소수점 이하 우측부분을 제거)
+Math.floor()                    // 내림. 주어진 숫자와 같거나 작은 정수 중에서 가장 큰 수를 반환
+Math.ceil()                     // 올림. 주어진 숫자보다 크거나 같은 숫자 중 가장 작은 숫자를 integer 로 반환
+Math.round()                    // 반올림. 반올림한 수와 가장 가까운 정수 값을 반환
+Math.abs()                      // 절대값. 주어진 숫자의 절대값을 반환합니다.
+Math.sign()                     // 부호. 주어진 수의 부호를 나타내는 +/-1을 반환합니다. 단, Math.sign()에 제공한 수가 0일 경우 부호에 따라 +/-0을 반환합니다.
+Math.sqrt()                     // 함수는 숫자의 제곱근을 반환합니다.
+Math.cbrt()                     // 함수는 주어진 수의 세제곱근을 반환합니다.
+Math.pow(x, y)                  // x의 y 제곱을 반환합니다.
+Math.max()                      // 0개 이상의 인수에서 제일 큰 수를 반환합니다.
+Math.min()                      // 0개 이상의 인수에서 제일 작은 수를 반환합니다.
+Math.random()                   // 0과 1 사이의 난수를 반환합니다.
+Math.round(x)                   // 숫자에서 가장 가까운 정수를 반환합니다.
 */
 ```
 
@@ -856,6 +856,7 @@ Array.prototype.entries()       // 배열의 각 인덱스에 대한 키/값 쌍
 Array.prototype.map()           // 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
 Array.prototype.filter()        // 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
 Array.prototype.reduce()        // 배열의 각 요소에 대해 주어진 리듀서 (reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
+
 Array.prototype.push()          // 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
 Array.prototype.pop()           // 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.
 Array.prototype.shift()         // 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다. 이 메서드는 배열의 길이를 변하게 합니다.
@@ -863,13 +864,20 @@ Array.prototype.unshift()       // 새로운 요소를 배열의 맨 앞쪽에 �
 Array.prototype.toString()      // 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다.
 Array.prototype.concat()        // 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
 
+Array.prototype.slice()         // 어떤 배열의 begin 부터 end 까지(end 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다. 원본 배열은 바뀌지 않습니다.
 Array.prototype.splice()        // 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
 Array.prototype.join()          // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
 Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
 Array.prototype.sort()          // 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 
                                 // 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
-Array.prototype.indexOf()       // 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환합니다.         
+Array.prototype.find()          // 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 undefined를 반환합니다.
 Array.prototype.findIndex()     // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 -1을 반환합니다.
+Array.prototype.findLast()      // 배열을 역순으로 반복하고 제공된 테스트 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 
+                                // 테스트 함수를 만족하는 요소가 없다면 undefined가 반환될 것입니다.
+Array.prototype.findLastIndex() // 배열을 역순으로 반복하고 제공된 테스트 함수를 충족하는 첫 번째 요소의 인덱스를 반환합니다. 
+                                // 테스트 함수를 만족하는 요소가 없으면 -1이 반환됩니다.
+Array.prototype.indexOf()       // 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환합니다.
+Array.prototype.forEach()       // 주어진 함수를 배열 요소 각각에 대해 실행합니다.
 Array.prototype.includes()      // 배열이 특정 요소를 포함하고 있는지 판별합니다.
 Array.prototype.every()         // 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
 Array.prototype.some()          // 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 
@@ -1995,6 +2003,7 @@ function solution(my_string, n) {
 ### 배열 자르기
 #### 정수 배열 numbers와 정수 num1, num2가 매개변수로 주어질 때, numbers의 num1번 째 인덱스부터 num2번째 인덱스까지 자른 정수 배열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120833
+> blog
 ```javascript
 /*
 function solution(numbers, num1, num2) {
@@ -2024,6 +2033,7 @@ function solution(numbers, num1, num2) {
 ### 잘라서 배열로 저장하기
 #### 문자열 my_str과 n이 매개변수로 주어질 때, my_str을 길이 n씩 잘라서 저장한 배열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120913
+> blog
 ```javascript
 function solution(my_str, n) {
     var answer = [];
@@ -2069,43 +2079,10 @@ function solution(my_string, n) {
 */
 ```
 
-### 가까운 수
-#### 정수 배열 array와 정수 n이 매개변수로 주어질 때, array에 들어있는 정수 중 n과 가장 가까운 수를 return 하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120890
-```javascript
-function solution(array, n) {
-    const abs = array.sort((a, b) => a - b).map(x => Math.abs(x - n));
-    const min = Math.min(...abs);    
-    const answer = array[abs.indexOf(min)];
-    // console.log(array, abs, min, answer);
-    return answer;
-}
-```
-
-```javascript
-/* good
-function solution(array, n) {
-    return array.reduce((a,c)=> Math.abs(a-n) < Math.abs(c-n) ? a : Math.abs(a-n) === Math.abs(c-n) ? Math.min(a, c) : c);
-}
-
-function solution(array, n) {
-    array.sort((a,b) => Math.abs(n - a) - Math.abs(n - b) || a - b);
-    return array[0];
-}
-
-let solution=(r,n)=>r.map(e=>[e,Math.abs(e-n)]).sort((a,b)=>a[1]-b[1]||a[0]-b[0])[0][0]
-
-function solution(array, n) {
-    return array[array.sort((a,b) => a-b).map((v) => Math.abs(v-n)).indexOf(Math.min(...array.map((v) => Math.abs(v-n))))]
-}
-
-var solution=(a,n)=>a.reduce((t,i)=>Math.abs(t-n)<Math.abs(i-n)?t:Math.abs(t-n)==Math.abs(i-n)?Math.min(t,i):i)
-*/
-```
-
 ### 숫자 찾기
 #### 정수 num과 k가 매개변수로 주어질 때, num을 이루는 숫자 중에 k가 있으면 num의 그 숫자가 있는 자리 수를 return하고 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120904
+> blog
 ```javascript
 /*
 function solution(num, k) {
@@ -2159,6 +2136,130 @@ function solution(num, k) {
         .findIndex(t => t === k.toString());
 
     return result < 0 ? result : result + 1
+}
+*/
+```
+
+### 가까운 수
+#### 정수 배열 array와 정수 n이 매개변수로 주어질 때, array에 들어있는 정수 중 n과 가장 가까운 수를 return 하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120890
+> blog
+```javascript
+function solution(array, n) {
+    const abs = array.sort((a, b) => a - b).map(x => Math.abs(x - n));
+    const min = Math.min(...abs);    
+    const answer = array[abs.indexOf(min)];
+    // console.log(array, abs, min, answer);
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(array, n) {
+    return array.reduce((a,c)=> Math.abs(a-n) < Math.abs(c-n) ? a : Math.abs(a-n) === Math.abs(c-n) ? Math.min(a, c) : c);
+}
+
+function solution(array, n) {
+    array.sort((a,b) => Math.abs(n - a) - Math.abs(n - b) || a - b);
+    return array[0];
+}
+
+let solution=(r,n)=>r.map(e=>[e,Math.abs(e-n)]).sort((a,b)=>a[1]-b[1]||a[0]-b[0])[0][0]
+
+function solution(array, n) {
+    return array[array.sort((a,b) => a-b).map((v) => Math.abs(v-n)).indexOf(Math.min(...array.map((v) => Math.abs(v-n))))]
+}
+
+var solution=(a,n)=>a.reduce((t,i)=>Math.abs(t-n)<Math.abs(i-n)?t:Math.abs(t-n)==Math.abs(i-n)?Math.min(t,i):i)
+*/
+```
+
+### 특이한 정렬
+#### 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120880
+```javascript
+function solution(numlist, n) {
+    let answer = [];
+    const arr = numlist.map(x => Math.abs(x - n));
+    const abs = [...arr].sort((a, b) => a - b);
+    // console.log(numlist, arr, abs);
+    for (let i = 0; i < abs.length; i++) {
+        if (abs[i] === abs[i-1]) {
+            numlist.includes(n - abs[i]) ? answer.push(n - abs[i]) : answer.push(n + abs[i]);
+        } else {
+            numlist.includes(n + abs[i]) ? answer.push(n + abs[i]) : answer.push(n - abs[i]);
+        }
+        // console.log(i, n - abs[i], n + abs[i]);
+    }
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(numlist, n) {
+    return numlist.sort((a, b) => Math.abs(a - n) - Math.abs(b - n) || b - a);
+}
+*/
+```
+
+### 인덱스 바꾸기
+#### 문자열 my_string과 정수 num1, num2가 매개변수로 주어질 때, my_string에서 인덱스 num1과 인덱스 num2에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120895
+```javascript
+function solution(my_string, num1, num2) {
+    let answer = [];
+    answer = my_string.split("");
+    let n1 = answer[num1];
+    let n2 = answer[num2];
+    answer[num1] = n2;
+    answer[num2] = n1;    
+    return answer.join("");
+}
+```
+
+```javascript
+/* good
+function solution(my_string, num1, num2) {
+    my_string = my_string.split('');
+    [my_string[num1], my_string[num2]] = [my_string[num2], my_string[num1]];
+    return my_string.join('');
+}
+
+function solution(my_string, num1, num2) {
+    let temp = '';
+    const strArray = my_string.split('');
+    temp = strArray[num1];
+    strArray[num1] = strArray[num2];
+    strArray[num2] = temp;
+    return strArray.join('');
+}
+*/
+```
+
+### 공 던지기
+#### 머쓱이는 친구들과 동그랗게 서서 공 던지기 게임을 하고 있습니다. 공은 1번부터 던지며 오른쪽으로 한 명을 건너뛰고 그다음 사람에게만 던질 수 있습니다. 친구들의 번호가 들어있는 정수 배열 numbers와 정수 K가 주어질 때, k번째로 공을 던지는 사람의 번호는 무엇인지 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120843
+```javascript
+function solution(numbers, k) {
+    let odd = numbers.filter((e, i) => i % 2 === 0);
+    let even = numbers.filter((e, i) => i % 2 !== 0);
+    let arr = numbers.length % 2 === 0 ? odd : odd.concat(even);
+    // console.log(odd, even, arr, k, (k - 1) % arr.length);
+    const answer = arr[(k - 1) % arr.length];
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(numbers, k) {
+    return numbers[(--k*2)%numbers.length];
+}
+
+function solution(numbers, k) {
+    return numbers[((2 * (k -1))) % numbers.length];
 }
 */
 ```
@@ -2229,40 +2330,6 @@ console.log(num1 + ', ' + typeof num1);
 console.log(num2 + ', ' + typeof num2);
 console.log(num3 + ', ' + typeof num3);
 console.log(num4 + ', ' + typeof num4);
-*/
-```
-
-### 인덱스 바꾸기
-#### 문자열 my_string과 정수 num1, num2가 매개변수로 주어질 때, my_string에서 인덱스 num1과 인덱스 num2에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120895
-```javascript
-function solution(my_string, num1, num2) {
-    let answer = [];
-    answer = my_string.split("");
-    let n1 = answer[num1];
-    let n2 = answer[num2];
-    answer[num1] = n2;
-    answer[num2] = n1;    
-    return answer.join("");
-}
-```
-
-```javascript
-/* good
-function solution(my_string, num1, num2) {
-    my_string = my_string.split('');
-    [my_string[num1], my_string[num2]] = [my_string[num2], my_string[num1]];
-    return my_string.join('');
-}
-
-function solution(my_string, num1, num2) {
-    let temp = '';
-    const strArray = my_string.split('');
-    temp = strArray[num1];
-    strArray[num1] = strArray[num2];
-    strArray[num2] = temp;
-    return strArray.join('');
-}
 */
 ```
 
@@ -2757,6 +2824,25 @@ function solution(my_string) {
 const solution = my_string => [...new Set(my_string)].join("");
 ```
 
+### 소인수분해
+#### 소인수분해란 어떤 수를 소수들의 곱으로 표현하는 것입니다. 예를 들어 12를 소인수 분해하면 2 * 2 * 3 으로 나타낼 수 있습니다. 따라서 12의 소인수는 2와 3입니다. 자연수 n이 매개변수로 주어질 때 n의 소인수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120852
+```javascript
+function solution(n) {
+    let answer = [...Array(n+1).keys()].filter(x => n % x === 0).slice(1);
+
+    for (let i = 0; i < answer.length; i++) {
+        let num = answer[i];
+        let arr = answer.map(x => x % num === 0 ? num : x);
+        let set = new Set(arr);
+        answer = [...set];
+        // console.log(num, arr, set, answer, answer.length);
+    }
+    
+    return answer;
+}
+```
+
 ## for
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for
 ```javascript
@@ -2922,6 +3008,62 @@ function solution(numbers) {
 var solution=n=>Number(['zero','one','two','three','four','five','six','seven','eight','nine'].reduce((t,s,i)=>t.replaceAll(s,i),n))
 */
 ```
+
+### OX퀴즈
+#### 덧셈, 뺄셈 수식들이 'X [연산자] Y = Z' 형태로 들어있는 문자열 배열 quiz가 매개변수로 주어집니다. 수식이 옳다면 "O"를 틀리다면 "X"를 순서대로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120907
+```javascript
+function solution(quiz) {
+    const answer = [];
+    const cal = [...quiz].map(e => e.split(" ").map((e, i) => i === 0 || i === 2 || i === 4 ? parseInt(e) : e));
+    
+    for (let i = 0; i < cal.length; i++) {
+        let num1 = parseInt(cal[i][0]);
+        let num2 = parseInt(cal[i][2]);
+        let num3 = parseInt(cal[i][4]);
+        let result = cal[i][1] === "+" ? num1 + num2 : num1 - num2;
+        let ox = result === num3 ? answer.push("O") : answer.push("X");
+        // console.log(`${num1} ${cal[i][1]} ${num2} = ${num3}`);
+    }
+    
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(quiz) {
+    var answer = [];
+    return quiz.map(t => {
+        const [calc, result] = t.split(' = ');
+        const sign = calc.includes('+') ? 1 : -1
+        const [a, b] = calc.split(sign === 1 ? ' + ' : ' - ');
+
+        return +a + (+b * sign) === +result ? 'O' : 'X'
+    });
+}
+
+function solution(quiz) {
+  return quiz
+    .map((el) => el.split(" = "))
+    .map((el) => {
+      return eval(el[0]) == el[1] ? "O" : "X";
+    });
+}
+
+function solution(quiz) {
+    let ans = [];
+    for (let q of quiz) {
+        let c = q.split('=');
+        ans.push(eval(c[0]) === +c[1] ? 'O' : 'X');
+    }
+    return ans;
+}
+
+var solution=q=>q.map(r=>r.split('=')).map(([a,b])=>eval(a)==b?'O':'X')
+*/
+```
+
 ## for ... in
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for...in
 ```javascript
@@ -3118,14 +3260,34 @@ var solution=eval
 */
 ```
 
-### 최빈값 구하기
-#### 최빈값은 주어진 값 중에서 가장 자주 나오는 값을 의미합니다. 정수 배열 array가 매개변수로 주어질 때, 최빈값을 return 하도록 solution 함수를 완성해보세요. 최빈값이 여러 개면 -1을 return 합니다.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120812
+### 문자열 밀기
+#### 문자열 "hello"에서 각 문자를 오른쪽으로 한 칸씩 밀고 마지막 문자는 맨 앞으로 이동시키면 "ohell"이 됩니다. 이것을 문자열을 민다고 정의한다면 문자열 A와 B가 매개변수로 주어질 때, A를 밀어서 B가 될 수 있다면 밀어야 하는 최소 횟수를 return하고 밀어서 B가 될 수 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120921
 ```javascript
+function solution(A, B) {
+    let answer = 0;
+    let arr = [...A];    
+    let i = 0;    
+    while (arr.join("") !== B) {
+        if (i < arr.length) {
+            i++;
+            let pop = arr.pop();
+            arr.unshift(pop);
+        } else if (i === arr.length) {
+            return -1;
+        }
+        // console.log(`${i} - ${arr} - ${arr.join("")}`);
+    }
+    answer = i;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+let solution=(a,b)=>(b+b).indexOf(a)
+
+var solution=(A,B)=>new Array(A.length).fill(A).map((s,i)=>s.slice(A.length-i)+s.slice(0,A.length-i)).indexOf(B)
 */
 ```
 
@@ -3159,21 +3321,9 @@ function solution(bin1, bin2) {
 ```javascript
 /* good
 function solution(bin1, bin2) {
-    return (parseInt(bin1, 2) + parseInt(bin2, 2)).toString(2)
-}
-
-function solution(bin1, bin2) {
-   const a = parseInt(bin1, 2)
-   const b = parseInt(bin2, 2)
-    return (a+b).toString(2)
-}
-
-function solution(bin1, bin2) {
     const sum = parseInt(bin1, 2) + parseInt(bin2, 2)
     return sum.toString(2)
 }
-
-var solution=(i,j)=>(parseInt(i,2)+parseInt(j,2)).toString(2)
 
 function solution(bin1, bin2) {
   let temp = Number(bin1) + Number(bin2);
@@ -3197,31 +3347,79 @@ function solution(bin1, bin2) {
 */
 ```
 
-### 공 던지기
-#### 머쓱이는 친구들과 동그랗게 서서 공 던지기 게임을 하고 있습니다. 공은 1번부터 던지며 오른쪽으로 한 명을 건너뛰고 그다음 사람에게만 던질 수 있습니다. 친구들의 번호가 들어있는 정수 배열 numbers와 정수 K가 주어질 때, k번째로 공을 던지는 사람의 번호는 무엇인지 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120843
+### 다항식 더하기
+#### 한 개 이상의 항의 합으로 이루어진 식을 다항식이라고 합니다. 다항식을 계산할 때는 동류항끼리 계산해 정리합니다. 덧셈으로 이루어진 다항식 polynomial이 매개변수로 주어질 때, 동류항끼리 더한 결괏값을 문자열로 return 하도록 solution 함수를 완성해보세요. 같은 식이라면 가장 짧은 수식을 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120863
 ```javascript
+function solution(polynomial) {
+    const poly = polynomial.split(" ").filter(x => x !== "+");
+    let sum = poly.filter(x => x.includes("x") === true);
+    let num = poly.filter(x => x.includes("x") === false);
+    let x = '';
+    let y = '';
+    
+    if (sum.length > 0 ) {
+        sum = sum.map(x => x === "x" ? 1 : parseInt(x.replace("x", ""))).reduce((a, b) => a + b);
+        if (sum > 1) {
+            x = `${sum}x`;
+        } else {
+            x = `x`;
+        }
+    } else {
+        x = ``;
+    }    
+    
+    if (num.length > 0) {
+        num = num.reduce((a, b) => parseInt(a) + parseInt(b));
+        y = `${num}`;
+    } else {
+        y = ``;
+    }
+    
+    const answer = x.length > 0 ? y.length > 0 ? `${x} + ${y}` : `${x}` : `${y}`;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(polynomial) {
+    const arr = polynomial.split(" + ");
+    const xNum = arr
+                .filter(n => n.includes("x"))
+                .map(n => n.replace('x', '') || '1')
+                .reduce((acc, cur) => acc + parseInt(cur, 10), 0);
+    const num = arr
+                .filter(n => !isNaN(n))
+                .reduce((acc, cur) => acc + parseInt(cur, 10), 0);
+
+    let answer = [];
+    if(xNum) answer.push(`${xNum === 1 ? "" : xNum}x`);
+    if(num) answer.push(num);
+
+    return answer.join(" + ");
+}
+
+function solution(p) {
+    var [x, c] = p.split('+').reduce(([a,b],s) => {
+        if (s.includes('x')) {
+            return [a + Number(s.trim().replace('x','') || 1), b];
+        }
+        return [a, b + Number(s)];
+    }, [0, 0]);
+
+    if (!x && !c) return '0';
+    if (!x) return c.toString();
+    x = `${x==1?'':x}x`;
+    if (!c) return x;
+    return `${x} + ${c}`;
+}
 */
 ```
 
-### 소인수분해
-#### 소인수분해란 어떤 수를 소수들의 곱으로 표현하는 것입니다. 예를 들어 12를 소인수 분해하면 2 * 2 * 3 으로 나타낼 수 있습니다. 따라서 12의 소인수는 2와 3입니다. 자연수 n이 매개변수로 주어질 때 n의 소인수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120852
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 특이한 정렬
-#### 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120880
+### 최빈값 구하기
+#### 최빈값은 주어진 값 중에서 가장 자주 나오는 값을 의미합니다. 정수 배열 array가 매개변수로 주어질 때, 최빈값을 return 하도록 solution 함수를 완성해보세요. 최빈값이 여러 개면 -1을 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120812
 ```javascript
 ```
 
@@ -3282,17 +3480,6 @@ function solution(bin1, bin2) {
 */
 ```
 
-### 문자열 밀기
-#### 문자열 "hello"에서 각 문자를 오른쪽으로 한 칸씩 밀고 마지막 문자는 맨 앞으로 이동시키면 "ohell"이 됩니다. 이것을 문자열을 민다고 정의한다면 문자열 A와 B가 매개변수로 주어질 때, A를 밀어서 B가 될 수 있다면 밀어야 하는 최소 횟수를 return하고 밀어서 B가 될 수 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120921
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
 ### 안전지대
 #### 다음 그림과 같이 지뢰가 있는 지역과 지뢰에 인접한 위, 아래, 좌, 우 대각선 칸을 모두 위험지역으로 분류합니다. 지뢰는 2차원 배열 board에 1로 표시되어 있고 board에는 지뢰가 매설 된 지역 1과, 지뢰가 없는 지역 0만 존재합니다. 지뢰가 매설된 지역의 지도 board가 매개변수로 주어질 때, 안전한 지역의 칸 수를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120866
@@ -3331,26 +3518,6 @@ function solution(bin1, bin2) {
 ### 구슬을 나누는 경우의 수
 #### 머쓱이는 구슬을 친구들에게 나누어주려고 합니다. 구슬은 모두 다르게 생겼습니다. 머쓱이가 갖고 있는 구슬의 개수 balls와 친구들에게 나누어 줄 구슬 개수 share이 매개변수로 주어질 때, balls개의 구슬 중 share개의 구슬을 고르는 가능한 모든 경우의 수를 return 하는 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120840
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
-```javascript
-```
-
-```javascript
-/* good
-*/
-```
-
-### 
-#### 
 ```javascript
 ```
 
