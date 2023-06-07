@@ -2175,38 +2175,10 @@ var solution=(a,n)=>a.reduce((t,i)=>Math.abs(t-n)<Math.abs(i-n)?t:Math.abs(t-n)=
 */
 ```
 
-### 특이한 정렬
-#### 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120880
-```javascript
-function solution(numlist, n) {
-    let answer = [];
-    const arr = numlist.map(x => Math.abs(x - n));
-    const abs = [...arr].sort((a, b) => a - b);
-    // console.log(numlist, arr, abs);
-    for (let i = 0; i < abs.length; i++) {
-        if (abs[i] === abs[i-1]) {
-            numlist.includes(n - abs[i]) ? answer.push(n - abs[i]) : answer.push(n + abs[i]);
-        } else {
-            numlist.includes(n + abs[i]) ? answer.push(n + abs[i]) : answer.push(n - abs[i]);
-        }
-        // console.log(i, n - abs[i], n + abs[i]);
-    }
-    return answer;
-}
-```
-
-```javascript
-/* good
-function solution(numlist, n) {
-    return numlist.sort((a, b) => Math.abs(a - n) - Math.abs(b - n) || b - a);
-}
-*/
-```
-
 ### 인덱스 바꾸기
 #### 문자열 my_string과 정수 num1, num2가 매개변수로 주어질 때, my_string에서 인덱스 num1과 인덱스 num2에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120895
+> blog
 ```javascript
 function solution(my_string, num1, num2) {
     let answer = [];
@@ -2241,6 +2213,7 @@ function solution(my_string, num1, num2) {
 ### 공 던지기
 #### 머쓱이는 친구들과 동그랗게 서서 공 던지기 게임을 하고 있습니다. 공은 1번부터 던지며 오른쪽으로 한 명을 건너뛰고 그다음 사람에게만 던질 수 있습니다. 친구들의 번호가 들어있는 정수 배열 numbers와 정수 K가 주어질 때, k번째로 공을 던지는 사람의 번호는 무엇인지 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120843
+> blog
 ```javascript
 function solution(numbers, k) {
     let odd = numbers.filter((e, i) => i % 2 === 0);
@@ -2264,11 +2237,156 @@ function solution(numbers, k) {
 */
 ```
 
+### OX퀴즈
+#### 덧셈, 뺄셈 수식들이 'X [연산자] Y = Z' 형태로 들어있는 문자열 배열 quiz가 매개변수로 주어집니다. 수식이 옳다면 "O"를 틀리다면 "X"를 순서대로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120907
+```javascript
+function solution(quiz) {
+    const answer = [];
+    const cal = [...quiz].map(e => e.split(" ").map((e, i) => i === 0 || i === 2 || i === 4 ? parseInt(e) : e));
+    
+    for (let i = 0; i < cal.length; i++) {
+        let num1 = parseInt(cal[i][0]);
+        let num2 = parseInt(cal[i][2]);
+        let num3 = parseInt(cal[i][4]);
+        let result = cal[i][1] === "+" ? num1 + num2 : num1 - num2;
+        let ox = result === num3 ? answer.push("O") : answer.push("X");
+        // console.log(`${num1} ${cal[i][1]} ${num2} = ${num3}`);
+    }
+    
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(quiz) {
+    var answer = [];
+    return quiz.map(t => {
+        const [calc, result] = t.split(' = ');
+        const sign = calc.includes('+') ? 1 : -1
+        const [a, b] = calc.split(sign === 1 ? ' + ' : ' - ');
+
+        return +a + (+b * sign) === +result ? 'O' : 'X'
+    });
+}
+
+function solution(quiz) {
+  return quiz
+    .map((el) => el.split(" = "))
+    .map((el) => {
+      return eval(el[0]) == el[1] ? "O" : "X";
+    });
+}
+
+function solution(quiz) {
+    let ans = [];
+    for (let q of quiz) {
+        let c = q.split('=');
+        ans.push(eval(c[0]) === +c[1] ? 'O' : 'X');
+    }
+    return ans;
+}
+
+var solution=q=>q.map(r=>r.split('=')).map(([a,b])=>eval(a)==b?'O':'X')
+*/
+```
+
+### 특이한 정렬
+#### 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120880
+```javascript
+function solution(numlist, n) {
+    let answer = [];
+    const arr = numlist.map(x => Math.abs(x - n));
+    const abs = [...arr].sort((a, b) => a - b);
+    // console.log(numlist, arr, abs);
+    for (let i = 0; i < abs.length; i++) {
+        if (abs[i] === abs[i-1]) {
+            numlist.includes(n - abs[i]) ? answer.push(n - abs[i]) : answer.push(n + abs[i]);
+        } else {
+            numlist.includes(n + abs[i]) ? answer.push(n + abs[i]) : answer.push(n - abs[i]);
+        }
+        // console.log(i, n - abs[i], n + abs[i]);
+    }
+    return answer;
+}
+```
+
+```javascript
+/* good
+function solution(numlist, n) {
+    return numlist.sort((a, b) => Math.abs(a - n) - Math.abs(b - n) || b - a);
+}
+*/
+```
+
+### 캐릭터의 좌표
+#### 머쓱이는 RPG게임을 하고 있습니다. 게임에는 up, down, left, right 방향키가 있으며 각 키를 누르면 위, 아래, 왼쪽, 오른쪽으로 한 칸씩 이동합니다. 예를 들어 [0,0]에서 up을 누른다면 캐릭터의 좌표는 [0, 1], down을 누른다면 [0, -1], left를 누른다면 [-1, 0], right를 누른다면 [1, 0]입니다. 머쓱이가 입력한 방향키의 배열 keyinput와 맵의 크기 board이 매개변수로 주어집니다. 캐릭터는 항상 [0,0]에서 시작할 때 키 입력이 모두 끝난 뒤에 캐릭터의 좌표 [x, y]를 return하도록 solution 함수를 완성해주세요.
+#### [0, 0]은 board의 정 중앙에 위치합니다. 예를 들어 board의 가로 크기가 9라면 캐릭터는 왼쪽으로 최대 [-4, 0]까지 오른쪽으로 최대 [4, 0]까지 이동할 수 있습니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120861
+```javascript
+function solution(keyinput, board) {
+    let answer = [0, 0];
+    let x = answer[0];
+    let y = answer[1];
+    const x_max = (board[0] - 1) / 2;
+    const x_min = -x_max;
+    const y_max = (board[1] - 1) / 2;
+    const y_min = -y_max;
+            
+    for (let i = 0; i < keyinput.length; i++) {
+        // console.log(i, keyinput[i]);
+                
+        if (keyinput[i] === "right") {
+            x++;
+            x > x_max ? x = x_max : x;
+        } else if (keyinput[i] === "left") {
+            x--;
+            x < x_min ? x = x_min : x;
+        } else if (keyinput[i] === "up") {
+            y++;
+            y > y_max ? y = y_max : y;
+        } else {
+            y--;
+            y < y_min ? y = y_min : y;
+        }        
+        answer = [x, y];
+        // console.log(i, keyinput[i], answer, x, y);
+    }
+    // console.log(`[${x_min} <= x <= ${x_max}, ${y_min} <= y <= ${y_max}] result: [${answer}]`);
+    return answer;
+}
+
+/* 
+테스트 케이스 추가
+["down", "down", "down", "down", "down", "up", "up", "up", "up"], [7, 9] => [0, 0]
+[], [7, 9] => [0, 0]
+*/
+```
+
+```javascript
+/* good
+function solution(keyinput, board) {
+    let res = [0,0];
+    for (let p of keyinput) {
+        switch(p){
+            case 'left': if (-res[0] < board[0]/2-1) res[0]--; break;
+            case 'right': if (res[0] < board[0]/2-1) res[0]++; break;
+            case 'up': if (res[1] < board[1]/2-1) res[1]++; break;
+            case 'down': if (-res[1] < board[1]/2-1) res[1]--; break;
+        }
+    }
+    return res;
+}
+*/
+```
+
 ## String
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 ```javascript
 /* memo
-String.fromCharCode()                   //  UTF-16 코드 유닛의 시퀀스로부터 문자열을 생성해 반환합니다.
+String.fromCharCode()                   // UTF-16 코드 유닛의 시퀀스로부터 문자열을 생성해 반환합니다.
 String.prototype.concat()               // 매개변수로 전달된 모든 문자열을 호출 문자열에 붙인 새로운 문자열을 반환합니다.
 String.prototype.split()                // String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눕니다.
 String.prototype.slice()                // 문자열의 일부를 추출하면서 새로운 문자열을 반환합니다.
@@ -3009,61 +3127,6 @@ var solution=n=>Number(['zero','one','two','three','four','five','six','seven','
 */
 ```
 
-### OX퀴즈
-#### 덧셈, 뺄셈 수식들이 'X [연산자] Y = Z' 형태로 들어있는 문자열 배열 quiz가 매개변수로 주어집니다. 수식이 옳다면 "O"를 틀리다면 "X"를 순서대로 담은 배열을 return하도록 solution 함수를 완성해주세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/120907
-```javascript
-function solution(quiz) {
-    const answer = [];
-    const cal = [...quiz].map(e => e.split(" ").map((e, i) => i === 0 || i === 2 || i === 4 ? parseInt(e) : e));
-    
-    for (let i = 0; i < cal.length; i++) {
-        let num1 = parseInt(cal[i][0]);
-        let num2 = parseInt(cal[i][2]);
-        let num3 = parseInt(cal[i][4]);
-        let result = cal[i][1] === "+" ? num1 + num2 : num1 - num2;
-        let ox = result === num3 ? answer.push("O") : answer.push("X");
-        // console.log(`${num1} ${cal[i][1]} ${num2} = ${num3}`);
-    }
-    
-    return answer;
-}
-```
-
-```javascript
-/* good
-function solution(quiz) {
-    var answer = [];
-    return quiz.map(t => {
-        const [calc, result] = t.split(' = ');
-        const sign = calc.includes('+') ? 1 : -1
-        const [a, b] = calc.split(sign === 1 ? ' + ' : ' - ');
-
-        return +a + (+b * sign) === +result ? 'O' : 'X'
-    });
-}
-
-function solution(quiz) {
-  return quiz
-    .map((el) => el.split(" = "))
-    .map((el) => {
-      return eval(el[0]) == el[1] ? "O" : "X";
-    });
-}
-
-function solution(quiz) {
-    let ans = [];
-    for (let q of quiz) {
-        let c = q.split('=');
-        ans.push(eval(c[0]) === +c[1] ? 'O' : 'X');
-    }
-    return ans;
-}
-
-var solution=q=>q.map(r=>r.split('=')).map(([a,b])=>eval(a)==b?'O':'X')
-*/
-```
-
 ## for ... in
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for...in
 ```javascript
@@ -3518,6 +3581,46 @@ function solution(p) {
 ### 구슬을 나누는 경우의 수
 #### 머쓱이는 구슬을 친구들에게 나누어주려고 합니다. 구슬은 모두 다르게 생겼습니다. 머쓱이가 갖고 있는 구슬의 개수 balls와 친구들에게 나누어 줄 구슬 개수 share이 매개변수로 주어질 때, balls개의 구슬 중 share개의 구슬을 고르는 가능한 모든 경우의 수를 return 하는 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120840
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
 ```javascript
 ```
 
