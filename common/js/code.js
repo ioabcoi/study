@@ -18,4 +18,3 @@ code_area.forEach(function(target) {
     const code_paste = target.querySelector(".code_view .code_view_box .code_preview");
     code_paste.insertAdjacentHTML("afterbegin", code_copy);
 });
-
