@@ -57,7 +57,42 @@ Link : [level1](https://school.programmers.co.kr/learn/challenges?order=acceptan
 */
 ```
 
+### 
+#### 
 ```javascript
-/* memo
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
+*/
+```
+
+### 
+#### 
+```javascript
+```
+
+```javascript
+/* good
 */
 ```
