@@ -184,80 +184,159 @@ rl.on('line', function (line) {
 #### 문자열 my_string, overwrite_string과 정수 s가 주어집니다. 문자열 my_string의 인덱스 s부터 overwrite_string의 길이만큼을 문자열 overwrite_string으로 바꾼 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181943
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_string, overwrite_string, s) {
+    const answer = `${my_string.substring(0, s)}${overwrite_string}${my_string.substring(s + overwrite_string.length)}`;
+    return answer;
+}
 */
+
+const solution = (my_string, overwrite_string, s) => `${my_string.substring(0, s)}${overwrite_string}${my_string.substring(s + overwrite_string.length)}`;
 ```
 
 ### 문자열 섞기
-#### 
+#### 길이가 같은 두 문자열 str1과 str2가 주어집니다. 두 문자열의 각 문자가 앞에서부터 서로 번갈아가면서 한 번씩 등장하는 문자열을 만들어 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181942
 ```javascript
+function solution(str1, str2) {
+    let answer = [];
+    for (let i = 0; i < str1.length; i++) {
+        answer.push(str1[i]);
+        answer.push(str2[i]);   
+    }
+    return answer.join("");
+}
 ```
 
 ```javascript
 /* good
+function solution(str1, str2) {
+    return [...str1].map((x, idx)=> x+str2[idx]).join("");
+}
 */
 ```
 
 ### 문자 리스트를 문자열로 변환하기
-#### 
+#### 문자들이 담겨있는 배열 arr가 주어집니다. arr의 원소들을 순서대로 이어 붙인 문자열을 return 하는 solution함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181941
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(arr) {
+    var answer = arr.join("");
+    return answer;
+}
 */
+
+const solution = arr => arr.join("");
 ```
 
 ### 문자열 곱하기
-#### 
+#### 문자열 my_string과 정수 k가 주어질 때, my_string을 k번 반복한 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181940
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_string, k) {
+    var answer = my_string.repeat(k);
+    return answer;
+}
 */
+
+const solution = (my_string, k) => my_string.repeat(k);
 ```
 
 ### 더 크게 합치기
-#### 
+#### 연산 ⊕는 두 정수에 대한 연산으로 두 정수를 붙여서 쓴 값을 반환합니다. 예를 들면 다음과 같습니다.
+> 12 ⊕ 3 = 123
+> 3 ⊕ 12 = 312
+> 양의 정수 a와 b가 주어졌을 때, a ⊕ b와 b ⊕ a 중 더 큰 값을 return 하는 solution 함수를 완성해 주세요.
+> 단, a ⊕ b와 b ⊕ a가 같다면 a ⊕ b를 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181939
 ```javascript
+function solution(a, b) {
+    const x = a.toString();
+    const y = b.toString();
+    const xy = parseInt(x + y);
+    const yx = parseInt(y + x);
+    const answer = xy >= yx ? xy : yx;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(a, b) {
+    return Math.max(+(a.toString()+b.toString()),+(b.toString()+a.toString()));
+}
+
+function solution(a, b) {
+    return Math.max(Number(`${a}${b}`), Number(`${b}${a}`))
+}
 */
 ```
 
 ### 두 수의 연산값 비교하기
-#### 
+#### 연산 ⊕는 두 정수에 대한 연산으로 두 정수를 붙여서 쓴 값을 반환합니다. 예를 들면 다음과 같습니다.
+> 12 ⊕ 3 = 123
+> 3 ⊕ 12 = 312
+> 양의 정수 a와 b가 주어졌을 때, a ⊕ b와 2 * a * b 중 더 큰 값을 return하는 solution 함수를 완성해 주세요.
+> 단, a ⊕ b와 2 * a * b가 같으면 a ⊕ b를 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181938
 ```javascript
+function solution(a, b) {
+    const x = a.toString();
+    const y = b.toString();
+    const z = 2 * a * b;
+    const xy = parseInt(x + y);
+    const answer = xy >= z ? xy : z;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(a, b) {
+    return Math.max( +(a.toString()+b.toString()),2*a*b)
+}
+
+function solution(a, b) {
+    return Math.max(Number(`${a}${b}`), 2 * a * b);
+}
 */
 ```
 
 ### n의 배수
-#### 
+#### 정수 num과 n이 매개 변수로 주어질 때, num이 n의 배수이면 1을 return n의 배수가 아니라면 0을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181937
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num, n) {
+    var answer = num % n === 0 ? 1 : 0;
+    return answer;
+}
 */
+
+const solution = (num, n) => num % n === 0 ? 1 : 0;
 ```
 
 ### 공배수
-#### 
+#### 정수 number와 n, m이 주어집니다. number가 n의 배수이면서 m의 배수이면 1을 아니라면 0을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181936
 ```javascript
+/*
+function solution(number, n, m) {
+    var answer = number % n === 0 && number % m === 0 ? 1 : 0;
+    return answer;
+}
+*/
+
+const solution = (number, n, m) => number % n === 0 && number % m === 0 ? 1 : 0;
 ```
 
 ```javascript
 /* good
+function solution(number, n, m) {
+    return +!(number % n || number % m);
+}
 */
 ```
 
