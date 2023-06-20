@@ -1124,6 +1124,7 @@ function solution(dot) {
 > num_list	                    n	    result
 > [1, 2, 3, 4, 5, 6, 7, 8]	    2	    [[1, 2], [3, 4], [5, 6], [7, 8]]
 > https://school.programmers.co.kr/learn/courses/30/lessons/120842
+> blog
 ```javascript
 function solution(num_list, n) {
     var answer = new Array(num_list.length / n);
@@ -1359,6 +1360,7 @@ function solution(numbers) {
 #### i팩토리얼 (i!)은 1부터 i까지 정수의 곱을 의미합니다. 예를들어 5! = 5 * 4 * 3 * 2 * 1 = 120 입니다. 정수 n이 주어질 때 다음 조건을 만족하는 가장 큰 정수 i를 return 하도록 solution 함수를 완성해주세요.
 > i! ≤ n
 > https://school.programmers.co.kr/learn/courses/30/lessons/120848
+> blog
 ```javascript
 function solution(n) {
     let answer = 0;

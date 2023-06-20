@@ -341,37 +341,130 @@ function solution(number, n, m) {
 ```
 
 ### 홀짝에 따라 다른 값 반환하기
-#### 
+#### 양의 정수 n이 매개변수로 주어질 때, n이 홀수라면 n 이하의 홀수인 모든 양의 정수의 합을 return 하고 n이 짝수라면 n 이하의 짝수인 모든 양의 정수의 제곱의 합을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181935
 ```javascript
+/*
+function solution(n) {
+    var answer = n % 2 === 0 ?
+        [...new Array(n+1).keys()].filter(x => x % 2 === 0).map(x => Math.pow(x, 2)).reduce((a, b) => a + b) : // 짝수
+        [...new Array(n+1).keys()].filter(x => x % 2 !== 0).reduce((a, b) => a + b); // 홀수
+    return answer;
+}
+*/
+
+const solution = n => n % 2 === 0 ?
+        [...new Array(n+1).keys()].filter(x => x % 2 === 0).map(x => Math.pow(x, 2)).reduce((a, b) => a + b) : // 짝수
+        [...new Array(n+1).keys()].filter(x => x % 2 !== 0).reduce((a, b) => a + b); // 홀수
 ```
 
 ```javascript
 /* good
+function solution(n) {
+    if(n%2===1)
+        return (n+1)/2*((n + 1)/2);
+    else
+        return n*(n+1)*(n+2)/6;
+}
 */
 ```
 
 ### 조건 문자열
-#### 
+#### 문자열에 따라 다음과 같이 두 수의 크기를 비교하려고 합니다.
+> 두 수가 n과 m이라면
+> ">", "=" : n >= m
+> "<", "=" : n <= m
+> ">", "!" : n > m
+> "<", "!" : n < m
+#### 두 문자열 ineq와 eq가 주어집니다. ineq는 "<"와 ">"중 하나고, eq는 "="와 "!"중 하나입니다. 그리고 두 정수 n과 m이 주어질 때, n과 m이 ineq와 eq의 조건에 맞으면 1을 아니면 0을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181934
 ```javascript
+/*
+function solution(ineq, eq, n, m) {
+    var answer = 0;
+    if (ineq === ">") {
+        if (eq === "=") {
+            answer = n >= m ? 1: 0;
+        } else {
+            answer = n > m ? 1: 0;
+        }
+    } else {
+        if (eq === "=") {
+            answer = n <= m ? 1: 0;
+        } else {
+            answer = n < m ? 1: 0;
+        }
+    }
+    return answer;
+}
+*/
+
+function solution(ineq, eq, n, m) {
+    var answer = 0;
+    if (ineq === ">") {
+        if (eq === "=") answer = n >= m ? 1 : 0;
+        else answer = n > m ? 1 : 0;
+    } else {
+        if (eq === "=") answer = n <= m ? 1 : 0;
+        else answer = n < m ? 1 : 0;
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+const operations = {
+    '>=': (n, m) => n >= m,
+    '<=': (n, m) => n <= m,
+    '>!': (n, m) => n > m,
+    '<!': (n, m) => n < m,
+};
+
+function solution(ineq, eq, n, m) {
+    const op = operations[ineq + eq];
+    return Number(op(n, m));
+}
+
+function solution(ineq, eq, n, m) {
+    var answer = eval(`${n}${ineq}${eq === "!" ? "" : eq}${m}`) ? 1 : 0
+    return answer;
+}
 */
 ```
 
 ### flag에 따라 다른 값 반환하기
-#### 
+#### 두 정수 a, b와 boolean 변수 flag가 매개변수로 주어질 때, flag가 true면 a + b를 false면 a - b를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181933
 ```javascript
+/*
+function solution(a, b, flag) {
+    var answer = flag === true ? a + b : a - b;
+    return answer;
+}
+*/
+
+const solution = (a, b, flag) => flag === true ? a + b : a - b;
 ```
 
 ```javascript
 /* good
+const solution = (a, b, flag) => flag ? a + b : a - b;
 */
 ```
 
 ### 코드 처리하기
-#### 
+#### 문자열 code가 주어집니다.
+> code를 앞에서부터 읽으면서 만약 문자가 "1"이면 mode를 바꿉니다. mode에 따라 code를 읽어가면서 문자열 ret을 만들어냅니다.
+> mode는 0과 1이 있으며, idx를 0 부터 code의 길이 - 1 까지 1씩 키워나가면서 code[idx]의 값에 따라 다음과 같이 행동합니다.
+> mode가 0일 때
+> > code[idx]가 "1"이 아니면 idx가 짝수일 때만 ret의 맨 뒤에 code[idx]를 추가합니다.
+> > code[idx]가 "1"이면 mode를 0에서 1로 바꿉니다.
+> mode가 1일 때
+> > code[idx]가 "1"이 아니면 idx가 홀수일 때만 ret의 맨 뒤에 code[idx]를 추가합니다.
+> > code[idx]가 "1"이면 mode를 1에서 0으로 바꿉니다.
+#### 문자열 code를 통해 만들어진 문자열 ret를 return 하는 solution 함수를 완성해 주세요. 단, 시작할 때 mode는 0이며, return 하려는 ret가 만약 빈 문자열이라면 대신 "EMPTY"를 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181932
 ```javascript
 ```
 
@@ -381,7 +474,8 @@ function solution(number, n, m) {
 ```
 
 ### 등차수열의 특정한 항만 더하기
-#### 
+#### 두 정수 a, d와 길이가 n인 boolean 배열 included가 주어집니다. 첫째항이 a, 공차가 d인 등차수열에서 included[i]가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 included가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181931
 ```javascript
 ```
 
@@ -391,7 +485,12 @@ function solution(number, n, m) {
 ```
 
 ### 주사위 게임 2
-#### 
+#### 1부터 6까지 숫자가 적힌 주사위가 세 개 있습니다. 세 주사위를 굴렸을 때 나온 숫자를 각각 a, b, c라고 했을 때 얻는 점수는 다음과 같습니다.
+> 세 숫자가 모두 다르다면 a + b + c 점을 얻습니다.
+> 세 숫자 중 어느 두 숫자는 같고 나머지 다른 숫자는 다르다면 (a + b + c) × (a2 + b2 + c2 )점을 얻습니다.
+> 세 숫자가 모두 같다면 (a + b + c) × (a2 + b2 + c2 ) × (a3 + b3 + c3 )점을 얻습니다.
+#### 세 정수 a, b, c가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181930
 ```javascript
 ```
 
@@ -401,52 +500,163 @@ function solution(number, n, m) {
 ```
 
 ### 원소들의 곱과 합
-#### 
+#### 정수가 담긴 리스트 num_list가 주어질 때, 모든 원소들의 곱이 모든 원소들의 합의 제곱보다 작으면 1을 크면 0을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181929
 ```javascript
+/*
+function solution(num_list) {
+    var answer = num_list.reduce((a, b) => a * b) < Math.pow(num_list.reduce((a, b) => a + b), 2) ? 1 : 0;
+    return answer;
+}
+*/
+
+const solution = num_list => num_list.reduce((a, b) => a * b) < Math.pow(num_list.reduce((a, b) => a + b), 2) ? 1 : 0;
 ```
 
 ```javascript
 /* good
+function solution(num_list) {
+    let accMul = 1
+    let accSum = 0
+    for (const num of num_list) {
+        accMul *= num
+        accSum += num
+    }
+    return accMul < accSum ** 2 ? 1 : 0
+}
 */
 ```
 
 ### 이어 붙인 수
-#### 
+#### 정수가 담긴 리스트 num_list가 주어집니다. num_list의 홀수만 순서대로 이어 붙인 수와 짝수만 순서대로 이어 붙인 수의 합을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181928
 ```javascript
+/*
+function solution(num_list) {
+    const odd = num_list.filter(x => x % 2 === 1).join("");
+    const even = num_list.filter(x => x % 2 === 0).join("");
+    const answer = parseInt(odd) + parseInt(even);    
+    return answer;
+}
+*/
+
+const solution = num_list => parseInt(num_list.filter(x => x % 2 === 1).join("")) + parseInt(num_list.filter(x => x % 2 === 0).join(""));
 ```
 
 ```javascript
 /* good
+function solution(num_list) {
+    const [e, o] = num_list.reduce((p, c) => (p[c % 2] += String(c), p), [0, 0]);
+    return +e + +o;
+}
+
+function solution(num_list) {
+    let o = e = '';
+    for (let n of num_list) n%2==0?o+=n:e+=n;
+    return +o+ +e;
+}
 */
 ```
 
 ### 마지막 두 원소
-#### 
+#### 정수 리스트 num_list가 주어질 때, 마지막 원소가 그전 원소보다 크면 마지막 원소에서 그전 원소를 뺀 값을 마지막 원소가 그전 원소보다 크지 않다면 마지막 원소를 두 배한 값을 추가하여 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181927
 ```javascript
+function solution(num_list) {
+    const a = num_list[num_list.length - 1];
+    const b = num_list[num_list.length - 2];
+    a > b ? num_list.push(a - b) : num_list.push(a * 2);
+    answer = num_list;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(num_list) {
+    const [a, b] = [...num_list].reverse();
+    return [...num_list, a > b ? (a-b):a*2];
+}
+
+const solution=n=>[...n,n.at(-1)>n.at(-2)?n.at(-1)-n.at(-2):n.at(-1)*2];
 */
 ```
 
 ### 수 조작하기 1
-#### 
+#### 정수 n과 문자열 control이 주어집니다. control은 "w", "a", "s", "d"의 4개의 문자로 이루어져 있으며, control의 앞에서부터 순서대로 문자에 따라 n의 값을 바꿉니다.
+> "w" : n이 1 커집니다.
+> "s" : n이 1 작아집니다.
+> "d" : n이 10 커집니다.
+> "a" : n이 10 작아집니다.
+#### 위 규칙에 따라 n을 바꿨을 때 가장 마지막에 나오는 n의 값을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181926
 ```javascript
+/*
+function solution(n, control) {
+    var answer = control.split("").map(x => x === "w" ? n+=1 : x === "s" ? n-=1 : x === "d" ? n+=10 : x === "a" ? n-=10 : n).pop();
+    return answer;
+}
+*/
+
+const solution = (n, control) => control.split("").map(x => x === "w" ? n+=1 : x === "s" ? n-=1 : x === "d" ? n+=10 : x === "a" ? n-=10 : n).pop();
 ```
 
 ```javascript
 /* good
+const operations = {
+    w: (n) => n + 1,
+    s: (n) => n - 1,
+    d: (n) => n + 10,
+    a: (n) => n - 10,
+};
+function solution(n, control) {
+    return [...control].reduce((prev, op) => operations[op](prev), n);
+}
+
+function solution(n, control) {
+    for(let i = 0 ; i < control.length ; i++){
+        switch(control[i]) {
+            case "w" : n++;break;
+            case "s" : n--;break;
+            case "d" : n+=10;break;
+            case "a" : n-=10;break;
+        }
+    }
+    return n;
+}
 */
 ```
 
 ### 수 조작하기 2
-#### 
+#### 정수 배열 numLog가 주어집니다. 처음에 numLog[0]에서 부터 시작해 "w", "a", "s", "d"로 이루어진 문자열을 입력으로 받아 순서대로 다음과 같은 조작을 했다고 합시다.
+> "w" : 수에 1을 더한다.
+> "s" : 수에 1을 뺀다.
+> "d" : 수에 10을 더한다.
+> "a" : 수에 10을 뺀다.
+#### 그리고 매번 조작을 할 때마다 결괏값을 기록한 정수 배열이 numLog입니다. 즉, numLog[i]는 numLog[0]로부터 총 i번의 조작을 가한 결과가 저장되어 있습니다.
+#### 주어진 정수 배열 numLog에 대해 조작을 위해 입력받은 문자열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181925
 ```javascript
+/*
+function solution (numLog) {
+    const answer = [...numLog].map((x, i) => x + 1 === numLog[i+1] ? "w" : x - 1 === numLog[i+1] ? "s" : x + 10 === numLog[i+1] ? "d" : x - 10 === numLog[i+1] ? "a" : "");
+    return answer;
+}
+*/
+
+const solution = numLog => numLog.map((x, i) => x + 1 === numLog[i+1] ? "w" : x - 1 === numLog[i+1] ? "s" : x + 10 === numLog[i+1] ? "d" : x - 10 === numLog[i+1] ? "a" : "").join("");
 ```
 
 ```javascript
 /* good
+function solution(numLog) {
+    const convert = {
+        '1': 'w', '-1': 's', '10': 'd', '-10': 'a'
+    };
+    return numLog.slice(1).map((v, i) => {
+        return convert[v - numLog[i]]
+    }).join('')
+}
 */
 ```
 

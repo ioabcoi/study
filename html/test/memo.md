@@ -195,6 +195,7 @@ nums.sort((a, b) => b - a);     // 내림차순
 ### map
 ```javascript
 /* memo
+Array.prototype.map()
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
 구문
@@ -222,6 +223,7 @@ var roots = numbers.map(Math.sqrt);
 ### filter
 ```javascript
 /* memo
+Array.prototype.filter()
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
 구문
@@ -250,6 +252,7 @@ var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
 ### reduce
 ```javascript
 /* memo
+Array.prototype.reduce()
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 
 구문
@@ -282,6 +285,7 @@ console.log(sumWithInitial);
 ### includes
 ```javascript
 /* memo
+Array.prototype.includes()
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/includes
 
 구문
