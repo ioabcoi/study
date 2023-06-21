@@ -466,10 +466,65 @@ const solution = (a, b, flag) => flag ? a + b : a - b;
 #### 문자열 code를 통해 만들어진 문자열 ret를 return 하는 solution 함수를 완성해 주세요. 단, 시작할 때 mode는 0이며, return 하려는 ret가 만약 빈 문자열이라면 대신 "EMPTY"를 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181932
 ```javascript
+function solution(code) {
+    let ret = [];
+    let mode = 0;
+    for (let i = 0; i < code.length; i++) {
+        if (mode === 0) {
+            if (code[i] !== "1") {
+                if (i % 2 === 0) ret.push(code[i]);
+            } else {
+                mode = 1;
+            }
+        }
+        else {
+            if (code[i] !== "1") {
+                if (i % 2 === 1) ret.push(code[i]);
+            } else {
+                mode = 0;
+            }
+        }
+        // console.log(i, code[i], ret, mode);
+    }
+    const answer = ret.length === 0 ? "EMPTY" : ret.reduce((a, b) => a + b);
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(code) {
+    let odd = false
+    return Array.from(code).reduce((acc, v, i) => {
+        if (v === '1') {
+            odd = !odd
+            return acc
+        }
+        return (i % 2 === (odd ? 1 : 0)) ? acc + v : acc
+    }, '') || 'EMPTY'
+}
+
+function solution(code) {
+    let mode =0;
+    let str ="";
+    for(let i = 0 ; i < code.length ; i++){
+        if(code[i]==="1") {mode = (mode ===0)? 1 : 0; continue;}
+        if(mode ===0){
+            if(i%2===0) str+= code[i];
+        }else{
+            if(i%2===1) str+= code[i];
+        }
+    }
+    return str.length===0 ? "EMPTY" : str; 
+}
+
+?
+function solution(code) {
+    let ans ='';
+    let m = true;
+    [...code].forEach((v,i)=>v==1?m=!m:ans+=!(i%2)==m?v:'')
+    return ans||'EMPTY'
+}
 */
 ```
 
@@ -477,10 +532,43 @@ const solution = (a, b, flag) => flag ? a + b : a - b;
 #### 두 정수 a, d와 길이가 n인 boolean 배열 included가 주어집니다. 첫째항이 a, 공차가 d인 등차수열에서 included[i]가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 included가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181931
 ```javascript
+/*
+function solution(a, d, included) {
+    let answer = [a, ...new Array(included.length - 1).keys()].fill(0).map((e, i) => i === 0 ? e = a : a + (d * i)).filter((e, i) => included[i] === true).reduce((a, b) => a + b);
+    return answer;
+}
+*/
+
+const solution = (a, d, included) => [a, ...new Array(included.length - 1).keys()].fill(0).map((e, i) => i === 0 ? e = a : a + (d * i)).filter((e, i) => included[i] === true).reduce((a, b) => a + b);
 ```
 
 ```javascript
 /* good
+function solution(a, d, included) {
+    var answer = 0;
+    answer = included.map((v,i)=>v==true?d*i+a:0).reduce((a,b)=>a+b)
+    return answer;
+}
+
+function solution(a, d, included) {
+    return included.reduce((acc, flag, i) => {
+        return flag ? acc + a + d * i : acc
+    }, 0)
+}
+
+function solution(a, d, included) {
+    let sum = 0;
+    let current = a;
+    for(let i = 0 ; i < included.length ;i++){
+        if(included[i]) sum+= current;
+        current+=d;
+    }
+    return sum
+}
+
+function solution(a, d, included) {
+    return included.reduce((p, c, i) => c ? p + d * i + a : p, 0);
+}
 */
 ```
 
@@ -492,10 +580,66 @@ const solution = (a, b, flag) => flag ? a + b : a - b;
 #### 세 정수 a, b, c가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181930
 ```javascript
+/*
+function solution(a, b, c) {
+    var answer = 0;
+    if ( a !== b && b !== c ) {
+        answer = a + b + c;
+    } else if ( a === b && b === c ) {
+        answer = (a + b + c) * (Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2)) * (Math.pow(a, 3) + Math.pow(b, 3) + Math.pow(c, 3));
+    } else {
+        answer = (a + b + c) * (Math.pow(a, 2) + Math.pow(b, 2) + Math.pow(c, 2));
+    } 
+    return answer;
+}
+*/
+
+function solution(a, b, c) {
+    let answer = 0;
+    let d = 0;
+    const sum = (a, b, c, d) => Math.pow(a, d) + Math.pow(b, d) + Math.pow(c, d);
+    
+    if ( a !== b && b !== c && c !== a) {
+        answer = sum(a, b, c, 1);
+    } else if ( a === b && b !== c || a !== b && b === c || a === c && b !== c ) {
+        answer = sum(a, b, c, 1) * sum(a, b, c, 2);
+    } else if ( a === b && b === c && c === a ) {
+        answer = sum(a, b, c, 1) * sum(a, b, c, 2) * sum(a, b, c, 3);
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+const solution = (a, b, c) => {
+    const set = new Set([a, b, c]);
+    switch ([...set].length) {
+        case 1: return calculate([a, b, c], 3);
+        case 2: return calculate([a, b, c], 2);
+        case 3: return calculate([a, b, c]);
+    }
+};
+const calculate = (inc, n=1) => {
+    const [a, b, c] = inc;
+    let result = 1;
+    for (let i = 1; i <= n; i++) {
+        result *= Math.pow(a, i) + Math.pow(b, i) + Math.pow(c, i)
+    }
+    return result;
+};
+
+function solution(a, b, c) {
+    let sum1 = a + b + c;
+    let sum2 = a * a + b * b + c * c;
+    let sum3 = a ** 3 + b**3 + c**3;
+    if (a === b && b === c) 
+        return sum1*sum2*sum3;
+     else if (a === b || a === c || b === c) 
+        return sum1*sum2;
+     else 
+        return sum1;
+}
 */
 ```
 
@@ -633,8 +777,7 @@ function solution(n, control) {
 > "s" : 수에 1을 뺀다.
 > "d" : 수에 10을 더한다.
 > "a" : 수에 10을 뺀다.
-#### 그리고 매번 조작을 할 때마다 결괏값을 기록한 정수 배열이 numLog입니다. 즉, numLog[i]는 numLog[0]로부터 총 i번의 조작을 가한 결과가 저장되어 있습니다.
-#### 주어진 정수 배열 numLog에 대해 조작을 위해 입력받은 문자열을 return 하는 solution 함수를 완성해 주세요.
+#### 그리고 매번 조작을 할 때마다 결괏값을 기록한 정수 배열이 numLog입니다. 즉, numLog[i]는 numLog[0]로부터 총 i번의 조작을 가한 결과가 저장되어 있습니다. 주어진 정수 배열 numLog에 대해 조작을 위해 입력받은 문자열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181925
 ```javascript
 /*
@@ -661,27 +804,92 @@ function solution(numLog) {
 ```
 
 ### 수열과 구간 쿼리 3
-#### 
+#### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [i, j] 꼴입니다. 각 query마다 순서대로 arr[i]의 값과 arr[j]의 값을 서로 바꿉니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181924
 ```javascript
+function solution(arr, queries) {
+    var answer = [];
+    for (let i = 0; i < queries.length; i++) {
+        let n = 0;
+        let x = queries[i][0];
+        let y = queries[i][1];
+        n = arr[x];
+        arr[x] = arr[y];
+        arr[y] = n;
+    }
+    answer = arr;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr, queries) {
+    queries.forEach( ([a,b]) => {
+        [arr[a],arr[b]] = [arr[b],arr[a]];
+    })
+    return arr;
+}
+
+function solution(arr, queries) {
+    for(let [i, j] of queries) {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function solution(arr, queries) {
+    return queries.reduce((bucket, [a, b]) => {
+        const temp = bucket[a]
+        bucket[a] = bucket[b]
+        bucket[b] = temp
+        return bucket
+    }, [...arr])
+}
+
+function solution(arr, queries) {
+    const swap = ([i, j]) => {
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    };
+    queries.forEach(swap);
+    return arr;
+}
+
+function solution(arr, queries) {
+    for (let q of queries) [arr[q[0]], arr[q[1]]] = [arr[q[1]], arr[q[0]]];
+    return arr;
+}
 */
 ```
 
 ### 수열과 구간 쿼리 2
-#### 
+#### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e, k] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 k보다 크면서 가장 작은 arr[i]를 찾습니다. 각 쿼리의 순서에 맞게 답을 저장한 배열을 반환하는 solution 함수를 완성해 주세요. 단, 특정 쿼리의 답이 존재하지 않으면 -1을 저장합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181923
 ```javascript
+function solution(arr, queries) {
+    var answer = [];
+    for (let i = 0; i < queries.length; i++) {
+        let x = queries[i][0];
+        let y = queries[i][1];
+        let z = queries[i][2];
+        let array = [...arr].filter((e, i) => i >= x && i <= y && e > z);
+        array.length <= 0 ? answer.push(-1) : answer.push(Math.min(...array));
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr, queries) {
+    return queries.map(([s, e, k]) => arr.slice(s, e + 1).filter((n) => n > k).sort((a, b) => a - b)[0] || -1);
+}
 */
 ```
 
 ### 수열과 구간 쿼리 4
-#### 
+#### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e, k] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 i가 k의 배수이면 arr[i]에 1을 더합니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181922
 ```javascript
 ```
 

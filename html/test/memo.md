@@ -138,49 +138,51 @@ Date.prototype.getTime()            // 1970년 1월 1일 00:00:00 UTC로부터�
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array
 ```javascript
 /* memo
-Array.of()                      // 인자의 수나 유형에 관계없이 가변 인자를 갖는 새 Array 인스턴스를 만듭니다.
-                                // Array.of()와 Array 생성자의 차이는 정수형 인자의 처리 방법에 있습니다. 
-                                // Array.of(7)은 하나의 요소 7을 가진 배열을 생성하지만 Array(7)은 length 속성이 7인 빈 배열을 생성합니다.
-Array.from()                    // 유사 배열 객체(array-like object)나 반복 가능한 객체(iterable object)를 얕게 복사해 새로운Array 객체를 만듭니다.
-Array.isArray()                 // 인자가 Array인지 판별합니다.
-Array.length                    // 배열의 길이를 반환합니다. 반환값은 부호 없는 32비트 정수형이며, 배열의 최대 인덱스보다 항상 큽니다. 
-                                // length 속성에 값을 설정할 경우 배열의 길이를 변경합니다.
+Array.of()                          // 인자의 수나 유형에 관계없이 가변 인자를 갖는 새 Array 인스턴스를 만듭니다.
+                                    // Array.of()와 Array 생성자의 차이는 정수형 인자의 처리 방법에 있습니다. 
+                                    // Array.of(7)은 하나의 요소 7을 가진 배열을 생성하지만 Array(7)은 length 속성이 7인 빈 배열을 생성합니다.
+Array.from()                        // 유사 배열 객체(array-like object)나 반복 가능한 객체(iterable object)를 얕게 복사해 새로운Array 객체를 만듭니다.
+Array.isArray()                     // 인자가 Array인지 판별합니다.
+Array.length                        // 배열의 길이를 반환합니다. 반환값은 부호 없는 32비트 정수형이며, 배열의 최대 인덱스보다 항상 큽니다. 
+                                    // length 속성에 값을 설정할 경우 배열의 길이를 변경합니다.
 
-Array.prototype.fill()          // 배열의 시작 인덱스부터 끝 인덱스의 이전까지 정적인 값 하나로 채웁니다.
-Array.prototype.keys()          // 배열의 각 인덱스를 키 값으로 가지는 새로운 Array Iterator 객체를 반환합니다.
-Array.prototype.values()        // 배열에서 각 인덱스에 대한 값을 순회하는 array iterator 객체를 반환합니다.
-Array.prototype.entries()       // 배열의 각 인덱스에 대한 키/값 쌍을 가지는 새로운 Array Iterator 객체를 반환합니다.
-Array.prototype.map()           // 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
-Array.prototype.filter()        // 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
-Array.prototype.reduce()        // 배열의 각 요소에 대해 주어진 리듀서 (reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
+Array.prototype.fill()              // 배열의 시작 인덱스부터 끝 인덱스의 이전까지 정적인 값 하나로 채웁니다.
+Array.prototype.keys()              // 배열의 각 인덱스를 키 값으로 가지는 새로운 Array Iterator 객체를 반환합니다.
+Array.prototype.values()            // 배열에서 각 인덱스에 대한 값을 순회하는 array iterator 객체를 반환합니다.
+Array.prototype.entries()           // 배열의 각 인덱스에 대한 키/값 쌍을 가지는 새로운 Array Iterator 객체를 반환합니다.
 
-Array.prototype.push()          // 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
-Array.prototype.pop()           // 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.
-Array.prototype.shift()         // 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다. 이 메서드는 배열의 길이를 변하게 합니다.
-Array.prototype.unshift()       // 새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
-Array.prototype.toString()      // 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다.
-Array.prototype.concat()        // 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
+Array.prototype.map()               // 배열 내의 모든 요소 각각에 대하여 주어진 함수를 호출한 결과를 모아 새로운 배열을 반환합니다.
+Array.prototype.filter()            // 주어진 함수의 테스트를 통과하는 모든 요소를 모아 새로운 배열로 반환합니다.
+Array.prototype.reduce()            // 배열의 각 요소에 대해 주어진 리듀서 (reducer) 함수를 실행하고, 하나의 결과값을 반환합니다.
 
-Array.prototype.slice()         // 어떤 배열의 begin 부터 end 까지(end 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다. 원본 배열은 바뀌지 않습니다.
-Array.prototype.splice()        // 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
-Array.prototype.join()          // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
-Array.prototype.reverse()       // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
-Array.prototype.sort()          // 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 
-                                // 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
-Array.prototype.find()          // 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 undefined를 반환합니다.
-Array.prototype.findIndex()     // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 -1을 반환합니다.
-Array.prototype.findLast()      // 배열을 역순으로 반복하고 제공된 테스트 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 
-                                // 테스트 함수를 만족하는 요소가 없다면 undefined가 반환될 것입니다.
-Array.prototype.findLastIndex() // 배열을 역순으로 반복하고 제공된 테스트 함수를 충족하는 첫 번째 요소의 인덱스를 반환합니다. 
-                                // 테스트 함수를 만족하는 요소가 없으면 -1이 반환됩니다.
-Array.prototype.indexOf()       // 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환합니다.
-Array.prototype.lastIndexOf()   // 배열에서 주어진 값을 발견할 수 있는 마지막 인덱스를 반환하고, 요소가 존재하지 않으면 -1을 반환합니다.
-                                // 배열 탐색은 fromIndex에서 시작하여 뒤로 진행합니다.
-Array.prototype.forEach()       // 주어진 함수를 배열 요소 각각에 대해 실행합니다.
-Array.prototype.includes()      // 배열이 특정 요소를 포함하고 있는지 판별합니다.
-Array.prototype.every()         // 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
-Array.prototype.some()          // 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 
-                                // 만약 배열에서 주어진 함수가 true을 반환하면 true를 반환합니다. 그렇지 않으면 false를 반환합니다. 이 메서드는 배열을 변경하지 않습니다.
+Array.prototype.push()              // 배열의 끝에 하나 이상의 요소를 추가하고, 배열의 새로운 길이를 반환합니다.
+Array.prototype.pop()               // 배열에서 마지막 요소를 제거하고 그 요소를 반환합니다.
+Array.prototype.shift()             // 배열에서 첫 번째 요소를 제거하고, 제거된 요소를 반환합니다. 이 메서드는 배열의 길이를 변하게 합니다.
+Array.prototype.unshift()           // 새로운 요소를 배열의 맨 앞쪽에 추가하고, 새로운 길이를 반환합니다.
+Array.prototype.toString()          // 지정된 배열 및 그 요소를 나타내는 문자열을 반환합니다.
+Array.prototype.concat()            // 인자로 주어진 배열이나 값들을 기존 배열에 합쳐서 새 배열을 반환합니다.
+
+Array.prototype.slice()             // 어떤 배열의 begin 부터 end 까지(end 미포함)에 대한 얕은 복사본을 새로운 배열 객체로 반환합니다. 
+                                    // 원본 배열은 바뀌지 않습니다.
+Array.prototype.splice()            // 배열의 기존 요소를 삭제 또는 교체하거나 새 요소를 추가하여 배열의 내용을 변경합니다.
+Array.prototype.join()              // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
+Array.prototype.reverse()           // 배열의 순서를 반전합니다. 첫 번째 요소는 마지막 요소가 되며 마지막 요소는 첫 번째 요소가 됩니다.
+Array.prototype.sort()              // 배열의 요소를 적절한 위치에 정렬한 후 그 배열을 반환합니다. 정렬은 stable sort가 아닐 수 있습니다. 
+                                    // 기본 정렬 순서는 문자열의 유니코드 코드 포인트를 따릅니다.
+Array.prototype.find()              // 주어진 판별 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 그런 요소가 없다면 undefined를 반환합니다.
+Array.prototype.findIndex()         // 주어진 판별 함수를 만족하는 배열의 첫 번째 요소에 대한 인덱스를 반환합니다. 만족하는 요소가 없으면 -1을 반환합니다.
+Array.prototype.findLast()          // 배열을 역순으로 반복하고 제공된 테스트 함수를 만족하는 첫 번째 요소의 값을 반환합니다. 
+                                    // 테스트 함수를 만족하는 요소가 없다면 undefined가 반환될 것입니다.
+Array.prototype.findLastIndex()     // 배열을 역순으로 반복하고 제공된 테스트 함수를 충족하는 첫 번째 요소의 인덱스를 반환합니다. 
+                                    // 테스트 함수를 만족하는 요소가 없으면 -1이 반환됩니다.
+Array.prototype.indexOf()           // 배열에서 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환합니다.
+Array.prototype.lastIndexOf()       // 배열에서 주어진 값을 발견할 수 있는 마지막 인덱스를 반환하고, 요소가 존재하지 않으면 -1을 반환합니다.
+                                    // 배열 탐색은 fromIndex에서 시작하여 뒤로 진행합니다.
+Array.prototype.forEach()           // 주어진 함수를 배열 요소 각각에 대해 실행합니다.
+Array.prototype.includes()          // 배열이 특정 요소를 포함하고 있는지 판별합니다.
+Array.prototype.every()             // 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
+Array.prototype.some()              // 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 
+                                    // 만약 배열에서 주어진 함수가 true을 반환하면 true를 반환합니다. 그렇지 않으면 false를 반환합니다. 이 메서드는 배열을 변경하지 않습니다.
 */
 ```
 
