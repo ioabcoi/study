@@ -183,6 +183,14 @@ Array.prototype.includes()          // 배열이 특정 요소를 포함하고 �
 Array.prototype.every()             // 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
 Array.prototype.some()              // 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 
                                     // 만약 배열에서 주어진 함수가 true을 반환하면 true를 반환합니다. 그렇지 않으면 false를 반환합니다. 이 메서드는 배열을 변경하지 않습니다.
+
+// 배열로 전환하기
+const arrFromArr = [...arr]
+const arrFromMap = [...map]
+const arrFromSet = [...set]
+const arrFromStr = [...str]
+const arrFromGene = [...gene]
+*/
 */
 ```
 
@@ -325,7 +333,8 @@ String.prototype.toString()             // 객체의 문자열 표현을 반환�
 String.prototype.join()                 // 배열의 모든 요소를 연결해 하나의 문자열로 만듭니다.
 String.prototype.match()                // 문자열이 정규식과 매치되는 부분을 검색합니다.
 String.prototype.repeat()               // 문자열을 주어진 횟수만큼 반복해 붙인 새로운 문자열을 반환합니다.
-String.prototype.includes()             // 하나의 문자열이 다른 문자열에 포함되어 있는지를 판별하고, 결과를 true 또는 false 로 반환합니다. 검색 시 대소문자를 구분합니다.
+String.prototype.includes()             // 하나의 문자열이 다른 문자열에 포함되어 있는지를 판별하고, 결과를 true 또는 false 로 반환합니다. 
+                                        // 검색 시 대소문자를 구분합니다.
 String.prototype.valueOf()              // String 객체의 원시값을 반환합니다.
 String.prototype.toUpperCase()          // 문자열을 대문자로 변환해 반환합니다.
 String.prototype.toLowerCase()          // 문자열을 소문자로 변환해 반환합니다.
@@ -423,6 +432,8 @@ https://extendsclass.com/regex-tester.html
 참고 블로그
 https://eadgnus.tistory.com/87
 https://velog.io/@jangws/JS-정규표현식특수문자-숫자-등-6766k8d6
+https://m.blog.naver.com/cjinnnn/221329842667
+https://hamait.tistory.com/342
 
 확장문자 (: backslash)
     s : 공백 문자(스페이스, 탭, 폼 피드, 라인 피드)
@@ -449,8 +460,8 @@ https://velog.io/@jangws/JS-정규표현식특수문자-숫자-등-6766k8d6
     | : ~또는~
     {} : 반복 횟수
 
-const re = /a/              --a 가 있는 문자열
-const re = /a/i             --a 가 있는 문자열, 대소문자 구분 안함
+const re = /a/              -- a 가 있는 문자열
+const re = /a/i             -- a 가 있는 문자열, 대소문자 구분 안함
 const re = /apple/          -- apple가 있는 문자열
 const re = /[a-z]/          -- a~z 사이의 모든 문자
 const re = /[a-zA-Z0-9]/    -- a~z, A~Z, 0~9 사이의 모든 문자
@@ -460,8 +471,9 @@ const re = /[^a-z]/         -- a~z까지의 문자가 아닌 문자("^" 부정)
 const re = /^[a-z]/         -- 문자의 처음이 a~z로 시작되는 문장
 const re = /[a-z]$/         -- 문자가 a~z로 끝남
 
-소문자                     const regExp = /[a-z]/g
-대문자                     const regExp = /[A-Z]/g
+소문자                      const regExp = /[a-z]/g
+대문자                      const regExp = /[A-Z]/g
+숫자                        const regExp = /[0-9]/g
 
 특수문자 체크 정규식        const regExp = /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g;
 모든 공백 체크 정규식       const regExp = /\s/g;
@@ -493,8 +505,7 @@ Object.entries()                // for...in와 같은 순서로 주어진 객체
 /* memo
 Set 객체는 자료형에 관계 없이 원시 값과 객체 참조 모두 유일한 값을 저장할 수 있습니다.
 Set 객체는 값 콜렉션으로, 삽입 순서대로 요소를 순회할 수 있습니다. 
-하나의 Set 내 값은 한 번만 나타날 수 있습니다. 
-즉, 어떤 값은 그 Set 콜렉션 내에서 유일합니다.
+하나의 Set 내 값은 한 번만 나타날 수 있습니다. 즉, 어떤 값은 그 Set 콜렉션 내에서 유일합니다.
 */
 ```
 

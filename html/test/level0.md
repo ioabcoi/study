@@ -164,6 +164,7 @@ const solution = (num1, num2) => num1 === num2 ? answer = 1 : answer = -1;
 ### 분수의 덧셈
 #### 첫 번째 분수의 분자와 분모를 뜻하는 numer1, denom1, 두 번째 분수의 분자와 분모를 뜻하는 numer2, denom2가 매개변수로 주어집니다. 두 분수를 더한 값을 기약 분수로 나타냈을 때 분자와 분모를 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120808
+> search
 ```javascript
 function solution(numer1, denom1, numer2, denom2) {
     const gcd = (a, b) => a % b === 0 ? b : gcd(b, a % b);
@@ -337,6 +338,7 @@ const solution = n => Math.ceil(n / 7);
 ### 피자 나눠 먹기 (2)
 #### 머쓱이네 피자가게는 피자를 여섯 조각으로 잘라 줍니다. 피자를 나눠먹을 사람의 수 n이 매개변수로 주어질 때, n명이 주문한 피자를 남기지 않고 모두 같은 수의 피자 조각을 먹어야 한다면 최소 몇 판을 시켜야 하는지를 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120815
+> search
 ```javascript
 /* 
 function solution(n) {
@@ -1428,6 +1430,7 @@ function solution(my_string) {
 ### 문자열 정렬하기 (1)
 #### 문자열 my_string이 매개변수로 주어질 때, my_string 안에 있는 숫자만 골라 오름차순 정렬한 리스트를 return 하도록 solution 함수를 작성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120850
+> blog
 ```javascript
 /*
 function solution(my_string) {
@@ -1462,6 +1465,7 @@ function solution(my_string) {
 ### 문자열 정렬하기 (2)
 #### 영어 대소문자로 이루어진 문자열 my_string이 매개변수로 주어질 때, my_string을 모두 소문자로 바꾸고 알파벳 순서대로 정렬한 문자열을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120911
+> blog
 ```javascript
 /*
 function solution(my_string) {
@@ -1586,6 +1590,7 @@ function solution(my_string) {
 ### 소인수분해
 #### 소인수분해란 어떤 수를 소수들의 곱으로 표현하는 것입니다. 예를 들어 12를 소인수 분해하면 2 * 2 * 3 으로 나타낼 수 있습니다. 따라서 12의 소인수는 2와 3입니다. 자연수 n이 매개변수로 주어질 때 n의 소인수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120852
+> blog
 ```javascript
 function solution(n) {
     let answer = [...Array(n+1).keys()].filter(x => n % x === 0).slice(1);

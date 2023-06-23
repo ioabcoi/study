@@ -808,7 +808,7 @@ function solution(numLog) {
 > https://school.programmers.co.kr/learn/courses/30/lessons/181924
 ```javascript
 function solution(arr, queries) {
-    var answer = [];
+    let answer = [];
     for (let i = 0; i < queries.length; i++) {
         let n = 0;
         let x = queries[i][0];
@@ -867,7 +867,7 @@ function solution(arr, queries) {
 > https://school.programmers.co.kr/learn/courses/30/lessons/181923
 ```javascript
 function solution(arr, queries) {
-    var answer = [];
+    let answer = [];
     for (let i = 0; i < queries.length; i++) {
         let x = queries[i][0];
         let y = queries[i][1];
@@ -891,50 +891,169 @@ function solution(arr, queries) {
 #### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e, k] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 i가 k의 배수이면 arr[i]에 1을 더합니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181922
 ```javascript
+function solution(arr, queries) {
+    let answer = arr;
+    for (let i = 0; i < queries.length; i++) {
+        let x = queries[i][0];
+        let y = queries[i][1];
+        let z = queries[i][2];
+        let array = answer.map((e, i) => i >= x && i <= y && i % z === 0 ? e = e + 1 : e);
+        // console.log(answer, x, y, z, array);
+        answer = array;
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr, queries) {
+    for(let [s, e, k] of queries) {
+        for(let i = s; i <= e; i++) {
+            if(i % k === 0) arr[i]++;
+        }
+    }
+    return arr;
+}
+
+function solution(arr, queries) {
+    return queries.reduce((bucket, [s, e, k]) => {
+        for (let i = s; i <= e; i += 1) {
+            if (i % k === 0) bucket[i] += 1
+        }
+        return bucket
+    }, [...arr])
+}
+
+?
+const solution=(a,q)=>q.length?solution(a.map((v,i)=>i>=q[0][0]&&i<=q[0][1]&&!(i%q[0][2])?v+1:v),q.slice(1)):a
 */
 ```
 
 ### 배열 만들기 2
-#### 
+#### 정수 l과 r이 주어졌을 때, l 이상 r이하의 정수 중에서 숫자 "0"과 "5"로만 이루어진 모든 정수를 오름차순으로 저장한 배열을 return 하는 solution 함수를 완성해 주세요. 만약 그러한 정수가 없다면, -1이 담긴 배열을 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181921
 ```javascript
+function solution(l, r) {
+    let answer = [...new Array(r + 1).keys()].filter(x => x >= l).filter(x => x.toString().split("").every(e => e.includes('0') || e.includes('5')));
+    return answer.length > 0 ? answer : answer = [-1];
+}
 ```
 
 ```javascript
 /* good
+function solution(l, r) {
+    const result = Array.from({length:r-l+1}, (_,i)=>i+l).filter(n=>!/[^05]/.test(n));
+    return result.length ? result : [-1];
+}
+
+function solution(l, r) {
+    const isFiveAndZero = (num) => /^[05]+$/.test(num.toString());
+    const answer = new Array(r - l + 1)
+        .fill()
+        .map((_, i) => i + l)
+        .filter(isFiveAndZero);
+    return answer.length === 0 ? [-1] : answer;
+}
 */
 ```
 
 ### 카운트 업
-#### 
+#### 정수 start와 end가 주어질 때, start부터 end까지의 숫자를 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181920
 ```javascript
+/*
+function solution(start, end) {
+    var answer = [...new Array(end + 1).keys()].slice(start);
+    return answer;
+}
+*/
+
+const solution = (start, end) => [...new Array(end + 1).keys()].slice(start);
 ```
 
 ```javascript
 /* good
+function solution(start, end) {
+    idx = start;
+    return Array.from({length: end-start+1}, ()=> {return start++});
+}
 */
 ```
 
 ### 콜라츠 수열 만들기
-#### 
+#### 모든 자연수 x에 대해서 현재 값이 x이면 x가 짝수일 때는 2로 나누고, x가 홀수일 때는 3 * x + 1로 바꾸는 계산을 계속해서 반복하면 언젠가는 반드시 x가 1이 되는지 묻는 문제를 콜라츠 문제라고 부릅니다. 그리고 위 과정에서 거쳐간 모든 수를 기록한 수열을 콜라츠 수열이라고 부릅니다. 계산 결과 1,000 보다 작거나 같은 수에 대해서는 전부 언젠가 1에 도달한다는 것이 알려져 있습니다. 임의의 1,000 보다 작거나 같은 양의 정수 n이 주어질 때 초기값이 n인 콜라츠 수열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181919
 ```javascript
+function solution(n) {
+    let answer = [n];
+    let x = n;
+    while (x !== 1) {
+        let y = 0;
+        y = x % 2 === 0 ? x / 2 : 3 * x + 1;
+        answer.push(y);
+        x = y;
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(n, arr = []) {
+    arr.push(n)
+    if (n === 1) return arr
+    if (n % 2 === 0) return solution(n / 2, arr)
+    return solution(3 * n + 1, arr)
+}
 */
 ```
 
 ### 배열 만들기 4
-#### 
+#### 정수 배열 arr가 주어집니다. arr를 이용해 새로운 배열 stk를 만드려고 합니다. 변수 i를 만들어 초기값을 0으로 설정한 후 i가 arr의 길이보다 작으면 다음 작업을 반복합니다.
+> 만약 stk가 빈 배열이라면 arr[i]를 stk에 추가하고 i에 1을 더합니다.
+> stk에 원소가 있고, stk의 마지막 원소가 arr[i]보다 작으면 arr[i]를 stk의 뒤에 추가하고 i에 1을 더합니다.
+> stk에 원소가 있는데 stk의 마지막 원소가 arr[i]보다 크거나 같으면 stk의 마지막 원소를 stk에서 제거합니다.
+#### 위 작업을 마친 후 만들어진 stk를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181918
 ```javascript
+function solution(arr) {
+    let stk = [];
+    let i = 0;
+    while (i < arr.length) {
+        if (stk.length === 0) {
+            stk.push(arr[i]);
+            i++;
+        } else {
+            if (stk[stk.length - 1] < arr[i]) {
+                stk.push(arr[i]);
+                i++;
+            }
+            else {
+                stk.pop();
+            }
+        }
+        // console.log(i, arr[i], stk);
+    }
+    return stk;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr) {
+    var stk = [];
+    let i = 0 ; 
+    while( i < arr.length){
+        if(stk.length ===0) stk.push(arr[i++]);
+        else {
+            let val = stk[stk.length-1];
+            if( val < arr[i] ) stk.push(arr[i++]);
+            else stk.pop();
+        }
+    }
+    return stk;
+}
 */
 ```
 
