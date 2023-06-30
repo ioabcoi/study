@@ -1665,6 +1665,7 @@ const solution = strlist => strlist.map(x => x.length);
 #### 머쓱이는 RPG게임을 하고 있습니다. 게임에는 up, down, left, right 방향키가 있으며 각 키를 누르면 위, 아래, 왼쪽, 오른쪽으로 한 칸씩 이동합니다. 예를 들어 [0,0]에서 up을 누른다면 캐릭터의 좌표는 [0, 1], down을 누른다면 [0, -1], left를 누른다면 [-1, 0], right를 누른다면 [1, 0]입니다. 머쓱이가 입력한 방향키의 배열 keyinput와 맵의 크기 board이 매개변수로 주어집니다. 캐릭터는 항상 [0,0]에서 시작할 때 키 입력이 모두 끝난 뒤에 캐릭터의 좌표 [x, y]를 return하도록 solution 함수를 완성해주세요.
 #### [0, 0]은 board의 정 중앙에 위치합니다. 예를 들어 board의 가로 크기가 9라면 캐릭터는 왼쪽으로 최대 [-4, 0]까지 오른쪽으로 최대 [4, 0]까지 이동할 수 있습니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120861
+> blog
 ```javascript
 function solution(keyinput, board) {
     let answer = [0, 0];
@@ -1725,6 +1726,7 @@ function solution(keyinput, board) {
 ### 다항식 더하기
 #### 한 개 이상의 항의 합으로 이루어진 식을 다항식이라고 합니다. 다항식을 계산할 때는 동류항끼리 계산해 정리합니다. 덧셈으로 이루어진 다항식 polynomial이 매개변수로 주어질 때, 동류항끼리 더한 결괏값을 문자열로 return 하도록 solution 함수를 완성해보세요. 같은 식이라면 가장 짧은 수식을 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120863
+> blog
 ```javascript
 function solution(polynomial) {
     const poly = polynomial.split(" ").filter(x => x !== "+");
@@ -1767,11 +1769,9 @@ function solution(polynomial) {
     const num = arr
                 .filter(n => !isNaN(n))
                 .reduce((acc, cur) => acc + parseInt(cur, 10), 0);
-
     let answer = [];
     if(xNum) answer.push(`${xNum === 1 ? "" : xNum}x`);
     if(num) answer.push(num);
-
     return answer.join(" + ");
 }
 
@@ -1782,7 +1782,6 @@ function solution(p) {
         }
         return [a, b + Number(s)];
     }, [0, 0]);
-
     if (!x && !c) return '0';
     if (!x) return c.toString();
     x = `${x==1?'':x}x`;
@@ -2026,6 +2025,7 @@ var solution=([a,b],d)=>d.some(([p,q])=>a==p&&b==q)?'login':d.some(([p])=>a==p)?
 ### 치킨 쿠폰
 #### 프로그래머스 치킨은 치킨을 시켜먹으면 한 마리당 쿠폰을 한 장 발급합니다. 쿠폰을 열 장 모으면 치킨을 한 마리 서비스로 받을 수 있고, 서비스 치킨에도 쿠폰이 발급됩니다. 시켜먹은 치킨의 수 chicken이 매개변수로 주어질 때 받을 수 있는 최대 서비스 치킨의 수를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120884
+> blog
 ```javascript
 function solution(chicken) {
     let answer = 0;
@@ -2057,6 +2057,7 @@ function solution(chicken) {
 ### 이진수 더하기
 #### 이진수를 의미하는 두 개의 문자열 bin1과 bin2가 매개변수로 주어질 때, 두 이진수의 합을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120885
+> blog
 ```javascript
 function solution(bin1, bin2) {
     var answer = [];

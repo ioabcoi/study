@@ -1058,87 +1058,345 @@ function solution(arr) {
 ```
 
 ### 간단한 논리 연산
-#### 
+#### boolean 변수 x1, x2, x3, x4가 매개변수로 주어질 때, 다음의 식의 true/false를 return 하는 solution 함수를 작성해 주세요.
+> (x1 ∨ x2) ∧ (x3 ∨ x4)
+> https://school.programmers.co.kr/learn/courses/30/lessons/181917
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(x1, x2, x3, x4) {
+    var answer = (x1 || x2) && (x3 || x4);
+    return answer;
+}
 */
+
+const solution = (x1, x2, x3, x4) => (x1 || x2) && (x3 || x4);
 ```
 
 ### 주사위 게임 3
-#### 
+#### 1부터 6까지 숫자가 적힌 주사위가 네 개 있습니다. 네 주사위를 굴렸을 때 나온 숫자에 따라 다음과 같은 점수를 얻습니다.
+> 네 주사위에서 나온 숫자가 모두 p로 같다면 1111 × p점을 얻습니다.
+> 세 주사위에서 나온 숫자가 p로 같고 나머지 다른 주사위에서 나온 숫자가 q(p ≠ q)라면 (10 × p + q)2 점을 얻습니다.
+> 주사위가 두 개씩 같은 값이 나오고, 나온 숫자를 각각 p, q(p ≠ q)라고 한다면 (p + q) × |p - q|점을 얻습니다.
+> 어느 두 주사위에서 나온 숫자가 p로 같고 나머지 두 주사위에서 나온 숫자가 각각 p와 다른 q, r(q ≠ r)이라면 q × r점을 얻습니다.
+> 네 주사위에 적힌 숫자가 모두 다르다면 나온 숫자 중 가장 작은 숫자 만큼의 점수를 얻습니다.
+#### 네 주사위를 굴렸을 때 나온 숫자가 정수 매개변수 a, b, c, d로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181916
 ```javascript
+/*
+function solution(a, b, c, d) {
+    let answer = 0;
+    let p = 0;
+    let q = 0;
+    let r = 0;
+    if (a === b && b === c && c === d) {
+        p = a;
+        answer = 1111 * p;
+    } else if (a === b && b === c) {
+        p = a;
+        q = d;
+        answer = Math.pow((10 * p) + q, 2);
+    } else if (a === b && b === d) {
+        p = a;
+        q = c;
+        answer = Math.pow((10 * p) + q, 2);
+    } else if (a === c && c === d) {
+        p = a;
+        q = b;
+        answer = Math.pow((10 * p) + q, 2);
+    } else if (b === c && c === d) {
+        p = b;
+        q = a;
+        answer = Math.pow((10 * p) + q, 2);
+    } else if (a === b && c === d) {
+        p = a;
+        q = c;
+        answer = (p + q) * Math.abs(p - q);
+    } else if (a === c && b === d) {
+        p = a;
+        q = b;
+        answer = (p + q) * Math.abs(p - q);
+    } else if (a === d && b === c) {
+        p = a;
+        q = b;
+        answer = (p + q) * Math.abs(p - q);
+    } else if (a === b) {
+        p = a;
+        q = c;
+        r = d;
+        answer = q * r;
+    } else if (a === c) {
+        p = a;
+        q = b;
+        r = d;
+        answer = q * r;
+    } else if (a === d) {
+        p = a;
+        q = b;
+        r = c;
+        answer = q * r;
+    } else if (b === c) {
+        p = b;
+        q = a;
+        r = d;
+        answer = q * r;
+    } else if (b === d) {
+        p = b;
+        q = a;
+        r = c;
+        answer = q * r;
+    } else if (c === d) {
+        p = c;
+        q = a;
+        r = b;
+        answer = q * r;
+    } else {
+        answer = Math.min(a, b, c, d);
+    }
+    return answer;
+}
+*/
+
+function solution(a, b, c, d) {
+    let answer = 0;
+    if (a === b && b === c && c === d) { answer = 1111 * a; } 
+    else if (a === b && b === c) { answer = Math.pow((10 * a) + d, 2); } 
+    else if (a === b && b === d) { answer = Math.pow((10 * a) + c, 2); } 
+    else if (a === c && c === d) { answer = Math.pow((10 * a) + b, 2); } 
+    else if (b === c && c === d) { answer = Math.pow((10 * b) + a, 2); } 
+    else if (a === b && c === d) { answer = (a + c) * Math.abs(a - c); } 
+    else if (a === c && b === d) { answer = (a + b) * Math.abs(a - b); } 
+    else if (a === d && b === c) { answer = (a + b) * Math.abs(a - b); } 
+    else if (a === b) { answer = c * d; } 
+    else if (a === c) { answer = b * d; } 
+    else if (a === d) { answer = b * c; } 
+    else if (b === c) { answer = a * d; } 
+    else if (b === d) { answer = a * c; } 
+    else if (c === d) { answer = a * b; } 
+    else { answer = Math.min(a, b, c, d); }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(a, b, c, d) {
+    if (a === b && a === c && a === d) return 1111 * a
+    if (a === b && a === c) return (10 * a + d) ** 2
+    if (a === b && a === d) return (10 * a + c) ** 2
+    if (a === c && a === d) return (10 * a + b) ** 2
+    if (b === c && b === d) return (10 * b + a) ** 2
+    if (a === b && c === d) return (a + c) * Math.abs(a - c)
+    if (a === c && b === d) return (a + b) * Math.abs(a - b)
+    if (a === d && b === c) return (a + b) * Math.abs(a - b)
+    if (a === b) return c * d
+    if (a === c) return b * d
+    if (a === d) return b * c
+    if (b === c) return a * d
+    if (b === d) return a * c
+    if (c === d) return a * b
+    return Math.min(a, b, c, d)
+}
+
+function solution(a, b, c, d) {
+    const map = new Map();
+    for (const data of [a, b, c, d]) {
+        map.set(data, (map.get(data) || 0) + 1);
+    }
+    const sortedArr = [...map].sort((a, b) => {if (a[1] === b[1]) return b[0] - a[0]; else return b[1] - a[1]});
+    if (map.size === 1) return 1111 * sortedArr[0][0];
+    else if (map.size === 3) return sortedArr[1][0] * sortedArr[2][0];
+    else if (map.size === 4) return sortedArr[3][0];
+    else if (sortedArr[0][1] === 3) return (10 * sortedArr[0][0] + sortedArr[1][0]) ** 2;
+    else return (sortedArr[0][0] + sortedArr[1][0]) * (sortedArr[0][0] - sortedArr[1][0]);
+}
+
+function solution(a, b, c, d) {
+    const maps = new Map();
+    [a, b, c, d].forEach(num => maps.set(num, (maps.get(num) || 0) + 1));
+    let answer = 1;
+    if (maps.size === 1) answer = 1111 * a;
+    if (maps.size === 2) {
+        const [p, q] = maps.keys();
+        if (maps.get(a) !== 2) answer = maps.get(p) === 3 ? Math.pow(10 * p + q, 2) : Math.pow(10 * q + p, 2);
+        else answer = (p + q) * Math.abs(p - q);
+    }
+    if (maps.size === 3) maps.forEach((v, k) => v === 1 ? answer *= k : false);
+    if (maps.size === 4) answer = Math.min(a, b, c, d);
+    return answer;
+}
+
+function solution(a, b, c, d) {
+    const dice = [a, b, c, d];
+    const counter = new Array(7).fill(0);
+    for (let i = 0; i < 4; i++) 
+        counter[dice[i]]++;
+    let result = 0;
+    if (counter.includes(4)) { 
+        result = 1111 * counter.indexOf(4);
+    } else if (counter.includes(3)) {
+        const p = counter.indexOf(3);
+        const q = counter.indexOf(1);
+        result = (10 * p + q) ** 2;
+    } else if (counter.includes(2) && counter.filter(val => val === 2).length === 2) {
+        const p = counter.indexOf(2);
+        const q = counter.lastIndexOf(2);
+        result = (p + q) * Math.abs(p - q);
+    } else if (counter.includes(2)) {
+        const p = counter.indexOf(2);
+        const q = dice.filter(num => num !== p)[0];
+        const r = dice.filter(num => num !== p)[1];
+        result = q * r;
+    } else { 
+        result = Math.min(...dice);
+    }
+    return result;
+}
 */
 ```
 
 ### 글자 이어 붙여 문자열 만들기
-#### 
+#### 문자열 my_string과 정수 배열 index_list가 매개변수로 주어집니다. my_string의 index_list의 원소들에 해당하는 인덱스의 글자들을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181915
 ```javascript
+/*
+function solution(my_string, index_list) {
+    var answer = '';
+    answer = index_list.map(x => my_string.slice(x, x + 1)).join("");
+    return answer;
+}
+*/
+
+const solution = (my_string, index_list) => index_list.map(x => my_string.slice(x, x + 1)).join("");
 ```
 
 ```javascript
 /* good
+function solution(my_string, index_list) {
+    return index_list.map(i => my_string[i]).join('')
+}
 */
 ```
 
 ### 9로 나눈 나머지
-#### 
+#### 음이 아닌 정수를 9로 나눈 나머지는 그 정수의 각 자리 숫자의 합을 9로 나눈 나머지와 같은 것이 알려져 있습니다. 이 사실을 이용하여 음이 아닌 정수가 문자열 number로 주어질 때, 이 정수를 9로 나눈 나머지를 return 하는 solution 함수를 작성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181914
 ```javascript
+/*
+function solution(number) {
+    var answer = 0;
+    answer = number.split("").reduce((a, b) => parseInt(a) + parseInt(b)) % 9;
+    return answer;
+}
+*/
+
+const solution = number => number.split("").reduce((a, b) => parseInt(a) + parseInt(b)) % 9;
 ```
 
 ```javascript
 /* good
+function solution(number) {
+    var answer = 0;
+    for(let i of number){
+        answer += Number(i);
+    }
+    return answer%9;
+}
+
+const solution=n=>BigInt(n)%9n
 */
 ```
 
 ### 문자열 여러 번 뒤집기
-#### 
+#### 문자열 my_string과 이차원 정수 배열 queries가 매개변수로 주어집니다. queries의 원소는 [s, e] 형태로, my_string의 인덱스 s부터 인덱스 e까지를 뒤집으라는 의미입니다. my_string에 queries의 명령을 순서대로 처리한 후의 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181913
 ```javascript
+function solution(my_string, queries) {
+    let answer = '';
+    let str = '';
+    for (let i = 0; i < queries.length; i++) {
+        str = [...my_string.substring(queries[i][0], queries[i][1] + 1)].reverse().join("");
+        answer = `${my_string.substring(0, queries[i][0])}${str}${my_string.substring(queries[i][1] + 1, my_string.length)}`;
+        // console.log(string, reverse, answer);
+        my_string = answer;
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(my_string, queries) {
+    let str = my_string.split('');
+    queries.forEach(([start, end]) => {
+        const changeStr = str.slice(start, end + 1);
+        str.splice(start, changeStr.length, ...changeStr.reverse());
+    });
+    return str.join('');
+}
+
+function solution(my_string, queries) {
+    let answer = [...my_string];
+    for(let z=0; z<queries.length; z++){
+        const [i, j] = queries[z];
+        answer = [
+            ...answer.slice(0, i),
+            ...answer.slice(i, j+1).reverse(),
+            ...answer.slice(j+1, my_string.length),
+        ];
+    }
+    return answer.join("");
+}
 */
 ```
 
 ### 배열 만들기 5
-#### 
+#### 문자열 배열 intStrs와 정수 k, s, l가 주어집니다. intStrs의 원소는 숫자로 이루어져 있습니다. 배열 intStrs의 각 원소마다 s번 인덱스에서 시작하는 길이 l짜리 부분 문자열을 잘라내 정수로 변환합니다. 이때 변환한 정수값이 k보다 큰 값들을 담은 배열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181912
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(intStrs, k, s, l) {
+    var answer = [];
+    answer = intStrs.map(x => parseInt(x.toString().substring(s, s + l))).filter(x => x > k);
+    return answer;
+}
 */
+
+const solution = (intStrs, k, s, l) => intStrs.map(x => parseInt(x.toString().substring(s, s + l))).filter(x => x > k);
 ```
 
 ### 부분 문자열 이어 붙여 문자열 만들기
-#### 
+#### 길이가 같은 문자열 배열 my_strings와 이차원 정수 배열 parts가 매개변수로 주어집니다. parts[i]는 [s, e] 형태로, my_string[i]의 인덱스 s부터 인덱스 e까지의 부분 문자열을 의미합니다. 각 my_strings의 원소의 parts에 해당하는 부분 문자열을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181911
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_strings, parts) {
+    var answer = '';
+    answer = my_strings.map((e, i) => e.substring(parts[i][0], parts[i][1] + 1)).join("");
+    return answer;
+}
 */
+
+const solution = (my_strings, parts) => my_strings.map((e, i) => e.substring(parts[i][0], parts[i][1] + 1)).join("");
 ```
 
 ### 문자열의 뒤의 n글자
-#### 
+#### 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string의 뒤의 n글자로 이루어진 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181910
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_string, n) {
+    var answer = '';
+    answer = my_string.substring(my_string.length - n);
+    return answer;
+}
 */
+
+const solution = (my_string, n) => my_string.substring(my_string.length - n);
 ```
 
 ### 접미사 배열
-#### 
+#### 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다. 문자열 my_string이 매개변수로 주어질 때, my_string의 모든 접미사를 사전순으로 정렬한 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181909
 ```javascript
 ```
 
