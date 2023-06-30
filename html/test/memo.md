@@ -353,6 +353,8 @@ String.prototype.replaceAll()               // pattern의 모든 일치 항목�
                                             // 원래 문자열은 변경되지 않습니다.
 String.prototype.trim()                     // 문자열 양 끝의 공백을 제거하고 원본 문자열을 수정하지 않고 새로운 문자열을 반환합니다. 
                                             // 여기서 말하는 공백이란 모든 공백문자(space, tab, NBSP 등)와 모든 개행문자(LF, CR 등)를 의미합니다.
+String.prototype.endsWith()                 // 어떤 문자열에서 특정 문자열로 끝나는지를 확인할 수 있으며, 그 결과를 true 혹은 false로 반환한다.
+String.prototype.startsWith()               // 어떤 문자열이 특정 문자로 시작하는지 확인하여 결과를 true 혹은 false로 반환합니다.
 */
 ```
 

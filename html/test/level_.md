@@ -1398,75 +1398,175 @@ const solution = (my_string, n) => my_string.substring(my_string.length - n);
 #### 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다. 문자열 my_string이 매개변수로 주어질 때, my_string의 모든 접미사를 사전순으로 정렬한 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181909
 ```javascript
+/*
+function solution(my_string) {
+    var answer = [];
+    answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).sort();
+    return answer;
+}
+*/
+
+const solution = my_string => [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).sort();
 ```
 
 ```javascript
 /* good
+function solution(my_string) {
+    var answer = [];
+    return new Array(my_string.length).fill(1).map((e,idx) => my_string.substring(idx)).sort();;
+}
+
+function solution(my_string) {
+    return Array.from(my_string)
+        .map((_, i) => my_string.substring(i))
+        .sort();
+}
 */
 ```
 
 ### 접미사인지 확인하기
-#### 
+#### 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다. 문자열 my_string과 is_suffix가 주어질 때, is_suffix가 my_string의 접미사라면 1을, 아니면 0을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181908
 ```javascript
+/*
+function solution(my_string, is_suffix) {
+    var answer = [];
+    answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).includes(is_suffix) === true ? 1: 0;
+    return answer;
+}
+*/
+
+const solution = (my_string, is_suffix) => [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).includes(is_suffix) === true ? 1: 0;
 ```
 
 ```javascript
 /* good
+const solution = (str, suff) => str.endsWith(suff) ? 1 : 0
+
+function solution(my_string, is_suffix) {
+    return my_string.slice(my_string.length - is_suffix.length) === is_suffix ? 1 : 0
+}
+
+function solution(my_string, is_suffix) {
+    return Number(new RegExp(`${is_suffix}$`).test(my_string))
+}
 */
 ```
 
 ### 문자열의 앞의 n글자
-#### 
+#### 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string의 앞의 n글자로 이루어진 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181907
 ```javascript
+/*
+function solution(my_string, n) {
+    var answer = '';
+    answer = my_string.substring(0, n);
+    return answer;
+}
+*/
+
+const solution = (my_string, n) => my_string.substring(0, n);
 ```
 
 ```javascript
 /* good
+function solution(my_string, n) {
+   return my_string.slice(0, n)
+}
 */
 ```
 
 ### 접두사인지 확인하기
-#### 
+#### 어떤 문자열에 대해서 접두사는 특정 인덱스까지의 문자열을 의미합니다. 예를 들어, "banana"의 모든 접두사는 "b", "ba", "ban", "bana", "banan", "banana"입니다. 문자열 my_string과 is_prefix가 주어질 때, is_prefix가 my_string의 접두사라면 1을, 아니면 0을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181906
 ```javascript
+/*
+function solution(my_string, is_prefix) {
+    var answer = [];
+    answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(0, i)).includes(is_prefix) === true ? 1: 0;
+    return answer;
+}
+*/
+
+const solution = (my_string, is_prefix) => [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(0, i)).includes(is_prefix) === true ? 1: 0;
 ```
 
 ```javascript
 /* good
+function solution(my_string, is_prefix) {
+    return my_string.slice(0, is_prefix.length) === is_prefix ? 1 : 0
+}
+
+function solution(my_string, is_prefix) {
+    return +my_string.startsWith(is_prefix);
+}
 */
 ```
 
 ### 문자열 뒤집기
-#### 
+#### 문자열 my_string과 정수 s, e가 매개변수로 주어질 때, my_string에서 인덱스 s부터 인덱스 e까지를 뒤집은 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181905
 ```javascript
+/*
+function solution(my_string, s, e) {
+    var answer = '';
+    answer = `${my_string.substring(0, s)}${[...my_string.substring(s, e + 1)].reverse().join("")}${my_string.substring(e + 1, my_string.length)}`;
+    return answer;
+}
+*/
+
+const solution = (my_string, s, e) => `${my_string.substring(0, s)}${[...my_string.substring(s, e + 1)].reverse().join("")}${my_string.substring(e + 1, my_string.length)}`;
 ```
 
 ```javascript
 /* good
+function solution(my_string, s, e) {
+    return my_string.substr(0,s)+my_string.split("").slice(s,e+1).reverse().join("")+my_string.substr(e+1);
+}
+
+const solution = (st, s, e) => st.slice(0,s)+st.slice(s, e+1).split('').reverse().join('')+st.slice(e+1);
 */
 ```
 
 ### 세로 읽기
-#### 
+#### 문자열 my_string과 두 정수 m, c가 주어집니다. my_string을 한 줄에 m 글자씩 가로로 적었을 때 왼쪽부터 세로로 c번째 열에 적힌 글자들을 문자열로 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181904
 ```javascript
+/*
+function solution(my_string, m, c) {
+    var answer = '';
+    answer = [...my_string].filter((e, i) => i % m === c - 1).join("");
+    return answer;
+}
+*/
+
+const solution = (my_string, m, c) => [...my_string].filter((e, i) => i % m === c - 1).join("");
 ```
 
 ```javascript
 /* good
+const solution=(s,m,c)=>s.match(new RegExp(`.{${m}}`,'g')).map(v=>v[c-1]).join('')
 */
 ```
 
 ### qr code
-#### 
+#### 두 정수 q, r과 문자열 code가 주어질 때, code의 각 인덱스를 q로 나누었을 때 나머지가 r인 위치의 문자를 앞에서부터 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181903
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(q, r, code) {
+    var answer = '';
+    answer = [...code].filter((e, i) => i % q === r).join("");
+    return answer;
+}
 */
+
+const solution = (q, r, code) => [...code].filter((e, i) => i % q === r).join("");
 ```
 
 ### 문자 개수 세기
-#### 
+#### 알파벳 대소문자로만 이루어진 문자열 my_string이 주어질 때, my_string에서 'A'의 개수, my_string에서 'B'의 개수,..., my_string에서 'Z'의 개수, my_string에서 'a'의 개수, my_string에서 'b'의 개수,..., my_string에서 'z'의 개수를 순서대로 담은 길이 52의 정수 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181902
 ```javascript
 ```
 
