@@ -5,6 +5,7 @@ Link : [level0](https://school.programmers.co.kr/learn/challenges/training?order
 ### 문자열 출력하기
 #### 문자열 str이 주어질 때, str을 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181952
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -25,6 +26,7 @@ rl.on('line', function (line) {
 ### a와 b 출력하기
 #### 정수 a와 b가 주어집니다. 각 수를 입력받아 입출력 예와 같은 형식으로 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181951
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -45,6 +47,7 @@ rl.on('line', function (line) {
 ### 문자열 반복해서 출력하기
 #### 문자열 str과 정수 n이 주어집니다. str이 n번 반복된 문자열을 만들어 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181950
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -1576,37 +1579,58 @@ const solution = (q, r, code) => [...code].filter((e, i) => i % q === r).join(""
 ```
 
 ### 배열 만들기 1
-#### 
+#### 정수 n과 k가 주어졌을 때, 1 이상 n이하의 정수 중에서 k의 배수를 오름차순으로 저장한 배열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181901
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(n, k) {
+    const answer = [...new Array(n + 1).keys()].slice(1).filter(x => x % k === 0).sort((a, b) => a - b);
+    return answer;
+}
 */
+
+const solution = (n, k) => [...new Array(n + 1).keys()].slice(1).filter(x => x % k === 0).sort((a, b) => a - b);
 ```
 
 ### 글자 지우기
-#### 
+#### 문자열 my_string과 정수 배열 indices가 주어질 때, my_string에서 indices의 원소에 해당하는 인덱스의 글자를 지우고 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181900
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_string, indices) {
+    const answer = [...my_string].filter((e, i) => !indices.includes(i)).join("");
+    return answer;
+}
 */
+
+const solution = (my_string, indices) => [...my_string].filter((e, i) => !indices.includes(i)).join("");
 ```
 
 ### 카운트 다운
-#### 
+#### 정수 start와 end가 주어질 때, start에서 end까지 1씩 감소하는 수들을 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181899
 ```javascript
+/*
+function solution(start, end) {
+    var answer = [...new Array(start + 1).keys()].slice(end).sort((a, b) => b - a);
+    return answer;
+}
+*/
+
+const solution = (start, end) => [...new Array(start + 1).keys()].slice(end).sort((a, b) => b - a);
 ```
 
 ```javascript
 /* good
+
+2
+const solution = (start, end) => Array(start-end+1).fill(start).map((v,i)=>v-i);
 */
 ```
 
 ### 가까운 1 찾기
-#### 
+#### 정수 배열 arr가 주어집니다. 이때 arr의 원소는 1 또는 0입니다. 정수 idx가 주어졌을 때, idx보다 크면서 배열의 값이 1인 가장 작은 인덱스를 찾아서 반환하는 solution 함수를 완성해 주세요. 단, 만약 그러한 인덱스가 없다면 -1을 반환합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181898
 ```javascript
 ```
 
@@ -1616,7 +1640,13 @@ const solution = (q, r, code) => [...code].filter((e, i) => i % q === r).join(""
 ```
 
 ### 리스트 자르기
-#### 
+#### 정수 n과 정수 3개가 담긴 리스트 slicer 그리고 정수 여러 개가 담긴 리스트 num_list가 주어집니다. slicer에 담긴 정수를 차례대로 a, b, c라고 할 때, n에 따라 다음과 같이 num_list를 슬라이싱 하려고 합니다.
+> n = 1 : num_list의 0번 인덱스부터 b번 인덱스까지
+> n = 2 : num_list의 a번 인덱스부터 마지막 인덱스까지
+> n = 3 : num_list의 a번 인덱스부터 b번 인덱스까지
+> n = 4 : num_list의 a번 인덱스부터 b번 인덱스까지 c 간격으로
+#### 올바르게 슬라이싱한 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181897
 ```javascript
 ```
 
@@ -1626,17 +1656,28 @@ const solution = (q, r, code) => [...code].filter((e, i) => i % q === r).join(""
 ```
 
 ### 첫 번째로 나오는 음수
-#### 
+#### 정수 리스트 num_list가 주어질 때, 첫 번째로 나오는 음수의 인덱스를 return하도록 solution 함수를 완성해주세요. 음수가 없다면 -1을 return합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181896
 ```javascript
+/*
+function solution(num_list) {
+    var answer = num_list.indexOf(num_list.filter(x => x < 0)[0]);
+    return answer;
+}
+*/
+
+const solution = num_list => num_list.indexOf(num_list.filter(x => x < 0)[0]);
 ```
 
 ```javascript
 /* good
+const solution = num_list => num_list.findIndex(v => v < 0)
 */
 ```
 
 ### 배열 만들기 3
-#### 
+#### 정수 배열 arr와 2개의 구간이 담긴 배열 intervals가 주어집니다. intervals는 항상 [[a1, b1], [a2, b2]]의 꼴로 주어지며 각 구간은 닫힌 구간입니다. 닫힌 구간은 양 끝값과 그 사이의 값을 모두 포함하는 구간을 의미합니다. 이때 배열 arr의 첫 번째 구간에 해당하는 배열과 두 번째 구간에 해당하는 배열을 앞뒤로 붙여 새로운 배열을 만들어 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181895
 ```javascript
 ```
 

@@ -532,6 +532,83 @@ Set.prototype.values()                  // Set 객체에 요소가 삽입된 순
 */
 ```
 
+## WeakSet
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/WeakSet
+```javascript
+/* memo
+WeakSet 객체는 약하게 유지되는(held, 잡아두는) 객체를 컬렉션에 저장할 수 있습니다.
+WeakSet 객체는 객체 컬렉션입니다. WeakSet 내 객체는 오직 한 번만 발생할 수 있습니다. 즉, WeakSet 컬렉션 내에서 유일합니다.
+Set 객체와 주된 차이는 다음과 같습니다:
+Set과 달리, WeakSet은 객체 만의 컬렉션이며 모든 유형의 임의 값(의 컬렉션)은 아닙니다.
+WeakSet은 약합니다(weak): 컬렉션 내 객체 참조는 약하게 유지됩니다. WeakSet 내 저장된 객체에 다른 참조가 없는 경우, 쓰레기 수집(garbage collection)될 수 있습니다. 
+이는 또한 컬렉션 내 현재 저장된 객체 목록이 없음을 뜻합니다. WeakSets은 열거불가입니다.
+*/
+```
+
+```javascript
+/* memo
+WeakSet() constructor
+WeakSet.prototype.add()                 // 
+WeakSet.prototype.delete()              // 
+WeakSet.prototype.has()                 // 
+*/
+```
+
+## Map
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Map
+```javascript
+/* memo
+Map 객체는 키-값 쌍인 집합입니다. 한 Map에서의 키는 오직 단 하나만 존재 합니다. 
+Map 객체는 키-값 쌍으로 반복됩니다. for...of 루프는 각 반복에 대해 [key, value]로 이루어진 멤버가 2개인 배열을 반환합니다. 반복은 삽입한 순서대로 발생합니다. 
+즉, set() 메서드로 맵에 처음 삽입한 각각의 키-값 쌍 순서와 대응됩니다. (set()이 호출되었을때 맵에서 해당 키가 없었을 경우입니다)
+*/
+```
+
+```javascript
+/* memo
+Map.prototype[@@iterator]()             // Map 객체의 @@iterator 메서드는 반복가능 프로토콜을 구현하여 전개 구문와 for...of 루프같은 반복이 필요한  
+                                        // 대부분의 구문에서 맵을 사용할 수 있게 합니다. 맵의 키-값 쌍을 생성하는 반복자를 반환합니다.
+Map.prototype.clear()                   // Map 객체의 모든 요소를 제거합니다.
+Map.prototype.delete()                  // 키로 Map 객체에서 특정 요소를 제거합니다.
+Map.prototype.entries()                 // 새 반복자 객체를 반환합니다. 이 객체에는 Map 객체의 각 요소에 대한 [key, value] 쌍이 삽입 순서대로 포함됩니다.
+                                        // 이 특별한 경우, 이 반복자 객체도 반복이 가능하므로 for-of 루프를 사용할 수 있습니다. 
+                                        // [Symbol.iterator] 프로토콜이 사용될 경우, 호출될 때 반복자 자체를 반환하는 함수를 반환합니다.
+Map.prototype.forEach()                 // 삽입 순서에 따라 Map 객체의 각 키/값 쌍마다 한 번씩 제공된 함수를 실행합니다.
+Map.prototype.get()                     // Map 객체에서 특정 요소를 반환합니다. 만약 주어진 키와 관련된 값이 객체라면 해당 객체에 대한 참조만 가져오고, 
+                                        // 해당 객체에 대한 모든 변경은 Map 내에서 효율적으로 수정됩니다.
+Map.prototype.has()                     // 주어진 키에 해당하는 요소가 존재 여부를 가리키는 불리언 값을 반환합니다.
+Map.prototype.keys()                    // 배열에서 각 인덱스의 키를 포함하는 새로운 맵 반복자 (en-US) 객체를 반환합니다.
+Map.prototype.set()                     // Map 객체에서 주어진 키와 값을 추가하거나 업데이트합니다.
+Map.prototype.values()                  // 배열의 각 아이템의 값을 순회하는 새로운 맵 반복자 (en-US) 객체를 반환합니다.
+*/
+```
+
+## WeakMap
+> https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/WeakMap
+```javascript
+/* memo
+WeakMap 은 키/값 쌍의 모음으로, 키는 반드시 객체 또는 등록되지 않은 심볼이며 값은 임의의 JavaScript 타입입니다.
+WeakMap은 키에 대한 강력한 참조를 생성하지 않으므로, 객체가 WeakMap의 키에 포함되더라도 가비지 컬렉션의 대상이 됩니다. 
+키 객체가 가비지 컬렉터에 의해 정리된 후에는, 다른 곳에 강력한 참조가 존재하지 않는 한, 키에 연결됐던 값 또한 가비지 컬렉션 대상이 됩니다. 
+WeakMap의 키로 사용할 수 있는 유일한 원시 값은 심볼, 정확히는 등록되지 않은 심볼인데, 등록되지 않은 심볼은 고유함이 보장되며 다시 생성할 수 없기 때문입니다.
+
+WeakMap을 사용하면 값이 키를 참조하더라도 키 객체의 가비지 컬렉션을 방지하지 않는 방식으로 데이터를 객체에 연결할 수 있습니다. 
+그러나 WeakMap은 키의 활성 상태를 관찰하는 것을 허용하지 않으며, 이는 WeakMap의 키를 열거할 수 없는 이유입니다. 
+만약 WeakMap이 키 목록을 얻을 수 있는 어떤 메서드를 제공했다면, 그 목록은 가비지 컬렉션 상태에 따라 달라질 것이므로 비결정성이 발생합니다. 
+키 목록이 필요하면 WeakMap 대신 Map을 사용해야 합니다.
+*/
+```
+
+```javascript
+/* memo
+WeakMap() constructor
+WeakMap.prototype.delete()              // WeakMap 객체에서 특정 요소를 제거합니다.
+WeakMap.prototype.get()                 // WeakMap 객체에서 특정 요소를 반환합니다.
+WeakMap.prototype.has()                 // 지정된 키를 가진 요소가 WeakMap 객체에 존재하는지를 나타내는 불리언 값을 반환합니다.
+WeakMap.prototype.set()                 // 지정된 키와 값을 가진 새 요소를 WeakMap 객체에 추가합니다.
+*/ 
+```
+
 ## for
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Statements/for
 ```javascript

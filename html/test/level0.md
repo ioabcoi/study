@@ -2113,6 +2113,8 @@ function solution(bin1, bin2) {
 
 ### A로 B 만들기
 #### 문자열 before와 after가 매개변수로 주어질 때, before의 순서를 바꾸어 after를 만들 수 있으면 1을, 만들 수 없으면 0을 return 하도록 solution 함수를 완성해보세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/120886
+> blog
 ```javascript
 /*
 function solution(before, after) {
@@ -2124,7 +2126,7 @@ function solution(before, after) {
 const solution = (before, after) => before.split("").reverse().join("") === after ? 1 : 0;
 */
 
-/*
+/* 
 function solution(before, after) {
     var answer = 0;
     answer = [...before].sort().join("") === [...after].sort().join("") ? 1 : 0;
@@ -2189,11 +2191,12 @@ function solution(i, j, k) {
 ### 중복된 문자 제거
 #### 문자열 my_string이 매개변수로 주어집니다. my_string에서 중복된 문자를 제거하고 하나의 문자만 남긴 문자열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120888
+> blog
 ```javascript
 /*
 function solution(my_string) {
     let anwser = '';
-     answer = [...new Set(my_string)].join("");
+    answer = [...new Set(my_string)].join("");
     return answer;
 }
 */
@@ -2360,6 +2363,7 @@ function solution(my_string) {
 ### 영어가 싫어요
 #### 영어가 싫은 머쓱이는 영어로 표기되어있는 숫자를 수로 바꾸려고 합니다. 문자열 numbers가 매개변수로 주어질 때, numbers를 정수로 바꿔 return 하도록 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120894
+> blog
 ```javascript
 function solution(numbers) {    
     let answer = 0;
@@ -2542,6 +2546,7 @@ function solution(array) {
 ### 문자열 계산하기
 #### my_string은 "3 + 5"처럼 문자열로 된 수식입니다. 문자열 my_string이 매개변수로 주어질 때, 수식을 계산한 값을 return 하는 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120902
+> blog
 ```javascript
 function solution(my_string) {
     let answer = 0;
@@ -2625,6 +2630,7 @@ var solution=eval
 ### 배열의 유사도
 #### 두 배열이 얼마나 유사한지 확인해보려고 합니다. 문자열 배열 s1과 s2가 주어질 때 같은 원소의 개수를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120903
+> blog
 ```javascript
 /*
 function solution(s1, s2) {
@@ -2967,6 +2973,7 @@ function solution(my_string, n) {
 ### 문자열 밀기
 #### 문자열 "hello"에서 각 문자를 오른쪽으로 한 칸씩 밀고 마지막 문자는 맨 앞으로 이동시키면 "ohell"이 됩니다. 이것을 문자열을 민다고 정의한다면 문자열 A와 B가 매개변수로 주어질 때, A를 밀어서 B가 될 수 있다면 밀어야 하는 최소 횟수를 return하고 밀어서 B가 될 수 없으면 -1을 return 하도록 solution 함수를 완성해보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120921
+> blog
 ```javascript
 function solution(A, B) {
     let answer = 0;
