@@ -69,6 +69,7 @@ rl.on('line', function (line) {
 ### 대소문자 바꿔서 출력하기
 #### 영어 알파벳으로 이루어진 문자열 str이 주어집니다. 각 알파벳을 대문자는 소문자로 소문자는 대문자로 변환해서 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181949
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -89,6 +90,7 @@ rl.on('line', function (line) {
 ### 특수문자 출력하기
 #### 다음과 같이 출력하도록 코드를 작성해 주세요. ->>>> !@#$%^&*(\'"<>?:;
 > https://school.programmers.co.kr/learn/courses/30/lessons/181948
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -103,8 +105,9 @@ rl.on('close', function () {
 
 ### 덧셈식 출력하기
 #### 두 정수 a, b가 주어질 때 다음과 같은 형태의 계산식을 출력하는 코드를 작성해 보세요.
-> https://school.programmers.co.kr/learn/courses/30/lessons/181947
 > a + b = c
+> https://school.programmers.co.kr/learn/courses/30/lessons/181947
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -125,6 +128,7 @@ rl.on('line', function (line) {
 ### 문자열 붙여서 출력하기
 #### 두 개의 문자열 str1, str2가 공백으로 구분되어 입력으로 주어집니다. 입출력 예와 같이 str1과 str2을 이어서 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181946
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -146,6 +150,7 @@ rl.on('line', function (line) {
 ### 문자열 돌리기
 #### 문자열 str이 주어집니다. 문자열을 시계방향으로 90도 돌려서 아래 입출력 예와 같이 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181945
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -166,6 +171,7 @@ rl.on('line', function (line) {
 ### 홀짝 구분하기
 #### 자연수 n이 입력으로 주어졌을 때 만약 n이 짝수이면 "n is even"을, 홀수이면 "n is odd"를 출력하는 코드를 작성해 보세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181944
+> blog
 ```javascript
 const readline = require('readline');
 const rl = readline.createInterface({
@@ -186,6 +192,7 @@ rl.on('line', function (line) {
 ### 문자열 겹쳐쓰기
 #### 문자열 my_string, overwrite_string과 정수 s가 주어집니다. 문자열 my_string의 인덱스 s부터 overwrite_string의 길이만큼을 문자열 overwrite_string으로 바꾼 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181943
+> blog
 ```javascript
 /*
 function solution(my_string, overwrite_string, s) {
@@ -200,6 +207,7 @@ const solution = (my_string, overwrite_string, s) => `${my_string.substring(0, s
 ### 문자열 섞기
 #### 길이가 같은 두 문자열 str1과 str2가 주어집니다. 두 문자열의 각 문자가 앞에서부터 서로 번갈아가면서 한 번씩 등장하는 문자열을 만들어 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181942
+> blog
 ```javascript
 function solution(str1, str2) {
     let answer = [];
@@ -222,6 +230,7 @@ function solution(str1, str2) {
 ### 문자 리스트를 문자열로 변환하기
 #### 문자들이 담겨있는 배열 arr가 주어집니다. arr의 원소들을 순서대로 이어 붙인 문자열을 return 하는 solution함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181941
+> blog
 ```javascript
 /*
 function solution(arr) {
@@ -236,6 +245,7 @@ const solution = arr => arr.join("");
 ### 문자열 곱하기
 #### 문자열 my_string과 정수 k가 주어질 때, my_string을 k번 반복한 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181940
+> blog
 ```javascript
 /*
 function solution(my_string, k) {
@@ -254,6 +264,7 @@ const solution = (my_string, k) => my_string.repeat(k);
 > 양의 정수 a와 b가 주어졌을 때, a ⊕ b와 b ⊕ a 중 더 큰 값을 return 하는 solution 함수를 완성해 주세요.
 > 단, a ⊕ b와 b ⊕ a가 같다면 a ⊕ b를 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181939
+> blog
 ```javascript
 function solution(a, b) {
     const x = a.toString();
@@ -284,6 +295,7 @@ function solution(a, b) {
 > 양의 정수 a와 b가 주어졌을 때, a ⊕ b와 2 * a * b 중 더 큰 값을 return하는 solution 함수를 완성해 주세요.
 > 단, a ⊕ b와 2 * a * b가 같으면 a ⊕ b를 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181938
+> blog
 ```javascript
 function solution(a, b) {
     const x = a.toString();
@@ -967,7 +979,7 @@ function solution(l, r) {
 ```javascript
 /*
 function solution(start, end) {
-    var answer = [...new Array(end + 1).keys()].slice(start);
+    const answer = [...new Array(end + 1).keys()].slice(start);
     return answer;
 }
 */
@@ -1067,7 +1079,7 @@ function solution(arr) {
 ```javascript
 /*
 function solution(x1, x2, x3, x4) {
-    var answer = (x1 || x2) && (x3 || x4);
+    const answer = (x1 || x2) && (x3 || x4);
     return answer;
 }
 */
@@ -1263,8 +1275,7 @@ function solution(a, b, c, d) {
 ```javascript
 /*
 function solution(my_string, index_list) {
-    var answer = '';
-    answer = index_list.map(x => my_string.slice(x, x + 1)).join("");
+    const answer = index_list.map(x => my_string.slice(x, x + 1)).join("");
     return answer;
 }
 */
@@ -1286,8 +1297,7 @@ function solution(my_string, index_list) {
 ```javascript
 /*
 function solution(number) {
-    var answer = 0;
-    answer = number.split("").reduce((a, b) => parseInt(a) + parseInt(b)) % 9;
+    const answer = number.split("").reduce((a, b) => parseInt(a) + parseInt(b)) % 9;
     return answer;
 }
 */
@@ -1358,8 +1368,7 @@ function solution(my_string, queries) {
 ```javascript
 /*
 function solution(intStrs, k, s, l) {
-    var answer = [];
-    answer = intStrs.map(x => parseInt(x.toString().substring(s, s + l))).filter(x => x > k);
+    const answer = intStrs.map(x => parseInt(x.toString().substring(s, s + l))).filter(x => x > k);
     return answer;
 }
 */
@@ -1373,8 +1382,7 @@ const solution = (intStrs, k, s, l) => intStrs.map(x => parseInt(x.toString().su
 ```javascript
 /*
 function solution(my_strings, parts) {
-    var answer = '';
-    answer = my_strings.map((e, i) => e.substring(parts[i][0], parts[i][1] + 1)).join("");
+    const answer = my_strings.map((e, i) => e.substring(parts[i][0], parts[i][1] + 1)).join("");
     return answer;
 }
 */
@@ -1388,8 +1396,7 @@ const solution = (my_strings, parts) => my_strings.map((e, i) => e.substring(par
 ```javascript
 /*
 function solution(my_string, n) {
-    var answer = '';
-    answer = my_string.substring(my_string.length - n);
+    const answer = my_string.substring(my_string.length - n);
     return answer;
 }
 */
@@ -1403,8 +1410,7 @@ const solution = (my_string, n) => my_string.substring(my_string.length - n);
 ```javascript
 /*
 function solution(my_string) {
-    var answer = [];
-    answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).sort();
+    const answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).sort();
     return answer;
 }
 */
@@ -1433,8 +1439,7 @@ function solution(my_string) {
 ```javascript
 /*
 function solution(my_string, is_suffix) {
-    var answer = [];
-    answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).includes(is_suffix) === true ? 1: 0;
+    const answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(i, my_string.length)).includes(is_suffix) === true ? 1: 0;
     return answer;
 }
 */
@@ -1462,8 +1467,7 @@ function solution(my_string, is_suffix) {
 ```javascript
 /*
 function solution(my_string, n) {
-    var answer = '';
-    answer = my_string.substring(0, n);
+    const answer = my_string.substring(0, n);
     return answer;
 }
 */
@@ -1485,8 +1489,7 @@ function solution(my_string, n) {
 ```javascript
 /*
 function solution(my_string, is_prefix) {
-    var answer = [];
-    answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(0, i)).includes(is_prefix) === true ? 1: 0;
+    const answer = [...Array(my_string.length).keys()].fill(my_string).map((e, i) => e.slice(0, i)).includes(is_prefix) === true ? 1: 0;
     return answer;
 }
 */
@@ -1512,8 +1515,7 @@ function solution(my_string, is_prefix) {
 ```javascript
 /*
 function solution(my_string, s, e) {
-    var answer = '';
-    answer = `${my_string.substring(0, s)}${[...my_string.substring(s, e + 1)].reverse().join("")}${my_string.substring(e + 1, my_string.length)}`;
+    const answer = `${my_string.substring(0, s)}${[...my_string.substring(s, e + 1)].reverse().join("")}${my_string.substring(e + 1, my_string.length)}`;
     return answer;
 }
 */
@@ -1537,8 +1539,7 @@ const solution = (st, s, e) => st.slice(0,s)+st.slice(s, e+1).split('').reverse(
 ```javascript
 /*
 function solution(my_string, m, c) {
-    var answer = '';
-    answer = [...my_string].filter((e, i) => i % m === c - 1).join("");
+    const answer = [...my_string].filter((e, i) => i % m === c - 1).join("");
     return answer;
 }
 */
@@ -1558,8 +1559,7 @@ const solution=(s,m,c)=>s.match(new RegExp(`.{${m}}`,'g')).map(v=>v[c-1]).join('
 ```javascript
 /*
 function solution(q, r, code) {
-    var answer = '';
-    answer = [...code].filter((e, i) => i % q === r).join("");
+    const answer = [...code].filter((e, i) => i % q === r).join("");
     return answer;
 }
 */
@@ -1612,7 +1612,7 @@ const solution = (my_string, indices) => [...my_string].filter((e, i) => !indice
 ```javascript
 /*
 function solution(start, end) {
-    var answer = [...new Array(start + 1).keys()].slice(end).sort((a, b) => b - a);
+    const answer = [...new Array(start + 1).keys()].slice(end).sort((a, b) => b - a);
     return answer;
 }
 */
@@ -1661,7 +1661,7 @@ const solution = (start, end) => Array(start-end+1).fill(start).map((v,i)=>v-i);
 ```javascript
 /*
 function solution(num_list) {
-    var answer = num_list.indexOf(num_list.filter(x => x < 0)[0]);
+    const answer = num_list.indexOf(num_list.filter(x => x < 0)[0]);
     return answer;
 }
 */
@@ -1679,106 +1679,212 @@ const solution = num_list => num_list.findIndex(v => v < 0)
 #### 정수 배열 arr와 2개의 구간이 담긴 배열 intervals가 주어집니다. intervals는 항상 [[a1, b1], [a2, b2]]의 꼴로 주어지며 각 구간은 닫힌 구간입니다. 닫힌 구간은 양 끝값과 그 사이의 값을 모두 포함하는 구간을 의미합니다. 이때 배열 arr의 첫 번째 구간에 해당하는 배열과 두 번째 구간에 해당하는 배열을 앞뒤로 붙여 새로운 배열을 만들어 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181895
 ```javascript
+/*
+function solution(arr, intervals) {
+    const answer = [... arr.slice(intervals[0][0], intervals[0][1] + 1) , ... arr.slice(intervals[1][0], intervals[1][1] + 1)];
+    return answer;
+}
+*/
+
+const solution = (arr, intervals) => [... arr.slice(intervals[0][0], intervals[0][1] + 1) , ... arr.slice(intervals[1][0], intervals[1][1] + 1)];
 ```
 
 ```javascript
 /* good
+function solution(arr, intervals) {
+    const [[a,b],[c,d]] = intervals;
+    return [...arr.slice(a, b+1), ...arr.slice(c, d+1)];
+}
+
+const solution = (arr, [[s1, e1], [s2, e2]]) => (
+    [...arr.slice(s1, e1 + 1), ...arr.slice(s2, e2 + 1)]
+)
 */
 ```
 
 ### 2의 영역
-#### 
+#### 정수 배열 arr가 주어집니다. 배열 안의 2가 모두 포함된 가장 작은 연속된 부분 배열을 return 하는 solution 함수를 완성해 주세요. 단, arr에 2가 없는 경우 [-1]을 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181894
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(arr) {
+    const answer = arr.includes(2) ? [... arr.slice(arr.indexOf(2), arr.lastIndexOf(2) + 1)] : [-1];
+    return answer;
+}
 */
+
+const solution = arr => arr.includes(2) ? [... arr.slice(arr.indexOf(2), arr.lastIndexOf(2) + 1)] : [-1];
 ```
 
 ### 배열 조각하기
-#### 
+#### 정수 배열 arr와 query가 주어집니다. query를 순회하면서 다음 작업을 반복합니다.
+> 짝수 인덱스에서는 arr에서 query[i]번 인덱스를 제외하고 배열의 query[i]번 인덱스 뒷부분을 잘라서 버립니다.
+> 홀수 인덱스에서는 arr에서 query[i]번 인덱스는 제외하고 배열의 query[i]번 인덱스 앞부분을 잘라서 버립니다.
+#### 위 작업을 마친 후 남은 arr의 부분 배열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181893
 ```javascript
-```
-
-```javascript
-/* good
-*/
+function solution(arr, query) {
+    let answer = [...arr];
+    let array = [];
+    for (let i = 0; i < query.length; i++) {        
+        array = i % 2 === 0 ? answer.slice(0, query[i] + 1) : answer.slice(query[i], answer.length);
+        answer = array;
+        // console.log(query[i], answer);
+    }
+    return answer;
+}
 ```
 
 ### n 번째 원소부터
-#### 
+#### 정수 리스트 num_list와 정수 n이 주어질 때, n 번째 원소부터 마지막 원소까지의 모든 원소를 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181892
 ```javascript
+/*
+function solution(num_list, n) {
+    const answer = num_list.slice(n - 1, num_list.length);
+    return answer;
+}
+*/
+
+const solution = (num_list, n) => num_list.slice(n - 1, num_list.length);
 ```
 
 ```javascript
 /* good
+function solution(num_list, n) {
+    return num_list.slice(n - 1);
+}
 */
 ```
 
 ### 순서 바꾸기
-#### 
+#### 정수 리스트 num_list와 정수 n이 주어질 때, num_list를 n 번째 원소 이후의 원소들과 n 번째까지의 원소들로 나눠 n 번째 원소 이후의 원소들을 n 번째까지의 원소들 앞에 붙인 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181891
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_list, n) {
+    // const answer = num_list.slice(n).concat(num_list.slice(0, n));
+    const answer = [...num_list.slice(n), ...num_list.slice(0, n)];
+    return answer;
+}
 */
+
+// const solution = (num_list, n) => num_list.slice(n).concat(num_list.slice(0, n));
+const solution = (num_list, n) => [...num_list.slice(n), ...num_list.slice(0, n)];
 ```
 
 ### 왼쪽 오른쪽
-#### 
+#### 문자열 리스트 str_list에는 "u", "d", "l", "r" 네 개의 문자열이 여러 개 저장되어 있습니다. str_list에서 "l"과 "r" 중 먼저 나오는 문자열이 "l"이라면 해당 문자열을 기준으로 왼쪽에 있는 문자열들을 순서대로 담은 리스트를, 먼저 나오는 문자열이 "r"이라면 해당 문자열을 기준으로 오른쪽에 있는 문자열들을 순서대로 담은 리스트를 return하도록 solution 함수를 완성해주세요. "l"이나 "r"이 없다면 빈 리스트를 return합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181890
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(str_list) {
+    let answer = [];
+    let i = 0;
+    while (i <= str_list.length) {
+        if (str_list[i] === "l") {
+            return str_list.slice(0, i);
+        } else if (str_list[i] === "r") {
+            return str_list.slice(i + 1);
+        }
+        // console.log(i, str_list[i], answer);
+        i++;
+    }
+    return answer;
+}
 */
+
+function solution(str_list) {
+    const l = str_list.indexOf('l');
+    const r = str_list.indexOf('r');
+    const answer = l < 0 && r < 0 ? [] : 
+                   l < 0 ? str_list.slice(r + 1) : 
+                   r < 0 ? str_list.slice(0, l) : 
+                   r < l ? str_list.slice(r + 1) : str_list.slice(0, l);
+    // console.log(l, r, answer);
+    return answer;
+}
 ```
 
 ### n 번째 원소까지
-#### 
+#### 정수 리스트 num_list와 정수 n이 주어질 때, num_list의 첫 번째 원소부터 n 번째 원소까지의 모든 원소를 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181889
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_list, n) {
+    const answer = num_list.slice(0, n);
+    return answer;
+}
 */
+
+const solution = (num_list, n) => num_list.slice(0, n);
 ```
 
 ### n개 간격의 원소들
-#### 
+#### 정수 리스트 num_list와 정수 n이 주어질 때, num_list의 첫 번째 원소부터 마지막 원소까지 n개 간격으로 저장되어있는 원소들을 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181888
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_list, n) {
+    const answer = num_list.filter((e, i) => i % n === 0);
+    return answer;
+}
 */
+
+const solution = (num_list, n) => num_list.filter((e, i) => i % n === 0);
 ```
 
 ### 홀수 vs 짝수
-#### 
+#### 정수 리스트 num_list가 주어집니다. 가장 첫 번째 원소를 1번 원소라고 할 때, 홀수 번째 원소들의 합과 짝수 번째 원소들의 합 중 큰 값을 return 하도록 solution 함수를 완성해주세요. 두 값이 같을 경우 그 값을 return합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181887
 ```javascript
+function solution(num_list) {
+    const odd = num_list.filter((e, i) => i % 2 === 0).reduce((a, b) => a + b);
+    const even = num_list.filter((e, i) => i % 2 !== 0).reduce((a, b) => a + b);
+    const answer = odd > even ? odd : even;    
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(num_list) {
+    let even = 0;
+    let odd = 0;
+    num_list.map((v, idx) => {
+        !(idx % 2) ? even += v : odd += v; 
+    })
+    return odd > even ? odd : even; 
+}
 */
 ```
 
 ### 5명씩
-#### 
+#### 최대 5명씩 탑승가능한 놀이기구를 타기 위해 줄을 서있는 사람들의 이름이 담긴 문자열 리스트 names가 주어질 때, 앞에서 부터 5명씩 묶은 그룹의 가장 앞에 서있는 사람들의 이름을 담은 리스트를 return하도록 solution 함수를 완성해주세요. 마지막 그룹이 5명이 되지 않더라도 가장 앞에 있는 사람의 이름을 포함합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181886
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(names) {
+    const answer = names.filter((e, i) => i % 5 === 0);
+    return answer;
+}
 */
+
+const solution = names => names.filter((e, i) => i % 5 === 0);
 ```
 
 ### 할 일 목록
-#### 
+#### 오늘 해야 할 일이 담긴 문자열 배열 todo_list와 각각의 일을 지금 마쳤는지를 나타내는 boolean 배열 finished가 매개변수로 주어질 때, todo_list에서 아직 마치지 못한 일들을 순서대로 담은 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181885
 ```javascript
+/*
+function solution(todo_list, finished) {
+    const answer = todo_list.filter((e, i) => finished[i] === false);
+    return answer;
+}
+*/
+
+const solution = (todo_list, finished) => todo_list.filter((e, i) => finished[i] === false);
 ```
 
 ```javascript
@@ -1787,17 +1893,31 @@ const solution = num_list => num_list.findIndex(v => v < 0)
 ```
 
 ### n보다 커질 때까지 더하기
-#### 
+#### 정수 배열 numbers와 정수 n이 매개변수로 주어집니다. numbers의 원소를 앞에서부터 하나씩 더하다가 그 합이 n보다 커지는 순간 이때까지 더했던 원소들의 합을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181884
 ```javascript
+function solution(numbers, n) {
+    let answer = 0;
+    let i = 0;
+    while (answer <= n) {
+        answer = answer + numbers[i];
+        i++; 
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(numbers, n) {
+    return numbers.reduce((a,c,i,t)=>(a<=n)?a+c:a)
+}
 */
 ```
 
 ### 수열과 구간 쿼리 1
-#### 
+#### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 arr[i]에 1을 더합니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181883
 ```javascript
 ```
 

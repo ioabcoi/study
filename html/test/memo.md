@@ -193,7 +193,6 @@ const arrFromSet = [...set]
 const arrFromStr = [...str]
 const arrFromGene = [...gene]
 */
-*/
 ```
 
 ### 오름차순, 내림차순
