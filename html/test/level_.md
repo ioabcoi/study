@@ -1571,10 +1571,63 @@ const solution = (q, r, code) => [...code].filter((e, i) => i % q === r).join(""
 #### 알파벳 대소문자로만 이루어진 문자열 my_string이 주어질 때, my_string에서 'A'의 개수, my_string에서 'B'의 개수,..., my_string에서 'Z'의 개수, my_string에서 'a'의 개수, my_string에서 'b'의 개수,..., my_string에서 'z'의 개수를 순서대로 담은 길이 52의 정수 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181902
 ```javascript
+/*
+String.fromCharCode(65); // A
+String.fromCharCode(97); // a
+*/
+
+function solution(my_string) {
+    const uppercase = [...Array(26).keys()].fill(0).map((e, i) => 65 + i);
+    const lowercase = [...Array(26).keys()].fill(0).map((e, i) => 97 + i);
+    // console.log(uppercase, lowercase);
+    
+    const alphabet = [...uppercase, ...lowercase].map(e => [String.fromCharCode(e), 0]);
+    // console.log(answer);
+    
+    const map = new Map(alphabet);
+    // console.log(map);
+    
+    let value = 0;
+    [...my_string].forEach(function(e){
+        if (map.has(e)) {
+            value = map.get(e);
+            value++;
+            map.set(e, value);
+        }
+    });
+    // console.log(map);
+    
+    const answer = [...map.values()];    
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(m) {
+    var answer = [];
+    let al = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    let a = [];
+    a.length = 52;
+    a.fill(0);
+    m.split("").map((n)=>{
+        a[al.indexOf(n)]+=1
+    })
+    return a;
+}
+
+function solution(my_string) {
+    let alp = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var answer = new Array(52).fill(0);
+    for (let i = 0; i < my_string.length; i++) {
+        answer[alp.indexOf(my_string[i])]++;
+    }
+    return answer;
+}
+
+function solution(str) {
+    return [...str].reduce((p, c) => (p[c.charCodeAt() - (c === c.toLowerCase() ? 71 : 65)]++, p), Array(52).fill(0));
+}
 */
 ```
 
@@ -1927,17 +1980,22 @@ function solution(numbers, n) {
 ```
 
 ### 조건에 맞게 수열 변환하기 1
-#### 
+#### 정수 배열 arr가 주어집니다. arr의 각 원소에 대해 값이 50보다 크거나 같은 짝수라면 2로 나누고, 50보다 작은 홀수라면 2를 곱합니다. 그 결과인 정수 배열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181882
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(arr) {
+    const answer = arr.map(e => e >= 50 && e % 2 === 0 ? e / 2 : e < 50 && e % 2 !== 0 ? e * 2 : e);
+    return answer;
+}
 */
+
+const solution = arr => arr.map(e => e >= 50 && e % 2 === 0 ? e / 2 : e < 50 && e % 2 !== 0 ? e * 2 : e);
 ```
 
 ### 조건에 맞게 수열 변환하기 2
-#### 
+#### 정수 배열 arr가 주어집니다. arr의 각 원소에 대해 값이 50보다 크거나 같은 짝수라면 2로 나누고, 50보다 작은 홀수라면 2를 곱하고 다시 1을 더합니다. 이러한 작업을 x번 반복한 결과인 배열을 arr(x)라고 표현했을 때, arr(x) = arr(x + 1)인 x가 항상 존재합니다. 이러한 x 중 가장 작은 값을 return 하는 solution 함수를 완성해 주세요. 단, 두 배열에 대한 "="는 두 배열의 크기가 서로 같으며, 같은 인덱스의 원소가 각각 서로 같음을 의미합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181881
 ```javascript
 ```
 
@@ -1947,32 +2005,71 @@ function solution(numbers, n) {
 ```
 
 ### 1로 만들기
-#### 
+#### 정수가 있을 때, 짝수라면 반으로 나누고, 홀수라면 1을 뺀 뒤 반으로 나누면, 마지막엔 1이 됩니다. 예를 들어 10이 있다면 다음과 같은 과정으로 1이 됩니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181880
 ```javascript
+function func(obj) {
+    let i = 0;
+    let x = obj;
+    let y = 0;
+    while (x !== 1) {
+        y = x % 2 === 0 ? x / 2 : (x - 1) / 2;
+        x = y;
+        i++;
+    }
+    return i;
+}
+
+const solution = num_list => num_list.map(e => func(e)).reduce((a, b) => a + b);
 ```
 
 ```javascript
 /* good
+function solution(num_list) {
+    return num_list.map(v => v.toString(2).length - 1).reduce((a, c) => a + c);
+}
 */
 ```
 
 ### 길이에 따른 연산
-#### 
+#### 정수가 담긴 리스트 num_list가 주어질 때, 리스트의 길이가 11 이상이면 리스트에 있는 모든 원소의 합을 10 이하이면 모든 원소의 곱을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181879
 ```javascript
+/*
+function solution(num_list) {
+    const answer = num_list.length > 10 ? num_list.reduce((a, b) => a + b) : num_list.reduce((a, b) => a * b);
+    return answer;
+}
+*/
+
+const solution = num_list => num_list.length > 10 ? num_list.reduce((a, b) => a + b) : num_list.reduce((a, b) => a * b);
 ```
 
 ```javascript
 /* good
+const solution=n=>n.reduce((a,v)=>n.length>10?a+v:a*v)
 */
 ```
 
 ### 원하는 문자열 찾기
-#### 
+#### 알파벳으로 이루어진 문자열 myString과 pat이 주어집니다. myString의 연속된 부분 문자열 중 pat이 존재하면 1을 그렇지 않으면 0을 return 하는 solution 함수를 완성해 주세요. 단, 알파벳 대문자와 소문자는 구분하지 않습니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181878
 ```javascript
+/*
+function solution(myString, pat) {
+    const answer = myString.toUpperCase().includes(pat.toUpperCase()) ? 1 : 0;
+    return answer;
+}
+*/
+
+const solution = (myString, pat) => myString.toUpperCase().includes(pat.toUpperCase()) ? 1 : 0;
 ```
 
 ```javascript
 /* good
+function solution(myString, pat) {
+    return [...myString.matchAll(new RegExp(pat, 'ig'))].length >= 1 ? 1 : 0;
+}
 */
 ```
 
@@ -2006,47 +2103,82 @@ const solution = myString => myString.toLowerCase();
 ```
 
 ### 배열에서 문자열 대소문자 변환하기
-#### 
+#### 문자열 배열 strArr가 주어집니다. 모든 원소가 알파벳으로만 이루어져 있을 때, 배열에서 홀수번째 인덱스의 문자열은 모든 문자를 대문자로, 짝수번째 인덱스의 문자열은 모든 문자를 소문자로 바꿔서 반환하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181875
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(strArr) {
+    const answer = strArr.map((e, i) => i % 2 !== 0 ? e.toUpperCase() : e.toLowerCase());
+    return answer;
+}
 */
+
+const solution = strArr => strArr.map((e, i) => i % 2 !== 0 ? e.toUpperCase() : e.toLowerCase());
 ```
 
 ### A 강조하기
-#### 
+#### 문자열 myString이 주어집니다. myString에서 알파벳 "a"가 등장하면 전부 "A"로 변환하고, "A"가 아닌 모든 대문자 알파벳은 소문자 알파벳으로 변환하여 return 하는 solution 함수를 완성하세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181874
 ```javascript
+/*
+function solution(myString) {
+    const answer = [...myString].map(e => e === "A" ? e : e === "a" ? e.toUpperCase() : e.toLowerCase()).join("");
+    return answer;
+}
+*/
+
+const solution = myString => [...myString].map(e => e === "A" ? e : e === "a" ? e.toUpperCase() : e.toLowerCase()).join("");
 ```
 
 ```javascript
 /* good
+const solution=s=>s.toLowerCase().replaceAll('a','A');
 */
 ```
 
 ### 특정한 문자를 대문자로 바꾸기
-#### 
+#### 영소문자로 이루어진 문자열 my_string과 영소문자 1글자로 이루어진 문자열 alp가 매개변수로 주어질 때, my_string에서 alp에 해당하는 모든 글자를 대문자로 바꾼 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181873
 ```javascript
+/*
+function solution(my_string, alp) {
+    const answer = [...my_string].map(e => e === alp ? e.toUpperCase() : e).join("");
+    return answer;
+}
+*/
+
+const solution = (my_string, alp) => [...my_string].map(e => e === alp ? e.toUpperCase() : e).join("");
 ```
 
 ```javascript
 /* good
+const solution=(s,a)=>s.replaceAll(a,a.toUpperCase())
 */
 ```
 
 ### 특정 문자열로 끝나는 가장 긴 부분 문자열 찾기
-#### 
+#### 문자열 myString과 pat가 주어집니다. myString의 부분 문자열중 pat로 끝나는 가장 긴 부분 문자열을 찾아서 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181872
 ```javascript
+/*
+function solution(myString, pat) {
+    const answer = myString.slice(0, myString.lastIndexOf(pat) + pat.length);
+    return answer;
+}
+*/
+
+const solution = (myString, pat) => myString.slice(0, myString.lastIndexOf(pat) + pat.length);
 ```
 
 ```javascript
 /* good
+const solution = (str, pat) => str.substring(0, str.lastIndexOf(pat)) + pat
 */
 ```
 
 ### 문자열이 몇 번 등장하는지 세기
-#### 
+#### 문자열 myString과 pat이 주어집니다. myString에서 pat이 등장하는 횟수를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181871
 ```javascript
 ```
 
@@ -2056,102 +2188,210 @@ const solution = myString => myString.toLowerCase();
 ```
 
 ### ad 제거하기
-#### 
+#### 문자열 배열 strArr가 주어집니다. 배열 내의 문자열 중 "ad"라는 부분 문자열을 포함하고 있는 모든 문자열을 제거하고 남은 문자열을 순서를 유지하여 배열로 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181870
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(strArr) {
+    const answer = strArr.filter(e => !e.includes("ad"));
+    return answer;
+}
 */
+
+const solution = strArr => strArr.filter(e => !e.includes("ad"));
 ```
 
 ### 공백으로 구분하기 1
-#### 
+#### 단어가 공백 한 개로 구분되어 있는 문자열 my_string이 매개변수로 주어질 때, my_string에 나온 단어를 앞에서부터 순서대로 담은 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181869
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_string) {
+    const answer = my_string.split(" ");
+    return answer;
+}
 */
+
+const solution = my_string => my_string.split(" ");
 ```
 
 ### 공백으로 구분하기 2
-#### 
+#### 단어가 공백 한 개 이상으로 구분되어 있는 문자열 my_string이 매개변수로 주어질 때, my_string에 나온 단어를 앞에서부터 순서대로 담은 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181868
 ```javascript
+/*
+function solution(my_string) {
+    const answer = my_string.split(" ").filter(e => e !== "");
+    return answer;
+}
+*/
+
+const solution = my_string => my_string.split(" ").filter(e => e !== "");
 ```
 
 ```javascript
 /* good
+function solution(my_string) {
+    return my_string.split(' ').filter(v => v);
+}
+
+function solution(my_string) {
+    return my_string.trim().split(/ +/);
+}
 */
 ```
 
 ### x 사이의 개수
-#### 
+#### 문자열 myString이 주어집니다. myString을 문자 "x"를 기준으로 나눴을 때 나눠진 문자열 각각의 길이를 순서대로 저장한 배열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181867
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(myString) {
+    const answer = myString.split("x").map(e => e.length);
+    return answer;
+}
 */
+
+const solution = myString => myString.split("x").map(e => e.length);
 ```
 
 ### 문자열 잘라서 정렬하기
-#### 
+> 
+#### 문자열 myString이 주어집니다. "x"를 기준으로 해당 문자열을 잘라내 배열을 만든 후 사전순으로 정렬한 배열을 return 하는 solution 함수를 완성해 주세요. 단, 빈 문자열은 반환할 배열에 넣지 않습니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181866
 ```javascript
+/*
+function solution(myString) {
+    const answer = myString.split("x").sort().filter(e => e !== "");
+    return answer;
+}
+*/
+
+const solution = myString => myString.split("x").sort().filter(e => e !== "");
 ```
 
 ```javascript
 /* good
+const solution=s=>s.match(/[^x]+/g).sort()
 */
 ```
 
 ### 간단한 식 계산하기
-#### 
+#### 문자열 binomial이 매개변수로 주어집니다. binomial은 "a op b" 형태의 이항식이고 a와 b는 음이 아닌 정수, op는 '+', '-', '*' 중 하나입니다. 주어진 식을 계산한 정수를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181865
 ```javascript
+function solution(binomial) {
+    let answer = 0;
+    const [a, op, b] = binomial.split(" ");
+    switch (op) {
+        case "+" : 
+            answer = Number(a) + Number(b);
+            break;
+        case "-" : 
+            answer = Number(a) - Number(b);
+            break;
+        case "*" : 
+            answer = Number(a) * Number(b);
+            break;
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+const ops = {
+    '+': (a, b) => a + b,
+    '-': (a, b) => a - b,
+    '*': (a, b) => a * b,
+};
+function solution(binomial) {
+    const [a, op, b] = binomial.split(' ');
+    return ops[op](+a, +b);
+}
 */
 ```
 
 ### 문자열 바꿔서 찾기
-#### 
+#### 문자 "A"와 "B"로 이루어진 문자열 myString과 pat가 주어집니다. myString의 "A"를 "B"로, "B"를 "A"로 바꾼 문자열의 연속하는 부분 문자열 중 pat이 있으면 1을 아니면 0을 return 하는 solution 함수를 완성하세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181864
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(myString, pat) {
+    const answer = [...myString].map(e => e === "A" ? "B" : "A").join("").includes(pat) ? 1 : 0;
+    return answer;
+}
 */
+
+const solution = (myString, pat) => [...myString].map(e => e === "A" ? "B" : "A").join("").includes(pat) ? 1 : 0;
 ```
 
 ### rny_string
-#### 
+#### 'm'과 "rn"이 모양이 비슷하게 생긴 점을 활용해 문자열에 장난을 하려고 합니다. 문자열 rny_string이 주어질 때, rny_string의 모든 'm'을 "rn"으로 바꾼 문자열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181863
 ```javascript
+/*
+function solution(rny_string) {
+    const answer = rny_string.replaceAll("m", "rn");
+    return answer;
+}
+*/
+
+const solution = rny_string => rny_string.replaceAll("m", "rn");
 ```
 
 ```javascript
 /* good
+function solution(rny_string) {
+    return rny_string.replaceAll(/m/g, "rn");
+}
 */
 ```
 
 ### 세 개의 구분자
-#### 
+#### 임의의 문자열이 주어졌을 때 문자 "a", "b", "c"를 구분자로 사용해 문자열을 나누고자 합니다. 예를 들어 주어진 문자열이 "baconlettucetomato"라면 나눠진 문자열 목록은 ["onlettu", "etom", "to"] 가 됩니다. 문자열 myStr이 주어졌을 때 위 예시와 같이 "a", "b", "c"를 사용해 나눠진 문자열을 순서대로 저장한 배열을 return 하는 solution 함수를 완성해 주세요. 단, 두 구분자 사이에 다른 문자가 없을 경우에는 아무것도 저장하지 않으며, return할 배열이 빈 배열이라면 ["EMPTY"]를 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181862
 ```javascript
+function solution(myStr) {
+    const answer = myStr.split("").map(e => e === "a" || e === "b" || e === "c" ? " " : e).join("").split(" ").filter(e => e !== "");
+    return answer.length > 0 ? answer : ["EMPTY"];
+}
 ```
 
 ```javascript
 /* good
+function solution(myStr) {
+    const arr = myStr.split(/[abc]/).filter(e => e);
+    return arr.length == 0 ? ["EMPTY"] : arr;
+}
+
+const solution=s=>s.match(/[^a-c]+/g)||['EMPTY']
 */
 ```
 
 ### 배열의 원소만큼 추가하기
-#### 
+#### 아무 원소도 들어있지 않은 빈 배열 X가 있습니다. 양의 정수 배열 arr가 매개변수로 주어질 때, arr의 앞에서부터 차례대로 원소를 보면서 원소가 a라면 X의 맨 뒤에 a를 a번 추가하는 일을 반복한 뒤의 배열 X를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181861
 ```javascript
+/*
+function solution(arr) {
+    const answer = arr.map(e => Array(e).fill(e)).reduce((a, b) => a.concat(b));
+    return answer;
+}
+*/
+
+const solution = arr => arr.map(e => Array(e).fill(e)).reduce((a, b) => a.concat(b));
 ```
 
 ```javascript
 /* good
+function solution(arr) {
+    return arr.reduce((list, num) => [...list, ...new Array(num).fill(num)], []);
+}
+
+function solution(arr) {
+    return arr.reduce((a, c) => a.concat(Array(c).fill(c)), [])
+}
 */
 ```
 

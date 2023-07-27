@@ -689,6 +689,21 @@ while (condition) {
 */
 ```
 
+## switch
+```javascript
+switch (expression) {
+    case value1:
+        statements
+    case value2:
+        statements
+        // …
+    case valueN:
+        statements
+    default:
+        statements
+}
+```
+
 ## 최대공약수 gcd / 최소공배수 lcm 
 ```javascript
 /* memo 
