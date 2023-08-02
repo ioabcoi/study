@@ -61,6 +61,7 @@ Math.round(x)                               // 숫자에서 가장 가까운 정
 https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/BigInt
 BigInt()                                    // Number 원시 값이 안정적으로 나타낼 수 있는 최대치인 2^53 - 1보다 큰 정수를 표현할 수 있는 내장 객체입니다.
 parseInt()                                  // 문자열 인자를 파싱하여 특정 진수(수의 진법 체계에서 기준이 되는 값)의 정수를 반환합니다.
+parseFloat()                                // 주어진 값을 필요한 경우 문자열로 변환한 후 부동소수점 실수로 파싱해 반환합니다.
 
 Number(value)                               // 문자열이나 다른 값을 Number 타입으로 변환합니다. 만약 만약 인수를 숫자로 변환할 수 없으면 NaN을 리턴합니다.
 Number.isFinite()                           // 주어진 값이 유한수인지 판별합니다.

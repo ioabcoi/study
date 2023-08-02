@@ -322,6 +322,7 @@ function solution(a, b) {
 ### n의 배수
 #### 정수 num과 n이 매개 변수로 주어질 때, num이 n의 배수이면 1을 return n의 배수가 아니라면 0을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181937
+> blog
 ```javascript
 /*
 function solution(num, n) {
@@ -336,6 +337,7 @@ const solution = (num, n) => num % n === 0 ? 1 : 0;
 ### 공배수
 #### 정수 number와 n, m이 주어집니다. number가 n의 배수이면서 m의 배수이면 1을 아니라면 0을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181936
+> blog
 ```javascript
 /*
 function solution(number, n, m) {
@@ -358,6 +360,7 @@ function solution(number, n, m) {
 ### 홀짝에 따라 다른 값 반환하기
 #### 양의 정수 n이 매개변수로 주어질 때, n이 홀수라면 n 이하의 홀수인 모든 양의 정수의 합을 return 하고 n이 짝수라면 n 이하의 짝수인 모든 양의 정수의 제곱의 합을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181935
+> blog
 ```javascript
 /*
 function solution(n) {
@@ -393,6 +396,7 @@ function solution(n) {
 > "<", "!" : n < m
 #### 두 문자열 ineq와 eq가 주어집니다. ineq는 "<"와 ">"중 하나고, eq는 "="와 "!"중 하나입니다. 그리고 두 정수 n과 m이 주어질 때, n과 m이 ineq와 eq의 조건에 맞으면 1을 아니면 0을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181934
+> blog
 ```javascript
 /*
 function solution(ineq, eq, n, m) {
@@ -451,6 +455,7 @@ function solution(ineq, eq, n, m) {
 ### flag에 따라 다른 값 반환하기
 #### 두 정수 a, b와 boolean 변수 flag가 매개변수로 주어질 때, flag가 true면 a + b를 false면 a - b를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181933
+> blog
 ```javascript
 /*
 function solution(a, b, flag) {
@@ -480,6 +485,7 @@ const solution = (a, b, flag) => flag ? a + b : a - b;
 > > code[idx]가 "1"이면 mode를 1에서 0으로 바꿉니다.
 #### 문자열 code를 통해 만들어진 문자열 ret를 return 하는 solution 함수를 완성해 주세요. 단, 시작할 때 mode는 0이며, return 하려는 ret가 만약 빈 문자열이라면 대신 "EMPTY"를 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181932
+> blog
 ```javascript
 function solution(code) {
     let ret = [];
@@ -546,6 +552,7 @@ function solution(code) {
 ### 등차수열의 특정한 항만 더하기
 #### 두 정수 a, d와 길이가 n인 boolean 배열 included가 주어집니다. 첫째항이 a, 공차가 d인 등차수열에서 included[i]가 i + 1항을 의미할 때, 이 등차수열의 1항부터 n항까지 included가 true인 항들만 더한 값을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181931
+> blog
 ```javascript
 /*
 function solution(a, d, included) {
@@ -2396,97 +2403,217 @@ function solution(arr) {
 ```
 
 ### 빈 배열에 추가, 삭제하기
-#### 
+#### 아무 원소도 들어있지 않은 빈 배열 X가 있습니다. 길이가 같은 정수 배열 arr과 boolean 배열 flag가 매개변수로 주어질 때, flag를 차례대로 순회하며 flag[i]가 true라면 X의 뒤에 arr[i]를 arr[i] × 2 번 추가하고, flag[i]가 false라면 X에서 마지막 arr[i]개의 원소를 제거한 뒤 X를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181860
 ```javascript
+function solution(arr, flag) {
+    let result = [];
+    let answer = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (flag[i]) {
+            result = answer.concat(Array(arr[i] * 2).fill(arr[i]));
+            answer = result;
+        } else {
+            answer = result.slice(0, answer.length - arr[i]);
+        }
+        // console.log(answer);
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr, flag) {
+    return arr.reduce(
+        (prev, num, i) => (flag[i] ? [...prev, ...new Array(num * 2).fill(num)] : prev.slice(0, -num)),
+        [],
+    );
+}
 */
 ```
 
 ### 배열 만들기 6
-#### 
+#### 0과 1로만 이루어진 정수 배열 arr가 주어집니다. arr를 이용해 새로운 배열 stk을 만드려고 합니다. i의 초기값을 0으로 설정하고 i가 arr의 길이보다 작으면 다음을 반복합니다.
+> 만약 stk이 빈 배열이라면 arr[i]를 stk에 추가하고 i에 1을 더합니다.
+> stk에 원소가 있고, stk의 마지막 원소가 arr[i]와 같으면 stk의 마지막 원소를 stk에서 제거하고 i에 1을 더합니다.
+> stk에 원소가 있는데 stk의 마지막 원소가 arr[i]와 다르면 stk의 맨 마지막에 arr[i]를 추가하고 i에 1을 더합니다.
+#### 위 작업을 마친 후 만들어진 stk을 return 하는 solution 함수를 완성해 주세요. 단, 만약 빈 배열을 return 해야한다면 [-1]을 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181859
 ```javascript
+function solution(arr) {
+    let i = 0;
+    let stk = [];
+    let answer = [];
+    
+    for(let i = 0; i < arr.length; i++) {
+        if (stk === []) {
+            stk.push(arr[i]);
+        } else {
+            if (stk[stk.length - 1] === arr[i]) {
+                stk.pop();
+            } else {
+                stk.push(arr[i]);
+            }
+        }
+        answer = stk;
+    }
+    
+    return answer.length === 0 ? [-1] : answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr) {
+    const stk = [];
+    arr.forEach((num) => (stk.length === 0 || stk.at(-1) !== num ? stk.push(num) : stk.pop()));
+    return stk.length === 0 ? [-1] : stk;
+}
+
+function solution(arr) {
+    const stk = arr.reduce((a, c) => {
+        if (a.length > 0 && a[a.length - 1] === c) 
+            a.pop(); else a.push(c);
+        return a;
+    }, []);
+    return stk.length === 0 ? [-1] : stk;
+}
 */
 ```
 
 ### 무작위로 K개의 수 뽑기
-#### 
+#### 랜덤으로 서로 다른 k개의 수를 저장한 배열을 만드려고 합니다. 적절한 방법이 떠오르지 않기 때문에 일정한 범위 내에서 무작위로 수를 뽑은 후, 지금까지 나온적이 없는 수이면 배열 맨 뒤에 추가하는 방식으로 만들기로 합니다. 이미 어떤 수가 무작위로 주어질지 알고 있다고 가정하고, 실제 만들어질 길이 k의 배열을 예상해봅시다. 정수 배열 arr가 주어집니다. 문제에서의 무작위의 수는 arr에 저장된 순서대로 주어질 예정이라고 했을 때, 완성될 배열을 return 하는 solution 함수를 완성해 주세요. 단, 완성될 배열의 길이가 k보다 작으면 나머지 값을 전부 -1로 채워서 return 합니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181858
 ```javascript
+function solution(arr, k) {
+    const answer = [...new Set(arr)].slice(0, k);
+    return answer.length < k ? [...answer, ...new Array(k - answer.length).fill(-1)] : answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr, k) {
+    const set = new Set(arr);
+    return set.size < k ? [...set, ...Array(k - set.size).fill(-1)] : [...set].slice(0, k);
+}
 */
 ```
 
 ### 배열의 길이를 2의 거듭제곱으로 만들기
-#### 
+#### 정수 배열 arr이 매개변수로 주어집니다. arr의 길이가 2의 정수 거듭제곱이 되도록 arr 뒤에 정수 0을 추가하려고 합니다. arr에 최소한의 개수로 0을 추가한 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181857
 ```javascript
+function solution(arr) {
+    let i = 0;
+    while (Math.pow(2, i) < arr.length) {
+        // console.log(i, Math.pow(2, i), arr.length);
+        i++;
+    }
+    // console.log(i);
+    const answer = [...arr, ...new Array(Math.pow(2, i)).fill(0).slice(arr.length)];
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr) {
+    const length = arr.length;
+    const totalLength = 2 ** Math.ceil(Math.log2(length));
+    return [...arr, ...new Array(totalLength - length).fill(0)];
+}
 */
 ```
 
 ### 배열 비교하기
-#### 
+#### 이 문제에서 두 정수 배열의 대소관계를 다음과 같이 정의합니다. 
+> 두 배열의 길이가 다르다면, 배열의 길이가 긴 쪽이 더 큽니다.
+> 배열의 길이가 같다면 각 배열에 있는 모든 원소의 합을 비교하여 다르다면 더 큰 쪽이 크고, 같다면 같습니다.
+#### 두 정수 배열 arr1과 arr2가 주어질 때, 위에서 정의한 배열의 대소관계에 대하여 arr2가 크다면 -1, arr1이 크다면 1, 두 배열이 같다면 0을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181856
 ```javascript
-```
-
-```javascript
-/* good
-*/
+function solution(arr1, arr2) {
+    const reduce = (obj) => obj.reduce((a, b) => a + b);
+    const answer = arr1.length > arr2.length ? 1 : 
+                   arr2.length > arr1.length ? -1 : 
+                   reduce(arr1) > reduce(arr2) ? 1 : 
+                   reduce(arr2) > reduce(arr1) ? -1 : 0;
+    // console.log(arr1.length, arr2.length, reduce(arr1), reduce(arr2));
+    return answer;
+}
 ```
 
 ### 문자열 묶기
-#### 
+#### 문자열 배열 strArr이 주어집니다. strArr의 원소들을 길이가 같은 문자열들끼리 그룹으로 묶었을 때 가장 개수가 많은 그룹의 크기를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181855
 ```javascript
-```
-
-```javascript
-/* good
-*/
+function solution(strArr) {
+    const set = new Set(strArr.map(e => e.length));
+    const answer = new Array(set.size).fill(0);
+    strArr.map(e => answer[e.length - 1]++);
+    return answer.sort((a, b) => b - a)[0];
+    // return Math.max(...answer);
+}
 ```
 
 ### 배열의 길이에 따라 다른 연산하기
-#### 
+#### 정수 배열 arr과 정수 n이 매개변수로 주어집니다. arr의 길이가 홀수라면 arr의 모든 짝수 인덱스 위치에 n을 더한 배열을, arr의 길이가 짝수라면 arr의 모든 홀수 인덱스 위치에 n을 더한 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181854
 ```javascript
+/*
+function solution(arr, n) {
+    const answer = arr.length % 2 !== 0 ? arr.map((e, i) => i % 2 === 0 ? e + n : e) : arr.map((e, i) => i % 2 !== 0 ? e + n : e);
+    return answer;
+}
+*/
+
+const solution = (arr, n) => answer = arr.length % 2 !== 0 ? arr.map((e, i) => i % 2 === 0 ? e + n : e) : arr.map((e, i) => i % 2 !== 0 ? e + n : e);
 ```
 
 ```javascript
 /* good
+const solution = (arr, n) => arr.map((num, idx) => (
+    arr.length % 2 !== idx % 2 ? num + n : num 
+))
+
+const solution=(a,n)=>a.map((v,i)=>a.length%2^i%2?v+n:v)
 */
 ```
 
 ### 뒤에서 5등까지
-#### 
+#### 정수로 이루어진 리스트 num_list가 주어집니다. num_list에서 가장 작은 5개의 수를 오름차순으로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181853
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_list) {
+    const answer = num_list.sort((a, b) => a - b).slice(0, 5);
+    return answer;
+}
 */
+
+const solution = num_list => num_list.sort((a, b) => a - b).slice(0, 5);
 ```
 
 ### 뒤에서 5등 위로
-#### 
+#### 정수로 이루어진 리스트 num_list가 주어집니다. num_list에서 가장 작은 5개의 수를 제외한 수들을 오름차순으로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181852
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_list) {
+    const answer = num_list.sort((a, b) => a - b).slice(5);
+    return answer;
+}
 */
+
+const solution = num_list => num_list.sort((a, b) => a - b).slice(5);
 ```
 
 ### 전국 대회 선발 고사
-#### 
+#### 0번부터 n - 1번까지 n명의 학생 중 3명을 선발하는 전국 대회 선발 고사를 보았습니다. 등수가 높은 3명을 선발해야 하지만, 개인 사정으로 전국 대회에 참여하지 못하는 학생들이 있어 참여가 가능한 학생 중 등수가 높은 3명을 선발하기로 했습니다. 
+#### 각 학생들의 선발 고사 등수를 담은 정수 배열 rank와 전국 대회 참여 가능 여부가 담긴 boolean 배열 attendance가 매개변수로 주어집니다. 전국 대회에 선발된 학생 번호들을 등수가 높은 순서대로 각각 a, b, c번이라고 할 때 10000 × a + 100 × b + c를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181851
 ```javascript
 ```
 
@@ -2496,147 +2623,277 @@ function solution(arr) {
 ```
 
 ### 정수 부분
-#### 
+#### 실수 flo가 매개 변수로 주어질 때, flo의 정수 부분을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181850
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(flo) {
+    const answer = Math.trunc(flo);
+    return answer;
+}
 */
+
+const solution = flo => Math.trunc(flo);
 ```
 
 ### 문자열 정수의 합
-#### 
+#### 한 자리 정수로 이루어진 문자열 num_str이 주어질 때, 각 자리수의 합을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181849
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_str) {
+    // var answer = [...num_str].reduce((a, b) => parseInt(a) + parseInt(b));
+    var answer = num_str.split("").reduce((a, b) => parseInt(a) + parseInt(b));
+    return answer;
+}
 */
+
+// const solution = num_str => [...num_str].reduce((a, b) => parseInt(a) + parseInt(b));
+const solution = num_str => num_str.split("").reduce((a, b) => parseInt(a) + parseInt(b));
 ```
 
 ### 문자열을 정수로 변환하기
-#### 
+#### 숫자로만 이루어진 문자열 n_str이 주어질 때, n_str을 정수로 변환하여 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181848
 ```javascript
+/*
+function solution(n_str) {
+    var answer = parseInt(n_str);
+    return answer;
+}
+*/
+
+const solution = n_str => parseInt(n_str);
 ```
 
 ```javascript
 /* good
+function solution(n_str) {
+    return +n_str;
+}
+
+function solution(n_str) {
+    return Number(n_str);
+}
+
+const solution = Number
 */
 ```
 
 ### 0 떼기
-#### 
+#### 정수로 이루어진 문자열 n_str이 주어질 때, n_str의 가장 왼쪽에 처음으로 등장하는 0들을 뗀 문자열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181847
 ```javascript
+/*
+function solution(n_str) {
+    var answer = Number(n_str).toString();
+    return answer;
+}
+*/
+
+const solution = n_str => Number(n_str).toString();
 ```
 
 ```javascript
 /* good
+const solution=s=>+s+''
+
+const solution = (str) => String(Number(str))
+
+function solution(n_str) {
+    return String(n_str/1)
+}
 */
 ```
 
 ### 두 수의 합
-#### 
+#### 0 이상의 두 정수가 문자열 a, b로 주어질 때, a + b의 값을 문자열로 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181846
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(a, b) {
+    var answer = String(BigInt(a) + BigInt(b));
+    return answer;
+}
 */
+
+const solution = (a, b) => String(BigInt(a) + BigInt(b));
 ```
 
 ### 문자열로 변환
-#### 
+#### 정수 n이 주어질 때, n을 문자열로 변환하여 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181845
 ```javascript
+/*
+function solution(n) {
+    var answer = n.toString();
+    return answer;
+}
+*/
+
+const solution = n => n.toString();
 ```
 
 ```javascript
 /* good
+function solution(n) {
+    return n+"";
+}
+
+const solution = n => String(n)
+
+const solution = String
 */
 ```
 
 ### 배열의 원소 삭제하기
-#### 
+#### 정수 배열 arr과 delete_list가 있습니다. arr의 원소 중 delete_list의 원소를 모두 삭제하고 남은 원소들은 기존의 arr에 있던 순서를 유지한 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181844
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(arr, delete_list) {
+    var answer = arr.filter(e => !delete_list.includes(e));
+    return answer;
+}
 */
+
+const solution = (arr, delete_list) => arr.filter(e => !delete_list.includes(e));
 ```
 
 ### 부분 문자열인지 확인하기
-#### 
+#### 부분 문자열이란 문자열에서 연속된 일부분에 해당하는 문자열을 의미합니다. 예를 들어, 문자열 "ana", "ban", "anana", "banana", "n"는 모두 문자열 "banana"의 부분 문자열이지만, "aaa", "bnana", "wxyz"는 모두 "banana"의 부분 문자열이 아닙니다. 문자열 my_string과 target이 매개변수로 주어질 때, target이 문자열 my_string의 부분 문자열이라면 1을, 아니라면 0을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181843
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(my_string, target) {
+    var answer = my_string.includes(target) ? 1 : 0;
+    return answer;
+}
 */
+
+const solution = (my_string, target) => my_string.includes(target) ? 1 : 0;
 ```
 
 ### 부분 문자열
-#### 
+#### 어떤 문자열 A가 다른 문자열 B안에 속하면 A를 B의 부분 문자열이라고 합니다. 예를 들어 문자열 "abc"는 문자열 "aabcc"의 부분 문자열입니다. 문자열 str1과 str2가 주어질 때, str1이 str2의 부분 문자열이라면 1을 부분 문자열이 아니라면 0을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181842
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(str1, str2) {
+    var answer = str2.includes(str1) ? 1 : 0;
+    return answer;
+}
 */
+
+const solution = (str1, str2) => str2.includes(str1) ? 1 : 0;
 ```
 
 ### 꼬리 문자열
-#### 
+#### 문자열들이 담긴 리스트가 주어졌을 때, 모든 문자열들을 순서대로 합친 문자열을 꼬리 문자열이라고 합니다. 꼬리 문자열을 만들 때 특정 문자열을 포함한 문자열은 제외시키려고 합니다. 예를 들어 문자열 리스트 ["abc", "def", "ghi"]가 있고 문자열 "ef"를 포함한 문자열은 제외하고 꼬리 문자열을 만들면 "abcghi"가 됩니다. 문자열 리스트 str_list와 제외하려는 문자열 ex가 주어질 때, str_list에서 ex를 포함한 문자열을 제외하고 만든 꼬리 문자열을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181841
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(str_list, ex) {
+    var answer = str_list.filter(e => !e.includes(ex)).join("");
+    return answer;
+}
 */
+
+const solution = (str_list, ex) => str_list.filter(e => !e.includes(ex)).join("");
 ```
 
 ### 정수 찾기
-#### 
+#### 정수 리스트 num_list와 찾으려는 정수 n이 주어질 때, num_list안에 n이 있으면 1을 없으면 0을 return하도록 solution 함수를 완성해주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181840
 ```javascript
-```
-
-```javascript
-/* good
+/*
+function solution(num_list, n) {
+    var answer = num_list.includes(n) ? 1 : 0;
+    return answer;
+}
 */
+
+const solution = (num_list, n) => num_list.includes(n) ? 1 : 0;
 ```
 
 ### 주사위 게임 1
-#### 
+#### 1부터 6까지 숫자가 적힌 주사위가 두 개 있습니다. 두 주사위를 굴렸을 때 나온 숫자를 각각 a, b라고 했을 때 얻는 점수는 다음과 같습니다.
+> a와 b가 모두 홀수라면 a2 + b2 점을 얻습니다.
+> a와 b 중 하나만 홀수라면 2 × (a + b) 점을 얻습니다.
+> a와 b 모두 홀수가 아니라면 |a - b| 점을 얻습니다.
+#### 두 정수 a와 b가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181839
 ```javascript
+/*
+function solution(a, b) {
+    var answer = a % 2 !== 0 && b % 2 !== 0 ? Math.pow(a, 2) + Math.pow(b, 2) : a % 2 !== 0 || b % 2 !== 0 ? 2 * (a + b) : Math.abs(a - b);
+    return answer;
+}
+*/
+
+const solution = (a, b) => a % 2 !== 0 && b % 2 !== 0 ? Math.pow(a, 2) + Math.pow(b, 2) : a % 2 !== 0 || b % 2 !== 0 ? 2 * (a + b) : Math.abs(a - b);
 ```
 
 ```javascript
 /* good
+function solution(a, b) {
+    const isOdd = (num) => num % 2 === 1;
+    return isOdd(a) && isOdd(b) ? a ** 2 + b ** 2 : isOdd(a) || isOdd(b) ? 2 * (a + b) : Math.abs(a - b);
+}
 */
 ```
 
 ### 날짜 비교하기
-#### 
+#### 정수 배열 date1과 date2가 주어집니다. 두 배열은 각각 날짜를 나타내며 [year, month, day] 꼴로 주어집니다. 각 배열에서 year는 연도를, month는 월을, day는 날짜를 나타냅니다. 만약 date1이 date2보다 앞서는 날짜라면 1을, 아니면 0을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181838
 ```javascript
+/*
+function solution(date1, date2) {
+    var answer = date1[0] < date2[0] ? 1 : date1[0] === date2[0] && date1[1] < date2[1] ? 1 : date1[1] === date2[1] && date1[2] < date2[2] ? 1 : 0;
+    return answer;
+}
+*/
+
+const solution = (date1, date2) => date1[0] < date2[0] ? 1 : date1[0] === date2[0] && date1[1] < date2[1] ? 1 : date1[1] === date2[1] && date1[2] < date2[2] ? 1 : 0;
 ```
 
 ```javascript
 /* good
+function solution(date1, date2) {
+    return date1.join('') - date2.join('') < 0 ? 1 : 0;
+}
+
+function solution(date1, date2) {
+    return new Date(...date1) < new Date(...date2) ? 1 : 0;
+}
+
+const solution = (date1, date2) => new Date(date1) < new Date(date2) ? 1 : 0
 */
 ```
 
 ### 커피 심부름
-#### 
+#### 팀의 막내인 철수는 아메리카노와 카페 라테만 판매하는 카페에서 팀원들의 커피를 사려고 합니다. 아메리카노와 카페 라테의 가격은 차가운 것과 뜨거운 것 상관없이 각각 4500, 5000원입니다. 각 팀원에게 마실 메뉴를 적어달라고 하였고, 그 중에서 메뉴만 적은 팀원의 것은 차가운 것으로 통일하고 "아무거나"를 적은 팀원의 것은 차가운 아메리카노로 통일하기로 하였습니다. 각 직원이 적은 메뉴가 문자열 배열 order로 주어질 때, 카페에서 결제하게 될 금액을 return 하는 solution 함수를 작성해주세요. order의 원소는 아래의 것들만 들어오고, 각각의 의미는 다음과 같습니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181837
 ```javascript
+/*
+function solution(order) {
+    const answer = order.map(e => e.includes("americano") || e.includes("anything") ? 4500 : 5000).reduce((a, b) => a + b);
+    return answer;
+}
+*/
+
+const solution = order => order.map(e => e.includes("americano") || e.includes("anything") ? 4500 : 5000).reduce((a, b) => a + b);
 ```
 
 ```javascript
 /* good
+const solution = (order) => order.reduce((acc, cur) => acc + (cur.includes('latte') ? 5000 : 4500), 0)
 */
 ```
 
 ### 그림 확대
-#### 
+#### 직사각형 형태의 그림 파일이 있고, 이 그림 파일은 1 × 1 크기의 정사각형 크기의 픽셀로 이루어져 있습니다. 이 그림 파일을 나타낸 문자열 배열 picture과 정수 k가 매개변수로 주어질 때, 이 그림 파일을 가로 세로로 k배 늘린 그림 파일을 나타내도록 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181836
 ```javascript
 ```
 
