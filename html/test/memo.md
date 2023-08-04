@@ -328,7 +328,6 @@ console.log(pets.includes('at'));
 > https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String
 ```javascript
 /* memo
-String.fromCharCode()                       // UTF-16 코드 유닛의 시퀀스로부터 문자열을 생성해 반환합니다.
 String.prototype.concat()                   // 매개변수로 전달된 모든 문자열을 호출 문자열에 붙인 새로운 문자열을 반환합니다.
 String.prototype.split()                    // String 객체를 지정한 구분자를 이용하여 여러 개의 문자열로 나눕니다.
 String.prototype.slice()                    // 문자열의 일부를 추출하면서 새로운 문자열을 반환합니다.
@@ -355,6 +354,10 @@ String.prototype.trim()                     // 문자열 양 끝의 공백을 �
                                             // 여기서 말하는 공백이란 모든 공백문자(space, tab, NBSP 등)와 모든 개행문자(LF, CR 등)를 의미합니다.
 String.prototype.endsWith()                 // 어떤 문자열에서 특정 문자열로 끝나는지를 확인할 수 있으며, 그 결과를 true 혹은 false로 반환한다.
 String.prototype.startsWith()               // 어떤 문자열이 특정 문자로 시작하는지 확인하여 결과를 true 혹은 false로 반환합니다.
+String.fromCharCode()                       // UTF-16 코드 유닛의 시퀀스로부터 문자열을 생성해 반환합니다.
+String.fromCharCode(65, 66, 67);  // "ABC"
+String.fromCharCode(65); // A
+String.fromCharCode(97); // a
 */
 ```
 

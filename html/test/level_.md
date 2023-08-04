@@ -1692,10 +1692,23 @@ const solution = (start, end) => Array(start-end+1).fill(start).map((v,i)=>v-i);
 #### 정수 배열 arr가 주어집니다. 이때 arr의 원소는 1 또는 0입니다. 정수 idx가 주어졌을 때, idx보다 크면서 배열의 값이 1인 가장 작은 인덱스를 찾아서 반환하는 solution 함수를 완성해 주세요. 단, 만약 그러한 인덱스가 없다면 -1을 반환합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181898
 ```javascript
+/*
+function solution(arr, idx) {
+    const answer = arr.map((e, i) => i >= idx && e === 1 ? i : -1).findIndex(e => e !== -1);
+    return answer;
+}
+*/
+
+const solution = (arr, idx) => arr.map((e, i) => i >= idx && e === 1 ? i : -1).findIndex(e => e !== -1);
 ```
 
 ```javascript
 /* good
+function solution(arr, idx) {
+    return arr.findIndex((v, i) => idx <= i && v === 1);
+}
+
+const solution=(a,i)=>a.indexOf(1,i);
 */
 ```
 
@@ -1708,10 +1721,38 @@ const solution = (start, end) => Array(start-end+1).fill(start).map((v,i)=>v-i);
 #### 올바르게 슬라이싱한 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181897
 ```javascript
+function solution(n, slicer, num_list) {
+    const [a, b, c] = slicer;
+    let ansewr = [];
+    switch (n) {
+        case n = 1 :
+            answer = num_list.slice(0, b + 1);
+            break;
+        case n = 2 :
+            answer = num_list.slice(a, num_list.length + 1);
+            break;
+        case n = 3 :
+            answer = num_list.slice(a, b + 1);
+            break;
+        case n = 4 :
+            answer = num_list.slice(a, b + 1).filter((e, i) => i % c === 0);
+            break;        
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+const slices = {
+    1: (num_list, [a, b, c]) => num_list.slice(0, b + 1),
+    2: (num_list, [a, b, c]) => num_list.slice(a),
+    3: (num_list, [a, b, c]) => num_list.slice(a, b + 1),
+    4: (num_list, [a, b, c]) => num_list.slice(a, b + 1).filter((_, i) => i % c === 0),
+};
+function solution(n, slicer, num_list) {
+    return slices[n](num_list, slicer);
+}
 */
 ```
 
@@ -2869,6 +2910,37 @@ function solution(date1, date2) {
 
 const solution = (date1, date2) => new Date(date1) < new Date(date2) ? 1 : 0
 */
+
+/* GPT
+function solution(date1, date2) {
+    const [year1, month1, day1] = date1;
+    const [year2, month2, day2] = date2;
+
+    // 연도를 비교
+    if (year1 < year2) {
+        return 1;
+    } else if (year1 > year2) {
+        return 0;
+    }
+
+    // 연도가 같은 경우, 월을 비교
+    if (month1 < month2) {
+        return 1;
+    } else if (month1 > month2) {
+        return 0;
+    }
+
+    // 월이 같은 경우, 날짜를 비교
+    if (day1 < day2) {
+        return 1;
+    } else if (day1 > day2) {
+        return 0;
+    }
+
+    // 두 날짜가 같은 경우
+    return 0;
+}
+*/
 ```
 
 ### 커피 심부름
@@ -2895,45 +2967,88 @@ const solution = (order) => order.reduce((acc, cur) => acc + (cur.includes('latt
 #### 직사각형 형태의 그림 파일이 있고, 이 그림 파일은 1 × 1 크기의 정사각형 크기의 픽셀로 이루어져 있습니다. 이 그림 파일을 나타낸 문자열 배열 picture과 정수 k가 매개변수로 주어질 때, 이 그림 파일을 가로 세로로 k배 늘린 그림 파일을 나타내도록 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181836
 ```javascript
-```
-
-```javascript
-/* good
-*/
+function solution(picture, k) {
+    let result = [];
+    const answer = picture.map(x => [...x].map(y => y.repeat(k)).join(""));
+    answer.forEach(function(e){
+        for(let i = 0; i < k; i++) result.push(e);
+    });
+    return result;
+}
 ```
 
 ### 조건에 맞게 수열 변환하기 3
-#### 
+#### 정수 배열 arr와 자연수 k가 주어집니다. 만약 k가 홀수라면 arr의 모든 원소에 k를 곱하고, k가 짝수라면 arr의 모든 원소에 k를 더합니다. 이러한 변환을 마친 후의 arr를 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181835
 ```javascript
+/*
+function solution(arr, k) {
+    const answer = k % 2 !== 0 ? arr.map(e => e * k) : arr.map(e => e + k);
+    return answer;
+}
+*/
+
+const solution = (arr, k) => k % 2 !== 0 ? arr.map(e => e * k) : arr.map(e => e + k);
 ```
 
 ```javascript
 /* good
+const solution = (arr, k) => arr.map(v => k % 2 ? v * k : v + k)
 */
 ```
 
 ### l로 만들기
-#### 
+#### 알파벳 소문자로 이루어진 문자열 myString이 주어집니다. 알파벳 순서에서 "l"보다 앞서는 모든 문자를 "l"로 바꾼 문자열을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181834
 ```javascript
+/*
+function solution(myString) {
+    const answer = [...myString].map(e => e < "l" ? "l" : e).join("");
+    return answer;
+}
+*/
+
+const solution = myString => [...myString].map(e => e < "l" ? "l" : e).join("");
 ```
 
 ```javascript
 /* good
+const solution = myString => myString.replace(/[a-k]/g,'l')
 */
 ```
 
 ### 특별한 이차원 배열 1
-#### 
+#### 정수 n이 매개변수로 주어질 때, 다음과 같은 n × n 크기의 이차원 배열 arr를 return 하는 solution 함수를 작성해 주세요. arr[i][j] (0 ≤ i, j < n)의 값은 i = j라면 1, 아니라면 0입니다.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181833
 ```javascript
+function solution(n) {
+    let answer = new Array(n).fill(0).map(e => new Array(n).fill(0));
+    for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) answer[i][j] = i === j ? 1 : 0;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(n) {
+    const answer = Array.from(Array(n), () => Array(n).fill(0));
+    for (let i = 0; i < n; i++) {
+        answer[i][i] = 1;
+    }
+    return answer;
+}
+
+function solution(n) {
+    return Array(n).fill().map((_, i) => Array(n).fill().map(($, j) => i === j ? 1 : 0));
+}
+
+const solution=n=>Array.from({length:n},()=>Array(n).fill(0)).map((v,i)=>[...v.slice(0,i), 1, ...v.slice(i+1)]);
 */
 ```
 
 ### 정수를 나선형으로 배치하기
-#### 
+#### 양의 정수 n이 매개변수로 주어집니다. n × n 배열에 1부터 n2 까지 정수를 인덱스 [0][0]부터 시계방향 나선형으로 배치한 이차원 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181832
 ```javascript
 ```
 
@@ -2943,7 +3058,8 @@ const solution = (order) => order.reduce((acc, cur) => acc + (cur.includes('latt
 ```
 
 ### 특별한 이차원 배열 2
-#### 
+#### n × n 크기의 이차원 배열 arr이 매개변수로 주어질 때, arr이 다음을 만족하면 1을 아니라면 0을 return 하는 solution 함수를 작성해 주세요. 0 ≤ i, j < n인 정수 i, j에 대하여 arr[i][j] = arr[j][i]
+> https://school.programmers.co.kr/learn/courses/30/lessons/181831
 ```javascript
 ```
 
@@ -2953,7 +3069,8 @@ const solution = (order) => order.reduce((acc, cur) => acc + (cur.includes('latt
 ```
 
 ### 정사각형으로 만들기
-#### 
+#### 이차원 정수 배열 arr이 매개변수로 주어집니다. arr의 행의 수가 더 많다면 열의 수가 행의 수와 같아지도록 각 행의 끝에 0을 추가하고, 열의 수가 더 많다면 행의 수가 열의 수와 같아지도록 각 열의 끝에 0을 추가한 이차원 배열을 return 하는 solution 함수를 작성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181830
 ```javascript
 ```
 
@@ -2963,7 +3080,8 @@ const solution = (order) => order.reduce((acc, cur) => acc + (cur.includes('latt
 ```
 
 ### 이차원 배열 대각선 순회하기
-#### 
+#### 2차원 정수 배열 board와 정수 k가 주어집니다. i + j <= k를 만족하는 모든 (i, j)에 대한 board[i][j]의 합을 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181829
 ```javascript
 ```
 
