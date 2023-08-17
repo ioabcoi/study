@@ -601,6 +601,7 @@ function solution(a, d, included) {
 > 세 숫자가 모두 같다면 (a + b + c) × (a2 + b2 + c2 ) × (a3 + b3 + c3 )점을 얻습니다.
 #### 세 정수 a, b, c가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181930
+> blog
 ```javascript
 /*
 function solution(a, b, c) {
@@ -668,6 +669,7 @@ function solution(a, b, c) {
 ### 원소들의 곱과 합
 #### 정수가 담긴 리스트 num_list가 주어질 때, 모든 원소들의 곱이 모든 원소들의 합의 제곱보다 작으면 1을 크면 0을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181929
+> blog
 ```javascript
 /*
 function solution(num_list) {
@@ -696,6 +698,7 @@ function solution(num_list) {
 ### 이어 붙인 수
 #### 정수가 담긴 리스트 num_list가 주어집니다. num_list의 홀수만 순서대로 이어 붙인 수와 짝수만 순서대로 이어 붙인 수의 합을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181928
+> blog
 ```javascript
 /*
 function solution(num_list) {
@@ -727,6 +730,7 @@ function solution(num_list) {
 ### 마지막 두 원소
 #### 정수 리스트 num_list가 주어질 때, 마지막 원소가 그전 원소보다 크면 마지막 원소에서 그전 원소를 뺀 값을 마지막 원소가 그전 원소보다 크지 않다면 마지막 원소를 두 배한 값을 추가하여 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181927
+> blog
 ```javascript
 function solution(num_list) {
     const a = num_list[num_list.length - 1];
@@ -756,6 +760,7 @@ const solution=n=>[...n,n.at(-1)>n.at(-2)?n.at(-1)-n.at(-2):n.at(-1)*2];
 > "a" : n이 10 작아집니다.
 #### 위 규칙에 따라 n을 바꿨을 때 가장 마지막에 나오는 n의 값을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181926
+> blog
 ```javascript
 /*
 function solution(n, control) {
@@ -801,6 +806,7 @@ function solution(n, control) {
 > "a" : 수에 10을 뺀다.
 #### 그리고 매번 조작을 할 때마다 결괏값을 기록한 정수 배열이 numLog입니다. 즉, numLog[i]는 numLog[0]로부터 총 i번의 조작을 가한 결과가 저장되어 있습니다. 주어진 정수 배열 numLog에 대해 조작을 위해 입력받은 문자열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181925
+> blog
 ```javascript
 /*
 function solution (numLog) {
@@ -828,6 +834,7 @@ function solution(numLog) {
 ### 수열과 구간 쿼리 3
 #### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [i, j] 꼴입니다. 각 query마다 순서대로 arr[i]의 값과 arr[j]의 값을 서로 바꿉니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181924
+> blog
 ```javascript
 function solution(arr, queries) {
     let answer = [];
@@ -887,6 +894,7 @@ function solution(arr, queries) {
 ### 수열과 구간 쿼리 2
 #### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e, k] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 k보다 크면서 가장 작은 arr[i]를 찾습니다. 각 쿼리의 순서에 맞게 답을 저장한 배열을 반환하는 solution 함수를 완성해 주세요. 단, 특정 쿼리의 답이 존재하지 않으면 -1을 저장합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181923
+> blog
 ```javascript
 function solution(arr, queries) {
     let answer = [];
@@ -912,6 +920,7 @@ function solution(arr, queries) {
 ### 수열과 구간 쿼리 4
 #### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e, k] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 i가 k의 배수이면 arr[i]에 1을 더합니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181922
+> blog
 ```javascript
 function solution(arr, queries) {
     let answer = arr;
@@ -955,6 +964,7 @@ const solution=(a,q)=>q.length?solution(a.map((v,i)=>i>=q[0][0]&&i<=q[0][1]&&!(i
 ### 배열 만들기 2
 #### 정수 l과 r이 주어졌을 때, l 이상 r이하의 정수 중에서 숫자 "0"과 "5"로만 이루어진 모든 정수를 오름차순으로 저장한 배열을 return 하는 solution 함수를 완성해 주세요. 만약 그러한 정수가 없다면, -1이 담긴 배열을 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181921
+> blog
 ```javascript
 function solution(l, r) {
     let answer = [...new Array(r + 1).keys()].filter(x => x >= l).filter(x => x.toString().split("").every(e => e.includes('0') || e.includes('5')));
@@ -983,6 +993,7 @@ function solution(l, r) {
 ### 카운트 업
 #### 정수 start와 end가 주어질 때, start부터 end까지의 숫자를 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181920
+> blog
 ```javascript
 /*
 function solution(start, end) {
@@ -1006,6 +1017,7 @@ function solution(start, end) {
 ### 콜라츠 수열 만들기
 #### 모든 자연수 x에 대해서 현재 값이 x이면 x가 짝수일 때는 2로 나누고, x가 홀수일 때는 3 * x + 1로 바꾸는 계산을 계속해서 반복하면 언젠가는 반드시 x가 1이 되는지 묻는 문제를 콜라츠 문제라고 부릅니다. 그리고 위 과정에서 거쳐간 모든 수를 기록한 수열을 콜라츠 수열이라고 부릅니다. 계산 결과 1,000 보다 작거나 같은 수에 대해서는 전부 언젠가 1에 도달한다는 것이 알려져 있습니다. 임의의 1,000 보다 작거나 같은 양의 정수 n이 주어질 때 초기값이 n인 콜라츠 수열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181919
+> blog
 ```javascript
 function solution(n) {
     let answer = [n];
@@ -1038,6 +1050,7 @@ function solution(n, arr = []) {
 > stk에 원소가 있는데 stk의 마지막 원소가 arr[i]보다 크거나 같으면 stk의 마지막 원소를 stk에서 제거합니다.
 #### 위 작업을 마친 후 만들어진 stk를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181918
+> blog
 ```javascript
 function solution(arr) {
     let stk = [];
@@ -1083,6 +1096,7 @@ function solution(arr) {
 #### boolean 변수 x1, x2, x3, x4가 매개변수로 주어질 때, 다음의 식의 true/false를 return 하는 solution 함수를 작성해 주세요.
 > (x1 ∨ x2) ∧ (x3 ∨ x4)
 > https://school.programmers.co.kr/learn/courses/30/lessons/181917
+> blog
 ```javascript
 /*
 function solution(x1, x2, x3, x4) {
@@ -2228,10 +2242,22 @@ const solution = (str, pat) => str.substring(0, str.lastIndexOf(pat)) + pat
 #### 문자열 myString과 pat이 주어집니다. myString에서 pat이 등장하는 횟수를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181871
 ```javascript
+function solution(myString, pat) {
+    let answer = 0;
+    for (let i = 0; i < myString.length; i++) {
+        myString.slice(i, i + pat.length) === pat ? answer++ : answer;
+        // console.log(i, myString.slice(i, i + pat.length), pat);
+    }
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(myString, pat) {
+    const reg = new RegExp(`(?=${pat})`, "g")
+    return myString.match(reg)?.length || 0;
+}
 */
 ```
 
