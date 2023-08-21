@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/code.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <title>board</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="">
+
+    <style type="text/css">
+        body {background:#f1f1f1;font-family:'Nanum Gothic';}
+    
+        #header {position:relative;z-index:0;height:100px;background:red;}
+        #footer {position:relative;z-index:0;height:100px;background:red;}
+        #container {position:relative;z-index:1;width:1200px;margin:0 auto;padding:50px 0;}
+    
+        .goodsView {position:relative;z-index:0;width:900px;padding-right:300px;}
+        .goodsInformation {width:900px;min-height:2000px;background:#999;}
+        .goodsBar {position:absolute;z-index:0;left:900px;top:0;width:300px;background:#ffffff;transition:height 0.25s;-webkit-transition:height 0.25s;}
+        .goodsBar.fixed {position:fixed;left:50%;top:0;}
+    
+        .goodsTop {padding:20px;border-bottom:1px solid #f1f1f1;background:#ffffff;}
+        .goodsMiddle {padding:20px;background:#ffffff;}
+        .goodsMiddle .goodsSelect {min-height:100px;overflow-y:auto;background:#f1f1f1;transition:height 0.25s;-webkit-transition:height 0.25s;}
+        .goodsBottom {padding:20px;border-top:1px solid #f1f1f1;background:#ffffff;}
+    </style>
+    <div id="wrap">
+        <div id="header"></div>
+        <div id="container">
+            <div class="contents">
+                <div class="goodsView">
+                    <div class="goodsInformation"></div>
+                    <div class="goodsBar">
+                        <div class="goodsTop">
+                            상단내용<br />
+                            상단내용<br />
+                            상단내용<br />
+                            상단내용<br />
+                            상단내용<br />
+                            상단내용
+                        </div>
+                        <div class="goodsMiddle">
+                            <div class="goodsSelect">
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택<br />
+                                상품선택
+                            </div>
+                        </div>
+                        <div class="goodsBottom">
+                            하단내용<br />
+                            하단내용<br />
+                            하단내용<br />
+                            하단내용<br />
+                            하단내용<br />
+                            하단내용
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+    <script type="text/javascript">
+        const $win = $(window);
+        const $docu = $(document);
+
+        $win.bind('load resize scroll', function () {
+            $('.goodsBar').goodsBar();
+        });
+
+        jQuery.fn.goodsBar = function () {
+            return this.each(function () {
+                const win_w = $win.width();
+                const win_h = $win.height();
+                const win_s = $win.scrollTop();
+                const win_b = $docu.height() - win_h - win_s;
+
+                const contents_t = $('.contents').offset().top;
+                const container_padding = 50;
+                const header_t = $('#header').offset().top;
+                const footer_t = $('#footer').offset().top - container_padding;
+                const header_h = $('#header').outerHeight() + container_padding;
+                const footer_h = $('#footer').outerHeight() + container_padding;
+
+                const $goodsBar = $(this);
+                const $goodsTop = $goodsBar.find('.goodsTop');
+                const $goodsMiddle = $goodsBar.find('.goodsMiddle');
+                const $goodsSelect = $goodsMiddle.find('.goodsSelect');
+                const $goodsBottom = $goodsBar.find('.goodsBottom');
+
+                const goods_w = $goodsBar.width();
+                const goods_t = $goodsBar.offset().top;
+                const goodsTop_h = $goodsTop.outerHeight();
+                const goodsSelect_h = $goodsSelect.outerHeight();
+                const goodsBottom_h = $goodsBottom.outerHeight();
+                const goodsMiddle_padding = 20;
+                const min_h = 100;
+                let select_h;
+                let gap;
+
+                init();
+
+                function init() {
+                    if (win_h > 640) {
+                        if (win_s < contents_t) {
+                            $goodsBar.removeClass('fixed').attr('style', '');
+                            $goodsBar.css({ 'height': win_h - contents_t });
+                            $goodsSelect.css({ 'height': win_h - contents_t - goodsTop_h - goodsBottom_h - (goodsMiddle_padding * 2) });
+                        } 
+                        
+                        else if (win_s >= contents_t) {
+                            select_h = win_h - goodsTop_h - goodsBottom_h - 40;
+                            $goodsBar.addClass('fixed').css({ 'margin-left': goods_w, 'height': win_h });
+                            $goodsSelect.css({ 'height': select_h });
+
+                            if (win_b <= footer_h) {
+                                select_h = win_h - goodsTop_h - goodsBottom_h - 40 - (footer_h - win_b);
+                                gap = min_h - select_h;
+                                $goodsSelect.css({ 'height': select_h });
+
+                                if (select_h <= min_h && win_b == 0) {
+                                    $goodsBar.css({ 'height': win_h - (footer_h - win_b) + gap, 'margin-top': -gap });
+                                } else {
+                                    $goodsBar.css({ 'height': win_h - (footer_h - win_b), 'margin-top': 0 });
+                                }
+                            }
+                        }
+                    } else {
+                        $goodsSelect.attr('style', '');
+                    }
+                };
+
+            });
+        }
+    </script>
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../../common/js/code.js"></script>
+</body>
+</html>

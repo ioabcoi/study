@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <link rel="stylesheet" href="../../common/css/reset.css">
     <link rel="stylesheet" href="../../common/css/code.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <title>counting</title>
 </head>
 <body data-theme="light">
@@ -16,8 +17,233 @@
     <h1>counting</h1>
 
     <!-- code_area -->
-    <div class="code_tit">title</div>
+    <div class="code_tit">style1 - default, comma</div>
     <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    .num {display:inline-block;position:relative;z-index:0;background:#eee;}
+    .correct {display:inline-block;width:172px;height:63px;font-size:45px;line-height:63px;text-align:center;letter-spacing:2px;}
+    .shadow {position:absolute;z-index:0;left:0;top:0;display:inline-block;width:172px;height:63px;background:url("http://www.lotteworld.com/_img/info/time/clock_shadow.png") no-repeat;}
+</style>
+<div class="num">
+    <span class="correct count_num">130</span>
+    <span class="shadow"></span>
+</div>
+<div class="num">
+    <span class="correct count_comma">1300</span>
+    <span class="shadow"></span>
+</div>
+<script type="text/javascript" >
+    $(function(){
+        // style1 - comma
+        var $numCorrect_count_num = $('.count_num');
+        $({ Counter: 0 }).animate({ Counter: $numCorrect_count_num.text() }, {
+            duration: 1000,
+            step: function () {
+                $numCorrect_count_num.text(Math.ceil(this.Counter));
+            }
+        });
+
+        // style1 - comma
+        var $numCorrect_count_comma = $('.count_comma');
+        $({ Counter: 0 }).animate({ Counter: $numCorrect_count_comma.text() }, {
+            duration: 1000,
+            step: function () {
+                $numCorrect_count_comma.text(numberWithCommas(Math.ceil(this.Counter)));
+            }
+        });
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }        
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">style2 - default, comma</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .flex {display:flex;justify-content:space-between;margin:100px auto;width:50%;}
+    .flex .col {font-size:35px;font-weight:700;text-align:center;}
+</style>
+<div class="flex">
+	<div class="col">
+		<p class="count-num" data-count="7777">0</p>
+	</div>
+	<div class="col">
+		<p class="count-num" data-count="5555">0</p>
+	</div>
+	<div class="col">
+		<p class="count-num" data-count="3333">0</p>
+	</div>
+</div>
+<div class="flex">
+	<div class="col">
+		<p class="count-num-comma" data-count="7777">0</p>
+	</div>
+	<div class="col">
+		<p class="count-num-comma" data-count="5555">0</p>
+	</div>
+	<div class="col">
+		<p class="count-num-comma" data-count="3333">0</p>
+	</div>
+</div>
+<script type="text/javascript" >
+    $('.count-num').each(function() { // .count-num에 각각 적용
+        var $this = $(this),
+        countTo = $this.attr('data-count');
+        // $this = 첫번째~세번째 .count-num
+        // countTo = 첫번째~세번째 .count-num의 data-count 속성의 값(777,555,333)
+
+        $({ countNum: $this.text()}).animate({
+            countNum: countTo 
+            // countNum: $this.text() = 0, countNum: countTo = 777, 555, 333
+            // 0에서 countNum이 된다
+        },
+        {
+            duration: 1000, // 애니메이션이 완료될때까지 걸리는 시간
+            easing:'linear', // 애니메이션 효과 방식
+            step: function() { // 움직임 각 스텝별로 실행될 함수
+                $this.text(Math.floor(this.countNum));
+                // Math.floor -> this.countNum의 값을 정수로 만들어준다
+            },
+            complete: function() { // 움직임이 멈춘 후 실행될 함수
+                $this.text(this.countNum);
+                // this.countNum이 $this의 text값이 된다
+                //alert('finished');
+            }
+        });  
+    });
+
+    $('.count-num-comma').each(function() { // .count-num에 각각 적용
+        var $this = $(this),
+        countTo = $this.attr('data-count');
+        // $this = 첫번째~세번째 .count-num
+        // countTo = 첫번째~세번째 .count-num의 data-count 속성의 값(777,555,333)
+
+        $({ countNum: $this.text()}).animate({
+            countNum: countTo 
+            // countNum: $this.text() = 0, countNum: countTo = 777, 555, 333
+            // 0에서 countNum이 된다
+        },
+        {
+            duration: 1000, // 애니메이션이 완료될때까지 걸리는 시간
+            easing:'linear', // 애니메이션 효과 방식
+            step: function() { // 움직임 각 스텝별로 실행될 함수
+                var num = numberWithCommas(Math.floor(this.countNum));
+                $this.text(num);
+                // Math.floor -> this.countNum의 값을 정수로 만들어준다
+            },
+            complete: function() { // 움직임이 멈춘 후 실행될 함수
+                var num = numberWithCommas(Math.floor(this.countNum));
+                $this.text(num);
+                // this.countNum이 $this의 text값이 된다
+                //alert('finished');
+            }
+        });  
+    });
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">style3 - default, comma</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    .content {display:flex;justify-content:space-around;align-items:center;background:#030303;height:200px;}
+    .counter {font-size:50px;display:block;font-weight:bold;color:#fff;}
+</style>
+<div class="content">
+	<div class="counter counter_num" data-target="1000">0</div>
+	<div class="counter counter_num" data-target="500">0</div>
+	<div class="counter counter_num" data-target="700">0</div>
+	<div class="counter counter_num" data-target="999">0</div>
+</div>
+<div class="content">
+	<div class="counter counter_comma" data-target="1000000"></div>
+</div>
+<script type="text/javascript" >
+    const counters = document.querySelectorAll('.counter_num');
+    const speed = 200;
+    counters.forEach( counter => {
+        const animate = () => {
+            const value = +counter.getAttribute('data-target');
+            const data = +counter.innerText;
+
+            const time = value / speed;
+            if(data < value) {
+                counter.innerText = Math.ceil(data + time);
+                setTimeout(animate, 1);
+            }else{
+                counter.innerText = value;
+            }
+        }
+        animate();
+    });
+
+    function counterAnimationHandler() {
+	const counters = document.querySelectorAll('.counter_comma');
+	counters.forEach(counter => {
+		counter.innerText = '0' //set default counter value
+		counter.dataset.count = 0;
+		const updateCounter = () => {
+			const target = +counter.getAttribute('data-target') //define increase couter to it's data-target
+			const count = +counter.dataset.count //define increase couter on innerText
+			
+			const increment = target / 200 // define increment as counter increase value / speed
+			if (count < target) {
+				const newCount = Math.ceil(count + increment);
+				counter.dataset.count = newCount;
+				counter.innerText = numberWithCommas(newCount);
+				setTimeout(updateCounter, 1);
+			} else {
+				counter.innerText = numberWithCommas(target); //if default value is bigger that date-target, show data-target
+			}
+		}
+		updateCounter() //call the function event
+	})
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+	}
+}
+counterAnimationHandler();
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">title</div>
+    <div class="code_area" data-style="vertical">
         <!-- code_ui -->
         <div class="code_ui">
             <div class="code_ui_box">
@@ -75,7 +301,6 @@
 </div>
 <!-- // code_wrap -->
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="../../common/js/code.js"></script>
 </body>
 </html>

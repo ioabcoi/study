@@ -1117,6 +1117,7 @@ const solution = (x1, x2, x3, x4) => (x1 || x2) && (x3 || x4);
 > 네 주사위에 적힌 숫자가 모두 다르다면 나온 숫자 중 가장 작은 숫자 만큼의 점수를 얻습니다.
 #### 네 주사위를 굴렸을 때 나온 숫자가 정수 매개변수 a, b, c, d로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181916
+> blog
 ```javascript
 /*
 function solution(a, b, c, d) {
@@ -1293,6 +1294,7 @@ function solution(a, b, c, d) {
 ### 글자 이어 붙여 문자열 만들기
 #### 문자열 my_string과 정수 배열 index_list가 매개변수로 주어집니다. my_string의 index_list의 원소들에 해당하는 인덱스의 글자들을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181915
+> blog
 ```javascript
 /*
 function solution(my_string, index_list) {
@@ -1315,6 +1317,7 @@ function solution(my_string, index_list) {
 ### 9로 나눈 나머지
 #### 음이 아닌 정수를 9로 나눈 나머지는 그 정수의 각 자리 숫자의 합을 9로 나눈 나머지와 같은 것이 알려져 있습니다. 이 사실을 이용하여 음이 아닌 정수가 문자열 number로 주어질 때, 이 정수를 9로 나눈 나머지를 return 하는 solution 함수를 작성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181914
+> blog
 ```javascript
 /*
 function solution(number) {
@@ -1343,6 +1346,7 @@ const solution=n=>BigInt(n)%9n
 ### 문자열 여러 번 뒤집기
 #### 문자열 my_string과 이차원 정수 배열 queries가 매개변수로 주어집니다. queries의 원소는 [s, e] 형태로, my_string의 인덱스 s부터 인덱스 e까지를 뒤집으라는 의미입니다. my_string에 queries의 명령을 순서대로 처리한 후의 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181913
+> blog
 ```javascript
 function solution(my_string, queries) {
     let answer = '';
@@ -1386,6 +1390,7 @@ function solution(my_string, queries) {
 ### 배열 만들기 5
 #### 문자열 배열 intStrs와 정수 k, s, l가 주어집니다. intStrs의 원소는 숫자로 이루어져 있습니다. 배열 intStrs의 각 원소마다 s번 인덱스에서 시작하는 길이 l짜리 부분 문자열을 잘라내 정수로 변환합니다. 이때 변환한 정수값이 k보다 큰 값들을 담은 배열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181912
+> blog
 ```javascript
 /*
 function solution(intStrs, k, s, l) {
@@ -1400,6 +1405,7 @@ const solution = (intStrs, k, s, l) => intStrs.map(x => parseInt(x.toString().su
 ### 부분 문자열 이어 붙여 문자열 만들기
 #### 길이가 같은 문자열 배열 my_strings와 이차원 정수 배열 parts가 매개변수로 주어집니다. parts[i]는 [s, e] 형태로, my_string[i]의 인덱스 s부터 인덱스 e까지의 부분 문자열을 의미합니다. 각 my_strings의 원소의 parts에 해당하는 부분 문자열을 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181911
+> blog
 ```javascript
 /*
 function solution(my_strings, parts) {
@@ -1414,6 +1420,7 @@ const solution = (my_strings, parts) => my_strings.map((e, i) => e.substring(par
 ### 문자열의 뒤의 n글자
 #### 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string의 뒤의 n글자로 이루어진 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181910
+> blog
 ```javascript
 /*
 function solution(my_string, n) {

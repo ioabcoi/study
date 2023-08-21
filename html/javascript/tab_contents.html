@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/code.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <title>tab_contents</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>tab_contents</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">simple_tab - css</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* simple_tab */
+    .simple_tab .tab {display:-webkit-flex;display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;width:100%;}
+    .simple_tab .tab li {flex:1;}
+    .simple_tab .tab li .link {display:-webkit-flex;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:10px;border:1px solid #fff;background:#eee;color:#252525;font-size:20px;font-weight:300;text-align:center;text-decoration:none;}
+    .simple_tab .tab li.on .link {background-color:#fff;}
+    .simple_cont .cont {display:none;width:100%;background-color:#fff;}
+    .simple_cont .cont.on {display:block;}    
+</style>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">simple_tab - jQuery</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+
+<!-- simple_tab_cont -->
+<div class="simple_tab_cont jq">
+    <div class="simple_tab">
+        <ul class="tab">
+            <li class="on"><a href="#" class="link">탭1</a></li>
+            <li><a href="#" class="link">탭2</a></li>
+            <li><a href="#" class="link">탭3</a></li>
+        </ul>
+    </div>
+    <div class="simple_cont">
+        <div class="cont on">
+            탭1
+        </div>
+        <div class="cont">
+            탭2
+        </div>
+        <div class="cont">
+            탭3
+        </div>
+    </div>
+</div>
+<div class="simple_tab_cont jq">
+    <div class="simple_tab">
+        <ul class="tab">
+            <li class="on"><a href="#" class="link">탭1</a></li>
+            <li><a href="#" class="link off">탭2 - off</a></li>
+            <li><a href="http://naver.com" class="link">탭3 - naver</a></li>
+            <li><a href="http://naver.com" class="link" target="_blank">탭3 - naver 새창</a></li>
+        </ul>
+    </div>
+    <div class="simple_cont">
+        <div class="cont on">
+            탭1
+        </div>
+        <div class="cont">
+            탭2
+        </div>
+        <div class="cont">
+            탭3
+        </div>
+        <div class="cont">
+            탭4
+        </div>
+    </div>
+</div>
+<!-- //simple_tab_cont -->
+<script type="text/javascript">
+    // jQuery
+    jQuery('.simple_tab_cont.jq').each(function(){
+        var $simple_tab_cont = jQuery(this);
+        $simple_tab_cont.find('.simple_tab .tab li .link').click(function(){
+            if (!jQuery(this).attr('href').includes("http")) {
+                if (!jQuery(this).hasClass("off")) {
+                    $simple_tab_cont.find('.simple_tab .tab li').removeClass('on').eq(jQuery(this).parent().index()).addClass('on');
+                    $simple_tab_cont.find('.simple_cont .cont').removeClass('on').eq(jQuery(this).parent().index()).addClass('on');
+                }
+                return false;
+            }
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">simple_tab - javascript</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+
+<!-- simple_tab_cont -->
+<div class="simple_tab_cont js">
+    <div class="simple_tab">
+        <ul class="tab">
+            <li class="on"><a href="#" class="link">탭1</a></li>
+            <li><a href="#" class="link">탭2</a></li>
+            <li><a href="#" class="link">탭3</a></li>
+        </ul>
+    </div>
+    <div class="simple_cont">
+        <div class="cont on">
+            탭1
+        </div>
+        <div class="cont">
+            탭2
+        </div>
+        <div class="cont">
+            탭3
+        </div>
+    </div>
+</div>
+<div class="simple_tab_cont js">
+    <div class="simple_tab">
+        <ul class="tab">
+            <li class="on"><a href="#" class="link">탭1</a></li>
+            <li><a href="#" class="link off">탭2 - off</a></li>
+            <li><a href="http://naver.com" class="link">탭3 - naver</a></li>
+            <li><a href="http://naver.com" class="link" target="_blank">탭3 - naver 새창</a></li>
+        </ul>
+    </div>
+    <div class="simple_cont">
+        <div class="cont on">
+            탭1
+        </div>
+        <div class="cont">
+            탭2
+        </div>
+        <div class="cont">
+            탭3
+        </div>
+        <div class="cont">
+            탭4
+        </div>
+    </div>
+</div>
+<!-- //simple_tab_cont -->
+<script type="text/javascript">
+    // javascript
+    const simple_tab_cont = Array.prototype.slice.call(document.querySelectorAll(".simple_tab_cont.js"));
+    simple_tab_cont.forEach(function(tab_cont) {
+        const simple_tab = Array.prototype.slice.call(tab_cont.querySelectorAll(".simple_tab .tab li"));
+        const simple_cont = Array.prototype.slice.call(tab_cont.querySelectorAll(".simple_cont .cont"));
+        const tabOff = function () {
+            simple_tab.forEach(e => e.classList.remove("on"));
+            simple_cont.forEach(e => e.classList.remove("on"));
+        }
+        const tabOn = function (e, num) {
+            e.target.parentNode.classList.add("on");
+            simple_tab[num].classList.add("on");
+            simple_cont[num].classList.add("on");
+        }
+        simple_tab.forEach(function(element) {
+            element.querySelector(".link").addEventListener("click", function(e){
+                // console.log(simple_tab, e.target.parentElement, simple_tab.indexOf(e.target.parentElement));
+                if (e.currentTarget.getAttribute('href').indexOf('http') == -1) {
+                    e.preventDefault();
+                    if (!e.target.classList.contains("off")) {
+                        let idx = simple_tab.indexOf(e.target.parentElement);
+                        tabOff();
+                        tabOn(e, idx);
+                    }
+                }
+            });
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">title</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+</style>
+<script type="text/javascript">
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">title</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+</style>
+<script type="text/javascript">
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../../common/js/code.js"></script>
+</body>
+</html>

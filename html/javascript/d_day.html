@@ -28,7 +28,7 @@
 <div id="countdown" class="time">D-<strong>00</strong>, <strong>00</strong>:<strong>00</strong>:<strong>00</strong></div>
 <script type="text/javascript" >
     // Set the date we're counting down to
-    var countDownDate = new Date("May 21, 2023 15:10:00").getTime();
+    var countDownDate = new Date("May 21, 2025 15:10:00").getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function() {
@@ -46,7 +46,7 @@
         var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // num 
-        days = pad(days, 2);
+        days = pad(days, 3);
         hours = pad(hours, 2);
         minutes = pad(minutes, 2);
         seconds = pad(seconds, 2);
@@ -118,7 +118,7 @@
 </div>
 <script type="text/javascript" >
     // D-day 설정
-    var dday = new Date("May 21, 2023 15:10:00").getTime();
+    var dday = new Date("May 21, 2025 15:10:00").getTime();
     var y = setInterval(function() {
         // 초기화
         $(".time_cnt em").html('');
