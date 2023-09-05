@@ -1435,6 +1435,7 @@ const solution = (my_string, n) => my_string.substring(my_string.length - n);
 ### 접미사 배열
 #### 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다. 문자열 my_string이 매개변수로 주어질 때, my_string의 모든 접미사를 사전순으로 정렬한 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181909
+> blog
 ```javascript
 /*
 function solution(my_string) {
@@ -1464,6 +1465,7 @@ function solution(my_string) {
 ### 접미사인지 확인하기
 #### 어떤 문자열에 대해서 접미사는 특정 인덱스부터 시작하는 문자열을 의미합니다. 예를 들어, "banana"의 모든 접미사는 "banana", "anana", "nana", "ana", "na", "a"입니다. 문자열 my_string과 is_suffix가 주어질 때, is_suffix가 my_string의 접미사라면 1을, 아니면 0을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181908
+> blog
 ```javascript
 /*
 function solution(my_string, is_suffix) {
@@ -1492,6 +1494,7 @@ function solution(my_string, is_suffix) {
 ### 문자열의 앞의 n글자
 #### 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string의 앞의 n글자로 이루어진 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181907
+> blog
 ```javascript
 /*
 function solution(my_string, n) {
@@ -1514,6 +1517,7 @@ function solution(my_string, n) {
 ### 접두사인지 확인하기
 #### 어떤 문자열에 대해서 접두사는 특정 인덱스까지의 문자열을 의미합니다. 예를 들어, "banana"의 모든 접두사는 "b", "ba", "ban", "bana", "banan", "banana"입니다. 문자열 my_string과 is_prefix가 주어질 때, is_prefix가 my_string의 접두사라면 1을, 아니면 0을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181906
+> blog
 ```javascript
 /*
 function solution(my_string, is_prefix) {
@@ -1540,6 +1544,7 @@ function solution(my_string, is_prefix) {
 ### 문자열 뒤집기
 #### 문자열 my_string과 정수 s, e가 매개변수로 주어질 때, my_string에서 인덱스 s부터 인덱스 e까지를 뒤집은 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181905
+> blog
 ```javascript
 /*
 function solution(my_string, s, e) {
@@ -1564,6 +1569,7 @@ const solution = (st, s, e) => st.slice(0,s)+st.slice(s, e+1).split('').reverse(
 ### 세로 읽기
 #### 문자열 my_string과 두 정수 m, c가 주어집니다. my_string을 한 줄에 m 글자씩 가로로 적었을 때 왼쪽부터 세로로 c번째 열에 적힌 글자들을 문자열로 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181904
+> blog
 ```javascript
 /*
 function solution(my_string, m, c) {
@@ -1584,6 +1590,7 @@ const solution=(s,m,c)=>s.match(new RegExp(`.{${m}}`,'g')).map(v=>v[c-1]).join('
 ### qr code
 #### 두 정수 q, r과 문자열 code가 주어질 때, code의 각 인덱스를 q로 나누었을 때 나머지가 r인 위치의 문자를 앞에서부터 순서대로 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181903
+> blog
 ```javascript
 /*
 function solution(q, r, code) {
@@ -1598,6 +1605,7 @@ const solution = (q, r, code) => [...code].filter((e, i) => i % q === r).join(""
 ### 문자 개수 세기
 #### 알파벳 대소문자로만 이루어진 문자열 my_string이 주어질 때, my_string에서 'A'의 개수, my_string에서 'B'의 개수,..., my_string에서 'Z'의 개수, my_string에서 'a'의 개수, my_string에서 'b'의 개수,..., my_string에서 'z'의 개수를 순서대로 담은 길이 52의 정수 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181902
+> blog
 ```javascript
 /*
 String.fromCharCode(65); // A
@@ -1662,6 +1670,7 @@ function solution(str) {
 ### 배열 만들기 1
 #### 정수 n과 k가 주어졌을 때, 1 이상 n이하의 정수 중에서 k의 배수를 오름차순으로 저장한 배열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181901
+> blog
 ```javascript
 /*
 function solution(n, k) {
@@ -1676,6 +1685,7 @@ const solution = (n, k) => [...new Array(n + 1).keys()].slice(1).filter(x => x %
 ### 글자 지우기
 #### 문자열 my_string과 정수 배열 indices가 주어질 때, my_string에서 indices의 원소에 해당하는 인덱스의 글자를 지우고 이어 붙인 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181900
+> blog
 ```javascript
 /*
 function solution(my_string, indices) {
@@ -1690,6 +1700,7 @@ const solution = (my_string, indices) => [...my_string].filter((e, i) => !indice
 ### 카운트 다운
 #### 정수 start와 end가 주어질 때, start에서 end까지 1씩 감소하는 수들을 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181899
+> blog
 ```javascript
 /*
 function solution(start, end) {
@@ -1712,6 +1723,7 @@ const solution = (start, end) => Array(start-end+1).fill(start).map((v,i)=>v-i);
 ### 가까운 1 찾기
 #### 정수 배열 arr가 주어집니다. 이때 arr의 원소는 1 또는 0입니다. 정수 idx가 주어졌을 때, idx보다 크면서 배열의 값이 1인 가장 작은 인덱스를 찾아서 반환하는 solution 함수를 완성해 주세요. 단, 만약 그러한 인덱스가 없다면 -1을 반환합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181898
+> blog
 ```javascript
 /*
 function solution(arr, idx) {
@@ -1741,6 +1753,7 @@ const solution=(a,i)=>a.indexOf(1,i);
 > n = 4 : num_list의 a번 인덱스부터 b번 인덱스까지 c 간격으로
 #### 올바르게 슬라이싱한 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181897
+> blog
 ```javascript
 function solution(n, slicer, num_list) {
     const [a, b, c] = slicer;
@@ -1780,6 +1793,7 @@ function solution(n, slicer, num_list) {
 ### 첫 번째로 나오는 음수
 #### 정수 리스트 num_list가 주어질 때, 첫 번째로 나오는 음수의 인덱스를 return하도록 solution 함수를 완성해주세요. 음수가 없다면 -1을 return합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181896
+> blog
 ```javascript
 /*
 function solution(num_list) {
@@ -1800,6 +1814,7 @@ const solution = num_list => num_list.findIndex(v => v < 0)
 ### 배열 만들기 3
 #### 정수 배열 arr와 2개의 구간이 담긴 배열 intervals가 주어집니다. intervals는 항상 [[a1, b1], [a2, b2]]의 꼴로 주어지며 각 구간은 닫힌 구간입니다. 닫힌 구간은 양 끝값과 그 사이의 값을 모두 포함하는 구간을 의미합니다. 이때 배열 arr의 첫 번째 구간에 해당하는 배열과 두 번째 구간에 해당하는 배열을 앞뒤로 붙여 새로운 배열을 만들어 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181895
+> blog
 ```javascript
 /*
 function solution(arr, intervals) {
@@ -1827,6 +1842,7 @@ const solution = (arr, [[s1, e1], [s2, e2]]) => (
 ### 2의 영역
 #### 정수 배열 arr가 주어집니다. 배열 안의 2가 모두 포함된 가장 작은 연속된 부분 배열을 return 하는 solution 함수를 완성해 주세요. 단, arr에 2가 없는 경우 [-1]을 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181894
+> blog
 ```javascript
 /*
 function solution(arr) {

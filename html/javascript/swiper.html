@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <link rel="stylesheet" href="../../common/css/reset.css">
+    <link rel="stylesheet" href="../../common/css/code.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <title>swiper</title>
+</head>
+<body data-theme="light">
+
+<!-- code_wrap -->
+<div class="code_wrap">
+    <h1>swiper</h1>
+
+    <!-- code_area -->
+    <div class="code_tit">common</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+https://swiperjs.com/<br><br>
+
+https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.css<br>
+https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css<br>
+https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.js<br>
+https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<style>
+    /* swiper */
+    .swiper {width:100%;height:100%;}
+    .swiper-slide {display:flex;justify-content:center;align-items:center;font-size:18px;text-align:center;}
+    .swiper-slide .swiper-slide img {display:block;width:100%;height:100%;object-fit:cover;}
+</style>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">swiper</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* cont_swiper */
+    .cont_swiper {width:200px;height:200px;margin:10px auto;background:#eee;}
+</style>
+<!-- cont_swiper -->
+<div class="cont_swiper cont_swiper_bullets">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!-- // cont_swiper -->
+<!-- cont_swiper -->
+<div class="cont_swiper cont_swiper_fraction">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!-- // cont_swiper -->
+<!-- cont_swiper -->
+<div class="cont_swiper cont_swiper_progressbar">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!-- // cont_swiper -->
+<!-- cont_swiper -->
+<div class="cont_swiper cont_swiper_scrollbar">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+<!-- // cont_swiper -->
+<!-- cont_swiper -->
+<div class="cont_swiper cont_swiper_vertical">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+<!-- // cont_swiper -->
+<script type="text/javascript">
+    // cont_swiper_bullets
+    const cont_swiper_bullets = new Array;
+    jQuery(".cont_swiper_bullets").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("cont_swiper_bullets" + i);
+        const this_swiper = ".cont_swiper_bullets" + i;
+        const this_next = this_swiper + " .swiper-button-next";
+        const this_prev = this_swiper + " .swiper-button-prev";
+        const this_pager = this_swiper + " .swiper-pagination";
+        cont_swiper_bullets[i] = new Swiper(this_swiper + " .swiper", {
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+            pagination: {
+                el: this_pager,
+                type: "bullets",
+            },
+        });
+    });
+
+    // cont_swiper_fraction
+    const cont_swiper_fraction = new Array;
+    jQuery(".cont_swiper_fraction").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("cont_swiper_fraction" + i);
+        const this_swiper = ".cont_swiper_fraction" + i;
+        const this_next = this_swiper + " .swiper-button-next";
+        const this_prev = this_swiper + " .swiper-button-prev";
+        const this_pager = this_swiper + " .swiper-pagination";
+        cont_swiper_bullets[i] = new Swiper(this_swiper + " .swiper", {
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+            pagination: {
+                el: this_pager,
+                type: "fraction",
+            },
+        });
+    });
+    
+    // cont_swiper_progressbar
+    const cont_swiper_progressbar = new Array;
+    jQuery(".cont_swiper_progressbar").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("cont_swiper_progressbar" + i);
+        const this_swiper = ".cont_swiper_progressbar" + i;
+        const this_next = this_swiper + " .swiper-button-next";
+        const this_prev = this_swiper + " .swiper-button-prev";
+        const this_pager = this_swiper + " .swiper-pagination";
+        cont_swiper_bullets[i] = new Swiper(this_swiper + " .swiper", {
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+            pagination: {
+                el: this_pager,
+                type: "progressbar",
+            },
+        });
+    });
+    
+    // cont_swiper_scrollbar
+    const cont_swiper_scrollbar = new Array;
+    jQuery(".cont_swiper_scrollbar").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("cont_swiper_scrollbar" + i);
+        const this_swiper = ".cont_swiper_scrollbar" + i;
+        const this_next = this_swiper + " .swiper-button-next";
+        const this_prev = this_swiper + " .swiper-button-prev";
+        const this_pager = this_swiper + " .swiper-pagination";
+        const this_scrollbar = this_swiper + " .swiper-scrollbar";
+        cont_swiper_scrollbar[i] = new Swiper(this_swiper + " .swiper", {
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+            pagination: {
+                el: this_pager,
+                type: "custom",
+            },
+            scrollbar: {
+                el: this_scrollbar,
+                hide: true,
+            },
+        });
+    });
+    
+    // cont_swiper_vertical
+    const cont_swiper_vertical = new Array;
+    jQuery(".cont_swiper_vertical").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("cont_swiper_vertical" + i);
+        const this_swiper = ".cont_swiper_vertical" + i;
+        const this_next = this_swiper + " .swiper-button-next";
+        const this_prev = this_swiper + " .swiper-button-prev";
+        const this_pager = this_swiper + " .swiper-pagination";
+        const this_scrollbar = this_swiper + " .swiper-scrollbar";
+        cont_swiper_vertical[i] = new Swiper(this_swiper + " .swiper", {
+            direction: "vertical",
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+            pagination: {
+                el: this_pager,
+                type: "fraction",
+            },
+            scrollbar: {
+                el: this_scrollbar,
+                hide: true,
+            },
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">mousewheel</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* mousewheel_swiper */
+    .mousewheel_swiper {position:relative;width:400px;height:400px;background:#eee;margin:0 auto;}
+    .mousewheel_swiper:after {opacity:1;position:absolute;z-index:1;left:0;top:0;content:"scroll me";display:-webkit-flex;display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:rgba(0,0,0,0.6);color:#fff;font-size:20px;text-align:center;-webkit-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
+    .mousewheel_swiper:hover:after {opacity:0;z-index:0;}
+</style>
+<!-- mousewheel_swiper -->
+<div class="mousewheel_swiper">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!-- // mousewheel_swiper -->
+<script type="text/javascript">
+    // mousewheel_swiper
+    const mousewheel_swiper_array = new Array;
+    jQuery(".mousewheel_swiper").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("mousewheel_swiper" + i);
+        const this_swiper = ".mousewheel_swiper" + i;
+        const this_pager = this_swiper + " .swiper-pagination";
+        mousewheel_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
+            direction: "vertical",
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            mousewheel: true,
+            pagination: {
+                el: this_pager,
+                clickable: true,
+            },
+        });
+        mousewheel_swiper_array[i].on('slideNextTransitionStart', function() {
+            $this_swiper.addClass("dontMove");
+        });
+        mousewheel_swiper_array[i].on('slideNextTransitionEnd', function() {
+            setTimeout(function(){
+                $this_swiper.removeClass("dontMove");
+            }, 10);
+        });
+        $this_swiper.on("mousewheel", function(e){
+            e.preventDefault();
+            if( !$this_swiper.hasClass("dontMove") ) {
+                if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+                    mousewheel_swiper_array[i].slidePrev();
+                } else {
+                    mousewheel_swiper_array[i].slideNext();
+                }
+            }
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">custom</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* custom_swiper */
+    .custom_tab ul {display:-webkit-flex;display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;width:500px;margin:0 auto;}
+    .custom_tab ul li {flex:1;}
+    .custom_tab ul li a {display:-webkit-flex;display:flex;align-items:center;justify-content:center;padding:10px;border:1px solid #333;background:#d1d1d1;color:#252525;font-size:20px;font-weight:300;text-align:center;text-decoration:none;box-sizing:border-box;}
+    .custom_tab ul li a strong {font-weight:700;}
+    .custom_tab ul li + li a {border-left:0;}
+    .custom_tab ul li.on a {background:#fff;color:#557ee9;font-weight:700;}
+    .custom_swiper {position:relative;width:500px;height:300px;background:#eee;margin:0 auto;}
+</style>
+<!-- custom_swiper -->
+<div class="custom_wrap">
+    <div class="custom_tab">
+        <ul>
+            <li class="on"><a href="#" class="tab_box">1</a></li>
+            <li><a href="#" class="tab_box">2</a></li>
+            <li><a href="#" class="tab_box">3</a></li>
+        </ul>
+    </div>
+    <!-- custom_swiper -->
+    <div class="custom_swiper">
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+</div>
+<!-- // custom_swiper -->
+<script type="text/javascript">
+    // cont_swiper_tab
+    const custom_swiper_array = new Array;
+    jQuery(".custom_wrap").each(function(i){
+        jQuery(this).find(".custom_tab").addClass("custom_tab" + i);
+        const $this_tab = jQuery(".custom_tab" + i).find(" ul li");
+        const $this_swiper = jQuery(this).find(".custom_swiper");
+        $this_swiper.addClass("custom_swiper" + i);
+        const this_swiper = ".custom_swiper" + i;
+        const this_next = this_swiper + " .swiper-button-next";
+        const this_prev = this_swiper + " .swiper-button-prev";
+        custom_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                pauseOnMouseEnter: true,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+        });
+        custom_swiper_array[i].on('slidePrevTransitionStart slideNextTransitionStart', function(swiper) {
+            activeTab(swiper.realIndex);
+        });
+        function activeTab(num){
+            $this_tab.removeClass("on");
+            $this_tab.eq(num).addClass("on");
+        }
+        $this_tab.find(".tab_box").bind("click", function(){
+            let idx = jQuery(this).parent().index();
+            activeTab(idx);
+            custom_swiper_array[i].slideTo(idx);
+            return false;
+        });
+        $this_tab.bind("mouseenter", function(){
+            custom_swiper_array[i].stop();
+        }).bind("mouseleave", function(){
+            custom_swiper_array[i].start();
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">table</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* table_swiper */
+    .table_swiper {position:relative;box-sizing:border-box;width:100%;border:1px solid #ccc;}
+    .table_swiper .swiper-slide div {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;box-sizing:border-box;width:100%;background:#fff;}
+    .table_swiper .swiper-slide div em {display:block;flex:1;box-sizing:border-box;height:40px;padding:8px 0;color:#494949;font-size:14px;font-weight:300;text-align:center;}
+    .table_swiper .swiper-slide div em + em {border-left:1px solid #ccc;}
+    .table_swiper .swiper-slide + .swiper-slide div em {border-top:1px solid #ccc;}
+    .table_swiper.head {z-index:1;}
+    .table_swiper.head .swiper-slide em {background:#ebebeb;}
+    .table_swiper.body {overflow:hidden;height:120px;margin-top:-1px;}
+    .table_swiper.body .swiper {margin-top:-1px;}
+</style>
+<!-- table_swiper -->
+<div class="table_swiper head">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><div><em>No.</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></div></div>
+        </div>
+    </div>
+</div>
+<div class="table_swiper body">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><div><em>1</em><em>ㅇㅇㅇ</em><em>ㅇㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></div></div>
+            <div class="swiper-slide"><div><em>2</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></div></div>
+            <div class="swiper-slide"><div><em>3</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em></div></div>
+            <div class="swiper-slide"><div><em>4</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></div></div>
+            <div class="swiper-slide"><div><em>5</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></div></div>
+            <div class="swiper-slide"><div><em>6</em><em>ㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇㅇㅇ</em><em>ㅇㅇ</em><em>ㅇㅇ</em></div></div>
+        </div>
+    </div>
+</div>
+<!-- // table_swiper -->
+<script type="text/javascript">
+    // table_swiper
+    const table_swiper_array = new Array;
+    jQuery(".table_swiper").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("table_swiper" + i);
+        const this_swiper = ".table_swiper" + i;
+        table_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
+            direction: "vertical",
+            loop: true,
+			slidesPerView: 3,
+            height: 120,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">vertical</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* vertical_swiper */
+    .vertical_swiper {position:relative;width:100%;height:150px;background:rgba(0,0,0,0.1);}
+    .vertical_swiper .swiper .swiper-slide p {padding:30px;color:#000;font-size:20px;text-align:center;}
+    .vertical_swiper .swiper .swiper-slide p span {display:block;color:#000;font-size:16px;}
+</style>
+<!-- vertical_swiper -->
+<div class="vertical_swiper">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><p>후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></div>
+            <div class="swiper-slide"><p>222후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></div>
+            <div class="swiper-slide"><p>333후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></div>
+        </div>
+    </div>
+</div>
+<!-- // vertical_swiper -->
+<script type="text/javascript">
+    // vertical_swiper
+    const vertical_swiper_array = new Array;
+    jQuery(".vertical_swiper").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("vertical_swiper" + i);
+        const this_swiper = ".vertical_swiper" + i;
+        vertical_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
+            direction: "vertical",
+            loop: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+        });
+    });
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">ticker</div>
+    <div class="code_area" data-style="">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* ticker_swiper */
+    .ticker_swiper {position:relative;width:100%;height:180px;}
+    .ticker_swiper .swiper-wrapper {transition-timing-function:linear;}
+    .ticker_swiper .swiper .swiper-slide {width:130px;text-align:center;}
+</style>
+<!-- ticker_swiper -->
+<div class="ticker_swiper">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=1" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=2" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=3" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=4" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=5" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=6" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=7" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=8" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=9" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=10" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=11" alt="" /></div>
+            <div class="swiper-slide"><img src="https://source.unsplash.com/random/120x180?sig=12" alt="" /></div>
+        </div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+</div>
+<!-- // ticker_swiper -->
+<script type="text/javascript">
+    // ticker_swiper
+    const ticker_swiper_array = new Array;
+    jQuery(".ticker_swiper").each(function(i){
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("ticker_swiper" + i);
+        const this_swiper = ".ticker_swiper" + i;
+        const this_scrollbar = this_swiper + " .swiper-scrollbar";
+        ticker_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
+            loop: true,
+            slidesPerView: "auto",
+            allowTouchMove: false,
+			autoplay: {
+                delay: 1,
+                speed: 50000,
+                disableOnInteraction: false,
+            },
+            scrollbar: {
+                el: this_scrollbar,
+                hide: true,
+            },
+        });
+    });
+    /*
+    // ticker_swiper_array
+    var ticker_swiper_array = new Array;
+    jQuery(".ticker_swiper").each(function(i){
+        jQuery(this).addClass("ticker_swiper" + i);
+        var $this_swiper = jQuery(".ticker_swiper" + i);
+        ticker_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
+            minswipers: 10,
+            maxswipers: 10,
+            swiperWidth: 120,
+            swiperMargin: 10,
+            ticker: true,
+            autoDirection: "prev",
+            speed: 20000
+        });
+    });
+        const this_scrollbar = this_swiper + " .swiper-scrollbar";
+        cont_swiper_scrollbar[i] = new Swiper(this_swiper + " .swiper", {
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: this_next,
+                prevEl: this_prev,
+            },
+            pagination: {
+                el: this_pager,
+                type: "custom",
+            },
+            scrollbar: {
+                el: this_scrollbar,
+                hide: true,
+            },
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">vertical + ticker</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* vertical_ticker_swiper */
+    .vertical_ticker_swiper {position:relative;background:rgba(0,0,0,0.1);}
+    .vertical_ticker_swiper .bx-wrapper {margin:0 auto;}
+    .vertical_ticker_swiper .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .vertical_ticker_swiper .bx-wrapper .bx-viewport p {padding:30px;color:#000;font-size:20px;text-align:center;}
+    .vertical_ticker_swiper .bx-wrapper .bx-viewport p span {display:block;color:#000;font-size:16px;}
+</style>
+<!-- vertical_ticker_swiper -->
+<div class="vertical_ticker_swiper">
+    <ul>
+        <li><p>후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>222후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>333후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+        <li><p>444후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
+    </ul>
+</div>
+<!-- // vertical_ticker_swiper -->
+<script type="text/javascript">
+    /*
+    // vertical_ticker_swiper_array
+    var vertical_ticker_swiper_array = new Array;
+    jQuery(".vertical_ticker_swiper").each(function(i){
+        jQuery(this).addClass("vertical_ticker_slick" + i);
+        var $this_swiper = jQuery(".vertical_ticker_slick" + i);
+        vertical_ticker_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
+            mode: "vertical",
+            ticker: true,
+            speed: 10000
+        });
+    });
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">text</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    /* text_swiper */
+    .text_swiper {position:relative;padding:20px 0;background:rgba(0,0,0,0.1);}
+    .text_swiper ul li p {color:#333;font-size:20px;line-height:53px;text-align:center;letter-spacing:-1px;-webkit-transition:all 0.45s ease-in-out;transition:all 0.45s ease-in-out;}
+    .text_swiper ul li.active + li p {font-size:30px;font-weight:800;}
+    .text_swiper .bx-wrapper {margin:0 auto;}
+    .text_swiper .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+</style>
+<!-- text_swiper -->
+<div class="text_swiper">
+    <ul>
+        <li><p>첫번째 문구가 들어갑니다.</p></li>
+        <li><p>두번째 두번째 문구가 들어갑니다.</p></li>
+        <li><p>세번째 문구가 들어갑니다.</p></li>
+        <li><p>네번째 네번째 문구가 들어갑니다.</p></li>
+    </ul>
+</div>
+<!-- // text_swiper -->
+<script type="text/javascript">
+    /*
+    // text_swiper_array
+    var text_swiper_array = new Array;
+    jQuery(".text_swiper").each(function(i){
+        jQuery(this).addClass("text_swiper" + i);
+        var $this_swiper = jQuery(".text_swiper" + i);
+        var this_length = $this_swiper.find("> ul li").length;
+            text_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
+            mode: "vertical",
+            pause: 2500,
+            minswipers: 3,
+            maxswipers: 3,
+            moveswipers: 1,
+            infiniteLoop: true,
+            auto: true,
+            controls: false,
+            touchEnabled: false,
+            adaptiveHeight: false, 
+            autoHover : true,
+            pager: false,
+            onswiperrLoad: function(currentIndex){
+                // console.log(currentIndex);
+                $this_swiper.find(".bx-viewport ul li").removeClass("active");
+                $this_swiper.find(".bx-viewport ul li:not(.bx-clone)").eq(currentIndex).addClass("active");
+            },
+            onswiperAfter: function($swiperElement, oldIndex, newIndex){
+                $this_swiper.find(".bx-viewport ul li").removeClass("active");
+                $swiperElement.addClass("active");
+                if (newIndex === this_length - 1) {
+                    $this_swiper.find(".bx-viewport ul li.bx-clone + li:not(.bx-clone)").prev().addClass("active");
+                }
+                if (newIndex === 0) {
+                    $this_swiper.find(".bx-viewport ul li:not(.bx-clone) + li.bx-clone").addClass("active");
+                }
+            }
+        });
+        $this_swiper.bind("mouseenter", function(){
+            text_swiper_array[i].stopAuto();
+        }).bind("mouseleave", function(){
+            text_swiper_array[i].startAuto();
+        });
+        $this_swiper.find("a").bind("click", function(){
+            text_swiper_array[i].stopAuto();
+            setTimeout(function(){
+                text_swiper_array[i].startAuto();
+            }, 500);
+        });
+    });
+
+    // text_swiper
+    var txt_length = jQuery(".text_swiper > ul li").length;
+    var txt_swiper = jQuery(".text_swiper > ul").bxswiperr({
+        mode: "vertical",
+        pause: 2500,
+        minswipers: 3,
+        maxswipers: 3,
+        moveswipers: 1,
+        infiniteLoop: true,
+        auto: true,
+        controls: false,
+        touchEnabled: false,
+        adaptiveHeight: false, 
+        autoHover : true,
+        pager: false,
+        onswiperrLoad: function(currentIndex) {     
+            jQuery(".text_swiper .bx-viewport ul li").removeClass("active");
+            jQuery(".text_swiper .bx-viewport ul li:not(".bx-clone")").eq(currentIndex).addClass("active");
+        },
+        onswiperAfter: function($swiperElement, oldIndex, newIndex){
+            jQuery(".text_swiper .bx-viewport ul li").removeClass("active");
+            $swiperElement.addClass("active");
+            if (newIndex === txt_length - 1) {
+                jQuery(".text_swiper .bx-viewport ul li.bx-clone + li:not(.bx-clone)").prev().addClass("active");
+            }
+            if (newIndex === 0) {
+                jQuery(".text_swiper .bx-viewport ul li:not(.bx-clone) + li.bx-clone").addClass("active");
+            }
+        }
+    });
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">img - center, active</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* center_swiper */
+    .center_swiper {position:relative;width:680px;height:240px;padding:0 10px;background:#eee;margin:0 auto;}
+    .center_swiper .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .center_swiper .bx-wrapper .bx-viewport ul li {padding:20px 10px 10px;}
+    .center_swiper .bx-wrapper .bx-viewport ul li img {transform:scale(1);transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
+    .center_swiper .bx-wrapper .bx-viewport ul li.active + li img {transform:scale(1.1);}
+    .center_swiper .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:100px;background:rgba(0,0,0,0.2);margin-top:-52px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
+    .center_swiper .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:"";display:inline-block;margin-top:-3px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
+    .center_swiper .bx-controls-direction > a.bx-prev {left:-50px;}
+    .center_swiper .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .center_swiper .bx-controls-direction > a.bx-next {right:-50px;}
+    .center_swiper .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+</style>
+<!-- center_swiper -->
+<div class="center_swiper">
+    <ul>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=1" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=2" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=3" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=4" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=5" alt="" /></li>
+    </ul>
+</div>
+<!-- // center_swiper -->
+<script type="text/javascript">
+    /*
+    // center_swiper_array
+    var center_swiper_array = new Array;
+    jQuery(".center_swiper").each(function(i){
+        jQuery(this).addClass("center_swiper" + i);
+        var $this_swiper = jQuery(".center_swiper" + i);
+        var this_length = $this_swiper.find("> ul li").length;
+        center_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
+            minswipers: 1,
+            maxswipers: 3,
+            moveswipers: 1,
+            swiperWidth: 220,
+            swiperMargin: 0,
+            pause: 2500,
+            infiniteLoop: true,
+            auto: true,
+            controls: true,
+            pager: false,
+            stopAutoOnClick: true,
+            touchEnabled: true,
+            autoHover : false,
+			useCSS: false, 
+            onswiperrLoad: function(currentIndex){
+                // console.log(currentIndex);
+                $this_swiper.find(".bx-viewport ul li").removeClass("active");
+                $this_swiper.find(".bx-viewport ul li:not(.bx-clone)").eq(currentIndex).addClass("active");
+            },
+            onswiperAfter: function($swiperElement, oldIndex, newIndex){
+                $this_swiper.find(".bx-viewport ul li").removeClass("active");
+                $swiperElement.addClass("active");
+                if (newIndex === this_length - 1) {
+                    $this_swiper.find(".bx-viewport ul li.bx-clone + li:not(.bx-clone)").prev().addClass("active");
+                }
+                if (newIndex === 0) {
+                    $this_swiper.find(".bx-viewport ul li:not(.bx-clone) + li.bx-clone").addClass("active");
+                }
+            }
+        });
+        $this_swiper.bind("mouseenter", function(){
+            center_swiper_array[i].stopAuto();
+        }).bind("mouseleave", function(){
+            center_swiper_array[i].startAuto();
+        });
+        $this_swiper.find("a").bind("click", function(){
+            center_swiper_array[i].stopAuto();
+            setTimeout(function(){
+                center_swiper_array[i].startAuto();
+            }, 500);
+        });
+    });
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">img - center, active</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* active_swiper */
+    .active_swiper {position:relative;width:680px;height:260px;padding:0 10px;margin:0 auto;}
+    .active_swiper .bx-wrapper .bx-viewport {position:relative;z-index:0;}
+    .active_swiper .bx-wrapper .bx-viewport ul li {padding:20px 10px 10px;}
+    .active_swiper .bx-wrapper .bx-viewport ul li img {opacity:0.5;display:block;transform:scale(0.8);border-radius:10px;transition:all 0.25s ease-in-out;}
+    .active_swiper .bx-wrapper .bx-viewport ul li .txt {opacity:0;margin-top:10px;color:#000;font-size:12px;text-align:center;transition:all 0.25s ease-in-out;}
+    .active_swiper .bx-wrapper .bx-viewport ul li.active + li img {opacity:1;transform:scale(1);}
+    .active_swiper .bx-wrapper .bx-viewport ul li.active + li .txt {opacity:1;}
+    .active_swiper .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:50px;margin-top:-35px;background:rgba(0,0,0,0.5);border:0;border-radius:50%;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
+    .active_swiper .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:"";display:inline-block;margin-top:-8px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
+    .active_swiper .bx-controls-direction > a.bx-prev {left:-40px;}
+    .active_swiper .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .active_swiper .bx-controls-direction > a.bx-next {right:-40px;}
+    .active_swiper .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+</style>
+<!-- active_swiper -->
+<div class="active_swiper">
+    <ul>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=1" alt="" /><p class="txt">텍스트가 들어갑니당.</p></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=2" alt="" /><p class="txt">텍스트가 들어갑니당.</p></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=3" alt="" /><p class="txt">텍스트가 들어갑니당.</p></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=4" alt="" /><p class="txt">텍스트가 들어갑니당.</p></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=5" alt="" /><p class="txt">텍스트가 들어갑니당.</p></li>
+    </ul>
+</div>
+<!-- // active_swiper -->
+<script type="text/javascript">
+    /*
+    // active_swiper_array
+    var active_swiper_array = new Array;
+    jQuery(".active_swiper").each(function(i){
+        jQuery(this).addClass("active_swiper" + i);
+        var $this_swiper = jQuery(".active_swiper" + i);
+        var this_length = $this_swiper.find("> ul li").length;
+        active_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
+            minswipers: 1,
+            maxswipers: 3,
+            moveswipers: 1,
+            swiperWidth: 220,
+            swiperMargin: 0,
+            pause: 2500,
+            infiniteLoop: true,
+            auto: true,
+            controls: true,
+            pager: false,
+            stopAutoOnClick: true,
+            touchEnabled: true,
+            autoHover : false,
+			useCSS: false, 
+            onswiperrLoad: function(currentIndex){
+                // console.log(currentIndex);
+                $this_swiper.find(".bx-viewport ul li").removeClass("active");
+                $this_swiper.find(".bx-viewport ul li:not(.bx-clone)").eq(currentIndex).addClass("active");
+            },
+            onswiperAfter: function($swiperElement, oldIndex, newIndex){
+                $this_swiper.find(".bx-viewport ul li").removeClass("active");
+                $swiperElement.addClass("active");
+                if (newIndex === this_length - 1) {
+                    $this_swiper.find(".bx-viewport ul li.bx-clone + li:not(.bx-clone)").prev().addClass("active");
+                }
+                if (newIndex === 0) {
+                    $this_swiper.find(".bx-viewport ul li:not(.bx-clone) + li.bx-clone").addClass("active");
+                }
+            }
+        });
+        $this_swiper.bind("mouseenter", function(){
+            active_swiper_array[i].stopAuto();
+        }).bind("mouseleave", function(){
+            active_swiper_array[i].startAuto();
+        });
+        $this_swiper.find("a").bind("click", function(){
+            active_swiper_array[i].stopAuto();
+            setTimeout(function(){
+                active_swiper_array[i].startAuto();
+            }, 500);
+        });
+    });
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">img - transform</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style>
+    /* transform_swiper */
+    .transform_swiper {position:relative;width:660px;padding:0 10px;margin:0 auto;transform:translateX(0vw) translateY(3vh) rotateX(60deg) rotateZ(36deg) translate3d(-60px, -60px, 0px)}
+    .transform_swiper .bx-wrapper .bx-viewport {position:relative;z-index:0;overflow:visible !important;}
+    .transform_swiper .bx-wrapper .bx-viewport li {padding:10px;}
+</style>
+<!-- transform_swiper -->
+<div class="transform_swiper">
+    <ul>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=1" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=2" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=3" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=4" alt="" /></li>
+        <li><img src="https://source.unsplash.com/random/200x200?sig=5" alt="" /></li>
+    </ul>
+</div>
+<!-- // transform_swiper -->
+<script type="text/javascript">
+    /*
+    // transform_swiper_array
+    var transform_swiper_array = new Array;
+    jQuery(".transform_swiper").each(function(i){
+        jQuery(this).addClass("transform_swiper" + i);
+        var $this_swiper = jQuery(".transform_swiper" + i);
+        transform_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
+            minswipers: 3,
+            maxswipers: 3,
+            moveswipers: 1,
+            swiperWidth: 220,
+            swiperMargin: 0,
+            pause: 2500,
+            infiniteLoop: true,
+            auto: true,
+            controls: false,
+            pager: false,
+            stopAutoOnClick: false,
+            touchEnabled: false,
+            autoHover : false,
+			useCSS: true, 
+        });
+        $this_swiper.bind("mouseenter", function(){
+            transform_swiper_array[i].stopAuto();
+        }).bind("mouseleave", function(){
+            transform_swiper_array[i].startAuto();
+        });
+    });
+    */
+</script>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">title</div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+</div>
+<!-- // code_wrap -->
+
+<script type="text/javascript" src="../../common/js/code.js"></script>
+</body>
+</html>

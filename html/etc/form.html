@@ -227,12 +227,12 @@
 </style>
 <form name="" action="" method="" autocomplete="">
     <div>
-        <textarea name="" id="" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
-        <textarea name="" id="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
+        <textarea name="" cols="30" rows="10" placeholder="내용을 입력해주세요."></textarea>
+        <textarea name="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
     </div>
     <div>
-        <textarea class="reset" name="" id="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
-        <textarea class="text-fill" name="" id="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
+        <textarea class="reset" name="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
+        <textarea class="text-fill" name="" cols="30" rows="10" placeholder="내용을&#10;입력해주세요."></textarea>
     </div>
 </form>
             </div>
@@ -453,6 +453,53 @@
     <input type="radio" id="img_star2" name="img_rating" value="2"><label for="img_star2">★★</label>
     <input type="radio" id="img_star1" name="img_rating" value="1"><label for="img_star1">★</label>
 </div>
+            </div>
+        </div>
+        <!-- // code_ui -->
+        <!-- code_view -->
+        <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+        <!-- // code_view -->
+    </div>
+    <!-- // code_area -->
+
+    <!-- code_area -->
+    <div class="code_tit">placeholder <span class="sub">- rolling</span></div>
+    <div class="code_area" data-style="vertical">
+        <!-- code_ui -->
+        <div class="code_ui">
+            <div class="code_ui_box">
+<style type="text/css">
+    .placeholder_rolling input[type="text"] {padding:10px;background-color:#fff;border:1px solid #ddd;}
+</style>
+<!-- placeholder_rolling -->
+<div class="placeholder_rolling">
+    <input type="text" id="" name="" value="" placeholder="" />
+</div>
+<!-- // placeholder_rolling -->
+<script type="text/javascript">
+    // placeholder_rolling
+    const placeholder_rolling = document.querySelector(".placeholder_rolling input[type='text']");
+    let placeholder_rolling_array = [
+        "placeholder 첫번째 텍스트 😀🔥",
+        "placeholder 두번째 텍스트 😎",
+        "placeholder 세번째 텍스트 😋",
+        "placeholder 네번째 텍스트 😍",
+        "placeholder 다섯번째 텍스트 😘"
+    ];
+    let rolling_idx = 0;
+    placeholder_rolling.setAttribute("placeholder", placeholder_rolling_array[0]);
+    function placeholderRollingFunc (obj) {
+        setInterval(function(){
+            if (rolling_idx == placeholder_rolling_array.length) rolling_idx = 0;
+            // console.log(rolling_idx);
+            placeholder_rolling.setAttribute("placeholder", placeholder_rolling_array[rolling_idx]);
+            rolling_idx++;
+        }, 1500);
+    }
+    setTimeout(function(){
+        placeholderRollingFunc(placeholder_rolling);
+    }, 250);
+</script>
             </div>
         </div>
         <!-- // code_ui -->
