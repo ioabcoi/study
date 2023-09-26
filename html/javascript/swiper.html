@@ -40,6 +40,11 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
     .swiper-slide {display:flex;justify-content:center;align-items:center;font-size:18px;text-align:center;}
     .swiper-slide .swiper-slide img {display:block;width:100%;height:100%;object-fit:cover;}
 </style>
+<script>
+    // option
+    // method 
+    // swiper.updateSize();
+</script>
             </div>
         </div>
         <!-- // code_ui -->
@@ -142,7 +147,7 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
         const this_prev = this_swiper + " .swiper-button-prev";
         const this_pager = this_swiper + " .swiper-pagination";
         cont_swiper_bullets[i] = new Swiper(this_swiper + " .swiper", {
-            loop: true,
+            loop: false,
             autoplay: {
                 delay: 2500,
                 disableOnInteraction: false,
@@ -180,6 +185,18 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
             pagination: {
                 el: this_pager,
                 type: "fraction",
+                // paging 01, 02 ....
+                // formatFractionCurrent: function (number) {
+                //     return ('0' + number).slice(-2);
+                // },
+                // formatFractionTotal: function (number) {
+                //     return ('0' + number).slice(-2);
+                // },
+                // renderFraction: function (currentClass, totalClass) {
+                //     return '<span class="' + currentClass + '"></span>' +
+                //         ' - ' +
+                //         '<span class="' + totalClass + '"></span>';
+                // }
             },
         });
     });
@@ -668,7 +685,7 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
             <div class="code_ui_box">
 <style type="text/css">
     /* vertical_ticker_swiper */
-    .vertical_ticker_swiper {position:relative;background:rgba(0,0,0,0.1);}
+    .vertical_ticker_swiper {position:relative;height:180px;background:rgba(0,0,0,0.1);}
     .vertical_ticker_swiper .bx-wrapper {margin:0 auto;}
     .vertical_ticker_swiper .bx-wrapper .bx-viewport {position:relative;z-index:0;}
     .vertical_ticker_swiper .bx-wrapper .bx-viewport p {padding:30px;color:#000;font-size:20px;text-align:center;}
@@ -676,28 +693,32 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </style>
 <!-- vertical_ticker_swiper -->
 <div class="vertical_ticker_swiper">
-    <ul>
-        <li><p>후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
-        <li><p>222후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
-        <li><p>333후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
-        <li><p>444후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></li>
-    </ul>
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><p>후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></div>
+            <div class="swiper-slide"><p>222후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></div>
+            <div class="swiper-slide"><p>333후기 내용을 입력해주세요<br>후기후기후기 내용을 입력해주세요 <span>홍길동</span></p></div>
+        </div>
+    </div>
 </div>
 <!-- // vertical_ticker_swiper -->
 <script type="text/javascript">
-    /*
-    // vertical_ticker_swiper_array
-    var vertical_ticker_swiper_array = new Array;
+    // vertical_ticker_swiper
+    const vertical_ticker_swiper_array = new Array;
     jQuery(".vertical_ticker_swiper").each(function(i){
-        jQuery(this).addClass("vertical_ticker_slick" + i);
-        var $this_swiper = jQuery(".vertical_ticker_slick" + i);
-        vertical_ticker_swiper_array[i] = $this_swiper.find("> ul").bxswiperr({
-            mode: "vertical",
-            ticker: true,
-            speed: 10000
+        const $this_swiper = jQuery(this);
+        $this_swiper.addClass("vertical_ticker_swiper" + i);
+        const this_swiper = ".vertical_ticker_swiper" + i;
+        vertical_ticker_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
+            direction: "vertical",
+            loop: true,
+            autoplay: {
+                delay: 1000,
+                speed: 2500,
+                disableOnInteraction: false,
+            },
         });
     });
-    */
 </script>
             </div>
         </div>

@@ -1860,6 +1860,7 @@ const solution = arr => arr.includes(2) ? [... arr.slice(arr.indexOf(2), arr.las
 > 홀수 인덱스에서는 arr에서 query[i]번 인덱스는 제외하고 배열의 query[i]번 인덱스 앞부분을 잘라서 버립니다.
 #### 위 작업을 마친 후 남은 arr의 부분 배열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181893
+> blog
 ```javascript
 function solution(arr, query) {
     let answer = [...arr];
@@ -1876,6 +1877,7 @@ function solution(arr, query) {
 ### n 번째 원소부터
 #### 정수 리스트 num_list와 정수 n이 주어질 때, n 번째 원소부터 마지막 원소까지의 모든 원소를 담은 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181892
+> blog
 ```javascript
 /*
 function solution(num_list, n) {
@@ -1898,6 +1900,7 @@ function solution(num_list, n) {
 ### 순서 바꾸기
 #### 정수 리스트 num_list와 정수 n이 주어질 때, num_list를 n 번째 원소 이후의 원소들과 n 번째까지의 원소들로 나눠 n 번째 원소 이후의 원소들을 n 번째까지의 원소들 앞에 붙인 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181891
+> blog
 ```javascript
 /*
 function solution(num_list, n) {
@@ -1914,6 +1917,7 @@ const solution = (num_list, n) => [...num_list.slice(n), ...num_list.slice(0, n)
 ### 왼쪽 오른쪽
 #### 문자열 리스트 str_list에는 "u", "d", "l", "r" 네 개의 문자열이 여러 개 저장되어 있습니다. str_list에서 "l"과 "r" 중 먼저 나오는 문자열이 "l"이라면 해당 문자열을 기준으로 왼쪽에 있는 문자열들을 순서대로 담은 리스트를, 먼저 나오는 문자열이 "r"이라면 해당 문자열을 기준으로 오른쪽에 있는 문자열들을 순서대로 담은 리스트를 return하도록 solution 함수를 완성해주세요. "l"이나 "r"이 없다면 빈 리스트를 return합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181890
+> blog
 ```javascript
 /*
 function solution(str_list) {
@@ -1947,6 +1951,7 @@ function solution(str_list) {
 ### n 번째 원소까지
 #### 정수 리스트 num_list와 정수 n이 주어질 때, num_list의 첫 번째 원소부터 n 번째 원소까지의 모든 원소를 담은 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181889
+> blog
 ```javascript
 /*
 function solution(num_list, n) {
@@ -1961,6 +1966,7 @@ const solution = (num_list, n) => num_list.slice(0, n);
 ### n개 간격의 원소들
 #### 정수 리스트 num_list와 정수 n이 주어질 때, num_list의 첫 번째 원소부터 마지막 원소까지 n개 간격으로 저장되어있는 원소들을 차례로 담은 리스트를 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181888
+> blog
 ```javascript
 /*
 function solution(num_list, n) {
@@ -1975,6 +1981,7 @@ const solution = (num_list, n) => num_list.filter((e, i) => i % n === 0);
 ### 홀수 vs 짝수
 #### 정수 리스트 num_list가 주어집니다. 가장 첫 번째 원소를 1번 원소라고 할 때, 홀수 번째 원소들의 합과 짝수 번째 원소들의 합 중 큰 값을 return 하도록 solution 함수를 완성해주세요. 두 값이 같을 경우 그 값을 return합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181887
+> blog
 ```javascript
 function solution(num_list) {
     const odd = num_list.filter((e, i) => i % 2 === 0).reduce((a, b) => a + b);
@@ -2000,6 +2007,7 @@ function solution(num_list) {
 ### 5명씩
 #### 최대 5명씩 탑승가능한 놀이기구를 타기 위해 줄을 서있는 사람들의 이름이 담긴 문자열 리스트 names가 주어질 때, 앞에서 부터 5명씩 묶은 그룹의 가장 앞에 서있는 사람들의 이름을 담은 리스트를 return하도록 solution 함수를 완성해주세요. 마지막 그룹이 5명이 되지 않더라도 가장 앞에 있는 사람의 이름을 포함합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181886
+> blog
 ```javascript
 /*
 function solution(names) {
@@ -2014,6 +2022,7 @@ const solution = names => names.filter((e, i) => i % 5 === 0);
 ### 할 일 목록
 #### 오늘 해야 할 일이 담긴 문자열 배열 todo_list와 각각의 일을 지금 마쳤는지를 나타내는 boolean 배열 finished가 매개변수로 주어질 때, todo_list에서 아직 마치지 못한 일들을 순서대로 담은 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181885
+> blog
 ```javascript
 /*
 function solution(todo_list, finished) {
@@ -2033,6 +2042,7 @@ const solution = (todo_list, finished) => todo_list.filter((e, i) => finished[i]
 ### n보다 커질 때까지 더하기
 #### 정수 배열 numbers와 정수 n이 매개변수로 주어집니다. numbers의 원소를 앞에서부터 하나씩 더하다가 그 합이 n보다 커지는 순간 이때까지 더했던 원소들의 합을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181884
+> blog
 ```javascript
 function solution(numbers, n) {
     let answer = 0;
@@ -2056,17 +2066,38 @@ function solution(numbers, n) {
 ### 수열과 구간 쿼리 1
 #### 정수 배열 arr와 2차원 정수 배열 queries이 주어집니다. queries의 원소는 각각 하나의 query를 나타내며, [s, e] 꼴입니다. 각 query마다 순서대로 s ≤ i ≤ e인 모든 i에 대해 arr[i]에 1을 더합니다. 위 규칙에 따라 queries를 처리한 이후의 arr를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181883
+> blog
 ```javascript
+function solution(arr, queries) {
+    let answer = [];
+    for (let i = 0; i < queries.length; i++) {
+        for (let j = 0; j < arr.length; j++) {
+            if (j >= queries[i][0] && j <= queries[i][1]) {
+                arr[j]++;
+            }
+            // console.log(arr, queries[i][0], queries[i][1]);
+        }
+    }
+    answer = arr;
+    return answer;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr, queries) {
+    queries.forEach(([s, e]) => {
+        while (s <= e) arr[s++]++;
+    });
+    return arr;
+}
 */
 ```
 
 ### 조건에 맞게 수열 변환하기 1
 #### 정수 배열 arr가 주어집니다. arr의 각 원소에 대해 값이 50보다 크거나 같은 짝수라면 2로 나누고, 50보다 작은 홀수라면 2를 곱합니다. 그 결과인 정수 배열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181882
+> blog
 ```javascript
 /*
 function solution(arr) {
@@ -2081,17 +2112,48 @@ const solution = arr => arr.map(e => e >= 50 && e % 2 === 0 ? e / 2 : e < 50 && 
 ### 조건에 맞게 수열 변환하기 2
 #### 정수 배열 arr가 주어집니다. arr의 각 원소에 대해 값이 50보다 크거나 같은 짝수라면 2로 나누고, 50보다 작은 홀수라면 2를 곱하고 다시 1을 더합니다. 이러한 작업을 x번 반복한 결과인 배열을 arr(x)라고 표현했을 때, arr(x) = arr(x + 1)인 x가 항상 존재합니다. 이러한 x 중 가장 작은 값을 return 하는 solution 함수를 완성해 주세요. 단, 두 배열에 대한 "="는 두 배열의 크기가 서로 같으며, 같은 인덱스의 원소가 각각 서로 같음을 의미합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181881
+> blog
 ```javascript
+function solution(arr) {
+    function func(array) {        
+        return array.map(x => x >= 50 && x % 2 === 0 ? x / 2 : x < 50 && x % 2 === 1 ? (x * 2) + 1 : x);
+    }
+    function diff(array1, array2) {
+        return diff1.length === diff2.length && array1.every((e, i) => e === array2[i]);
+    }
+    let answer = 0;
+    let diff1 = [];
+    let diff2 = arr;
+    while (!diff(diff1, diff2)) {
+        answer++;
+        diff1 = diff2;
+        diff2 = func(diff1);
+        // console.log(answer, diff1, diff2);
+    }
+    return answer - 1;
+}
 ```
 
 ```javascript
 /* good
+function solution(arr) {
+    const isConvertable = (v) => (50 <= v && v % 2 === 0) || (v < 50 && v % 2 === 1);
+    const convert = (arr) => arr.map((v) => (v % 2 ? v * 2 + 1 : v / 2)).filter(isConvertable);
+    let answer = 0;
+    let current = arr.filter(isConvertable);
+    while (0 < current.length) {
+        current = convert(current);
+        answer += 1;
+    }
+    return answer;
+}
 */
 ```
 
 ### 1로 만들기
 #### 정수가 있을 때, 짝수라면 반으로 나누고, 홀수라면 1을 뺀 뒤 반으로 나누면, 마지막엔 1이 됩니다. 예를 들어 10이 있다면 다음과 같은 과정으로 1이 됩니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181880
+> blog
 ```javascript
 function func(obj) {
     let i = 0;
@@ -2118,6 +2180,7 @@ function solution(num_list) {
 
 ### 길이에 따른 연산
 #### 정수가 담긴 리스트 num_list가 주어질 때, 리스트의 길이가 11 이상이면 리스트에 있는 모든 원소의 합을 10 이하이면 모든 원소의 곱을 return하도록 solution 함수를 완성해주세요.
+> blog
 > https://school.programmers.co.kr/learn/courses/30/lessons/181879
 ```javascript
 /*
@@ -2139,6 +2202,7 @@ const solution=n=>n.reduce((a,v)=>n.length>10?a+v:a*v)
 ### 원하는 문자열 찾기
 #### 알파벳으로 이루어진 문자열 myString과 pat이 주어집니다. myString의 연속된 부분 문자열 중 pat이 존재하면 1을 그렇지 않으면 0을 return 하는 solution 함수를 완성해 주세요. 단, 알파벳 대문자와 소문자는 구분하지 않습니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181878
+> blog
 ```javascript
 /*
 function solution(myString, pat) {
@@ -2160,6 +2224,8 @@ function solution(myString, pat) {
 
 ### 대문자로 바꾸기
 #### 알파벳으로 이루어진 문자열 myString이 주어집니다. 모든 알파벳을 대문자로 변환하여 return 하는 solution 함수를 완성해 주세요.
+> https://school.programmers.co.kr/learn/courses/30/lessons/181877
+> blog
 ```javascript
 /*
 function solution(myString) {
@@ -2175,6 +2241,7 @@ const solution = myString => myString.toUpperCase();
 ### 소문자로 바꾸기
 #### 알파벳으로 이루어진 문자열 myString이 주어집니다. 모든 알파벳을 소문자로 변환하여 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181876
+> blog
 ```javascript
 /*
 function solution(myString) {
@@ -2190,6 +2257,7 @@ const solution = myString => myString.toLowerCase();
 ### 배열에서 문자열 대소문자 변환하기
 #### 문자열 배열 strArr가 주어집니다. 모든 원소가 알파벳으로만 이루어져 있을 때, 배열에서 홀수번째 인덱스의 문자열은 모든 문자를 대문자로, 짝수번째 인덱스의 문자열은 모든 문자를 소문자로 바꿔서 반환하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181875
+> blog
 ```javascript
 /*
 function solution(strArr) {
@@ -2204,6 +2272,7 @@ const solution = strArr => strArr.map((e, i) => i % 2 !== 0 ? e.toUpperCase() : 
 ### A 강조하기
 #### 문자열 myString이 주어집니다. myString에서 알파벳 "a"가 등장하면 전부 "A"로 변환하고, "A"가 아닌 모든 대문자 알파벳은 소문자 알파벳으로 변환하여 return 하는 solution 함수를 완성하세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181874
+> blog
 ```javascript
 /*
 function solution(myString) {
@@ -2224,6 +2293,7 @@ const solution=s=>s.toLowerCase().replaceAll('a','A');
 ### 특정한 문자를 대문자로 바꾸기
 #### 영소문자로 이루어진 문자열 my_string과 영소문자 1글자로 이루어진 문자열 alp가 매개변수로 주어질 때, my_string에서 alp에 해당하는 모든 글자를 대문자로 바꾼 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181873
+> blog
 ```javascript
 /*
 function solution(my_string, alp) {
@@ -2244,6 +2314,7 @@ const solution=(s,a)=>s.replaceAll(a,a.toUpperCase())
 ### 특정 문자열로 끝나는 가장 긴 부분 문자열 찾기
 #### 문자열 myString과 pat가 주어집니다. myString의 부분 문자열중 pat로 끝나는 가장 긴 부분 문자열을 찾아서 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181872
+> blog
 ```javascript
 /*
 function solution(myString, pat) {
@@ -2264,6 +2335,7 @@ const solution = (str, pat) => str.substring(0, str.lastIndexOf(pat)) + pat
 ### 문자열이 몇 번 등장하는지 세기
 #### 문자열 myString과 pat이 주어집니다. myString에서 pat이 등장하는 횟수를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181871
+> blog
 ```javascript
 function solution(myString, pat) {
     let answer = 0;
