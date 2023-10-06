@@ -2359,6 +2359,7 @@ function solution(myString, pat) {
 ### ad 제거하기
 #### 문자열 배열 strArr가 주어집니다. 배열 내의 문자열 중 "ad"라는 부분 문자열을 포함하고 있는 모든 문자열을 제거하고 남은 문자열을 순서를 유지하여 배열로 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181870
+> blog
 ```javascript
 /*
 function solution(strArr) {
@@ -2373,6 +2374,7 @@ const solution = strArr => strArr.filter(e => !e.includes("ad"));
 ### 공백으로 구분하기 1
 #### 단어가 공백 한 개로 구분되어 있는 문자열 my_string이 매개변수로 주어질 때, my_string에 나온 단어를 앞에서부터 순서대로 담은 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181869
+> blog
 ```javascript
 /*
 function solution(my_string) {
@@ -2387,6 +2389,7 @@ const solution = my_string => my_string.split(" ");
 ### 공백으로 구분하기 2
 #### 단어가 공백 한 개 이상으로 구분되어 있는 문자열 my_string이 매개변수로 주어질 때, my_string에 나온 단어를 앞에서부터 순서대로 담은 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181868
+> blog
 ```javascript
 /*
 function solution(my_string) {
@@ -2413,6 +2416,7 @@ function solution(my_string) {
 ### x 사이의 개수
 #### 문자열 myString이 주어집니다. myString을 문자 "x"를 기준으로 나눴을 때 나눠진 문자열 각각의 길이를 순서대로 저장한 배열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181867
+> blog
 ```javascript
 /*
 function solution(myString) {
@@ -2428,6 +2432,7 @@ const solution = myString => myString.split("x").map(e => e.length);
 > 
 #### 문자열 myString이 주어집니다. "x"를 기준으로 해당 문자열을 잘라내 배열을 만든 후 사전순으로 정렬한 배열을 return 하는 solution 함수를 완성해 주세요. 단, 빈 문자열은 반환할 배열에 넣지 않습니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181866
+> blog
 ```javascript
 /*
 function solution(myString) {
@@ -2448,6 +2453,7 @@ const solution=s=>s.match(/[^x]+/g).sort()
 ### 간단한 식 계산하기
 #### 문자열 binomial이 매개변수로 주어집니다. binomial은 "a op b" 형태의 이항식이고 a와 b는 음이 아닌 정수, op는 '+', '-', '*' 중 하나입니다. 주어진 식을 계산한 정수를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181865
+> blog
 ```javascript
 function solution(binomial) {
     let answer = 0;
