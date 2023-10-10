@@ -14,10 +14,14 @@ study
 │  ├─etc
 │  ├─ets_guide
 │  ├─ets_promotion
+│  ├─include
 │  ├─javascript
+│  ├─main
 │  ├─templates
+│  ├─test
 │  └─ui
 └─images
+    └─icon
 
 ```
 

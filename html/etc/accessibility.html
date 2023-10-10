@@ -10,342 +10,345 @@
 </head>
 <body data-theme="light">
 
-<!-- accessibility -->
-<div class="wrap">
-    <!-- contents -->
-    <div class="contents">
-        <h1>접근성 지침</h1>
+    <!-- accessibility -->
+    <div class="wrap">
+        <!-- contents -->
+        <div class="contents">
+            <h1>접근성 지침</h1>
 
-        <div class="cont">
-            <h2>1. 인식의 용이성</h2><br>
+            <div class="cont">
+                <h2>1. 인식의 용이성</h2><br>
 
-            <h3>1) 대체텍스트</h3>
+                <h3>1) 대체텍스트</h3>
 
-            <h4>① alt</h4>
-            <ul class="txt_list">
-                <li>
-                    <strong>⑴ 링크로 묶여있는 경우 빈 값으로 제공</strong>
-                    <p>&lt;a&gt;&lt;img alt="" /&gt;&lt;span&gt;제목&lt;/span&gt;&lt;/a&gt;</p>
-                </li>
-                <li>
-                    <strong>⑵ 링크 없이 제공되는 경우 제목과 동일한 대체텍스트 제공</strong>
-                    <p>&lt;img alt="제목" /&gt;&lt;span&gt;제목&lt;/span&gt;</p>
-                </li>
-            </ul>
+                <h4>① alt</h4>
+                <ul class="txt_list">
+                    <li>
+                        <strong>⑴ 링크로 묶여있는 경우 빈 값으로 제공</strong>
+                        <p>&lt;a&gt;&lt;img alt="" /&gt;&lt;span&gt;제목&lt;/span&gt;&lt;/a&gt;</p>
+                    </li>
+                    <li>
+                        <strong>⑵ 링크 없이 제공되는 경우 제목과 동일한 대체텍스트 제공</strong>
+                        <p>&lt;img alt="제목" /&gt;&lt;span&gt;제목&lt;/span&gt;</p>
+                    </li>
+                </ul>
 
-            <h4>② longdesc</h4>
-            <ul class="txt_list">
-                <li>
-                    <strong>alt만으로 설명이 불가능할 경우 숨김 텍스트 제공</strong>
-                    <ul>
-                        <li>&lt;img longdesc="#explain" /&gt;&lt;div id="#explain" class="hidden"&gt;내용&lt;/div&gt;</li>
-                        <li>(단, 숨김 텍스트도 구조적으로 제공해야 함)</li>
-                    </ul>
-                </li>
-            </ul><br>
+                <h4>② longdesc</h4>
+                <ul class="txt_list">
+                    <li>
+                        <strong>alt만으로 설명이 불가능할 경우 숨김 텍스트 제공</strong>
+                        <ul>
+                            <li>&lt;img longdesc="#explain" /&gt;&lt;div id="#explain" class="hidden"&gt;내용&lt;/div&gt;</li>
+                            <li>(단, 숨김 텍스트도 구조적으로 제공해야 함)</li>
+                        </ul>
+                    </li>
+                </ul><br>
 
-            <h3>2) 자막 제공</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>동영상, 음성 콘텐츠는 자막, 대본/원고, 수화 제공</strong>
-                    <p>사용자의 필요에 따라 자막을 끄고 켤 수 있도록 제공, 대사가 없는 경우엔 화면 해설을 제공</p>
-                </li>
-            </ul><br>
+                <h3>2) 자막 제공</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>동영상, 음성 콘텐츠는 자막, 대본/원고, 수화 제공</strong>
+                        <p>사용자의 필요에 따라 자막을 끄고 켤 수 있도록 제공, 대사가 없는 경우엔 화면 해설을 제공</p>
+                    </li>
+                </ul><br>
 
-            <h3>3) 명료성</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>① 명도대비</strong>
-                    <p>18pt 이상 또는 14pt 이상 굵은 폰트의 경우 3:1</p>
-                </li>
-                <li>
-                    <strong>② 색에 무관한 콘텐츠 인식</strong>
-                    <p>GNB/ LNB/ paging 등 선택된 항목들에게 색의 변화가 아닌 다른 방법으로 구분 가능하도록 제공 (ex: 밑줄, 불릿 등)</p>
-                </li>
-                <li>
-                    <strong>③ 명확한 지시사항</strong>
-                    <p>색, 크기, 모양 또는 위치에 관한 정보를 인식하지 못하더라도 원하는 콘텐츠에 접근할 수 있도록 제작</p>
-                    <p>ex) 동그란 버튼/ 오른쪽 버튼을 누르시오 (X)</p>
-                    <p>ex) 실제 명칭을 제공하거나 그 요소의 대체텍스트를 사용해 지칭 : 더보기 버튼/ 지도보기 버튼을 누르시오 (O)</p>
-                </li>
-                <li>
-                    <strong>④ 배경음 사용 금지</strong>
-                    <p>자동으로 재생되는 배경음악 사용 금지</p>
-                    <p>(단, 3초 미만은 예외 / 3초 이상일 경우 마우스 또는 키보드로 제어할 수 있는 수단 제공)</p>
-                </li>
-            </ul>
+                <h3>3) 명료성</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>① 명도대비</strong>
+                        <p>18pt 이상 또는 14pt 이상 굵은 폰트의 경우 3:1</p>
+                    </li>
+                    <li>
+                        <strong>② 색에 무관한 콘텐츠 인식</strong>
+                        <p>GNB/ LNB/ paging 등 선택된 항목들에게 색의 변화가 아닌 다른 방법으로 구분 가능하도록 제공 (ex: 밑줄, 불릿 등)</p>
+                    </li>
+                    <li>
+                        <strong>③ 명확한 지시사항</strong>
+                        <p>색, 크기, 모양 또는 위치에 관한 정보를 인식하지 못하더라도 원하는 콘텐츠에 접근할 수 있도록 제작</p>
+                        <p>ex) 동그란 버튼/ 오른쪽 버튼을 누르시오 (X)</p>
+                        <p>ex) 실제 명칭을 제공하거나 그 요소의 대체텍스트를 사용해 지칭 : 더보기 버튼/ 지도보기 버튼을 누르시오 (O)</p>
+                    </li>
+                    <li>
+                        <strong>④ 배경음 사용 금지</strong>
+                        <p>자동으로 재생되는 배경음악 사용 금지</p>
+                        <p>(단, 3초 미만은 예외 / 3초 이상일 경우 마우스 또는 키보드로 제어할 수 있는 수단 제공)</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cont">
+                <h2>2. 운용의 용이성</h2><br>
+
+                <h3>1) 키보드 접근성</h3>
+                <ul class="txt_list">
+                    <li>
+                        <p>마우스 이벤트와 키보드 이벤트 병행</p>
+                    </li>
+                    <li>
+                        <strong>① 모든 기능은 키보드로 사용할 수 있어야 함</strong>
+                        <p>스크롤이 생기는 컨텐츠 블록일 경우 tabindex="0"으로 초점을 받아 스크롤을 사용할 수 있도록 해야 함</p>
+                    </li>
+                    <li>
+                        <strong>② 초점은 논리적으로 이동해야며 시각적으로 구별할 수 있어야 함</strong>
+                        <ul>
+                            <li>⑴ onfocus="this.blur();" outline:none; 사용 금지</li>
+                            <li>⑵ cursor="pointer" 로 스타일 지정</li>
+                            <li>⑶ flash wmode 값 transparent 또는 opaque</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>③ 이미지 슬라이드</strong>
+                        <p>마크업 / 초점 순서 - ◀□□□□(□□□□)▶ / 마지막 페이지로 넘어갔을 때 ▶버튼에 '마지막페이지'임을 명시</p>
+                    </li>
+                </ul><br>
+
+                <h3>2) 충분한 시간 제공</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>① 응답시간 조절</strong>
+                        <p>시간제한 있는 콘텐츠는 응답시간 조절할 수 있어야 함</p>
+                    </li>
+                    <li>
+                        <strong>② 정지기능 제공</strong>
+                        <p>자동으로 변경되는 콘텐츠는 움직임을 제어할 수 있도록 정지기능 제공 - 정지, 이전, 다음</p>
+                    </li>
+                </ul><br>
+
+                <h3>3) 쉬운 네비게이션</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>① 스킵 네비게이션</strong>
+                        <p>반복영역 건너뛰기 (본문 바로가기)</p>
+                        <ul>
+                            <li>⑴ 페이지 가장 처음에 위치</li>
+                            <li>⑵ 배경음이 있을 경우 배경음 다음에 위치</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>② 제목 제공</strong>
+                        <p>페이지, iframe, 컨텐츠 블록에는 적절한 제목을 제공</p>
+                        <ul>
+                            <li>⑴ 페이지 타이틀 - 팝업창일 경우 '팝업창' 명시</li>
+                            <li>⑵ iframe - title="제목" / 내용이 없는 경우 title="빈 프레임" src="about:blank" 제공</li>
+                            <li>⑶ 컨텐츠 블록 - 제목을 제공하는 경우 헤딩태그 부여 / 컨텐츠 블록이 없는 경우 헤딩태그 사용 안됨</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>③ 적절한 링크 텍스트</strong>
+                        <p>숨김 텍스트로 더 구체적으로 명확하게 제공</p>
+                        <ul>
+                            <li>⑴ '더보기' 링크의 경우 - '공지사항 더보기', '이벤트 더보기'</li>
+                            <li>⑵ 한 페이지에 동일한 링크 텍스트가 있을 경우 - '미디어포스원 지도보기', '이수역 지도보기'</li>
+                            <li>⑶ 이미지 링크일 경우 - '홈페이지로 이동', '첫번째 페이지로 이동', '다음 페이지로 이동'</li>
+                            <li>⑷ 활성화를 시각적으로만 확인할 수 있을 때는 숨김텍스트로 '활성화' 명시</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cont">
+                <h2>3. 이해의 용이성</h2><br>
+
+                <h3>1) 기본언어 표시</h3>
+                <ul class="txt_list">
+                    <li>
+                        <p>&lt;html lang="ko"&gt;&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"&gt;</p>
+                    </li>
+                </ul><br>
+                
+                <h3>2) 사용자 요구에 따른 실행</h3>
+                <ul class="txt_list">
+                    <li>
+                        <p>마우스 이벤트와 키보드 이벤트 병행</p>
+                    </li>
+                    <li>
+                        <strong>① 마우스 오버</strong>
+                    </li>
+                    <li>
+                        <strong>② 마우스 클릭</strong>
+                    </li>
+                    <li>
+                        <strong>③ 드롭다운 메뉴</strong>
+                        <p>선택과 조작의 단계를 통해 구현되어야 함 (셀렉트박스에서 옵션 선택 후 이동 버튼을 클릭해야 페이지가 이동)</p>
+                    </li>
+                    <li>
+                        <strong>④ 풀다운 메뉴</strong>
+                    </li>
+                    <li>
+                        <strong>⑤ 새 창</strong>
+                        <ul>
+                            <li>⑴ target="_blank" </li>
+                            <li>⑵ target="_blank" 없이 스크립트를 사용할 경우 - title="새 창"</li>
+                            <li>⑶ alt에 함께 제공 -  alt="인쇄하기 새 창"</li>
+                        </ul>
+                    </li>
+                </ul><br>
+
+                <h3>3) 컨텐츠 선형화</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>① 콘텐츠의 논리적인 초점 순서</strong>
+                        <p>좌 -> 우, 상 -> 하</p>
+                    </li>
+                    <li>
+                        <strong>② 탭, 컨텐츠</strong>
+                        <ul>
+                            <li>⑴ 한 페이지에 모든 탭과 컨텐츠가 있는 경우 - 탭1, 컨텐츠1, 탭2, 컨텐츠2, 탭3, 컨텐츠3…</li>
+                            <li>⑵ 각각 다른 페이지에 컨텐츠가 있는 경우 - 탭1, 탭2, 탭3… , 컨텐츠n (현재 활성화된 탭n의 제목을 컨텐츠의 제목으로 명시해주어야 함)</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>③ 이미지 슬라이드</strong>
+                        <p>이전버튼 -> 이미지1, 이미지2, 이미지3, .... -> 다음버튼</p>
+                    </li>
+                    <li>
+                        <strong>④ 레이어 팝업</strong>
+                        <p>열기 버튼 -> 레이어 팝업 -> 닫기</p>
+                    </li>
+                </ul><br>
+                
+                <h3>4) 표의 구성</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>① caption</strong>
+                        <p>표의 내용을 요약한 정보를 제공</p>
+                    </li>
+                    <li>
+                        <strong>② th</strong>
+                        <p>scope 제공</p>
+                    </li>
+                </ul><br>
+
+                <h3>5) 레이블 제공</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>&lt;input&gt;, &lt;textarea&gt;, &lt;seelect&gt; 등의 입력 서식에는 각각 대응하는 레이블을 제공해야 함</strong>
+                        <p>휴대폰번호, 이메일주소 처럼 하나의 레이블로 대응이 안될 경우 title="" 제공</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cont">
+                <h2>4. 견고성</h2><br>
+
+                <h3>1) 문법 준수</h3>
+                <ul class="txt_list">
+                    <li>
+                        <strong>마크업 오류 방지</strong>
+                        <ul>
+                            <li>- 태그의 열고닫음, 중첩, 중복된 선언, id 속성 값</li>
+                            <li>- Markup Validation Service - http://validator.w3.org/</li>
+                            <li>- 자동검사 k-wah / 수동검사 openWAX, n-WAX</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
+        <!-- // contents -->
+        
+        <!-- contents -->
+        <div class="contents">
+            <h1>접근성 체크리스트</h1>
 
-        <div class="cont">
-            <h2>2. 운용의 용이성</h2><br>
+            <div class="cont">
+                <h2>1. 인식의 용이성</h2><br>
 
-            <h3>1) 키보드 접근성</h3>
-            <ul class="txt_list">
-                <li>
-                    <p>마우스 이벤트와 키보드 이벤트 병행</p>
-                </li>
-                <li>
-                    <strong>① 모든 기능은 키보드로 사용할 수 있어야 함</strong>
-                    <p>스크롤이 생기는 컨텐츠 블록일 경우 tabindex="0"으로 초점을 받아 스크롤을 사용할 수 있도록 해야 함</p>
-                </li>
-                <li>
-                    <strong>② 초점은 논리적으로 이동해야며 시각적으로 구별할 수 있어야 함</strong>
-                    <ul>
-                        <li>⑴ onfocus="this.blur();" outline:none; 사용 금지</li>
-                        <li>⑵ cursor="pointer" 로 스타일 지정</li>
-                        <li>⑶ flash wmode 값 transparent 또는 opaque</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>③ 이미지 슬라이드</strong>
-                    <p>마크업 / 초점 순서 - ◀□□□□(□□□□)▶ / 마지막 페이지로 넘어갔을 때 ▶버튼에 '마지막페이지'임을 명시</p>
-                </li>
-            </ul><br>
+                <h3>1) 대체텍스트</h3>
 
-            <h3>2) 충분한 시간 제공</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>① 응답시간 조절</strong>
-                    <p>시간제한 있는 콘텐츠는 응답시간 조절할 수 있어야 함</p>
-                </li>
-                <li>
-                    <strong>② 정지기능 제공</strong>
-                    <p>자동으로 변경되는 콘텐츠는 움직임을 제어할 수 있도록 정지기능 제공 - 정지, 이전, 다음</p>
-                </li>
-            </ul><br>
+                <ul class="checkList">
+                    <li>- &lt;img&gt; &lt;input type="image"&gt; &lt;area&gt; 의 alt 속성이 있는지, 적절한 대체텍스트를 제공하였는지 체크</li>
+                    <li>- img와 텍스트가 링크로 묶여있는 경우, img alt=""는 빈값으로 제공하였는지 체크 (중복 제공되었는지 체크)</li>
+                    <li>- 긴 내용의 숨김 텍스트도 (h1h2h3..., p, ul 등을 사용하여) 구조적으로 제공되었는지 체크</li>
+                </ul><br>
 
-            <h3>3) 쉬운 네비게이션</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>① 스킵 네비게이션</strong>
-                    <p>반복영역 건너뛰기 (본문 바로가기)</p>
-                    <ul>
-                        <li>⑴ 페이지 가장 처음에 위치</li>
-                        <li>⑵ 배경음이 있을 경우 배경음 다음에 위치</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>② 제목 제공</strong>
-                    <p>페이지, iframe, 컨텐츠 블록에는 적절한 제목을 제공</p>
-                    <ul>
-                        <li>⑴ 페이지 타이틀 - 팝업창일 경우 '팝업창' 명시</li>
-                        <li>⑵ iframe - title="제목" / 내용이 없는 경우 title="빈 프레임" src="about:blank" 제공</li>
-                        <li>⑶ 컨텐츠 블록 - 제목을 제공하는 경우 헤딩태그 부여 / 컨텐츠 블록이 없는 경우 헤딩태그 사용 안됨</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>③ 적절한 링크 텍스트</strong>
-                    <p>숨김 텍스트로 더 구체적으로 명확하게 제공</p>
-                    <ul>
-                        <li>⑴ '더보기' 링크의 경우 - '공지사항 더보기', '이벤트 더보기'</li>
-                        <li>⑵ 한 페이지에 동일한 링크 텍스트가 있을 경우 - '미디어포스원 지도보기', '이수역 지도보기'</li>
-                        <li>⑶ 이미지 링크일 경우 - '홈페이지로 이동', '첫번째 페이지로 이동', '다음 페이지로 이동'</li>
-                        <li>⑷ 활성화를 시각적으로만 확인할 수 있을 때는 숨김텍스트로 '활성화' 명시</li>
-                    </ul>
-                </li>
-            </ul>
+                <h3>2) 자막 제공</h3>
+                <ul class="checkList">
+                    <li>- 동영상에 자막, 원고 또는 수화가 제공되었는지 체크</li>
+                </ul><br>
+
+                <h3>3) 명료성</h3>
+                <ul class="checkList">
+                    <li>- GNB/ LNB/ paging 등 선택된 항목들에게 색의 변화가 아닌 다른 방법으로 구분 가능한지 체크</li>
+                    <li>- 3초 이상의 배경음악이 자동으로 재생되는지 체크 (자동으로 재생된다면 마우스 또는 키보드로 제어할 수 있도록 제공되었는지 체크)</li>
+                </ul>
+            </div>
+            <div class="cont">
+                <h2>2. 운용의 용이성</h2><br>
+
+                <h3>1) 키보드 접근성</h3>
+                <ul class="checkList">
+                    <li>- Tab 과 Shift + Tab 으로 모든 컨텐츠에 접근이 가능하도록 제공되었는지 체크</li>
+                    <li>- 컨텐츠 접근 순서가 논리적인지 체크</li>
+                    <li>- 초점 받은 요소가 시각적으로 구분 가능한지 체크</li>
+                    <li>- flash wmode 값이 transparent 또는 opaque 인지 체크</li>
+                    <li>- onfocus="this.blur();" outline:none; 속성/ 스타일을 사용하였는지 체크</li>
+                </ul><br>
+
+                <h3>2) 충분한 시간 제공</h3>
+                <ul class="checkList">
+                    <li>- 시간제한 있는 콘텐츠는 응답시간 조절할 수 있도록 제공되었는지 체크</li>
+                    <li>- 자동으로 변경되는 콘텐츠는 움직임을 제어할 수 있도록 정지기능이 제공되었는지 체크</li>
+                </ul><br>
+
+                <h3>3) 쉬운 네비게이션</h3>
+                <ul class="checkList">
+                    <li>- 반복영역 건너뛰기(본문 바로가기)가 제공되고 포커스가 제대로 이동되는지 체크</li>
+                    <li>- 키보드로도 제대로 작동이 되는지 체크</li>
+                    <li>- 페이지, iframe 에 적절한 title이 제공되었는지 체크</li>
+                    <li>- 컨텐츠 블록에 헤딩태그가 적절하게 제공되었는지 체크</li>
+                </ul>
+            </div>
+            <div class="cont">
+                <h2>3. 이해의 용이성</h2><br>
+
+                <h3>1) 기본언어 표시</h3>
+                <ul class="checkList">
+                    <li>- &lt;html&gt; 요소 lang 속성 값 체크</li>
+                </ul><br>
+                
+                <h3>2) 사용자 요구에 따른 실행</h3>
+                <ul class="checkList">
+                    <li>- 새 창으로 동작하는 a태그에 target="_blank"를 제공되었는지 체크</li>
+                </ul><br>
+
+                <h3>3) 컨텐츠 선형화</h3>
+                <ul class="checkList">
+                    <li>- 컨텐츠의 순서가 논리적으로 제공되었는지 체크</li>
+                    <li>- 탭의 경우, 탭과 컨텐츠의 순서가 논리적으로 제공되었는지 체크</li>
+                    <li>- 레이어 팝업의 경우, 레이어 팝업의 위치가 논리적으로 제공되었는지 체크</li>
+                </ul><br>
+                
+                <h3>4) 표의 구성</h3>
+                <ul class="checkList">
+                    <li>- caption 내용이 올바르게 제공되었는지 체크</li>
+                    <li>- th 요소가 있는지, scope 속성이 적절히 제공되었는지 체크</li>
+                </ul><br>
+
+                <h3>5) 레이블 제공</h3>
+                <ul class="checkList">
+                    <li>- &lt;input&gt;, &lt;textarea&gt;, &lt;seelect&gt; 요소 등에 &lt;label&gt; 과 title 이 올바르게 제공되었는지 체크</li>
+                </ul>
+            </div>
+            <div class="cont">
+                <h2>4. 견고성</h2><br>
+
+                <h3>1) 문법 준수</h3>
+                <ul class="checkList">
+                    <li>- 태그의 열고 닫음 체크</li>
+                    <li>- 태그의 중첩이 올바른지 체크</li>
+                    <li>- 한 요소에 중복된 속성 선언 여부 체크</li>
+                    <li>- 한 페이지에 중복된 id 속성 값 선언 여부 체크</li>
+                    <li>- Markup Validation Service - http://validator.w3.org/</li>
+                    <li>- 자동검사 k-wah / 수동검사 openWAX, n-WAX</li>
+                </ul>
+            </div>
         </div>
-
-        <div class="cont">
-            <h2>3. 이해의 용이성</h2><br>
-
-            <h3>1) 기본언어 표시</h3>
-            <ul class="txt_list">
-                <li>
-                    <p>&lt;html lang="ko"&gt;&lt;html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko"&gt;</p>
-                </li>
-            </ul><br>
-            
-            <h3>2) 사용자 요구에 따른 실행</h3>
-            <ul class="txt_list">
-                <li>
-                    <p>마우스 이벤트와 키보드 이벤트 병행</p>
-                </li>
-                <li>
-                    <strong>① 마우스 오버</strong>
-                </li>
-                <li>
-                    <strong>② 마우스 클릭</strong>
-                </li>
-                <li>
-                    <strong>③ 드롭다운 메뉴</strong>
-                    <p>선택과 조작의 단계를 통해 구현되어야 함 (셀렉트박스에서 옵션 선택 후 이동 버튼을 클릭해야 페이지가 이동)</p>
-                </li>
-                <li>
-                    <strong>④ 풀다운 메뉴</strong>
-                </li>
-                <li>
-                    <strong>⑤ 새 창</strong>
-                    <ul>
-                        <li>⑴ target="_blank" </li>
-                        <li>⑵ target="_blank" 없이 스크립트를 사용할 경우 - title="새 창"</li>
-                        <li>⑶ alt에 함께 제공 -  alt="인쇄하기 새 창"</li>
-                    </ul>
-                </li>
-            </ul><br>
-
-            <h3>3) 컨텐츠 선형화</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>① 콘텐츠의 논리적인 초점 순서</strong>
-                    <p>좌 -> 우, 상 -> 하</p>
-                </li>
-                <li>
-                    <strong>② 탭, 컨텐츠</strong>
-                    <ul>
-                        <li>⑴ 한 페이지에 모든 탭과 컨텐츠가 있는 경우 - 탭1, 컨텐츠1, 탭2, 컨텐츠2, 탭3, 컨텐츠3…</li>
-                        <li>⑵ 각각 다른 페이지에 컨텐츠가 있는 경우 - 탭1, 탭2, 탭3… , 컨텐츠n (현재 활성화된 탭n의 제목을 컨텐츠의 제목으로 명시해주어야 함)</li>
-                    </ul>
-                </li>
-                <li>
-                    <strong>③ 이미지 슬라이드</strong>
-                    <p>이전버튼 -> 이미지1, 이미지2, 이미지3, .... -> 다음버튼</p>
-                </li>
-                <li>
-                    <strong>④ 레이어 팝업</strong>
-                    <p>열기 버튼 -> 레이어 팝업 -> 닫기</p>
-                </li>
-            </ul><br>
-            
-            <h3>4) 표의 구성</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>① caption</strong>
-                    <p>표의 내용을 요약한 정보를 제공</p>
-                </li>
-                <li>
-                    <strong>② th</strong>
-                    <p>scope 제공</p>
-                </li>
-            </ul><br>
-
-            <h3>5) 레이블 제공</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>&lt;input&gt;, &lt;textarea&gt;, &lt;seelect&gt; 등의 입력 서식에는 각각 대응하는 레이블을 제공해야 함</strong>
-                    <p>휴대폰번호, 이메일주소 처럼 하나의 레이블로 대응이 안될 경우 title="" 제공</p>
-                </li>
-            </ul>
-        </div>
-
-        <div class="cont">
-            <h2>4. 견고성</h2><br>
-
-            <h3>1) 문법 준수</h3>
-            <ul class="txt_list">
-                <li>
-                    <strong>마크업 오류 방지</strong>
-                    <ul>
-                        <li>- 태그의 열고닫음, 중첩, 중복된 선언, id 속성 값</li>
-                        <li>- Markup Validation Service - http://validator.w3.org/</li>
-                        <li>- 자동검사 k-wah / 수동검사 openWAX, n-WAX</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <!-- // contents -->
     </div>
-    <!-- // contents -->
-    
-    <!-- contents -->
-    <div class="contents">
-        <h1>접근성 체크리스트</h1>
+    <!-- // accessibility -->
 
-        <div class="cont">
-            <h2>1. 인식의 용이성</h2><br>
-
-            <h3>1) 대체텍스트</h3>
-
-            <ul class="checkList">
-                <li>- &lt;img&gt; &lt;input type="image"&gt; &lt;area&gt; 의 alt 속성이 있는지, 적절한 대체텍스트를 제공하였는지 체크</li>
-                <li>- img와 텍스트가 링크로 묶여있는 경우, img alt=""는 빈값으로 제공하였는지 체크 (중복 제공되었는지 체크)</li>
-                <li>- 긴 내용의 숨김 텍스트도 (h1h2h3..., p, ul 등을 사용하여) 구조적으로 제공되었는지 체크</li>
-            </ul><br>
-
-            <h3>2) 자막 제공</h3>
-            <ul class="checkList">
-                <li>- 동영상에 자막, 원고 또는 수화가 제공되었는지 체크</li>
-            </ul><br>
-
-            <h3>3) 명료성</h3>
-            <ul class="checkList">
-                <li>- GNB/ LNB/ paging 등 선택된 항목들에게 색의 변화가 아닌 다른 방법으로 구분 가능한지 체크</li>
-                <li>- 3초 이상의 배경음악이 자동으로 재생되는지 체크 (자동으로 재생된다면 마우스 또는 키보드로 제어할 수 있도록 제공되었는지 체크)</li>
-            </ul>
-        </div>
-        <div class="cont">
-            <h2>2. 운용의 용이성</h2><br>
-
-            <h3>1) 키보드 접근성</h3>
-            <ul class="checkList">
-                <li>- Tab 과 Shift + Tab 으로 모든 컨텐츠에 접근이 가능하도록 제공되었는지 체크</li>
-                <li>- 컨텐츠 접근 순서가 논리적인지 체크</li>
-                <li>- 초점 받은 요소가 시각적으로 구분 가능한지 체크</li>
-                <li>- flash wmode 값이 transparent 또는 opaque 인지 체크</li>
-                <li>- onfocus="this.blur();" outline:none; 속성/ 스타일을 사용하였는지 체크</li>
-            </ul><br>
-
-            <h3>2) 충분한 시간 제공</h3>
-            <ul class="checkList">
-                <li>- 시간제한 있는 콘텐츠는 응답시간 조절할 수 있도록 제공되었는지 체크</li>
-                <li>- 자동으로 변경되는 콘텐츠는 움직임을 제어할 수 있도록 정지기능이 제공되었는지 체크</li>
-            </ul><br>
-
-            <h3>3) 쉬운 네비게이션</h3>
-            <ul class="checkList">
-                <li>- 반복영역 건너뛰기(본문 바로가기)가 제공되고 포커스가 제대로 이동되는지 체크</li>
-                <li>- 키보드로도 제대로 작동이 되는지 체크</li>
-                <li>- 페이지, iframe 에 적절한 title이 제공되었는지 체크</li>
-                <li>- 컨텐츠 블록에 헤딩태그가 적절하게 제공되었는지 체크</li>
-            </ul>
-        </div>
-        <div class="cont">
-            <h2>3. 이해의 용이성</h2><br>
-
-            <h3>1) 기본언어 표시</h3>
-            <ul class="checkList">
-                <li>- &lt;html&gt; 요소 lang 속성 값 체크</li>
-            </ul><br>
-            
-            <h3>2) 사용자 요구에 따른 실행</h3>
-            <ul class="checkList">
-                <li>- 새 창으로 동작하는 a태그에 target="_blank"를 제공되었는지 체크</li>
-            </ul><br>
-
-            <h3>3) 컨텐츠 선형화</h3>
-            <ul class="checkList">
-                <li>- 컨텐츠의 순서가 논리적으로 제공되었는지 체크</li>
-                <li>- 탭의 경우, 탭과 컨텐츠의 순서가 논리적으로 제공되었는지 체크</li>
-                <li>- 레이어 팝업의 경우, 레이어 팝업의 위치가 논리적으로 제공되었는지 체크</li>
-            </ul><br>
-            
-            <h3>4) 표의 구성</h3>
-            <ul class="checkList">
-                <li>- caption 내용이 올바르게 제공되었는지 체크</li>
-                <li>- th 요소가 있는지, scope 속성이 적절히 제공되었는지 체크</li>
-            </ul><br>
-
-            <h3>5) 레이블 제공</h3>
-            <ul class="checkList">
-                <li>- &lt;input&gt;, &lt;textarea&gt;, &lt;seelect&gt; 요소 등에 &lt;label&gt; 과 title 이 올바르게 제공되었는지 체크</li>
-            </ul>
-        </div>
-        <div class="cont">
-            <h2>4. 견고성</h2><br>
-
-            <h3>1) 문법 준수</h3>
-            <ul class="checkList">
-                <li>- 태그의 열고 닫음 체크</li>
-                <li>- 태그의 중첩이 올바른지 체크</li>
-                <li>- 한 요소에 중복된 속성 선언 여부 체크</li>
-                <li>- 한 페이지에 중복된 id 속성 값 선언 여부 체크</li>
-                <li>- Markup Validation Service - http://validator.w3.org/</li>
-                <li>- 자동검사 k-wah / 수동검사 openWAX, n-WAX</li>
-            </ul>
-        </div>
-    </div>
-    <!-- // contents -->
-</div>
-<!-- // accessibility -->
-
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
 </body>
 </html>

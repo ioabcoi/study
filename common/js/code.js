@@ -2,7 +2,9 @@
 const button = document.createElement("button");
 button.innerHTML = "theme";
 button.classList.add("theme");
-document.querySelector(".code_wrap").prepend(button);
+if (document.body.querySelectorAll(".code_wrap").length > 0) {
+    document.querySelector(".code_wrap").prepend(button);
+}
 button.addEventListener('click', function(e){
     if (document.body.getAttribute("data-theme") === "light") {
         document.body.setAttribute("data-theme", "dark");

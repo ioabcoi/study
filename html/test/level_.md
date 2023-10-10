@@ -2490,6 +2490,7 @@ function solution(binomial) {
 ### 문자열 바꿔서 찾기
 #### 문자 "A"와 "B"로 이루어진 문자열 myString과 pat가 주어집니다. myString의 "A"를 "B"로, "B"를 "A"로 바꾼 문자열의 연속하는 부분 문자열 중 pat이 있으면 1을 아니면 0을 return 하는 solution 함수를 완성하세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181864
+> blog
 ```javascript
 /*
 function solution(myString, pat) {
@@ -2504,6 +2505,7 @@ const solution = (myString, pat) => [...myString].map(e => e === "A" ? "B" : "A"
 ### rny_string
 #### 'm'과 "rn"이 모양이 비슷하게 생긴 점을 활용해 문자열에 장난을 하려고 합니다. 문자열 rny_string이 주어질 때, rny_string의 모든 'm'을 "rn"으로 바꾼 문자열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181863
+> blog
 ```javascript
 /*
 function solution(rny_string) {
@@ -2526,6 +2528,7 @@ function solution(rny_string) {
 ### 세 개의 구분자
 #### 임의의 문자열이 주어졌을 때 문자 "a", "b", "c"를 구분자로 사용해 문자열을 나누고자 합니다. 예를 들어 주어진 문자열이 "baconlettucetomato"라면 나눠진 문자열 목록은 ["onlettu", "etom", "to"] 가 됩니다. 문자열 myStr이 주어졌을 때 위 예시와 같이 "a", "b", "c"를 사용해 나눠진 문자열을 순서대로 저장한 배열을 return 하는 solution 함수를 완성해 주세요. 단, 두 구분자 사이에 다른 문자가 없을 경우에는 아무것도 저장하지 않으며, return할 배열이 빈 배열이라면 ["EMPTY"]를 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181862
+> blog
 ```javascript
 function solution(myStr) {
     const answer = myStr.split("").map(e => e === "a" || e === "b" || e === "c" ? " " : e).join("").split(" ").filter(e => e !== "");
@@ -2547,6 +2550,7 @@ const solution=s=>s.match(/[^a-c]+/g)||['EMPTY']
 ### 배열의 원소만큼 추가하기
 #### 아무 원소도 들어있지 않은 빈 배열 X가 있습니다. 양의 정수 배열 arr가 매개변수로 주어질 때, arr의 앞에서부터 차례대로 원소를 보면서 원소가 a라면 X의 맨 뒤에 a를 a번 추가하는 일을 반복한 뒤의 배열 X를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181861
+> blog
 ```javascript
 /*
 function solution(arr) {
@@ -2573,6 +2577,7 @@ function solution(arr) {
 ### 빈 배열에 추가, 삭제하기
 #### 아무 원소도 들어있지 않은 빈 배열 X가 있습니다. 길이가 같은 정수 배열 arr과 boolean 배열 flag가 매개변수로 주어질 때, flag를 차례대로 순회하며 flag[i]가 true라면 X의 뒤에 arr[i]를 arr[i] × 2 번 추가하고, flag[i]가 false라면 X에서 마지막 arr[i]개의 원소를 제거한 뒤 X를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181860
+> blog
 ```javascript
 function solution(arr, flag) {
     let result = [];
@@ -2608,6 +2613,7 @@ function solution(arr, flag) {
 > stk에 원소가 있는데 stk의 마지막 원소가 arr[i]와 다르면 stk의 맨 마지막에 arr[i]를 추가하고 i에 1을 더합니다.
 #### 위 작업을 마친 후 만들어진 stk을 return 하는 solution 함수를 완성해 주세요. 단, 만약 빈 배열을 return 해야한다면 [-1]을 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181859
+> blog
 ```javascript
 function solution(arr) {
     let i = 0;
@@ -2653,6 +2659,7 @@ function solution(arr) {
 ### 무작위로 K개의 수 뽑기
 #### 랜덤으로 서로 다른 k개의 수를 저장한 배열을 만드려고 합니다. 적절한 방법이 떠오르지 않기 때문에 일정한 범위 내에서 무작위로 수를 뽑은 후, 지금까지 나온적이 없는 수이면 배열 맨 뒤에 추가하는 방식으로 만들기로 합니다. 이미 어떤 수가 무작위로 주어질지 알고 있다고 가정하고, 실제 만들어질 길이 k의 배열을 예상해봅시다. 정수 배열 arr가 주어집니다. 문제에서의 무작위의 수는 arr에 저장된 순서대로 주어질 예정이라고 했을 때, 완성될 배열을 return 하는 solution 함수를 완성해 주세요. 단, 완성될 배열의 길이가 k보다 작으면 나머지 값을 전부 -1로 채워서 return 합니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181858
+> blog
 ```javascript
 function solution(arr, k) {
     const answer = [...new Set(arr)].slice(0, k);
