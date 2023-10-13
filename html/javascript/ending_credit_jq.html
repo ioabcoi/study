@@ -3,15 +3,16 @@
 <head>
     <!-- head -->
     <script src="../include/head.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!-- // head -->
     
-    <title>ending_credit</title>
+    <title>ending_credit_jq</title>
 </head>
 <body data-theme="light">
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>ending_credit</h1>
+        <h1>ending_credit_jq</h1>
 
         <!-- code_area -->
         <div class="code_tit">common</div>
@@ -28,86 +29,41 @@
 	.ending_credit .container .description > div {box-sizing:border-box;white-space:nowrap;}
 </style>
 <script type="text/javascript" >
-    (function(){
-		// for ie 
-		if (typeof Object.assign != 'function') {
-			Object.assign = function(target) {
-				'use strict';
-				if (target == null) {
-					throw new TypeError('Cannot convert undefined or null to object');
-				}
-				target = Object(target);
-				for (var index = 1; index < arguments.length; index++) {
-					var source = arguments[index];
-					if (source != null) {
-						for (var key in source) {
-							if (Object.prototype.hasOwnProperty.call(source, key)) {
-								target[key] = source[key];
-							}
-						}
-					}
-				}
-				return target;
-			};
+    function endingCreditFunc(obj){
+		var target = jQuery(obj);
+		var object = target.find('.container');
+		var description = object.find('.description');
+		var temp = description.find('> div');
+		var temp_twice = temp.clone();
+		var temp_triple = temp.clone();
+		var temp_quadruple = temp.clone();
+		var direction = null;
+		var size = 0;
+		var speed = 0;
+		
+		if(target.hasClass('horizontal')){
+			size = temp.width();
+		}else{
+			size = temp.height();
 		}
+		speed = size * 20;
+		description.append(temp_twice).append(temp_triple).append(temp_quadruple);
 
-		var ending_credit = function(opts){
-			this.options = Object.assign(ending_credit.defaults, opts); // ie
-			// console.log(this.options);
-
-			this.target = document.querySelector(opts.selector);
-			this.desc = this.target.querySelector('.description');
-			this.temp = this.desc.querySelector('.text');
-			this.temp_twice = this.temp.cloneNode(true);
-			this.temp_triple = this.temp.cloneNode(true);
-			this.temp_quadruple = this.temp.cloneNode(true);
-			this.size = 0;
-			this.speed = 0;
-			this.type = '';
-
-			if(this.target.classList.contains('horizontal')){
-				this.size = this.temp.offsetWidth;
-				this.type = 'horizontal';
+		function ticker(){
+			if(target.hasClass('horizontal')){
+				description.animate({'left' : '-' + size + 'px'}, speed, 'linear', function(){
+					description.css({'left' : '0'}).append(temp.eq(0));
+				});
 			}else{
-				this.size = this.temp.offsetHeight;
-				this.type = 'vertical';
+				description.animate({'top' : '-' + size + 'px'}, speed, 'linear', function(){
+					description.css({'top' : '0'}).append(temp.eq(0));
+				});
 			}
-			console.log(this.size);
-			this.speed = this.size * 20;
-			this.desc.append(this.temp_twice);
-			this.desc.append(this.temp_triple);
-			this.desc.append(this.temp_quadruple);
-			//console.log(this.desc, this.size, this.type, this.speed, this.temp);
-			init(this.desc, this.size, this.type, this.speed, this.temp);
 		}
-
-		function init(desc, size, type, speed, temp){
-			function ticker(){
-				//console.log(desc, size, type, speed, temp);
-				if( type === 'horizontal' ){
-					desc.animate({'left' : '-' + size + 'px'}, speed, 'linear', function(){
-						desc.css({'left' : '0'}).append(temp);
-					});
-				}else{
-					desc.animate({'top' : '-' + size + 'px'}, speed, 'linear', function(){
-						desc.css({'top' : '0'}).append(temp);
-					});
-				}
-			}
+		setInterval(function(){
 			ticker();
-			setInterval(function(){
-				ticker();
-			}, speed);
-		}
-
-		// Attach our defaults for plugin to the plugin itself
-		ending_credit.defaults = {
-			selector : ''
-		}
-
-        // make accessible globally
-		window.ending_credit = ending_credit;
-	})();
+		}, 250);
+	}
 </script>
                 </div>
             </div>
@@ -141,8 +97,8 @@
 <!-- //ending_credit -->
 <script type="text/javascript" >
     // ending_credit
-	var ending_credit1 = new ending_credit({ 
-		selector: '#ending_credit1'
+	jQuery(function(){
+		endingCreditFunc('.ending_credit.horizontal');
 	});
 </script>
                 </div>
@@ -185,8 +141,8 @@
 <!-- //ending_credit -->
 <script type="text/javascript" >
     // ending_credit
-    var ending_credit2 = new ending_credit({ 
-		selector: '#ending_credit2'
+	jQuery(function(){
+		endingCreditFunc('.ending_credit.vertical');
 	});
 </script>
                 </div>
