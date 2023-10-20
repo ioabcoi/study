@@ -2679,6 +2679,7 @@ function solution(arr, k) {
 ### 배열의 길이를 2의 거듭제곱으로 만들기
 #### 정수 배열 arr이 매개변수로 주어집니다. arr의 길이가 2의 정수 거듭제곱이 되도록 arr 뒤에 정수 0을 추가하려고 합니다. arr에 최소한의 개수로 0을 추가한 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181857
+> blog
 ```javascript
 function solution(arr) {
     let i = 0;
@@ -2708,6 +2709,7 @@ function solution(arr) {
 > 배열의 길이가 같다면 각 배열에 있는 모든 원소의 합을 비교하여 다르다면 더 큰 쪽이 크고, 같다면 같습니다.
 #### 두 정수 배열 arr1과 arr2가 주어질 때, 위에서 정의한 배열의 대소관계에 대하여 arr2가 크다면 -1, arr1이 크다면 1, 두 배열이 같다면 0을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181856
+> blog
 ```javascript
 function solution(arr1, arr2) {
     const reduce = (obj) => obj.reduce((a, b) => a + b);
@@ -2723,6 +2725,7 @@ function solution(arr1, arr2) {
 ### 문자열 묶기
 #### 문자열 배열 strArr이 주어집니다. strArr의 원소들을 길이가 같은 문자열들끼리 그룹으로 묶었을 때 가장 개수가 많은 그룹의 크기를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181855
+> blog
 ```javascript
 function solution(strArr) {
     const set = new Set(strArr.map(e => e.length));
@@ -2736,6 +2739,7 @@ function solution(strArr) {
 ### 배열의 길이에 따라 다른 연산하기
 #### 정수 배열 arr과 정수 n이 매개변수로 주어집니다. arr의 길이가 홀수라면 arr의 모든 짝수 인덱스 위치에 n을 더한 배열을, arr의 길이가 짝수라면 arr의 모든 홀수 인덱스 위치에 n을 더한 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181854
+> blog
 ```javascript
 /*
 function solution(arr, n) {
