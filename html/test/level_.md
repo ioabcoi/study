@@ -3218,6 +3218,14 @@ const solution=n=>Array.from({length:n},()=>Array(n).fill(0)).map((v,i)=>[...v.s
 #### n × n 크기의 이차원 배열 arr이 매개변수로 주어질 때, arr이 다음을 만족하면 1을 아니라면 0을 return 하는 solution 함수를 작성해 주세요. 0 ≤ i, j < n인 정수 i, j에 대하여 arr[i][j] = arr[j][i]
 > https://school.programmers.co.kr/learn/courses/30/lessons/181831
 ```javascript
+/*
+function solution(arr) {
+    const answer = arr.every((x, i) => x.every((y, j) => arr[i][j] === arr[j][i] ? 1 : 0)) ? 1 : 0; 
+    return answer;
+}
+*/
+
+const solution = arr => arr.every((x, i) => x.every((y, j) => arr[i][j] === arr[j][i] ? 1 : 0)) ? 1 : 0;
 ```
 
 ```javascript
@@ -3250,9 +3258,23 @@ function solution(arr) {
 #### 2차원 정수 배열 board와 정수 k가 주어집니다. i + j <= k를 만족하는 모든 (i, j)에 대한 board[i][j]의 합을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181829
 ```javascript
+/*
+function solution(board, k) {
+    const answer = board.map((x, i) => x.map((y, j) => i + j <= k ? y : 0).reduce((a, b) => a + b)).reduce((a, b) => a + b);
+    return answer;
+}
+*/
+
+const solution = (board, k) => board.map((x, i) => x.map((y, j) => i + j <= k ? y : 0).reduce((a, b) => a + b)).reduce((a, b) => a + b);
 ```
 
 ```javascript
 /* good
+function solution(board, k) {
+    return board.reduce(
+        (total, row, i) => total + row.reduce((prev, num, j) => (i + j <= k ? prev + num : prev), 0), 
+        0,
+    );
+}
 */
 ```
