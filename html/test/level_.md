@@ -2921,6 +2921,7 @@ const solution = (a, b) => String(BigInt(a) + BigInt(b));
 ### 문자열로 변환
 #### 정수 n이 주어질 때, n을 문자열로 변환하여 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181845
+> blog
 ```javascript
 /*
 function solution(n) {
@@ -2947,6 +2948,7 @@ const solution = String
 ### 배열의 원소 삭제하기
 #### 정수 배열 arr과 delete_list가 있습니다. arr의 원소 중 delete_list의 원소를 모두 삭제하고 남은 원소들은 기존의 arr에 있던 순서를 유지한 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181844
+> blog
 ```javascript
 /*
 function solution(arr, delete_list) {
@@ -2961,6 +2963,7 @@ const solution = (arr, delete_list) => arr.filter(e => !delete_list.includes(e))
 ### 부분 문자열인지 확인하기
 #### 부분 문자열이란 문자열에서 연속된 일부분에 해당하는 문자열을 의미합니다. 예를 들어, 문자열 "ana", "ban", "anana", "banana", "n"는 모두 문자열 "banana"의 부분 문자열이지만, "aaa", "bnana", "wxyz"는 모두 "banana"의 부분 문자열이 아닙니다. 문자열 my_string과 target이 매개변수로 주어질 때, target이 문자열 my_string의 부분 문자열이라면 1을, 아니라면 0을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181843
+> blog
 ```javascript
 /*
 function solution(my_string, target) {
@@ -2975,6 +2978,7 @@ const solution = (my_string, target) => my_string.includes(target) ? 1 : 0;
 ### 부분 문자열
 #### 어떤 문자열 A가 다른 문자열 B안에 속하면 A를 B의 부분 문자열이라고 합니다. 예를 들어 문자열 "abc"는 문자열 "aabcc"의 부분 문자열입니다. 문자열 str1과 str2가 주어질 때, str1이 str2의 부분 문자열이라면 1을 부분 문자열이 아니라면 0을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181842
+> blog
 ```javascript
 /*
 function solution(str1, str2) {
@@ -2989,6 +2993,7 @@ const solution = (str1, str2) => str2.includes(str1) ? 1 : 0;
 ### 꼬리 문자열
 #### 문자열들이 담긴 리스트가 주어졌을 때, 모든 문자열들을 순서대로 합친 문자열을 꼬리 문자열이라고 합니다. 꼬리 문자열을 만들 때 특정 문자열을 포함한 문자열은 제외시키려고 합니다. 예를 들어 문자열 리스트 ["abc", "def", "ghi"]가 있고 문자열 "ef"를 포함한 문자열은 제외하고 꼬리 문자열을 만들면 "abcghi"가 됩니다. 문자열 리스트 str_list와 제외하려는 문자열 ex가 주어질 때, str_list에서 ex를 포함한 문자열을 제외하고 만든 꼬리 문자열을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181841
+> blog
 ```javascript
 /*
 function solution(str_list, ex) {
@@ -3003,6 +3008,7 @@ const solution = (str_list, ex) => str_list.filter(e => !e.includes(ex)).join(""
 ### 정수 찾기
 #### 정수 리스트 num_list와 찾으려는 정수 n이 주어질 때, num_list안에 n이 있으면 1을 없으면 0을 return하도록 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181840
+> blog
 ```javascript
 /*
 function solution(num_list, n) {
@@ -3021,6 +3027,7 @@ const solution = (num_list, n) => num_list.includes(n) ? 1 : 0;
 > a와 b 모두 홀수가 아니라면 |a - b| 점을 얻습니다.
 #### 두 정수 a와 b가 매개변수로 주어질 때, 얻는 점수를 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181839
+> blog
 ```javascript
 /*
 function solution(a, b) {
@@ -3044,6 +3051,7 @@ function solution(a, b) {
 ### 날짜 비교하기
 #### 정수 배열 date1과 date2가 주어집니다. 두 배열은 각각 날짜를 나타내며 [year, month, day] 꼴로 주어집니다. 각 배열에서 year는 연도를, month는 월을, day는 날짜를 나타냅니다. 만약 date1이 date2보다 앞서는 날짜라면 1을, 아니면 0을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181838
+> blog
 ```javascript
 /*
 function solution(date1, date2) {
@@ -3103,6 +3111,7 @@ function solution(date1, date2) {
 ### 커피 심부름
 #### 팀의 막내인 철수는 아메리카노와 카페 라테만 판매하는 카페에서 팀원들의 커피를 사려고 합니다. 아메리카노와 카페 라테의 가격은 차가운 것과 뜨거운 것 상관없이 각각 4500, 5000원입니다. 각 팀원에게 마실 메뉴를 적어달라고 하였고, 그 중에서 메뉴만 적은 팀원의 것은 차가운 것으로 통일하고 "아무거나"를 적은 팀원의 것은 차가운 아메리카노로 통일하기로 하였습니다. 각 직원이 적은 메뉴가 문자열 배열 order로 주어질 때, 카페에서 결제하게 될 금액을 return 하는 solution 함수를 작성해주세요. order의 원소는 아래의 것들만 들어오고, 각각의 의미는 다음과 같습니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181837
+> blog
 ```javascript
 /*
 function solution(order) {
@@ -3123,6 +3132,7 @@ const solution = (order) => order.reduce((acc, cur) => acc + (cur.includes('latt
 ### 그림 확대
 #### 직사각형 형태의 그림 파일이 있고, 이 그림 파일은 1 × 1 크기의 정사각형 크기의 픽셀로 이루어져 있습니다. 이 그림 파일을 나타낸 문자열 배열 picture과 정수 k가 매개변수로 주어질 때, 이 그림 파일을 가로 세로로 k배 늘린 그림 파일을 나타내도록 문자열 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181836
+> blog
 ```javascript
 function solution(picture, k) {
     let result = [];
@@ -3137,6 +3147,7 @@ function solution(picture, k) {
 ### 조건에 맞게 수열 변환하기 3
 #### 정수 배열 arr와 자연수 k가 주어집니다. 만약 k가 홀수라면 arr의 모든 원소에 k를 곱하고, k가 짝수라면 arr의 모든 원소에 k를 더합니다. 이러한 변환을 마친 후의 arr를 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181835
+> blog
 ```javascript
 /*
 function solution(arr, k) {
@@ -3157,6 +3168,7 @@ const solution = (arr, k) => arr.map(v => k % 2 ? v * k : v + k)
 ### l로 만들기
 #### 알파벳 소문자로 이루어진 문자열 myString이 주어집니다. 알파벳 순서에서 "l"보다 앞서는 모든 문자를 "l"로 바꾼 문자열을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181834
+> blog
 ```javascript
 /*
 function solution(myString) {
@@ -3177,6 +3189,7 @@ const solution = myString => myString.replace(/[a-k]/g,'l')
 ### 특별한 이차원 배열 1
 #### 정수 n이 매개변수로 주어질 때, 다음과 같은 n × n 크기의 이차원 배열 arr를 return 하는 solution 함수를 작성해 주세요. arr[i][j] (0 ≤ i, j < n)의 값은 i = j라면 1, 아니라면 0입니다.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181833
+> blog
 ```javascript
 function solution(n) {
     let answer = new Array(n).fill(0).map(e => new Array(n).fill(0));
