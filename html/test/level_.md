@@ -3220,16 +3220,169 @@ const solution=n=>Array.from({length:n},()=>Array(n).fill(0)).map((v,i)=>[...v.s
 #### 양의 정수 n이 매개변수로 주어집니다. n × n 배열에 1부터 n2 까지 정수를 인덱스 [0][0]부터 시계방향 나선형으로 배치한 이차원 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181832
 ```javascript
+/*
+function solution(n) {
+    let answer = new Array(n).fill(0).map(e => new Array(n).fill(0)).map((x, i) => x.map((y, j) => i + j));
+    let num = 0;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            // console.log(i, j, i+j);
+            answer[i][j] = num;
+            num++;
+        }
+    }
+    for (let i = 0; i < n * n; i++) {
+    }    
+    return answer;
+}
+*/
 ```
 
 ```javascript
 /* good
+function solution(n) {
+    const move = [[0, 1], [1, 0], [0, -1], [-1, 0]];
+    const answer = Array.from(new Array(n), () => new Array(n).fill(0))
+    let x = 0, y = 0, dir = 0, num = 1;
+    while(num <= n * n) {
+        answer[x][y] = num;
+        let nextX = x + move[dir][0];
+        let nextY = y + move[dir][1];
+        if (nextX >= n || nextX < 0 || nextY >= n || nextY < 0 || answer[nextX][nextY] !== 0) {
+            dir = (dir + 1) % 4;
+            nextX = x + move[dir][0];
+            nextY = y + move[dir][1];
+        }
+        x = nextX;
+        y = nextY;
+        num ++;
+    }
+    return answer;
+}
+
+function solution(n) {
+    let result = new Array(n);
+    for(let i = 0; i < result.length; i++){
+        result[i] = new Array(n);
+    }
+    let direction = 1; 
+    let x,y,num;
+    x = y = num = 0;
+    x--; 
+    while(1) {
+        for(let i = 0; i < n; i++){
+            x += direction;
+            result[y][x] = ++num; 
+        }
+        n--; 
+        if(n == 0)break;
+        for(let j = 0; j < n; j++){
+            y += direction;
+            result[y][x] = ++num;
+        }
+        direction *= -1;
+    }
+    return result;
+}
+
+function solution(n) {
+    const result = new Array(n).fill().map(() => new Array(n).fill(-1));
+    const directions = [
+        [0, 1],
+        [1, 0],
+        [0, -1],
+        [-1, 0],
+    ];    
+    result[0][0] = 1;
+    let currentValue = 1;
+    let [y, x, direction] = [0, 0, 0];
+    while (currentValue < n ** 2) {
+        const [dy, dx] = directions[direction];
+        const [ny, nx] = [y + dy, x + dx];
+        if (0 <= ny && ny < n && 0 <= nx && nx < n && result[ny][nx] === -1) {
+            [y, x] = [ny, nx];
+            currentValue += 1;
+            result[y][x] = currentValue;
+        } else {
+            direction = (direction + 1) % 4;
+        }
+    }
+    return result;
+}
+
+function solution(n) {
+    var answer = new Array(n);
+    for (var i = 0; i < answer.length; i++) {
+        answer[i] = new Array(n).fill(-1);
+    }
+    let y = 0;
+    let x = 0;
+    let index = 1;
+    let dir = [0,1];
+    for(let i = 0 ; i< n * n; i++) {
+        answer[y][x] = index++;
+        const next = [y + dir[0], x + dir[1]];
+        let num;
+        try{
+            num = answer[next[0]][next[1]] != -1 ? undefined : -1;
+        }  catch(e) {
+            num = undefined;
+        }
+        if (num == undefined)  {
+            if(dir[1] == 1) dir = [1,0];
+            else if(dir[0] == 1) dir = [0,-1];
+            else if(dir[1] == -1) dir = [-1,0];
+            else if(dir[0] == -1) dir = [0,1];
+        }
+        y += dir[0];
+        x += dir[1];
+    }
+    return answer;
+}
+*/
+
+/* GPT
+function solution(n) {
+    const answer = new Array(n).fill(0).map(() => new Array(n).fill(0)); // n x n 크기의 2차원 배열 초기화
+
+    let num = 1;
+    let left = 0, right = n - 1, top = 0, bottom = n - 1;
+
+    while (left <= right && top <= bottom) {
+        // 위쪽 행
+        for (let i = left; i <= right; i++) {
+            answer[top][i] = num++;
+        }
+        top++;
+
+        // 오른쪽 열
+        for (let i = top; i <= bottom; i++) {
+            answer[i][right] = num++;
+        }
+        right--;
+
+        // 아래쪽 행
+        for (let i = right; i >= left; i--) {
+            answer[bottom][i] = num++;
+        }
+        bottom--;
+
+        // 왼쪽 열
+        for (let i = bottom; i >= top; i--) {
+            answer[i][left] = num++;
+        }
+        left++;
+    }
+
+    return answer;
+}
 */
 ```
 
 ### 특별한 이차원 배열 2
 #### n × n 크기의 이차원 배열 arr이 매개변수로 주어질 때, arr이 다음을 만족하면 1을 아니라면 0을 return 하는 solution 함수를 작성해 주세요. 0 ≤ i, j < n인 정수 i, j에 대하여 arr[i][j] = arr[j][i]
 > https://school.programmers.co.kr/learn/courses/30/lessons/181831
+> blog
 ```javascript
 /*
 function solution(arr) {
@@ -3249,6 +3402,7 @@ const solution = arr => arr.every((x, i) => x.every((y, j) => arr[i][j] === arr[
 ### 정사각형으로 만들기
 #### 이차원 정수 배열 arr이 매개변수로 주어집니다. arr의 행의 수가 더 많다면 열의 수가 행의 수와 같아지도록 각 행의 끝에 0을 추가하고, 열의 수가 더 많다면 행의 수가 열의 수와 같아지도록 각 열의 끝에 0을 추가한 이차원 배열을 return 하는 solution 함수를 작성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181830
+> blog
 ```javascript
 function solution(arr) {
     const n = Math.max(arr[0].length, arr.length);
@@ -3270,6 +3424,7 @@ function solution(arr) {
 ### 이차원 배열 대각선 순회하기
 #### 2차원 정수 배열 board와 정수 k가 주어집니다. i + j <= k를 만족하는 모든 (i, j)에 대한 board[i][j]의 합을 return 하는 solution 함수를 완성해 주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/181829
+> blog
 ```javascript
 /*
 function solution(board, k) {
