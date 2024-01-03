@@ -1077,11 +1077,186 @@ const solution = rsp => rsp.split("").map(x => parseInt(x) === 2 ? 0 : parseInt(
 ### 구슬을 나누는 경우의 수
 #### 머쓱이는 구슬을 친구들에게 나누어주려고 합니다. 구슬은 모두 다르게 생겼습니다. 머쓱이가 갖고 있는 구슬의 개수 balls와 친구들에게 나누어 줄 구슬 개수 share이 매개변수로 주어질 때, balls개의 구슬 중 share개의 구슬을 고르는 가능한 모든 경우의 수를 return 하는 solution 함수를 완성해주세요.
 > https://school.programmers.co.kr/learn/courses/30/lessons/120840
+> 
 ```javascript
+/*
+구슬을 나누는 경우의 수
+
+문제 설명 : 
+머쓱이는 구슬을 친구들에게 나누어주려고 합니다. 구슬은 모두 다르게 생겼습니다. 
+머쓱이가 갖고 있는 구슬의 개수 balls와 친구들에게 나누어 줄 구슬 개수 share이 매개변수로 주어질 때, 
+balls개의 구슬 중 share개의 구슬을 고르는 가능한 모든 경우의 수를 return 하는 solution 함수를 완성해주세요.
+
+제한사항 :
+ㆍ 1 ≤ balls ≤ 30
+ㆍ 1 ≤ share ≤ 30
+ㆍ 구슬을 고르는 순서는 고려하지 않습니다.
+ㆍ share ≤ balls
+
+입출력 예 :
+balls = 3 이고 share = 2 이면 result = 3
+balls = 5 이고 share = 3 이면 result = 10
+
+입출력 예 설명
+입출력 예1 : 서로 다른 구슬 3개 중 2개를 고르는 경우의 수는 3입니다.
+입출력 예2 : 서로 다른 구슬 5개 중 3개를 고르는 경우의 수는 10입니다.
+
+힌트 :
+서로 다른 n개 중 m개를 뽑는 경우의 수 공식은 다음과 같습니다.
+n! / (n-m)! * m!
+*/
 ```
 
 ```javascript
-/* good
+/*
+// chatGPT 
+// 팩토리얼을 계산하는 함수
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+// 조합을 계산하는 함수
+function combination(n, r) {
+    return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
+// 주어진 구슬 중에서 share 개수를 선택하는 경우의 수 계산
+function solution(balls, share) {
+    return combination(balls, share);
+}
+
+// 예시
+console.log(solution(3, 2));  // 결과: 3
+console.log(solution(5, 3));  // 결과: 10
+
+// 테스트 5,6,7,28,33,34,35 실패
+-> Math.round() 로 해결
+*/
+
+/*
+// chatGPT
+// 팩토리얼을 계산하는 함수
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+// 조합을 계산하는 함수
+function combination(n, r) {
+    return Math.round(factorial(n) / (factorial(r) * factorial(n - r)));
+}
+
+// 주어진 구슬 중에서 share 개수를 선택하는 경우의 수 계산
+function solution(balls, share) {
+    return combination(balls, share);
+}
+*/
+```
+
+```javascript
+/*
+// chatGPT 3.5
+function solution(balls, share) {
+    // 팩토리얼 계산 함수
+    function factorial(num) {
+        if (num === 0 || num === 1) {
+            return 1;
+        }
+        return num * factorial(num - 1);
+    }
+
+    // 구슬을 나누는 경우의 수 계산
+    const numerator = factorial(balls);
+    const denominator = factorial(balls - share) * factorial(share);
+    const result = numerator / denominator;
+
+    return result;
+}
+
+// 예시 테스트
+const balls1 = 3;
+const share1 = 2;
+console.log(solution(balls1, share1)); // 결과: 3
+
+const balls2 = 5;
+const share2 = 3;
+console.log(solution(balls2, share2)); // 결과: 10
+
+// 테스트 5,6,7,28,33,34,35 실패
+-> Math.round() 로 해결
+*/
+
+/*
+// chatGPT 3.5
+function solution(balls, share) {
+    // 팩토리얼 계산 함수
+    function factorial(num) {
+        if (num === 0 || num === 1) {
+            return 1;
+        }
+        return num * factorial(num - 1);
+    }
+
+    // 구슬을 나누는 경우의 수 계산
+    const numerator = factorial(balls);
+    const denominator = factorial(balls - share) * factorial(share);
+    const result = Math.round(numerator / denominator);
+
+    return result;
+}
+```
+
+```javascript
+/*
+이 문제는 조합의 개념을 사용하여 해결할 수 있습니다. 
+조합은 서로 다른 n개에서 순서에 상관없이 m개를 선택하는 경우의 수를 말합니다. 
+주어진 공식인 n! / (n-m)! * m!을 이용해 이를 계산할 수 있습니다.
+
+JavaScript에서는 다음과 같이 이 문제를 해결할 수 있습니다:
+
+1. Factorial 계산을 위한 함수를 작성합니다.
+2. 주어진 `balls`와 `share` 값에 대해 조합 공식을 사용하여 결과를 계산합니다.
+
+// chatGPT 4.0
+function factorial(n) {
+    if (n === 0 || n === 1) return 1;
+    return n * factorial(n - 1);
+}
+
+function solution(balls, share) {
+    return factorial(balls) / (factorial(balls - share) * factorial(share));
+}
+
+// 예제 테스트
+console.log(solution(3, 2)); // 3
+console.log(solution(5, 3)); // 10
+
+이 코드에서 `factorial` 함수는 재귀적으로 팩토리얼을 계산합니다. 
+그리고 `solution` 함수는 주어진 `balls`와 `share` 값에 대해 조합의 경우의 수를 계산하여 반환합니다.
+
+// 테스트 5,6,7,28,33,34,35 실패
+-> 테스트 케이스 추가
+반례
+입력값 〉 30, 10
+기댓값 〉 30045015
+-> Math.round() 로 해결
+*/
+
+/*
+// chatGPT 4.0
+function factorial(n) {
+    if (n === 0 || n === 1) return 1;
+    return n * factorial(n - 1);
+}
+
+function solution(balls, share) {
+    return Math.round(factorial(balls) / (factorial(balls - share) * factorial(share)));
+}
 */
 ```
 
