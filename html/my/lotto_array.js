@@ -1,9 +1,8 @@
-/*
-2024-01-12 
-1 ~ 1101 È¸Â÷ 
+// 2024-01-12 1 ~ 1101 íšŒì°¨ 
 
-´çÃ· Åë°è
-https://www.dhlottery.co.kr/gameResult.do?method=statIndex
+/*
+ë‹¹ì²¨ê²°ê³¼ - íšŒì°¨ë³„ ë‹¹ì²¨ë²ˆí˜¸
+https://www.dhlottery.co.kr/gameResult.do?method=byWin
 */
 
 const old_list = [
@@ -1111,9 +1110,10 @@ const old_list = [
 ];
 
 /*
-¹øÈ£º° Åë°è
+ë²ˆí˜¸ë³„ í†µê³„ - ë‹¹ì²¨íšŸìˆ˜ìˆœ
 https://www.dhlottery.co.kr/gameResult.do?method=statByNumber
 */
+
 const count_list = [
     [43, 191],
     [34, 189],
