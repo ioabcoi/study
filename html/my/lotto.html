@@ -1133,6 +1133,54 @@
             [9, 13, 21, 25, 32, 42],
             [10, 23, 29, 33, 37, 40]];
         
+        const count_list = [
+            [43, 191],
+            [34, 189],
+            [12, 187],
+            [17, 186],
+            [27, 186],
+            [33, 183],
+            [18, 183],
+            [1, 183],
+            [13, 181],
+            [4, 179],
+            [14, 179],
+            [20, 178],
+            [26, 177],
+            [40, 176],
+            [24, 176],
+            [45, 176],
+            [6, 175],
+            [38, 175],
+            [39, 175],
+            [7, 174],
+            [3, 174],
+            [37, 174],
+            [31, 174],
+            [10, 173],
+            [35, 173],
+            [11, 172],
+            [16, 172],
+            [21, 171],
+            [2, 171],
+            [36, 171],
+            [44, 170],
+            [15, 170],
+            [19, 167],
+            [30, 166],
+            [42, 165],
+            [5, 162],
+            [8, 161],
+            [32, 158],
+            [28, 156],
+            [25, 155],
+            [23, 153],
+            [29, 152],
+            [41, 152],
+            [22, 146],
+            [9, 140]
+        ];
+        
         let generatedNumbers = [];
 
         function generateLottoNumber() {
@@ -1161,10 +1209,19 @@
         }
 
         function generateNewNumbers() {
-            // 1부터 45까지의 번호 중에서 무작위로 6개 선택
+            // 번호별 당첨횟수를 반영하여 가중치 생성
+            const weights = [];
+            for (const [number, count] of count_list) {
+                for (let i = 0; i < count; i++) {
+                    weights.push(number);
+                }
+            }
+
+            // 가중치를 기반으로 무작위로 6개의 번호 선택
             const newNumbers = [];
             while (newNumbers.length < 6) {
-                const randomNumber = Math.floor(Math.random() * 45) + 1;
+                const randomIndex = Math.floor(Math.random() * weights.length);
+                const randomNumber = weights[randomIndex];
                 if (!newNumbers.includes(randomNumber)) {
                     newNumbers.push(randomNumber);
                 }
