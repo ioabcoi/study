@@ -113,9 +113,7 @@
             generatedNumbers.push(newNumbers);
             const result = newNumbers.slice(0, 6).sort((a, b) => a - b);
             // document.getElementById("lottoNumbers").innerText = "새로운 로또 번호: " + result.join(", ");
-
             // console.log(result)
-            // document.getElementById('container').insertAdjacentHTML('afterend', html);
 
             document.getElementById('lottoNumbers').textContent = "";
             const result_strong = result.map(e => e < 10 ? '0' + e : String(e));
