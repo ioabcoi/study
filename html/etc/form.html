@@ -20,6 +20,125 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style>
+/* 숫자 증가/감소 버튼 숨기기 */
+/* chrome, safari */
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* 검색 입력 상자의 둥근 모서리와 'x(입력 내용 삭제)' 아이콘 숨기기 */
+/* chrome, safari */
+input[type="search"]::-webkit-search-clear-button,
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+/* 캘린더와 시간 관련 아이콘 숨기기 */
+/* chrome, safari */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator,
+input[type="week"]::-webkit-calendar-picker-indicator,
+input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+/* 비밀번호 입력 상자의 '비밀번호 보기' 아이콘 숨기기 (Edge 브라우저에서만 해당) */
+input[type="password"]::-ms-reveal {
+    display: none;
+}
+
+/* select 요소 화살표 숨기기 */
+/* chrome, safari */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+}
+ 
+
+/* File 선택 커스텀화 하기 */
+.custom-file-upload-wrap {
+    display: flex;
+    align-items: center;
+}
+.custom-file-upload {
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    cursor: pointer;
+    background-color: #f2f2f2;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.custom-file-upload-name {
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: inline-block;  
+}
+.custom-file-upload:hover {
+    background-color: #e0e0e0;
+}
+</style>
+<form>
+    <div><input type = "text"></div>
+    <div><input type = "radio"></div>
+    <div><input type = "checkbox"></div>
+    <div><input type = "submit"></div>
+    <div><input type = "button"></div>
+    <div><input type = "reset"></div>
+    <div><input type = "file"></div>
+    <div><input type = "date"></div>
+    <div><input type = "number"></div>
+    <div><input type = "email"></div>
+    <div><input type = "color"></div>
+    <div><input type = "range" min="0" max="50"></div>
+    <div><input type = "search"></div>
+    <div>
+        <select>
+            <option>HTML</option>
+            <option>CSS</option>
+            <option>JAVASCRIPT</option>
+        </select>
+    </div>
+    <div>
+        <div class="custom-file-upload-wrap">
+            <input type="text" id="file-name" class="custom-file-upload-name" />
+            <label for="file-upload" class="custom-file-upload">파일 선택</label>
+            <input id="file-upload" type="file" />
+        </div>
+    </div>
+</form>
+<script>
+document.getElementById("file-upload").addEventListener("change", function () {
+    const fileName = this.files[0].name;
+    document.getElementById("file-name").value = fileName;
+});
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">common</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
     select,
     input[type="checkbox"], 
     input[type="radio"],
