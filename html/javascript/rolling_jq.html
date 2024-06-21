@@ -22,15 +22,15 @@
 <style type="text/css">
     /* rolling */
     .rolling {position:relative;width:100%;}
-    .rolling ul {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:row;-webkit-flex-direction:row;box-sizing:border-box;width:100%;margin:0 auto;}
+    .rolling ul {display:flex;align-items:center;justify-content:center;flex-direction:row;box-sizing:border-box;width:100%;margin:0 auto;}
     .rolling ul li {flex:1;text-align:center;}
     .rolling ul li a {box-sizing:border-box;display:block;height:32px;background:#eee;border:1px solid #dcdcdc;color:#000;font-size:14px;line-height:32px;text-decoration:none;}
     .rolling ul li.on a {color:#ff00ff;}
 
     .rolling > a {position:absolute;right:-37px;top:0;box-sizing:border-box;display:inline-block;width:32px;height:32px;background:#fff;border:1px solid #ddd;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
-    .rolling .play:after {position:absolute;left:50%;top:50%;content:'';display:inline-block;width:0;height:0;margin:-6px 0 0 -2px;border-style:solid;border-width:6px;border-color:transparent transparent transparent #888888;}
+    .rolling .play:after {position:absolute;left:50%;top:50%;content:"";display:inline-block;width:0;height:0;margin:-6px 0 0 -2px;border-style:solid;border-width:6px;border-color:transparent transparent transparent #888;}
     .rolling .stop:before,
-    .rolling .stop:after {position:absolute;left:50%;top:50%;content:'';display:inline-block;width:2px;height:12px;margin-top:-6px;background:#888888;}
+    .rolling .stop:after {position:absolute;left:50%;top:50%;content:"";display:inline-block;width:2px;height:12px;margin-top:-6px;background:#888;}
     .rolling .stop:before {margin-left:-3px;}
     .rolling .stop:after {margin-left:2px;}
 

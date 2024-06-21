@@ -19,7 +19,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* common */
     .popup_wrap {position:relative;border:2px solid #000;}
     .popup_wrap .blind {display:block;overflow:hidden;position:absolute;top:-1000em;left:0;text-indent:-1000em;}
@@ -38,7 +38,7 @@
     .popup_wrap .color_red {color:#ff0000 !important;}
     .popup_wrap .color_blue {color:#0000ff !important;}
     .popup_wrap .color_green {color:#12938e !important;}
-    .popup_wrap .color_black {color:#000000 !important;}
+    .popup_wrap .color_black {color:#000 !important;}
     .popup_wrap strong {font-weight:normal;font-weight:700;}
 
     /* list */
@@ -70,11 +70,11 @@
     .popup_wrap .desc_list.point li:before {content:'※';}
 
     /* btn */
-    .popup_wrap .btn_wrap {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:center;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:100%;margin-top:20px;}
+    .popup_wrap .btn_wrap {flex-wrap:wrap;display:flex;align-items:center;justify-content:space-between;flex-direction:row;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;width:100%;margin-top:20px;}
     .popup_wrap .btn_wrap + .btn_wrap {margin-top:5px;}
     .popup_wrap .btn_box {flex:1;}
     .popup_wrap .btn_box + .btn_box {padding-left:5px;}
-    .popup_wrap .btn {overflow:hidden;display:block;height:40px;background:#fff;border:1px solid #cccccc;border-radius:2px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:center;color:#222222;font-size:15px;line-height:40px;cursor:pointer;text-decoration:none;}
+    .popup_wrap .btn {overflow:hidden;display:flex;align-items:center;justify-content:center;box-sizing:border-box;height:40px;background:#fff;border:1px solid #ccc;border-radius:2px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;text-align:center;color:#222;font-size:15px;cursor:pointer;text-decoration:none;}
     .popup_wrap .bd_gray {border:1px solid #ccc;background:#fff;color:#555;}
     .popup_wrap .bg_gray {border:1px solid #979b9e;background:#979b9e;color:#fff;}
     .popup_wrap .bg_black {border:1px solid #2c2c2c;background:#2c2c2c;color:#fff;}
@@ -147,7 +147,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* agree */
     .popup_wrap .agree_box .term_tit {color:#ff0000;text-align:center;}
     .popup_wrap .agree_box .term_sub {margin-top:20px;}
@@ -223,7 +223,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* table */
     .popup_wrap table {width:100%;table-layout:fixed !important;border-collapse:collapse;}
     .popup_wrap table caption {position:absolute;z-index:0;left:-100000px;top:-10000px;overflow:hidden;width:0;height:0;font-size:0;line-height:0}
@@ -234,8 +234,13 @@
     .popup_wrap .table_style td {padding:4px;border-left:1px solid #d0d0d0;border-top:1px solid #d0d0d0;text-align:center;vertical-align:middle;word-wrap:break-word;}
     .popup_wrap .table_style th {background-color:#eee;color:#363636;font-size:12px;}
     .popup_wrap .table_style td {color:#666;font-size:11px;}
-    .popup_wrap .table_style td .btn {display:inline-block;min-width:60px;width:30%;height:28px;font-size:11px;line-height:28px;vertical-align:middle;}
+    .popup_wrap .table_style td .btn {display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:60px;width:30%;height:28px;border-radius:0;font-size:11px;vertical-align:middle;}
     .popup_wrap .table_style + .table_tit {margin-top:15px;}
+    @media(max-width:360px){
+        .popup_wrap .flexible_header colgroup col:first-child {display:none;}
+        .popup_wrap .flexible_header tbody tr th {display:none;}
+        .popup_wrap .flexible_header tbody tr td:before {display:block;content:attr(data-header);margin-bottom:4px;padding:4px;background:#f1f1f1;}
+    }
 </style>
 <!-- popup -->
 <div class="popup_wrap">
@@ -313,7 +318,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* status_box */
     .popup_wrap .status_box {padding:15px;background-color:#ffedd9;color:#000;font-size:18px;font-weight:600;text-align:center;}
     .popup_wrap .status_box strong {color:#f00;}
@@ -367,7 +372,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* gift_box */
     .popup_wrap .gift_box {padding:10px 0 50px;text-align:center;}
     .popup_wrap .gift_box .gift_img img {width:100%;}
@@ -514,12 +519,12 @@
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">apply</div>
+        <div class="code_tit">apply, flexible table (360 ⬇)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* form */
     .popup_wrap input, 
     .popup_wrap textarea,
@@ -531,7 +536,7 @@
     .popup_wrap select {height:28px;padding:0 24px 0 10px;background:#fff url('../../images/select_style.gif') no-repeat right center;background-size:24px auto;border:1px solid #d0d0d0;color:#000;font-size:12px;}
     .popup_wrap label {font-size:12px;vertical-align:middle;}
     .popup_wrap .sel {position:relative;}
-    .popup_wrap .sel:after {position:absolute;right:10px;top:50%;content:'';display:inline-block;margin-top:-3px;display:inline-block;padding:3px;border:solid #000;border-width:0 1px 1px 0;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+    .popup_wrap .sel:after {position:absolute;right:10px;top:50%;content:"";display:inline-block;margin-top:-3px;display:inline-block;padding:3px;border:solid #000;border-width:0 1px 1px 0;transform:rotate(45deg);-webkit-transform:rotate(45deg);}
     .popup_wrap .alink {text-decoration:underline;}
     .popup_wrap .del {position:relative;display:inline-block;padding-right:20px;text-decoration:underline;}
     .popup_wrap .del:after,
@@ -554,7 +559,7 @@
 	</div>
 	<div class="popup_body">
 		<!-- table -->
-		<table class="table_style">
+		<table class="table_style flexible_header">
 			<colgroup>
 				<col width="30%;" >
 				<col>
@@ -675,7 +680,7 @@
 		<p class="desc_tit">향상된 성적표를 <span class="color_red">자랑</span>해주세요. <span class="color_red">수강료를 돌려드립니다.</span></p>
 		<p class="desc">중간고사 성적 뿜뿜 자랑해봐<br>① 1학기 기말 → 2학기 중간 10점 이상 향상<br>② 과목 100점 (만점)</p>
 		<!-- table -->
-		<table class="table_style">
+		<table class="table_style flexible_header">
 			<colgroup>
 				<col width="30%;" >
 				<col>
@@ -743,7 +748,7 @@
 		<!-- // agree -->
 		<br/>
 		<!-- table -->
-		<table class="table_style">
+		<table class="table_style flexible_header">
 			<colgroup><col width="30%;" ><col></colgroup>
 			<tbody>
 				<tr>
@@ -758,7 +763,7 @@
 		</table>
 		<!-- // table -->
 		<!-- table -->
-		<table class="table_style">
+		<table class="table_style flexible_header">
 			<colgroup><col width="30%;" ><col></colgroup>
 			<tbody>
 				<tr>
@@ -799,7 +804,7 @@
 	</div>
 	<div class="popup_body">
 		<!-- table -->
-		<table class="table_style">
+		<table class="table_style flexible_header">
 			<colgroup>
 				<col style="width:30%">
 				<col>
@@ -925,7 +930,7 @@
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">file</div>
+        <div class="code_tit">file, flexible table (360 ⬇)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -938,7 +943,7 @@
 	</div>
 	<div class="popup_body">
 		<!-- table -->
-		<table class="table_style">
+		<table class="table_style flexible_header">
 			<colgroup>
 				<col width="25%;" >
 				<col>
@@ -1037,5 +1042,22 @@
     <!-- foot -->
     <script src="../include/foot.js"></script>
     <!-- // foot -->
+
+    <script type="text/javascript">
+        function addHeader(table) {
+            if (!table) {
+                return false;
+            }
+            const trs = [...table.getElementsByTagName("tr")];
+            // console.log(trs);
+            const ths = trs.map(e => e.querySelector("th").innerText);
+            // console.log(ths);
+            trs.forEach((e, i) => e.querySelector("td").setAttribute("data-header", ths[i]));
+            // trs.forEach(e => console.log(e));
+        }
+        // addHeader(document.querySelector('.flexible_header'));
+        // document.querySelectorAll('.flexible_header').forEach(e => console.log(e));
+        document.querySelectorAll('.flexible_header').forEach(e => addHeader(e));
+    </script>
 </body>
 </html>

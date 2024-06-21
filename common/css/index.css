@@ -3,7 +3,7 @@
 h1 {font-size:30px;font-weight:700;text-align:center;}
 
 .index_area {padding:20px 20px 100px;}
-.index_area ul li {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;-webkit-flex-direction:column;box-sizing:border-box;width:100%;margin-top:-1px;border:1px solid #f2f2f2;}
+.index_area ul li {flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;box-sizing:border-box;width:100%;margin-top:-1px;border:1px solid #f2f2f2;}
 .index_area ul li > div {width:100%;padding:3px 4px;font-size:11px;font-weight:400;text-align:left;}
 .index_area ul li > div a {margin-right:10px;text-decoration:none;}
 .index_area ul li > div:first-child {padding:3px 4px 0;background-color:#f2f2f2;border-bottom:1px solid #f2f2f2;font-size:20px;font-weight:700;}
@@ -11,7 +11,7 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 .index_area ul li:hover {background-color:#fff8e6;}
 .index_area .tit {display:none;}
 
-.mobile_area {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;width:100%;padding:20px;}
+.mobile_area {display:flex;align-items:flex-start;justify-content:center;box-sizing:border-box;width:100%;padding:20px;}
 .mobile_area > div {padding:20px 5px;background:#ddd;border-radius:10px;}
 .mobile_area > div > div {overflow:hidden;width:337px;height:540px;margin:0 auto;background:#fff;border-radius:6px;}
 .mobile_preview {margin:0;padding:0;border:0;overflow-x:hidden;overflow-y:scroll;}
@@ -20,7 +20,7 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 .mobile_size ul li {margin-top:5px;}
 
 @media(min-width:768px){
-    .index_area ul li {flex-direction:row;-webkit-flex-direction:row;}
+    .index_area ul li {flex-direction:row;}
     .index_area ul li > div {width:37%;min-height:21px;padding:2px 4px;font-size:11px;text-align:left;}
     .index_area ul li > div:first-child {width:16%;margin:0;background-color:transparent;border-bottom:0;font-size:11px;font-weight:400;}
     .index_area ul li > div:last-child {width:10%;text-align:center;}

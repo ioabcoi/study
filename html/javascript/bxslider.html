@@ -47,16 +47,16 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* cont_slide */
     .cont_slide {position:relative;width:400px;height:400px;background:#eee;margin:0 auto;}
     .cont_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
     .cont_slide .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:100px;background:rgba(0,0,0,0.2);margin-top:-52px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
     .cont_slide .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:"";display:inline-block;margin-top:-6px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
     .cont_slide .bx-controls-direction > a.bx-prev {left:-50px;}
-    .cont_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .cont_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;-webkit-transform:rotate(135deg);transform:rotate(135deg);}
     .cont_slide .bx-controls-direction > a.bx-next {right:-50px;}
-    .cont_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+    .cont_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
     .cont_slide .bx-pager {position:absolute;bottom:-30px;width:100%;height:15px;padding-top:0;text-align:center;box-sizing:border-box;}
     .cont_slide .bx-pager-item {display:inline-block;overflow:hidden;width:auto;height:15px;margin:0 6px;vertical-align:top;}
     .cont_slide .bx-pager-item > a {display:block;width:13px;height:13px;margin:0;background:transparent;border:1px solid #111336;border-radius:8px;-webkit-border-radius:8px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;-webkit-transition: all 0.20s ease-in-out;transition: all 0.20s ease-in-out;}
@@ -142,15 +142,15 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* mousewheel_slide */
     .mousewheel_slide {position:relative;width:400px;height:400px;background:#eee;margin:0 auto;}
     .mousewheel_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
     .mousewheel_slide .bx-pager {position:absolute;bottom:auto;right:-40px;top:180px;width:14px;height:100%;padding-top:0;text-align:center;box-sizing:border-box;}
     .mousewheel_slide .bx-pager-item {display:inline-block;overflow:hidden;width:14px;height:auto;margin:0 6px;vertical-align:top;}
     .mousewheel_slide .bx-pager-item > a {display:block;width:14px;height:14px;margin:0 0 6px 0;background:#bbbbbb;border-radius:8px;-webkit-border-radius:8px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;-webkit-transition: all 0.20s ease-in-out;transition: all 0.20s ease-in-out;}
-    .mousewheel_slide .bx-pager-item > a.active {height:40px !important;background:#222222;}
-    .mousewheel_slide:after {opacity:1;position:absolute;left:0;top:0;content:"scroll me";display:-webkit-flex;display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:rgba(0,0,0,0.6);color:#fff;font-size:20px;text-align:center;-webkit-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
+    .mousewheel_slide .bx-pager-item > a.active {height:40px !important;background:#222;}
+    .mousewheel_slide:after {opacity:1;position:absolute;left:0;top:0;content:"scroll me";display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:rgba(0,0,0,0.6);color:#fff;font-size:20px;text-align:center;-webkit-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
     .mousewheel_slide:hover:after {opacity:0;}
 </style>
 <!-- mousewheel_slide -->
@@ -246,9 +246,9 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 <div class="code_ui_box">
 <style type="text/css">
     /* custom_slide */
-    .custom_tab ul {display:-webkit-flex;display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;width:500px;margin:0 auto;}
+    .custom_tab ul {display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;width:500px;margin:0 auto;}
     .custom_tab ul li {flex:1;}
-    .custom_tab ul li a {display:-webkit-flex;display:flex;align-items:center;justify-content:center;padding:10px;border:1px solid #333;background:#d1d1d1;color:#252525;font-size:20px;font-weight:300;text-align:center;text-decoration:none;box-sizing:border-box;}
+    .custom_tab ul li a {display:flex;align-items:center;justify-content:center;padding:10px;border:1px solid #333;background:#d1d1d1;color:#252525;font-size:20px;font-weight:300;text-align:center;text-decoration:none;box-sizing:border-box;}
     .custom_tab ul li a strong {font-weight:700;}
     .custom_tab ul li + li a {border-left:0;}
     .custom_tab ul li a.active {background:#fff;color:#557ee9;font-weight:700;}
@@ -257,9 +257,9 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
     .custom_slide .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:100px;background:rgba(0,0,0,0.2);margin-top:-52px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
     .custom_slide .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:"";display:inline-block;margin-top:-3px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
     .custom_slide .bx-controls-direction > a.bx-prev {left:-50px;}
-    .custom_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .custom_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;-webkit-transform:rotate(135deg);transform:rotate(135deg);}
     .custom_slide .bx-controls-direction > a.bx-next {right:-50px;}
-    .custom_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+    .custom_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
     .custom_slide .bx-pager {position:absolute;bottom:-30px;width:100%;height:15px;padding-top:0;text-align:center;box-sizing:border-box;}
     .custom_slide .bx-pager-item {display:inline-block;overflow:hidden;width:auto;height:15px;margin:0 6px;vertical-align:top;}
     .custom_slide .bx-pager-item > a {display:block;width:13px;height:13px;margin:0;background:transparent;border:1px solid #111336;border-radius:8px;-webkit-border-radius:8px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;-webkit-transition: all 0.20s ease-in-out;transition: all 0.20s ease-in-out;}
@@ -409,7 +409,7 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
 <style type="text/css">
     /* table_slide */
     .table_slide {position:relative;box-sizing:border-box;width:100%;background:#fff;border:1px solid #ccc;border-top:0;}
-    .table_slide ul li div {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;box-sizing:border-box;width:100%;}
+    .table_slide ul li div {flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;box-sizing:border-box;width:100%;}
     .table_slide ul li div em {display:block;flex:1;box-sizing:border-box;height:40px;padding:8px 0;color:#494949;font-size:14px;font-weight:300;text-align:center;}
     .table_slide ul li div em + em {border-left:1px solid #ccc;}
     .table_slide ul li + li div em {border-top:1px solid #ccc;}
@@ -745,7 +745,7 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* center_slide */
     .center_slide {position:relative;width:680px;height:240px;padding:0 10px;background:#eee;margin:0 auto;}
     .center_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
@@ -755,9 +755,9 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
     .center_slide .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:100px;background:rgba(0,0,0,0.2);margin-top:-52px;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
     .center_slide .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:"";display:inline-block;margin-top:-3px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
     .center_slide .bx-controls-direction > a.bx-prev {left:-50px;}
-    .center_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .center_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;-webkit-transform:rotate(135deg);transform:rotate(135deg);}
     .center_slide .bx-controls-direction > a.bx-next {right:-50px;}
-    .center_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+    .center_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
 </style>
 <!-- center_slide -->
 <div class="center_slide">
@@ -836,7 +836,7 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* active_slide */
     .active_slide {position:relative;width:680px;height:260px;padding:0 10px;margin:0 auto;}
     .active_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;}
@@ -848,9 +848,9 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
     .active_slide .bx-controls-direction > a {position:absolute;top:50%;z-index:0;overflow:hidden;width:50px;height:50px;margin-top:-35px;background:rgba(0,0,0,0.5);border:0;border-radius:50%;text-indent:-100000px;white-space:nowrap;text-shadow:none;color:transparent;}
     .active_slide .bx-controls-direction > a:before {position:absolute;left:50%;top:50%;content:"";display:inline-block;margin-top:-8px;padding:6px;border:solid #fff;border-width:0 3px 3px 0;}
     .active_slide .bx-controls-direction > a.bx-prev {left:-40px;}
-    .active_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;transform:rotate(135deg);-webkit-transform:rotate(135deg);}
+    .active_slide .bx-controls-direction > a.bx-prev:before {margin-left:-3px;-webkit-transform:rotate(135deg);transform:rotate(135deg);}
     .active_slide .bx-controls-direction > a.bx-next {right:-40px;}
-    .active_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;transform:rotate(-45deg);-webkit-transform:rotate(-45deg);}
+    .active_slide .bx-controls-direction > a.bx-next:before {margin-left:-10px;-webkit-transform:rotate(-45deg);transform:rotate(-45deg);}
 </style>
 <!-- active_slide -->
 <div class="active_slide">
@@ -929,7 +929,7 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style>
+<style type="text/css">
     /* transform_slide */
     .transform_slide {position:relative;width:660px;padding:0 10px;margin:0 auto;transform:translateX(0vw) translateY(3vh) rotateX(60deg) rotateZ(36deg) translate3d(-60px, -60px, 0px);}
     .transform_slide .bx-wrapper .bx-viewport {position:relative;z-index:0;overflow:visible !important;}

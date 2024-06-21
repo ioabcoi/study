@@ -36,8 +36,8 @@
     .cum_wrap .cum_title .play span:before {position:absolute;right:0;bottom:0;display:block;content:"";width:7px;height:1px;background:#8e8e8e;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}
 
     .cum_wrap .tit_img {margin:35px 0;}
-    .cum_wrap .tit_list {flex-wrap:wrap;display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:row;-webkit-flex-direction:row;margin:20px auto 0;}
-    .cum_wrap .tit_list li {display:-webkit-flex;display:flex;align-items:center;justify-content:center;width:262px;height:125px;padding-bottom:20px;background:url('../../images/tit_bg.png') no-repeat;color:#333;font-size:18px;text-align:center;line-height:24px;}
+    .cum_wrap .tit_list {flex-wrap:wrap;display:flex;align-items:center;justify-content:center;flex-direction:row;margin:20px auto 0;}
+    .cum_wrap .tit_list li {display:flex;align-items:center;justify-content:center;width:262px;height:125px;padding-bottom:20px;background:url('../../images/tit_bg.png') no-repeat;color:#333;font-size:18px;text-align:center;line-height:24px;}
 
     .cum_wrap .ti {position:relative;margin:40px 0 10px;}
     .cum_wrap .ti:after {position:absolute;left:0;top:50%;content:"";display:block;height:1px;width:100%;background:#8e8e8e;}
@@ -93,14 +93,14 @@
                 <div class="code_ui_box">
 <style type="text/css">
     /* icon */
-    .cum_wrap .icon_free {display:inline-block;width:26px;height:26px;margin-right:5px;margin-top:5px;border:1px solid #f8e1de;background-color:#ffebe9;font-weight:normal;font-size:10px;color:#de857b;line-height:24px;box-sizing:border-box;border-radius:13px;text-align:center;}
-    .cum_wrap .icon_reco {display:inline-block;width:26px;height:26px;margin-right:5px;margin-top:5px;border:1px solid #57b3ad;background-color:#ebfbfa;font-weight:normal;font-size:10px;color:#57b3ad;line-height:24px;box-sizing:border-box;border-radius:13px;text-align:center;}
-    .cum_wrap .icon_best {display:inline-block;width:45px;height:45px;border:1px solid #f00;background:#f00;border-radius:50%;-webkit-border-radius:50%;color:#fff;font-size:12px;font-weight:500;text-align:center;line-height:43px;vertical-align:top;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
-    .cum_wrap .tag_best {display:inline-block;height:20px;padding:0 8px;border:1px solid #f00;background:#f00;color:#fff;font-size:12px;font-weight:400;text-align:center;line-height:18px;vertical-align:top;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+    .cum_wrap .icon_free {display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin-right:5px;margin-top:5px;border:1px solid #f8e1de;background-color:#ffebe9;font-weight:normal;font-size:10px;color:#de857b;box-sizing:border-box;border-radius:13px;text-align:center;}
+    .cum_wrap .icon_reco {display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;margin-right:5px;margin-top:5px;border:1px solid #57b3ad;background-color:#ebfbfa;font-weight:normal;font-size:10px;color:#57b3ad;box-sizing:border-box;border-radius:13px;text-align:center;}
+    .cum_wrap .icon_best {display:inline-flex;align-items:center;justify-content:center;width:45px;height:45px;border:1px solid #f00;background:#f00;-webkit-border-radius:50%;border-radius:50%;color:#fff;font-size:12px;font-weight:500;text-align:center;vertical-align:top;box-sizing:border-box;}
+    .cum_wrap .tag_best {display:inline-flex;align-items:center;justify-content:center;height:20px;padding:0 8px;border:1px solid #f00;background:#f00;color:#fff;font-size:12px;font-weight:400;text-align:center;vertical-align:top;box-sizing:border-box;}
 
-    .cum_wrap .icon {display:inline-block;width:45px;height:45px;border-radius:50%;-webkit-border-radius:50%;color:#fff;font-size:12px;font-weight:500;text-align:center;line-height:43px;vertical-align:top;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
-    .cum_wrap .bar {display:inline-block;min-width:80px;height:25px;padding:0 10px;border-radius:15px;-webkit-border-radius:15px;color:#fff;font-size:14px;font-weight:400;text-align:center;line-height:23px;vertical-align:top;letter-spacing:-0.05em;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
-    .cum_wrap .tag {display:inline-block;height:20px;padding:0 8px;color:#fff;font-size:12px;font-weight:400;text-align:center;line-height:18px;vertical-align:top;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+    .cum_wrap .icon {display:inline-flex;align-items:center;justify-content:center;width:45px;height:45px;-webkit-border-radius:50%;border-radius:50%;color:#fff;font-size:12px;font-weight:500;text-align:center;vertical-align:top;box-sizing:border-box;}
+    .cum_wrap .bar {display:inline-flex;align-items:center;justify-content:center;min-width:80px;height:25px;padding:0 10px;border-radius:15px;-webkit-border-radius:15px;color:#fff;font-size:14px;font-weight:400;text-align:center;vertical-align:top;letter-spacing:-0.05em;box-sizing:border-box;}
+    .cum_wrap .tag {display:inline-flex;align-items:center;justify-content:center;height:20px;padding:0 8px;color:#fff;font-size:12px;font-weight:400;text-align:center;vertical-align:top;box-sizing:border-box;}
 
     .cum_wrap .style1 {border:1px solid #57b3ad;background:#ebfbfa;color:#57b3ad;}
     .cum_wrap .style2 {border:1px solid #21a1ac;background:#21a1ac;color:#fff;}
@@ -113,7 +113,7 @@
     .cum_wrap .tag.arr {position:relative;width:80px;padding:0;}
     .cum_wrap .tag.arr em {position:relative;z-index:1;top:2px;}
     .cum_wrap .tag.arr:before,
-    .cum_wrap .tag.arr:after {position:absolute;bottom:-9px;content:'';display:block;width:55%;height:15px;}
+    .cum_wrap .tag.arr:after {position:absolute;bottom:-9px;content:"";display:block;width:55%;height:15px;}
     .cum_wrap .tag.arr:before {left:1px;-webkit-transform:rotate(380deg);transform:rotate(380deg);}
     .cum_wrap .tag.arr:after {right:1px;-webkit-transform:rotate(340deg);transform:rotate(340deg);}
     .cum_wrap .tag.arr.style1:before, .cum_wrap .tag.arr.style1:after {border-bottom:1px solid #57b3ad;background:#ebfbfa;}
@@ -224,7 +224,7 @@
     .cum_wrap .common_tbl.arrow thead th {height:48px;}
     .cum_wrap .common_tbl.arrow tbody th {height:105px;}
     .cum_wrap .common_tbl.arrow tbody td {padding:0 20px;}
-    .cum_wrap [class^='bg'] > div:after {position:absolute;left:50%;bottom:-45px;content:'';display:block;width:11px;height:11px;margin-left:-5px;border:1px solid #8e8e8e;border-top:0;border-left:0;-webkit-transform:rotate(406deg);transform:rotate(406deg);}
+    .cum_wrap [class^='bg'] > div:after {position:absolute;left:50%;bottom:-45px;content:"";display:block;width:11px;height:11px;margin-left:-5px;border:1px solid #8e8e8e;border-top:0;border-left:0;-webkit-transform:rotate(406deg);transform:rotate(406deg);}
     .cum_wrap tbody tr:last-child th div:after {content:normal;}
     .cum_wrap thead [class^='bg'] > div:after {left:100%;top:50%;bottom:auto;margin-left:5px;margin-top:-5px;-webkit-transform:rotate(315deg);transform:rotate(315deg);}
     .cum_wrap thead tr th:last-child div:after {content:normal;}    

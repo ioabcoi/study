@@ -262,7 +262,7 @@ if (!document.createElement('canvas').getContext) {
             azure: '#F0FFFF',
             beige: '#F5F5DC',
             bisque: '#FFE4C4',
-            black: '#000000',
+            black: '#000',
             blanchedalmond: '#FFEBCD',
             blueviolet: '#8A2BE2',
             brown: '#A52A2A',

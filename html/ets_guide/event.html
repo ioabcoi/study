@@ -22,9 +22,9 @@
 <style type="text/css">
     /* tab_category */
     .tab_category {margin-bottom:30px;}
-    .tab_category ul {display:-webkit-flex;display:flex;align-items:stretch;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;flex-wrap:nowrap;width:100%;}
-    .tab_category ul li {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:column;-webkit-flex-direction:column;flex:1;border:1px solid #333;}
-    .tab_category ul li a {display:block;width:100%;height:100%;padding:20px 0;background:#eee;color:#999;text-decoration:none;text-align:center;box-sizing:border-box;}
+    .tab_category ul {flex-wrap:nowrap;display:flex;align-items:stretch;justify-content:flex-start;flex-direction:row;width:100%;}
+    .tab_category ul li {display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1;border:1px solid #333;}
+    .tab_category ul li a {display:flex;align-items:center;justify-content:center;flex-direction:column;box-sizing:border-box;width:100%;height:100%;padding:20px 0;background:#eee;color:#999;text-decoration:none;text-align:center;}
     .tab_category ul li a span {display:block;font-size:22px;font-weight:400;}
     .tab_category ul li a strong {display:block;font-size:30px;font-weight:700;}
     .tab_category ul li.on a {background:#fff;color:#333;}
@@ -32,9 +32,9 @@
 
     /* tab_subject */
     .tab_subject {margin-bottom:30px;}
-    .tab_subject ul {display:-webkit-flex;display:flex;align-items:stretch;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;flex-wrap:nowrap;width:100%;}
-    .tab_subject ul li {display:-webkit-flex;display:flex;align-items:center;justify-content:center;flex-direction:column;-webkit-flex-direction:column;flex:1;border:1px solid #333;}
-    .tab_subject ul li a {display:block;width:100%;height:100%;padding:20px 0;background:#eee;color:#999;text-decoration:none;text-align:center;box-sizing:border-box;}
+    .tab_subject ul {flex-wrap:nowrap;display:flex;align-items:stretch;justify-content:flex-start;flex-direction:row;width:100%;}
+    .tab_subject ul li {display:flex;align-items:center;justify-content:center;flex-direction:column;flex:1;border:1px solid #333;}
+    .tab_subject ul li a {display:flex;align-items:center;justify-content:center;flex-direction:column;box-sizing:border-box;width:100%;height:100%;padding:20px 0;background:#eee;color:#999;text-decoration:none;text-align:center;}
     .tab_subject ul li a span {display:block;font-size:22px;font-weight:400;}
     .tab_subject ul li a strong {display:block;font-size:30px;font-weight:700;}
     .tab_subject ul li.on a {background:#fff;color:#333;}
@@ -43,9 +43,9 @@
     /* tab_teacher */
     .tab_teacher {margin-top:15px;}
     .tab_teacher,
-    .tab_teacher ul {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;} 
+    .tab_teacher ul {display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;}
     .tab_teacher ul li {position:relative;padding-left:13px;}
-    .tab_teacher ul li:after {position:absolute;left:5px;top:50%;content:'';display:block;width:1px;height:10px;margin-top:-5px;background:#999;}
+    .tab_teacher ul li:after {position:absolute;left:5px;top:50%;content:"";display:block;width:1px;height:10px;margin-top:-5px;background:#999;}
     .tab_teacher ul li a {color:#484848;font-size:15px;font-family:'Noto Sans KR';font-weight:400;}
     .tab_teacher ul li .new {margin-left:3px;color:#0d13d2;font-size:12px;font-family:'tahoma';font-weight:700;}
     .tab_teacher ul li:first-child {padding-left:0;}
@@ -116,12 +116,12 @@
     /* radio_box */
     .radio_wrap .radio_box {position:relative;display:inline-block;padding-left:24px;color:#000;font-size:18px;line-height:18px;vertical-align:middle;}
     .radio_wrap .radio_box input[type="radio"] {position:absolute;left:0;top:0;width:0;height:0;border:0;}
-    .radio_wrap .radio_box input[type="radio"] + label:after {position:absolute;left:0;top:0;content:'';display:inline-block;width:16px;height:16px;border:1px solid #020202;border-radius:50%;-webkit-border-radius:50%;background:#fff;}
+    .radio_wrap .radio_box input[type="radio"] + label:after {position:absolute;left:0;top:0;content:"";display:inline-block;width:16px;height:16px;border:1px solid #020202;border-radius:50%;-webkit-border-radius:50%;background:#fff;}
     .radio_wrap .radio_box input[type="radio"]:checked + label:after {background:#020202;}
     .radio_wrap .radio_box_img {position:relative;display:inline-block;padding-left:32px;color:#000;font-size:18px;line-height:34px;vertical-align:middle;}
     .radio_wrap .radio_box_img input[type="radio"] {position:absolute;left:0;top:3px;width:0;height:0;border:0;}
     .radio_wrap .radio_box_img input[type="radio"] + label {display:inline-block;vertical-align:middle;}
-    .radio_wrap .radio_box_img input[type="radio"] + label:after {position:absolute;left:0;top:-3px;content:'';display:inline-block;width:28px;height:34px;background:url('../../images/radio2_off.png') no-repeat;}
+    .radio_wrap .radio_box_img input[type="radio"] + label:after {position:absolute;left:0;top:-3px;content:"";display:inline-block;width:28px;height:34px;background:url('../../images/radio2_off.png') no-repeat;}
     .radio_wrap .radio_box_img input[type="radio"]:checked + label:after {background:url('../../images/radio2_on.png') no-repeat;}
 </style>
 <!-- input radio -->
@@ -198,7 +198,7 @@
     <span class="check_item_left"><input type="radio" id="check_type2_1" name="check_type2"> <label for="check_type2_1">동반인 O</label></span>
     <span class="check_item_left"><input type="radio" id="check_type2_2" name="check_type2"> <label for="check_type2_2">동반인 X</label></span>
 </div>
-<!-- //check_box -->
+<!-- // check_box -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -216,9 +216,9 @@
                 <div class="code_ui_box">
 <style type="text/css">
     /* buy_box */
-    .buy_box ul li {display:-webkit-flex;display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;-webkit-flex-direction:row;background:#eee;}
+    .buy_box ul li {display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;background:#eee;}
+    .buy_box ul li .buy_info {flex:80% 20% 40px;box-sizing:border-box;}
     .buy_box ul li + li {margin-top:10px;}
-    .buy_box ul li > div {flex:80% 20% 40px;box-sizing:border-box;}
     .buy_box .buy_info {position:relative;padding:40px;}
     .buy_box .buy_info .type {position:absolute;left:0;top:0;padding:0 15px;background:#000;border-bottom:1px solid #000;color:#fff;font-size:15px;line-height:23px;font-weight:500;}
     .buy_box .buy_info .title {color:#363636;font-size:30px;font-weight:900;line-height:37px;letter-spacing:-2px;}
@@ -227,7 +227,7 @@
     .buy_box .buy_info .buy .sale {position:relative;margin-left:5px;padding:0 18px 0 10px;color:#848484;font-size:28px;font-weight:700;vertical-align:-3px;}
     .buy_box .buy_info .buy .sale em {font-weight:700;}
     .buy_box .buy_info .buy .sale:before,
-    .buy_box .buy_info .buy .sale:after {position:absolute;top:50%;content:'';display:block;background:#888;}
+    .buy_box .buy_info .buy .sale:after {position:absolute;top:50%;content:"";display:block;background:#888;}
     .buy_box .buy_info .buy .sale:before {left:0;width:100%;height:1px;}
     .buy_box .buy_info .buy .sale:after {right:0;width:15px;height:1px;margin-top:-4px;-webkit-transform: rotate(32deg);transform: rotate(32deg);}
     .buy_box .buy_info .buy .price {margin-left:5px;color:#fb502f;font-size:28px;font-weight:700;vertical-align:-5px;}
@@ -238,7 +238,7 @@
     .buy_box .buy_info .check_box label strong {font-weight:500;}
     .buy_box .buy_info .check_box label + label {margin-left:15px;}
     .buy_box .buy_button {width:200px;}
-    .buy_box .buy_button a {display:-webkit-flex;display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#000;color:#fff;font-size:30px;font-weight:700;text-align:center;text-decoration:none;}
+    .buy_box .buy_button a {display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:#000;color:#fff;font-size:30px;font-weight:700;text-align:center;text-decoration:none;}
 </style>
 <!-- buy_box -->
 <div class="buy_box">
@@ -306,30 +306,31 @@
                 <div class="code_ui_box">
 <style type="text/css">
     /* count_box */
-    .count_box {position:relative;margin-bottom:16px;}
-    .count_box .box {display:-webkit-flex;display:flex;align-items:center;justify-content:flex-end;flex-direction:row;-webkit-flex-direction:row;width:100%;background:#fff;border:1px solid #333333;vertical-align:middle;text-align:center;box-sizing:border-box;}
-    .count_box span strong {font-family:'Tahoma';font-weight:bold;}
-    .count_box .day {padding:0 20px;border-bottom:1px solid #333;color:#333;font-size:32px;font-weight:300;line-height:32px;}
-    .count_box .count {margin-right:80px;color:#000000;font-size:30px;}
-    .count_box .count em {display:inline-block;margin-left:35px;color:#000000;font-size:18px;line-height:23px;}
-    .count_box .count strong {color:#000000;font-size:55px;line-height:55px;}
+    .count_box {display:flex;align-items:center;justify-content:center;flex-direction:row;box-sizing:border-box;width:100%;margin-bottom:16px;background:#fff;border:1px solid #333;color:#333;line-height:1.4;vertical-align:middle;text-align:center;}
+    .count_box .box {flex:1;}
+    .count_box .day {border-right:1px solid #ccc;font-size:32px;font-weight:700;line-height:32px;}
+    .count_box .count {font-size:30px;}
+    .count_box .count em {display:inline-block;font-size:18px;line-height:23px;}
+    .count_box .count strong {font-size:55px;line-height:55px;}
     .count_box .btn a, 
-    .count_box .btn em {display:-webkit-flex;display:flex;align-items:center;justify-content:center;width:305px;height:70px;border-left:1px solid #333333;color:#fff;font-size:28px;font-weight:700;vertical-align:top;text-decoration:none;}
-    .count_box .btn + .btn a {width:205px;font-size:20px}
+    .count_box .btn em {display:flex;align-items:center;justify-content:center;width:100%;height:70px;border-left:1px solid #333;color:#fff;font-size:28px;font-weight:700;vertical-align:top;text-decoration:none;}
+    .count_box .btn + .btn a {font-size:20px}
 </style>
 <!-- count_box -->
 <div class="count_box">
-    <div class="box">
-        <span class="day"><strong>NN</strong>월 <strong>NN</strong>일</span>
-        <span class="count"><em>남은<br>인원</em> <strong>100</strong>명</span>
-        <span class="btn">
-            <a href="#" style="background:#2d5dde">신청하기 &gt;</a>
-            <em style="background:#000;">진행예정</em>
-            <em style="background:#989898;">선착순마감</em>  
-        </span>
-        <span class="btn">
-            <a href="#" style="background:#363636;">당첨 확인하기 &gt;</a>
-        </span>
+    <div class="box day">
+        <strong>NN</strong>월 <strong>NN</strong>일
+    </div>
+    <div class="box count">
+        <em>남은<br>인원</em> <strong>100</strong>명
+    </div>
+    <div class="box btn">
+        <a href="#" style="background:#2d5dde">신청하기 &gt;</a>
+        <em style="background:#000;">진행예정</em>
+        <em style="background:#989898;">선착순마감</em>  
+    </div>
+    <div class="box btn">
+        <a href="#" style="background:#363636;">당첨 확인하기 &gt;</a>
     </div>
 </div>
 <!-- // count_box -->
@@ -354,8 +355,8 @@
     .planner_table table {width:100%;table-layout:fixed !important;border-collapse:collapse;border-spacing:0;}
     .planner_table table th,
     .planner_table table td {border-top:1px solid #848484;border-right:1px solid #848484;text-align:center;vertical-align:middle;}
-    .planner_table table th {padding:14px 0;background:#e1e1e1;color:#444444;font-size:17px;font-weight:600;}
-    .planner_table table td {height:80px;background:#ffffff;color:#444444;font-size:14px;font-weight:400;}
+    .planner_table table th {padding:14px 0;background:#e1e1e1;color:#444;font-size:17px;font-weight:600;}
+    .planner_table table td {height:80px;background:#fff;color:#444;font-size:14px;font-weight:400;}
     .planner_table table td strong {font-size:30px;font-weight:800;vertical-align:-3px;}
     .planner_table table td.end {background:#525252;color:#b8b8b8;font-size:20px;font-weight:700;}
     .planner_table table td.today {background:#017f3c;color:#fff;font-size:20px;font-weight:700;}
@@ -408,7 +409,7 @@
         </tbody>
     </table>
 </div>					
-<!-- //planner_table -->
+<!-- // planner_table -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -419,31 +420,115 @@
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">calendar - list</div>
+        <div class="code_tit">calendar - table</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">	
+    /* planner_list */
+    .planner_list {border-bottom:1px solid #848484;border-left:1px solid #848484;}
+    .planner_list ul {flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;box-sizing:border-box;}
+    .planner_list ul li {width:calc(100% / 6);box-sizing:border-box;}
+    .planner_list ul li .date,
+    .planner_list ul li .count {border-top:1px solid #848484;border-right:1px solid #848484;text-align:center;vertical-align:middle;}
+    .planner_list ul li .date {padding:15px 0;background:#e1e1e1;color:#444;font-size:17px;font-weight:600;}
+    .planner_list ul li .count {display:flex;align-items:center;justify-content:center;height:90px;background:#fff;color:#444;font-size:14px;font-weight:400;}
+    .planner_list ul li .count strong {margin:0 3px;font-size:30px;font-weight:800;vertical-align:-3px;}
+    .planner_list ul li .count .num {display:flex;align-items:center;flex-direction:row;}
+    .planner_list ul li .count .win {display:flex;flex-direction:column;}
+    .planner_list ul li .count.end {background:#525252;color:#b8b8b8;font-size:20px;font-weight:700;}
+    .planner_list ul li .count.today {background:#017f3c;color:#fff;font-size:20px;font-weight:700;}
+</style>
+<!-- planner_list -->
+<div class="planner_list">
+    <ul>
+        <li>
+            <div class="date">12월 05일 (목)</div>
+            <div class="count end">선착순마감</div>
+        </li>
+        <li>
+            <div class="date">12월 06일 (금)</div>
+            <div class="count today">TODAY</div>
+        </li>
+        <li>
+            <div class="date">12월 09일 (월)</div>
+            <div class="count"><span class="num">총 <strong>1000</strong>개</span></div>
+        </li>
+        <li>
+            <div class="date">12월 10일 (화)</div>
+            <div class="count"><span class="num">총 <strong>1000</strong>개</span></div>
+        </li>
+        <li>
+            <div class="date">12월 11일 (수)</div>
+            <div class="count"><span class="num">총 <strong>1000</strong>개</span></div>
+        </li>
+        <li>
+            <div class="date">12월 12일 (목)</div>
+            <div class="count"><span class="num">총 <strong>1000</strong>개</span></div>
+        </li>
+        <li>
+            <div class="date">12월 13일 (금)</div>
+            <div class="count"><span class="win"><strong>50명</strong>[진행예정]</span></div>
+        </li>
+        <li>
+            <div class="date">12월 16일 (월)</div>
+            <div class="count"><span class="win"><strong>50명</strong>[진행예정]</span></div>
+        </li>
+        <li>
+            <div class="date">12월 17일 (화)</div>
+            <div class="count"><span class="win"><strong>50명</strong>[진행예정]</span></div>
+        </li>
+        <li>
+            <div class="date">12월 18일 (수)</div>
+            <div class="count"><span class="win"><strong>50명</strong>[진행예정]</span></div>
+        </li>
+        <li>
+            <div class="date">12월 19일 (목)</div>
+            <div class="count"><span class="win"><strong>50명</strong>[진행예정]</span></div>
+        </li>
+        <li>
+            <div class="date">12월 20일 (금)</div>
+            <div class="count"><span class="win"><strong>50명</strong>[진행예정]</span></div>
+        </li>
+    </ul>
+</div>					
+<!-- // planner_list -->
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">calendar - img</div>
         <div class="code_area" data-style="">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    /* planner_list */
-    .planner_list {background:#fff;border:1px solid #000;}
-    .planner_list ul {display:-webkit-flex;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;-webkit-flex-direction:row;box-sizing:border-box;}
-    .planner_list ul li {position:relative;flex:1;text-align:center;}
-    .planner_list ul li > div {box-sizing:border-box;}
-    .planner_list ul li .date {height:54px;background:#e8e8e8;color:#444444;font-size:18px;font-weight:600;line-height:54px;} 
-    .planner_list ul li .item {height:262px;padding:32px 0 0;background:#ffffff;color:#444444;font-size:14px;font-weight:400;}
-    .planner_list ul li .item .photo {position:relative;display:inline-block;width:108px;height:138px;background:#eee;}
-    .planner_list ul li .item .photo img {width:100%;height:100%;}
-    .planner_list ul li .item .photo .num {position:absolute;right:-15px;top:-15px;display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#1756a2;border-radius:50%;color:#ffffff;font-size:13px;}
-    .planner_list ul li .item .txt {height:44px;margin:15px 0 0;color:#333333;font-size:17px;font-weight:700;line-height:22px;}
-    .planner_list ul li .status {width:100%;height:52px;background:#fff;border-top:1px solid #8d8d8d;color:#000000;font-size:17px;font-weight:400;line-height:52px;}
-    .planner_list ul li + li {border-left:1px solid #000;}
-    .planner_list ul li.end:after {position:absolute;left:0;top:0;right:0;bottom:0;content:'';display:block;box-sizing:border-box;width:100%;height:100%;background:rgba(0,0,0,0.5);}
-    .planner_list ul li.today .status {background:#c31b40;border-top:1px solid #c31b40;color:#fff;font-size:20px;font-weight:700;}
-    .planner_list ul li.today:after {position:absolute;left:0;top:0;right:0;bottom:0;content:'';display:block;box-sizing:border-box;width:100%;height:100%;border:4px solid #c31b40;}
+    /* planner_img */
+    .planner_img {background:#fff;border:1px solid #000;}
+    .planner_img ul {display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;box-sizing:border-box;}
+    .planner_img ul li {position:relative;flex:1;text-align:center;}
+    .planner_img ul li .date {height:54px;background:#e8e8e8;color:#444;font-size:18px;font-weight:600;line-height:54px;} 
+    .planner_img ul li .item {height:262px;padding:32px 0 0;background:#fff;color:#444;font-size:14px;font-weight:400;}
+    .planner_img ul li .item .photo {position:relative;display:inline-block;width:108px;height:138px;background:#eee;}
+    .planner_img ul li .item .photo img {width:100%;height:100%;}
+    .planner_img ul li .item .photo .num {position:absolute;right:-15px;top:-15px;display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:#1756a2;border-radius:50%;color:#fff;font-size:13px;}
+    .planner_img ul li .item .txt {height:44px;margin:15px 0 0;color:#333;font-size:17px;font-weight:700;line-height:22px;}
+    .planner_img ul li .status {width:100%;height:52px;background:#e8e8e8;border-top:1px solid #8d8d8d;color:#000;font-size:17px;font-weight:400;line-height:52px;}
+    .planner_img ul li + li {border-left:1px solid #000;}
+    .planner_img ul li.end .status {background:#333;color:#fff;}
+    .planner_img ul li.end:after {position:absolute;left:0;top:0;right:0;bottom:0;content:"";display:block;box-sizing:border-box;width:100%;height:100%;background:rgba(0,0,0,0.5);}
+    .planner_img ul li.today .status {background:#c31b40;border-top:1px solid #c31b40;color:#fff;font-size:20px;font-weight:700;}
+    .planner_img ul li.today:after {position:absolute;left:0;top:0;right:0;bottom:0;content:"";display:block;box-sizing:border-box;width:100%;height:100%;border:4px solid #c31b40;}
 </style>
-<!-- planner_list -->
-<div class="planner_list">
+<!-- planner_img -->
+<div class="planner_img">
     <ul>
         <li class="end">
             <div class="date">2월 10일 (금)</div>
@@ -479,7 +564,7 @@
         </li>
     </ul>
 </div>			
-<!-- // planner_list -->
+<!-- // planner_img -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -497,14 +582,14 @@
                 <div class="code_ui_box">
 <style type="text/css">
     /* layer_agree */
-    .layer_agree {position:absolute;z-index:1;top:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:-webkit-flex;display:flex;align-items:center;justify-content:center;text-align:center;}
+    .layer_agree {position:absolute;z-index:1;top:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;text-align:center;}
     .layer_agree .txt {display:block;font-size:18px;font-weight:300;color:#fff;}
     .layer_agree .agree {display:inline-block;margin-top:5px;border-bottom:1px solid #fff;color:#fff;font-size:15px;font-weight:700;line-height:15px;text-decoration:none;vertical-align:middle;}
 </style>
 <div style="position:relative;width:100%;height:400px;margin:0 auto;">
     <!-- layer_agree -->
     <div id="layer_agree" class="layer_agree">
-        <div>
+        <div class="box">
             <span class="txt">이벤트 참여를 위해 개인정보 이용에 동의해주세요.</span>
             <a href="#" onclick="jQuery(this).parents('.layer_agree').hide();return false;" class="agree">개인정보 이용 동의하기 &gt;</a>
         </div>
@@ -529,16 +614,16 @@
 <style type="text/css">
     /* event_info */
     .event_info {padding:20px 0 0 0;}
-    .event_info strong {display:block;margin-bottom:8px;color:#444;font-size:18px;font-weight:600;}
+    .event_info .tit {margin-bottom:8px;color:#444;font-size:18px;font-weight:600;}
     .event_info ul li {color:#444;font-size:14px;font-weight:400;line-height:22px;padding-left:10px;text-indent:-7px;word-break:keep-all;}
     .event_info ul li a {margin-left:10px;color:#444;font-size:15px;font-weight:600;text-decoration:underline;}
 </style>
 <!-- event_info -->
 <div class="event_info">
-    <strong>이벤트 안내</strong>
+    <div class="tit"><strong>이벤트 안내</strong></div>
     <ul>
-        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다.</li>
-        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다.</li>
+        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. <br>안내사항입니다. 안내사항입니다. 안내사항입니다.</li>
+        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. <br>안내사항입니다. 안내사항입니다.</li>
         <li>- 안내사항입니다. <a href="#">회원 정보 수정 &gt;</a></li>
     </ul>
 </div>
@@ -547,19 +632,19 @@
 <style type="text/css">
     /* info_box */
     .info_box {margin-top:30px;}
-    .info_box p {position:relative;}
-    .info_box p:before {position:absolute;z-index:1;left:0;top:50%;content:'';display:block;width:100%;height:1px;background:#333;}
-    .info_box p strong {position:relative;z-index:2;display:inline-block;padding-right:15px;background:#fff;color:#333;font-size:18px;font-weight:600;}
+    .info_box .tit {position:relative;}
+    .info_box .tit:before {position:absolute;z-index:1;left:0;top:50%;content:"";display:block;width:100%;height:1px;background:#333;}
+    .info_box .tit strong {position:relative;z-index:2;display:inline-block;padding-right:15px;background:#fff;color:#333;font-size:18px;font-weight:600;}
     .info_box ul {margin-top:5px;}
     .info_box ul li {padding-left:10px;color:#000;font-size:16px;line-height:28px;text-indent:-10px;}
     .info_box ul li a {display:inline-block;margin:-3px 10px;padding:0 10px;border:1px solid #333;color:#000;font-size:14px;line-height:26px;vertical-align:middle;text-indent:0;text-decoration:none;}
 </style>
 <!-- info_box -->
 <div class="info_box">
-    <p><strong>이벤트 안내</strong></p>
+    <div class="tit"><strong>이벤트 안내</strong></div>
     <ul>
-        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다.</li>
-        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다.</li>
+        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. <br>안내사항입니다. 안내사항입니다. 안내사항입니다.</li>
+        <li>- 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. 안내사항입니다. <br>안내사항입니다. 안내사항입니다.</li>
         <li>- 안내사항입니다. <a href="#">회원 정보 수정 &gt;</a></li>
     </ul>
 </div>
