@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary-color: #4CAF50;
-            --secondary-color: #f4f4f4;
+            --primary-color: #201E43;
+            --secondary-color: #EEEEEE;
             --font-color: #333;
             --button-hover-color: #45a049;
             --delete-button-color: #f44336;
@@ -34,12 +34,41 @@
         }
 
         .container {
+            position: relative;
             background: #fff;
             padding: 20px 30px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             width: 100%;
             max-width: 400px;
+        }
+
+        .container:before {
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            content: '';
+            display: block;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: #508C9B;
+            transform:translateX(-60%) translateY(-10%);
+        }
+
+        .container:after {
+            position: absolute;
+            z-index: -1;
+            left: 0;
+            top: 0;
+            content: '';
+            display: block;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            background: #134B70;
+            transform:translateX(-5%) translateY(-20%);
         }
 
         h1 {
