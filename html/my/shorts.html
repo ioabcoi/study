@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <title>유튜브 쇼츠</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style type="text/css">
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+        }
+
+        .video-container {
+            height: 100vh;
+            flex: 0 0 100vh;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+            align-items: flex-start;
+            scroll-snap-align: start;
+            background: #f0f0f0;
+        }
+
+        .video-container:nth-child(odd) {
+            background: #e0e0e0;
+        }
+
+        .video-inner {
+            position: relative;
+        }
+
+        video {
+            max-width: 100vw;
+            max-height: 85vh;
+            display: block;
+            background-color: black;
+        }
+
+        /* 컨트롤러 전체 감추기 */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        .custom-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            width: 90%;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .control-button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            width: 50px;
+        }
+
+        .seekbar {
+            width: 90%;
+            margin: 0 10px;
+            background: none;
+            outline: none;
+        }
+
+        .mute-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            /* Ensure the button is above all other content */
+        }
+
+        .mute-button i {
+            pointer-events: none;
+            /* Ensure icon doesn't block button click */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <button id="mute-toggle-button" class="mute-button"><i class="fas fa-volume-mute"></i></button>
+
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="http://img.cheongsol.co.kr/mobile2018/answer/teaser/file/teaser.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://www.w3schools.com/html/mov_bbb.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/11sec_200391_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/11sec_200502_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/14sec_200506_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/25sec_200457_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/33sec_200209_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/48sec_brand_01_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/1min_brand_02_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/1min_200391_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/5min_200180_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div class="video-inner">
+                <video class="video" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/10min_200391_720.mp4" loop autoplay playsinline muted></video>
+                <div class="custom-controls">
+                    <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                    <input type="range" class="seekbar" min="0" max="100" value="0">
+                </div>
+            </div>
+        </div>
+
+        <!-- Add more video containers as needed -->
+    </div>
+    <!-- <script src="script.js"></script> -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrap = document.querySelector('.wrap');
+            const containers = document.querySelectorAll('.video-container');
+            const videos = document.querySelectorAll('.video');
+            const muteToggleButton = document.getElementById('mute-toggle-button');
+            const muteIcon = muteToggleButton.querySelector('i');
+
+            // Function to preload a video
+            function preloadVideo(video) {
+                const src = video.getAttribute('data-src');
+                if (src && !video.src) {
+                    video.src = src;
+                }
+            }
+
+            // Function to preload videos in a range
+            function preloadVideosInRange(start, end) {
+                for (let i = start; i <= end && i < videos.length; i++) {
+                    if (i >= 0) {
+                        preloadVideo(videos[i]);
+                    }
+                }
+            }
+
+            // Function to play the visible video and pause others
+            function playVisibleVideo() {
+                let containerRect = wrap.getBoundingClientRect();
+
+                videos.forEach((video, index) => {
+                    let videoRect = video.getBoundingClientRect();
+
+                    if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
+                        video.play();
+                        // Preload next and previous 5 videos
+                        preloadVideosInRange(index - 5, index + 5);
+                    } else {
+                        video.pause();
+                    }
+                });
+            }
+
+            // Function to update the play/pause button
+            function updatePlayPauseButton(video, button) {
+                if (video.paused) {
+                    button.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    button.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            }
+
+            // Prevent double-click event from doing anything
+            videos.forEach((video, index) => {
+                const container = containers[index];
+                const playPauseButton = container.querySelector('.play-pause');
+                const seekbar = container.querySelector('.seekbar');
+
+                video.addEventListener('dblclick', (event) => {
+                    event.preventDefault();
+                });
+
+                // Set the video to play by default
+                video.play();
+
+                // Update controls when video state changes
+                video.addEventListener('play', () => updatePlayPauseButton(video, playPauseButton));
+                video.addEventListener('pause', () => updatePlayPauseButton(video, playPauseButton));
+                video.addEventListener('timeupdate', () => {
+                    const value = (100 / video.duration) * video.currentTime;
+                    seekbar.value = value;
+                });
+
+                // Play/Pause button click event
+                playPauseButton.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+
+                // Seekbar change event
+                seekbar.addEventListener('input', () => {
+                    const time = video.duration * (seekbar.value / 100);
+                    video.currentTime = time;
+                });
+            });
+
+            // Function to toggle mute for all videos
+            function toggleMute() {
+                let areAnyMuted = Array.from(videos).some(video => video.muted);
+                videos.forEach(video => {
+                    video.muted = !areAnyMuted;
+                });
+                updateMuteButtonIcon();
+            }
+
+            // Function to update the mute button icon
+            function updateMuteButtonIcon() {
+                let areAnyMuted = Array.from(videos).some(video => video.muted);
+                muteIcon.className = areAnyMuted ? 'fas fa-volume-mute' : 'fas fa-volume-up';
+            }
+
+            // Initial preload of the first 5 videos
+            preloadVideosInRange(0, 4);
+
+            // Set all videos to be muted initially
+            videos.forEach(video => {
+                video.muted = true;
+
+                // Event listener for each video's volume change
+                video.addEventListener('volumechange', () => {
+                    if (video.muted) {
+                        muteIcon.className = 'fas fa-volume-mute';
+                    } else {
+                        muteIcon.className = 'fas fa-volume-up';
+                    }
+                });
+            });
+
+            // Event listener for scrolling
+            wrap.addEventListener('scroll', () => {
+                playVisibleVideo();
+            });
+
+            // Event listener for mute toggle button
+            muteToggleButton.addEventListener('click', toggleMute);
+
+            // Initial check to play the first video
+            playVisibleVideo();
+        });
+
+    </script>
+</body>
+
+</html>
