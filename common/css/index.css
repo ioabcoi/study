@@ -5,7 +5,7 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 .index_area {padding:20px 20px 100px;}
 .index_area ul li {flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;box-sizing:border-box;width:100%;margin-top:-1px;border:1px solid #f2f2f2;}
 .index_area ul li > div {width:100%;padding:3px 4px;font-size:11px;font-weight:400;text-align:left;}
-.index_area ul li > div a {margin-right:10px;text-decoration:none;}
+.index_area ul li > div a {margin-right:10px;word-break:break-all;text-decoration:none;}
 .index_area ul li > div:first-child {padding:3px 4px 0;background-color:#f2f2f2;border-bottom:1px solid #f2f2f2;font-size:20px;font-weight:700;}
 .index_area ul li.line {background-color:#f2f2f2;}
 .index_area ul li:hover {background-color:#fff8e6;}
@@ -21,9 +21,10 @@ h1 {font-size:30px;font-weight:700;text-align:center;}
 
 @media(min-width:768px){
     .index_area ul li {flex-direction:row;}
-    .index_area ul li > div {width:37%;min-height:21px;padding:2px 4px;font-size:11px;text-align:left;}
+    .index_area ul li > div {width:35%;min-height:21px;padding:2px 4px;font-size:11px;text-align:left;}
     .index_area ul li > div:first-child {width:16%;margin:0;background-color:transparent;border-bottom:0;font-size:11px;font-weight:400;}
-    .index_area ul li > div:last-child {width:10%;text-align:center;}
+    .index_area ul li.line > div:first-child {width:100%;text-align:left;font-weight:600;}
+    .index_area ul li > div:last-child {width:12%;text-align:center;}
     .index_area ul li > div + div {border-left:1px solid #f2f2f2;}
     .index_area .tit {display:block;background-color:#f5f5f5;}
     .index_area .tit li > div {font-size:12px;text-align:center;}
