@@ -3,229 +3,248 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="styles.css"> -->
     <title>shots_custom</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-	<style type="text/css">
-		body, html {
-			height: 100%;
-			overflow: hidden;
-			background: #000;
-		}
+    <style type="text/css">
+        body,
+        html {
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
 
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-		.wrap {
-			position: relative;
-		}
+        .wrap {
+            position: relative;
+        }
 
-		.container {
-			display: flex;
-			flex-direction: column;
-			height: 100vh;
-			/* scroll-behavior: smooth; */
-			scroll-snap-type: y mandatory; /* 스크롤이 정렬되도록 설정 */
-			scrollbar-width: none; /* 기본 스크롤바 숨기기 */
-			overflow-y: scroll; /* 수직 스크롤 허용 */
-			-webkit-overflow-scrolling: touch; /* 부드러운 스크롤링 추가 */
-			transition: transform 0.5s ease; /* 스크롤 이동 시 애니메이션 추가 */
-			touch-action: pan-y; /* 수직 스크롤만 허용 */
-		}
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            /* scroll-behavior: smooth; */
+            scroll-snap-type: y mandatory;
+            /* 스크롤이 정렬되도록 설정 */
+            scrollbar-width: none;
+            /* 기본 스크롤바 숨기기 */
+            overflow-y: scroll;
+            /* 수직 스크롤 허용 */
+            -webkit-overflow-scrolling: touch;
+            /* 부드러운 스크롤링 추가 */
+            transition: transform 0.5s ease;
+            /* 스크롤 이동 시 애니메이션 추가 */
+            touch-action: pan-y;
+            /* 수직 스크롤만 허용 */
+        }
 
-		.container::-webkit-scrollbar { 
-			display: none; /* 크롬, 사파리, 오페라에서 스크롤바 숨기기 */
-		}
+        .container::-webkit-scrollbar {
+            display: none;
+            /* 크롬, 사파리, 오페라에서 스크롤바 숨기기 */
+        }
 
-		.video-container {
-			width: 100%;
-			height: 100vh;
-			height: 100dvh;
-			flex: 0 0 100vh;
-			display: flex;
-			justify-content: center;
-			align-items: flex-start;
-			scroll-snap-align: start; /* 각 비디오 컨테이너가 스크롤 정렬 기준에 맞도록 설정 */
-		}
+        .video-container {
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            flex: 0 0 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            scroll-snap-align: start;
+            /* 각 비디오 컨테이너가 스크롤 정렬 기준에 맞도록 설정 */
+        }
 
-		.video-inner {
-			position: relative;
-			width: 100%;
-			height: 100%;
-		}
+        .video-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
 
-		video {
-			position: absolute;
-			z-index: 0;
-			left: 50%;
-			top: 0;
-			width: 100%;
-			max-width: 720px;
-			height: 100vh;
-			height: 100dvh;
-			transform: translate(-50%, 0); /* 중앙 정렬 */
-			display: block;
-			background-color: black;
-			object-fit: cover;
-		}
+        video {
+            position: absolute;
+            z-index: 0;
+            left: 50%;
+            top: 0;
+            width: 100%;
+            max-width: 720px;
+            height: 100vh;
+            height: 100dvh;
+            transform: translate(-50%, 0);
+            /* 중앙 정렬 */
+            display: block;
+            background-color: black;
+            object-fit: cover;
+        }
 
-		/* 컨트롤러 전체 감추기 */
-		video::-webkit-media-controls {
-			display: none !important;
-		}
+        /* 컨트롤러 전체 감추기 */
+        video::-webkit-media-controls {
+            display: none !important;
+        }
 
-		.control-button {
-			position: absolute;
-			z-index: 1;
-			left: 0;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			border: 0;
-			background: none;
-			cursor: pointer;
-		}
+        .control-button {
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: none;
+            cursor: pointer;
+        }
 
-		.control-button i {
-			position: absolute;
-			top: 20px;
-			right: 20px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 50px;
-			height: 50px;
-			font-size: 1.5rem;
-			background-color: rgba(0, 0, 0, 0.5);
-			color: #fff;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			-webkit-transition: all 0.25s ease-in-out;
-			transition: all 0.25s ease-in-out;
-		}
+        .control-button i {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            -webkit-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+        }
 
-		.control-button .fa-pause {
-			opacity: 0; /* 기본적으로 일시 정지 아이콘 숨기기 */
-		}
+        .control-button .fa-pause {
+            opacity: 0;
+            /* 기본적으로 일시 정지 아이콘 숨기기 */
+        }
 
-		.control-button:hover .fa-pause {
-			opacity: 1; /* 호버 시 일시 정지 아이콘 표시 */
-		}
+        .control-button:hover .fa-pause {
+            opacity: 1;
+            /* 호버 시 일시 정지 아이콘 표시 */
+        }
 
-		.control-button .fa-play {
-			text-indent: -5px;
-		}
+        .control-button .fa-play {
+            text-indent: -5px;
+        }
 
-		.mute-button {
-			position: fixed;
-			z-index: 100;
-			left: 20px;
-			top: 20px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 50px;
-			height: 50px;
-			font-size: 1.5rem;
-			background-color: rgba(0, 0, 0, 0.5);
-			color: #fff;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			z-index: 1000; /* 모든 컨텐츠 위에 버튼 위치 설정 */
-			-webkit-transition: all 0.25s ease-in-out;
-			transition: all 0.25s ease-in-out;
-		}
-		
-		.mute-button i {
-			pointer-events: none; /* 아이콘 클릭 방지 */
-		}
+        .mute-button {
+            position: fixed;
+            z-index: 100;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            /* 모든 컨텐츠 위에 버튼 위치 설정 */
+            -webkit-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+        }
 
-		.mute-button + .volume-control {
-			opacity: 0;
-			-webkit-transition: all 0.25s ease-in-out;
-			transition: all 0.25s ease-in-out;
-		}
+        .mute-button i {
+            pointer-events: none;
+            /* 아이콘 클릭 방지 */
+        }
 
-		.volume-control {
-			opacity: 0;
-			position: fixed;
-			z-index: 100;
-			left: 80px;
-			top: 20px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 50px;
-			padding: 0 15px;
-			background-color: rgba(0, 0, 0, 0.5);
-			border-radius: 5px;
-			z-index: 1000; /* 모든 컨텐츠 위에 위치 */
-			-webkit-transition: all 0.25s ease-in-out;
-			transition: all 0.25s ease-in-out;
-		}
+        .mute-button+.volume-control {
+            opacity: 0;
+            -webkit-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+        }
 
-		.volume-control input[type="range"] {
-			width: 80px;
-		}
-		
-		.mute-button:hover + .volume-control,
-		.mute-button + .volume-control:hover {
-			opacity: 1; /* 호버 시 볼륨 조절 표시 */
-		}
-		
-		.mute-button:hover + .volume-control input[type="range"],
-		.mute-button + .volume-control:hover input[type="range"] {
-			width: 80px;
-		}
+        .volume-control {
+            opacity: 0;
+            position: fixed;
+            z-index: 100;
+            left: 80px;
+            top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            padding: 0 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            z-index: 1000;
+            /* 모든 컨텐츠 위에 위치 */
+            -webkit-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+        }
 
-		/* control-seekbar */
-		.control-seekbar {
-			position: absolute;
-			z-index: 2;
-			left: 50%;
-			bottom: 10px;
-			width: 100%;
-			height: 30px;
-			padding: 0 15px;
-			transform: translateX(-50%);
-			background: rgba(0, 0, 0, 0.5);
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			outline: none;
-		}
+        .volume-control input[type="range"] {
+            width: 80px;
+        }
 
-		.control-seekbar .seekbar {
-			width: 100%;
-			height: 16px;
-		}
+        .mute-button:hover+.volume-control,
+        .mute-button+.volume-control:hover {
+            opacity: 1;
+            /* 호버 시 볼륨 조절 표시 */
+        }
 
-		/* progress-bar */
-		.progress-bar-container {
-			position: absolute;
-			top: calc(100vh - 5px); /* 스크롤 상단과 일치하도록 설정 */
-			top: calc(100dvh - 5px);
-			left: 50%;
-			width: 100%;
-			height: 5px;
-			transform: translate(-50%, 0);
-			background: rgba(255, 255, 255, 0.3);
-		}
+        .mute-button:hover+.volume-control input[type="range"],
+        .mute-button+.volume-control:hover input[type="range"] {
+            width: 80px;
+        }
 
-		.progress-bar {
-			width: 0%;
-			height: 100%;
-			background: #3498db; /* 진행 상황 표시 */
-			-webkit-transition: all 0.25s linear;
-			transition: all 0.25s linear;
-		}
-	</style>
+        /* control-seekbar */
+        .control-seekbar {
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            bottom: 10px;
+            width: 100%;
+            height: 30px;
+            padding: 0 15px;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline: none;
+        }
+
+        .control-seekbar .seekbar {
+            width: 100%;
+            height: 16px;
+        }
+
+        /* progress-bar */
+        .progress-bar-container {
+            position: absolute;
+            top: calc(100vh - 5px);
+            /* 스크롤 상단과 일치하도록 설정 */
+            top: calc(100dvh - 5px);
+            left: 50%;
+            width: 100%;
+            height: 5px;
+            transform: translate(-50%, 0);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #3498db;
+            /* 진행 상황 표시 */
+            -webkit-transition: all 0.25s linear;
+            transition: all 0.25s linear;
+        }
+    </style>
 </head>
 
 <body>

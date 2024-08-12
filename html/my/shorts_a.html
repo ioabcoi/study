@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width, viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <title> shorts_a </title>
+</head>
+
+<body>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #000;
+        }
+
+        html,
+        body * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            scroll-snap-align: start;
+            /* scroll-behavior: smooth; */
+            overflow-x: hidden;
+            overflow-y: scroll;
+            -ms-overflow-style: none;
+            /* for Internet Explorer, Edge */
+            scrollbar-width: none;
+            /* for Firefox */
+            touch-action: pan-y;
+            /* 수직 스크롤만 허용 */
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+            /* for Chrome, Safari, and Opera */
+        }
+
+        .main {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #000;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
+            scroll-snap-align: start;
+            flex: 0 0 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            height: 100vh;
+            height: 100dvh;
+            object-fit: cover;
+            transform: translate(-50%, 0);
+        }
+
+        .mute-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            top: calc(100vh - 5px);
+            top: calc(100dvh - 5px);
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: #3498db;
+            transition: width 0.1s;
+        }
+
+        .btn_play {
+            font-size: 0;
+            text-indent: -9999em
+        }
+
+        .btn_play.stop {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -36px;
+            margin-left: -36px;
+            width: 72px;
+            height: 72px;
+            background: url('https://img.etoos.com/teacher/tcc_2013/ico_play2.png') no-repeat 50% 0;
+        }
+    </style>
+
+    <div class="container">
+        <button class="mute-button">Unmute All</button>
+        <!-- controls playsinline muted -->
+        <main class="main">
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/11sec_200391_720.mp4" playsinline loop muted></video>
+                <div class="btn_play">play</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/11sec_200502_720.mp4" playsinline loop muted></video>
+                <div class="btn_play">play</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/14sec_200506_720.mp4" playsinline loop muted></video>
+                <div class="btn_play">play</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/25sec_200457_720.mp4" playsinline loop muted></video>
+                <div class="btn_play">play</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/33sec_200209_720.mp4" playsinline loop muted></video>
+                <div class="btn_play">play</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/48sec_brand_01_720.mp4" playsinline loop muted></video>
+                <div class="btn_play ">play stop</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/1min_200391_720.mp4" playsinline loop muted></video>
+                <div class="btn_play ">play stop</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video" src="https://freevod.etoos.com/qr/shorts/sample/youtube/5min_200180_720.mp4" playsinline loop muted></video>
+                <div class="btn_play ">play stop</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const videoContainers = document.querySelectorAll('.video-container');
+            const videos = document.querySelectorAll('.video-container video');
+            const muteButton = document.querySelector('.mute-button');
+            const container = document.querySelector('.container');
+
+            // Video playback control with IntersectionObserver
+            const observerOptions = {
+                root: null,
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.play().catch(error => {
+                            console.log('Auto-play prevented, user interaction required.');
+                        });
+                    } else {
+                        entry.target.pause();
+                        entry.target.parentNode.querySelector('.btn_play').classList.remove('stop');
+                    }
+                });
+            }, observerOptions);
+
+            videos.forEach(video => {
+                observer.observe(video);
+                // Update progress bar
+                video.addEventListener('timeupdate', () => {
+                    const progressBar = video.closest('.video-container').querySelector('.progress-bar');
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = `${percentage}%`;
+                });
+            });
+
+            // Mute/unmute button
+            muteButton.addEventListener('click', () => {
+                const isMuted = videos[0].muted;
+                videos.forEach(video => {
+                    video.muted = !isMuted;
+                });
+                muteButton.textContent = isMuted ? 'Mute All' : 'Unmute All';
+            });
+
+            videoContainers.forEach(container => {
+                container.addEventListener('click', () => {
+                    const video = container.querySelector('video');
+                    const playstop = container.querySelector('.btn_play');
+                    if (video.paused) {
+                        video.play();
+                        playstop.classList.remove('stop')
+                    } else {
+                        video.pause();
+                        playstop.classList.add('stop')
+                    }
+                });
+            });
+
+            // 스크롤 방향에 따라 스크롤을 처리하는 함수
+            function scrollHandler(event, direction) {
+                event.preventDefault();
+                const scrollAmount = window.innerHeight;
+                const newScrollPosition = container.scrollTop + (direction === 'down' ? scrollAmount : -scrollAmount);
+
+                container.scrollTo({
+                    top: Math.min(container.scrollHeight - container.clientHeight, Math.max(0, newScrollPosition)),
+                    behavior: 'smooth'
+                });
+            }
+
+            // 마우스 휠을 이용한 스크롤 처리
+            function movingWheel() {
+                container.addEventListener('wheel', (event) => {
+                    if (event.deltaY > 0) {
+                        scrollHandler(event, 'down');
+                    } else if (event.deltaY < 0) {
+                        scrollHandler(event, 'up');
+                    }
+                }, { passive: false });
+            }
+
+            // 모바일 기기에서 스크롤 처리 (안드로이드)
+            function movingAos() {
+                let isScrolling = false;
+                let startY = 0;
+
+                function handleScroll(event) {
+                    event.preventDefault();
+
+                    if (isScrolling) return;
+                    isScrolling = true;
+
+                    // 스크롤 애니메이션의 성능을 개선하고 스크롤이 튀는 현상을 줄이기 위해 requestAnimationFrame을 사용하여 이벤트 핸들러를 호출
+                    requestAnimationFrame(() => {
+                        if (event.deltaY > 0 || (event.touches && event.touches[0].clientY < startY)) {
+                            container.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+                        } else if (event.deltaY < 0 || (event.touches && event.touches[0].clientY > startY)) {
+                            container.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+                        }
+
+                        setTimeout(() => {
+                            isScrolling = false;
+                        }, 500);
+                    });
+                }
+
+                container.addEventListener('touchstart', (event) => {
+                    startY = event.touches[0].clientY;
+                }, { passive: false });
+
+                container.addEventListener('touchmove', handleScroll, { passive: false });
+            }
+
+            // 모바일 기기에서 스크롤 처리 (iOS)
+            function movingIos() {
+                let startY = 0;
+                let isDragging = false;
+                let threshold = 10;
+
+                container.addEventListener('touchstart', (event) => {
+                    startY = event.touches[0].clientY;
+                    isDragging = true;
+                });
+
+                container.addEventListener('touchmove', (event) => {
+                    if (!isDragging) return;
+
+                    const currentY = event.touches[0].clientY;
+                    const deltaY = startY - currentY;
+
+                    if (Math.abs(deltaY) > threshold) {
+                        event.preventDefault();
+                    }
+                }, { passive: false });
+
+                container.addEventListener('touchend', (event) => {
+                    if (!isDragging) return;
+
+                    const endY = event.changedTouches[0].clientY;
+                    const deltaY = startY - endY;
+                    if (Math.abs(deltaY) > threshold) {
+                        scrollHandler(event, deltaY > 0 ? 'down' : 'up');
+                    }
+
+                    isDragging = false;
+                }, { passive: false });
+            }
+
+            // 모바일 장치 감지 및 적절한 스크롤 핸들러 호출
+            const isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
+            if (isMobile) {
+                if (/android/i.test(navigator.userAgent.toLowerCase())) {
+                    movingAos();
+                } else {
+                    movingIos();
+                }
+            } else {
+                movingWheel();
+            }
+
+        });
+    </script>
+</body>
+
+</html>
