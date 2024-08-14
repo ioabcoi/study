@@ -1,4 +1,4 @@
-# level0 : 코딩 기초 트레이닝
+# level_ : 코딩 기초 트레이닝 : 코딩 기초 트레이닝 문제를 모두 풀었어요! 😎
 
 Link : [level0](https://school.programmers.co.kr/learn/challenges/training?order=acceptance_desc&languages=javascript "코딩 기초 트레이닝")
 

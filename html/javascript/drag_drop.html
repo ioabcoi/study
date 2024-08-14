@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <!-- // head -->
+    
+    <title>drag_drop</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>drag_drop</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">description</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+
+<!-- 출처 : https://inpa.tistory.com/entry/드래그-앤-드롭-Drag-Drop-기능 -->
+<!-- 
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event 
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+
+
+<a>는 기본적으로 드래그 가능
+
+
+dragstart   1. 사용자가 객체(object)를 드래그하려고 시작할 때 발생함.
+            드래그가 시작되는 순간 발생
+
+drag        2. 대상 객체를 드래그하면서 마우스를 움직일 때 발생함.
+            요소를 드래그할 때 발생
+
+dragenter   3. 마우스가 대상 객체의 위로 처음 진입할 때 발생함.
+            해당 이벤트를 지정한 요소에 드래그한 아이템이 들어가면 발생
+            드래그하는 요소가 dragenter 이벤트를 달아놓은 요소 안에 진입했을 때 발생
+
+dragover    4. 드래그하면서 마우스가 대상 객체의 영역 위에 자리 잡고 있을 때 발생함.
+            이 이벤트가 달린 영역 위에 드래그 요소가 있으면 발생
+
+drop        5. 드래그가 끝나서 드래그하던 객체를 놓는 장소에 위치한 객체에서 발생함. 리스너는 드래그된 데이터를 가져와서 드롭 위치에 놓는 역할을 함
+            이 이벤트가 달린 요소에 드래그를 끝내면 발생 (dragover랑 같이 써야함)
+            drop 이벤트 역시 드롭될 요소에는 e.preventDefault()를 사용하지 않으면 정상적인 동작이 되지 않을 수 있으므로이벤트에 preventDefault() 코드를 작성하는 것이 좋다.
+            단독으로 사용했을 때는 동작을 하지 않았고 dragover이벤트와 함께 사용했을 때 비로소 동작이 된다.
+
+dragleave   6. 드래그가 끝나서 마우스가 대상 객체의 위에서 벗어날 때 발생함.
+            dragexit 이벤트 대신 사용.
+            어떤 요소든 드래그되고 있다면 이 이벤트가 달린 요소에 들어갔다가 나가는 시점에 발생하는 이벤트
+            dragenter 이벤트와 동작이 겹칠수 있기 때문에 e.preventDefault() 로 제한하며 둘이 결합하여 사용함
+
+dragend     7. 대상 객체를 드래그하다가 마우스 버튼을 놓는 순간 발생함.
+            요소의 드래그가 끝날때 발생(드래그 도중에 마우스 버튼을 아무데나 놓으면)
+
+drop, dragover 이벤트는 필수로 사용해야 하는 이벤트
+dragover 이벤트를 적용하지 않으면 drop 이벤트가 작동하지 않음
+
+기본적으로 HTML 요소는 다른 요소의 위에 위치할 수 없다. 
+따라서 다른 요소 위에 위치할 수 있도록 만들기 위해서는 놓일 장소에 있는 요소의 기본 동작을 막아야만 한다. 
+이 작업을 event.preventDefault() 메소드를 호출하는 것만으로 간단히 설정할 수 있다.
+
+
+DataTransfer 객체
+드래그 앤 드롭 이벤트를 위한 모든 이벤트 리스너 메소드(event listener method)는 DataTransfer 객체를 반환한다.
+이렇게 반환된 DataTransfer 객체는 드래그 앤 드롭 동작에 관한 정보를 가지고 있다. 
+event.dataTransfer
+데이터를 저장 및 가져오기, 삭제를 수행할 수 있는 표준 메소드를 가지고 있다.
+
+event.dataTransfer.setData(format,data)
+첫번째 매개변수로 포맷 문자열을 지정.
+첫번째 매개변수에 지정한 포맷과 일치하는 값을 두번째 매개변수로 지정.
+두번째 매개변수로는 문자열만 지정 가능
+
+event.dataTransfer.getData(format)
+첫번째 매개변수에 지정한 포맷의 전송 데이터를 반환.
+지정된 포맷의 데이터가 지정되어 있지 않으면 공백 문자열을 반환
+
+event.dataTransfer.clearData()
+event.dataTransfer.clearData(format)
+데이터 전송용으로 지정된 데이터를 모두 제거.
+첫번째 매개변수로 포맷 문자열을 지정하면 해당 형식과 일치하는 데이터만을 제거.
+
+event.dataTransfer.types
+dragstart 이벤트 발생시 DOM 목록에 있는 data format 을 설정하며
+setData 함수를 호출할때 지정되는 format 문자열을 배열형식으로 얻을 수 있다.
+
+
+요소를 마우스로 드래그하면 그 요소의 모습이 고스트 이미지(ghost image) 로서 커서에 딸려 나온다. 
+이 드래그 이미지를 DataTransfer.setDragImage() 메서드를 통해 사용자 커스텀이 가능하다.
+-->
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">drag_drop</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .drag_drop {overflow:hidden;width:100%;height:600px;background:#eee;user-select:none;}
+    .drag_drop .item {width:200px;height:50px;background:#f0f;border:0;}
+    .drag_drop .item.dragging {background:#f00;}
+    .drag_drop .drag_box {display:flex;align-items:center;justify-content:center;width:500px;height:200px;background:#0ff;}
+    .drag_drop .drag_box.dragover {background:#00f;}
+    .drag_drop .drop_box {display:flex;align-items:center;justify-content:center;width:500px;height:300px;background:#ff0;}
+    .drag_drop .drop_box.dragover {background:#0f0;}
+</style>
+<div class="drag_drop">
+    <div class="drag_box">
+        drag_box
+        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+    </div>
+    <div class="drop_box">
+        drop_box
+    </div>
+</div>
+<script type='text/javascript'>
+    // item
+    const item = document.querySelector('.drag_box .item');
+    item.addEventListener('dragstart', (e) => {
+        // e.preventDefault();
+        e.target.classList.add("dragging");
+        // console.log('요소를 드래그를 시작하면 발생하는 이벤트');
+
+        if (e.target.classList.contains('image')) {
+            const img = document.createElement("img");
+            img.src = "../../images/snoopy.png";
+            // setDragImage(이미지요소, xOffset, yOffset)
+            e.dataTransfer.setDragImage(img, 60, 80); // 사용할 사용자 정의 이미지를 설정
+            // console.log('image');
+        }
+    }, false);
+    item.addEventListener('drag', (e) => {
+        // console.log(e.dataTransfer); // 드래그 이벤트 정보를 담고있는 dataTransfer 객체
+        // console.log('드래그하면 발생하는 이벤트');
+    });
+    item.addEventListener('dragend', (e) => {
+        e.target.classList.remove("dragging");
+        // console.log('드래그가 끝나면 발생하는 이벤트');
+    });
+
+    // dragBox, dropBox
+    const dragBox = document.querySelector('.drag_drop .drag_box');
+    const dropBox = document.querySelector('.drag_drop .drop_box');
+
+    // dragBox
+    dragBox.addEventListener('dragenter', (e) => {
+        e.preventDefault();
+        e.target.classList.add("dragover");
+        // console.log('드래그 요소가 drag_box 영역에 닿으면 발생하는 이벤트');
+    });
+    dragBox.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        e.target.classList.remove("dragover");
+        // console.log('드래그 요소가 drag_box 영역을 떠나면 발생하는 이벤트');
+    });
+    dragBox.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        // console.log('드래그 요소가 drag_box 영역에 계속 위치하면 발생하는 이벤트');
+    });
+    dragBox.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (!e.target.classList.contains('item') ) {
+            dropBox.removeChild(item);
+            e.target.appendChild(item);
+        }        
+        // console.log('드래그 요소가 drag_box 영역에 드롭');
+    });
+
+    // dropBox
+    dropBox.addEventListener('dragenter', (e) => {
+        e.target.classList.add("dragover");
+        // console.log('드래그 요소가 drop_box 영역에 닿으면 발생하는 이벤트');
+    });
+    dropBox.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        e.target.classList.remove("dragover");
+        // console.log('드래그 요소가 drop_box 영역을 떠나면 발생하는 이벤트');
+    });
+    dropBox.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        // console.log('드래그 요소가 drop_box 영역에 계속 위치하면 발생하는 이벤트');
+    });
+    dropBox.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (!e.target.classList.contains('item') ) {
+            dragBox.removeChild(item);
+            e.target.appendChild(item);
+        }
+        // console.log('드래그 요소가 drop_box 영역에 드롭');
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">attach File</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .attach_file {position:relative;width:100%;height:200px;overflow:auto;display:flex;justify-content:center;align-items:center;flex-direction:column;border-radius:5px;border:4px dashed #ddd;text-align:center;user-select:none;transition:0.4s;}
+    .attach_file .tit {position:absolute;left:0;top:50%;width:100%;font-size:20px;font-weight:600;transform:translateY(-50%);}
+    .attach_file .file {position:relative;z-index:1;width:100%;height:100%;overflow-y:auto;padding:10px;font-size:12px;}
+    .attach_file.active {background:#ddd;} /* 드롭 반응 */
+</style>
+<div class="attach_file">
+    <strong class="tit">이곳에 파일을 (여러개) 드롭해주세요. </strong>
+    <div class="file"></div>
+</div>
+<script type='text/javascript'>
+const $drop = document.querySelector(".attach_file");
+const $title = document.querySelector(".attach_file .tit");
+const $file = document.querySelector(".attach_file .file");
+
+// 드래그한 파일 객체가 해당 영역에 놓였을 때
+$drop.ondrop = (e) => {
+    e.preventDefault();
+    $drop.className = "attach_file";
+
+    // 파일 리스트
+    const files = [...e.dataTransfer?.files];
+    // console.log(files);
+
+    // $title.innerHTML = files.map(file => file.name).join("<br>");
+    $title.remove();
+    $file.innerHTML = files.map(file => file.name).join("<br>");
+}
+
+// ondragover 이벤트가 없으면 onDrop 이벤트가 실핻되지 않습니다.
+$drop.ondragover = (e) => {
+    e.preventDefault();
+}
+
+// 드래그한 파일이 최초로 진입했을 때
+$drop.ondragenter = (e) => {
+    e.preventDefault();
+
+$drop.classList.add("active");
+}
+
+// 드래그한 파일이 영역을 벗어났을 때
+$drop.ondragleave = (e) => {
+    e.preventDefault();
+
+    $drop.classList.remove("active");
+}
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">ex</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- 
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+-->
+<style type="text/css">
+    #drag {padding:20px;background:#eee;font-size:20px;}
+    #drop {padding:20px;background:#999;font-size:20px;}
+</style>
+<div>
+    <p id="drag" draggable="true">드래그해보세요.</p>
+    <div id="drop">여기에 드롭하세요</div>
+</div>
+<script type='text/javascript'>
+    document.getElementById('drag').ondragstart = function(e) {
+        console.log('드래그 시작');
+        e.dataTransfer.setData('data', this.innerHTML);
+        e.dataTransfer.dropEffect = 'copy';
+    };
+    var drop = document.getElementById('drop');
+    drop.ondragover = function(e) {
+        e.preventDefault(); // 필수
+        console.log('무언가 위에 올려져 있습니다');
+        e.dataTransfer.dropEffect = 'move';
+    };
+    drop.ondrop = function(e) {
+        console.log('무언가 드롭되었습니다.');
+        alert(e.dataTransfer.getData('data'));
+    }
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">ex</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- 
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+-->
+<style type="text/css">
+    .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
+    .container button {width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
+    .container .draggable.dragging {opacity:0.5;}
+</style>
+<div class="container">
+    <button class="draggable" draggable="true">🦊</button>
+    <button class="draggable" draggable="true">🐸</button>
+</div>
+<div class="container">
+    <button class="draggable" draggable="true">🐶</button>
+    <button class="draggable" draggable="true">🐱</button>
+</div>
+<script type='text/javascript'>
+const draggables = document.querySelectorAll(".draggable");
+const containers = document.querySelectorAll(".container");
+
+draggables.forEach(draggable => {
+    draggable.addEventListener("dragstart", () => {
+        draggable.classList.add("dragging");
+    });
+
+    draggable.addEventListener("dragend", () => {
+        draggable.classList.remove("dragging");
+    });
+});
+
+containers.forEach(container => {
+    container.addEventListener("dragover", e => {
+        e.preventDefault();
+        const afterElement = getDragAfterElement(container, e.clientX);
+        const draggable = document.querySelector(".dragging");
+        if (afterElement === undefined) {
+            container.appendChild(draggable);
+        } else {
+            container.insertBefore(draggable, afterElement);
+        }
+    });
+});
+
+function getDragAfterElement(container, x) {
+    const draggableElements = [
+        ...container.querySelectorAll(".draggable:not(.dragging)"),
+    ];
+
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+            // console.log(offset);
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY },
+    ).element;
+}
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">ex</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- 
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+-->
+<style type="text/css">
+    .ico_container {padding:20px;background:#f1f1f1;border:1px solid #ccc;}
+    .ico_container .draggable {display:flex;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #ccc;font-size:20px;line-height:40px;cursor:move;}
+    .ico_container .draggable + .draggable {margin-top:-1px;}
+    .ico_container .draggable.dragging {opacity:.5;border:2px dashed red;}
+    .ico_container + .ico_container {margin-top:10px;}
+</style>
+<div class="ico_container">
+    <div class="draggable" draggable="true">
+        <span class="ico-drag"></span>
+        <div class="el">HTML</div>
+    </div>
+    <div class="draggable" draggable="true">
+        <span class="ico-drag"></span>    
+        <div class="el">CSS</div>
+    </div>
+    <div class="draggable" draggable="true">
+        <span class="ico-drag"></span>
+        <div class="el">JavaScript</div>
+    </div>
+</div>
+<div class="ico_container">
+    <div class="draggable" draggable="true">
+        <span class="ico-drag"></span>
+        <div class="el">React</div>
+    </div>
+    <div class="draggable" draggable="true">
+        <span class="ico-drag"></span>
+        <div class="el">Vue</div>
+    </div>
+    <div class="draggable" draggable="true">
+        <span class="ico-drag"></span>
+        <div class="el">Next JS</div>
+    </div>
+</div>
+<script type='text/javascript'>
+/**
+ * [x] 엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
+ * [x] draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
+ * [x] dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
+ * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
+ */
+(() => {
+    const $ = (select) => document.querySelectorAll(select);
+    const draggables = $('.ico_container .draggable');
+    const containers = $('.ico_container');
+
+    draggables.forEach(el => {
+        el.addEventListener('dragstart', () => {
+            el.classList.add('dragging');
+        });
+
+        el.addEventListener('dragend', () => {
+            el.classList.remove('dragging')
+        });
+    });
+
+    function getDragAfterElement(container, y) {
+        const draggableElements = [...container.querySelectorAll('.ico_container .draggable:not(.dragging)')]
+
+        return draggableElements.reduce((closest, child) => {
+            const box = child.getBoundingClientRect() //해당 엘리먼트에 top값, height값 담겨져 있는 메소드를 호출해 box변수에 할당
+            const offset = y - box.top - box.height / 2 //수직 좌표 - top값 - height값 / 2의 연산을 통해서 offset변수에 할당
+            if (offset < 0 && offset > closest.offset) { // (예외 처리) 0 이하 와, 음의 무한대 사이에 조건
+                return { offset: offset, element: child } // Element를 리턴
+            } else {
+                return closest
+            }
+        }, { offset: Number.NEGATIVE_INFINITY }).element
+    };
+
+    containers.forEach(container => {
+        container.addEventListener('dragover', e => {
+            e.preventDefault()
+            const afterElement = getDragAfterElement(container, e.clientY);
+            const draggable = document.querySelector('.dragging')
+            // container.appendChild(draggable)
+            container.insertBefore(draggable, afterElement)
+        })
+    });
+})();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">ex</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- 
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+-->
+<style type="text/css">
+    .img_container {float:left;width:200px;height:300px;margin:0 10px;border:solid 10px #8B4513;}
+</style>
+<div class="img_container" ondrop="drop(event)" ondragover="dragEnter(event)">
+    <img id="monalisa" width="180" height="280" src="https://tcpschool.com/examples/images/img_monalisa.png" draggable="true" ondragstart="drag(event)">
+</div>
+<div class="img_container" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
+<script>
+function dragEnter(ev) {
+    ev.preventDefault();
+}
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+}
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <!-- // head -->
+    
+    <title>canvas_scratch</title>
+</head>
+<body data-theme="light">
+        
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>canvas</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">scratch</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+
+<!-- 출처 : https://codepen.io/progrape/pen/XXBwWe -->
+<style type="text/css">
+    .scratch_container {overflow:hidden;width:100%;height:600px;background:#000 url('https://picsum.photos/1920/1024/?random=51') no-repeat;}
+    .scratch_container canvas {background:transparent;}
+</style>
+<div class="scratch_container">
+    <canvas id="canvas_scratch"></canvas>
+</div>
+<script type="text/javascript">
+    const url = 'https://picsum.photos/1920/1024/?random=52';
+    const canvas = document.getElementById('canvas_scratch');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = url;
+    img.onload = function () {
+        // const width = Math.min(500, img.width);
+        // const height = img.height * (width / img.width);
+        const width = 1080;
+        const height = 600;
+
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
+    };
+
+    let isPress = false;
+    let old = null;
+    canvas.addEventListener('mousedown', function (e){
+        isPress = true;
+        old = {x: e.offsetX, y: e.offsetY};
+    });
+    canvas.addEventListener('mousemove', function (e){
+        if (isPress) {
+            let x = e.offsetX;
+            let y = e.offsetY;
+            ctx.globalCompositeOperation = 'destination-out';
+
+            ctx.beginPath();
+            // ctx.arc(x, y, 10, 0, 2 * Math.PI);
+            ctx.arc(x, y, 50, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // ctx.lineWidth = 20;
+            ctx.lineWidth = 100;
+            ctx.beginPath();
+            ctx.moveTo(old.x, old.y);
+            ctx.lineTo(x, y);
+            ctx.stroke();
+
+            old = {x: x, y: y};
+        }
+    });
+    canvas.addEventListener('mouseup', function (e){
+        isPress = false;
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+            
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
