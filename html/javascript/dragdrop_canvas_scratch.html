@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <!-- // head -->
+    
+    <title>dragdrop_canvas_scratch</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>dragdrop_canvas_scratch</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">dragdrop_canvas_scratch</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+button,input {-webkit-border-radius:0;border-radius:0;border:0;}
+button {background-color:transparent;cursor:pointer;}
+/* mission */
+.mission_box {flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:space-between;flex-direction:row;box-sizing:border-box;background-color:#000;}
+.mission_box .mission {overflow:hidden;position:relative;}
+.mission_box .mission .dimmed {position:absolute;left:0;top:0;display:none;}
+.mission_box .mission .dimmed.on {display:block;}
+.mission_box .mission .success {position:absolute;left:0;top:0;display:none;}
+.mission_box .mission .success.on {display:block;}
+.mission_box .mission + .mission {margin-left:22px;}
+/* drag_drop */
+.drag_drop {position:absolute;left:32px;top:85px;width:266px;height:253px;}
+.drag_drop .item {width:266px;height:63px;}
+.drag_drop .drop_box {position:relative;width:266px;height:190px;}
+.drag_drop .drop_box .tree {position:absolute;left:0;top:0;}
+.drag_drop .drop_box .tree_msg {position:absolute;left:0;top:0;}
+.drag_drop .drop_box .tree_msg.off {display:none;}
+.drag_drop .drag_box {width:266px;height:63px;background-color:#a1d4dc;border-radius:10px;}
+.motion_txtup {
+    -webkit-animation:txtup 0.75s 0.20s ease-in-out both infinite;
+    animation:txtup 0.75s 0.20s ease-in-out both infinite;
+}
+@-webkit-keyframes txtup {
+    0% {-webkit-transform:translateY(0);transform:translateY(0);}
+    50% {-webkit-transform:translateY(-10px);transform:translateY(-10px);}
+    100% {-webkit-transform:translateY(0);transform:translateY(0);}
+}
+@keyframes txtup {
+    0% {-webkit-transform:translateY(0);transform:translateY(0);}
+    50% {-webkit-transform:translateY(-10px);transform:translateY(-10px);}
+    100% {-webkit-transform:translateY(0);transform:translateY(0);}
+}
+.motion_punchmotion {
+    -webkit-animation:punchmotion 1.50s 0.00s cubic-bezier(0.080, 1, 0.890, 0) 1 normal;
+    animation:punchmotion 1.50s 0.00s cubic-bezier(0.080, 1, 0.890, 0) 1 normal;
+}
+@-webkit-keyframes punchmotion {
+    0% {-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);}
+    10%, 20% {-webkit-transform:scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);transform:scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);}
+    30%, 50%, 70%, 90% {-webkit-transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);}
+    40%, 60%, 80% {-webkit-transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);}
+    100% {-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);}
+}
+@keyframes punchmotion {
+    0% {-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);}
+    10%, 20% {-webkit-transform:scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);transform:scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);}
+    30%, 50%, 70%, 90% {-webkit-transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);}
+    40%, 60%, 80% {-webkit-transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);transform:scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);}
+    100% {-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);}
+}
+/* scratch */
+.mission_wood .scratch_container {overflow:hidden;width:246px;height:123px;background:url('../../images/wood_back.gif');}
+.mission_wood .scratch_container canvas {background:transparent;}
+.mission_wood .wood {position:absolute;left:43px;top:97px;}
+.mission_wood .wood .coin {position:absolute;left:62px;top:149px;display:none;}
+.mission_wood.finish .scratch_container {background:url('../../images/wood_back3.jpg');}
+</style>
+<div class="mission_box">
+    <!-- mission_tree -->
+    <div class="mission mission_tree">
+        <img src="../../images/mission1.jpg" alt="mission1. 어젯밤 수상한 사람이 커다란 나무 아래 무언가를 묻어두었다는 제보를 받았다. 얼른 확인해 보자!" />
+        <div class="drag_drop">
+            <div class="drop_box">
+                <span class="tree"><img src="../../images/tree.png" alt="나무" /></span>
+                <span class="tree_msg motion_txtup"><img src="../../images/tree_msg.png" alt="삽으로 이곳을 클릭해 보세요" /></span>
+            </div>
+            <div class="drag_box">
+                <button class="draggable item" draggable="true"><img src="../../images/shovel.png" alt="삽" /></button>
+            </div>
+        </div>
+        <div class="success"><img src="../../images/success1.png" alt="success" /></div>
+    </div>
+    <!-- // mission_tree -->
+    <!-- mission_wood -->
+    <div class="mission mission_wood">
+        <img src="../../images/mission2.jpg" alt="mission2. 어라?! 열심히 삽질을 하다 보니 저기 나무뿌리 근처에 무언가 반짝거리는 게 보이기 시작하는데…" />
+        <div class="wood">
+            <img src="../../images/wood.png" alt="나무 기둥" />
+            <div class="scratch_container">
+                <canvas id="canvas_scratch"></canvas>
+            </div>
+            <a href="#" class="coin"><img src="../../images/coin.png" alt="코인" /></a>
+        </div>
+        <div class="dimmed on"><img src="../../images/mission2_dimmed.jpg" alt="mission2." /></div>
+        <div class="success"><img src="../../images/success2.png" alt="응모하러가기" /></div>
+    </div>
+    <!-- // mission_wood -->
+</div>
+<script>
+// drag_drop
+const item = document.querySelector('.drag_box .item');
+const dragBox = document.querySelector('.drag_drop .drag_box');
+const dropBox = document.querySelector('.drag_drop .drop_box');
+const tree = document.querySelector('.drag_drop .drop_box .tree');
+const treeMsg = document.querySelector('.drag_drop .drop_box .tree_msg');
+const missionTree = document.querySelector('.mission_tree');
+const treeSuccess = document.querySelector('.mission_tree .success');
+const missionWood = document.querySelector('.mission_wood');
+const woodDimmed = document.querySelector('.mission_wood .dimmed');
+const woodSuccess = document.querySelector('.mission_wood .success');
+dropBox.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    // console.log('드래그 요소가 drop_box 영역에 계속 위치하면 발생하는 이벤트');
+});
+dropBox.addEventListener('drop', (e) => {
+    e.preventDefault();
+
+    // 삽을 드롭하면 메시지 off
+    dropBox.classList.add('on');
+    treeMsg.classList.remove('motion_txtup');
+    treeMsg.classList.add('off');
+
+    setTimeout(function(){
+        // 나무 모션
+        tree.classList.add('motion_punchmotion');
+        setTimeout(function(){
+            // success 노출, mission2 딤드 제거
+            missionTree.classList.add('finish');
+            treeSuccess.classList.add('on');
+            dragBox.appendChild(item);
+            woodDimmed.classList.remove('on');
+        }, 2250);
+    }, 250);
+    
+    // console.log('드래그 요소가 drop_box 영역에 드롭');
+    if (!e.target.classList.contains('item') ) {
+        dragBox.removeChild(item);
+        e.target.appendChild(item);
+    }  
+});
+
+// scratch
+const url = 'https://img.etoos.com/enp/front/2024/09/04/bon/wood_over.jpg';
+const canvas = document.getElementById('canvas_scratch');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+// crossOrigin 속성을 설정하여 CORS 문제를 해결합니다.
+img.crossOrigin = 'Anonymous';
+img.src = url;
+img.onload = function () {
+    // const width = Math.min(500, img.width);
+    // const height = img.height * (width / img.width);
+    const width = 246;
+    const height = 123;
+
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
+};
+
+let isPress = false;
+let old = null;
+canvas.addEventListener('mousedown', function (e){
+    isPress = true;
+    old = {x: e.offsetX, y: e.offsetY};
+});
+canvas.addEventListener('mousemove', function (e){
+    if (isPress) {
+        let x = e.offsetX;
+        let y = e.offsetY;
+        ctx.globalCompositeOperation = 'destination-out';
+
+        ctx.beginPath();
+        ctx.arc(x, y, 30, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.lineWidth = 30;
+        ctx.beginPath();
+        ctx.moveTo(old.x, old.y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+
+        old = {x: x, y: y};
+
+        // 스크래치된 영역 계산
+        checkScratch();
+    }
+});
+canvas.addEventListener('mouseup', function (e){
+    isPress = false;
+});
+
+const coin = document.querySelector('.mission_wood .wood .coin');
+function checkScratch() {
+    try {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let totalPixels = imageData.width * imageData.height;
+        let clearPixels = 0;
+
+        // 모든 픽셀을 확인하여 투명한 픽셀 수를 계산
+        for (let i = 0; i < totalPixels * 4; i += 4) {
+            if (imageData.data[i + 3] === 0) {
+                clearPixels++;
+            }
+        }
+
+        // 스크래치된 영역의 비율 계산
+        let clearPercentage = (clearPixels / totalPixels) * 100;
+
+        if (clearPercentage >= 85) {
+            // 80% 이상 스크래치된 경우, 나머지 부분 자동으로 지움
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // .coin 요소를 노출
+            coin.style.display = 'block';
+        }
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+coin.addEventListener('click', function (e){
+    e.preventDefault();
+    // .coin 클릭 시 응모하러가기 노출
+    woodSuccess.classList.add('on');
+    missionWood.classList.add('finish');
+});
+
+/*
+checkScratch() 함수 추가: ctx.getImageData()를 사용하여 캔버스에서 스크래치된 영역(투명한 픽셀)의 비율을 계산합니다.
+비율이 80% 이상일 때 처리: 스크래치된 영역이 80% 이상이면 ctx.clearRect()를 사용해 나머지 부분을 지우고 .coin 요소를 보이게 합니다.
+.coin 요소 표시: .coin 요소의 display 속성을 block으로 변경하여 노출합니다.
+img.crossOrigin = 'Anonymous';: 이 코드를 통해 이미지가 익명 모드로 로드됩니다. 이 설정을 통해 getImageData를 호출할 때 발생하는 CORS(Cross-Origin Resource Sharing) 문제를 피할 수 있습니다.
+try-catch 구문: checkScratch 함수 내부에 try-catch 구문을 추가하여 예외를 처리하고, 예상치 못한 에러가 발생할 경우 콘솔에 오류 메시지를 표시하도록 했습니다. 이를 통해 디버깅이 더 쉬워집니다.
+*/
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
