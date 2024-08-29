@@ -31,7 +31,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">itemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -124,6 +124,10 @@ dropBox.addEventListener('drop', (e) => {
 // 터치 이벤트 추가
 let isDragging = false;
 
+// 터치 시작 위치
+let startX;
+let startY;
+
 // 터치 시작
 item.addEventListener('touchstart', (e) => {
     isDragging = true;
@@ -131,11 +135,9 @@ item.addEventListener('touchstart', (e) => {
     
     // 터치한 위치를 기록
     const touch = e.touches[0];
-    clientX = touch.clientX;
-    clientY = touch.clientY;
+    startX = touch.clientX - item.offsetLeft;
+    startY = touch.clientY - item.offsetTop;
     item.style.position = 'absolute';
-    item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
-    item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
 
     // 스크롤 방지
     e.preventDefault();
@@ -145,8 +147,8 @@ item.addEventListener('touchstart', (e) => {
 item.addEventListener('touchmove', (e) => {
     if (isDragging) {
         const touch = e.touches[0];
-        item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
-        item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
+        item.style.left = `${touch.clientX - startX}px`;
+        item.style.top = `${touch.clientY - startY}px`;
     }
 
     // 스크롤 방지
@@ -188,19 +190,12 @@ touchend 이벤트: 터치가 종료되면 touchend 이벤트가 발생하고, �
 +
 드롭 위치 확인: touchend 이벤트에서 elementFromPoint 함수의 좌표 계산을 수정했습니다. 터치 이벤트의 clientX와 clientY를 그대로 사용하여 정확한 위치를 찾습니다.
 드롭 타겟 확인: dropTarget.closest()를 사용해 드롭 위치를 좀 더 확실하게 확인합니다. 이 방법은 drop_box 또는 drag_box 내에 있는지 확인하는 데 유용합니다.
-추가 고려사항:
-만약 드래그하는 동안 화면의 스크롤 위치가 변경된다면, window.scrollX 및 window.scrollY 값을 더해줘야 하니 이 부분도 고려해 주세요.
+추가 고려사항: 만약 드래그하는 동안 화면의 스크롤 위치가 변경된다면, window.scrollX 및 window.scrollY 값을 더해줘야 하니 이 부분도 고려해 주세요.
 
 +
-{ passive: false } 옵션 추가:
-touchstart, touchmove, touchend 이벤트 핸들러에 { passive: false } 옵션을 추가하여 스크롤 방지를 명확하게 설정했습니다. 이 옵션을 사용하면, 기본 스크롤 동작을 막는 데 더 효과적입니다.
-드롭 타겟 확인:
-
-dropTarget.closest('.drop_box')를 사용하여 터치 종료 시점에서의 드롭 위치를 더 정확하게 확인합니다.
-이 방법을 통해 드롭 위치에 따라 아이템이 drop_box 또는 drag_box로 이동하게 됩니다.
-스크롤 방지 전체 설정:
-
-전체 페이지에 대해 터치 시 스크롤이 발생하지 않도록 하기 위해 document.addEventListener('touchmove')를 사용했습니다. 드래그 중일 때만 스크롤을 방지합니다.
+{ passive: false } 옵션 추가: touchstart, touchmove, touchend 이벤트 핸들러에 { passive: false } 옵션을 추가하여 스크롤 방지를 명확하게 설정했습니다. 이 옵션을 사용하면, 기본 스크롤 동작을 막는 데 더 효과적입니다.
+드롭 타겟 확인: dropTarget.closest('.drop_box')를 사용하여 터치 종료 시점에서의 드롭 위치를 더 정확하게 확인합니다. 이 방법을 통해 드롭 위치에 따라 아이템이 drop_box 또는 drag_box로 이동하게 됩니다.
+스크롤 방지 전체 설정: 전체 페이지에 대해 터치 시 스크롤이 발생하지 않도록 하기 위해 document.addEventListener('touchmove')를 사용했습니다. 드래그 중일 때만 스크롤을 방지합니다.
 
 +
 처음에 너가 준건
@@ -214,6 +209,14 @@ dropTarget.closest('.drop_box')를 사용하여 터치 종료 시점에서의 �
 이렇게 수정한거거든 다시 돌려야될까?
 window.scrollX와 window.scrollY를 제거한 이유**: 만약 요소의 위치 계산에서 이 스크롤 값을 반영할 필요가 없다면, 
 오히려 터치 좌표가 이상하게 보정될 수 있습니다. 이 경우 원래의 코드로 돌아가는 것이 더 정확한 위치 계산을 제공할 수 있습니다.
+
++ 
+startX 및 startY: 터치 시작 시에 clientX와 clientY 값을 item.offsetLeft 및 item.offsetTop으로 보정했습니다. 이 값들을 기록하여, touchmove 시에 아이템의 이동이 터치한 곳에서의 상대적인 위치를 유지할 수 있도록 합니다.
+item.style.left 및 item.style.top: 터치한 곳에서 시작한 위치와 현재 터치 위치 간의 차이(startX, startY)를 사용하여 정확하게 드래그 위치를 설정합니다.
+
++
+
+
 */
 </script>
                 </div>
