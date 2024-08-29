@@ -32,7 +32,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">ITEM</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -135,6 +135,9 @@ dropBox.addEventListener('drop', (e) => {
 // 터치 이벤트 추가
 let isDragging = false;
 
+ // 터치 시작 시 부모 박스를 저장
+let initialParent; 
+
 // 터치 시작
 item.addEventListener('touchstart', (e) => {
     isDragging = true;
@@ -145,6 +148,9 @@ item.addEventListener('touchstart', (e) => {
     item.style.position = 'absolute';
     item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollX}px`;
     item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollY}px`;
+
+    // 현재 아이템의 부모 요소 저장 (drag_box 또는 drop_box)
+    initialParent = item.parentElement;
 
     // 스크롤 방지
     e.preventDefault();
@@ -215,15 +221,19 @@ item.addEventListener('touchend', (e) => {
 
     // 터치한 위치가 drag_box 내부에 있는지 확인
     if (touchX >= dragBoxX1 && touchX <= dragBoxX2 && touchY >= dragBoxY1 && touchY <= dragBoxY2) {
-        // 드래그 박스에 아이템 추가
-        dropBox.removeChild(item);
-        dragBox.appendChild(item);
+        // 만약 처음 시작했던 부모가 drag_box라면 위치 변경하지 않음
+        if (initialParent !== dragBox) {
+            initialParent.removeChild(item);
+            dragBox.appendChild(item);
+        }
     } 
     // 터치한 위치가 drop_box 내부에 있는지 확인
     else if (touchX >= dropBoxX1 && touchX <= dropBoxX2 && touchY >= dropBoxY1 && touchY <= dropBoxY2) {
-        // 드롭 박스에 아이템 추가
-        dragBox.removeChild(item);
-        dropBox.appendChild(item);
+        // 만약 처음 시작했던 부모가 drop_box라면 위치 변경하지 않음
+        if (initialParent !== dropBox) {
+            initialParent.removeChild(item);
+            dropBox.appendChild(item);
+        }
     }
 
     // 아이템을 초기 위치로 되돌림
