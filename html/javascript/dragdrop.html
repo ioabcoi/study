@@ -32,7 +32,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">itemitemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -143,8 +143,8 @@ item.addEventListener('touchstart', (e) => {
     // 터치한 위치를 기록
     const touch = e.touches[0];
     item.style.position = 'absolute';
-    item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
-    item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
+    item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollX}px`;
+    item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollY}px`;
 
     // 스크롤 방지
     e.preventDefault();
@@ -169,7 +169,7 @@ item.addEventListener('touchend', (e) => {
 
     // 터치 종료 시 드롭 위치 확인
     const touch = e.changedTouches[0];
-    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+    const dropTarget = document.elementFromPoint(touch.clientX - window.scrollX, touch.clientY - window.scrollY);
 
     if (dropTarget === dropBox) {
         dragBox.removeChild(item);
