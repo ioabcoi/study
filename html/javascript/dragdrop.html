@@ -31,7 +31,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">Item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -134,6 +134,9 @@
         item.style.position = 'absolute';
         item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
         item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollX}px`;
+    
+        // 스크롤 방지
+        e.preventDefault();
     });
 
     // 터치 이동
@@ -143,6 +146,9 @@
             item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
             item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollX}px`;
         }
+    
+        // 스크롤 방지
+        e.preventDefault();
     });
 
     // 터치 종료
@@ -166,6 +172,9 @@
         item.style.position = 'relative';
         item.style.left = '0px';
         item.style.top = '0px';
+    
+        // 스크롤 방지
+        e.preventDefault();
     });
 
 /*
