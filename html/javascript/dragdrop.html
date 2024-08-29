@@ -92,7 +92,6 @@ event.dataTransfer.types
 dragstart 이벤트 발생시 DOM 목록에 있는 data format 을 설정하며
 setData 함수를 호출할때 지정되는 format 문자열을 배열형식으로 얻을 수 있다.
 
-
 요소를 마우스로 드래그하면 그 요소의 모습이 고스트 이미지(ghost image) 로서 커서에 딸려 나온다. 
 이 드래그 이미지를 DataTransfer.setDragImage() 메서드를 통해 사용자 커스텀이 가능하다.
 -->
@@ -106,7 +105,7 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">drag_drop</div>
+        <div class="code_tit">drag_drop (pc/mo)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -115,9 +114,9 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
     .drag_drop {overflow:hidden;width:100%;height:600px;background:#eee;user-select:none;}
     .drag_drop .item {width:200px;height:50px;background:#f0f;border:0;}
     .drag_drop .item.dragging {background:#f00;}
-    .drag_drop .drag_box {display:flex;align-items:center;justify-content:center;width:500px;height:200px;background:#0ff;}
+    .drag_drop .drag_box {display:flex;align-items:center;justify-content:center;width:100%;height:200px;background:#0ff;}
     .drag_drop .drag_box.dragover {background:#00f;}
-    .drag_drop .drop_box {display:flex;align-items:center;justify-content:center;width:500px;height:300px;background:#ff0;}
+    .drag_drop .drop_box {display:flex;align-items:center;justify-content:center;width:100%;height:300px;background:#ff0;}
     .drag_drop .drop_box.dragover {background:#0f0;}
 </style>
 <div class="drag_drop">
@@ -145,10 +144,12 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
             // console.log('image');
         }
     }, false);
+
     item.addEventListener('drag', (e) => {
         // console.log(e.dataTransfer); // 드래그 이벤트 정보를 담고있는 dataTransfer 객체
         // console.log('드래그하면 발생하는 이벤트');
     });
+
     item.addEventListener('dragend', (e) => {
         e.target.classList.remove("dragging");
         // console.log('드래그가 끝나면 발생하는 이벤트');
@@ -164,15 +165,18 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         e.target.classList.add("dragover");
         // console.log('드래그 요소가 drag_box 영역에 닿으면 발생하는 이벤트');
     });
+
     dragBox.addEventListener('dragleave', (e) => {
         e.preventDefault();
         e.target.classList.remove("dragover");
         // console.log('드래그 요소가 drag_box 영역을 떠나면 발생하는 이벤트');
     });
+
     dragBox.addEventListener('dragover', (e) => {
         e.preventDefault();
         // console.log('드래그 요소가 drag_box 영역에 계속 위치하면 발생하는 이벤트');
     });
+
     dragBox.addEventListener('drop', (e) => {
         e.preventDefault();
         if (!e.target.classList.contains('item') ) {
@@ -187,15 +191,18 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         e.target.classList.add("dragover");
         // console.log('드래그 요소가 drop_box 영역에 닿으면 발생하는 이벤트');
     });
+
     dropBox.addEventListener('dragleave', (e) => {
         e.preventDefault();
         e.target.classList.remove("dragover");
         // console.log('드래그 요소가 drop_box 영역을 떠나면 발생하는 이벤트');
     });
+
     dropBox.addEventListener('dragover', (e) => {
         e.preventDefault();
         // console.log('드래그 요소가 drop_box 영역에 계속 위치하면 발생하는 이벤트');
     });
+    
     dropBox.addEventListener('drop', (e) => {
         e.preventDefault();
         if (!e.target.classList.contains('item') ) {
@@ -204,6 +211,59 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         }
         // console.log('드래그 요소가 drop_box 영역에 드롭');
     });
+
+    // 터치 이벤트 추가
+    let isDragging = false;
+
+    // 터치 시작
+    item.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        e.target.classList.add("dragging");
+        
+        // 터치한 위치를 기록
+        const touch = e.touches[0];
+        item.style.position = 'absolute';
+        item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+        item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
+    });
+
+    // 터치 이동
+    item.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+            const touch = e.touches[0];
+            item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+            item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
+        }
+    });
+
+    // 터치 종료
+    item.addEventListener('touchend', (e) => {
+        isDragging = false;
+        e.target.classList.remove("dragging");
+
+        // 터치 종료 시 드롭 위치 확인
+        const touch = e.changedTouches[0];
+        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        if (dropTarget === dropBox) {
+            dragBox.removeChild(item);
+            dropBox.appendChild(item);
+        } else if (dropTarget === dragBox) {
+            dropBox.removeChild(item);
+            dragBox.appendChild(item);
+        }
+
+        // 아이템을 초기 위치로 되돌림
+        item.style.position = 'relative';
+        item.style.left = '0px';
+        item.style.top = '0px';
+    });
+
+/*
+touchstart 이벤트: 터치가 시작되면 touchstart 이벤트가 발생하고, 이때 dragging 클래스를 추가하며, 아이템의 위치를 터치한 곳으로 이동시킵니다.
+touchmove 이벤트: 터치가 이동할 때 touchmove 이벤트가 발생하며, 터치 위치에 따라 아이템을 계속 이동시킵니다.
+touchend 이벤트: 터치가 종료되면 touchend 이벤트가 발생하고, 드래그가 끝난 위치에서 드롭 위치를 확인한 후 해당 위치에 아이템을 이동시킵니다. 아이템 위치를 초기화합니다.
+*/
 </script>
                 </div>
             </div>
@@ -215,7 +275,7 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">attach File</div>
+        <div class="code_tit">attach File (pc)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -278,17 +338,11 @@ $drop.ondragleave = (e) => {
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">ex</div>
+        <div class="code_tit">data (pc/mo)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<!-- 
-dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
-setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
-dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
-drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
--->
 <style type="text/css">
     #drag {padding:20px;background:#eee;font-size:20px;}
     #drop {padding:20px;background:#999;font-size:20px;}
@@ -298,21 +352,88 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
     <div id="drop">여기에 드롭하세요</div>
 </div>
 <script type='text/javascript'>
-    document.getElementById('drag').ondragstart = function(e) {
-        console.log('드래그 시작');
-        e.dataTransfer.setData('data', this.innerHTML);
-        e.dataTransfer.dropEffect = 'copy';
-    };
-    var drop = document.getElementById('drop');
-    drop.ondragover = function(e) {
-        e.preventDefault(); // 필수
-        console.log('무언가 위에 올려져 있습니다');
-        e.dataTransfer.dropEffect = 'move';
-    };
-    drop.ondrop = function(e) {
-        console.log('무언가 드롭되었습니다.');
-        alert(e.dataTransfer.getData('data'));
+/*
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+*/
+
+// 데스크탑용 드래그 이벤트
+document.getElementById('drag').ondragstart = function(e) {
+    console.log('드래그 시작');
+    e.dataTransfer.setData('data', this.innerHTML);
+    e.dataTransfer.dropEffect = 'copy';
+};
+
+var drop = document.getElementById('drop');
+drop.ondragover = function(e) {
+    e.preventDefault(); // 필수
+    console.log('무언가 위에 올려져 있습니다');
+    e.dataTransfer.dropEffect = 'move';
+};
+
+drop.ondrop = function(e) {
+    console.log('무언가 드롭되었습니다.');
+    alert(e.dataTransfer.getData('data'));
+}
+
+// 터치 이벤트를 위한 추가 코드
+var drag = document.getElementById('drag');
+var isDragging = false; // 드래그 여부 확인 변수
+
+// 터치 시작
+drag.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    console.log('터치 시작');
+    
+    // 터치한 위치를 기록
+    const touch = e.touches[0];
+    drag.style.position = 'absolute';
+    drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
+    drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
+});
+
+// 터치 이동
+drag.addEventListener('touchmove', function(e) {
+    if (isDragging) {
+        console.log('터치 이동');
+        const touch = e.touches[0];
+        drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
+        drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
     }
+});
+
+// 터치 종료
+drag.addEventListener('touchend', function(e) {
+    if (isDragging) {
+        console.log('터치 종료');
+        isDragging = false;
+
+        // 터치 종료 시 드롭 위치 확인
+        const touch = e.changedTouches[0];
+        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        // 드롭 대상이 drop 영역인지 확인
+        if (dropTarget === drop) {
+            console.log('drop 영역에 드롭됨');
+            alert(drag.innerHTML);
+        } else {
+            console.log('drop 영역이 아님');
+        }
+
+        // 아이템을 초기 위치로 되돌림
+        drag.style.position = 'relative';
+        drag.style.left = '0px';
+        drag.style.top = '0px';
+    }
+});
+
+/*
+터치 시작 (touchstart): 사용자가 아이템을 터치할 때 드래그 상태를 true로 설정하고, 터치 위치에 따라 아이템을 이동시킵니다.
+터치 이동 (touchmove): 터치가 이동할 때 아이템이 함께 이동하도록 합니다.
+터치 종료 (touchend): 터치가 종료되면 아이템이 drop 영역에 있는지 확인하고, 드롭되었을 경우에는 alert를 띄웁니다. 이후 아이템을 초기 위치로 되돌립니다.
+*/
 </script>
                 </div>
             </div>
@@ -324,17 +445,11 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">ex</div>
+        <div class="code_tit">draggable item</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<!-- 
-dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
-setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
-dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
-drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
--->
 <style type="text/css">
     .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
     .container button {width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
@@ -349,9 +464,17 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
     <button class="draggable" draggable="true">🐱</button>
 </div>
 <script type='text/javascript'>
+/*
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+*/
+
 const draggables = document.querySelectorAll(".draggable");
 const containers = document.querySelectorAll(".container");
 
+// 데스크탑용 드래그 이벤트
 draggables.forEach(draggable => {
     draggable.addEventListener("dragstart", () => {
         draggable.classList.add("dragging");
@@ -394,6 +517,81 @@ function getDragAfterElement(container, x) {
         { offset: Number.NEGATIVE_INFINITY },
     ).element;
 }
+
+// 모바일 터치 이벤트 처리 추가
+draggables.forEach(draggable => {
+    let isDragging = false; // 터치 드래그 상태 변수
+
+    // 터치 시작
+    draggable.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        draggable.classList.add("dragging");
+
+        // 터치한 위치에 따라 요소의 이동 시작
+        const touch = e.touches[0];
+        draggable.style.position = 'absolute';
+        draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2}px`;
+        draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2}px`;
+    });
+
+    // 터치 이동
+    draggable.addEventListener("touchmove", (e) => {
+        if (isDragging) {
+            const touch = e.touches[0];
+            draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2}px`;
+            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2}px`;
+
+            // 드래그 중간 상태를 체크하여 컨테이너 내부에서 아이템 위치 계산
+            containers.forEach(container => {
+                const afterElement = getDragAfterElement(container, touch.clientX);
+                if (container.contains(draggable)) {
+                    if (afterElement === undefined) {
+                        container.appendChild(draggable);
+                    } else {
+                        container.insertBefore(draggable, afterElement);
+                    }
+                }
+            });
+        }
+    });
+
+    // 터치 종료
+    draggable.addEventListener("touchend", () => {
+        isDragging = false;
+        draggable.classList.remove("dragging");
+
+        // 요소 위치를 초기화 (상대 위치에서 원래 위치로)
+        draggable.style.position = 'relative';
+        draggable.style.left = '0px';
+        draggable.style.top = '0px';
+    });
+});
+
+// 기존 getDragAfterElement 함수
+function getDragAfterElement(container, x) {
+    const draggableElements = [
+        ...container.querySelectorAll(".draggable:not(.dragging)"),
+    ];
+
+    return draggableElements.reduce(
+        (closest, child) => {
+            const box = child.getBoundingClientRect();
+            const offset = x - box.left - box.width / 2;
+            if (offset < 0 && offset > closest.offset) {
+                return { offset: offset, element: child };
+            } else {
+                return closest;
+            }
+        },
+        { offset: Number.NEGATIVE_INFINITY },
+    ).element;
+}
+
+/*
+터치 시작 (touchstart): 터치가 시작되면, isDragging 변수를 true로 설정하고, 아이템의 위치를 터치한 위치로 이동시킵니다.
+터치 이동 (touchmove): 터치가 이동할 때마다 아이템을 따라 움직이게 하고, 컨테이너 내부에서 다른 요소와의 위치를 계산하여 드래그 위치를 업데이트합니다.
+터치 종료 (touchend): 터치가 종료되면 isDragging 변수를 false로 설정하고, 아이템의 위치를 초기화하여 원래 위치로 되돌립니다.
+*/
 </script>
                 </div>
             </div>
@@ -405,7 +603,7 @@ function getDragAfterElement(container, x) {
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">ex</div>
+        <div class="code_tit">draggable list (pc/mo)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -452,17 +650,19 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
     </div>
 </div>
 <script type='text/javascript'>
-/**
- * [x] 엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
- * [x] draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
- * [x] dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
- * [x] dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
- */
+/*
+엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
+draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
+dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
+dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
+*/
+
 (() => {
     const $ = (select) => document.querySelectorAll(select);
     const draggables = $('.ico_container .draggable');
     const containers = $('.ico_container');
 
+    // 데스크탑용 드래그 이벤트 처리
     draggables.forEach(el => {
         el.addEventListener('dragstart', () => {
             el.classList.add('dragging');
@@ -473,12 +673,13 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
         });
     });
 
+    // 요소 드래그 후 위치 계산 함수
     function getDragAfterElement(container, y) {
         const draggableElements = [...container.querySelectorAll('.ico_container .draggable:not(.dragging)')]
 
         return draggableElements.reduce((closest, child) => {
-            const box = child.getBoundingClientRect() //해당 엘리먼트에 top값, height값 담겨져 있는 메소드를 호출해 box변수에 할당
-            const offset = y - box.top - box.height / 2 //수직 좌표 - top값 - height값 / 2의 연산을 통해서 offset변수에 할당
+            const box = child.getBoundingClientRect() // 해당 엘리먼트에 top값, height값 담겨져 있는 메소드를 호출해 box변수에 할당
+            const offset = y - box.top - box.height / 2 // 수직 좌표 - top값 - height값 / 2의 연산을 통해서 offset변수에 할당
             if (offset < 0 && offset > closest.offset) { // (예외 처리) 0 이하 와, 음의 무한대 사이에 조건
                 return { offset: offset, element: child } // Element를 리턴
             } else {
@@ -487,6 +688,7 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
         }, { offset: Number.NEGATIVE_INFINITY }).element
     };
 
+    // 드래그오버 이벤트 처리
     containers.forEach(container => {
         container.addEventListener('dragover', e => {
             e.preventDefault()
@@ -496,7 +698,52 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
             container.insertBefore(draggable, afterElement)
         })
     });
+
+    // 모바일 터치 이벤트 처리 추가
+    draggables.forEach(draggable => {
+        let isDragging = false; // 터치 드래그 상태 변수
+        let startY = 0;
+
+        // 터치 시작
+        draggable.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startY = e.touches[0].clientY;
+            draggable.classList.add('dragging');
+        });
+
+        // 터치 이동
+        draggable.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+
+            const currentY = e.touches[0].clientY;
+            const container = [...containers].find(container => container.contains(draggable));
+
+            if (container) {
+                const afterElement = getDragAfterElement(container, currentY);
+                if (afterElement === undefined) {
+                    container.appendChild(draggable);
+                } else {
+                    container.insertBefore(draggable, afterElement);
+                }
+            }
+
+            // 터치 시 위치 변경을 위해 preventDefault() 호출
+            e.preventDefault();
+        });
+
+        // 터치 종료
+        draggable.addEventListener('touchend', () => {
+            isDragging = false;
+            draggable.classList.remove('dragging');
+        });
+    });
 })();
+
+/*
+터치 시작 (touchstart): 터치가 시작되면 isDragging 변수를 true로 설정하고, 터치 시작 위치를 기록하며, 드래그 중이라는 표시를 위해 .dragging 클래스를 추가합니다.
+터치 이동 (touchmove): 터치가 이동할 때마다 현재 터치 위치(currentY)를 계산하고, getDragAfterElement 함수를 사용하여 아이템을 새로운 위치에 삽입합니다. e.preventDefault()를 호출하여 기본 터치 스크롤 동작을 방지합니다.
+터치 종료 (touchend): 터치가 종료되면 드래그 상태를 false로 설정하고, .dragging 클래스를 제거하여 드래그 상태를 해제합니다.
+*/
 </script>
                 </div>
             </div>
@@ -508,17 +755,11 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">ex</div>
+        <div class="code_tit">draggable img (pc/mo)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<!-- 
-dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
-setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
-dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
-drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
--->
 <style type="text/css">
     .img_container {float:left;width:200px;height:300px;margin:0 10px;border:solid 10px #8B4513;}
 </style>
@@ -527,17 +768,74 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
 </div>
 <div class="img_container" ondrop="drop(event)" ondragover="dragEnter(event)"></div>
 <script>
+/*
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+*/
+
+// 드래그 앤 드롭 기능을 위한 JavaScript 코드
+
+// dragover 이벤트에서 drop 이벤트가 호출될 수 있도록 방지하는 역할을 합니다.
 function dragEnter(ev) {
     ev.preventDefault();
 }
+
+// 드래그 시작 시 데이터를 설정하는 함수입니다.
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
+
+// 드롭 시 데이터를 가져와서 해당 요소를 이동하는 함수입니다.
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
 }
+
+// 모바일 터치 이벤트를 위한 변수
+let currentDraggedElement = null;
+let initialX, initialY;
+
+// 터치 시작 시 드래그 시작 이벤트와 비슷하게 처리합니다.
+function touchStart(ev) {
+    currentDraggedElement = ev.target;  // 터치한 요소를 저장
+    initialX = ev.touches[0].clientX;    // 터치한 위치의 X좌표 저장
+    initialY = ev.touches[0].clientY;    // 터치한 위치의 Y좌표 저장
+}
+
+// 터치 이동 시 요소를 따라다니도록 합니다.
+function touchMove(ev) {
+    ev.preventDefault();
+    
+    // 터치 이동 시 위치 계산
+    let currentX = ev.touches[0].clientX;
+    let currentY = ev.touches[0].clientY;
+
+    // 이동에 따라 이미지의 위치를 업데이트합니다.
+    currentDraggedElement.style.position = "absolute";
+    currentDraggedElement.style.left = currentX - initialX + "px";
+    currentDraggedElement.style.top = currentY - initialY + "px";
+}
+
+// 터치 종료 시 드롭 이벤트와 유사한 동작을 수행합니다.
+function touchEnd(ev) {
+    let dropZone = document.elementFromPoint(ev.changedTouches[0].clientX, ev.changedTouches[0].clientY);
+    if (dropZone && dropZone.classList.contains("img_container")) {
+        if (!dropZone.querySelector("img")) {
+            dropZone.appendChild(currentDraggedElement);
+            currentDraggedElement.style.position = "static"; // 위치 초기화
+        }
+    }
+    currentDraggedElement = null;  // 드래그 종료 후 초기화
+}
+
+/*
+터치 시작(touchstart): touchStart 함수에서 터치 시작 시 현재 터치된 요소와 초기 터치 위치를 기록합니다.
+터치 이동(touchmove): touchMove 함수에서 사용자가 터치하고 있는 동안 이미지가 따라다니도록 위치를 업데이트합니다. e.preventDefault()를 사용해 기본 터치 동작(스크롤)을 방지합니다.
+터치 종료(touchend): touchEnd 함수에서 터치가 종료되었을 때 터치 위치를 기준으로 드롭할 위치를 찾습니다. 드롭할 위치가 img_container 요소이고, 해당 요소에 이미 이미지가 없다면 드래그된 이미지를 그 위치에 이동시킵니다.
+*/
 </script>
                 </div>
             </div>
