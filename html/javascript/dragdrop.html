@@ -31,7 +31,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">itemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -138,8 +138,8 @@
         clientX = touch.clientX;
         clientY = touch.clientY;
         item.style.position = 'absolute';
-        item.style.left = `${clientX - item.offsetWidth / 2 + window.scrollY}px`;
-        item.style.top = `${clientY - item.offsetHeight / 2 + window.scrollX}px`;
+        item.style.left = `${clientX - item.offsetWidth / 2 + window.scrollX}px`;
+        item.style.top = `${clientY - item.offsetHeight / 2 + window.scrollY}px`;
     
         // 스크롤 방지
         e.preventDefault();
@@ -149,8 +149,8 @@
     item.addEventListener('touchmove', (e) => {
         if (isDragging) {
             const touch = e.touches[0];
-            item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
-            item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollX}px`;
+            item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollX}px`;
+            item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollY}px`;
         }
     
         // 스크롤 방지
