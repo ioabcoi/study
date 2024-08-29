@@ -32,7 +32,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">ITEM</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -162,21 +162,68 @@ item.addEventListener('touchmove', (e) => {
     e.preventDefault();
 });
 
+// // 터치 종료
+// item.addEventListener('touchend', (e) => {
+//     isDragging = false;
+//     e.target.classList.remove("dragging");
+
+//     // 터치 종료 시 드롭 위치 확인
+//     const touch = e.changedTouches[0];
+//     const dropTarget = document.elementFromPoint(touch.clientX + window.scrollX, touch.clientY + window.scrollY);
+//     alert(dropTarget, dropTarget.closest('.drop_box'));
+
+//     if (dropTarget && dropTarget.closest('.drop_box')) {        
+//         dragBox.removeChild(item);
+//         dropBox.appendChild(item);
+//     } else if (dropTarget && dropTarget.closest('.drag_box')) {
+//         dropBox.removeChild(item);
+//         dragBox.appendChild(item);
+//     }
+
+//     // 아이템을 초기 위치로 되돌림
+//     item.style.position = 'relative';
+//     item.style.left = '0px';
+//     item.style.top = '0px';
+
+//     // 스크롤 방지
+//     e.preventDefault();
+// });
+
 // 터치 종료
 item.addEventListener('touchend', (e) => {
     isDragging = false;
     e.target.classList.remove("dragging");
 
-    // 터치 종료 시 드롭 위치 확인
+    // 터치 종료 시 좌표 확인
     const touch = e.changedTouches[0];
-    const dropTarget = document.elementFromPoint(touch.clientX + window.scrollX, touch.clientY + window.scrollY);
+    const touchX = touch.clientX + window.scrollX;
+    const touchY = touch.clientY + window.scrollY;
 
-    if (dropTarget && dropTarget.closest('.drop_box')) {
-        dragBox.removeChild(item);
-        dropBox.appendChild(item);
-    } else if (dropTarget && dropTarget.closest('.drag_box')) {
+    // drag_box의 위치와 크기
+    const dragBoxRect = dragBox.getBoundingClientRect();
+    const dragBoxX1 = dragBoxRect.left + window.scrollX;
+    const dragBoxY1 = dragBoxRect.top + window.scrollY;
+    const dragBoxX2 = dragBoxX1 + dragBoxRect.width;
+    const dragBoxY2 = dragBoxY1 + dragBoxRect.height;
+
+    // drop_box의 위치와 크기
+    const dropBoxRect = dropBox.getBoundingClientRect();
+    const dropBoxX1 = dropBoxRect.left + window.scrollX;
+    const dropBoxY1 = dropBoxRect.top + window.scrollY;
+    const dropBoxX2 = dropBoxX1 + dropBoxRect.width;
+    const dropBoxY2 = dropBoxY1 + dropBoxRect.height;
+
+    // 터치한 위치가 drag_box 내부에 있는지 확인
+    if (touchX >= dragBoxX1 && touchX <= dragBoxX2 && touchY >= dragBoxY1 && touchY <= dragBoxY2) {
+        // 드래그 박스에 아이템 추가
         dropBox.removeChild(item);
         dragBox.appendChild(item);
+    } 
+    // 터치한 위치가 drop_box 내부에 있는지 확인
+    else if (touchX >= dropBoxX1 && touchX <= dropBoxX2 && touchY >= dropBoxY1 && touchY <= dropBoxY2) {
+        // 드롭 박스에 아이템 추가
+        dragBox.removeChild(item);
+        dropBox.appendChild(item);
     }
 
     // 아이템을 초기 위치로 되돌림
@@ -247,6 +294,17 @@ e.dataTransfer.setData('text/plain', e.target.textContent);
 텍스트를 드래그할 때, 특히 드래그 이미지 설정이나 스타일이 맞지 않는 경우, 예상치 못한 위치에서 드래그 이미지가 표시될 수 있습니다. 
 이럴 때는 setDragImage() 메서드로 원하는 드래그 이미지를 설정하거나, 텍스트를 드래그할 때의 스타일을 조정하는 것이 필요할 수 있습니다.
 .drag_drop .dragging {opacity:0.5;}
+
++
+모바일에서 touchstart, touchmove 는 정상 작동 하는데
+touchend 했을 때에도 item 의 위치는 맞는 것 같은데
+.drog_box 와 .drop_box 의 위치가 안맞는건지, item 이 위치 이동을 정상적으로 안하네
+
+이 문제는 모바일 환경에서 터치 이벤트의 처리 방식과 화면 좌표 계산에서 발생하는 오차 때문일 수 있습니다. 
+특히, elementFromPoint 메서드를 사용하여 터치 종료 시 위치를 확인할 때, 스크롤이나 화면 비율에 의해 정확한 요소가 인식되지 않는 경우가 생길 수 있습니다.
+이를 해결하기 위해, elementFromPoint 대신 터치 종료 시점의 좌표와 박스의 위치를 직접 비교하는 방식으로 구현할 수 있습니다. 아래는 수정된 코드입니다:
+
+
 */
 </script>
                 </div>
