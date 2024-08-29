@@ -124,6 +124,10 @@
     // 터치 이벤트 추가
     let isDragging = false;
 
+    // 터치 위치
+    let clientX;
+    let clientY;
+
     // 터치 시작
     item.addEventListener('touchstart', (e) => {
         isDragging = true;
@@ -131,9 +135,11 @@
         
         // 터치한 위치를 기록
         const touch = e.touches[0];
+        clientX = touch.clientX;
+        clientY = touch.clientY;
         item.style.position = 'absolute';
-        item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
-        item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollX}px`;
+        item.style.left = `${clientX - item.offsetWidth / 2 + window.scrollY}px`;
+        item.style.top = `${clientY - item.offsetHeight / 2 + window.scrollX}px`;
     
         // 스크롤 방지
         e.preventDefault();
@@ -167,6 +173,12 @@
             dropBox.removeChild(item);
             dragBox.appendChild(item);
         }
+
+        // 터치 위치 초기화
+        let deltaX;
+        let deltaY;
+        deltaX = touch.clientX - clientX;
+        deltaY = touch.clientY - clientY;
 
         // 아이템을 초기 위치로 되돌림
         item.style.position = 'relative';
@@ -208,6 +220,8 @@ https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+https://developer.mozilla.org/en-US/docs/Web/API/Touch/clientX
+https://developer.mozilla.org/en-US/docs/Web/API/Touch/clientY
 
 
 <a>는 기본적으로 드래그 가능
