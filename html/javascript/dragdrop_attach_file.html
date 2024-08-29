@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <!-- // head -->
+    
+    <title>dragdrop</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>dragdrop</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">attach file (pc)</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .attach_file {position:relative;width:100%;height:200px;overflow:auto;display:flex;justify-content:center;align-items:center;flex-direction:column;border-radius:5px;border:4px dashed #ddd;text-align:center;user-select:none;transition:0.4s;}
+    .attach_file .tit {position:absolute;left:0;top:50%;width:100%;font-size:20px;font-weight:600;transform:translateY(-50%);}
+    .attach_file .file {position:relative;z-index:1;width:100%;height:100%;overflow-y:auto;padding:10px;font-size:12px;}
+    .attach_file.active {background:#ddd;} /* 드롭 반응 */
+</style>
+<div class="attach_file">
+    <strong class="tit">이곳에 파일을 (여러개) 드롭해주세요. </strong>
+    <div class="file"></div>
+</div>
+<script type='text/javascript'>
+const $drop = document.querySelector(".attach_file");
+const $title = document.querySelector(".attach_file .tit");
+const $file = document.querySelector(".attach_file .file");
+
+// 드래그한 파일 객체가 해당 영역에 놓였을 때
+$drop.ondrop = (e) => {
+    e.preventDefault();
+    $drop.className = "attach_file";
+
+    // 파일 리스트
+    const files = [...e.dataTransfer?.files];
+    // console.log(files);
+
+    // $title.innerHTML = files.map(file => file.name).join("<br>");
+    $title.remove();
+    $file.innerHTML = files.map(file => file.name).join("<br>");
+}
+
+// ondragover 이벤트가 없으면 onDrop 이벤트가 실핻되지 않습니다.
+$drop.ondragover = (e) => {
+    e.preventDefault();
+}
+
+// 드래그한 파일이 최초로 진입했을 때
+$drop.ondragenter = (e) => {
+    e.preventDefault();
+
+$drop.classList.add("active");
+}
+
+// 드래그한 파일이 영역을 벗어났을 때
+$drop.ondragleave = (e) => {
+    e.preventDefault();
+
+    $drop.classList.remove("active");
+}
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

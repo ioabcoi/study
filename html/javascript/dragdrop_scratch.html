@@ -11,10 +11,10 @@
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>dragdrop_scratch</h1>
+        <h1>dragdrop & scratch</h1>
 
         <!-- code_area -->
-        <div class="code_tit">dragdrop_canvas_scratch</div>
+        <div class="code_tit">& canvas_scratch (pc/mo)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -188,6 +188,7 @@ canvas.addEventListener('mousemove', function (e){
         let y = e.offsetY;
         draw(x, y);
         old = {x: x, y: y};
+        
         // 스크래치된 영역 계산
         checkScratch();
     }

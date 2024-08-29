@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <!-- // head -->
+    
+    <title>dragdrop</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>dragdrop</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">data (pc/mo)</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    #drag {padding:20px;background:#eee;font-size:20px;}
+    #drop {padding:20px;background:#999;font-size:20px;}
+</style>
+<div>
+    <p id="drag" draggable="true">드래그해보세요.</p>
+    <div id="drop">여기에 드롭하세요</div>
+</div>
+<script type='text/javascript'>
+/*
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+*/
+
+// 데스크탑용 드래그 이벤트
+document.getElementById('drag').ondragstart = function(e) {
+    console.log('드래그 시작');
+    e.dataTransfer.setData('data', this.innerHTML);
+    e.dataTransfer.dropEffect = 'copy';
+};
+
+var drop = document.getElementById('drop');
+drop.ondragover = function(e) {
+    e.preventDefault(); // 필수
+    console.log('무언가 위에 올려져 있습니다');
+    e.dataTransfer.dropEffect = 'move';
+};
+
+drop.ondrop = function(e) {
+    console.log('무언가 드롭되었습니다.');
+    alert(e.dataTransfer.getData('data'));
+}
+
+// 터치 이벤트를 위한 추가 코드
+var drag = document.getElementById('drag');
+var isDragging = false; // 드래그 여부 확인 변수
+
+// 터치 시작
+drag.addEventListener('touchstart', function(e) {
+    isDragging = true;
+    console.log('터치 시작');
+    
+    // 터치한 위치를 기록
+    const touch = e.touches[0];
+    drag.style.position = 'absolute';
+    drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
+    drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
+});
+
+// 터치 이동
+drag.addEventListener('touchmove', function(e) {
+    if (isDragging) {
+        console.log('터치 이동');
+        const touch = e.touches[0];
+        drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
+        drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
+    }
+});
+
+// 터치 종료
+drag.addEventListener('touchend', function(e) {
+    if (isDragging) {
+        console.log('터치 종료');
+        isDragging = false;
+
+        // 터치 종료 시 드롭 위치 확인
+        const touch = e.changedTouches[0];
+        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        // 드롭 대상이 drop 영역인지 확인
+        if (dropTarget === drop) {
+            console.log('drop 영역에 드롭됨');
+            alert(drag.innerHTML);
+        } else {
+            console.log('drop 영역이 아님');
+        }
+
+        // 아이템을 초기 위치로 되돌림
+        drag.style.position = 'relative';
+        drag.style.left = '0px';
+        drag.style.top = '0px';
+    }
+});
+
+/*
+터치 시작 (touchstart): 사용자가 아이템을 터치할 때 드래그 상태를 true로 설정하고, 터치 위치에 따라 아이템을 이동시킵니다.
+터치 이동 (touchmove): 터치가 이동할 때 아이템이 함께 이동하도록 합니다.
+터치 종료 (touchend): 터치가 종료되면 아이템이 drop 영역에 있는지 확인하고, 드롭되었을 경우에는 alert를 띄웁니다. 이후 아이템을 초기 위치로 되돌립니다.
+*/
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
