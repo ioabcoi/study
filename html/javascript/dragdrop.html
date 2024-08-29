@@ -31,158 +31,165 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">itemitemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">itemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
     </div>
 </div>
 <script type='text/javascript'>
-    // item
-    const item = document.querySelector('.drag_box .item');
-    item.addEventListener('dragstart', (e) => {
-        // e.preventDefault();
-        e.target.classList.add("dragging");
-        // console.log('요소를 드래그를 시작하면 발생하는 이벤트');
+// item
+const item = document.querySelector('.drag_box .item');
+item.addEventListener('dragstart', (e) => {
+    // e.preventDefault();
+    e.target.classList.add("dragging");
+    // console.log('요소를 드래그를 시작하면 발생하는 이벤트');
 
-        if (e.target.classList.contains('image')) {
-            const img = document.createElement("img");
-            img.src = "../../images/snoopy.png";
-            // setDragImage(이미지요소, xOffset, yOffset)
-            e.dataTransfer.setDragImage(img, 60, 80); // 사용할 사용자 정의 이미지를 설정
-            // console.log('image');
-        }
-    }, false);
+    if (e.target.classList.contains('image')) {
+        const img = document.createElement("img");
+        img.src = "../../images/snoopy.png";
+        // setDragImage(이미지요소, xOffset, yOffset)
+        e.dataTransfer.setDragImage(img, 60, 80); // 사용할 사용자 정의 이미지를 설정
+        // console.log('image');
+    }
+}, false);
 
-    item.addEventListener('drag', (e) => {
-        // console.log(e.dataTransfer); // 드래그 이벤트 정보를 담고있는 dataTransfer 객체
-        // console.log('드래그하면 발생하는 이벤트');
-    });
+item.addEventListener('drag', (e) => {
+    // console.log(e.dataTransfer); // 드래그 이벤트 정보를 담고있는 dataTransfer 객체
+    // console.log('드래그하면 발생하는 이벤트');
+});
 
-    item.addEventListener('dragend', (e) => {
-        e.target.classList.remove("dragging");
-        // console.log('드래그가 끝나면 발생하는 이벤트');
-    });
+item.addEventListener('dragend', (e) => {
+    e.target.classList.remove("dragging");
+    // console.log('드래그가 끝나면 발생하는 이벤트');
+});
 
-    // dragBox, dropBox
-    const dragBox = document.querySelector('.drag_drop .drag_box');
-    const dropBox = document.querySelector('.drag_drop .drop_box');
+// dragBox, dropBox
+const dragBox = document.querySelector('.drag_drop .drag_box');
+const dropBox = document.querySelector('.drag_drop .drop_box');
 
-    // dragBox
-    dragBox.addEventListener('dragenter', (e) => {
-        e.preventDefault();
-        e.target.classList.add("dragover");
-        // console.log('드래그 요소가 drag_box 영역에 닿으면 발생하는 이벤트');
-    });
+// dragBox
+dragBox.addEventListener('dragenter', (e) => {
+    e.preventDefault();
+    e.target.classList.add("dragover");
+    // console.log('드래그 요소가 drag_box 영역에 닿으면 발생하는 이벤트');
+});
 
-    dragBox.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        e.target.classList.remove("dragover");
-        // console.log('드래그 요소가 drag_box 영역을 떠나면 발생하는 이벤트');
-    });
+dragBox.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    e.target.classList.remove("dragover");
+    // console.log('드래그 요소가 drag_box 영역을 떠나면 발생하는 이벤트');
+});
 
-    dragBox.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        // console.log('드래그 요소가 drag_box 영역에 계속 위치하면 발생하는 이벤트');
-    });
+dragBox.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    // console.log('드래그 요소가 drag_box 영역에 계속 위치하면 발생하는 이벤트');
+});
 
-    dragBox.addEventListener('drop', (e) => {
-        e.preventDefault();
-        if (!e.target.classList.contains('item') ) {
-            dropBox.removeChild(item);
-            e.target.appendChild(item);
-        }        
-        // console.log('드래그 요소가 drag_box 영역에 드롭');
-    });
+dragBox.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (!e.target.classList.contains('item') ) {
+        dropBox.removeChild(item);
+        e.target.appendChild(item);
+    }        
+    // console.log('드래그 요소가 drag_box 영역에 드롭');
+});
 
-    // dropBox
-    dropBox.addEventListener('dragenter', (e) => {
-        e.target.classList.add("dragover");
-        // console.log('드래그 요소가 drop_box 영역에 닿으면 발생하는 이벤트');
-    });
+// dropBox
+dropBox.addEventListener('dragenter', (e) => {
+    e.target.classList.add("dragover");
+    // console.log('드래그 요소가 drop_box 영역에 닿으면 발생하는 이벤트');
+});
 
-    dropBox.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        e.target.classList.remove("dragover");
-        // console.log('드래그 요소가 drop_box 영역을 떠나면 발생하는 이벤트');
-    });
+dropBox.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    e.target.classList.remove("dragover");
+    // console.log('드래그 요소가 drop_box 영역을 떠나면 발생하는 이벤트');
+});
 
-    dropBox.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        // console.log('드래그 요소가 drop_box 영역에 계속 위치하면 발생하는 이벤트');
-    });
+dropBox.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    // console.log('드래그 요소가 drop_box 영역에 계속 위치하면 발생하는 이벤트');
+});
+
+dropBox.addEventListener('drop', (e) => {
+    e.preventDefault();
+    if (!e.target.classList.contains('item') ) {
+        dragBox.removeChild(item);
+        e.target.appendChild(item);
+    }
+    // console.log('드래그 요소가 drop_box 영역에 드롭');
+});
+
+// 터치 이벤트 추가
+let isDragging = false;
+
+// 터치 위치
+let clientX;
+let clientY;
+
+// 터치 시작
+item.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    e.target.classList.add("dragging");
     
-    dropBox.addEventListener('drop', (e) => {
-        e.preventDefault();
-        if (!e.target.classList.contains('item') ) {
-            dragBox.removeChild(item);
-            e.target.appendChild(item);
-        }
-        // console.log('드래그 요소가 drop_box 영역에 드롭');
-    });
+    // 터치한 위치를 기록
+    const touch = e.touches[0];
+    clientX = touch.clientX;
+    clientY = touch.clientY;
+    item.style.position = 'absolute';
+    item.style.left = `${clientX - item.offsetWidth / 2 + window.scrollX}px`;
+    item.style.top = `${clientY - item.offsetHeight / 2 + window.scrollY}px`;
 
-    // 터치 이벤트 추가
-    let isDragging = false;
+    // 스크롤 방지
+    e.preventDefault();
+}, { passive: false }); // passive: false로 스크롤 방지
 
-    // 터치 위치
-    let clientX;
-    let clientY;
-
-    // 터치 시작
-    item.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        e.target.classList.add("dragging");
-        
-        // 터치한 위치를 기록
+// 터치 이동
+item.addEventListener('touchmove', (e) => {
+    if (isDragging) {
         const touch = e.touches[0];
-        clientX = touch.clientX;
-        clientY = touch.clientY;
-        item.style.position = 'absolute';
-        item.style.left = `${clientX - item.offsetWidth / 2 + window.scrollX}px`;
-        item.style.top = `${clientY - item.offsetHeight / 2 + window.scrollY}px`;
-    
-        // 스크롤 방지
+        item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollX}px`;
+        item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollY}px`;
+    }
+
+    // 스크롤 방지
+    e.preventDefault();
+}, { passive: false });
+
+// 터치 종료
+item.addEventListener('touchend', (e) => {
+    isDragging = false;
+    e.target.classList.remove("dragging");
+
+    // 터치 종료 시 드롭 위치 확인
+    const touch = e.changedTouches[0];
+    const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    // 정확한 위치 계산 후, 드롭 처리
+    if (dropTarget && dropTarget.closest('.drop_box')) {
+        dragBox.removeChild(item);
+        dropBox.appendChild(item);
+    } else if (dropTarget && dropTarget.closest('.drag_box')) {
+        dropBox.removeChild(item);
+        dragBox.appendChild(item);
+    }
+
+    // 아이템을 초기 위치로 되돌림
+    item.style.position = 'relative';
+    item.style.left = '0px';
+    item.style.top = '0px';
+
+    // 스크롤 방지
+    e.preventDefault();
+}, { passive: false });
+
+// 스크롤 방지 설정 (기본적인 모든 스크롤 방지)
+document.addEventListener('touchmove', function(e) {
+    if (isDragging) {
         e.preventDefault();
-    });
-
-    // 터치 이동
-    item.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-            const touch = e.touches[0];
-            item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollX}px`;
-            item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollY}px`;
-        }
-    
-        // 스크롤 방지
-        e.preventDefault();
-    });
-
-    // 터치 종료
-    item.addEventListener('touchend', (e) => {
-        isDragging = false;
-        e.target.classList.remove("dragging");
-
-        // 터치 종료 시 드롭 위치 확인
-        const touch = e.changedTouches[0];
-        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
-
-        // 정확한 위치 계산 후, 드롭 처리
-        if (dropTarget && dropTarget.closest('.drop_box')) {
-            dragBox.removeChild(item);
-            dropBox.appendChild(item);
-        } else if (dropTarget && dropTarget.closest('.drag_box')) {
-            dropBox.removeChild(item);
-            dragBox.appendChild(item);
-        }
-
-        // 아이템을 초기 위치로 되돌림
-        item.style.position = 'relative';
-        item.style.left = '0px';
-        item.style.top = '0px';
-    
-        // 스크롤 방지
-        e.preventDefault();
-    });
+    }
+}, { passive: false });
 
 /*
 touchstart 이벤트: 터치가 시작되면 touchstart 이벤트가 발생하고, 이때 dragging 클래스를 추가하며, 아이템의 위치를 터치한 곳으로 이동시킵니다.
@@ -194,6 +201,16 @@ touchend 이벤트: 터치가 종료되면 touchend 이벤트가 발생하고, �
 
 추가 고려사항:
 만약 드래그하는 동안 화면의 스크롤 위치가 변경된다면, window.scrollX 및 window.scrollY 값을 더해줘야 하니 이 부분도 고려해 주세요.
+
+{ passive: false } 옵션 추가:
+touchstart, touchmove, touchend 이벤트 핸들러에 { passive: false } 옵션을 추가하여 스크롤 방지를 명확하게 설정했습니다. 이 옵션을 사용하면, 기본 스크롤 동작을 막는 데 더 효과적입니다.
+드롭 타겟 확인:
+
+dropTarget.closest('.drop_box')를 사용하여 터치 종료 시점에서의 드롭 위치를 더 정확하게 확인합니다.
+이 방법을 통해 드롭 위치에 따라 아이템이 drop_box 또는 drag_box로 이동하게 됩니다.
+
+스크롤 방지 전체 설정:
+전체 페이지에 대해 터치 시 스크롤이 발생하지 않도록 하기 위해 document.addEventListener('touchmove')를 사용했습니다. 드래그 중일 때만 스크롤을 방지합니다.
 */
 </script>
                 </div>
