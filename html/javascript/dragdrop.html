@@ -133,15 +133,15 @@
         const touch = e.touches[0];
         item.style.position = 'absolute';
         item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
-        item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
+        item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollX}px`;
     });
 
     // 터치 이동
     item.addEventListener('touchmove', (e) => {
         if (isDragging) {
             const touch = e.touches[0];
-            item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
-            item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
+            item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
+            item.style.top = `${touch.clientY - item.offsetHeight / 2 + window.scrollX}px`;
         }
     });
 
