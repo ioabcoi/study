@@ -122,7 +122,7 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true"><img src="../../images/shovel.png" alt="삽" /></button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -223,7 +223,7 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         // 터치한 위치를 기록
         const touch = e.touches[0];
         item.style.position = 'absolute';
-        item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+        item.style.left = `${touch.clientX - item.offsetWidth / 2 + window.scrollY}px`;
         item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
     });
 
