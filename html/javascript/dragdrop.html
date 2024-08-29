@@ -32,7 +32,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">itemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -135,9 +135,6 @@ dropBox.addEventListener('drop', (e) => {
 // 터치 이벤트 추가
 let isDragging = false;
 
-let clientX;
-let clientY;
-
 // 터치 시작
 item.addEventListener('touchstart', (e) => {
     isDragging = true;
@@ -145,25 +142,25 @@ item.addEventListener('touchstart', (e) => {
     
     // 터치한 위치를 기록
     const touch = e.touches[0];
-    clientX = touch.clientX - item.offsetLeft;
-    clientY = touch.clientY - item.offsetTop;
     item.style.position = 'absolute';
+    item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+    item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
 
     // 스크롤 방지
     e.preventDefault();
-}, { passive: false });
+});
 
 // 터치 이동
 item.addEventListener('touchmove', (e) => {
     if (isDragging) {
         const touch = e.touches[0];
-        item.style.left = `${touch.clientX - clientX}px`;
-        item.style.top = `${touch.clientY - clientY}px`;
+        item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+        item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
     }
 
     // 스크롤 방지
     e.preventDefault();
-}, { passive: false });
+});
 
 // 터치 종료
 item.addEventListener('touchend', (e) => {
@@ -174,11 +171,10 @@ item.addEventListener('touchend', (e) => {
     const touch = e.changedTouches[0];
     const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
 
-    // 정확한 위치 계산 후, 드롭 처리
-    if (dropTarget && dropTarget.closest('.drop_box')) {
+    if (dropTarget === dropBox) {
         dragBox.removeChild(item);
         dropBox.appendChild(item);
-    } else if (dropTarget && dropTarget.closest('.drag_box')) {
+    } else if (dropTarget === dragBox) {
         dropBox.removeChild(item);
         dragBox.appendChild(item);
     }
@@ -190,7 +186,7 @@ item.addEventListener('touchend', (e) => {
 
     // 스크롤 방지
     e.preventDefault();
-}, { passive: false });
+});
 
 /*
 touchstart 이벤트: 터치가 시작되면 touchstart 이벤트가 발생하고, 이때 dragging 클래스를 추가하며, 아이템의 위치를 터치한 곳으로 이동시킵니다.
