@@ -14,97 +14,6 @@
         <h1>dragdrop</h1>
 
         <!-- code_area -->
-        <div class="code_tit">description</div>
-        <div class="code_area" data-style="vertical">
-            <!-- code_ui -->
-            <div class="code_ui">
-                <div class="code_ui_box">
-
-<!-- 출처 : https://inpa.tistory.com/entry/드래그-앤-드롭-Drag-Drop-기능 -->
-<!-- 
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event 
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
-https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
-
-
-<a>는 기본적으로 드래그 가능
-
-
-dragstart   1. 사용자가 객체(object)를 드래그하려고 시작할 때 발생함.
-            드래그가 시작되는 순간 발생
-
-drag        2. 대상 객체를 드래그하면서 마우스를 움직일 때 발생함.
-            요소를 드래그할 때 발생
-
-dragenter   3. 마우스가 대상 객체의 위로 처음 진입할 때 발생함.
-            해당 이벤트를 지정한 요소에 드래그한 아이템이 들어가면 발생
-            드래그하는 요소가 dragenter 이벤트를 달아놓은 요소 안에 진입했을 때 발생
-
-dragover    4. 드래그하면서 마우스가 대상 객체의 영역 위에 자리 잡고 있을 때 발생함.
-            이 이벤트가 달린 영역 위에 드래그 요소가 있으면 발생
-
-drop        5. 드래그가 끝나서 드래그하던 객체를 놓는 장소에 위치한 객체에서 발생함. 리스너는 드래그된 데이터를 가져와서 드롭 위치에 놓는 역할을 함
-            이 이벤트가 달린 요소에 드래그를 끝내면 발생 (dragover랑 같이 써야함)
-            drop 이벤트 역시 드롭될 요소에는 e.preventDefault()를 사용하지 않으면 정상적인 동작이 되지 않을 수 있으므로이벤트에 preventDefault() 코드를 작성하는 것이 좋다.
-            단독으로 사용했을 때는 동작을 하지 않았고 dragover이벤트와 함께 사용했을 때 비로소 동작이 된다.
-
-dragleave   6. 드래그가 끝나서 마우스가 대상 객체의 위에서 벗어날 때 발생함.
-            dragexit 이벤트 대신 사용.
-            어떤 요소든 드래그되고 있다면 이 이벤트가 달린 요소에 들어갔다가 나가는 시점에 발생하는 이벤트
-            dragenter 이벤트와 동작이 겹칠수 있기 때문에 e.preventDefault() 로 제한하며 둘이 결합하여 사용함
-
-dragend     7. 대상 객체를 드래그하다가 마우스 버튼을 놓는 순간 발생함.
-            요소의 드래그가 끝날때 발생(드래그 도중에 마우스 버튼을 아무데나 놓으면)
-
-drop, dragover 이벤트는 필수로 사용해야 하는 이벤트
-dragover 이벤트를 적용하지 않으면 drop 이벤트가 작동하지 않음
-
-기본적으로 HTML 요소는 다른 요소의 위에 위치할 수 없다. 
-따라서 다른 요소 위에 위치할 수 있도록 만들기 위해서는 놓일 장소에 있는 요소의 기본 동작을 막아야만 한다. 
-이 작업을 event.preventDefault() 메소드를 호출하는 것만으로 간단히 설정할 수 있다.
-
-
-DataTransfer 객체
-드래그 앤 드롭 이벤트를 위한 모든 이벤트 리스너 메소드(event listener method)는 DataTransfer 객체를 반환한다.
-이렇게 반환된 DataTransfer 객체는 드래그 앤 드롭 동작에 관한 정보를 가지고 있다. 
-event.dataTransfer
-데이터를 저장 및 가져오기, 삭제를 수행할 수 있는 표준 메소드를 가지고 있다.
-
-event.dataTransfer.setData(format,data)
-첫번째 매개변수로 포맷 문자열을 지정.
-첫번째 매개변수에 지정한 포맷과 일치하는 값을 두번째 매개변수로 지정.
-두번째 매개변수로는 문자열만 지정 가능
-
-event.dataTransfer.getData(format)
-첫번째 매개변수에 지정한 포맷의 전송 데이터를 반환.
-지정된 포맷의 데이터가 지정되어 있지 않으면 공백 문자열을 반환
-
-event.dataTransfer.clearData()
-event.dataTransfer.clearData(format)
-데이터 전송용으로 지정된 데이터를 모두 제거.
-첫번째 매개변수로 포맷 문자열을 지정하면 해당 형식과 일치하는 데이터만을 제거.
-
-event.dataTransfer.types
-dragstart 이벤트 발생시 DOM 목록에 있는 data format 을 설정하며
-setData 함수를 호출할때 지정되는 format 문자열을 배열형식으로 얻을 수 있다.
-
-요소를 마우스로 드래그하면 그 요소의 모습이 고스트 이미지(ghost image) 로서 커서에 딸려 나온다. 
-이 드래그 이미지를 DataTransfer.setDragImage() 메서드를 통해 사용자 커스텀이 가능하다.
--->
-                </div>
-            </div>
-            <!-- // code_ui -->
-            <!-- code_view -->
-            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
-            <!-- // code_view -->
-        </div>
-        <!-- // code_area -->
-
-        <!-- code_area -->
         <div class="code_tit">drag_drop (pc/mo)</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
@@ -265,6 +174,97 @@ touchmove 이벤트: 터치가 이동할 때 touchmove 이벤트가 발생하며
 touchend 이벤트: 터치가 종료되면 touchend 이벤트가 발생하고, 드래그가 끝난 위치에서 드롭 위치를 확인한 후 해당 위치에 아이템을 이동시킵니다. 아이템 위치를 초기화합니다.
 */
 </script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">description</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+
+<!-- 출처 : https://inpa.tistory.com/entry/드래그-앤-드롭-Drag-Drop-기능 -->
+<!-- 
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragstart_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drag_event 
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragenter_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragover_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragleave_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/drop_event
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dragend_event
+
+
+<a>는 기본적으로 드래그 가능
+
+
+dragstart   1. 사용자가 객체(object)를 드래그하려고 시작할 때 발생함.
+            드래그가 시작되는 순간 발생
+
+drag        2. 대상 객체를 드래그하면서 마우스를 움직일 때 발생함.
+            요소를 드래그할 때 발생
+
+dragenter   3. 마우스가 대상 객체의 위로 처음 진입할 때 발생함.
+            해당 이벤트를 지정한 요소에 드래그한 아이템이 들어가면 발생
+            드래그하는 요소가 dragenter 이벤트를 달아놓은 요소 안에 진입했을 때 발생
+
+dragover    4. 드래그하면서 마우스가 대상 객체의 영역 위에 자리 잡고 있을 때 발생함.
+            이 이벤트가 달린 영역 위에 드래그 요소가 있으면 발생
+
+drop        5. 드래그가 끝나서 드래그하던 객체를 놓는 장소에 위치한 객체에서 발생함. 리스너는 드래그된 데이터를 가져와서 드롭 위치에 놓는 역할을 함
+            이 이벤트가 달린 요소에 드래그를 끝내면 발생 (dragover랑 같이 써야함)
+            drop 이벤트 역시 드롭될 요소에는 e.preventDefault()를 사용하지 않으면 정상적인 동작이 되지 않을 수 있으므로이벤트에 preventDefault() 코드를 작성하는 것이 좋다.
+            단독으로 사용했을 때는 동작을 하지 않았고 dragover이벤트와 함께 사용했을 때 비로소 동작이 된다.
+
+dragleave   6. 드래그가 끝나서 마우스가 대상 객체의 위에서 벗어날 때 발생함.
+            dragexit 이벤트 대신 사용.
+            어떤 요소든 드래그되고 있다면 이 이벤트가 달린 요소에 들어갔다가 나가는 시점에 발생하는 이벤트
+            dragenter 이벤트와 동작이 겹칠수 있기 때문에 e.preventDefault() 로 제한하며 둘이 결합하여 사용함
+
+dragend     7. 대상 객체를 드래그하다가 마우스 버튼을 놓는 순간 발생함.
+            요소의 드래그가 끝날때 발생(드래그 도중에 마우스 버튼을 아무데나 놓으면)
+
+drop, dragover 이벤트는 필수로 사용해야 하는 이벤트
+dragover 이벤트를 적용하지 않으면 drop 이벤트가 작동하지 않음
+
+기본적으로 HTML 요소는 다른 요소의 위에 위치할 수 없다. 
+따라서 다른 요소 위에 위치할 수 있도록 만들기 위해서는 놓일 장소에 있는 요소의 기본 동작을 막아야만 한다. 
+이 작업을 event.preventDefault() 메소드를 호출하는 것만으로 간단히 설정할 수 있다.
+
+
+DataTransfer 객체
+드래그 앤 드롭 이벤트를 위한 모든 이벤트 리스너 메소드(event listener method)는 DataTransfer 객체를 반환한다.
+이렇게 반환된 DataTransfer 객체는 드래그 앤 드롭 동작에 관한 정보를 가지고 있다. 
+event.dataTransfer
+데이터를 저장 및 가져오기, 삭제를 수행할 수 있는 표준 메소드를 가지고 있다.
+
+event.dataTransfer.setData(format,data)
+첫번째 매개변수로 포맷 문자열을 지정.
+첫번째 매개변수에 지정한 포맷과 일치하는 값을 두번째 매개변수로 지정.
+두번째 매개변수로는 문자열만 지정 가능
+
+event.dataTransfer.getData(format)
+첫번째 매개변수에 지정한 포맷의 전송 데이터를 반환.
+지정된 포맷의 데이터가 지정되어 있지 않으면 공백 문자열을 반환
+
+event.dataTransfer.clearData()
+event.dataTransfer.clearData(format)
+데이터 전송용으로 지정된 데이터를 모두 제거.
+첫번째 매개변수로 포맷 문자열을 지정하면 해당 형식과 일치하는 데이터만을 제거.
+
+event.dataTransfer.types
+dragstart 이벤트 발생시 DOM 목록에 있는 data format 을 설정하며
+setData 함수를 호출할때 지정되는 format 문자열을 배열형식으로 얻을 수 있다.
+
+요소를 마우스로 드래그하면 그 요소의 모습이 고스트 이미지(ghost image) 로서 커서에 딸려 나온다. 
+이 드래그 이미지를 DataTransfer.setDragImage() 메서드를 통해 사용자 커스텀이 가능하다.
+-->
                 </div>
             </div>
             <!-- // code_ui -->
