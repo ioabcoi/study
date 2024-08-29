@@ -21,7 +21,7 @@
                 <div class="code_ui_box">
 <style type="text/css">
     .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
-    .container button {width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
+    .container button {display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
     .container .draggable.dragging {opacity:0.5;}
 </style>
 <div class="container">
@@ -101,6 +101,9 @@ draggables.forEach(draggable => {
         draggable.style.position = 'absolute';
         draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
         draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
+
+        // 스크롤 방지
+        e.preventDefault();
     });
 
     // 터치 이동
@@ -121,6 +124,9 @@ draggables.forEach(draggable => {
                     }
                 }
             });
+
+            // 스크롤 방지
+            e.preventDefault();
         }
     });
 
@@ -133,6 +139,9 @@ draggables.forEach(draggable => {
         draggable.style.position = 'relative';
         draggable.style.left = '0px';
         draggable.style.top = '0px';
+
+        // 스크롤 방지
+        e.preventDefault();
     });
 });
 
