@@ -27,11 +27,12 @@
     .drag_drop .drag_box.dragover {background:#00f;}
     .drag_drop .drop_box {display:flex;align-items:center;justify-content:center;width:100%;height:300px;background:#ff0;}
     .drag_drop .drop_box.dragover {background:#0f0;}
+    .drag_drop .dragging {opacity:0.5;} /* 드래그 중인 아이템의 투명도 조정 */
 </style>
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">itemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -44,6 +45,16 @@ item.addEventListener('dragstart', (e) => {
     // e.preventDefault();
     e.target.classList.add("dragging");
     // console.log('요소를 드래그를 시작하면 발생하는 이벤트');
+    
+    // 드래그 시작 시 텍스트 데이터를 전송 데이터에 추가
+    e.dataTransfer.setData('text/plain', e.target.textContent);
+
+    // 만약 이미지가 포함된 버튼이라면, 이미지를 설정할 수 있음
+    // if (e.target.classList.contains('image')) {
+    //     const img = new Image();
+    //     img.src = "../../images/snoopy.png";
+    //     e.dataTransfer.setDragImage(img, 60, 80);
+    // }
 
     if (e.target.classList.contains('image')) {
         const img = document.createElement("img");
@@ -124,9 +135,8 @@ dropBox.addEventListener('drop', (e) => {
 // 터치 이벤트 추가
 let isDragging = false;
 
-// 터치 시작 위치
-let startX;
-let startY;
+let clientX;
+let clientY;
 
 // 터치 시작
 item.addEventListener('touchstart', (e) => {
@@ -135,9 +145,11 @@ item.addEventListener('touchstart', (e) => {
     
     // 터치한 위치를 기록
     const touch = e.touches[0];
-    startX = touch.clientX - item.offsetLeft;
-    startY = touch.clientY - item.offsetTop;
+    clientX = touch.clientX;
+    clientY = touch.clientY;
     item.style.position = 'absolute';
+    item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+    item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
 
     // 스크롤 방지
     e.preventDefault();
@@ -147,8 +159,8 @@ item.addEventListener('touchstart', (e) => {
 item.addEventListener('touchmove', (e) => {
     if (isDragging) {
         const touch = e.touches[0];
-        item.style.left = `${touch.clientX - startX}px`;
-        item.style.top = `${touch.clientY - startY}px`;
+        item.style.left = `${touch.clientX - item.offsetWidth / 2}px`;
+        item.style.top = `${touch.clientY - item.offsetHeight / 2}px`;
     }
 
     // 스크롤 방지
@@ -210,13 +222,37 @@ touchend 이벤트: 터치가 종료되면 touchend 이벤트가 발생하고, �
 window.scrollX와 window.scrollY를 제거한 이유**: 만약 요소의 위치 계산에서 이 스크롤 값을 반영할 필요가 없다면, 
 오히려 터치 좌표가 이상하게 보정될 수 있습니다. 이 경우 원래의 코드로 돌아가는 것이 더 정확한 위치 계산을 제공할 수 있습니다.
 
-+ 
-startX 및 startY: 터치 시작 시에 clientX와 clientY 값을 item.offsetLeft 및 item.offsetTop으로 보정했습니다. 이 값들을 기록하여, touchmove 시에 아이템의 이동이 터치한 곳에서의 상대적인 위치를 유지할 수 있도록 합니다.
-item.style.left 및 item.style.top: 터치한 곳에서 시작한 위치와 현재 터치 위치 간의 차이(startX, startY)를 사용하여 정확하게 드래그 위치를 설정합니다.
-
 +
+<button class="item image" draggable="true"><img></button> 버튼 안에 이미지로 넣었을 땐, 처음부터 잘 작동했는데,
+<button class="item image" draggable="true">item</button> 이렇게 텍스트로 넣으면 이상한데 왜 차이가 있는거야?
 
+버튼 안에 이미지(img 태그)로 넣었을 때와 텍스트로 넣었을 때 드래그 동작이 다르게 작동하는 이유는 브라우저가 이미지와 텍스트를 처리하는 방식의 차이 때문입니다.
 
+이미지 요소: 브라우저가 자동으로 드래그 앤 드롭을 처리해 주므로 추가 설정이 필요 없었습니다.
+텍스트나 다른 요소: dataTransfer.setData로 명시적으로 데이터를 설정해야 드래그 앤 드롭이 정상적으로 작동합니다.
+
+차이점의 원인:
+    기본 드래그 동작:
+        이미지 (<img> 태그): 대부분의 브라우저는 이미지에 대해 기본적으로 드래그 앤 드롭 기능을 지원합니다. 
+        img 태그 자체가 드래그 가능한 요소로 인식되기 때문에, 이미지가 버튼 안에 있어도 브라우저는 이를 드래그할 수 있는 요소로 자동 인식하여 기본적으로 잘 작동합니다.
+        텍스트: 텍스트는 이미지와 달리, 기본적으로 드래그 앤 드롭이 가능한 요소가 아닙니다. 
+        브라우저는 텍스트를 드래그할 때 그저 텍스트 선택으로 처리하려고 할 수 있으며, 이는 우리가 원하는 드래그 앤 드롭 동작과는 다릅니다.
+    데이터 전송 방식:
+        이미지를 드래그할 때 브라우저는 자동으로 이미지 데이터를 dataTransfer 객체에 포함시켜 전송할 준비를 합니다. 
+        하지만 텍스트는 기본적으로 드래그 앤 드롭에 포함되지 않으므로, 추가적으로 설정이 필요합니다.
+
+해결 방법:
+    텍스트를 포함한 버튼도 이미지와 같은 방식으로 정상적으로 드래그 앤 드롭이 작동하도록 하려면, 몇 가지 조정을 해야 합니다.
+
+1. 기본 dataTransfer 설정 추가:
+드래그 시작 시, 텍스트도 dataTransfer 객체에 명시적으로 포함되도록 설정합니다.
+// 드래그 시작 시 텍스트 데이터를 전송 데이터에 추가
+e.dataTransfer.setData('text/plain', e.target.textContent);
+
+2. 스타일 및 레이아웃 고려:
+텍스트를 드래그할 때, 특히 드래그 이미지 설정이나 스타일이 맞지 않는 경우, 예상치 못한 위치에서 드래그 이미지가 표시될 수 있습니다. 
+이럴 때는 setDragImage() 메서드로 원하는 드래그 이미지를 설정하거나, 텍스트를 드래그할 때의 스타일을 조정하는 것이 필요할 수 있습니다.
+.drag_drop .dragging {opacity:0.5;}
 */
 </script>
                 </div>
@@ -309,6 +345,12 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
 
 요소를 마우스로 드래그하면 그 요소의 모습이 고스트 이미지(ghost image) 로서 커서에 딸려 나온다. 
 이 드래그 이미지를 DataTransfer.setDragImage() 메서드를 통해 사용자 커스텀이 가능하다.
+
+결론:
+이미지(img 태그)는 브라우저에서 기본적으로 드래그 앤 드롭이 지원되므로 별도의 설정이 필요 없지만, 
+텍스트나 다른 HTML 요소는 기본적으로 드래그 앤 드롭에 포함되지 않을 수 있습니다.
+이를 해결하기 위해 드래그 시작 시 dataTransfer.setData를 명시적으로 설정하고, 스타일 및 레이아웃을 적절히 조정해 주면, 
+이미지와 텍스트가 일관되게 작동하도록 할 수 있습니다.
 -->
                 </div>
             </div>
