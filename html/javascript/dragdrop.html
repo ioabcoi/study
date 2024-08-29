@@ -31,7 +31,7 @@
 <div class="drag_drop">
     <div class="drag_box">
         drag_box
-        <button class="item image" draggable="true">item</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
+        <button class="item image" draggable="true">itemitemitem</button><!-- 드래그 이벤트가 발생할 요소에 draggable="true" 추가 -->
     </div>
     <div class="drop_box">
         drop_box
@@ -164,16 +164,13 @@
 
         // 터치 종료 시 드롭 위치 확인
         const touch = e.changedTouches[0];
-        let deltaX;
-        let deltaY;
-        deltaX = touch.clientX - clientX;
-        deltaY = touch.clientY - clientY;
-        const dropTarget = document.elementFromPoint(deltaX, deltaY);
+        const dropTarget = document.elementFromPoint(touch.clientX, touch.clientY);
 
-        if (dropTarget === dropBox) {
+        // 정확한 위치 계산 후, 드롭 처리
+        if (dropTarget && dropTarget.closest('.drop_box')) {
             dragBox.removeChild(item);
             dropBox.appendChild(item);
-        } else if (dropTarget === dragBox) {
+        } else if (dropTarget && dropTarget.closest('.drag_box')) {
             dropBox.removeChild(item);
             dragBox.appendChild(item);
         }
@@ -191,6 +188,12 @@
 touchstart 이벤트: 터치가 시작되면 touchstart 이벤트가 발생하고, 이때 dragging 클래스를 추가하며, 아이템의 위치를 터치한 곳으로 이동시킵니다.
 touchmove 이벤트: 터치가 이동할 때 touchmove 이벤트가 발생하며, 터치 위치에 따라 아이템을 계속 이동시킵니다.
 touchend 이벤트: 터치가 종료되면 touchend 이벤트가 발생하고, 드래그가 끝난 위치에서 드롭 위치를 확인한 후 해당 위치에 아이템을 이동시킵니다. 아이템 위치를 초기화합니다.
+
+드롭 위치 확인: touchend 이벤트에서 elementFromPoint 함수의 좌표 계산을 수정했습니다. 터치 이벤트의 clientX와 clientY를 그대로 사용하여 정확한 위치를 찾습니다.
+드롭 타겟 확인: dropTarget.closest()를 사용해 드롭 위치를 좀 더 확실하게 확인합니다. 이 방법은 drop_box 또는 drag_box 내에 있는지 확인하는 데 유용합니다.
+
+추가 고려사항:
+만약 드래그하는 동안 화면의 스크롤 위치가 변경된다면, window.scrollX 및 window.scrollY 값을 더해줘야 하니 이 부분도 고려해 주세요.
 */
 </script>
                 </div>
