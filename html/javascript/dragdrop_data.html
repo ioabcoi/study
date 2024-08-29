@@ -38,6 +38,8 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
 // 데스크탑용 드래그 이벤트
 document.getElementById('drag').ondragstart = function(e) {
     console.log('드래그 시작');
+    
+    // e.dataTransfer.setData('text/plain', e.target.textContent); // 드래그 시작 시 텍스트 데이터를 전송 데이터에 추가
     e.dataTransfer.setData('data', this.innerHTML);
     e.dataTransfer.dropEffect = 'copy';
 };

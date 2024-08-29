@@ -110,6 +110,13 @@ img {vertical-align:top;}
     <!-- // mission_wood -->
 </div>
 <script>
+/*
+item 이 이미지일 경우, 드래그가 기본적으로 제공되어서 drag/drop 이벤트로 작성하면 되는데, 
+item 이 텍스트일 경우, 드래그가 제공되지 않아서 touch 이벤트로 drag/drop 을 구현해 주어야 함.
+참고 페이지 : dragdrop.html
+가능하면 이미지로 구현하도록..!!!
+*/
+
 // drag_drop
 const item = document.querySelector('.drag_box .item');
 const dragBox = document.querySelector('.drag_drop .drag_box');

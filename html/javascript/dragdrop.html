@@ -168,33 +168,6 @@ item.addEventListener('touchmove', (e) => {
     e.preventDefault();
 });
 
-// // 터치 종료
-// item.addEventListener('touchend', (e) => {
-//     isDragging = false;
-//     e.target.classList.remove("dragging");
-
-//     // 터치 종료 시 드롭 위치 확인
-//     const touch = e.changedTouches[0];
-//     const dropTarget = document.elementFromPoint(touch.clientX + window.scrollX, touch.clientY + window.scrollY);
-//     alert(dropTarget, dropTarget.closest('.drop_box'));
-
-//     if (dropTarget && dropTarget.closest('.drop_box')) {        
-//         dragBox.removeChild(item);
-//         dropBox.appendChild(item);
-//     } else if (dropTarget && dropTarget.closest('.drag_box')) {
-//         dropBox.removeChild(item);
-//         dragBox.appendChild(item);
-//     }
-
-//     // 아이템을 초기 위치로 되돌림
-//     item.style.position = 'relative';
-//     item.style.left = '0px';
-//     item.style.top = '0px';
-
-//     // 스크롤 방지
-//     e.preventDefault();
-// });
-
 // 터치 종료
 item.addEventListener('touchend', (e) => {
     isDragging = false;
@@ -314,7 +287,16 @@ touchend 했을 때에도 item 의 위치는 맞는 것 같은데
 특히, elementFromPoint 메서드를 사용하여 터치 종료 시 위치를 확인할 때, 스크롤이나 화면 비율에 의해 정확한 요소가 인식되지 않는 경우가 생길 수 있습니다.
 이를 해결하기 위해, elementFromPoint 대신 터치 종료 시점의 좌표와 박스의 위치를 직접 비교하는 방식으로 구현할 수 있습니다. 아래는 수정된 코드입니다:
 
+직접 좌표 계산: elementFromPoint 대신, 터치한 좌표(touchX, touchY)를 getBoundingClientRect()로 구한 박스의 좌표와 비교하여 터치 위치가 박스 내에 있는지 확인합니다. 이렇게 하면 화면의 스크롤 상태나 다른 좌표 계산 오류를 줄일 수 있습니다.
+명확한 조건 처리: 터치한 위치가 drag_box 또는 drop_box의 영역 내에 있을 경우에만 해당 박스에 아이템을 추가하도록 하여 정확성을 높입니다.
 
++
+원래 위치로 돌아간 경우에 removeChild가 발생하지 않도록 하기 위해, 터치 시작 시의 박스(drag_box 또는 drop_box)를 기록하고, 
+터치 종료 시 해당 박스와 비교하여 동일한 박스라면 removeChild를 하지 않도록 추가 조건을 구현할 수 있습니다.
+
+initialParent 저장: 터치 시작 시(touchstart 이벤트) 아이템의 현재 부모 요소(박스)를 initialParent 변수에 저장합니다.
+비교 조건 추가: 터치 종료 시(touchend 이벤트) 드롭하려는 박스가 터치 시작 시의 initialParent와 같은지 확인합니다.
+만약 같다면 removeChild 및 appendChild를 수행하지 않아, 원래 위치에서 움직이지 않도록 합니다.
 */
 </script>
                 </div>

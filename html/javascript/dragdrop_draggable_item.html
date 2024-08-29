@@ -99,16 +99,16 @@ draggables.forEach(draggable => {
         // 터치한 위치에 따라 요소의 이동 시작
         const touch = e.touches[0];
         draggable.style.position = 'absolute';
-        draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2}px`;
-        draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2}px`;
+        draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
+        draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
     });
 
     // 터치 이동
     draggable.addEventListener("touchmove", (e) => {
         if (isDragging) {
             const touch = e.touches[0];
-            draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2}px`;
-            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2}px`;
+            draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
+            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
 
             // 드래그 중간 상태를 체크하여 컨테이너 내부에서 아이템 위치 계산
             containers.forEach(container => {
