@@ -19,15 +19,10 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<!-- 
-dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
-setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
-dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
-drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
--->
+                    
 <style type="text/css">
     .ico_container {padding:20px;background:#f1f1f1;border:1px solid #ccc;}
-    .ico_container .draggable {display:flex;width:100%;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #ccc;font-size:20px;line-height:40px;cursor:move;}
+    .ico_container .draggable {display:flex;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #000;font-size:20px;line-height:40px;cursor:move;}
     .ico_container .draggable + .draggable {margin-top:-1px;}
     .ico_container .draggable.dragging {opacity:.5;border:2px dashed red;}
     .ico_container + .ico_container {margin-top:10px;}
@@ -61,13 +56,6 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
     </div>
 </div>
 <script type='text/javascript'>
-/*
-엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
-draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
-dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
-dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
-*/
-
 (() => {
     const $ = (select) => document.querySelectorAll(select);
     const draggables = $('.ico_container .draggable');
@@ -106,29 +94,26 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
             const afterElement = getDragAfterElement(container, e.clientY);
             const draggable = document.querySelector('.dragging')
             // container.appendChild(draggable)
-            container.insertBefore(draggable, afterElement)
+            // container.insertBefore(draggable, afterElement)
+
+            if (afterElement === undefined) {
+                container.appendChild(draggable);
+            } else {
+                container.insertBefore(draggable, afterElement);
+            }
         })
     });
 
     // 모바일 터치 이벤트 처리 추가
     draggables.forEach(draggable => {
         let isDragging = false; // 터치 드래그 상태 변수
-        let startY = 0;
-        let currentContainer = null; // 현재 컨테이너 참조 변수
+        let currentContainer = null;
 
         // 터치 시작
         draggable.addEventListener('touchstart', (e) => {
             isDragging = true;
-            startY = e.touches[0].clientY;
             draggable.classList.add('dragging');
-
-            // 터치한 위치에 따라 요소의 이동 시작
-            const touch = e.touches[0];
-            draggable.style.position = 'absolute';
-            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
-
-            // 현재 드래그 중인 요소가 속한 컨테이너를 저장
-            currentContainer = draggable.parentNode;
+            currentContainer = draggable.parentNode; // 드래그 시작 시 현재 컨테이너를 저장
 
             // 스크롤 방지
             e.preventDefault();
@@ -139,27 +124,23 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
             if (!isDragging) return;
 
             const currentY = e.touches[0].clientY;
-            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
-
-            // 현재 터치 위치에서 컨테이너를 감지
+            
+            // 현재 터치 위치에 있는 컨테이너를 찾음
             containers.forEach(container => {
                 const rect = container.getBoundingClientRect();
-                if (touch.clientY > rect.top && touch.clientY < rect.bottom) {
-                    currentContainer = container; // 현재 터치 위치에 해당하는 컨테이너로 업데이트
+                if (currentY > rect.top && currentY < rect.bottom) {
+                    currentContainer = container; // 새로운 컨테이너로 업데이트
                 }
             });
 
-            // const container = [...containers].find(container => container.contains(draggable));
-            if (currentContainer) {
-                const afterElement = getDragAfterElement(currentContainer, currentY);
-                if (afterElement === undefined) {
-                    currentContainer.appendChild(draggable);
-                } else {
-                    currentContainer.insertBefore(draggable, afterElement);
-                }
+            const afterElement = getDragAfterElement(currentContainer, currentY);
+            if (afterElement === undefined) {
+                currentContainer.appendChild(draggable);
+            } else {
+                currentContainer.insertBefore(draggable, afterElement);
             }
 
-            // 터치 시 위치 변경을 위해 preventDefault() 호출
+            // 스크롤 방지
             e.preventDefault();
         });
 
@@ -175,9 +156,30 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
 })();
 
 /*
+dragstart 이벤트핸들러에서 e.dataTransfer.setData로 전달할 데이터를 지정해준다. 
+setData는 키-값 형식으로 저장하기 때문에, 키만 다르면 여러 개의 데이터를 저장할 수 있다.
+dragover이벤트에서는 e.preventDefault()로 drop 이벤트가 호출될 수 있게 해주고
+drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
+
+엘리먼트의 .draggable, .container의 배열로 선택자를 지정합니다.
+draggables를 전체를 루프하면서 dragstart, dragend를 이벤트를 발생시킵니다.
+dragstart, dragend 이벤트를 발생할때 .dragging라는 클래스를 토글시킨다.
+dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 위치해놓은 Element를 리턴하는 함수를 만듭니다.
+
 터치 시작 (touchstart): 터치가 시작되면 isDragging 변수를 true로 설정하고, 터치 시작 위치를 기록하며, 드래그 중이라는 표시를 위해 .dragging 클래스를 추가합니다.
 터치 이동 (touchmove): 터치가 이동할 때마다 현재 터치 위치(currentY)를 계산하고, getDragAfterElement 함수를 사용하여 아이템을 새로운 위치에 삽입합니다. e.preventDefault()를 호출하여 기본 터치 스크롤 동작을 방지합니다.
 터치 종료 (touchend): 터치가 종료되면 드래그 상태를 false로 설정하고, .dragging 클래스를 제거하여 드래그 상태를 해제합니다.
+
++
+터치 이동 중 컨테이너 감지: touchmove 이벤트 내에서 터치의 Y좌표(currentY)를 이용해, 드래그 중인 요소가 위치한 컨테이너를 동적으로 감지합니다. 
+각 컨테이너의 getBoundingClientRect()를 사용해 현재 터치된 위치가 어떤 컨테이너에 속해 있는지 확인합니다.
+컨테이너 업데이트: 드래그 중에 터치 위치가 다른 컨테이너에 들어오면, 해당 컨테이너를 currentContainer로 업데이트합니다. 
+그런 다음, getDragAfterElement 함수를 이용해 드래그된 요소를 새로운 컨테이너 내에서 올바른 위치에 삽입합니다.
+기본 터치 동작 방지: 터치 이동 중에 스크롤이나 다른 기본 동작을 방지하기 위해 e.preventDefault()를 호출합니다.
+
++
+
+
 */
 </script>
                 </div>
