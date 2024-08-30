@@ -1,13 +1,101 @@
 @charset "utf-8";
 
-h1, h2, h3, h4, h5 {color:#000;font-size:12px;font-weight:700;}
+:root {
+    /* 색상 변수 */
+    --color-text-primary: #000;
+    --color-text-secondary: #666;
+    --color-bg-header: #eee;
+    --color-bg-light: #f9f9f9;
+    --color-border-light: #ccc;
+    --color-border-dark: #999;
 
-.wrap {flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:center;flex-direction:row;box-sizing:border-box;width:100%;padding:100px 0;color:#666;line-height:1.5;}
-.contents {padding:0 30px;}
-.contents h1 {padding:10px;background-color:#eee;font-size:18px;}
-.contents h2 {padding:5px;border-bottom:1px solid #ccc;font-size:15px;}
-.contents h3 {padding:5px;font-size:13px;}
-.contents h4 {padding:5px;}
-.contents .cont {margin:20px 0;padding:5px;border:1px solid #ccc;}
-.contents .txt_list {padding:5px;}
-.contents .txt_list li strong {font-weight:700;}
+    /* 폰트 크기 및 두께 */
+    --font-size-h1: 1.125rem;
+    /* 18px */
+    --font-size-h2: 0.9375rem;
+    /* 15px */
+    --font-size-h3: 0.8125rem;
+    /* 13px */
+    --font-size-h4: 0.75rem;
+    /* 12px */
+    --font-weight-bold: 700;
+
+    /* 패딩 및 마진 */
+    --padding-header: 0.625rem;
+    /* 10px */
+    --padding-subheader: 0.3125rem;
+    /* 5px */
+    --padding-content: 0.3125rem;
+    /* 5px */
+    --margin-content: 1.25rem;
+    /* 20px */
+    --padding-wrap: 6.25rem 0;
+    /* 100px 0 */
+
+    /* 기타 */
+    --line-height-default: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: var(--color-text-primary);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-bold);
+}
+
+.wrap {
+    flex-wrap: wrap;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    padding: var(--padding-wrap);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-default);
+}
+
+.contents {
+    padding: 0 1.875rem;
+    /* 30px */
+}
+
+.contents h1 {
+    padding: var(--padding-header);
+    background-color: var(--color-bg-header);
+    font-size: var(--font-size-h1);
+}
+
+.contents h2 {
+    padding: var(--padding-subheader);
+    border-bottom: 1px solid var(--color-border-light);
+    font-size: var(--font-size-h2);
+}
+
+.contents h3 {
+    padding: var(--padding-subheader);
+    font-size: var(--font-size-h3);
+}
+
+.contents h4 {
+    padding: var(--padding-subheader);
+    font-size: var(--font-size-h4);
+}
+
+.contents .cont {
+    margin: var(--margin-content);
+    padding: var(--padding-content);
+    border: 1px solid var(--color-border-light);
+}
+
+.contents .txt_list {
+    padding: var(--padding-content);
+}
+
+.contents .txt_list li strong {
+    font-weight: var(--font-weight-bold);
+}

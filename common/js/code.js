@@ -1,22 +1,25 @@
-// theme
-const button = document.createElement("button");
-button.innerHTML = "theme";
-button.classList.add("theme");
-if (document.body.querySelectorAll(".code_wrap").length > 0) {
-    document.querySelector(".code_wrap").prepend(button);
+// 테마 전환 버튼 생성 및 동작
+const themeButton = document.createElement("button");
+themeButton.textContent = "theme";
+themeButton.classList.add("theme");
+
+const codeWrap = document.querySelector(".code_wrap");
+if (codeWrap) {
+    codeWrap.prepend(themeButton);
 }
-button.addEventListener('click', function(e){
-    if (document.body.getAttribute("data-theme") === "light") {
-        document.body.setAttribute("data-theme", "dark");
-    } else {
-        document.body.setAttribute("data-theme", "light");
-    }
+
+themeButton.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute("data-theme");
+    const newTheme = currentTheme === "light" ? "dark" : "light";
+    document.body.setAttribute("data-theme", newTheme);
 });
 
-// code_copy
-let code_area = document.querySelectorAll(".code_area");
-code_area.forEach(function(target) {
-    const code_copy = target.querySelector(".code_ui .code_ui_box").innerHTML;
-    const code_paste = target.querySelector(".code_view .code_view_box .code_preview");
-    code_paste.insertAdjacentHTML("afterbegin", code_copy);
+// 코드 복사 및 붙여넣기
+document.querySelectorAll(".code_area").forEach(codeArea => {
+    const codeContent = codeArea.querySelector(".code_ui .code_ui_box").innerHTML;
+    const codePreview = codeArea.querySelector(".code_view .code_view_box .code_preview");
+    
+    if (codeContent && codePreview) {
+        codePreview.insertAdjacentHTML("afterbegin", codeContent);
+    }
 });

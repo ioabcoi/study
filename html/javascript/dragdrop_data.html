@@ -63,7 +63,7 @@ drop.ondrop = function(e) {
 
 // 모바일 터치 이벤트 처리 추가
 const drag = document.getElementById('drag');
-const dragClone = drag.clone();
+const dragClone = drag.clone(); // 드래그하면 드래그 요소 영역이 사라져버려서 터치하는 동안 복사해서 영역 유지시켜줌
 const isDragging = false; // 드래그 여부 확인 변수
 
 // 터치 시작
@@ -78,7 +78,7 @@ drag.addEventListener('touchstart', function(e) {
     drag.style.position = 'relative';
     drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
     drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
-    drop.prepend(dragClone);
+    drop.prepend(dragClone); // 드래그 요소를 드래그하는 동안 복사해서 영역 유지시켜줌
 
     // 스크롤 방지
     e.preventDefault();
@@ -114,7 +114,7 @@ drag.addEventListener('touchend', function(e) {
         if (dropTarget === drop) {
             // console.log('drop 영역에 드롭됨');
             consoleView.innerHTML = 'drop 영역에 드롭됨';
-            dragClone.remove();
+            dragClone.remove(); // 드롭되면 복사한 드래그 요소를 제거
             // alert(drag.innerHTML);
             alertView.innerHTML = drag.innerHTML;
         } else {

@@ -1,6 +1,6 @@
-# etc
+# my
 
-Link : [etc](url "etc")
+Link : [my](url "my")
 
 ```javascript
 ```

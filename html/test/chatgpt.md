@@ -1,6 +1,6 @@
-# openAI ChatGPT
+# chatgpt
 
-Link : [openAI ChatGPT]( "openAI ChatGPT")
+Link : [chatgpt]( "chatgpt")
 
 ### 
 ```javascript
