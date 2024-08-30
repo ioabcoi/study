@@ -54,7 +54,7 @@ document.getElementById('drag').ondragstart = function(e) {
     e.dataTransfer.dropEffect = 'copy';
 };
 
-var drop = document.getElementById('drop');
+const drop = document.getElementById('drop');
 drop.ondragover = function(e) {
     e.preventDefault(); // 필수
     // console.log('무언가 위에 올려져 있습니다');
@@ -70,8 +70,9 @@ drop.ondrop = function(e) {
 }
 
 // 모바일 터치 이벤트 처리 추가
-var drag = document.getElementById('drag');
-var isDragging = false; // 드래그 여부 확인 변수
+const drag = document.getElementById('drag');
+const dragClone = drag.clone();
+const isDragging = false; // 드래그 여부 확인 변수
 
 // 터치 시작
 drag.addEventListener('touchstart', function(e) {
@@ -85,6 +86,7 @@ drag.addEventListener('touchstart', function(e) {
     drag.style.position = 'relative';
     drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
     drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
+    drop.prepend(dragClone);
 
     // 스크롤 방지
     e.preventDefault();
@@ -120,6 +122,7 @@ drag.addEventListener('touchend', function(e) {
         if (dropTarget === drop) {
             // console.log('drop 영역에 드롭됨');
             consoleView.innerHTML = 'drop 영역에 드롭됨';
+            dragClone.remove();
             // alert(drag.innerHTML);
             alertView.innerHTML = drag.innerHTML;
         } else {
