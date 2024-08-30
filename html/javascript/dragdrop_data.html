@@ -22,10 +22,15 @@
 <style type="text/css">
     #drag {padding:20px;background:#eee;font-size:20px;}
     #drop {padding:20px;background:#999;font-size:20px;}
+    .console {padding:20px;background:#f9f9f9;font-size:12px;}
+    .alert {padding:20px;background:#f0f0f0;font-size:12px;}
 </style>
 <div>
     <p id="drag" draggable="true">드래그해보세요.</p>
     <div id="drop">여기에 드롭하세요</div>
+
+    <div class="console">console</div>
+    <div class="alert">alert</div>
 </div>
 <script type='text/javascript'>
 /*
@@ -37,9 +42,13 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
 https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect
 */
 
+const consoleView = document.querySelector('.console');
+const alertView = document.querySelector('.alert');
+
 // 데스크탑용 드래그 이벤트
 document.getElementById('drag').ondragstart = function(e) {
-    console.log('드래그 시작');
+    // console.log('드래그 시작');
+    consoleView.innerHTML = '드래그 시작';
     
     // e.dataTransfer.setData('text/plain', e.target.textContent); // 드래그 시작 시 텍스트 데이터를 전송 데이터에 추가
     e.dataTransfer.setData('data', this.innerHTML);
@@ -49,23 +58,27 @@ document.getElementById('drag').ondragstart = function(e) {
 var drop = document.getElementById('drop');
 drop.ondragover = function(e) {
     e.preventDefault(); // 필수
-    console.log('무언가 위에 올려져 있습니다');
+    // console.log('무언가 위에 올려져 있습니다');
+    consoleView.innerHTML = '무언가 위에 올려져 있습니다';
     e.dataTransfer.dropEffect = 'move';
 };
 
 drop.ondrop = function(e) {
-    console.log('무언가 드롭되었습니다.');
-    alert(e.dataTransfer.getData('data'));
+    // console.log('무언가 드롭되었습니다.');
+    consoleView.innerHTML = '무언가 드롭되었습니다';
+    // alert(e.dataTransfer.getData('data'));
+    alertView.innerHTML = e.dataTransfer.getData('data');
 }
 
-// 터치 이벤트를 위한 추가 코드
+// 모바일 터치 이벤트 처리 추가
 var drag = document.getElementById('drag');
 var isDragging = false; // 드래그 여부 확인 변수
 
 // 터치 시작
 drag.addEventListener('touchstart', function(e) {
     isDragging = true;
-    console.log('터치 시작');
+    // console.log('터치 시작');
+    consoleView.innerHTML = '터치 시작';
     
     // 터치한 위치를 기록
     const touch = e.touches[0];
@@ -77,7 +90,8 @@ drag.addEventListener('touchstart', function(e) {
 // 터치 이동
 drag.addEventListener('touchmove', function(e) {
     if (isDragging) {
-        console.log('터치 이동');
+        // console.log('터치 이동');
+        consoleView.innerHTML = '터치 이동';
         const touch = e.touches[0];
         drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
         drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
@@ -87,7 +101,8 @@ drag.addEventListener('touchmove', function(e) {
 // 터치 종료
 drag.addEventListener('touchend', function(e) {
     if (isDragging) {
-        console.log('터치 종료');
+        // console.log('터치 종료');
+        consoleView.innerHTML = '터치 종료';
         isDragging = false;
 
         // 터치 종료 시 드롭 위치 확인
@@ -96,10 +111,13 @@ drag.addEventListener('touchend', function(e) {
 
         // 드롭 대상이 drop 영역인지 확인
         if (dropTarget === drop) {
-            console.log('drop 영역에 드롭됨');
-            alert(drag.innerHTML);
+            // console.log('drop 영역에 드롭됨');
+            consoleView.innerHTML = 'drop 영역에 드롭됨';
+            // alert(drag.innerHTML);
+            alertView.innerHTML = drag.innerHTML;
         } else {
-            console.log('drop 영역이 아님');
+            // console.log('drop 영역이 아님');
+            consoleView.innerHTML = 'drop 영역이 아님';
         }
 
         // 아이템을 초기 위치로 되돌림
