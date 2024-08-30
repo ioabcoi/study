@@ -20,7 +20,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
+    .container {height:120px;margin:10px;padding:10px;background-color:blue;border-radius:8px;}
     .container button {display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
     .container .draggable.dragging {opacity:0.5;}
 </style>
@@ -47,6 +47,9 @@ const containers = document.querySelectorAll(".container");
 draggables.forEach(draggable => {
     draggable.addEventListener("dragstart", () => {
         draggable.classList.add("dragging");
+
+        // 드래그 시작 시 텍스트 데이터를 전송 데이터에 추가
+        e.dataTransfer.setData('text/plain', e.target.textContent);
     });
 
     draggable.addEventListener("dragend", () => {
