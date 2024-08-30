@@ -20,7 +20,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .container {height:120px;margin:10px;padding:10px;background-color:blue;border-radius:8px;}
+    .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
     .container button {display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
     .container .draggable.dragging {opacity:0.5;}
 </style>
@@ -97,6 +97,7 @@ function getDragAfterElement(container, x) {
 // 모바일 터치 이벤트 처리 추가
 draggables.forEach(draggable => {
     let isDragging = false; // 터치 드래그 상태 변수
+    let currentContainer = null; // 현재 컨테이너 참조 변수
 
     // 터치 시작
     draggable.addEventListener("touchstart", (e) => {
@@ -109,6 +110,9 @@ draggables.forEach(draggable => {
         draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
         draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
 
+        // 현재 드래그 중인 요소가 속한 컨테이너를 저장
+        currentContainer = draggable.parentNode;
+
         // 스크롤 방지
         e.preventDefault();
     });
@@ -120,12 +124,12 @@ draggables.forEach(draggable => {
             draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
             draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
 
-            const afterElement = getDragAfterElement(container, touch.clientX);
-            if (container.contains(draggable)) {
+            const afterElement = getDragAfterElement(currentContainer, touch.clientX);
+            if (currentContainer.contains(draggable)) {
                 if (afterElement === undefined) {
-                    container.appendChild(draggable);
+                    currentContainer.appendChild(draggable);
                 } else {
-                    container.insertBefore(draggable, afterElement);
+                    currentContainer.insertBefore(draggable, afterElement);
                 }
             }
         }
@@ -173,6 +177,23 @@ function getDragAfterElement(container, x) {
 터치 시작 (touchstart): 터치가 시작되면, isDragging 변수를 true로 설정하고, 아이템의 위치를 터치한 위치로 이동시킵니다.
 터치 이동 (touchmove): 터치가 이동할 때마다 아이템을 따라 움직이게 하고, 컨테이너 내부에서 다른 요소와의 위치를 계산하여 드래그 위치를 업데이트합니다.
 터치 종료 (touchend): 터치가 종료되면 isDragging 변수를 false로 설정하고, 아이템의 위치를 초기화하여 원래 위치로 되돌립니다.
+
++
+container 가 N 개일 때, touchstart 는 정상 작동 하는데 touchmove 내에 터치 이동할 때 item 위치가 안잡히느 것 같아
+
+지금 겪고 있는 문제는 touchmove 이벤트에서 container 변수가 제대로 참조되지 않아서 발생하는 것 같아요. 
+터치 이동 중에 드래그 중인 요소의 위치를 정확하게 계산하지 못하는 상황이죠.
+이를 해결하기 위해서는 터치가 시작될 때, 드래그 중인 요소가 속한 컨테이너(container)를 저장하고, 
+그 정보를 touchmove 이벤트 안에서 사용해야 합니다. 아래는 수정된 코드와 설명입니다:
+
+Touch Start (touchstart): 터치가 시작될 때 드래그 중인 요소가 속한 컨테이너를 currentContainer 변수에 저장합니다. 
+이를 통해 터치 이동 시 해당 컨테이너를 참조할 수 있게 됩니다.
+Touch Move (touchmove): 터치가 이동할 때 currentContainer를 사용해 드래그된 요소가 속한 컨테이너 내부에서 정확한 위치를 계산합니다. 
+이렇게 하면 요소의 위치가 올바르게 잡힐 것입니다.
+Touch End (touchend): 터치가 끝나면 드래그 중이던 요소의 위치를 초기화하여 원래 위치로 되돌립니다.
+
++
+
 */
 </script>
                 </div>
