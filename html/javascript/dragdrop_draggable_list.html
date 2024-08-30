@@ -27,7 +27,7 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
 -->
 <style type="text/css">
     .ico_container {padding:20px;background:#f1f1f1;border:1px solid #ccc;}
-    .ico_container .draggable {display:flex;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #000;font-size:20px;line-height:40px;cursor:move;}
+    .ico_container .draggable {display:flex;width:100%;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #ccc;font-size:20px;line-height:40px;cursor:move;}
     .ico_container .draggable + .draggable {margin-top:-1px;}
     .ico_container .draggable.dragging {opacity:.5;border:2px dashed red;}
     .ico_container + .ico_container {margin-top:10px;}
@@ -141,14 +141,21 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
             const currentY = e.touches[0].clientY;
             draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
 
-            const container = [...containers].find(container => container.contains(draggable));
+            // 현재 터치 위치에서 컨테이너를 감지
+            containers.forEach(container => {
+                const rect = container.getBoundingClientRect();
+                if (touch.clientY > rect.top && touch.clientY < rect.bottom) {
+                    currentContainer = container; // 현재 터치 위치에 해당하는 컨테이너로 업데이트
+                }
+            });
 
+            // const container = [...containers].find(container => container.contains(draggable));
             if (currentContainer) {
                 const afterElement = getDragAfterElement(currentContainer, currentY);
                 if (afterElement === undefined) {
-                    container.appendChild(draggable);
+                    currentContainer.appendChild(draggable);
                 } else {
-                    container.insertBefore(draggable, afterElement);
+                    currentContainer.insertBefore(draggable, afterElement);
                 }
             }
 
