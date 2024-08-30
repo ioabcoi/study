@@ -20,7 +20,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
+    .container {height:120px;margin:10px;padding:10px;background-color:darkgreen;border-radius:8px;}
     .container button {display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
     .container .draggable.dragging {opacity:0.5;}
 </style>
@@ -124,13 +124,20 @@ draggables.forEach(draggable => {
             draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
             draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
 
-            const afterElement = getDragAfterElement(currentContainer, touch.clientX);
-            if (currentContainer.contains(draggable)) {
-                if (afterElement === undefined) {
-                    currentContainer.appendChild(draggable);
-                } else {
-                    currentContainer.insertBefore(draggable, afterElement);
+            // 현재 터치 위치에서 컨테이너를 감지
+            containers.forEach(container => {
+                const rect = container.getBoundingClientRect();
+                if (touch.clientX > rect.left && touch.clientX < rect.right &&
+                    touch.clientY > rect.top && touch.clientY < rect.bottom) {
+                    currentContainer = container; // 현재 터치 위치에 해당하는 컨테이너로 업데이트
                 }
+            });
+
+            const afterElement = getDragAfterElement(currentContainer, touch.clientX);
+            if (afterElement === undefined) {
+                currentContainer.appendChild(draggable);
+            } else {
+                currentContainer.insertBefore(draggable, afterElement);
             }
         }
 
@@ -179,7 +186,7 @@ function getDragAfterElement(container, x) {
 터치 종료 (touchend): 터치가 종료되면 isDragging 변수를 false로 설정하고, 아이템의 위치를 초기화하여 원래 위치로 되돌립니다.
 
 +
-container 가 N 개일 때, touchstart 는 정상 작동 하는데 touchmove 내에 터치 이동할 때 item 위치가 안잡히느 것 같아
+container 가 N 개일 때, touchstart 는 정상 작동 하는데 touchmove 내에 터치 이동할 때 item 위치가 안잡히는 것 같아
 
 지금 겪고 있는 문제는 touchmove 이벤트에서 container 변수가 제대로 참조되지 않아서 발생하는 것 같아요. 
 터치 이동 중에 드래그 중인 요소의 위치를 정확하게 계산하지 못하는 상황이죠.
@@ -193,6 +200,16 @@ Touch Move (touchmove): 터치가 이동할 때 currentContainer를 사용해 �
 Touch End (touchend): 터치가 끝나면 드래그 중이던 요소의 위치를 초기화하여 원래 위치로 되돌립니다.
 
 +
+현재 드래그 중인 요소가 속한 컨테이너 내에서의 이동은 잘 작동하는데, 드래그 중인 요소가 속하지 않은 컨테이너로 이동할 때는 작동이 안돼
+
+Touch Move (touchmove)에서 컨테이너 감지: touchmove 이벤트에서 containers 배열을 순회하면서, 
+현재 터치된 위치(touch.clientX, touch.clientY)에 해당하는 컨테이너를 감지합니다. 
+이 감지된 컨테이너를 currentContainer로 업데이트하여, 드래그 중인 요소가 새로운 컨테이너로 이동할 수 있게 합니다.
+다른 컨테이너로의 이동: 감지된 새로운 컨테이너에서 드래그된 요소를 올바르게 배치합니다. 
+이때 getDragAfterElement 함수를 사용해 해당 컨테이너 내에서 적절한 위치를 찾아 요소를 삽입합니다.
+
++
+
 
 */
 </script>
