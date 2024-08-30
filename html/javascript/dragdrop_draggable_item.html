@@ -20,7 +20,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .container {height:120px;margin:10px;padding:10px;background-color:blue;border-radius:8px;}
+    .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
     .container button {display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
     .container .draggable.dragging {opacity:0.5;}
 </style>
@@ -31,6 +31,10 @@
 <div class="container">
     <button class="draggable" draggable="true">🐶</button>
     <button class="draggable" draggable="true">🐱</button>
+</div>
+<div class="container">
+    <button class="draggable" draggable="true">🌼</button>
+    <button class="draggable" draggable="true">🌻</button>
 </div>
 <script type='text/javascript'>
 /*
@@ -93,7 +97,6 @@ function getDragAfterElement(container, x) {
 // 모바일 터치 이벤트 처리 추가
 draggables.forEach(draggable => {
     let isDragging = false; // 터치 드래그 상태 변수
-    let initialParent; // 터치 시작 시 부모 박스를 저장
 
     // 터치 시작
     draggable.addEventListener("touchstart", (e) => {
@@ -105,9 +108,6 @@ draggables.forEach(draggable => {
         draggable.style.position = 'absolute';
         draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
         draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
-
-        // 현재 아이템의 부모 요소 저장 (container)
-        initialParent = draggable.parentElement;
 
         // 스크롤 방지
         e.preventDefault();
@@ -130,35 +130,14 @@ draggables.forEach(draggable => {
         isDragging = false;
         draggable.classList.remove("dragging");
 
-        // 터치 종료 시 좌표 확인
-        const touch = e.changedTouches[0];
-        const touchX = touch.clientX + window.scrollX;
-        const touchY = touch.clientY + window.scrollY;
-
-        // 드래그 중간 상태를 체크하여 컨테이너 내부에서 아이템 위치 계산
-        containers.forEach(container => {
-            // container의 위치와 크기
-            const containerRect = container.getBoundingClientRect();
-            const containerX1 = containerRect.left + window.scrollX;
-            const containerY1 = containerRect.top + window.scrollY;
-            const containerX2 = containerX1 + containerRect.width;
-            const containerY2 = containerY1 + containerRect.height;
-
-            // 터치한 위치가 container 내부에 있는지 확인
-            if (touchX >= containerX1 && touchX <= containerX2 && touchY >= containerY1 && touchY <= containerY2) {
-                // 만약 처음 시작했던 부모가 container 라면 위치 변경하지 않음
-                if (initialParent !== container) {
-                    const afterElement = getDragAfterElement(container, touch.clientX);
-                    if (container.contains(draggable)) {
-                        if (afterElement === undefined) {
-                            container.appendChild(draggable);
-                        } else {
-                            container.insertBefore(draggable, afterElement);
-                        }
-                    }
-                }
+        const afterElement = getDragAfterElement(container, touch.clientX);
+        if (container.contains(draggable)) {
+            if (afterElement === undefined) {
+                container.appendChild(draggable);
+            } else {
+                container.insertBefore(draggable, afterElement);
             }
-        });
+        }
 
         // 요소 위치를 초기화 (상대 위치에서 원래 위치로)
         draggable.style.position = 'relative';
