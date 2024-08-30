@@ -28,7 +28,7 @@
 <div>
     <p id="drag" draggable="true">드래그해보세요.</p>
     <div id="drop">여기에 드롭하세요</div>
-
+    <br>
     <div class="console">console</div>
     <div class="alert">alert</div>
 </div>
@@ -82,9 +82,12 @@ drag.addEventListener('touchstart', function(e) {
     
     // 터치한 위치를 기록
     const touch = e.touches[0];
-    drag.style.position = 'absolute';
+    // drag.style.position = 'absolute';
     drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
     drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
+
+    // 스크롤 방지
+    e.preventDefault();
 });
 
 // 터치 이동
@@ -96,6 +99,9 @@ drag.addEventListener('touchmove', function(e) {
         drag.style.left = `${touch.clientX - drag.offsetWidth / 2}px`;
         drag.style.top = `${touch.clientY - drag.offsetHeight / 2}px`;
     }
+
+    // 스크롤 방지
+    e.preventDefault();
 });
 
 // 터치 종료
@@ -121,10 +127,13 @@ drag.addEventListener('touchend', function(e) {
         }
 
         // 아이템을 초기 위치로 되돌림
-        drag.style.position = 'relative';
+        // drag.style.position = 'relative';
         drag.style.left = '0px';
         drag.style.top = '0px';
     }
+
+    // 스크롤 방지
+    e.preventDefault();
 });
 
 /*
