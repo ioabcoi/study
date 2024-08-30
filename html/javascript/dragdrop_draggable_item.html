@@ -20,7 +20,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .container {height:120px;margin:10px;padding:10px;background-color:green;border-radius:8px;}
+    .container {height:120px;margin:10px;padding:10px;background-color:blue;border-radius:8px;}
     .container button {display:inline-flex;align-items:center;justify-content:center;width:70px;height:70px;border:none;border-radius:8px;margin:12px;cursor:move;font-size:30px;background:#eaeaea4f;}
     .container .draggable.dragging {opacity:0.5;}
 </style>
@@ -119,6 +119,15 @@ draggables.forEach(draggable => {
             const touch = e.touches[0];
             draggable.style.left = `${touch.clientX - draggable.offsetWidth / 2 + window.scrollX}px`;
             draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
+
+            const afterElement = getDragAfterElement(container, touch.clientX);
+            if (container.contains(draggable)) {
+                if (afterElement === undefined) {
+                    container.appendChild(draggable);
+                } else {
+                    container.insertBefore(draggable, afterElement);
+                }
+            }
         }
 
         // 스크롤 방지
@@ -129,15 +138,6 @@ draggables.forEach(draggable => {
     draggable.addEventListener("touchend", () => {
         isDragging = false;
         draggable.classList.remove("dragging");
-
-        const afterElement = getDragAfterElement(container, touch.clientX);
-        if (container.contains(draggable)) {
-            if (afterElement === undefined) {
-                container.appendChild(draggable);
-            } else {
-                container.insertBefore(draggable, afterElement);
-            }
-        }
 
         // 요소 위치를 초기화 (상대 위치에서 원래 위치로)
         draggable.style.position = 'relative';
