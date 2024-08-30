@@ -27,7 +27,7 @@ drop 이벤트에서 e.dataTransfer.getData로 데이터를 받을 수 있다.
 -->
 <style type="text/css">
     .ico_container {padding:20px;background:#f1f1f1;border:1px solid #ccc;}
-    .ico_container .draggable {display:flex;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #ccc;font-size:20px;line-height:40px;cursor:move;}
+    .ico_container .draggable {display:flex;justify-content:center;align-items:center;height:40px;background:#f7f7f7;border:1px solid #000;font-size:20px;line-height:40px;cursor:move;}
     .ico_container .draggable + .draggable {margin-top:-1px;}
     .ico_container .draggable.dragging {opacity:.5;border:2px dashed red;}
     .ico_container + .ico_container {margin-top:10px;}
@@ -114,12 +114,24 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
     draggables.forEach(draggable => {
         let isDragging = false; // 터치 드래그 상태 변수
         let startY = 0;
+        let currentContainer = null; // 현재 컨테이너 참조 변수
 
         // 터치 시작
         draggable.addEventListener('touchstart', (e) => {
             isDragging = true;
             startY = e.touches[0].clientY;
             draggable.classList.add('dragging');
+
+            // 터치한 위치에 따라 요소의 이동 시작
+            const touch = e.touches[0];
+            draggable.style.position = 'absolute';
+            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
+
+            // 현재 드래그 중인 요소가 속한 컨테이너를 저장
+            currentContainer = draggable.parentNode;
+
+            // 스크롤 방지
+            e.preventDefault();
         });
 
         // 터치 이동
@@ -127,10 +139,12 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
             if (!isDragging) return;
 
             const currentY = e.touches[0].clientY;
+            draggable.style.top = `${touch.clientY - draggable.offsetHeight / 2 + window.scrollY}px`;
+
             const container = [...containers].find(container => container.contains(draggable));
 
-            if (container) {
-                const afterElement = getDragAfterElement(container, currentY);
+            if (currentContainer) {
+                const afterElement = getDragAfterElement(currentContainer, currentY);
                 if (afterElement === undefined) {
                     container.appendChild(draggable);
                 } else {
@@ -146,6 +160,9 @@ dragover 이벤트가 발생하는 동안 마우스 드래그하고 마지막 �
         draggable.addEventListener('touchend', () => {
             isDragging = false;
             draggable.classList.remove('dragging');
+
+            // 스크롤 방지
+            e.preventDefault();
         });
     });
 })();
