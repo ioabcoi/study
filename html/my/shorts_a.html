@@ -122,6 +122,40 @@
             height: 72px;
             background: url('https://img.etoos.com/teacher/tcc_2013/ico_play2.png') no-repeat 50% 0;
         }
+
+        .gnb_open {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+            display: none;
+        }
+        .gnb_open.on {
+            display: block;
+        }
+
+        .gnb_close {
+            position: fixed;
+            bottom: 40px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            z-index: 1000;
+            display: none;
+        }
+        .gnb_close.on {
+            display: block;
+        }
     </style>
 
     <div class="container">
@@ -185,6 +219,9 @@
                 </div>
             </div>
         </main>
+
+        <a href="#" class="gnb_open on">gnb_open</a>
+        <a href="#" class="gnb_close">gnb_close</a>
     </div>
 
     <script>
@@ -221,6 +258,54 @@
                     const percentage = (video.currentTime / video.duration) * 100;
                     progressBar.style.width = `${percentage}%`;
                 });
+            });
+
+            // 화면에 표시된 비디오만 재생하는 함수
+            function shortsPlayVideo() {
+                const videos = document.querySelectorAll('.video-container video');
+                videos.forEach(video => {
+                    const videoContainer = video.closest('.video-container');
+                    const rect = videoContainer.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                        if (video.paused) {
+                            video.play();
+                            const playstop = videoContainer.querySelector('.btn_play');
+                            playstop.classList.remove('stop');
+                        }
+                    }
+                });
+            }
+            // shortsPlayVideo();
+
+            // 화면에 표시된 비디오만 정지하는 함수
+            function shortsPauseVideo() {
+                const videos = document.querySelectorAll('.video-container video');
+                videos.forEach(video => {
+                    const videoContainer = video.closest('.video-container');
+                    const rect = videoContainer.getBoundingClientRect();
+                    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                        if (!video.paused) {
+                            video.pause();
+                            const playstop = videoContainer.querySelector('.btn_play');
+                            playstop.classList.add('stop');
+                        }
+                    }
+                });
+            }
+            // shortsPauseVideo();
+
+            const gnbOpen = document.querySelector('.gnb_open');
+            gnbOpen.addEventListener('click', () => {
+                shortsPauseVideo();
+                gnbOpen.classList.remove('on');
+                gnbClose.classList.add('on');
+            });
+
+            const gnbClose = document.querySelector('.gnb_close');
+            gnbClose.addEventListener('click', () => {
+                shortsPlayVideo();
+                gnbClose.classList.remove('on');
+                gnbOpen.classList.add('on');
             });
 
             // Mute/unmute button
