@@ -1,0 +1,491 @@
+body,
+html {
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.blind {
+    overflow: hidden;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 0px;
+    height: 0px;
+    margin: -1px;
+}
+
+.wrap {
+    position: relative;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    /* scroll-behavior: smooth; */
+    scroll-snap-type: y mandatory;
+    /* 스크롤이 정렬되도록 설정 */
+    scrollbar-width: none;
+    /* 기본 스크롤바 숨기기 */
+    overflow-y: scroll;
+    /* 수직 스크롤 허용 */
+    -webkit-overflow-scrolling: touch;
+    /* 부드러운 스크롤링 추가 */
+    transition: transform 0.5s ease;
+    /* 스크롤 이동 시 애니메이션 추가 */
+    touch-action: pan-y;
+    /* 수직 스크롤만 허용 */
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+    /* 크롬, 사파리, 오페라에서 스크롤바 숨기기 */
+}
+
+.video-container {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    flex: 0 0 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    scroll-snap-align: start;
+    /* 각 비디오 컨테이너가 스크롤 정렬 기준에 맞도록 설정 */
+}
+
+.video-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.video-container .video-box::after {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+}
+
+video {
+    position: absolute;
+    z-index: 0;
+    left: 50%;
+    top: 0;
+    width: 100%;
+    max-width: 720px;
+    height: 100vh;
+    height: 100dvh;
+    transform: translate(-50%, 0);
+    /* 중앙 정렬 */
+    display: block;
+    background-color: black;
+    object-fit: cover;
+}
+
+/* 컨트롤러 전체 감추기 */
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+.control-button {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.control-button i {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+}
+
+.control-button .fa-pause {
+    opacity: 0;
+    /* 기본적으로 일시 정지 아이콘 숨기기 */
+}
+
+.control-button:hover .fa-pause {
+    opacity: 1;
+    /* 호버 시 일시 정지 아이콘 표시 */
+}
+
+.control-button .fa-play {
+    text-indent: -5px;
+}
+
+.mute-button {
+    position: fixed;
+    z-index: 100;
+    left: 20px;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    /* 모든 컨텐츠 위에 버튼 위치 설정 */
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+}
+
+.mute-button i {
+    pointer-events: none;
+    /* 아이콘 클릭 방지 */
+}
+
+.mute-button+.volume-control {
+    opacity: 0;
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+}
+
+.volume-control {
+    opacity: 0;
+    position: fixed;
+    z-index: 100;
+    left: 80px;
+    top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    padding: 0 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    z-index: 1000;
+    /* 모든 컨텐츠 위에 위치 */
+    -webkit-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+}
+
+.volume-control input[type="range"] {
+    width: 80px;
+}
+
+.mute-button:hover+.volume-control,
+.mute-button+.volume-control:hover {
+    opacity: 1;
+    /* 호버 시 볼륨 조절 표시 */
+}
+
+.mute-button:hover+.volume-control input[type="range"],
+.mute-button+.volume-control:hover input[type="range"] {
+    width: 80px;
+}
+
+/* control-seekbar */
+.control-seekbar {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: 10px;
+    width: 100%;
+    height: 30px;
+    padding: 0 15px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+}
+
+.control-seekbar .seekbar {
+    width: 100%;
+    height: 16px;
+}
+
+/* progress-bar */
+.progress-bar-container {
+    position: absolute;
+    z-index: 3;
+    top: calc(100vh - 5px);
+    /* 스크롤 상단과 일치하도록 설정 */
+    top: calc(100dvh - 5px);
+    left: 50%;
+    width: 100%;
+    height: 5px;
+    transform: translate(-50%, 0);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #3498db;
+    /* 진행 상황 표시 */
+    -webkit-transition: all 0.25s linear;
+    transition: all 0.25s linear;
+}
+
+.gnb_open {
+    position: fixed;
+    top: 80px;
+    left: 20px;
+    background-color: rgba(0, 0, 255, 0.5);
+    border: 0;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+}
+
+.gnb_open.on {
+    display: block;
+}
+
+.gnb_close {
+    position: fixed;
+    top: 135px;
+    left: 20px;
+    background-color: rgba(0, 255, 0, 0.5);
+    border: 0;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+}
+
+.gnb_close.on {
+    display: block;
+}
+
+.btn_append {
+    position: fixed;
+    top: 190px;
+    left: 20px;
+    background-color: rgba(255, 0, 0, 0.5);
+    border: 0;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.video-description {
+    overflow: hidden;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 100vh;
+    top: 100dvh;
+    right: 0;
+    padding: 0 64px 44px 16px;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+.video-description .description-teacher {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+}
+
+.video-description .description-teacher .img {
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #fff;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.video-description .description-teacher .img img {
+    position: absolute;
+    left: 50%;
+    top: 2px;
+    width: 40px;
+    margin-left: -18px;
+}
+
+.video-description .description-teacher .name {
+    margin-left: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.video-description .description-teacher .name .subj {
+    font-weight: 400;
+}
+
+.video-description .description-info {
+    color: #fff;
+    font-size: 14px;
+    line-height: 21px;
+}
+
+.video-description .description-title {
+    display: block;
+    margin-top: 4px;
+    color: #fff;
+    font-weight: 300;
+    word-wrap: break-word;
+}
+
+.video-description .description-title.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.video-description .description-tag {
+    margin-top: 4px;
+    font-weight: 500;
+}
+
+.video-description .description-tag .hashtag strong {
+    color: #00FFD2;
+}
+
+.video-description .description-banner {
+    margin-top: 14px;
+}
+
+.video-description .description-banner .description-link+.description-link {
+    margin-top: 4px;
+}
+
+.video-description .description-banner .description-link .link {
+    display: block;
+    padding: 9px;
+    background-color: #F5F3F3;
+    border-radius: 8px;
+    color: #222;
+    font-size: 14px;
+    text-align: center;
+}
+
+.video-feedback {
+    overflow: hidden;
+    position: absolute;
+    z-index: 3;
+    top: calc(100vh - 53px);
+    top: calc(100dvh - 53px);
+    right: 0;
+    flex-wrap: wrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 64px;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+
+.video-feedback .btn_ico {
+    position: relative;
+    display: block;
+    min-width: 30px;
+    margin: 11px 0;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.video-feedback .btn_ico .txt {
+    display: block;
+    padding-top: 35px;
+}
+
+.video-feedback .btn_ico::before {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 30px auto;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.video-feedback .btn_volume::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_volume.png');
+}
+
+.video-feedback .btn_volume.mute::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_volume_mute.png');
+}
+
+.video-feedback .btn_view::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_view.png');
+}
+
+.video-feedback .btn_like::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_like.png');
+}
+
+.video-feedback .btn_like.on::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_like_on.png');
+}
+
+.video-feedback .btn_share::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_share.png');
+}
+
+.video-feedback .btn_more::before {
+    background-image: url('https://img.etoos.com/enp/front/2024/main/ic_more.png');
+}
+
+.video-feedback .hidden {
+    opacity: 0;
+    visibility: hidden;
+}

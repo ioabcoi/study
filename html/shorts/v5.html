@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shorts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="shorts.css">
+</head>
+
+<body>
+    <div class="wrap">
+        <a href="#" class="btn_append">append</a>
+        <a href="#" class="gnb_open on">gnb_open</a>
+        <a href="#" class="gnb_close">gnb_close</a>
+
+        <!-- 음소거/소리 조절 버튼 -->
+        <button id="mute-toggle-button" class="mute-button mute"><i class="fas fa-volume-mute"></i></button>
+
+        <!-- 볼륨 조절 슬라이더 -->
+        <div class="volume-control"><input type="range" class="volume-slider" min="0" max="1" step="0.1" value="0"></div>
+
+        <!-- container -->
+        <div class="container">
+            <!-- video-container -->
+            <div class="video-container">
+                <div class="video-inner">
+                    <div class="video-box">
+                        <video class="video" tabindex="-1" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/11sec_200391_720.mp4" loop autoplay playsinline muted></video>
+                    </div>
+                    <div class="custom-controls">
+                        <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                        <div class="video-description">
+                            <div class="description-teacher">
+                                <span class="img"><img src="https://img.etoos.com/teacher/teacher/200391/m300x300.png" alt=""></span>
+                                <span class="name"><strong class="subj">사탐</strong> 이지영</span>
+                            </div>
+                            <div class="description-info">
+                                <p class="description-title ellipsis">영상 제목 노출(1줄 글자수 까지만 노출 이하 ‘...’ 처리, 글자수 최대 80 자) 까지 작성 가능, 두 줄 이상 시 해당 글 클릭하면 상단 높이가 길어지며 전체 글자수 노출)</p>
+                                <p class="description-tag">
+                                    <span class="hashtag"><strong>#</strong>숏츠</span>
+                                    <span class="hashtag"><strong>#</strong>사탐</span>
+                                    <span class="hashtag"><strong>#</strong>이지영</span>
+                                    <span class="hashtag"><strong>#</strong>6평</span>
+                                    <span class="hashtag"><strong>#</strong>LIVE</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="video-feedback">
+                            <button class="btn_ico btn_view"><span class="blind">조회수</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_like"><span class="blind">좋아요</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_share"><span class="blind">공유</span><span class="txt">공유</span></button>
+                            <button class="btn_ico btn_more"><span class="blind">더보기</span><span class="txt">더보기</span></button>
+                        </div>
+                        <div class="control-seekbar"><input type="range" class="seekbar" min="0" max="100" step="0.1" value="0"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // video-container -->
+            <!-- video-container -->
+            <div class="video-container">
+                <div class="video-inner">
+                    <div class="video-box">
+                        <video class="video" tabindex="-1" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/11sec_200502_720.mp4" loop autoplay playsinline muted></video>
+                    </div>
+                    <div class="custom-controls">
+                        <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                        <div class="video-description">
+                            <div class="description-teacher">
+                                <span class="img"><img src="https://img.etoos.com/teacher/teacher/200391/m300x300.png" alt=""></span>
+                                <span class="name"><strong class="subj">사탐</strong> 이지영</span>
+                            </div>
+                            <div class="description-info">
+                                <p class="description-title ellipsis">영상 제목 노출(1줄 글자수 까지만 노출 이하 ‘...’ 처리, 글자수 최대 80 자) 까지 작성 가능, 두 줄 이상 시 해당 글 클릭하면 상단 높이가 길어지며 전체 글자수 노출)</p>
+                                <p class="description-tag">
+                                    <span class="hashtag"><strong>#</strong>숏츠</span>
+                                    <span class="hashtag"><strong>#</strong>사탐</span>
+                                    <span class="hashtag"><strong>#</strong>이지영</span>
+                                    <span class="hashtag"><strong>#</strong>6평</span>
+                                    <span class="hashtag"><strong>#</strong>LIVE</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="video-feedback">
+                            <button class="btn_ico btn_view"><span class="blind">조회수</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_like"><span class="blind">좋아요</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_share"><span class="blind">공유</span><span class="txt">공유</span></button>
+                            <button class="btn_ico btn_more"><span class="blind">더보기</span><span class="txt">더보기</span></button>
+                        </div>
+                        <div class="control-seekbar"><input type="range" class="seekbar" min="0" max="100" step="0.1" value="0"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // video-container -->
+            <!-- video-container -->
+            <div class="video-container">
+                <div class="video-inner">
+                    <div class="video-box">
+                        <video class="video" tabindex="-1" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/14sec_200506_720.mp4" loop autoplay playsinline muted></video>
+                    </div>
+                    <div class="custom-controls">
+                        <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                        <div class="video-description">
+                            <div class="description-teacher">
+                                <span class="img"><img src="https://img.etoos.com/teacher/teacher/200391/m300x300.png" alt=""></span>
+                                <span class="name"><strong class="subj">사탐</strong> 이지영</span>
+                            </div>
+                            <div class="description-info">
+                                <p class="description-title ellipsis">영상 제목 노출(1줄 글자수 까지만 노출 이하 ‘...’ 처리, 글자수 최대 80 자) 까지 작성 가능, 두 줄 이상 시 해당 글 클릭하면 상단 높이가 길어지며 전체 글자수 노출)</p>
+                                <p class="description-tag">
+                                    <span class="hashtag"><strong>#</strong>숏츠</span>
+                                    <span class="hashtag"><strong>#</strong>사탐</span>
+                                    <span class="hashtag"><strong>#</strong>이지영</span>
+                                    <span class="hashtag"><strong>#</strong>6평</span>
+                                    <span class="hashtag"><strong>#</strong>LIVE</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="video-feedback">
+                            <button class="btn_ico btn_view"><span class="blind">조회수</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_like"><span class="blind">좋아요</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_share"><span class="blind">공유</span><span class="txt">공유</span></button>
+                            <button class="btn_ico btn_more"><span class="blind">더보기</span><span class="txt">더보기</span></button>
+                        </div>
+                        <div class="control-seekbar"><input type="range" class="seekbar" min="0" max="100" step="0.1" value="0"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // video-container -->
+            <!-- video-container -->
+            <div class="video-container">
+                <div class="video-inner">
+                    <div class="video-box">
+                        <video class="video" tabindex="-1" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/25sec_200457_720.mp4" loop autoplay playsinline muted></video>
+                    </div>
+                    <div class="custom-controls">
+                        <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                        <div class="video-description">
+                            <div class="description-teacher">
+                                <span class="img"><img src="https://img.etoos.com/teacher/teacher/200391/m300x300.png" alt=""></span>
+                                <span class="name"><strong class="subj">사탐</strong> 이지영</span>
+                            </div>
+                            <div class="description-info">
+                                <p class="description-title ellipsis">영상 제목 노출(1줄 글자수 까지만 노출 이하 ‘...’ 처리, 글자수 최대 80 자) 까지 작성 가능, 두 줄 이상 시 해당 글 클릭하면 상단 높이가 길어지며 전체 글자수 노출)</p>
+                                <p class="description-tag">
+                                    <span class="hashtag"><strong>#</strong>숏츠</span>
+                                    <span class="hashtag"><strong>#</strong>사탐</span>
+                                    <span class="hashtag"><strong>#</strong>이지영</span>
+                                    <span class="hashtag"><strong>#</strong>6평</span>
+                                    <span class="hashtag"><strong>#</strong>LIVE</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="video-feedback">
+                            <button class="btn_ico btn_view"><span class="blind">조회수</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_like"><span class="blind">좋아요</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_share"><span class="blind">공유</span><span class="txt">공유</span></button>
+                            <button class="btn_ico btn_more"><span class="blind">더보기</span><span class="txt">더보기</span></button>
+                        </div>
+                        <div class="control-seekbar"><input type="range" class="seekbar" min="0" max="100" step="0.1" value="0"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // video-container -->
+            <!-- video-container -->
+            <div class="video-container">
+                <div class="video-inner">
+                    <div class="video-box">
+                        <video class="video" tabindex="-1" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/33sec_200209_720.mp4" loop autoplay playsinline muted></video>
+                    </div>
+                    <div class="custom-controls">
+                        <button class="play-pause control-button"><i class="fas fa-play"></i></button>
+                        <div class="video-description">
+                            <div class="description-teacher">
+                                <span class="img"><img src="https://img.etoos.com/teacher/teacher/200391/m300x300.png" alt=""></span>
+                                <span class="name"><strong class="subj">사탐</strong> 이지영</span>
+                            </div>
+                            <div class="description-info">
+                                <p class="description-title ellipsis">영상 제목 노출(1줄 글자수 까지만 노출 이하 ‘...’ 처리, 글자수 최대 80 자) 까지 작성 가능, 두 줄 이상 시 해당 글 클릭하면 상단 높이가 길어지며 전체 글자수 노출)</p>
+                                <p class="description-tag">
+                                    <span class="hashtag"><strong>#</strong>숏츠</span>
+                                    <span class="hashtag"><strong>#</strong>사탐</span>
+                                    <span class="hashtag"><strong>#</strong>이지영</span>
+                                    <span class="hashtag"><strong>#</strong>6평</span>
+                                    <span class="hashtag"><strong>#</strong>LIVE</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="video-feedback">
+                            <button class="btn_ico btn_view"><span class="blind">조회수</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_like"><span class="blind">좋아요</span><span class="txt">1.8만</span></button>
+                            <button class="btn_ico btn_share"><span class="blind">공유</span><span class="txt">공유</span></button>
+                            <button class="btn_ico btn_more"><span class="blind">더보기</span><span class="txt">더보기</span></button>
+                        </div>
+                        <div class="control-seekbar"><input type="range" class="seekbar" min="0" max="100" step="0.1" value="0"></div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- // video-container -->
+
+            <!-- 비디오 컨테이너 추가 (위와 동일하게 반복) -->
+        </div>
+        <!-- // container -->
+    </div>
+    <script src="shorts.js"></script>
+</body>
+
+</html>
