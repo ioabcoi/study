@@ -1,299 +1,425 @@
+var shortsEvent = shortsEvent || {};
 
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.container');
-    const containers = document.querySelectorAll('.video-container');
-    const videos = document.querySelectorAll('.video');
-    const muteToggleButton = document.getElementById('mute-toggle-button');
-    const muteIcon = muteToggleButton.querySelector('i');
-    const volumeSlider = document.querySelector('.volume-slider');
-    let lastVolume = 1; // ¸¶Áö¸· º¼·ı °ª ÃÊ±âÈ­ (±âº»°ª: 1)
+shortsEvent.main = {
+    shortsFunc() {
+        const _this = this;
 
-    // ºñµğ¿À¸¦ ¹Ì¸® ·ÎµåÇÏ´Â ÇÔ¼ö
-    function preloadVideo(video) {
-        const src = video.getAttribute('data-src');
-        if (src && !video.src) {
-            video.src = src;
-        }
-    }
+        // ë””ë°”ìš´ìŠ¤ í•¨ìˆ˜
+        const debounce = (func, delay) => {
+            let timeoutId;
+            return (...args) => {
+                if (timeoutId) clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    func.apply(null, args);
+                }, delay);
+            };
+        };
 
-    // ÁÖ¾îÁø ¹üÀ§ÀÇ ºñµğ¿À¸¦ ¹Ì¸® ·ÎµåÇÏ´Â ÇÔ¼ö
-    function preloadVideosInRange(start, end) {
-        for (let i = start; i <= end && i < videos.length; i++) {
-            if (i >= 0) {
-                preloadVideo(videos[i]);
+        const container = document.querySelector('.container'); // ì—¬ê¸°ì„œ í•œ ë²ˆë§Œ ì •ì˜
+        let lastVolume = 1; // ë§ˆì§€ë§‰ ë³¼ë¥¨ ê°’ ì´ˆê¸°í™” (ê¸°ë³¸ê°’: 1)
+        let isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
+        
+        _this.shortsFunc.init = () => {
+            _this.shortsFunc.preloadVideosInRange(0, 3); // ì´ˆê¸° 3ê°œì˜ ë¹„ë””ì˜¤ ë¯¸ë¦¬ ë¡œë“œ
+            _this.shortsFunc.addEvents();
+            _this.shortsFunc.scrollHandler();
+            _this.shortsFunc.addScrollEvents();
+            _this.shortsFunc.addGnbEvents(); // GNB ì´ë²¤íŠ¸ ì¶”ê°€
+        };
+
+        // ë¹„ë””ì˜¤ë¥¼ ë¯¸ë¦¬ ë¡œë“œí•˜ëŠ” í•¨ìˆ˜
+        _this.shortsFunc.preloadVideo = (video) => {
+            const src = video.getAttribute('data-src');
+            if (src && !video.src) {
+                video.src = src;
             }
-        }
-    }
+        };
 
-    // È­¸é¿¡ º¸ÀÌ´Â ºñµğ¿À¸¦ Àç»ıÇÏ°í ³ª¸ÓÁö ºñµğ¿À´Â ÀÏ½Ã Á¤ÁöÇÏ´Â ÇÔ¼ö
-    function playVisibleVideo() {
-        let containerRect = container.getBoundingClientRect();
-
-        videos.forEach((video, index) => {
-            let videoRect = video.getBoundingClientRect();
-
-            if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
-                video.play();
-                // ´ÙÀ½°ú ÀÌÀü 10°³ÀÇ ºñµğ¿À¸¦ ¹Ì¸® ·Îµå
-                preloadVideosInRange(index - 10, index + 10);
-            } else {
-                video.pause();
-            }
-        });
-    }
-
-    // ÇöÀç È­¸é¿¡ º¸ÀÌ´Â ºñµğ¿À¸¦ Àç»ıÇÏ´Â ÇÔ¼ö
-    function playVisibleVideos() {
-        let containerRect = container.getBoundingClientRect();
-
-        videos.forEach((video) => {
-            let videoRect = video.getBoundingClientRect();
-
-            if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
-                video.play();
-            }
-        });
-    }
-    // const playVisibleBtn = document.getElementById('play-visible-btn');
-    // document.getElementById('play-visible-btn').addEventListener('click', playVisibleVideos);
-
-    // ÇöÀç È­¸é¿¡ º¸ÀÌ´Â ºñµğ¿À¸¦ ÀÏ½Ã Á¤ÁöÇÏ´Â ÇÔ¼ö
-    function pauseVisibleVideos() {
-        let containerRect = container.getBoundingClientRect();
-
-        videos.forEach((video) => {
-            let videoRect = video.getBoundingClientRect();
-
-            if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
-                video.pause();
-            }
-        });
-    }
-    // const pauseVisibleBtn = document.getElementById('pause-visible-btn');
-    // document.getElementById('pause-visible-btn').addEventListener('click', pauseVisibleVideos);
-
-    // gnb open/close 
-    const gnbOpen = document.querySelector('.gnb_open');
-    gnbOpen.addEventListener('click', () => {
-        pauseVisibleVideos();
-        gnbOpen.classList.remove('on');
-        gnbClose.classList.add('on');
-    });
-    const gnbClose = document.querySelector('.gnb_close');
-    gnbClose.addEventListener('click', () => {
-        playVisibleVideos();
-        gnbClose.classList.remove('on');
-        gnbOpen.classList.add('on');
-    });
-
-    // ÃÊ±â ·Îµå ½Ã Ã¹ 10°³ÀÇ ºñµğ¿À ¹Ì¸® ·Îµå
-    preloadVideosInRange(0, 9);
-
-    // Àç»ı/ÀÏ½Ã Á¤Áö ¹öÆ° »óÅÂ ¾÷µ¥ÀÌÆ® ÇÔ¼ö
-    function updatePlayPauseButton(video, button) {
-        if (video.paused) {
-            button.innerHTML = '<i class="fas fa-play"></i>';
-        } else {
-            button.innerHTML = '<i class="fas fa-pause"></i>';
-        }
-    }
-
-    // ´õºí Å¬¸¯ ¹æÁö ¹× ºñµğ¿À ÄÁÆ®·Ñ ¼³Á¤
-    videos.forEach((video, index) => {
-        const container = containers[index];
-        const playPauseButton = container.querySelector('.play-pause');
-        const seekbar = container.querySelector('.seekbar'); // seekbar
-
-        // ´õºí Å¬¸¯ ÀÌº¥Æ® ¹æÁö
-        video.addEventListener('dblclick', (event) => {
-            event.preventDefault();
-        });
-
-        // ºñµğ¿À Àç»ı ¹× ÀÏ½Ã Á¤Áö »óÅÂ¿¡ µû¸¥ ¹öÆ° ¾÷µ¥ÀÌÆ®
-        video.addEventListener('play', () => updatePlayPauseButton(video, playPauseButton));
-        video.addEventListener('pause', () => updatePlayPauseButton(video, playPauseButton));
-
-        // ºñµğ¿ÀÀÇ ÇöÀç ½Ã°£¿¡ µû¶ó seekbar °ª ¾÷µ¥ÀÌÆ®
-        video.addEventListener('timeupdate', () => { // seekbar
-            const value = (100 / video.duration) * video.currentTime;
-            seekbar.value = value;
-        });
-
-        // ºñµğ¿À ÁøÇà »óÅÂ¿¡ µû¸¥ progress-bar ¾÷µ¥ÀÌÆ®
-        video.addEventListener('timeupdate', () => { // progress-bar
-            const progressBar = video.closest('.video-container').querySelector('.progress-bar');
-            const percentage = (video.currentTime / video.duration) * 100;
-            progressBar.style.width = `${percentage}%`;
-        });
-
-        // Àç»ı/ÀÏ½Ã Á¤Áö ¹öÆ° Å¬¸¯ ÀÌº¥Æ®
-        playPauseButton.addEventListener('click', () => {
-            if (video.paused) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        });
-
-        // seekbar º¯°æ ÀÌº¥Æ®
-        seekbar.addEventListener('input', () => { // seekbar
-            const time = video.duration * (seekbar.value / 100);
-            video.currentTime = time;
-        });
-    });
-
-    // º¼·ı ½½¶óÀÌ´õ º¯°æ ÀÌº¥Æ®
-    volumeSlider.addEventListener('input', () => {
-        lastVolume = volumeSlider.value; // ÇöÀç º¼·ı °ªÀ» ÀúÀå
-        videos.forEach((video) => {
-            video.volume = lastVolume;
-            video.muted = lastVolume == 0; // º¼·ıÀÌ 0ÀÌ¸é À½¼Ò°Å
-        });
-    });
-
-    // ÃÊ±â À½¼Ò°Å ¼³Á¤
-    videos.forEach(video => {
-        video.muted = true;
-
-        // ºñµğ¿À º¼·ı º¯°æ ÀÌº¥Æ®
-        video.addEventListener('volumechange', () => {
-            if (video.muted) {
-                muteIcon.parentNode.classList.add('mute');
-                muteIcon.className = 'fas fa-volume-mute';
-            } else {
-                muteIcon.parentNode.classList.remove('mute');
-                muteIcon.className = 'fas fa-volume-up';
-            }
-        });
-    });
-
-    // À½¼Ò°Å/¼Ò¸® Á¶Àı ¹öÆ° Å¬¸¯ ÀÌº¥Æ®
-    muteToggleButton.addEventListener('click', () => {
-        let isMuted = videos[0].muted;
-
-        videos.forEach((video) => {
-            if (!isMuted) {
-                video.muted = true;
-                video.volume = 0;
-            } else {
-                video.muted = false;
-                video.volume = lastVolume == 0 ? 1 : lastVolume; // À½¼Ò°Å ÇØÁ¦ ½Ã ¸¶Áö¸· º¼·ı °ª »ç¿ë (¸¶Áö¸· º¼·ı °ªÀÌ 0ÀÌ¸é 1·Î ¼³Á¤)
-            }
-        });
-
-        // º¼·ı ½½¶óÀÌ´õ¿Í À½¼Ò°Å ¹öÆ° ¾ÆÀÌÄÜ ¾÷µ¥ÀÌÆ®
-        volumeSlider.value = isMuted ? (lastVolume == 0 ? 1 : lastVolume) : 0;
-        muteIcon.classList.toggle('fa-volume-mute', isMuted);
-        muteIcon.classList.toggle('fa-volume-up', !isMuted);
-    });
-
-    // ½ºÅ©·Ñ ÀÌº¥Æ® Ã³¸®
-    container.addEventListener('scroll', () => {
-        playVisibleVideo();
-    });
-
-    // ÃÊ±â ·Îµå ½Ã Ã¹ ºñµğ¿À Àç»ı
-    playVisibleVideo();
-
-    // ½ºÅ©·Ñ ¹æÇâ¿¡ µû¶ó ½ºÅ©·ÑÀ» Ã³¸®ÇÏ´Â ÇÔ¼ö
-    function scrollHandler(event, direction) {
-        event.preventDefault();
-        const scrollAmount = window.innerHeight;
-        const newScrollPosition = container.scrollTop + (direction === 'down' ? scrollAmount : -scrollAmount);
-
-        container.scrollTo({
-            top: Math.min(container.scrollHeight - container.clientHeight, Math.max(0, newScrollPosition)),
-            behavior: 'smooth'
-        });
-    }
-
-    // ¸¶¿ì½º ÈÙÀ» ÀÌ¿ëÇÑ ½ºÅ©·Ñ Ã³¸®
-    function movingWheel() {
-        container.addEventListener('wheel', (event) => {
-            if (event.deltaY > 0) {
-                scrollHandler(event, 'down');
-            } else if (event.deltaY < 0) {
-                scrollHandler(event, 'up');
-            }
-        }, { passive: false });
-    }
-
-    // ¸ğ¹ÙÀÏ ±â±â¿¡¼­ ½ºÅ©·Ñ Ã³¸® (¾Èµå·ÎÀÌµå)
-    function movingAos() {
-        let isScrolling = false;
-        let startY = 0;
-
-        function handleScroll(event) {
-            event.preventDefault();
-
-            if (isScrolling) return;
-            isScrolling = true;
-
-            // ½ºÅ©·Ñ ¾Ö´Ï¸ŞÀÌ¼ÇÀÇ ¼º´ÉÀ» °³¼±ÇÏ°í ½ºÅ©·ÑÀÌ Æ¢´Â Çö»óÀ» ÁÙÀÌ±â À§ÇØ requestAnimationFrameÀ» »ç¿ëÇÏ¿© ÀÌº¥Æ® ÇÚµé·¯¸¦ È£Ãâ
-            requestAnimationFrame(() => {
-                if (event.deltaY > 0 || (event.touches && event.touches[0].clientY < startY)) {
-                    container.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-                } else if (event.deltaY < 0 || (event.touches && event.touches[0].clientY > startY)) {
-                    container.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+        // ì£¼ì–´ì§„ ë²”ìœ„ì˜ ë¹„ë””ì˜¤ë¥¼ ë¯¸ë¦¬ ë¡œë“œí•˜ëŠ” í•¨ìˆ˜
+        _this.shortsFunc.preloadVideosInRange = (start, end) => {
+            const videos = document.querySelectorAll('.video');
+            for (let i = start; i <= end && i < videos.length; i++) {
+                if (i >= 0) {
+                    _this.shortsFunc.preloadVideo(videos[i]);
                 }
+            }
+        };
 
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 500);
+        // í™”ë©´ì— ë³´ì´ëŠ” ë¹„ë””ì˜¤ë¥¼ ì¬ìƒí•˜ê³  ë‚˜ë¨¸ì§€ ë¹„ë””ì˜¤ëŠ” ì¼ì‹œ ì •ì§€í•˜ëŠ” í•¨ìˆ˜
+        _this.shortsFunc.playVisibleVideo = () => {
+            const container = document.querySelector('.container');
+            const videos = document.querySelectorAll('.video');
+            let containerRect = container.getBoundingClientRect();
+
+            videos.forEach((video, index) => {
+                let videoRect = video.getBoundingClientRect();
+
+                if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
+                    video.play();
+                    _this.shortsFunc.preloadVideosInRange(index - 3, index + 3);
+                } else {
+                    video.pause();
+                }
+            });
+        };
+
+        // í™”ë©´ì— ë³´ì´ëŠ” ë¹„ë””ì˜¤ë¥¼ ì¬ìƒí•˜ëŠ” í•¨ìˆ˜
+        _this.shortsFunc.playVisibleVideos = () => {
+            const videos = document.querySelectorAll('.video');
+            let containerRect = container.getBoundingClientRect();
+            videos.forEach((video) => {
+                let videoRect = video.getBoundingClientRect();
+                if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
+                    video.play();
+                }
+            });
+        };
+
+        // í™”ë©´ì— ë³´ì´ëŠ” ë¹„ë””ì˜¤ë¥¼ ì¼ì‹œ ì •ì§€í•˜ëŠ” í•¨ìˆ˜
+        _this.shortsFunc.pauseVisibleVideos = () => {
+            const videos = document.querySelectorAll('.video');
+            let containerRect = container.getBoundingClientRect();
+            videos.forEach((video) => {
+                let videoRect = video.getBoundingClientRect();
+                if (videoRect.top >= containerRect.top && videoRect.bottom <= containerRect.bottom) {
+                    video.pause();
+                }
+            });
+        };
+
+        // ì¬ìƒ/ì¼ì‹œ ì •ì§€ ë²„íŠ¼ ìƒíƒœ ì—…ë°ì´íŠ¸ í•¨ìˆ˜
+        _this.shortsFunc.updatePlayPauseButton = (video, button) => {
+            if (video.paused) {
+                button.innerHTML = '<i class="fas fa-play"></i>';
+            } else {
+                button.innerHTML = '<i class="fas fa-pause"></i>';
+            }
+        };
+
+        // GNB open/close ì´ë²¤íŠ¸ ì¶”ê°€
+        _this.shortsFunc.addGnbEvents = () => {
+            const gnbOpen = document.querySelector('.gnb_open');
+            const gnbClose = document.querySelector('.gnb_close');
+
+            gnbOpen.addEventListener('click', () => {
+                _this.shortsFunc.pauseVisibleVideos(); // GNBê°€ ì—´ë¦´ ë•Œ ë¹„ë””ì˜¤ ì¼ì‹œ ì •ì§€
+                gnbOpen.classList.remove('on');
+                gnbClose.classList.add('on');
+            });
+
+            gnbClose.addEventListener('click', () => {
+                _this.shortsFunc.playVisibleVideos(); // GNBê°€ ë‹«í ë•Œ ë¹„ë””ì˜¤ ì¬ìƒ
+                gnbClose.classList.remove('on');
+                gnbOpen.classList.add('on');
+            });
+        };
+
+        // ì½”ë“œ ì¤‘ë³µ ì œê±°: addEventsì™€ addVideoEventsì—ì„œ ë¹„ìŠ·í•œ ë¡œì§ì´ ë°˜ë³µë˜ê³  ìˆìœ¼ë‹ˆ, ê³µí†µëœ ë¶€ë¶„ì€ í•¨ìˆ˜ë¡œ ë¶„ë¦¬í•˜ë©´ ê°€ë…ì„±ì´ ë†’ì•„ì§ˆ ê²ƒì…ë‹ˆë‹¤.
+
+        // ë¹„ë””ì˜¤ì— í•„ìš”í•œ ì´ë²¤íŠ¸ ì¶”ê°€
+        _this.shortsFunc.addEvents = () => {
+            const videos = document.querySelectorAll('.video');
+            const containers = document.querySelectorAll('.video-container');
+            const muteToggleButton = document.getElementById('mute-toggle-button');
+            const muteIcon = muteToggleButton.querySelector('i');
+            const volumeSlider = document.querySelector('.volume-slider');
+
+            videos.forEach((video, index) => {
+                const container = containers[index];
+                const playPauseButton = container.querySelector('.play-pause');
+                const seekbar = container.querySelector('.seekbar');
+                
+                // ë”ë¸” í´ë¦­ ë°©ì§€
+                video.addEventListener('dblclick', (event) => event.preventDefault());
+
+                // ì¬ìƒ/ì¼ì‹œ ì •ì§€ ë²„íŠ¼ ìƒíƒœ ì—…ë°ì´íŠ¸
+                video.addEventListener('play', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
+                video.addEventListener('pause', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
+
+                // seekbar ì—…ë°ì´íŠ¸
+                video.addEventListener('timeupdate', () => {
+                    const value = (100 / video.duration) * video.currentTime;
+                    seekbar.value = value;
+                    const progressBar = video.closest('.video-container').querySelector('.progress-bar');
+                    const percentage = (video.currentTime / video.duration) * 100;
+                    progressBar.style.width = `${percentage}%`;
+                });
+
+                // seekbar ë³€ê²½
+                seekbar.addEventListener('input', () => {
+                    const time = video.duration * (seekbar.value / 100);
+                    video.currentTime = time;
+                });
+
+                // ì¬ìƒ/ì¼ì‹œ ì •ì§€ ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸
+                playPauseButton.addEventListener('click', () => {
+                    video.paused ? video.play() : video.pause();
+                });
+
+                // ì¢‹ì•„ìš” ë²„íŠ¼ í´ë¦­ ì‹œ ìƒíƒœ ë³€ê²½
+                if (container.getElementsByClassName('btn_like').length > 0) {
+                    const btnLike = container.querySelector('.btn_like');
+                    btnLike.addEventListener('click', (event) => {
+                        event.target.classList.toggle('on');
+                    });
+                }
+        
+                // ì œëª© í´ë¦­ ì‹œ ellipsis í† ê¸€ (ì¤„ì„ë§ íš¨ê³¼ í† ê¸€)
+                if (container.getElementsByClassName('description-title').length > 0) {
+                    const descriptionTitle = container.querySelector('.description-title');
+                    descriptionTitle.addEventListener('click', (event) => {
+                        event.target.classList.toggle('ellipsis');
+                    });
+                }
+            });
+
+            // ë³¼ë¥¨ ìŠ¬ë¼ì´ë” ë³€ê²½ ì´ë²¤íŠ¸
+            volumeSlider.addEventListener('input', () => {
+                lastVolume = volumeSlider.value;
+                videos.forEach((video) => {
+                    video.volume = lastVolume;
+                    video.muted = lastVolume == 0;
+                });
+            });
+
+            // ìŒì†Œê±°/ì†Œë¦¬ ì¡°ì ˆ ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸
+            muteToggleButton.addEventListener('click', () => {
+                let isMuted = videos[0].muted;
+                videos.forEach((video) => {
+                    video.muted = !isMuted;
+                });
+                volumeSlider.value = isMuted ? (lastVolume == 0 ? 1 : lastVolume) : 0;
+                muteIcon.classList.toggle('fa-volume-mute', !isMuted);
+                muteIcon.classList.toggle('fa-volume-up', isMuted);
+            });
+        };
+        
+        // btn_append ë²„íŠ¼ í´ë¦­ ì‹œ ë¹„ë””ì˜¤ ì»¨í…Œì´ë„ˆ ì¶”ê°€
+        const btnAppend = document.querySelector('.btn_append');
+        if (btnAppend) {
+            btnAppend.addEventListener('click', () => {
+                // ìƒˆë¡œìš´ video-container ìš”ì†Œ ìƒì„±
+                const newContainer = document.createElement('div');
+                newContainer.classList.add('video-container');
+                newContainer.innerHTML = `
+                    <div class="video-inner">
+                        <div class="video-box">
+                            <video class="video" tabindex="-1" data-src="https://s3.ap-northeast-2.amazonaws.com/freevod.etoos.com/qr/shorts/sample/youtube/11sec_200391_720.mp4" loop autoplay playsinline muted></video>
+                        </div>
+                        <div class="custom-controls">
+                            <button class="play-pause control-button" aria-label="Play/Pause video"><i class="fas fa-play"></i></button>
+                            <div class="video-description">
+                                <div class="description-teacher">
+                                    <span class="img"><img src="https://img.etoos.com/teacher/teacher/200391/m300x300.png" alt=""></span>
+                                    <span class="name"><strong class="subj">ì‚¬íƒ</strong> ì´ì§€ì˜</span>
+                                </div>
+                                <div class="description-info">
+                                    <p class="description-title ellipsis">ì˜ìƒ ì œëª© ë…¸ì¶œ(1ì¤„ ê¸€ììˆ˜ ê¹Œì§€ë§Œ ë…¸ì¶œ ì´í•˜ â€˜...â€™ ì²˜ë¦¬, ê¸€ììˆ˜ ìµœëŒ€ 80 ì) ê¹Œì§€ ì‘ì„± ê°€ëŠ¥, ë‘ ì¤„ ì´ìƒ ì‹œ í•´ë‹¹ ê¸€ í´ë¦­í•˜ë©´ ìƒë‹¨ ë†’ì´ê°€ ê¸¸ì–´ì§€ë©° ì „ì²´ ê¸€ììˆ˜ ë…¸ì¶œ)</p>
+                                    <p class="description-tag">
+                                        <span class="hashtag"><strong>#</strong>ìˆì¸ </span>
+                                        <span class="hashtag"><strong>#</strong>ì‚¬íƒ</span>
+                                        <span class="hashtag"><strong>#</strong>ì´ì§€ì˜</span>
+                                        <span class="hashtag"><strong>#</strong>6í‰</span>
+                                        <span class="hashtag"><strong>#</strong>LIVE</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="video-feedback">
+                                <button class="btn_ico btn_view"><span class="blind">ì¡°íšŒìˆ˜</span><span class="txt">1.8ë§Œ</span></button>
+                                <button class="btn_ico btn_like"><span class="blind">ì¢‹ì•„ìš”</span><span class="txt">1.8ë§Œ</span></button>
+                                <button class="btn_ico btn_share"><span class="blind">ê³µìœ </span><span class="txt">ê³µìœ </span></button>
+                                <button class="btn_ico btn_more"><span class="blind">ë”ë³´ê¸°</span><span class="txt">ë”ë³´ê¸°</span></button>
+                            </div>
+                            <div class="control-seekbar"><input type="range" class="seekbar" min="0" max="100" step="0.1" value="0"></div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // ì»¨í…Œì´ë„ˆë¥¼ ì›í•˜ëŠ” ìœ„ì¹˜ì— ì¶”ê°€
+                document.querySelector('.container').appendChild(newContainer);
+            
+                // ìƒˆë¡œìš´ ë¹„ë””ì˜¤ì— ëŒ€í•œ ì´ë²¤íŠ¸ ì¶”ê°€
+                const newVideo = newContainer.querySelector('.video');
+                const newPlayPauseButton = newContainer.querySelector('.play-pause');
+                const newSeekbar = newContainer.querySelector('.seekbar');
+
+                // ê¸°ì¡´ addVideoEvents ë¡œì§ì„ ì‚¬ìš©í•˜ì—¬ ì´ë²¤íŠ¸ ì—°ê²°
+                _this.shortsFunc.addVideoEvents(newVideo, newPlayPauseButton, newSeekbar, newContainer);
             });
         }
+        
+        // ë¹„ë””ì˜¤ì— í•„ìš”í•œ ì´ë²¤íŠ¸ ì¶”ê°€
+        _this.shortsFunc.addVideoEvents = (video, playPauseButton, seekbar, container) => {
+            const volumeSlider = document.querySelector('.volume-slider');
+            const muteToggleButton = document.getElementById('mute-toggle-button');
+            const muteIcon = muteToggleButton.querySelector('i');
+            let lastVolume = 1; // ë§ˆì§€ë§‰ ë³¼ë¥¨ ê°’ì„ ì´ˆê¸°í™”
 
-        container.addEventListener('touchstart', (event) => {
-            startY = event.touches[0].clientY;
-        }, { passive: false });
-
-        container.addEventListener('touchmove', handleScroll, { passive: false });
-    }
-
-    // ¸ğ¹ÙÀÏ ±â±â¿¡¼­ ½ºÅ©·Ñ Ã³¸® (iOS)
-    function movingIos() {
-        let startY = 0;
-        let isDragging = false;
-        let threshold = 10;
-
-        container.addEventListener('touchstart', (event) => {
-            startY = event.touches[0].clientY;
-            isDragging = true;
-        });
-
-        container.addEventListener('touchmove', (event) => {
-            if (!isDragging) return;
-
-            const currentY = event.touches[0].clientY;
-            const deltaY = startY - currentY;
-
-            if (Math.abs(deltaY) > threshold) {
-                event.preventDefault();
+            // ë”ë¸” í´ë¦­ ë°©ì§€
+            video.addEventListener('dblclick', (event) => event.preventDefault());
+        
+            // ì¬ìƒ/ì¼ì‹œ ì •ì§€ ë²„íŠ¼ ìƒíƒœ ì—…ë°ì´íŠ¸
+            video.addEventListener('play', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
+            video.addEventListener('pause', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
+        
+            // seekbar ì—…ë°ì´íŠ¸
+            video.addEventListener('timeupdate', () => {
+                const value = (100 / video.duration) * video.currentTime;
+                seekbar.value = value;
+                const progressBar = container.querySelector('.progress-bar');
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = `${percentage}%`;
+            });
+        
+            // seekbar ë³€ê²½
+            seekbar.addEventListener('input', () => {
+                const time = video.duration * (seekbar.value / 100);
+                video.currentTime = time;
+            });
+        
+            // ì¬ìƒ/ì¼ì‹œ ì •ì§€ ë²„íŠ¼ í´ë¦­ ì´ë²¤íŠ¸
+            playPauseButton.addEventListener('click', () => {
+                video.paused ? video.play() : video.pause();
+            });
+        
+            // ì¢‹ì•„ìš” ë²„íŠ¼ í´ë¦­ ì‹œ ìƒíƒœ ë³€ê²½
+            if (container.getElementsByClassName('btn_like').length > 0) {
+                const btnLike = container.querySelector('.btn_like');
+                btnLike.addEventListener('click', (event) => {
+                    event.target.classList.toggle('on');
+                });
             }
-        }, { passive: false });
-
-        container.addEventListener('touchend', (event) => {
-            if (!isDragging) return;
-
-            const endY = event.changedTouches[0].clientY;
-            const deltaY = startY - endY;
-            if (Math.abs(deltaY) > threshold) {
-                scrollHandler(event, deltaY > 0 ? 'down' : 'up');
+        
+            // ì œëª© í´ë¦­ ì‹œ ellipsis í† ê¸€
+            if (container.getElementsByClassName('description-title').length > 0) {
+                const descriptionTitle = container.querySelector('.description-title');
+                descriptionTitle.addEventListener('click', (event) => {
+                    event.target.classList.toggle('ellipsis');
+                });
             }
 
-            isDragging = false;
-        }, { passive: false });
-    }
+            // ë³¼ë¥¨ ìŠ¬ë¼ì´ë” ì´ˆê¸° ì„¤ì •
+            lastVolume = volumeSlider.value;
+            video.volume = lastVolume; // ë¹„ë””ì˜¤ ë³¼ë¥¨ ì´ˆê¸° ì„¤ì •
+            video.muted = lastVolume == 0; // ë³¼ë¥¨ì´ 0ì´ë©´ ìŒì†Œê±° ì„¤ì •
+        
+            // ë³¼ë¥¨ ìŠ¬ë¼ì´ë” ë³€ê²½ ì´ë²¤íŠ¸
+            volumeSlider.addEventListener('input', () => {
+                video.volume = lastVolume;
+                video.muted = lastVolume == 0; // ë³¼ë¥¨ì´ 0ì´ë©´ ìŒì†Œê±°
+            });
 
-    // ¸ğ¹ÙÀÏ ÀåÄ¡ °¨Áö ¹× ÀûÀıÇÑ ½ºÅ©·Ñ ÇÚµé·¯ È£Ãâ
-    const isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
-    if (isMobile) {
-        if (/android/i.test(navigator.userAgent.toLowerCase())) {
-            movingAos();
-        } else {
-            movingIos();
-        }
-    } else {
-        movingWheel();
+            // ìƒˆë¡œ ì¶”ê°€ëœ ì˜ìƒ ë³¼ë¥¨ slider, ë³¼ë¥¨ toggle ì ìš© ì•ˆë¨
+            
+        };
+
+        // ìŠ¤í¬ë¡¤ ì´ë²¤íŠ¸ ì¶”ê°€
+        _this.shortsFunc.addScrollEvents = () => {
+            const container = document.querySelector('.container');
+            // ë””ë°”ìš´ìŠ¤ë¥¼ ì‚¬ìš©í•œ playVisibleVideo í˜¸ì¶œ
+            container.addEventListener('scroll', debounce(() => _this.shortsFunc.playVisibleVideo(), 100));
+        };
+
+        // ìŠ¤í¬ë¡¤ í•¸ë“¤ëŸ¬
+        _this.shortsFunc.scrollHandler = (event, direction) => {
+            const container = document.querySelector('.container');
+            const scrollAmount = window.innerHeight;
+            const newScrollPosition = container.scrollTop + (direction === 'down' ? scrollAmount : -scrollAmount);
+            container.scrollTo({
+                top: Math.min(container.scrollHeight - container.clientHeight, Math.max(0, newScrollPosition)),
+                behavior: 'smooth',
+            });
+        };
+
+        // ë§ˆìš°ìŠ¤ íœ ë¡œ ìŠ¤í¬ë¡¤ ì²˜ë¦¬
+        _this.shortsFunc.movingWheel = () => {
+            const container = document.querySelector('.container');
+            container.addEventListener('wheel', (event) => {
+                if (event.deltaY > 0) {
+                    _this.shortsFunc.scrollHandler(event, 'down');
+                } else {
+                    _this.shortsFunc.scrollHandler(event, 'up');
+                }
+            }, { passive: false });
+        };
+
+        // ëª¨ë°”ì¼ ê¸°ê¸°ì—ì„œ ìŠ¤í¬ë¡¤ ì²˜ë¦¬ (ì•ˆë“œë¡œì´ë“œ)
+        _this.shortsFunc.movingAos = () => {
+            let isScrolling = false;
+            let startY = 0;
+            const container = document.querySelector('.container');
+
+            function handleScroll(event) {
+                if (isScrolling) return;
+                isScrolling = true;
+                requestAnimationFrame(() => {
+                    if (event.touches[0].clientY < startY) {
+                        container.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+                    } else {
+                        container.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+                    }
+                    setTimeout(() => {
+                        isScrolling = false;
+                    }, 500);
+                });
+            }
+
+            container.addEventListener('touchstart', (event) => startY = event.touches[0].clientY);
+            container.addEventListener('touchmove', handleScroll, { passive: false });
+        };
+
+        // ëª¨ë°”ì¼ ê¸°ê¸°ì—ì„œ ìŠ¤í¬ë¡¤ ì²˜ë¦¬ (iOS)
+        _this.shortsFunc.movingIos = () => {
+            let startY = 0;
+            let isDragging = false;
+            const container = document.querySelector('.container');
+
+            container.addEventListener('touchstart', (event) => {
+                startY = event.touches[0].clientY;
+                isDragging = true;
+            });
+
+            container.addEventListener('touchmove', (event) => {
+                if (!isDragging) return;
+                const deltaY = startY - event.touches[0].clientY;
+                if (Math.abs(deltaY) > 10) {
+                    event.preventDefault();
+                    _this.shortsFunc.scrollHandler(event, deltaY > 0 ? 'down' : 'up');
+                }
+            }, { passive: false });
+
+            container.addEventListener('touchend', () => isDragging = false);
+        };
+
+        // ëª¨ë°”ì¼ ì¥ì¹˜ ê°ì§€ ë° ì ì ˆí•œ ìŠ¤í¬ë¡¤ í•¸ë“¤ëŸ¬ í˜¸ì¶œ
+        _this.shortsFunc.detectDeviceAndScroll = () => {
+            if (isMobile) {
+                if (/android/i.test(navigator.userAgent.toLowerCase())) {
+                    _this.shortsFunc.movingAos();
+                } else {
+                    _this.shortsFunc.movingIos();
+                }
+            } else {
+                _this.shortsFunc.movingWheel();
+            }
+        };
+
+        _this.shortsFunc.init();
+    },
+
+    init() {
+        this.shortsFunc();
     }
+};
+
+/* INIT */
+shortsEvent.init = () => {
+    shortsEvent.main.init();
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    shortsEvent.init();
 });

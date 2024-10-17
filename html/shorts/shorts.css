@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 body,
 html {
     height: 100%;
@@ -263,11 +265,12 @@ video::-webkit-media-controls {
     top: 80px;
     left: 20px;
     background-color: rgba(0, 0, 255, 0.5);
-    border: 0;
+    border: 2px solid #fff;
     color: white;
-    padding: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
     cursor: pointer;
-    border-radius: 5px;
+    text-decoration: none;
     z-index: 1000;
     display: none;
 }
@@ -278,14 +281,15 @@ video::-webkit-media-controls {
 
 .gnb_close {
     position: fixed;
-    top: 135px;
+    top: 120px;
     left: 20px;
     background-color: rgba(0, 255, 0, 0.5);
-    border: 0;
+    border: 2px solid #fff;
     color: white;
-    padding: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
     cursor: pointer;
-    border-radius: 5px;
+    text-decoration: none;
     z-index: 1000;
     display: none;
 }
@@ -296,14 +300,15 @@ video::-webkit-media-controls {
 
 .btn_append {
     position: fixed;
-    top: 190px;
+    top: 160px;
     left: 20px;
     background-color: rgba(255, 0, 0, 0.5);
-    border: 0;
+    border: 2px solid #fff;
     color: white;
-    padding: 10px;
+    font-size: 12px;
+    padding: 5px 10px;
     cursor: pointer;
-    border-radius: 5px;
+    text-decoration: none;
     z-index: 1000;
 }
 
