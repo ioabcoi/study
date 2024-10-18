@@ -16,7 +16,13 @@ shortsEvent.main = {
         };
 
         const container = document.querySelector('.container'); // 여기서 한 번만 정의
-        let lastVolume = 1; // 마지막 볼륨 값 초기화 (기본값: 1)
+        const containers = document.querySelectorAll('.video-container');
+        const videos = document.querySelectorAll('.video');
+        const muteToggleButton = document.getElementById('mute-toggle-button');
+        const muteIcon = muteToggleButton.querySelector('i');
+        const volumeSlider = document.querySelector('.volume-slider');
+
+        let lastVolume = 0; // 마지막 볼륨 값 초기화 (기본값: 0)
         let isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
         
         _this.shortsFunc.init = () => {
@@ -113,84 +119,109 @@ shortsEvent.main = {
                 gnbOpen.classList.add('on');
             });
         };
-
-        // 코드 중복 제거: addEvents와 addVideoEvents에서 비슷한 로직이 반복되고 있으니, 공통된 부분은 함수로 분리하면 가독성이 높아질 것입니다.
-
-        // 비디오에 필요한 이벤트 추가
-        _this.shortsFunc.addEvents = () => {
-            const videos = document.querySelectorAll('.video');
-            const containers = document.querySelectorAll('.video-container');
-            const muteToggleButton = document.getElementById('mute-toggle-button');
-            const muteIcon = muteToggleButton.querySelector('i');
-            const volumeSlider = document.querySelector('.volume-slider');
-
-            videos.forEach((video, index) => {
-                const container = containers[index];
-                const playPauseButton = container.querySelector('.play-pause');
-                const seekbar = container.querySelector('.seekbar');
-                
-                // 더블 클릭 방지
-                video.addEventListener('dblclick', (event) => event.preventDefault());
-
-                // 재생/일시 정지 버튼 상태 업데이트
-                video.addEventListener('play', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
-                video.addEventListener('pause', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
-
-                // seekbar 업데이트
-                video.addEventListener('timeupdate', () => {
-                    const value = (100 / video.duration) * video.currentTime;
-                    seekbar.value = value;
-                    const progressBar = video.closest('.video-container').querySelector('.progress-bar');
-                    const percentage = (video.currentTime / video.duration) * 100;
-                    progressBar.style.width = `${percentage}%`;
-                });
-
-                // seekbar 변경
-                seekbar.addEventListener('input', () => {
-                    const time = video.duration * (seekbar.value / 100);
-                    video.currentTime = time;
-                });
-
-                // 재생/일시 정지 버튼 클릭 이벤트
-                playPauseButton.addEventListener('click', () => {
-                    video.paused ? video.play() : video.pause();
-                });
-
-                // 좋아요 버튼 클릭 시 상태 변경
-                if (container.getElementsByClassName('btn_like').length > 0) {
-                    const btnLike = container.querySelector('.btn_like');
-                    btnLike.addEventListener('click', (event) => {
-                        event.target.classList.toggle('on');
-                    });
-                }
         
-                // 제목 클릭 시 ellipsis 토글 (줄임말 효과 토글)
-                if (container.getElementsByClassName('description-title').length > 0) {
-                    const descriptionTitle = container.querySelector('.description-title');
-                    descriptionTitle.addEventListener('click', (event) => {
-                        event.target.classList.toggle('ellipsis');
-                    });
-                }
+// 다시 점검
+
+        // 기존 비디오와 추가되는 비디오에 필요한 공통 이벤트
+        _this.shortsFunc.addCommonVideoEvents = (video, playPauseButton, seekbar, container) => {
+            // 더블 클릭 방지
+            video.addEventListener('dblclick', (event) => event.preventDefault());
+        
+            // 재생/일시 정지 버튼 상태 업데이트
+            video.addEventListener('play', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
+            video.addEventListener('pause', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
+        
+            // seekbar 업데이트
+            video.addEventListener('timeupdate', () => {
+                const value = (100 / video.duration) * video.currentTime;
+                seekbar.value = value;
+                const progressBar = container.querySelector('.progress-bar');
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = `${percentage}%`;
             });
+        
+            // seekbar 변경
+            seekbar.addEventListener('input', () => {
+                const time = video.duration * (seekbar.value / 100);
+                video.currentTime = time;
+            });
+        
+            // 재생/일시 정지 버튼 클릭 이벤트
+            playPauseButton.addEventListener('click', () => {
+                video.paused ? video.play() : video.pause();
+            });
+        
+            // 좋아요 버튼 클릭 시 상태 변경
+            if (container.getElementsByClassName('btn_like').length > 0) {
+                const btnLike = container.querySelector('.btn_like');
+                btnLike.addEventListener('click', (event) => {
+                    event.target.classList.toggle('on');
+                });
+            }
+        
+            // 제목 클릭 시 ellipsis 토글
+            if (container.getElementsByClassName('description-title').length > 0) {
+                const descriptionTitle = container.querySelector('.description-title');
+                descriptionTitle.addEventListener('click', (event) => {
+                    event.target.classList.toggle('ellipsis');
+                });
+            }
+        };
+
+        // 기존 비디오와 추가되는 비디오에 필요한 공통 이벤트 - 볼륨 및 음소거 이벤트
+        _this.shortsFunc.addVolumeAndMuteEvents = (video, volumeSlider, muteToggleButton, muteIcon) => {
+            const isMuted = container.querySelectorAll('.video')[0].muted;
+
+            // 비디오의 초기 볼륨 설정
+            video.volume = lastVolume > 0 ? lastVolume : 0;  // 기본 볼륨 0
+            volumeSlider.value = video.volume;
+            video.muted = lastVolume == 0;  // 마지막 볼륨이 0이면 음소거로 설정
+
+            // 음소거 상태에 따라 아이콘 설정
+            muteIcon.classList.toggle('fa-volume-mute', isMuted);
+            muteIcon.classList.toggle('fa-volume-up', !isMuted);
 
             // 볼륨 슬라이더 변경 이벤트
             volumeSlider.addEventListener('input', () => {
                 lastVolume = volumeSlider.value;
-                videos.forEach((video) => {
-                    video.volume = lastVolume;
-                    video.muted = lastVolume == 0;
-                });
+                video.volume = lastVolume;
+                video.muted = lastVolume == 0;  // 볼륨이 0이면 음소거로 설정
+                muteIcon.classList.toggle('fa-volume-mute', isMuted);
+                muteIcon.classList.toggle('fa-volume-up', !isMuted);
             });
 
-            // 음소거/소리 조절 버튼 클릭 이벤트
+            // 음소거 토글 버튼 클릭 이벤트
             muteToggleButton.addEventListener('click', () => {
-                let isMuted = videos[0].muted;
-                videos.forEach((video) => {
+                // 모든 비디오에 대해 음소거 상태를 토글
+                videos.forEach(video => {
                     video.muted = !isMuted;
                 });
-                volumeSlider.value = isMuted ? (lastVolume == 0 ? 1 : lastVolume) : 0;
-                muteIcon.classList.toggle('fa-volume-mute', !isMuted);
-                muteIcon.classList.toggle('fa-volume-up', isMuted);
+        
+                // 음소거 상태에 따라 볼륨 슬라이더 및 아이콘 업데이트
+                if (isMuted) {
+                    volumeSlider.value = 0;
+                    muteIcon.classList.add('fa-volume-mute');
+                    muteIcon.classList.remove('fa-volume-up');
+                } else {
+                    volumeSlider.value = lastVolume > 0 ? lastVolume : 1;  // 음소거 해제 시 마지막 볼륨 복원
+                    muteIcon.classList.add('fa-volume-up');
+                    muteIcon.classList.remove('fa-volume-mute');
+                }
+            });
+        };
+
+        // 기존 비디오에 필요한 이벤트 추가
+        _this.shortsFunc.addEvents = () => {
+            videos.forEach((video, index) => {
+                const container = containers[index];
+                const playPauseButton = container.querySelector('.play-pause');
+                const seekbar = container.querySelector('.seekbar');
+
+                // 공통 비디오 이벤트 추가
+                _this.shortsFunc.addCommonVideoEvents(video, playPauseButton, seekbar, container);
+
+                // 볼륨 및 음소거 이벤트 처리
+                _this.shortsFunc.addVolumeAndMuteEvents(videos, volumeSlider, muteToggleButton, muteIcon);
             });
         };
         
@@ -248,73 +279,19 @@ shortsEvent.main = {
 
                 // 기존 addVideoEvents 로직을 사용하여 이벤트 연결
                 _this.shortsFunc.addVideoEvents(newVideo, newPlayPauseButton, newSeekbar, newContainer);
+
+                // 볼륨 및 음소거 이벤트 처리
+                _this.shortsFunc.addVolumeAndMuteEvents(videos, volumeSlider, muteToggleButton, muteIcon);
             });
         }
         
-        // 비디오에 필요한 이벤트 추가
+        // 추가되는 비디오에 필요한 이벤트 추가
         _this.shortsFunc.addVideoEvents = (video, playPauseButton, seekbar, container) => {
-            const volumeSlider = document.querySelector('.volume-slider');
-            const muteToggleButton = document.getElementById('mute-toggle-button');
-            const muteIcon = muteToggleButton.querySelector('i');
-            let lastVolume = 1; // 마지막 볼륨 값을 초기화
-
-            // 더블 클릭 방지
-            video.addEventListener('dblclick', (event) => event.preventDefault());
-        
-            // 재생/일시 정지 버튼 상태 업데이트
-            video.addEventListener('play', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
-            video.addEventListener('pause', () => _this.shortsFunc.updatePlayPauseButton(video, playPauseButton));
-        
-            // seekbar 업데이트
-            video.addEventListener('timeupdate', () => {
-                const value = (100 / video.duration) * video.currentTime;
-                seekbar.value = value;
-                const progressBar = container.querySelector('.progress-bar');
-                const percentage = (video.currentTime / video.duration) * 100;
-                progressBar.style.width = `${percentage}%`;
-            });
-        
-            // seekbar 변경
-            seekbar.addEventListener('input', () => {
-                const time = video.duration * (seekbar.value / 100);
-                video.currentTime = time;
-            });
-        
-            // 재생/일시 정지 버튼 클릭 이벤트
-            playPauseButton.addEventListener('click', () => {
-                video.paused ? video.play() : video.pause();
-            });
-        
-            // 좋아요 버튼 클릭 시 상태 변경
-            if (container.getElementsByClassName('btn_like').length > 0) {
-                const btnLike = container.querySelector('.btn_like');
-                btnLike.addEventListener('click', (event) => {
-                    event.target.classList.toggle('on');
-                });
-            }
-        
-            // 제목 클릭 시 ellipsis 토글
-            if (container.getElementsByClassName('description-title').length > 0) {
-                const descriptionTitle = container.querySelector('.description-title');
-                descriptionTitle.addEventListener('click', (event) => {
-                    event.target.classList.toggle('ellipsis');
-                });
-            }
-
-            // 볼륨 슬라이더 초기 설정
-            lastVolume = volumeSlider.value;
-            video.volume = lastVolume; // 비디오 볼륨 초기 설정
-            video.muted = lastVolume == 0; // 볼륨이 0이면 음소거 설정
-        
-            // 볼륨 슬라이더 변경 이벤트
-            volumeSlider.addEventListener('input', () => {
-                video.volume = lastVolume;
-                video.muted = lastVolume == 0; // 볼륨이 0이면 음소거
-            });
-
-            // 새로 추가된 영상 볼륨 slider, 볼륨 toggle 적용 안됨
-            
+            // 공통 비디오 이벤트 추가
+            _this.shortsFunc.addCommonVideoEvents(video, playPauseButton, seekbar, container);
         };
+
+// 다시 점검
 
         // 스크롤 이벤트 추가
         _this.shortsFunc.addScrollEvents = () => {
