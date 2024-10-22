@@ -18,12 +18,10 @@ shortsEvent.main = {
         const container = document.querySelector('.container'); // 여기서 한 번만 정의
         const containers = document.querySelectorAll('.video-container');
         const videos = document.querySelectorAll('.video');
-        const muteToggleButton = document.getElementById('mute-toggle-button');
-        const muteIcon = muteToggleButton.querySelector('i');
-        const volumeSlider = document.querySelector('.volume-slider');
 
         let lastVolume = 0; // 마지막 볼륨 값 초기화 (기본값: 0)
         let isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
+        let videoIndex = 0;
         
         _this.shortsFunc.init = () => {
             _this.shortsFunc.preloadVideosInRange(0, 3); // 초기 3개의 비디오 미리 로드
@@ -31,6 +29,44 @@ shortsEvent.main = {
             _this.shortsFunc.scrollHandler();
             _this.shortsFunc.addScrollEvents();
             _this.shortsFunc.addGnbEvents(); // GNB 이벤트 추가
+
+            // 볼륨 슬라이더를 통해 볼륨 조절
+            const volumeSlider = document.querySelector('.volume-slider');
+            volumeSlider.addEventListener('input', () => {
+                lastVolume = volumeSlider.value; // 슬라이더 값에 맞게 비디오 볼륨 조정
+                document.querySelectorAll('.video').forEach((video) => {
+                    video.volume = lastVolume;
+                    video.muted = lastVolume == 0; // 볼륨이 0이면 음소거
+                    if (video.volume === 0) {
+                        muteIcon.classList.remove('fa-volume-up');
+                        muteIcon.classList.add('fa-volume-mute');
+                    } else {
+                        muteIcon.classList.remove('fa-volume-mute');
+                        muteIcon.classList.add('fa-volume-up');
+                    }
+                    lastVolume = video.volume; // 마지막 볼륨 값 저장
+                });
+            });
+    
+            // 음소거 버튼 클릭 이벤트 처리
+            const muteToggleButton = document.getElementById('mute-toggle-button');
+            const muteIcon = muteToggleButton.querySelector('i');
+            let isMuted = videos[0].muted;
+            muteToggleButton.addEventListener('click', () => {
+                document.querySelectorAll('.video').forEach((video) => {
+                    video.muted = !isMuted; // 현재 상태 반전
+                    if (!isMuted) {
+                        video.volume = 0;
+                    } else {
+                        video.volume = lastVolume == 0 ? 1 : lastVolume; // 음소거 해제 시 마지막 볼륨 값 사용 (마지막 볼륨 값이 0이면 1로 설정)
+                    }
+                });
+
+                // 볼륨 슬라이더와 음소거 버튼 아이콘 업데이트
+                volumeSlider.value = isMuted ? (lastVolume == 0 ? 1 : lastVolume) : 0;
+                muteIcon.classList.toggle('fa-volume-mute', !isMuted);
+                muteIcon.classList.toggle('fa-volume-up', isMuted);
+            });
         };
 
         // 비디오를 미리 로드하는 함수
@@ -38,6 +74,7 @@ shortsEvent.main = {
             const src = video.getAttribute('data-src');
             if (src && !video.src) {
                 video.src = src;
+                video.setAttribute('data-number', videoIndex++);
             }
         };
 
@@ -119,8 +156,6 @@ shortsEvent.main = {
                 gnbOpen.classList.add('on');
             });
         };
-        
-// 다시 점검
 
         // 기존 비디오와 추가되는 비디오에 필요한 공통 이벤트
         _this.shortsFunc.addCommonVideoEvents = (video, playPauseButton, seekbar, container) => {
@@ -168,48 +203,6 @@ shortsEvent.main = {
             }
         };
 
-        // 기존 비디오와 추가되는 비디오에 필요한 공통 이벤트 - 볼륨 및 음소거 이벤트
-        _this.shortsFunc.addVolumeAndMuteEvents = (video, volumeSlider, muteToggleButton, muteIcon) => {
-            const isMuted = container.querySelectorAll('.video')[0].muted;
-
-            // 비디오의 초기 볼륨 설정
-            video.volume = lastVolume > 0 ? lastVolume : 0;  // 기본 볼륨 0
-            volumeSlider.value = video.volume;
-            video.muted = lastVolume == 0;  // 마지막 볼륨이 0이면 음소거로 설정
-
-            // 음소거 상태에 따라 아이콘 설정
-            muteIcon.classList.toggle('fa-volume-mute', isMuted);
-            muteIcon.classList.toggle('fa-volume-up', !isMuted);
-
-            // 볼륨 슬라이더 변경 이벤트
-            volumeSlider.addEventListener('input', () => {
-                lastVolume = volumeSlider.value;
-                video.volume = lastVolume;
-                video.muted = lastVolume == 0;  // 볼륨이 0이면 음소거로 설정
-                muteIcon.classList.toggle('fa-volume-mute', isMuted);
-                muteIcon.classList.toggle('fa-volume-up', !isMuted);
-            });
-
-            // 음소거 토글 버튼 클릭 이벤트
-            muteToggleButton.addEventListener('click', () => {
-                // 모든 비디오에 대해 음소거 상태를 토글
-                videos.forEach(video => {
-                    video.muted = !isMuted;
-                });
-        
-                // 음소거 상태에 따라 볼륨 슬라이더 및 아이콘 업데이트
-                if (isMuted) {
-                    volumeSlider.value = 0;
-                    muteIcon.classList.add('fa-volume-mute');
-                    muteIcon.classList.remove('fa-volume-up');
-                } else {
-                    volumeSlider.value = lastVolume > 0 ? lastVolume : 1;  // 음소거 해제 시 마지막 볼륨 복원
-                    muteIcon.classList.add('fa-volume-up');
-                    muteIcon.classList.remove('fa-volume-mute');
-                }
-            });
-        };
-
         // 기존 비디오에 필요한 이벤트 추가
         _this.shortsFunc.addEvents = () => {
             videos.forEach((video, index) => {
@@ -219,9 +212,6 @@ shortsEvent.main = {
 
                 // 공통 비디오 이벤트 추가
                 _this.shortsFunc.addCommonVideoEvents(video, playPauseButton, seekbar, container);
-
-                // 볼륨 및 음소거 이벤트 처리
-                _this.shortsFunc.addVolumeAndMuteEvents(videos, volumeSlider, muteToggleButton, muteIcon);
             });
         };
         
@@ -277,11 +267,14 @@ shortsEvent.main = {
                 const newPlayPauseButton = newContainer.querySelector('.play-pause');
                 const newSeekbar = newContainer.querySelector('.seekbar');
 
+                // 추가된 비디오에 mute 상태 초기화
+                newVideo.muted = isMuted;
+                lastVolume = volumeSlider.value; // 슬라이더 값에 맞게 비디오 볼륨 조정
+                newVideo.volume = lastVolume;
+                newVideo.muted = lastVolume == 0; // 볼륨이 0이면 음소거
+
                 // 기존 addVideoEvents 로직을 사용하여 이벤트 연결
                 _this.shortsFunc.addVideoEvents(newVideo, newPlayPauseButton, newSeekbar, newContainer);
-
-                // 볼륨 및 음소거 이벤트 처리
-                _this.shortsFunc.addVolumeAndMuteEvents(videos, volumeSlider, muteToggleButton, muteIcon);
             });
         }
         
@@ -290,8 +283,6 @@ shortsEvent.main = {
             // 공통 비디오 이벤트 추가
             _this.shortsFunc.addCommonVideoEvents(video, playPauseButton, seekbar, container);
         };
-
-// 다시 점검
 
         // 스크롤 이벤트 추가
         _this.shortsFunc.addScrollEvents = () => {
