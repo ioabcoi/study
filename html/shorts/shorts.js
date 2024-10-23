@@ -18,6 +18,7 @@ shortsEvent.main = {
         const container = document.querySelector('.container'); // 여기서 한 번만 정의
         const containers = document.querySelectorAll('.video-container');
         const videos = document.querySelectorAll('.video');
+        const volumeSlider = document.querySelector('.volume-slider');
 
         let lastVolume = 0; // 마지막 볼륨 값 초기화 (기본값: 0)
         let isMobile = /iphone|ipad|ipod|android/i.test(navigator.userAgent.toLowerCase());
@@ -31,7 +32,6 @@ shortsEvent.main = {
             _this.shortsFunc.addGnbEvents(); // GNB 이벤트 추가
 
             // 볼륨 슬라이더를 통해 볼륨 조절
-            const volumeSlider = document.querySelector('.volume-slider');
             volumeSlider.addEventListener('input', () => {
                 lastVolume = volumeSlider.value; // 슬라이더 값에 맞게 비디오 볼륨 조정
                 document.querySelectorAll('.video').forEach((video) => {
@@ -51,9 +51,9 @@ shortsEvent.main = {
             // 음소거 버튼 클릭 이벤트 처리
             const muteToggleButton = document.getElementById('mute-toggle-button');
             const muteIcon = muteToggleButton.querySelector('i');
-            let isMuted = videos[0].muted;
             muteToggleButton.addEventListener('click', () => {
-                document.querySelectorAll('.video').forEach((video) => {
+                const isMuted = container.querySelectorAll('video')[0].muted;
+                container.querySelectorAll('video').forEach(video => {
                     video.muted = !isMuted; // 현재 상태 반전
                     if (!isMuted) {
                         video.volume = 0;
@@ -268,6 +268,7 @@ shortsEvent.main = {
                 const newSeekbar = newContainer.querySelector('.seekbar');
 
                 // 추가된 비디오에 mute 상태 초기화
+                const isMuted = container.querySelectorAll('video')[0].muted;
                 newVideo.muted = isMuted;
                 lastVolume = volumeSlider.value; // 슬라이더 값에 맞게 비디오 볼륨 조정
                 newVideo.volume = lastVolume;
