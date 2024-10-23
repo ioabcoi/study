@@ -20,52 +20,44 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .time {display:flex;align-items:center;justify-content:center;flex-direction:row;height:50px;font-size:50px;}
-    .time strong {display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 10px;background:#000;color:#fff;font-size:50px;font-weight:800;line-height:50px;letter-spacing:0.1em;}
+    .time {display:flex;align-items:center;justify-content:center;flex-direction:row;font-size:50px;}
+    .time strong {display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 10px;background:#000;color:#fff;font-size:50px;font-weight:800;letter-spacing:0.1em;}
 </style>
 <div id="countdown" class="time">D-<strong>00</strong>, <strong>00</strong>:<strong>00</strong>:<strong>00</strong></div>
 <script type="text/javascript" >
-    // Set the date we're counting down to
-    var countDownDate = new Date("May 21, 2025 15:10:00").getTime();
+    const countDownDate = new Date("May 21, 2025 15:10:00").getTime();
+    
+    function pad(num, size) {
+        return String(num).padStart(size, '0');
+    }
 
-    // Update the count down every 1 second
-    var x = setInterval(function() {
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
 
-        // Get today's date and time
-        var now = new Date().getTime();
-
-        // Find the distance between now and the count down date
-        var distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // num 
-        days = pad(days, 3);
-        hours = pad(hours, 2);
-        minutes = pad(minutes, 2);
-        seconds = pad(seconds, 2);
-
-        // console.log('1.', days, hours, minutes, seconds);
-
-        // Output the result in an element with id="demo"
-        document.getElementById("countdown").innerHTML = "D-<strong>" + days + "</strong>,<strong>" + hours + "</strong>:<strong>" + minutes + "</strong>:<strong>" + seconds + "</strong>";
-
-        // If the count down is over, write some text 
         if (distance < 0) {
-            clearInterval(x);
             document.getElementById("countdown").innerHTML = "EXPIRED";
+            return; // 카운트다운이 종료된 경우 함수 종료
         }
 
-        // num size
-        function pad(num, size) {
-            var s = "0000" + num;
-            return s.substr(s.length - size);
+        const days = pad(Math.floor(distance / (1000 * 60 * 60 * 24)), 3);
+        const hours = pad(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), 2);
+        const minutes = pad(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)), 2);
+        const seconds = pad(Math.floor((distance % (1000 * 60)) / 1000), 2);
+
+        document.getElementById("countdown").innerHTML = `D-<strong>${days}</strong>, <strong>${hours}</strong>:<strong>${minutes}</strong>:<strong>${seconds}</strong>`;
+    }
+
+    function startCountdown() {
+        updateCountdown(); // 처음 한 번 업데이트
+        const update = () => {
+            updateCountdown();
+            requestAnimationFrame(update);
         }
-    }, 1000);
+        requestAnimationFrame(update); // 애니메이션 프레임을 통한 지속적인 업데이트
+    }
+
+    startCountdown(); // 카운트다운 시작
 </script>
                 </div>
             </div>
@@ -95,65 +87,68 @@
     <dl>
         <dt>D-</dt>
         <dd>
-            <em class="day">
-                <span></span>
-                <span></span>
-            </em>,
-            <em class="hour">
-                <span></span>
-                <span></span>
-            </em> : 
-            <em class="min">
-                <span></span>
-                <span></span>
-            </em> : 
-            <em class="sec">
-                <span></span>
-                <span></span>
-            </em>
+            <em class="day"><span></span><span></span><span></span></em>,  <!-- 최대 3자리 -->
+            <em class="hour"><span></span><span></span></em> :
+            <em class="min"><span></span><span></span></em> :
+            <em class="sec"><span></span><span></span></em>
         </dd>
     </dl>
 </div>
 <script type="text/javascript" >
-    // D-day 설정
-    var dday = new Date("May 21, 2025 15:10:00").getTime();
-    var y = setInterval(function() {
-        // 초기화
-        $(".time_cnt em").html('');
+    const dday = new Date("May 21, 2025 15:10:00").getTime();
+    
+    function pad(num, size) {
+        return String(num).padStart(size, '0');
+    }
 
-        // 시간 셋팅 및 한 숫자씩 자르기
-        var today = new Date().getTime();
-        var gap = dday - today;
-        var day_ary = String(Math.floor(gap / (1000 * 60 * 60 * 24))).split("");
-        var hour_ary = String(Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).split("");
-        var min_ary = String(Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60))).split("");
-        var sec_ary = String(Math.floor((gap % (1000 * 60)) / 1000)).split("");
+    function updateTime() {
+        const now = new Date().getTime();
+        const gap = dday - now;
 
-        for (i=0; day_ary.length > i; i++){
-            if(day_ary.length < 2 && i == 0) $(".time_cnt .day").append('<span><img src="../../images/num0.png" alt="0"></span>');
-            $(".time_cnt .day").append('<span><img src="../../images/num'+day_ary[i]+'.png" alt="'+day_ary[i]+'"></span>');
-        }
-        for (i=0; hour_ary.length > i; i++){
-            if(hour_ary.length < 2 && i == 0) $(".time_cnt .hour").append('<span><img src="../../images/num0.png" alt="0"></span>');
-            $(".time_cnt .hour").append('<span><img src="../../images/num'+hour_ary[i]+'.png" alt="'+hour_ary[i]+'"></span>');
-        }
-        for (i=0; min_ary.length > i; i++){
-            if(min_ary.length < 2 && i == 0) $(".time_cnt .min").append('<span><img src="../../images/num0.png" alt="0"></span>');
-            $(".time_cnt .min").append('<span><img src="../../images/num'+min_ary[i]+'.png" alt="'+min_ary[i]+'"></span>');
-        }
-        for (i=0; sec_ary.length > i; i++){
-            if(sec_ary.length < 2 && i == 0) $(".time_cnt .sec").append('<span><img src="../../images/num0.png" alt="0"></span>');
-            $(".time_cnt .sec").append('<span><img src="../../images/num'+sec_ary[i]+'.png" alt="'+sec_ary[i]+'"></span>');
-        }
-
-        // console.log('2.', day_ary, hour_ary, min_ary, sec_ary);
-
-        // If the count down is over, write some text 
         if (gap < 0) {
-            clearInterval(y);
             document.getElementById("time_cnt").innerHTML = "EXPIRED";
+            return;
         }
-    }, 1000);
+
+        const days = Math.floor(gap / (1000 * 60 * 60 * 24)); // 계산 후, padding 적용
+        const hours = pad(Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)), 2);
+        const minutes = pad(Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60)), 2);
+        const seconds = pad(Math.floor((gap % (1000 * 60)) / 1000), 2);
+
+        updateDisplay(days, hours, minutes, seconds);
+    }
+
+    function updateDisplay(days, hours, minutes, seconds) {
+        const dayElem = document.querySelector('.day');
+        const hourElem = document.querySelector('.hour');
+        const minElem = document.querySelector('.min');
+        const secElem = document.querySelector('.sec');
+
+        // 각 자릿수에 맞게 span 요소 생성
+        dayElem.innerHTML = ''; // Clear existing spans
+        const dayStr = String(days); // days를 문자열로 변환
+        for (let i = 0; i < dayStr.length; i++) {
+            dayElem.innerHTML += `<span><img src="../../images/num${dayStr[i]}.png" alt="${dayStr[i]}"></span>`;
+        }
+
+        hourElem.innerHTML = `<span><img src="../../images/num${hours[0]}.png" alt="${hours[0]}"></span>
+                            <span><img src="../../images/num${hours[1]}.png" alt="${hours[1]}"></span>`;
+        minElem.innerHTML = `<span><img src="../../images/num${minutes[0]}.png" alt="${minutes[0]}"></span>
+                            <span><img src="../../images/num${minutes[1]}.png" alt="${minutes[1]}"></span>`;
+        secElem.innerHTML = `<span><img src="../../images/num${seconds[0]}.png" alt="${seconds[0]}"></span>
+                            <span><img src="../../images/num${seconds[1]}.png" alt="${seconds[1]}"></span>`;
+    }
+
+    function startCountdown() {
+        updateTime(); // 처음 한 번 업데이트
+        const update = () => {
+            updateTime();
+            requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update); // 애니메이션 프레임을 통한 지속적인 업데이트
+    }
+
+    startCountdown(); // 카운트다운 시작
 </script>
                 </div>
             </div>

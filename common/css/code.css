@@ -102,6 +102,7 @@ h1 {
     /* 배경색 분리 */
     border: 1px solid var(--color-border-light);
     border-radius: var(--border-radius-default);
+    overflow: hidden;
 }
 
 /* 코드 뷰 박스 스타일 */

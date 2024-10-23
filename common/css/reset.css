@@ -56,8 +56,8 @@ body,
 button,
 textarea {
     color: #333;
-    font-family: 'Noto Sans KR';
-    /* font-family: 'Nanum Gothic Coding'; */
+    /* font-family: 'Noto Sans KR'; */
+    font-family: 'Nanum Gothic Coding';
     font-size: 11px;
     font-weight: 400;
     line-height: 1.5;

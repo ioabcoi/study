@@ -35,26 +35,25 @@
 </div>
 <script type="text/javascript" >
     $(function(){
-        // style1 - comma
-        var $numCorrect_count_num = $('.count_num');
-        $({ Counter: 0 }).animate({ Counter: $numCorrect_count_num.text() }, {
-            duration: 1000,
-            step: function () {
-                $numCorrect_count_num.text(Math.ceil(this.Counter));
-            }
-        });
+        function animateCounter($element, withComma) {
+            $({ Counter: 0 }).animate({ Counter: $element.text() }, {
+                duration: 1000,
+                step: function () {
+                    var value = Math.ceil(this.Counter);
+                    $element.text(withComma ? numberWithCommas(value) : value);
+                }
+            });
+        }
 
-        // style1 - comma
+        var $numCorrect_count_num = $('.count_num');
         var $numCorrect_count_comma = $('.count_comma');
-        $({ Counter: 0 }).animate({ Counter: $numCorrect_count_comma.text() }, {
-            duration: 1000,
-            step: function () {
-                $numCorrect_count_comma.text(numberWithCommas(Math.ceil(this.Counter)));
-            }
-        });
+
+        animateCounter($numCorrect_count_num, false);
+        animateCounter($numCorrect_count_comma, true);
+
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }        
+        }
     });
 </script>
                 </div>
@@ -73,7 +72,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    .flex {display:flex;justify-content:space-between;margin:100px auto;width:50%;}
+    .flex {display:flex;justify-content:space-between;margin:100px auto;width:100%;max-width:600px;}
     .flex .col {font-size:35px;font-weight:700;text-align:center;}
 </style>
 <div class="flex">
@@ -99,62 +98,38 @@
 	</div>
 </div>
 <script type="text/javascript" >
-    $('.count-num').each(function() { // .count-num에 각각 적용
-        var $this = $(this),
-        countTo = $this.attr('data-count');
-        // $this = 첫번째~세번째 .count-num
-        // countTo = 첫번째~세번째 .count-num의 data-count 속성의 값(777,555,333)
-
-        $({ countNum: $this.text()}).animate({
-            countNum: countTo 
-            // countNum: $this.text() = 0, countNum: countTo = 777, 555, 333
-            // 0에서 countNum이 된다
-        },
-        {
-            duration: 1000, // 애니메이션이 완료될때까지 걸리는 시간
-            easing:'linear', // 애니메이션 효과 방식
-            step: function() { // 움직임 각 스텝별로 실행될 함수
-                $this.text(Math.floor(this.countNum));
-                // Math.floor -> this.countNum의 값을 정수로 만들어준다
+    $(function() {
+        function animateCount($element, withComma) {
+            var countTo = $element.attr('data-count');
+            $({ countNum: $element.text() }).animate({
+                countNum: countTo
             },
-            complete: function() { // 움직임이 멈춘 후 실행될 함수
-                $this.text(this.countNum);
-                // this.countNum이 $this의 text값이 된다
-                //alert('finished');
-            }
-        });  
-    });
+            {
+                duration: 1000,
+                easing: 'linear',
+                step: function() {
+                    var num = withComma ? numberWithCommas(Math.floor(this.countNum)) : Math.floor(this.countNum);
+                    $element.text(num);
+                },
+                complete: function() {
+                    var num = withComma ? numberWithCommas(this.countNum) : this.countNum;
+                    $element.text(num);
+                }
+            });
+        }
 
-    $('.count-num-comma').each(function() { // .count-num에 각각 적용
-        var $this = $(this),
-        countTo = $this.attr('data-count');
-        // $this = 첫번째~세번째 .count-num
-        // countTo = 첫번째~세번째 .count-num의 data-count 속성의 값(777,555,333)
+        $('.count-num').each(function() {
+            animateCount($(this), false);
+        });
 
-        $({ countNum: $this.text()}).animate({
-            countNum: countTo 
-            // countNum: $this.text() = 0, countNum: countTo = 777, 555, 333
-            // 0에서 countNum이 된다
-        },
-        {
-            duration: 1000, // 애니메이션이 완료될때까지 걸리는 시간
-            easing:'linear', // 애니메이션 효과 방식
-            step: function() { // 움직임 각 스텝별로 실행될 함수
-                var num = numberWithCommas(Math.floor(this.countNum));
-                $this.text(num);
-                // Math.floor -> this.countNum의 값을 정수로 만들어준다
-            },
-            complete: function() { // 움직임이 멈춘 후 실행될 함수
-                var num = numberWithCommas(Math.floor(this.countNum));
-                $this.text(num);
-                // this.countNum이 $this의 text값이 된다
-                //alert('finished');
-            }
-        });  
+        $('.count-num-comma').each(function() {
+            animateCount($(this), true);
+        });
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     });
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
 </script>
                 </div>
             </div>
@@ -176,59 +151,49 @@
     .counter {font-size:50px;display:block;font-weight:bold;color:#fff;}
 </style>
 <div class="content">
-	<div class="counter counter_num" data-target="1000">0</div>
-	<div class="counter counter_num" data-target="500">0</div>
-	<div class="counter counter_num" data-target="700">0</div>
-	<div class="counter counter_num" data-target="999">0</div>
+    <div class="counter counter_num" data-target="1000" data-speed="200">0</div>
+    <div class="counter counter_num" data-target="500" data-speed="150">0</div>
+    <div class="counter counter_num" data-target="700" data-speed="180">0</div>
+    <div class="counter counter_num" data-target="999" data-speed="220">0</div>
 </div>
 <div class="content">
-	<div class="counter counter_comma" data-target="1000000"></div>
+    <div class="counter counter_comma" data-target="1000000" data-speed="250">0</div>
 </div>
 <script type="text/javascript" >
-    const counters = document.querySelectorAll('.counter_num');
-    const speed = 200;
-    counters.forEach( counter => {
-        const animate = () => {
-            const value = +counter.getAttribute('data-target');
-            const data = +counter.innerText;
+    // 애니메이션을 위한 공통 함수
+    function animateCounter(counter, formatWithComma = false) {
+        const target = +counter.getAttribute('data-target');
+        const speed = +counter.getAttribute('data-speed') || 200;
+        let startValue = +counter.innerText;
+        
+        const updateCounter = () => {
+            const increment = target / speed;
+            startValue = Math.min(startValue + increment, target);
+            counter.innerText = formatWithComma 
+                ? numberWithCommas(Math.floor(startValue)) 
+                : Math.floor(startValue);
 
-            const time = value / speed;
-            if(data < value) {
-                counter.innerText = Math.ceil(data + time);
-                setTimeout(animate, 1);
-            }else{
-                counter.innerText = value;
+            if (startValue < target) {
+                requestAnimationFrame(updateCounter);
             }
-        }
-        animate();
+        };
+        requestAnimationFrame(updateCounter);
+    }
+
+    // 쉼표를 추가해주는 함수
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // 모든 .counter_num 애니메이션 실행
+    document.querySelectorAll('.counter_num').forEach(counter => {
+        animateCounter(counter);
     });
 
-    function counterAnimationHandler() {
-	const counters = document.querySelectorAll('.counter_comma');
-	counters.forEach(counter => {
-		counter.innerText = '0' //set default counter value
-		counter.dataset.count = 0;
-		const updateCounter = () => {
-			const target = +counter.getAttribute('data-target') //define increase couter to it's data-target
-			const count = +counter.dataset.count //define increase couter on innerText
-			
-			const increment = target / 200 // define increment as counter increase value / speed
-			if (count < target) {
-				const newCount = Math.ceil(count + increment);
-				counter.dataset.count = newCount;
-				counter.innerText = numberWithCommas(newCount);
-				setTimeout(updateCounter, 1);
-			} else {
-				counter.innerText = numberWithCommas(target); //if default value is bigger that date-target, show data-target
-			}
-		}
-		updateCounter() //call the function event
-	})
-	function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	}
-}
-counterAnimationHandler();
+    // 모든 .counter_comma 애니메이션 실행 (쉼표 포함)
+    document.querySelectorAll('.counter_comma').forEach(counter => {
+        animateCounter(counter, true);
+    });
 </script>
                 </div>
             </div>
