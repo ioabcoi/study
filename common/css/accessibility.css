@@ -26,14 +26,14 @@
     --padding-subheader: 0.3125rem;
     /* 5px */
     --padding-content: 0.3125rem;
-    /* 5px */
+    /* 10px */
     --margin-content: 1.25rem;
     /* 20px */
     --padding-wrap: 6.25rem 0;
     /* 100px 0 */
 
     /* 기타 */
-    --line-height-default: 1.5;
+    --line-height-default: 1.8;
 }
 
 h1,
@@ -60,6 +60,9 @@ h5 {
 }
 
 .contents {
+    min-width: 320px;
+    width: 80%;
+    margin: 0 auto;
     padding: 0 1.875rem;
     /* 30px */
 }
@@ -87,13 +90,28 @@ h5 {
 }
 
 .contents .cont {
-    margin: var(--margin-content);
+    margin: var(--margin-content) 0;
     padding: var(--padding-content);
     border: 1px solid var(--color-border-light);
 }
 
+.contents .ex {
+    padding: var(--margin-content);
+    background: var(--color-bg-light);
+    font-weight: var(--font-weight-bold);
+}
+
+.contents .txt {
+    padding: var(--padding-content);
+}
+
 .contents .txt_list {
     padding: var(--padding-content);
+}
+
+.contents .txt_list li {
+    padding-left: var(--padding-content);
+    text-indent: calc(var(--padding-content) * -1);
 }
 
 .contents .txt_list li strong {

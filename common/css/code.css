@@ -131,7 +131,7 @@ h1 {
     font-weight: var(--font-weight-bold);
     text-align: center;
     margin: var(--margin-default) 0;
-    color: var(--color-text-dark);
+    color: var(--color-text-light);
 }
 
 .code_tit span {
@@ -216,6 +216,9 @@ body[data-theme="dark"] .code_area .code_view_box .code_preview {
     color: #85c99c;
 }
 
+body[data-theme="dark"] .code_tit {
+    color: var(--color-text-dark);
+}
 body[data-theme="dark"] .code_wrap .theme {
     background-color: #444;
     border-color: #555;

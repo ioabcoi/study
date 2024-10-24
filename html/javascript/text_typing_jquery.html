@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- // head -->
+    
+    <title>text_typing_jquery</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>text_typing_jquery</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">tag X</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<div id="typing_js_1" class="typing"></div>
+<div id="typing_js_2" class="typing"></div>
+<script type="text/javascript" >
+    document.addEventListener("DOMContentLoaded", function(){
+        function fntypeing(obg, ttl){
+            var typeing = ttl,
+                typeingarr = typeing.split(''),
+                typeingLen = typeingarr.length,
+                typeingnum = 0,
+                timertyeing,
+                $firstttl = obg;
+
+            timertyeing = setInterval(function(){
+                $(obg).append(typeingarr[typeingnum]);
+                typeingnum++;
+                if ( typeingnum > typeingLen ){
+                    clearInterval(timertyeing);
+                }
+            }, 80);
+        }
+        
+        setTimeout(function(){
+            fntypeing('#typing_js_1','Hello, World!');
+        }, 500);
+        setTimeout(function(){
+            fntypeing('#typing_js_2','Hello, World! Hello, World! Hello, World! Hello, World!');
+        }, 1500);
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">tag O <span class="sub">- plugin</span></div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .typing strong {font-weight:700;}
+</style>
+<div><span id="typing_jq_1" class="typing"></span></div>
+<div><span id="typing_jq_2" class="typing"></span></div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<!-- <script src="https://mattboldt.github.io/typed.js/lib/typed.js" type="text/javascript"></script> -->
+<script type="text/javascript" src="../../common/js/typed.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var typing1 = new Typed('#typing_jq_1', {
+            strings: ['원하는 글씨를', '순서대로', '출력해 줍니다.'],
+            typeSpeed: 100,
+            backSpeed: 100,
+            cursorChar: '_',
+            smartBackspace: false,
+            fadeOut: false,
+            shuffle: false,
+            loop: false
+        });
+        typing1.stop();
+        setTimeout(function(){
+            typing1.start();
+        }, 1500);
+
+        var typing2 = new Typed('#typing_jq_2', {
+            strings: ['원하는 글씨를 <strong>순서대로</strong> 출력해 줍니다.'],
+            typeSpeed: 100,
+            backSpeed: 100,
+            cursorChar: '|',
+            smartBackspace: false,
+            fadeOut: false,
+            shuffle: false,
+            loop: false
+        });
+        typing2.stop();
+        setTimeout(function(){
+            typing2.start();
+        }, 2500);
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+        
+        <!-- code_area -->
+        <div class="code_tit">rolling</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* rolling_typing */
+    .rolling_typing ul li {height:20px;background:#eee;line-height:20px;}
+    .rolling_typing ul li.on {background:#fff;}
+</style>
+<!-- rolling_typing -->
+<div id="rolling_typing1" class="rolling_typing">
+    <ul>
+        <li>자기주도적 자율 학습 시간 확대로 능동적 학습 완성</li>
+        <li>필수수업 축소로 꼭 필요한 수업만</li>
+        <li>스스로 학습을 설계할 수 있는 선택수업 강화</li>
+        <li>프리미엄 무제한 인강 이투스PASS 무료 제공</li>
+    </ul>
+</div>
+<br>
+<div id="rolling_typing2" class="rolling_typing">
+    <ul>
+        <li>안녕하세요</li>
+        <li>오늘은</li>
+        <li>2023년 3월 20일</li>
+        <li>미세먼지 최악!!!</li>
+    </ul>
+</div>
+<!-- // rolling_typing -->
+<script type="text/javascript">
+    // rolling_typing
+    function fntypeing(obg, ttl){
+        var typeing = ttl,
+            typeingarr = typeing.split(''),
+            typeingLen = typeingarr.length,
+            typeingnum = 0,
+            timertyeing,
+            $firstttl = obg;
+
+        timertyeing = setInterval(function(){
+            jQuery(obg).append(typeingarr[typeingnum]);
+            typeingnum++;
+            if ( typeingnum > typeingLen ){
+                clearInterval(timertyeing);
+            }
+        }, 45);
+    }
+    // fntypeing('target', '문구문구');
+
+    // rolling_typing_func
+    jQuery.fn.rollingTypingFunc = function(speed) {
+        return this.each(function() {
+            var $rolling = jQuery(this);
+            var rolling_id = '#'+ jQuery(this).attr('id');
+            var $steplist = jQuery(rolling_id +' > ul li');
+            var step_length = $steplist.length;
+            var step_array = new Array;
+            var step_index = 0;
+            var step_speed = speed;
+            var timer;
+            
+            // setting
+            $steplist.each(function(i){
+                var $this_typing = jQuery(this).addClass('typing'+i);
+                this_text = $this_typing.text();
+                step_array[i] = this_text;
+            });
+
+            // start
+            function stepStart(obj){
+                step_index = obj;
+                timer = setInterval(function(){
+                    stepRolling(step_index);
+                }, step_speed);
+            }
+
+            // stop
+            function stepStop(){
+                step_index = 0;
+                $steplist.removeClass('on');
+                clearInterval(timer);
+            }
+
+            // rolling
+            function stepRolling(num){
+                step_index = num;
+                step_text = step_array[step_index];
+                $steplist.removeClass('on').eq(step_index).addClass('on');
+                jQuery(rolling_id +' .typing'+ step_index).text('');
+                fntypeing(rolling_id +' .typing'+ step_index, step_text);
+
+                if( step_index >= step_length-1 ){
+                    step_index = 0;
+                }else{
+                    step_index++;
+                }
+            }
+            setTimeout(function(){
+                stepStart(0);
+            }, 500);
+        });
+    }
+
+    jQuery("#rolling_typing1").rollingTypingFunc(4000);
+    jQuery("#rolling_typing2").rollingTypingFunc(2000);
+</script>
+
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

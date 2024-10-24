@@ -3,7 +3,6 @@
 <head>
     <!-- head -->
     <script src="../include/head.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- // head -->
     
     <title>counting</title>
@@ -16,7 +15,7 @@
 
         <!-- code_area -->
         <div class="code_tit">style1 - default, comma</div>
-        <div class="code_area" data-style="">
+        <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
@@ -26,7 +25,7 @@
     .shadow {position:absolute;z-index:0;left:0;top:0;display:inline-block;width:172px;height:63px;background:url("http://www.lotteworld.com/_img/info/time/clock_shadow.png") no-repeat;}
 </style>
 <div class="num">
-    <span class="correct count_num">130</span>
+    <span class="correct count_num">1300</span>
     <span class="shadow"></span>
 </div>
 <div class="num">
@@ -34,26 +33,36 @@
     <span class="shadow"></span>
 </div>
 <script type="text/javascript" >
-    $(function(){
-        function animateCounter($element, withComma) {
-            $({ Counter: 0 }).animate({ Counter: $element.text() }, {
-                duration: 1000,
-                step: function () {
-                    var value = Math.ceil(this.Counter);
-                    $element.text(withComma ? numberWithCommas(value) : value);
+    document.addEventListener('DOMContentLoaded', function() {
+        function animateCounter(element, withComma) {
+            let start = 0;
+            const end = parseInt(element.textContent, 10);
+            const duration = 1000;
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const value = Math.ceil(progress * end);
+                element.textContent = withComma ? numberWithCommas(value) : value;
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
                 }
-            });
+            }
+
+            requestAnimationFrame(updateCounter);
         }
-
-        var $numCorrect_count_num = $('.count_num');
-        var $numCorrect_count_comma = $('.count_comma');
-
-        animateCounter($numCorrect_count_num, false);
-        animateCounter($numCorrect_count_comma, true);
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+
+        const countNumElement = document.querySelector('.count_num');
+        const countCommaElement = document.querySelector('.count_comma');
+
+        animateCounter(countNumElement, false);
+        animateCounter(countCommaElement, true);
     });
 </script>
                 </div>
@@ -76,59 +85,53 @@
     .flex .col {font-size:35px;font-weight:700;text-align:center;}
 </style>
 <div class="flex">
-	<div class="col">
-		<p class="count-num" data-count="7777">0</p>
-	</div>
-	<div class="col">
-		<p class="count-num" data-count="5555">0</p>
-	</div>
-	<div class="col">
-		<p class="count-num" data-count="3333">0</p>
-	</div>
+	<div class="col"><p class="count-num" data-count="7777">0</p></div>
+	<div class="col"><p class="count-num" data-count="5555">0</p></div>
+	<div class="col"><p class="count-num" data-count="3333">0</p></div>
 </div>
 <div class="flex">
-	<div class="col">
-		<p class="count-num-comma" data-count="7777">0</p>
-	</div>
-	<div class="col">
-		<p class="count-num-comma" data-count="5555">0</p>
-	</div>
-	<div class="col">
-		<p class="count-num-comma" data-count="3333">0</p>
-	</div>
+	<div class="col"><p class="count-num-comma" data-count="7777">0</p></div>
+	<div class="col"><p class="count-num-comma" data-count="5555">0</p></div>
+	<div class="col"><p class="count-num-comma" data-count="3333">0</p></div>
 </div>
 <script type="text/javascript" >
-    $(function() {
-        function animateCount($element, withComma) {
-            var countTo = $element.attr('data-count');
-            $({ countNum: $element.text() }).animate({
-                countNum: countTo
-            },
-            {
-                duration: 1000,
-                easing: 'linear',
-                step: function() {
-                    var num = withComma ? numberWithCommas(Math.floor(this.countNum)) : Math.floor(this.countNum);
-                    $element.text(num);
-                },
-                complete: function() {
-                    var num = withComma ? numberWithCommas(this.countNum) : this.countNum;
-                    $element.text(num);
+    document.addEventListener('DOMContentLoaded', function() {
+        function animateCount(element, withComma) {
+            let countTo = parseInt(element.getAttribute('data-count'));
+            let countFrom = 0;
+            let duration = 1000;
+            let startTime = null;
+
+            function updateCount(currentTime) {
+                if (!startTime) startTime = currentTime;
+                let progress = currentTime - startTime;
+                let currentNum = Math.min(countFrom + (progress / duration) * countTo, countTo);
+                element.textContent = withComma ? numberWithCommas(Math.floor(currentNum)) : Math.floor(currentNum);
+
+                if (progress < duration) {
+                    requestAnimationFrame(updateCount);
+                } else {
+                    element.textContent = withComma ? numberWithCommas(countTo) : countTo;
                 }
-            });
+            }
+
+            requestAnimationFrame(updateCount);
         }
-
-        $('.count-num').each(function() {
-            animateCount($(this), false);
-        });
-
-        $('.count-num-comma').each(function() {
-            animateCount($(this), true);
-        });
 
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+
+        const countNumElements = document.querySelectorAll('.count-num');
+        const countNumCommaElements = document.querySelectorAll('.count-num-comma');
+
+        countNumElements.forEach(function(element) {
+            animateCount(element, false);
+        });
+
+        countNumCommaElements.forEach(function(element) {
+            animateCount(element, true);
+        });
     });
 </script>
                 </div>
@@ -141,7 +144,7 @@
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">style3 - default, comma</div>
+        <div class="code_tit">style3 - default, comma / speed</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -151,13 +154,14 @@
     .counter {font-size:50px;display:block;font-weight:bold;color:#fff;}
 </style>
 <div class="content">
-    <div class="counter counter_num" data-target="1000" data-speed="200">0</div>
+    <div class="counter counter_num" data-target="1000" data-speed="100">0</div>
     <div class="counter counter_num" data-target="500" data-speed="150">0</div>
     <div class="counter counter_num" data-target="700" data-speed="180">0</div>
     <div class="counter counter_num" data-target="999" data-speed="220">0</div>
 </div>
 <div class="content">
-    <div class="counter counter_comma" data-target="1000000" data-speed="250">0</div>
+    <div class="counter counter_comma" data-target="1000" data-speed="150">0</div>
+    <div class="counter counter_comma" data-target="1000000" data-speed="100">0</div>
 </div>
 <script type="text/javascript" >
     // 애니메이션을 위한 공통 함수
@@ -194,44 +198,6 @@
     document.querySelectorAll('.counter_comma').forEach(counter => {
         animateCounter(counter, true);
     });
-</script>
-                </div>
-            </div>
-            <!-- // code_ui -->
-            <!-- code_view -->
-            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
-            <!-- // code_view -->
-        </div>
-        <!-- // code_area -->
-
-        <!-- code_area -->
-        <div class="code_tit">title</div>
-        <div class="code_area" data-style="vertical">
-            <!-- code_ui -->
-            <div class="code_ui">
-                <div class="code_ui_box">
-<style type="text/css">
-</style>
-<script type="text/javascript" >
-</script>
-                </div>
-            </div>
-            <!-- // code_ui -->
-            <!-- code_view -->
-            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
-            <!-- // code_view -->
-        </div>
-        <!-- // code_area -->
-
-        <!-- code_area -->
-        <div class="code_tit">title</div>
-        <div class="code_area" data-style="vertical">
-            <!-- code_ui -->
-            <div class="code_ui">
-                <div class="code_ui_box">
-<style type="text/css">
-</style>
-<script type="text/javascript" >
 </script>
                 </div>
             </div>

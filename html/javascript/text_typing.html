@@ -14,25 +14,52 @@
         <h1>text_typing</h1>
 
         <!-- code_area -->
-        <div class="code_tit">javascript <span class="sub">- tag X</span></div>
+        <div class="code_tit">tag X</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<div id="typing-text"></div>
+<div id="typing_text"></div>
 <script type="text/javascript" >
-    var text = "Hello, World! Hello, World! Hello, World! Hello, World!";
-    var i = 0;
-    var speed = 100; // 타이핑 속도를 조절할 수 있습니다. 
-    function typingEffect() {
-        if (i < text.length) {
-            document.getElementById("typing-text").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typingEffect, speed);
+    // TypingEffect 모듈 정의
+    const TypingEffect = (function() {
+        // private 함수
+        function type(elementId, text, speed) {
+            let i = 0;
+            function typeCharacter() {
+                if (i < text.length) {
+                    document.getElementById(elementId).innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeCharacter, speed);
+                }
+            }
+            typeCharacter();
         }
-    }
-    typingEffect();
+
+        // public API
+        return {
+            start: type // public 메서드로 type 함수 노출
+        };
+    })();
+
+    // TypingEffect 사용 예시
+    TypingEffect.start("typing_text", "Hello, World!", 100);
 </script>
+<!-- <script type="text/javascript" >
+    function typingEffect(elementId, text, speed) {
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                document.getElementById(elementId).innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
+    typingEffect("typing_text", "Hello, World!", 100);
+</script> -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -43,40 +70,87 @@
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">jQuery <span class="sub">- tag X</span></div>
+        <div class="code_tit">tag O</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<div id="typing_js_1" class="typing"></div>
-<div id="typing_js_2" class="typing"></div>
-<script type="text/javascript" >
-    document.addEventListener("DOMContentLoaded", function(){
-        function fntypeing(obg, ttl){
-            var typeing = ttl,
-                typeingarr = typeing.split(''),
-                typeingLen = typeingarr.length,
-                typeingnum = 0,
-                timertyeing,
-                $firstttl = obg;
 
-            timertyeing = setInterval(function(){
-                $(obg).append(typeingarr[typeingnum]);
-                typeingnum++;
-                if ( typeingnum > typeingLen ){
-                    clearInterval(timertyeing);
+<style type="text/css">
+    .highlight {color:red;font-weight:700;} /* 강조 효과를 위한 클래스 */
+</style>                    
+<div id="typing1" class="typing"></div>
+<div id="typing2" class="typing"></div>
+<script type="text/javascript">
+    // TypingFunction 모듈 정의
+    const TypingFunction = (function() {
+        // private 함수
+        function type(obg, ttl, speed, start, end) {
+            const typingArr = ttl.split('');
+            let typingNum = 0;
+            const typingLength = typingArr.length;
+
+            const timerTyping = setInterval(() => {
+                let currentChar = typingArr[typingNum];
+
+                // 강조 효과를 적용할 범위 체크
+                if (typingNum >= start && typingNum <= end) {
+                    currentChar = `<span class="highlight">${currentChar}</span>`;
                 }
-            }, 80);
+
+                document.querySelector(obg).innerHTML += currentChar;
+                typingNum++;
+
+                // 모든 문자가 타이핑되면 타이머 정지
+                if (typingNum >= typingLength) {
+                    clearInterval(timerTyping);
+                }
+            }, speed); // 속도를 여기에 적용
         }
-        
-        setTimeout(function(){
-            fntypeing('#typing_js_1','Hello, World!');
-        }, 500);
-        setTimeout(function(){
-            fntypeing('#typing_js_2','Hello, World! Hello, World! Hello, World! Hello, World!');
-        }, 1500);
+
+        // public API
+        return {
+            start: type // public 메서드로 type 함수 노출
+        };
+    })();
+
+    // TypingFunction 사용 예시
+    document.addEventListener("DOMContentLoaded", function() {
+        // 특정 인덱스에 효과를 적용 (0부터 시작)
+        TypingFunction.start('#typing1', 'Hello, World!', 100, 7, 12); // 7번째부터 12번째 문자에 강조 효과
+        TypingFunction.start('#typing2', 'Hello, World! Hello, World!', 80, 0, 6); // 0번째부터 6번째 문자에 강조 효과
     });
 </script>
+<!-- <script type="text/javascript" >
+    document.addEventListener("DOMContentLoaded", function() {
+        function fntypeing(obg, ttl, speed, start, end) {
+            const typingArr = ttl.split('');
+            let typingNum = 0;
+            const typingLength = typingArr.length;
+
+            const timerTyping = setInterval(() => {
+                let currentChar = typingArr[typingNum];
+
+                // 강조 효과를 적용할 범위 체크
+                if (typingNum >= start && typingNum <= end) {
+                    currentChar = `<span class="highlight">${currentChar}</span>`;
+                }
+
+                document.querySelector(obg).innerHTML += currentChar;
+                typingNum++;
+
+                // 모든 문자가 타이핑되면 타이머 정지
+                if (typingNum >= typingLength) {
+                    clearInterval(timerTyping);
+                }
+            }, speed); // 속도를 여기에 적용
+        }
+
+        // 특정 인덱스에 효과를 적용 (0부터 시작)
+        fntypeing('#typing1', 'Hello, World!', 100, 7, 12); // 7번째부터 12번째 문자에 강조 효과
+        fntypeing('#typing2', 'Hello, World! Hello, World!', 80, 0, 6); // 0번째부터 6번째 문자에 강조 효과
+    });
+</script> -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -87,7 +161,7 @@
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">jQuery plugin <span class="sub">- tag O</span></div>
+        <div class="code_tit">array</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -95,44 +169,100 @@
 <style type="text/css">
     .typing strong {font-weight:700;}
 </style>
-<div><span id="typing_jq_1" class="typing"></span></div>
-<div><span id="typing_jq_2" class="typing"></span></div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<!-- <script src="https://mattboldt.github.io/typed.js/lib/typed.js" type="text/javascript"></script> -->
-<script type="text/javascript" src="../../common/js/typed.js"></script>
+<div><span id="typing_1" class="typing"></span></div>
+<div><span id="typing_2" class="typing"></span></div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        var typing1 = new Typed('#typing_jq_1', {
-            strings: ['원하는 글씨를', '순서대로', '출력해 줍니다.'],
-            typeSpeed: 100,
-            backSpeed: 100,
-            cursorChar: '_',
-            smartBackspace: false,
-            fadeOut: false,
-            shuffle: false,
-            loop: false
-        });
-        typing1.stop();
-        setTimeout(function(){
-            typing1.start();
-        }, 1500);
+    const TypeEffect = (function() {
+        // private 함수
+        function type(element, strings, typeSpeed, backSpeed, delay) {
+            let stringIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
 
-        var typing2 = new Typed('#typing_jq_2', {
-            strings: ['원하는 글씨를 <strong>순서대로</strong> 출력해 줍니다.'],
-            typeSpeed: 100,
-            backSpeed: 100,
-            cursorChar: '|',
-            smartBackspace: false,
-            fadeOut: false,
-            shuffle: false,
-            loop: false
-        });
-        typing2.stop();
-        setTimeout(function(){
-            typing2.start();
-        }, 2500);
+            function typeNextChar() {
+                const currentString = strings[stringIndex];
+
+                if (isDeleting) {
+                    charIndex--;
+                } else {
+                    charIndex++;
+                }
+
+                // 현재 문자열의 일부분과 커서 효과를 적용
+                element.innerHTML = currentString.substring(0, charIndex) + (charIndex === currentString.length ? '' : '_');
+
+                // 문자열을 다 입력한 경우 삭제 모드로 전환
+                if (!isDeleting && charIndex === currentString.length) {
+                    setTimeout(() => {
+                        isDeleting = true;
+                    }, delay); // 지우기 전에 대기 시간
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    stringIndex++;
+                    if (stringIndex >= strings.length) {
+                        stringIndex = 0; // 문자열이 끝나면 다시 처음으로 돌아감
+                    }
+                }
+
+                // 타이핑 속도 설정
+                setTimeout(typeNextChar, isDeleting ? backSpeed : typeSpeed);
+            }
+
+            typeNextChar(); // 처음 타이핑 시작
+        }
+
+        // public API
+        return {
+            start: type // public 메서드로 type 함수 노출
+        };
+    })();
+
+    // DOMContentLoaded 이벤트를 통해 TypeEffect 사용
+    document.addEventListener("DOMContentLoaded", function() {
+        TypeEffect.start(document.getElementById('typing_1'), ['원하는 글씨를', '순서대로', '출력해 줍니다.'], 100, 100, 1000);
+        TypeEffect.start(document.getElementById('typing_2'), ['원하는 글씨를 순서대로 출력해 줍니다.'], 100, 100, 1000);
     });
 </script>
+<!-- <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        function typeEffect(element, strings, typeSpeed, backSpeed, delay) {
+            let stringIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentString = strings[stringIndex];
+                
+                if (isDeleting) {
+                    charIndex--;
+                } else {
+                    charIndex++;
+                }
+
+                element.innerHTML = currentString.substring(0, charIndex) + (charIndex === currentString.length ? '' : '_'); // 커서 효과
+
+                if (!isDeleting && charIndex === currentString.length) {
+                    setTimeout(() => {
+                        isDeleting = true;
+                    }, delay); // 지우기 전에 대기 시간
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    stringIndex++;
+                    if (stringIndex >= strings.length) {
+                        stringIndex = 0; // 문자열이 끝나면 다시 처음으로 돌아감
+                    }
+                }
+
+                setTimeout(type, isDeleting ? backSpeed : typeSpeed); // 타이핑 속도 설정
+            }
+
+            type(); // 처음 타이핑 시작
+        }
+
+        typeEffect(document.getElementById('typing_1'), ['원하는 글씨를', '순서대로', '출력해 줍니다.'], 100, 100, 1000);
+        typeEffect(document.getElementById('typing_2'), ['원하는 글씨를 순서대로 출력해 줍니다.'], 100, 100, 1000);
+    });
+</script> -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -143,7 +273,7 @@
         <!-- // code_area -->
         
         <!-- code_area -->
-        <div class="code_tit">jQuery - typing + rolling</div>
+        <div class="code_tit">rolling</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
@@ -159,7 +289,7 @@
         <li>자기주도적 자율 학습 시간 확대로 능동적 학습 완성</li>
         <li>필수수업 축소로 꼭 필요한 수업만</li>
         <li>스스로 학습을 설계할 수 있는 선택수업 강화</li>
-        <li>프리미엄 무제한 인강 이투스PASS 무료 제공</li>
+        <li>프리미엄 무제한 인강 무료 제공</li>
     </ul>
 </div>
 <br>
@@ -167,91 +297,147 @@
     <ul>
         <li>안녕하세요</li>
         <li>오늘은</li>
-        <li>2023년 3월 20일</li>
+        <li>2099년 3월 20일</li>
         <li>미세먼지 최악!!!</li>
     </ul>
 </div>
 <!-- // rolling_typing -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
-    // rolling_typing
-    function fntypeing(obg, ttl){
-        var typeing = ttl,
-            typeingarr = typeing.split(''),
-            typeingLen = typeingarr.length,
-            typeingnum = 0,
-            timertyeing,
-            $firstttl = obg;
+    // 타이핑 효과 모듈
+    const TypingMotion = (function() {
+        function type(element, text, callback) {
+            const typingArr = text.split('');
+            let typingNum = 0;
 
-        timertyeing = setInterval(function(){
-            jQuery(obg).append(typeingarr[typeingnum]);
-            typeingnum++;
-            if ( typeingnum > typeingLen ){
-                clearInterval(timertyeing);
+            const timerTyping = setInterval(() => {
+                element.innerHTML += typingArr[typingNum];
+                typingNum++;
+                if (typingNum >= typingArr.length) {
+                    clearInterval(timerTyping);
+                    if (callback) callback(); // 완료 후 콜백 호출
+                }
+            }, 45);
+        }
+
+        function erase(element, length, callback) {
+            let eraseNum = length;
+
+            const timerErase = setInterval(() => {
+                element.innerHTML = element.innerHTML.slice(0, --eraseNum);
+                if (eraseNum <= 0) {
+                    clearInterval(timerErase);
+                    if (callback) callback(); // 완료 후 콜백 호출
+                }
+            }, 45);
+        }
+
+        return {
+            type: type,
+            erase: erase
+        };
+    })();
+
+    // 롤링 타이핑 모듈
+    const RollingTyping = (function() {
+        function rollingTypingFunc(rollingElement, speed) {
+            const rollingList = rollingElement.querySelectorAll('ul li');
+            const stepArray = Array.from(rollingList).map(li => li.textContent);
+            let stepIndex = 0;
+
+            // 시작 함수
+            function stepStart() {
+                const currentText = stepArray[stepIndex];
+                rollingList.forEach((li, index) => {
+                    li.classList.remove('on');
+                    if (index === stepIndex) {
+                        li.classList.add('on');
+                        li.innerHTML = ''; // 기존 텍스트 초기화
+
+                        // 지우기 효과
+                        TypingMotion.erase(li, currentText.length, () => {
+                            // 타이핑 효과 적용
+                            TypingMotion.type(li, currentText, () => {
+                                // 다음 단계로 이동
+                                stepIndex = (stepIndex + 1) % stepArray.length; // 처음으로 돌아감
+                                setTimeout(stepStart, speed); // 다음 단계 시작
+                            });
+                        });
+                    }
+                });
+            }
+
+            // 효과 시작
+            setTimeout(stepStart, speed); // 첫 시작 지연
+        }
+
+        return {
+            init: rollingTypingFunc
+        };
+    })();
+
+    // DOMContentLoaded 이벤트
+    document.addEventListener('DOMContentLoaded', function() {
+        const rollingTyping1 = document.getElementById('rolling_typing1');
+        const rollingTyping2 = document.getElementById('rolling_typing2');
+        RollingTyping.init(rollingTyping1, 1000);
+        RollingTyping.init(rollingTyping2, 2000);
+    });
+</script>
+<!-- <script type="text/javascript">
+    // rolling_typing
+    function fntypeing(element, text) {
+        const typingArr = text.split('');
+        let typingNum = 0;
+        const typingLength = typingArr.length;
+
+        const timerTyping = setInterval(() => {
+            element.innerHTML += typingArr[typingNum];
+            typingNum++;
+            if (typingNum >= typingLength) {
+                clearInterval(timerTyping);
             }
         }, 45);
     }
-    // fntypeing('target', '문구문구');
 
-    // rolling_typing_func
-    jQuery.fn.rollingTypingFunc = function(speed) {
-        return this.each(function() {
-            var $rolling = jQuery(this);
-            var rolling_id = '#'+ jQuery(this).attr('id');
-            var $steplist = jQuery(rolling_id +' > ul li');
-            var step_length = $steplist.length;
-            var step_array = new Array;
-            var step_index = 0;
-            var step_speed = speed;
-            var timer;
-            
-            // setting
-            $steplist.each(function(i){
-                var $this_typing = jQuery(this).addClass('typing'+i);
-                this_text = $this_typing.text();
-                step_array[i] = this_text;
+    function rollingTypingFunc(rollingElement, speed) {
+        const rollingList = rollingElement.querySelectorAll('ul li');
+        const stepArray = Array.from(rollingList).map(li => li.getAttribute('data-text')); // data-text에서 텍스트 가져오기
+        let stepIndex = 0;
+
+        // start
+        function stepStart() {
+            stepRolling(stepIndex);
+        }
+
+        // rolling
+        function stepRolling(num) {
+            const currentText = stepArray[stepIndex];
+            rollingList.forEach((li, index) => {
+                li.classList.remove('on');
+                if (index === stepIndex) {
+                    li.classList.add('on');
+                    // Clear existing text and start typing
+                    li.innerHTML = ''; // Clear existing text
+                    fntypeing(li, currentText);
+                }
             });
 
-            // start
-            function stepStart(obj){
-                step_index = obj;
-                timer = setInterval(function(){
-                    stepRolling(step_index);
-                }, step_speed);
-            }
+            // Update index
+            stepIndex = (stepIndex + 1) % stepArray.length; // Loop back to the start
+        }
 
-            // stop
-            function stepStop(){
-                step_index = 0;
-                $steplist.removeClass('on');
-                clearInterval(timer);
-            }
-
-            // rolling
-            function stepRolling(num){
-                step_index = num;
-                step_text = step_array[step_index];
-                $steplist.removeClass('on').eq(step_index).addClass('on');
-                jQuery(rolling_id +' .typing'+ step_index).text('');
-                fntypeing(rolling_id +' .typing'+ step_index, step_text);
-
-                if( step_index >= step_length-1 ){
-                    step_index = 0;
-                }else{
-                    step_index++;
-                }
-            }
-            setTimeout(function(){
-                stepStart(0);
-            }, 500);
-        });
+        // Start the rolling effect after a delay
+        setTimeout(stepStart, 500);
+        setInterval(stepStart, speed); // Change step every speed milliseconds
     }
 
-    $(document).ready(function(){
-        jQuery("#rolling_typing1").rollingTypingFunc(4000);
-        jQuery("#rolling_typing2").rollingTypingFunc(2000);
+    document.addEventListener('DOMContentLoaded', function() {
+        const rollingTyping1 = document.getElementById('rolling_typing1');
+        const rollingTyping2 = document.getElementById('rolling_typing2');
+        rollingTypingFunc(rollingTyping1, 4000);
+        rollingTypingFunc(rollingTyping2, 2000);
     });
-</script>
+</script> -->
 
                 </div>
             </div>

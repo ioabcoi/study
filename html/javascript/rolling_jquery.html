@@ -3,15 +3,16 @@
 <head>
     <!-- head -->
     <script src="../include/head.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- // head -->
     
-    <title>rolling_jq</title>
+    <title>rolling_jquery</title>
 </head>
 <body data-theme="light">
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>rolling_jq</h1>
+        <h1>rolling_jquery</h1>
 
         <!-- code_area -->
         <div class="code_tit">common</div>
@@ -41,17 +42,17 @@
 <div id="rolling" class="rolling">
     <ul>
         <li class="on"><a href="http://naver.com" class="link">link 탭1</a></li>
-        <li><a href="#">탭2</a></li>
+        <li class="on"><a href="http://naver.com" target="_blank" class="link">link 탭2</a></li>
         <li><a href="#">탭3</a></li>
         <li><a href="#">탭4</a></li>
+        <li><a href="#">탭5</a></li>
     </ul>
     <a href="#" class="play">재생</a>
     <a href="#" class="stop">정지</a>
 </div>
 <!-- // rolling -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script type="text/javascript">
-    // rolling Function - ul,li active class / speed / play, stop / contents / over, click
+    // rolling Function - ul, li active class / speed / play, stop / contents / over, click
     jQuery.fn.rollingFunc = function(num) {
         return this.each(function() {
             var $rolling = jQuery(this);

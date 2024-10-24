@@ -3,16 +3,15 @@
 <head>
     <!-- head -->
     <script src="../include/head.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- // head -->
     
-    <title>ending_credit_jq</title>
+    <title>ending_credit</title>
 </head>
 <body data-theme="light">
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>ending_credit_jq</h1>
+        <h1>ending_credit</h1>
 
         <!-- code_area -->
         <div class="code_tit">common</div>
@@ -26,44 +25,102 @@
 	.ending_credit .container {position:relative;width:100%;height:100%;}
 	.ending_credit .container .description {position:absolute;left:0;top:0;}
 	.ending_credit .container .description:after {content:"";display:block;height:0px;clear:both;visibility:hidden;} 
-	.ending_credit .container .description > div {box-sizing:border-box;white-space:nowrap;}
+	.ending_credit .container .description > div {box-sizing:border-box;white-space:nowrap;color:#333;font-size:20px;font-weight:700;line-height:28px;}
+	/* ending_credit - horizontal */
+	.ending_credit.horizontal {height:28px;}
+	.ending_credit.horizontal .container .description {width:10000%;height:100%;}
+	.ending_credit.horizontal .container .description > div {float:left;}
+    /* ending_credit - vertical */
+    .ending_credit.vertical {height:150px;}
+    .ending_credit.vertical .container .description {width:100%;height:10000%;}
 </style>
 <script type="text/javascript" >
-    function endingCreditFunc(obj){
-		var target = jQuery(obj);
-		var object = target.find('.container');
-		var description = object.find('.description');
-		var temp = description.find('> div');
-		var temp_twice = temp.clone();
-		var temp_triple = temp.clone();
-		var temp_quadruple = temp.clone();
-		var direction = null;
-		var size = 0;
-		var speed = 0;
-		
-		if(target.hasClass('horizontal')){
-			size = temp.width();
-		}else{
-			size = temp.height();
+	(function() {
+		// Fallback for Object.assign for older browsers (IE)
+		if (typeof Object.assign != 'function') {
+			Object.assign = function(target) {
+				'use strict';
+				if (target == null) {
+					throw new TypeError('Cannot convert undefined or null to object');
+				}
+				target = Object(target);
+				for (var index = 1; index < arguments.length; index++) {
+					var source = arguments[index];
+					if (source != null) {
+						for (var key in source) {
+							if (Object.prototype.hasOwnProperty.call(source, key)) {
+								target[key] = source[key];
+							}
+						}
+					}
+				}
+				return target;
+			};
 		}
-		speed = size * 20;
-		description.append(temp_twice).append(temp_triple).append(temp_quadruple);
 
-		function ticker(){
-			if(target.hasClass('horizontal')){
-				description.animate({'left' : '-' + size + 'px'}, speed, 'linear', function(){
-					description.css({'left' : '0'}).append(temp.eq(0));
-				});
-			}else{
-				description.animate({'top' : '-' + size + 'px'}, speed, 'linear', function(){
-					description.css({'top' : '0'}).append(temp.eq(0));
-				});
+		// Main function to handle the animation
+		var EndingCredit = function(opts) {
+			this.options = Object.assign({}, EndingCredit.defaults, opts);
+
+			this.target = document.querySelector(this.options.selector);
+			this.desc = this.target.querySelector('.description');
+			this.text = this.desc.querySelector('.text');
+
+			this.cloneElements();
+			this.calculateSize();
+			this.startAnimation();
+		};
+
+		EndingCredit.prototype.cloneElements = function() {
+			// Clone the text to ensure continuous flow
+			for (let i = 0; i < 3; i++) {
+				this.desc.appendChild(this.text.cloneNode(true));
 			}
-		}
-		setInterval(function(){
-			ticker();
-		}, 250);
-	}
+		};
+
+		EndingCredit.prototype.calculateSize = function() {
+			// Determine size and speed based on direction (horizontal/vertical)
+			if (this.target.classList.contains('horizontal')) {
+				this.size = this.text.offsetWidth;
+				this.direction = 'left';
+			} else {
+				this.size = this.text.offsetHeight;
+				this.direction = 'top';
+			}
+			this.speed = this.size * this.options.speedMultiplier;
+		};
+
+		EndingCredit.prototype.startAnimation = function() {
+			const that = this;
+			let position = 0;
+
+			function animate() {
+				position -= 1;
+				that.desc.style[that.direction] = position + 'px';
+
+				// Reset position and loop the text
+				if (Math.abs(position) >= that.size) {
+					position = 0;
+					that.desc.appendChild(that.text);
+				}
+
+				// Continue the animation
+				requestAnimationFrame(animate);
+			}
+
+			// Start the animation
+			animate();
+		};
+
+		// Default settings
+		EndingCredit.defaults = {
+			selector: '',
+			speedMultiplier: 20
+		};
+
+		// Global access
+		window.EndingCredit = EndingCredit;
+	})();
 </script>
                 </div>
             </div>
@@ -80,12 +137,6 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
-	/* ending_credit - horizontal */
-	.ending_credit.horizontal {height:28px;}
-	.ending_credit.horizontal .container .description {width:10000%;height:100%;}
-	.ending_credit.horizontal .container .description > div {float:left;color:#333;font-size:20px;font-weight:700;line-height:28px;}
-</style>
 <!-- ending_credit -->
 <div id="ending_credit1" class="ending_credit horizontal">
     <div class="container">
@@ -96,10 +147,8 @@
 </div>
 <!-- //ending_credit -->
 <script type="text/javascript" >
-    // ending_credit
-	jQuery(function(){
-		endingCreditFunc('.ending_credit.horizontal');
-	});
+	// Initialize instances
+	new EndingCredit({ selector: '#ending_credit1' });
 </script>
                 </div>
             </div>
@@ -116,13 +165,6 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
-    /* ending_credit - vertical */
-    .ending_credit.vertical {height:150px;}
-    .ending_credit.vertical .container {position:relative;}
-    .ending_credit.vertical .container .description {width:100%;height:10000%;}
-    .ending_credit.vertical .container .description > div {color:#333;font-size:20px;font-weight:700;line-height:28px;}
-</style>
 <!-- ending_credit -->
 <div id="ending_credit2" class="ending_credit vertical">
     <div class="container">
@@ -140,10 +182,8 @@
 </div>
 <!-- //ending_credit -->
 <script type="text/javascript" >
-    // ending_credit
-	jQuery(function(){
-		endingCreditFunc('.ending_credit.vertical');
-	});
+	// Initialize instances
+	new EndingCredit({ selector: '#ending_credit2' });
 </script>
                 </div>
             </div>

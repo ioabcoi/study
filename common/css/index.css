@@ -19,6 +19,7 @@
     --font-size-depth1: 20px;
     --font-size-depth2: 15px;
     --font-size-small: 11px;
+    --font-size-xsmall: 10px;
     --font-size-title: 12px;
 
     /* 폰트 두께 */
@@ -102,12 +103,18 @@ h1 {
 }
 
 .index_area ul .line {
-    padding: 2px;
+    padding: 3px;
     background-color: #f0f0f0;
+}
+
+.index_area ul .line_sub {
+    padding: 1px;
+    background-color: #f5f5f5;
 }
 
 .index_area ul .link_box a {
     color: var(--color-link-dark);
+    font-size: var(--font-size-xsmall);
     text-decoration: underline;
 }
 
