@@ -6,13 +6,13 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- // head -->
     
-    <title>tab_contents</title>
+    <title>tab_contents_jquery</title>
 </head>
 <body data-theme="light">
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>tab_contents</h1>
+        <h1>tab_contents_jquery</h1>
 
         <!-- code_area -->
         <div class="code_tit">simple_tab</div>
@@ -84,65 +84,44 @@
 </div>
 <!-- //simple_tab -->
 <script type="text/javascript">
-    document.querySelectorAll(".simple_tab_cont").forEach((tabCont) => {
-        const simpleTabs = tabCont.querySelectorAll(".simple_tab .tab li");
-        const simpleConts = tabCont.querySelectorAll(".simple_cont .cont");
+    jQuery('.simple_tab_cont').each(function () {
+        var $simple_tab_cont = jQuery(this);
 
-        // 모든 탭과 컨텐츠를 초기화 (on 클래스 제거)
-        const deactivateTabs = () => {
-            simpleTabs.forEach(tab => tab.classList.remove("on"));
-            simpleConts.forEach(cont => cont.classList.remove("on"));
-        };
+        // 이벤트 위임을 사용해 클릭 이벤트 처리
+        $simple_tab_cont.on('click', '.simple_tab .tab li .link', function (e) {
+            var $this = jQuery(this);
 
-        // 선택된 탭과 컨텐츠 활성화
-        const activateTab = (index) => {
-            simpleTabs[index].classList.add("on");
-            simpleConts[index].classList.add("on");
-        };
-
-        // 이벤트 위임으로 이벤트를 한 곳에서 관리
-        tabCont.addEventListener("click", (e) => {
-            const target = e.target.closest(".link");
-            
-            if (!target || target.classList.contains("off") || target.getAttribute('href').indexOf('http') !== -1) {
+            // 외부 링크인 경우 실행하지 않음
+            if ($this.attr('href').includes("http")) {
                 return;
             }
-            
-            e.preventDefault(); // 링크 기본 동작 방지
-            
-            const index = Array.from(simpleTabs).indexOf(target.parentElement);
-            
-            deactivateTabs(); // 모든 탭 비활성화
-            activateTab(index); // 클릭한 탭 활성화
+
+            // .off 클래스를 가진 탭은 클릭 무시
+            if ($this.hasClass('off')) {
+                return false;
+            }
+
+            // 탭의 인덱스를 얻고 상태 변경
+            var index = $this.parent().index();
+            $simple_tab_cont.find('.simple_tab .tab li').removeClass('on').eq(index).addClass('on');
+            $simple_tab_cont.find('.simple_cont .cont').removeClass('on').eq(index).addClass('on');
+
+            // 기본 링크 동작 막기
+            e.preventDefault();
         });
     });
 </script>
 <!-- <script type="text/javascript">
-    const simple_tab_cont = Array.prototype.slice.call(document.querySelectorAll(".simple_tab_cont"));
-    simple_tab_cont.forEach(function(tab_cont) {
-        const simple_tab = Array.prototype.slice.call(tab_cont.querySelectorAll(".simple_tab .tab li"));
-        const simple_cont = Array.prototype.slice.call(tab_cont.querySelectorAll(".simple_cont .cont"));
-        const tabOff = function () {
-            simple_tab.forEach(e => e.classList.remove("on"));
-            simple_cont.forEach(e => e.classList.remove("on"));
-        }
-        const tabOn = function (e, num) {
-            e.target.parentNode.classList.add("on");
-            simple_tab[num].classList.add("on");
-            simple_cont[num].classList.add("on");
-        }
-        simple_tab.forEach(function(element) {
-            element.querySelector(".link").addEventListener("click", function(e){
-                // console.log(simple_tab, e.target.parentElement, simple_tab.indexOf(e.target.parentElement));
-                if (e.currentTarget.getAttribute('href').indexOf('http') == -1) {
-                    e.preventDefault();
-                    if (!e.target.classList.contains("off")) {
-                        let idx = simple_tab.indexOf(e.target.parentElement);
-                        tabOff();
-                        tabOn(e, idx);
-                    }
+    jQuery('.simple_tab_cont').each(function(){
+        var $simple_tab_cont = jQuery(this);
+        $simple_tab_cont.find('.simple_tab .tab li .link').click(function(){
+            if (!jQuery(this).attr('href').includes("http")) {
+                if (!jQuery(this).hasClass("off")) {
+                    $simple_tab_cont.find('.simple_tab .tab li').removeClass('on').eq(jQuery(this).parent().index()).addClass('on');
+                    $simple_tab_cont.find('.simple_cont .cont').removeClass('on').eq(jQuery(this).parent().index()).addClass('on');
                 }
-            });
+                return false;
+            }
         });
     });
 </script> -->

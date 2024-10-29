@@ -30,8 +30,8 @@
         }
 
         /* background-image */
-        .picture-box1 .picture {background-image:url('https://source.unsplash.com/random/960x780?sig=1');}
-        .picture-box2 .picture {background-image:url('https://source.unsplash.com/random/960x780?sig=2');}
+        .picture-box1 .picture {background-image:url('https://picsum.photos/960/780/?random=1');}
+        .picture-box2 .picture {background-image:url('https://picsum.photos/960/780/?random=2');}
 
         /* direction */
         .picture-box .picture.type_1 {-webkit-transform:translateX(-96px) translateY(0);transform:translateX(-96px) translateY(0);}
@@ -43,19 +43,29 @@
         .picture-box.motion .picture-div {opacity:1;}
         .picture-box.motion .picture {-webkit-transform:translateX(0) translateY(0);transform:translateX(0) translateY(0);}
 
+        @media (max-width: 768px) {
+            .picture-box {width:100%;height:auto;}
+            .picture-div {width:9.6vw;height:7.8vw;}
+            .top, .middle, .bottom {height:auto;}
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .picture-div, .picture {
+                transition:none;
+            }
+        }
     </style>
     <!-- wrap -->
     <div id="wrap">
         <div class="top"></div>
 
         <!-- picture-box1 -->
-        <div class="picture-box picture-box1 scrollfade"></div>
+        <div class="picture-box picture-box1 scrollfade" role="img" aria-label="Random Image" loading="lazy"></div>
         <!-- // picture-box1 -->
 
         <div class="middle"></div>
 
         <!-- picture-box2 -->
-        <div class="picture-box picture-box2 scrollfade"></div>
+        <div class="picture-box picture-box2 scrollfade" role="img" aria-label="Random Image" loading="lazy"></div>
         <!-- // picture-box2 -->
 
         <div class="bottom"></div>
@@ -63,6 +73,79 @@
     <!-- // wrap --> 
     <script src="https://code.jquery.com/jquery-1.11.0.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+        /*
+        DOM 조작 최적화: 반복문 안에서 매번 DOM을 조작하는 대신, 문자열을 한 번에 모아서 DOM에 추가하는 방식으로 성능을 개선할 수 있어.
+        Scroll 이벤트 최적화: Scroll 이벤트를 매번 호출하는 것은 성능에 영향을 줄 수 있어. debounce나 throttle을 사용하여 최적화할 수 있어.
+        클래스 네이밍 개선: 의미를 더 잘 나타내는 이름으로 네이밍을 변경하면 유지보수가 쉬워져.
+
+        추가 고려사항:
+        성능 최적화: Lazy loading을 적용했지만, 배경 이미지를 사용할 경우에도 IntersectionObserver와 같은 API를 활용하여 이미지를 지연 로드하는 것을 고려할 수 있어.
+        웹 접근성 검토: 스크롤이나 애니메이션이 불편한 사용자들을 위해 prefers-reduced-motion을 사용해서 애니메이션을 줄이거나 꺼두는 옵션을 제공하는 것도 좋아.
+
+        Scroll 이벤트 남용 방지: 
+        Scroll 이벤트는 스크롤할 때마다 계속해서 실행되기 때문에 성능에 영향을 줄 수 있어. 
+        반면 IntersectionObserver는 특정 요소가 뷰포트에 들어올 때만 실행되므로 더 효율적이야.
+        */
+        jQuery(document).ready(function() {
+            function appendPictures(boxClass) {
+                let pictureContent = '';
+                for (let i = 0; i < 10; i++) {
+                    for (let j = 0; j < 10; j++) {
+                        pictureContent += `
+                            <div class="picture-div">
+                                <div class="picture type_${Math.floor(Math.random() * 4) + 1}" 
+                                    style="background-position:${j * -96}px ${i * -78}px">
+                                </div>
+                            </div>`;
+                    }
+                }
+                jQuery(boxClass).append(pictureContent);
+            }
+
+            appendPictures('.picture-box1');
+            appendPictures('.picture-box2');
+
+            // Throttle scroll event to optimize performance
+            function throttle(func, limit) {
+                let lastFunc;
+                let lastRan;
+                return function() {
+                    const context = this;
+                    const args = arguments;
+                    if (!lastRan) {
+                        func.apply(context, args);
+                        lastRan = Date.now();
+                    } else {
+                        clearTimeout(lastFunc);
+                        lastFunc = setTimeout(function() {
+                            if ((Date.now() - lastRan) >= limit) {
+                                func.apply(context, args);
+                                lastRan = Date.now();
+                            }
+                        }, limit - (Date.now() - lastRan));
+                    }
+                };
+            }
+
+            function onScroll() {
+                fnScrollfade();
+            }
+
+            function fnScrollfade() {
+                var _winH = jQuery(window).height();
+                var bottomWindow = jQuery(window).scrollTop() + _winH;
+                jQuery('.scrollfade').each(function() {
+                    var bottomObject = jQuery(this).offset().top;
+                    if (bottomWindow > bottomObject + _winH / 2) {
+                        jQuery(this).addClass('motion');
+                    }
+                });
+            }
+
+            jQuery(window).scroll(throttle(onScroll, 100));
+        });
+    </script>
+    <!-- <script type="text/javascript">
         // Math.floor(Math.random() * 4);		// 0 ~ 3
         // Math.floor(Math.random() * 4) + 1;   // 1 ~ 4
 
@@ -111,7 +194,7 @@
                 onScroll(); 
             });
         });
-    </script>
+    </script> -->
     <!-- // event -->
 
     <!-- foot -->
