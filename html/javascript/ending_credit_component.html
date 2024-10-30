@@ -5,13 +5,13 @@
     <script src="../include/head.js"></script>
     <!-- // head -->
     
-    <title>ending_credit</title>
+    <title>ending_credit_component</title>
 </head>
 <body data-theme="light">
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>ending_credit</h1>
+        <h1>ending_credit_component</h1>
 
         <!-- code_area -->
         <div class="code_tit">common</div>
@@ -26,79 +26,81 @@
 	.ending_credit .container .description {position:absolute;left:0;top:0;}
 	.ending_credit .container .description:after {content:"";display:block;height:0px;clear:both;visibility:hidden;} 
 	.ending_credit .container .description > div {box-sizing:border-box;white-space:nowrap;color:#333;font-size:20px;font-weight:700;line-height:28px;}
-	/* ending_credit - horizontal */
+	
+    /* ending_credit - horizontal */
 	.ending_credit.horizontal {height:28px;}
 	.ending_credit.horizontal .container .description {width:10000%;height:100%;}
 	.ending_credit.horizontal .container .description > div {float:left;}
+    
     /* ending_credit - vertical */
     .ending_credit.vertical {height:150px;}
     .ending_credit.vertical .container .description {width:100%;height:10000%;}
 </style>
 <script type="text/javascript" >
 	(function() {
-		// Main function to handle the animation
-		var EndingCredit = function(opts) {
-			this.options = Object.assign({}, EndingCredit.defaults, opts);
+        // Main function to handle the animation
+        class EndingCredit {
+            constructor(opts) {
+                this.options = Object.assign({}, EndingCredit.defaults, opts);
+                this.target = document.querySelector(this.options.selector);
+                this.desc = this.target.querySelector('.description');
+                this.text = this.desc.querySelector('.text');
+                this.cloneElements();
+                this.calculateSize();
+                this.startAnimation();
+            }
 
-			this.target = document.querySelector(this.options.selector);
-			this.desc = this.target.querySelector('.description');
-			this.text = this.desc.querySelector('.text');
+            cloneElements() {
+                // Clone the text to ensure continuous flow
+                for (let i = 0; i < 3; i++) {
+                    this.desc.appendChild(this.text.cloneNode(true));
+                }
+            }
 
-			this.cloneElements();
-			this.calculateSize();
-			this.startAnimation();
-		};
+            calculateSize() {
+                // Determine size and speed based on direction (horizontal/vertical)
+                if (this.target.classList.contains('horizontal')) {
+                    this.size = this.text.offsetWidth;
+                    this.direction = 'left';
+                } else {
+                    this.size = this.text.offsetHeight;
+                    this.direction = 'top';
+                }
+                this.speed = this.size * this.options.speedMultiplier;
+            }
 
-		EndingCredit.prototype.cloneElements = function() {
-			// Clone the text to ensure continuous flow
-			for (let i = 0; i < 3; i++) {
-				this.desc.appendChild(this.text.cloneNode(true));
-			}
-		};
+            startAnimation() {
+                const that = this;
+                let position = 0;
 
-		EndingCredit.prototype.calculateSize = function() {
-			// Determine size and speed based on direction (horizontal/vertical)
-			if (this.target.classList.contains('horizontal')) {
-				this.size = this.text.offsetWidth;
-				this.direction = 'left';
-			} else {
-				this.size = this.text.offsetHeight;
-				this.direction = 'top';
-			}
-			this.speed = this.size * this.options.speedMultiplier;
-		};
+                function animate() {
+                    position -= 1;
+                    that.desc.style[that.direction] = position + 'px';
 
-		EndingCredit.prototype.startAnimation = function() {
-			const that = this;
-			let position = 0;
+                    // Reset position and loop the text
+                    if (Math.abs(position) >= that.size) {
+                        position = 0;
+                        that.desc.appendChild(that.text);
+                    }
 
-			function animate() {
-				position -= 1;
-				that.desc.style[that.direction] = position + 'px';
+                    // Continue the animation
+                    requestAnimationFrame(animate);
+                }
 
-				// Reset position and loop the text
-				if (Math.abs(position) >= that.size) {
-					position = 0;
-					that.desc.appendChild(that.text);
-				}
+                // Start the animation
+                animate();
+            }
+        }
 
-				// Continue the animation
-				requestAnimationFrame(animate);
-			}
+        // Default settings
+        EndingCredit.defaults = {
+            selector: '',
+            speedMultiplier: 20
+        };
 
-			// Start the animation
-			animate();
-		};
-
-		// Default settings
-		EndingCredit.defaults = {
-			selector: '',
-			speedMultiplier: 20
-		};
-
-		// Global access
-		window.EndingCredit = EndingCredit;
-	})();
+        // Global access
+        window.EndingCredit = EndingCredit;
+    })();
 </script>
                 </div>
             </div>

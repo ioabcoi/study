@@ -1,0 +1,249 @@
+    <!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="../include/head.js"></script>
+    <!-- // head -->
+    
+    <title>tab_scroll_component</title>
+</head>
+<body>
+        
+    <!-- event -->
+    <style type="text/css">
+        #wrap {overflow:hidden;position:relative;width:100%;min-width:1080px;background:#fff;letter-spacing:-0.04em;}
+        #wrap .inner {display:flex;align-items:center;justify-content:center;flex-direction:column;box-sizing:border-box;width:100%;min-height:1500px;color:#fff;font-size:50px;}
+        #wrap .top,
+        #wrap .bottom {background:#333;}
+
+        /* Scroll Out Sections */
+        .scroll_out {width:100%;}
+        .scroll_out1 {background:#e07667;}
+        .scroll_out2 {background:#e29632;}
+        .scroll_out3 {background:#f7e712;}
+        .scroll_out4 {background:#2574db;}
+
+        /* Quick Navigation Out */
+        .quick_out1 {position:fixed;z-index:3;right:0;top:0;width:100px;height:100%;background:#333;flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;box-sizing:border-box;-webkit-transform:translateX(100%);transform:translateX(100%);-webkit-transition:all 0.10s ease-in-out;transition:all 0.10s ease-in-out;}
+        .quick_out1 ul {width:100%;}
+        .quick_out1 ul li a {display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:100%;height:125px;background:#333;color:#fff;font-size:20px;text-decoration:none;}
+        .quick_out1 ul li.on a {background:#333;color:#ff0;text-decoration:underline;}
+        .quick_out1.fixed {-webkit-transform:translateX(0);transform:translateX(0);}
+
+        /* Quick Navigation In */
+        .quick_out2 {position:fixed;z-index:2;left:0;top:0;width:100%;height:100px;background:#333;flex-wrap:wrap;display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:row;box-sizing:border-box;-webkit-transform:translateY(-100%);transform:translateY(-100%);-webkit-transition:all 0.10s ease-in-out;transition:all 0.10s ease-in-out;}
+        .quick_out2 ul {height:100px;display:flex;align-items:center;justify-content:center;flex-direction:row;}
+        .quick_out2 ul li a {display:flex;align-items:center;justify-content:center;box-sizing:border-box;width:125px;height:100px;background:#333;color:#fff;font-size:20px;text-decoration:none;}
+        .quick_out2 ul li.on a {background:#333;color:#ff0;text-decoration:underline;}
+        .quick_out2.fixed {-webkit-transform:translateY(0);transform:translateY(0);}
+
+        
+    </style>
+    <!-- wrap -->
+    <div id="wrap">
+        <!-- top section -->
+        <div class="cont_box top">
+            <div class="inner">Top</div>
+        </div>
+    
+        <!-- content sections -->
+        <div class="cont_wrap">
+            <div class="quick_out quick_out1">
+                <ul>
+                    <li><a href="#">out 1</a></li>
+                    <li><a href="#">out 2</a></li>
+                    <li><a href="#">out 3</a></li>
+                    <li><a href="#">out 4</a></li>
+                </ul>
+            </div>
+
+            <div class="scroll_out scroll_out1"><div class="inner">Scroll Out 1</div></div>
+            <div class="scroll_out scroll_out2">
+                <div class="inner">Scroll Out 2</div>
+    
+                <!-- content sections -->
+                <div class="cont_wrap">
+                    <div class="quick_out quick_out2">
+                        <ul>
+                            <li><a href="#">in 1</a></li>
+                            <li><a href="#">in 2</a></li>
+                            <li><a href="#">in 3</a></li>
+                            <li><a href="#">in 4</a></li>
+                        </ul>
+                    </div>
+        
+                    <div class="scroll_out scroll_out1"><div class="inner">Scroll In 1</div></div>
+                    <div class="scroll_out scroll_out2">
+                        <div class="inner">Scroll In 2</div>
+                    </div>
+                    <div class="scroll_out scroll_out3"><div class="inner">Scroll In 3</div></div>
+                    <div class="scroll_out scroll_out4"><div class="inner">Scroll In 4</div></div>
+                </div>
+            </div>
+            <div class="scroll_out scroll_out3"><div class="inner">Scroll Out 3</div></div>
+            <div class="scroll_out scroll_out4"><div class="inner">Scroll Out 4</div></div>
+        </div>
+    
+        <!-- bottom section -->
+        <div class="cont_box bottom">
+            <div class="inner">Bottom</div>
+        </div>
+    </div>
+    <!-- // wrap -->
+    <script type="text/javascript">
+        class ScrollComponent {
+            constructor(contWrap, quickMenu, options = {}) {
+                this.contWrap = contWrap; // 현재 cont_wrap
+                this.scrollSections =Array.from(this.contWrap.children).filter(child => child.classList.contains('scroll_out')); // 현재 cont_wrap 내의 scroll_out 찾기
+                this.quickMenu = quickMenu; // Quick 메뉴
+                this.menuItems = this.quickMenu.querySelectorAll('li'); // 메뉴 항목
+
+                // 사용자 정의 옵션 설정
+                this.options = Object.assign({
+                    activeClass: 'on',
+                    scrollOffset: 0,
+                    smoothScroll: true,
+                }, options);
+
+                this.addEventListeners();
+            }
+
+            addEventListeners() {
+                window.addEventListener('scroll', this.handleScroll.bind(this));
+
+                if (this.options.smoothScroll) {
+                    this.menuItems.forEach((item, index) => {
+                        item.querySelector('a').addEventListener('click', (e) => {
+                            e.preventDefault();
+                            this.scrollToSection(index);
+                        });
+                    });
+                }
+            }
+
+            handleScroll() {
+                let scrollPosition = window.scrollY + this.options.scrollOffset;
+
+                // 현재 cont_wrap의 상단 및 하단 경계 설정
+                let topBoundary = this.contWrap.previousElementSibling?.offsetTop + this.contWrap.previousElementSibling?.offsetHeight || 0;
+                let bottomBoundary = this.contWrap.nextElementSibling?.offsetTop || Infinity;
+
+                // 고정 클래스 처리
+                let firstScrollOut = this.scrollSections[0];
+                let lastScrollOut = this.scrollSections[this.scrollSections.length - 1];
+                let firstScrollOutTop = firstScrollOut.offsetTop;
+                let lastScrollOutBottom = lastScrollOut.offsetTop + lastScrollOut.offsetHeight;
+
+                if (scrollPosition >= firstScrollOutTop && scrollPosition <= lastScrollOutBottom) {
+                    this.quickMenu.classList.add('fixed');
+                } else {
+                    this.quickMenu.classList.remove('fixed');
+                }
+
+                // 상단이나 하단 섹션에 있을 경우 하이라이트 제거
+                if (scrollPosition < topBoundary || scrollPosition >= bottomBoundary) {
+                    this.clearMenuHighlight();
+                    return; // 더 이상 처리하지 않음
+                }
+
+                // 현재 scroll_out 섹션 하이라이트 처리
+                this.scrollSections.forEach((section, index) => {
+                    let sectionTop = section.offsetTop;
+                    let sectionHeight = section.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        this.setActiveMenuItem(index);
+                    }
+                });
+            }
+
+            setActiveMenuItem(index) {
+                this.menuItems.forEach(item => item.classList.remove(this.options.activeClass));
+                this.menuItems[index].classList.add(this.options.activeClass);
+            }
+
+            clearMenuHighlight() {
+                this.menuItems.forEach(item => item.classList.remove(this.options.activeClass));
+            }
+
+            scrollToSection(index) {
+                let targetSection = this.scrollSections[index];
+                window.scrollTo({
+                    top: targetSection.offsetTop - this.options.scrollOffset,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // 각 cont_wrap에 대해 ScrollComponent 초기화
+        document.querySelectorAll('.cont_wrap').forEach((contWrap) => {
+            const quickMenu = contWrap.querySelector('.quick_out'); // 현재 cont_wrap 내의 Quick 메뉴 찾기
+            new ScrollComponent(contWrap, quickMenu, {
+                activeClass: 'on',
+                scrollOffset: 0
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        /*
+        1. 기능 분리 및 모듈화
+        기능별로 함수를 나누고, 특정 HTML 구조나 CSS 클래스에 종속되지 않도록 유연하게 만들어야 해. 
+        이를 위해, HTML에서 어떤 요소를 기준으로 동작할지 파라미터로 넘겨주면 더 유연하게 사용할 수 있어.
+
+        // 특정 섹션의 시작과 끝을 감지하고, 스크롤에 따라 고정할지 여부 결정.
+        // 스크롤 위치에 맞춰 네비게이션 요소를 하이라이트.
+
+        class ScrollComponent {
+            constructor(scrollSections, quickMenu) {
+                this.scrollSections = document.querySelectorAll(scrollSections); // 스크롤 섹션들
+                this.quickMenu = document.querySelector(quickMenu);  // 네비게이션 메뉴
+                this.menuItems = this.quickMenu.querySelectorAll('li'); // 메뉴 아이템들
+                this.addEventListeners();
+            }
+
+            addEventListeners() {
+                window.addEventListener('scroll', this.handleScroll.bind(this));
+            }
+
+            handleScroll() {
+                let scrollPosition = window.scrollY;
+
+                this.scrollSections.forEach((section, index) => {
+                    let sectionTop = section.offsetTop;
+                    let sectionHeight = section.offsetHeight;
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        this.setActiveMenuItem(index);
+                    }
+                });
+            }
+
+            setActiveMenuItem(index) {
+                this.menuItems.forEach(item => item.classList.remove('on'));
+                this.menuItems[index].classList.add('on');
+            }
+        }
+
+        // 컴포넌트 인스턴스화
+        const scrollComponent = new ScrollComponent('.scroll_out', '.quick_out');
+
+        3. 확장 가능한 옵션 추가
+        컴포넌트를 더 유연하게 사용하기 위해 옵션을 추가할 수 있어. 
+        예를 들어, 각 섹션이 특정 마진을 가지고 스크롤되거나, 스크롤 애니메이션을 다르게 적용하고 싶을 때 설정할 수 있는 옵션을 추가하는 거야.
+
+        // 옵션 추가
+
+        5. 컴포넌트의 장점
+        재사용성: 한 번 컴포넌트를 만들어두면 여러 페이지나 프로젝트에서 간단하게 사용할 수 있어.
+        유지보수성: 스크롤이나 네비게이션 관련 로직을 컴포넌트로 분리하면 유지보수가 훨씬 쉬워져.
+        확장성: 필요할 때마다 옵션이나 기능을 추가해도 기존 코드를 크게 수정할 필요 없이 확장할 수 있어.
+        모듈화: 컴포넌트를 모듈화하여 ES6의 import/export를 사용하면 다른 파일에서 가져다 쓰기에도 용이해.
+        */
+    </script>
+    <!-- // event -->
+    
+    <!-- foot -->
+    <script src="../include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

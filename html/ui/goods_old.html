@@ -3,6 +3,7 @@
 <head>
     <!-- head -->
     <script src="../include/head.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- // head -->
     
     <title>board</title>
@@ -131,72 +132,76 @@
         <div id="footer"></div>
     </div>
     <script type="text/javascript">
-        class GoodsBar {
-            constructor() {
-                this.goodsBar = document.querySelector('.goodsBar');
-                this.goodsTop = this.goodsBar.querySelector('.goodsTop');
-                this.goodsMiddle = this.goodsBar.querySelector('.goodsMiddle');
-                this.goodsSelect = this.goodsMiddle.querySelector('.goodsSelect');
-                this.goodsBottom = this.goodsBar.querySelector('.goodsBottom');
-                this.containerPadding = 50; // 패딩 값 설정
-                this.init();
-                this.bindEvents();
-            }
+        const $win = $(window);
+        const $docu = $(document);
 
-            init() {
-                this.updateStyles();
-            }
+        $win.bind('load resize scroll', function () {
+            $('.goodsBar').goodsBar();
+        });
 
-            bindEvents() {
-                window.addEventListener('load', this.updateStyles.bind(this));
-                window.addEventListener('resize', this.updateStyles.bind(this));
-                window.addEventListener('scroll', this.updateStyles.bind(this));
-            }
+        jQuery.fn.goodsBar = function () {
+            return this.each(function () {
+                const win_w = $win.width();
+                const win_h = $win.height();
+                const win_s = $win.scrollTop();
+                const win_b = $docu.height() - win_h - win_s;
 
-            updateStyles() {
-                const win_h = window.innerHeight;
-                const win_s = window.scrollY;
-                const contents_t = document.querySelector('.contents').offsetTop;
-                const header_h = document.getElementById('header').offsetHeight;
-                const footer_h = document.getElementById('footer').offsetHeight;
+                const contents_t = $('.contents').offset().top;
+                const container_padding = 50;
+                const header_t = $('#header').offset().top;
+                const footer_t = $('#footer').offset().top - container_padding;
+                const header_h = $('#header').outerHeight() + container_padding;
+                const footer_h = $('#footer').outerHeight() + container_padding;
 
-                const goods_w = this.goodsBar.offsetWidth;
-                const goodsTop_h = this.goodsTop.offsetHeight;
-                const goodsBottom_h = this.goodsBottom.offsetHeight;
+                const $goodsBar = $(this);
+                const $goodsTop = $goodsBar.find('.goodsTop');
+                const $goodsMiddle = $goodsBar.find('.goodsMiddle');
+                const $goodsSelect = $goodsMiddle.find('.goodsSelect');
+                const $goodsBottom = $goodsBar.find('.goodsBottom');
 
+                const goods_w = $goodsBar.width();
+                const goods_t = $goodsBar.offset().top;
+                const goodsTop_h = $goodsTop.outerHeight();
+                const goodsSelect_h = $goodsSelect.outerHeight();
+                const goodsBottom_h = $goodsBottom.outerHeight();
+                const min_h = 100;
                 let select_h;
                 let gap;
-                
-                if (win_h > 640) {
-                    if (win_s < header_h + contents_t) {
-                        select_h = win_h - header_h - this.containerPadding - goodsTop_h - goodsBottom_h;
-                        this.goodsBar.classList.remove('fixed');
-                        this.goodsBar.style.marginLeft = `0px`;
-                        this.goodsBar.style.height = `${win_h - contents_t}px`;
-                        this.goodsSelect.style.height = `${select_h}px`;
-                    } else {
-                        select_h = win_h - goodsTop_h - goodsBottom_h;
-                        this.goodsBar.classList.add('fixed');
-                        this.goodsBar.style.marginLeft = `${goods_w}px`;
-                        this.goodsBar.style.height = `${win_h}px`;
-                        this.goodsSelect.style.height = `${select_h}px`;
 
-                        if (win_s + win_h >= document.body.scrollHeight - footer_h) {
-                            select_h = win_h - goodsTop_h - goodsBottom_h - this.containerPadding - footer_h;
-                            gap = Math.max(100 - select_h, 0);
-                            this.goodsSelect.style.height = `${select_h}px`;
-                            this.goodsBar.style.height = `${win_h - (footer_h - (document.body.scrollHeight - win_h - win_s)) + gap - this.containerPadding}px`;
-                            this.goodsBar.style.marginTop = `-${gap}px`;
+                init();
+
+                function init() {
+                    if (win_h > 640) {
+                        if (win_s < contents_t) {
+                            $goodsBar.removeClass('fixed').attr('style', '');
+                            $goodsBar.css({ 'height': win_h - contents_t });
+                            $goodsSelect.css({ 'height': win_h - contents_t - goodsTop_h - goodsBottom_h });
+                        } 
+                        
+                        else if (win_s >= contents_t) {
+                            select_h = win_h - goodsTop_h - goodsBottom_h - 40;
+                            $goodsBar.addClass('fixed').css({ 'margin-left': goods_w, 'height': win_h });
+                            $goodsSelect.css({ 'height': select_h });
+
+                            if (win_b <= footer_h) {
+                                select_h = win_h - goodsTop_h - goodsBottom_h - 40 - (footer_h - win_b);
+                                gap = min_h - select_h;
+                                $goodsSelect.css({ 'height': select_h });
+
+                                if (select_h <= min_h && win_b == 0) {
+                                    $goodsBar.css({ 'height': win_h - (footer_h - win_b) + gap, 'margin-top': - gap });
+                                } else {
+                                    $goodsBar.css({ 'height': win_h - (footer_h - win_b), 'margin-top': 0 });
+                                }
+                            }
                         }
+                    } else {
+                        $goodsSelect.attr('style', '');
                     }
-                } else {
-                    this.goodsSelect.style.height = 'auto';
-                }
-            }
-        }
+                };
 
-        // Initialize GoodsBar
-        new GoodsBar();
+            });
+        }
     </script>
 
 </div>
