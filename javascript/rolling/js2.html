@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>rolling_js2</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>rolling_js2</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">common</div>
+        <div class="code_area">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* rolling */
+    .rolling {position:relative;width:100%;}
+    .rolling ul {display:flex;align-items:center;justify-content:center;flex-direction:row;box-sizing:border-box;width:100%;margin:0 auto;}
+    .rolling ul li {flex:1;text-align:center;}
+    .rolling ul li a {box-sizing:border-box;display:block;height:32px;background:#ddd;border:1px solid #ccc;color:#000;font-size:14px;line-height:32px;text-decoration:none;}
+    .rolling ul li.on a {color:#ff00ff;}
+</style>
+<!-- rolling -->
+<div class="rolling">
+    <ul>
+        <li><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+</div>
+<!-- // rolling -->
+<script type="text/javascript">
+    // Rolling Function  
+    var Rolling = function(obj, idx, spd, pus){
+        const target = document.querySelector(obj);
+        // const rolling = Array.from(target.querySelectorAll("ul li")); // ie no
+        const rolling = Array.prototype.slice.call(target.getElementsByTagName("li")); // ie ok
+        // console.log(rolling);
+        const length = rolling.length;
+        const pause = pus;
+        let index = idx - 1;
+        const speed = spd;
+        let timer = setInterval(function(){}, speed);
+        const stepReset = function(){
+            target.querySelector("ul").removeAttribute("class");
+            for (let i=0; i<length; i++) {
+                rolling[i].classList.remove("on");
+            }		
+        }
+        const stepActive = function(num){
+            index = num;
+            target.querySelector("ul").classList.add("r" + (index + 1));
+            rolling[index].classList.add("on");	
+        }
+        const stepStart = function(num){
+            index = num;
+            stepReset();
+            stepActive(index);
+            stepStop();
+            timer = setInterval(function(){        
+                stepRolling(index);
+            }, speed);
+        }
+        const stepStop = function(){
+            clearInterval(timer);
+        }
+        const stepRolling = function(num){
+            index = num;
+            stepReset();
+            if( index >= length-1 ){
+                index = 0;
+            }else{
+                index++;
+            }
+            stepActive(index);
+        }
+        const mouseclick = function(e){
+            // console.log("mouseclick", e.target.parentElement);
+            // console.log("mouseclick", rolling.indexOf(e.target.parentElement));
+            index = rolling.indexOf(e.target.parentElement);
+            stepStart(index);
+            stepStop();
+            setTimeout(function(){
+                stepStart(index);
+            }, speed);
+        }
+        const mouseenter = function(e){
+            // console.log("mouseenter", e.target);
+            // console.log("mouseenter", rolling.indexOf(e.target));
+            index = rolling.indexOf(e.target);
+            // console.log(index);
+            stepStart(index);
+            stepStop();
+        }
+        const mouseleave = function(e){
+            // console.log("mouseleave", e.target);
+            // console.log("mouseleave", rolling.indexOf(e.target));
+            stepStart(index);
+        }
+        const init = function(){
+            // console.log(target, rolling, length);
+            // console.log(rolling[0]);
+            stepStart(index);
+        };
+        init();
+        if( pause === "click" ){
+            rolling.forEach(function(element) {
+                // console.log(element);  
+                element.addEventListener("click", mouseclick);
+            });
+        }	
+        if( pause === "over" ){
+            rolling.forEach(function(element) {
+                // console.log(element);  
+                element.addEventListener("mouseenter", mouseenter);
+                element.addEventListener("mouseleave", mouseleave);
+                element.addEventListener("click", function(e){ e.preventDefault(); });
+            });
+        }	
+    }
+    // var rolling1 = new Rolling(target, index, speed, pause);
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">default</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling1" class="rolling">
+    <ul>
+        <li><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+</div>
+<!-- // rolling -->
+<script type="text/javascript">
+    var rolling1 = new Rolling("#rolling1", 1, 1000, false);
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">pause 'click'</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling2" class="rolling">
+    <ul>
+        <li><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+</div>
+<!-- // rolling -->
+<script type="text/javascript">
+    var rolling2 = new Rolling("#rolling2", 1, 1000, "click");
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">pause 'over'</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling3" class="rolling">
+    <ul>
+        <li><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+</div>
+<!-- // rolling -->
+<script type="text/javascript">
+    var rolling3 = new Rolling("#rolling3", 1, 1000, "over");
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

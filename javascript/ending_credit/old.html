@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>ending_credit</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>ending_credit</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">common</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+	/* ending_credit - common */
+	.ending_credit {position:relative;width:300px;margin:0 auto;overflow:hidden;border:1px solid #ccc;}
+	.ending_credit .container {position:relative;width:100%;height:100%;}
+	.ending_credit .container .description {position:absolute;left:0;top:0;}
+	.ending_credit .container .description:after {content:"";display:block;height:0px;clear:both;visibility:hidden;} 
+	.ending_credit .container .description > div {box-sizing:border-box;white-space:nowrap;}
+</style>
+<script type="text/javascript" >
+    (function(){
+		// for ie 
+		if (typeof Object.assign != 'function') {
+			Object.assign = function(target) {
+				'use strict';
+				if (target == null) {
+					throw new TypeError('Cannot convert undefined or null to object');
+				}
+				target = Object(target);
+				for (var index = 1; index < arguments.length; index++) {
+					var source = arguments[index];
+					if (source != null) {
+						for (var key in source) {
+							if (Object.prototype.hasOwnProperty.call(source, key)) {
+								target[key] = source[key];
+							}
+						}
+					}
+				}
+				return target;
+			};
+		}
+
+		var ending_credit = function(opts){
+			this.options = Object.assign(ending_credit.defaults, opts); // ie
+			// console.log(this.options);
+
+			this.target = document.querySelector(opts.selector);
+			this.desc = this.target.querySelector('.description');
+			this.temp = this.desc.querySelector('.text');
+			this.temp_twice = this.temp.cloneNode(true);
+			this.temp_triple = this.temp.cloneNode(true);
+			this.temp_quadruple = this.temp.cloneNode(true);
+			this.size = 0;
+			this.speed = 0;
+			this.type = '';
+
+			if(this.target.classList.contains('horizontal')){
+				this.size = this.temp.offsetWidth;
+				this.type = 'horizontal';
+			}else{
+				this.size = this.temp.offsetHeight;
+				this.type = 'vertical';
+			}
+			console.log(this.size);
+			this.speed = this.size * 20;
+			this.desc.append(this.temp_twice);
+			this.desc.append(this.temp_triple);
+			this.desc.append(this.temp_quadruple);
+			//console.log(this.desc, this.size, this.type, this.speed, this.temp);
+			init(this.desc, this.size, this.type, this.speed, this.temp);
+		}
+
+		function init(desc, size, type, speed, temp){
+			function ticker(){
+				//console.log(desc, size, type, speed, temp);
+				if( type === 'horizontal' ){
+					desc.animate({'left' : '-' + size + 'px'}, speed, 'linear', function(){
+						desc.css({'left' : '0'}).append(temp);
+					});
+				}else{
+					desc.animate({'top' : '-' + size + 'px'}, speed, 'linear', function(){
+						desc.css({'top' : '0'}).append(temp);
+					});
+				}
+			}
+			ticker();
+			setInterval(function(){
+				ticker();
+			}, speed);
+		}
+
+		// Attach our defaults for plugin to the plugin itself
+		ending_credit.defaults = {
+			selector : ''
+		}
+
+        // make accessible globally
+		window.ending_credit = ending_credit;
+	})();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">horizontal</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+	/* ending_credit - horizontal */
+	.ending_credit.horizontal {height:28px;}
+	.ending_credit.horizontal .container .description {width:10000%;height:100%;}
+	.ending_credit.horizontal .container .description > div {float:left;color:#333;font-size:20px;font-weight:700;line-height:28px;}
+</style>
+<!-- ending_credit -->
+<div id="ending_credit1" class="ending_credit horizontal">
+    <div class="container">
+        <div class="description">
+            <div class="text">시작. 문구가 흘러 갑니다. 끝.</div>
+        </div>
+    </div>
+</div>
+<!-- //ending_credit -->
+<script type="text/javascript" >
+    // ending_credit
+	var ending_credit1 = new ending_credit({ 
+		selector: '#ending_credit1'
+	});
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">vertical</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* ending_credit - vertical */
+    .ending_credit.vertical {height:150px;}
+    .ending_credit.vertical .container {position:relative;}
+    .ending_credit.vertical .container .description {width:100%;height:10000%;}
+    .ending_credit.vertical .container .description > div {color:#333;font-size:20px;font-weight:700;line-height:28px;}
+</style>
+<!-- ending_credit -->
+<div id="ending_credit2" class="ending_credit vertical">
+    <div class="container">
+        <div class="description">
+            <div class="text">
+                시작. <br>
+                문구가 흘러 갑니다. <br>
+                문구가 흘러 갑니다. <br>
+                문구가 흘러 갑니다. <br>
+                문구가 흘러 갑니다. <br>
+                끝. <br>					
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //ending_credit -->
+<script type="text/javascript" >
+    // ending_credit
+    var ending_credit2 = new ending_credit({ 
+		selector: '#ending_credit2'
+	});
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

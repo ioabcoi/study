@@ -25,8 +25,8 @@
         + '    <meta property="og:title" content="study 9">'
         + '    <!-- // openGraph -->'
         + ''
-        + '    <link rel="stylesheet" href="../../common/css/reset.css">'
-        + '    <link rel="stylesheet" href="../../common/css/code.css">'
+        + '    <link rel="stylesheet" href="/common/css/reset.css">'
+        + '    <link rel="stylesheet" href="/common/css/code.css">'
         ;
     document.write(html);
 })();

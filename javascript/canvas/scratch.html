@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>canvas_scratch</title>
+</head>
+<body data-theme="light">
+        
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>canvas</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">scratch</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+
+<!-- 출처 : https://codepen.io/progrape/pen/XXBwWe -->
+<style type="text/css">
+    .scratch_container {overflow:hidden;width:600px;height:600px;background:#000 url('https://picsum.photos/600/600/?random=51') no-repeat;}
+    .scratch_container canvas {background:transparent;}
+</style>
+<div class="scratch_container">
+    <canvas id="canvas_scratch"></canvas>
+</div>
+<script type="text/javascript">
+const url = 'https://picsum.photos/600/600/?random=52';
+const canvas = document.getElementById('canvas_scratch');
+const ctx = canvas.getContext('2d');
+const img = new Image();
+
+// crossOrigin 속성을 설정하여 CORS 문제를 해결합니다.
+img.crossOrigin = 'Anonymous';
+img.src = url;
+
+img.onload = function () {
+    // const width = Math.min(500, img.width);
+    // const height = img.height * (width / img.width);
+    const width = 600;
+    const height = 600;
+
+    canvas.width = width;
+    canvas.height = height;
+    ctx.drawImage(img, 0, 0, width, height);
+};
+
+let isPress = false;
+let old = null;
+
+// 마우스 이벤트
+canvas.addEventListener('mousedown', function (e){
+    isPress = true;
+    old = {x: e.offsetX, y: e.offsetY};
+});
+
+canvas.addEventListener('mousemove', function (e){
+    if (isPress) {
+        let x = e.offsetX;
+        let y = e.offsetY;
+        draw(x, y);
+        old = {x: x, y: y};
+        
+        // 스크래치된 영역 계산
+        checkScratch();
+    }
+});
+
+canvas.addEventListener('mouseup', function (e){
+    isPress = false;
+});
+
+// 터치 이벤트
+canvas.addEventListener('touchstart', function (e) {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    const x = touch.clientX - rect.left;
+    const y = touch.clientY - rect.top;
+    isPress = true;
+    old = {x: x, y: y};
+});
+
+canvas.addEventListener('touchmove', function (e) {
+    if (isPress) {
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        const x = touch.clientX - rect.left;
+        const y = touch.clientY - rect.top;
+        draw(x, y);
+        old = {x: x, y: y};
+        checkScratch();
+        e.preventDefault();  // 터치 스크롤 방지
+    }
+});
+
+canvas.addEventListener('touchend', function () {
+    isPress = false;
+});
+
+// 공통 draw 함수
+function draw(x, y) {
+    ctx.globalCompositeOperation = 'destination-out';
+
+    ctx.beginPath();
+    ctx.arc(x, y, 50, 0, 2 * Math.PI);
+    ctx.fill();
+
+    ctx.lineWidth = 50;
+    ctx.beginPath();
+    ctx.moveTo(old.x, old.y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+}
+
+const coin = document.querySelector('.mission_wood .wood .coin');
+function checkScratch() {
+    try {
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let totalPixels = imageData.width * imageData.height;
+        let clearPixels = 0;
+
+        // 모든 픽셀을 확인하여 투명한 픽셀 수를 계산
+        for (let i = 0; i < totalPixels * 4; i += 4) {
+            if (imageData.data[i + 3] === 0) {
+                clearPixels++;
+            }
+        }
+
+        // 스크래치된 영역의 비율 계산
+        let clearPercentage = (clearPixels / totalPixels) * 100;
+
+        if (clearPercentage >= 80) {
+            // 80% 이상 스크래치된 경우, 나머지 부분 자동으로 지움
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    } catch (e) {
+        console.error(e);
+    }
+}
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+            
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

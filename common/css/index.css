@@ -16,6 +16,7 @@
 
     /* 폰트 크기 */
     --font-size-h1: 30px;
+    --font-size-h2: 24px;
     --font-size-depth1: 20px;
     --font-size-depth2: 13px;
     --font-size-small: 11px;
@@ -31,6 +32,8 @@
     --padding-mobile: 20px 5px;
     --margin-default: 10px;
     --margin-small: 5px;
+    --margin-medium: 15px;
+    --margin-large: 30px;
 
     /* 기타 */
     --border-radius-default: 6px;
@@ -39,7 +42,15 @@
 }
 
 h1 {
+    margin: var(--margin-large) auto;
     font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+}
+
+h2 {
+    margin: var(--margin-large) auto;
+    font-size: var(--font-size-h2);
     font-weight: var(--font-weight-bold);
     text-align: center;
 }
@@ -102,6 +113,10 @@ h1 {
     font-weight: var(--font-weight-bold);
 }
 
+.index_area ul li>div.date {
+    font-size: var(--font-size-xsmall);
+}
+
 .index_area ul .line {
     padding: 3px;
     background-color: #f0f0f0;
@@ -115,6 +130,11 @@ h1 {
 .index_area ul .link_box a {
     color: var(--color-link-dark);
     font-size: var(--font-size-xsmall);
+    text-decoration: underline;
+}
+
+.index_area ul .link_box .old {
+    opacity: 0.5;
     text-decoration: underline;
 }
 

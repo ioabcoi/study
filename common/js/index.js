@@ -1,17 +1,22 @@
 // index_link
-document.querySelectorAll(".index_area .list li").forEach(target => {
-    const linkBox = target.querySelector(".link_box");
-    const link = linkBox?.querySelector(".link");
-
-    if (link) {
-        const hrefValue = link.textContent.trim();
-        link.setAttribute("href", hrefValue);
-
-        const preview = linkBox.querySelector(".preview");
-        if (preview) {
-            preview.setAttribute("data-href", hrefValue);
+document.querySelectorAll(".index_area .list").forEach(list => {
+    list.querySelectorAll(".link_box").forEach(linkBox => {
+        const link = linkBox.querySelector(".link");
+    
+        if (link) {
+            const hrefValue = link.textContent.trim();
+            link.setAttribute("href", hrefValue);
+    
+            if (hrefValue.includes("_old")) {
+                link.classList.add("old");
+            }
+    
+            const preview = linkBox.querySelector(".preview");
+            if (preview) {
+                preview.setAttribute("data-href", hrefValue);
+            }
         }
-    }
+    });
 });
 
 // mobile_preview

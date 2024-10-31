@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- // head -->
+    
+    <title>tab_contents_jquery</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>tab_contents_jquery</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">simple_tab</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* simple_tab */
+    .simple_tab_cont {border:1px solid #dcdcdc;}
+    .simple_tab_cont .simple_tab .tab {display:flex;align-items:stretch;justify-content:space-between;flex-direction:row;width:100%;}
+    .simple_tab_cont .simple_tab .tab li {flex:1;}
+    .simple_tab_cont .simple_tab .tab li .link {display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:10px;border:1px solid #fff;background:#eee;color:#252525;font-size:20px;font-weight:300;text-align:center;text-decoration:none;}
+    .simple_tab_cont .simple_tab .tab li .link.off {pointer-events:none;opacity:0.5;}
+    .simple_tab_cont .simple_tab .tab li.on .link {background-color:#fff;}
+    .simple_tab_cont .simple_cont .cont {display:none;align-items:center;justify-content:center;box-sizing:border-box;padding:50px;width:100%;background-color:#fff;font-size:20px;}
+    .simple_tab_cont .simple_cont .cont.on {display:flex;}
+</style>
+<!-- simple_tab -->
+<div class="simple_tab_cont">
+    <div class="simple_tab">
+        <ul class="tab">
+            <li class="on"><a href="#" class="link">탭1</a></li>
+            <li><a href="#" class="link">탭2</a></li>
+            <li><a href="#" class="link">탭3</a></li>
+            <li><a href="#" class="link">탭4</a></li>
+        </ul>
+    </div>
+    <div class="simple_cont">
+        <div class="cont on">탭1</div>
+        <div class="cont">탭2</div>
+        <div class="cont">탭3</div>
+        <div class="cont">탭4</div>
+    </div>
+</div>
+<div class="simple_tab_cont">
+    <div class="simple_tab">
+        <ul class="tab">
+            <li class="on"><a href="#" class="link">탭1</a></li>
+            <li><a href="#" class="link">탭2</a></li>
+            <li><a href="#" class="link off">탭3 - off</a></li> <!-- 콘텐츠 없음 -->
+            <li><a href="http://naver.com" class="link">탭4 - naver</a></li> <!-- 콘텐츠 없음 -->
+            <li><a href="http://naver.com" class="link" target="_blank">탭5 - naver 새창</a></li> <!-- 콘텐츠 없음 -->
+            <li><a href="#" class="link">탭6</a></li>
+        </ul>
+    </div>
+    <div class="simple_cont">
+        <div class="cont on">탭1</div>
+        <div class="cont">탭2</div>
+        <div class="cont" style="display:none;">탭3</div> <!-- 콘텐츠 없음 -->
+        <div class="cont" style="display:none;">탭4</div> <!-- 콘텐츠 없음 -->
+        <div class="cont" style="display:none;">탭5</div> <!-- 콘텐츠 없음 -->
+        <div class="cont">탭6</div>
+    </div>
+</div>
+<!-- //simple_tab -->
+<script type="text/javascript">
+    jQuery('.simple_tab_cont').each(function () {
+        var $simple_tab_cont = jQuery(this);
+
+        // 이벤트 위임을 사용해 클릭 이벤트 처리
+        $simple_tab_cont.on('click', '.simple_tab .tab li .link', function (e) {
+            var $this = jQuery(this);
+
+            // 외부 링크인 경우 실행하지 않음
+            if ($this.attr('href').includes("http")) {
+                return;
+            }
+
+            // .off 클래스를 가진 탭은 클릭 무시
+            if ($this.hasClass('off')) {
+                return false;
+            }
+
+            // 탭의 인덱스를 얻고 상태 변경
+            var index = $this.parent().index();
+            $simple_tab_cont.find('.simple_tab .tab li').removeClass('on').eq(index).addClass('on');
+            $simple_tab_cont.find('.simple_cont .cont').removeClass('on').eq(index).addClass('on');
+
+            // 기본 링크 동작 막기
+            e.preventDefault();
+        });
+    });
+</script>
+<!-- <script type="text/javascript">
+    jQuery('.simple_tab_cont').each(function(){
+        var $simple_tab_cont = jQuery(this);
+        $simple_tab_cont.find('.simple_tab .tab li .link').click(function(){
+            if (!jQuery(this).attr('href').includes("http")) {
+                if (!jQuery(this).hasClass("off")) {
+                    $simple_tab_cont.find('.simple_tab .tab li').removeClass('on').eq(jQuery(this).parent().index()).addClass('on');
+                    $simple_tab_cont.find('.simple_cont .cont').removeClass('on').eq(jQuery(this).parent().index()).addClass('on');
+                }
+                return false;
+            }
+        });
+    });
+</script> -->
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

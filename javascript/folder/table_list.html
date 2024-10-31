@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>folder</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>folder</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">table</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+	/* folder_table */
+	.folder_table table {width:100%;border-collapse:collapse;}
+	.folder_table table caption {visibility:hidden;height:0;font-size:0;}
+	.folder_table table thead th {padding:12px;border:1px solid #bbb;text-align:center;}
+	.folder_table table tbody tr td {padding:13px;border:1px solid #ddd;text-align:center;}
+	.folder_table .f_btn {color:#777;text-decoration:none;}
+    .folder_table .folder_btn .f_btn:hover {text-decoration:underline;color:#555;}
+	.folder_table .folder_btn.on .f_btn {color:#333;font-weight:700;text-decoration:underline;}
+	.folder_table .folder_cont {display:none;}
+	.folder_table .folder_cont.on {display:table-row;}
+</style>
+<!-- folder_table -->
+<div id="folder_table" class="folder_table">
+	<table>
+        <caption>제목</caption>
+        <colgroup>
+            <col style="width:16%" />
+            <col style="width:84%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+            </tr>
+        </thead>
+        <tbody>
+			<tr class="folder_btn">
+				<td>1</td>
+				<td><a href="#" class="f_btn">제목1</a></td>
+			</tr>
+			<tr class="folder_cont">
+				<td colspan="2">내용1</td>
+			</tr>
+			<tr class="folder_btn">
+				<td>2</td>
+				<td><a href="#" class="f_btn">제목2</a></td>
+			</tr>
+			<tr class="folder_cont">
+				<td colspan="2">내용2</td>
+			</tr>
+			<tr class="folder_btn">
+				<td>3</td>
+				<td><a href="#" class="f_btn">제목3</a></td>
+			</tr>
+			<tr class="folder_cont">
+				<td colspan="2">내용3</td>
+			</tr>
+            <tr class="folder_btn">
+                <td>4</td>
+                <td><a href="http://naver.com" target="_blank" class="f_btn"><span>제목4 - 새창링크</span></a></td>
+            </tr>
+            <tr class="folder_btn">
+                <td>5</td>
+                <td><a href="http://naver.com" class="f_btn"><span>제목5 - 현재창링크</span></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- // folder_table -->
+<script type="text/javascript" >
+    // folder_table
+    (function(){
+		function FolderTable(selector) {
+			this.table = document.querySelector(selector);
+			this.init();
+		}
+
+		FolderTable.prototype.init = function() {
+			this.table.addEventListener('click', (e) => {
+				const btn = e.target.closest('.f_btn');
+				if (!btn) return; // 클릭한 것이 f_btn이 아닐 때
+
+				const href = btn.getAttribute('href');
+				
+				// href에 값이 있으면 링크 이동, 새 창 띄우기
+				if (href && href !== "#") {
+					// 새 창 띄우기 - target="_blank"인 경우
+					if (btn.getAttribute('target') === '_blank') {
+						window.open(href, '_blank');
+					} else {
+						// 현재 창에서 링크 이동
+						window.location.href = href;
+					}
+					return; // 링크 이동일 경우 여기서 종료
+				}
+
+				e.preventDefault(); // 링크 이동이 아닌 경우 클릭 기본 동작 막기
+
+				const row = btn.closest('.folder_btn');
+				const content = row.nextElementSibling;
+
+				// 토글 기능 추가: 이미 열려 있으면 닫고, 닫혀 있으면 열기
+				if (row.classList.contains('on')) {
+					// 이미 열려 있으면 닫기
+					row.classList.remove('on');
+					content.classList.remove('on');
+				} else {
+					// 다른 열린 행을 닫기
+					this.reset();
+
+					// 클릭한 열 열기
+					row.classList.add('on');
+					content.classList.add('on');
+				}
+			});
+		};
+
+		FolderTable.prototype.reset = function() {
+			// 모든 열 닫기
+			const openBtns = this.table.querySelectorAll('.folder_btn.on');
+			const openContents = this.table.querySelectorAll('.folder_cont.on');
+			openBtns.forEach(btn => btn.classList.remove('on'));
+			openContents.forEach(cont => cont.classList.remove('on'));
+		};
+
+		// 초기화
+		new FolderTable('#folder_table');
+	})();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">list</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* folder_list */
+    .folder_list {width:100%;border-bottom:1px solid #ddd;}
+    .folder_list ul li {display:flex;align-items:center;justify-content:flex-start;flex-direction:row;padding:11px 0;}
+    .folder_list ul li > span {padding:0 10px;color:#333;text-align:center;}
+    .folder_list ul li > span:first-child {width:10%;}
+    .folder_list .head {border-top:1px solid #333;}
+    .folder_list .body li {border-top:1px solid #ddd;}
+    .folder_list .body .folder_btn .f_btn {display:block;text-decoration:none;color:#777;}
+    .folder_list .body .folder_btn.on .f_btn {text-decoration:underline;color:#333;font-weight:700;}
+    .folder_list .body .folder_btn .f_btn:hover {text-decoration:underline;color:#555;}
+    .folder_list .body .folder_cont {display:none;}
+    .folder_list .body .folder_cont p {padding:10px;}
+    .folder_list .body .folder_cont.on {display:block;}
+</style>
+<!-- folder_list -->
+<div id="folder_list" class="folder_list">
+    <ul class="head">
+        <li>
+            <span>번호</span>
+            <span>제목</span>
+        </li>
+    </ul>
+    <ul class="body">
+        <li class="folder_btn">
+            <span>1</span>
+            <span><a href="#" class="f_btn" aria-expanded="false">제목1</a></span>
+        </li>
+        <li class="folder_cont">
+            <div><p>내용</p></div>
+        </li>
+        <li class="folder_btn">
+            <span>2</span>
+            <span><a href="#" class="f_btn" aria-expanded="false">제목2</a></span>
+        </li>
+        <li class="folder_cont">
+            <div><p>내용</p></div>
+        </li>
+        <li class="folder_btn">
+            <span>3</span>
+            <span><a href="#" class="f_btn" aria-expanded="false">제목3</a></span>
+        </li>
+        <li class="folder_cont">
+            <div><p>내용</p></div>
+        </li>
+        <li class="folder_btn">
+            <span>4</span>
+            <span><a href="http://naver.com" target="_blank" class="f_btn" aria-expanded="false">제목 - 새창링크</a></span>
+        </li>
+        <li class="folder_btn">
+            <span>5</span>
+            <span><a href="http://naver.com" class="f_btn" aria-expanded="false">제목 - 현재창링크</a></span>
+        </li>
+    </ul>
+</div>
+<!-- // folder_list -->
+<script type="text/javascript" >
+    // folder_list
+    (function(){
+		function FolderList(selector) {
+			this.list = document.querySelector(selector);
+			this.init();
+		}
+
+		FolderList.prototype.init = function() {
+			this.list.addEventListener('click', (e) => {
+				const btn = e.target.closest('.f_btn');
+				if (!btn) return; // 클릭한 것이 f_btn이 아닐 때
+
+				const href = btn.getAttribute('href');
+
+				// href에 값이 있으면 링크 이동 또는 새 창 열기
+				if (href && href !== "#") {
+					// 새 창 열기 - target="_blank"인 경우
+					if (btn.getAttribute('target') === '_blank') {
+						window.open(href, '_blank');
+					} else {
+						// 현재 창에서 링크 이동
+						window.location.href = href;
+					}
+					return; // 링크 이동일 경우 여기서 종료
+				}
+
+				e.preventDefault(); // 링크 이동이 아닌 경우 클릭 기본 동작 막기
+
+				const row = btn.closest('.folder_btn');
+				const content = row.nextElementSibling;
+
+				// 토글 기능 추가: 이미 열려 있으면 닫고, 닫혀 있으면 열기
+				if (row.classList.contains('on')) {
+					// 이미 열려 있으면 닫기
+					row.classList.remove('on');
+					content.classList.remove('on');
+				} else {
+					// 다른 열린 항목 닫기
+					this.reset();
+
+					// 클릭한 항목 열기
+					row.classList.add('on');
+					content.classList.add('on');
+				}
+			});
+		};
+
+		FolderList.prototype.reset = function() {
+			// 모든 항목 닫기
+			const openBtns = this.list.querySelectorAll('.folder_btn.on');
+			const openContents = this.list.querySelectorAll('.folder_cont.on');
+			openBtns.forEach(btn => btn.classList.remove('on'));
+			openContents.forEach(cont => cont.classList.remove('on'));
+		};
+
+		// 초기화
+		new FolderList('#folder_list');
+	})();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

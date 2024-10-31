@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>canvas</title>
+</head>
+<body data-theme="light">
+        
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>canvas</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">ball</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .canvas_wrap {overflow:hidden;position:relative;box-sizing:border-box;width:100%;height:100%;background:#eee;}
+    #canvas {display:block;}
+</style>
+<div class="canvas_wrap">
+	<canvas id="canvas" width="100%" height="100%">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // $('#canvas').attr('width', $(window).width() ).attr('height', $(window).height() );
+        $('#canvas').attr('width', $('.canvas_wrap').width()).attr('height', $('.canvas_wrap').height());
+    });
+
+    var canvas;
+    var ctx;
+    var x = 15, y = 15;
+    var dx = 1, dy = 1;
+    var r = 10;
+
+    window.onload = function () {
+        canvas = document.getElementById('canvas');
+        if (canvas == null || canvas.getContext == null) return;
+        ctx = canvas.getContext('2d');
+        ctx.fillStyle = 'blue';
+        setInterval(draw, 5);
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI, true);
+        ctx.fill();
+
+        if (x < r || x + r > canvas.width) {
+            dx = -dx;
+        }
+        if (y < r || y + r > canvas.height) {
+            dy = -dy;
+        }
+        x += dx;
+        y += dy;
+    }
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">title</div>
+        <div class="code_area">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+            
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
