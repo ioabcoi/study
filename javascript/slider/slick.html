@@ -76,32 +76,37 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // cont_slick -->
 <script type="text/javascript">
-    // cont_slick_array
-    const cont_slick_array = new Array;
-    jQuery(".cont_slick").each(function(i){
-        jQuery(this).addClass("cont_slick" + i);
-        const $this_slide = jQuery(".cont_slick" + i);
-        cont_slick_array[i] = $this_slide.find("> ul").slick({
-            arrows: true,
-            dots: true,
-            infinite: true,
-            autoplay: false,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
+    // $(document).ready(function () {
+        // cont_slick_array
+        const cont_slick_array = [];
+
+        $(".cont_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("cont_slick" + index);
+
+            cont_slick_array[index] = $ul.slick({
+                arrows: true,
+                dots: true,
+                infinite: true,
+                autoplay: false,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
+
+            $this.on("mouseenter", function () {
+                cont_slick_array[index].stopAuto();
+            }).on("mouseleave", function () {
+                cont_slick_array[index].startAuto();
+            });
+
+            $this.find("a").on("click", function () {
+                cont_slick_array[index].stopAuto();
+                setTimeout(() => cont_slick_array[index].startAuto(), 500);
+            });
         });
-        $this_slide.bind("mouseenter", function(){
-            cont_slick_array[i].stopAuto();
-        }).bind("mouseleave", function(){
-            cont_slick_array[i].startAuto();
-        });
-        $this_slide.find("a").bind("click", function(){
-            cont_slick_array[i].stopAuto();
-            setTimeout(function(){
-                cont_slick_array[i].startAuto();
-            }, 500);
-        });
-    });
+    // });
 </script>
                 </div>
             </div>
@@ -139,42 +144,50 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // mousewheel_slick -->
 <script type="text/javascript">
-    /**/
-    // mousewheel_slick_array
-    const mousewheel_slick_array = new Array;
-    jQuery(".mousewheel_slick").each(function(i){
-        jQuery(this).addClass("mousewheel_slick" + i);
-        const $this_slide = jQuery(".mousewheel_slick" + i);        
-        mousewheel_slick_array[i] = $this_slide.find("> ul").slick({
-            fade: true,
-            cssEase: "linear",
-            arrows: false,
-            dots: true,
-            infinite: true,
-            autoplay: false,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
-        });
-        mousewheel_slick_array[i].on("beforeChange", function(event, slick, currentSlide, nextSlide){
-            $this_slide.addClass("dontMove");
-        });
-        mousewheel_slick_array[i].on("afterChange", function(event, slick, currentSlide, nextSlide){
-            setTimeout(function(){
-                $this_slide.removeClass("dontMove");
-            }, 10);
-        });
-        $this_slide.on("mousewheel", function(e){
-            e.preventDefault();
-            if( !$this_slide.hasClass("dontMove") ) {
-                if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
-                    mousewheel_slick_array[i].slick("slickPrev");
-                } else {
-                    mousewheel_slick_array[i].slick("slickNext");
+    // $(document).ready(function () {
+        // mousewheel_slick_array
+        const mousewheel_slick_array = [];
+
+        $(".mousewheel_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("mousewheel_slick" + index);
+
+            mousewheel_slick_array[index] = $ul.slick({
+                fade: true,
+                cssEase: "linear",
+                arrows: false,
+                dots: true,
+                infinite: true,
+                autoplay: false,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
+
+            mousewheel_slick_array[index].on("beforeChange", function(event, slick, currentSlide, nextSlide){
+                $this.addClass("dontMove");
+            });
+
+            mousewheel_slick_array[index].on("afterChange", function(event, slick, currentSlide, nextSlide){
+                setTimeout(function(){
+                    $this.removeClass("dontMove");
+                }, 10);
+            });
+
+            $this.on("mousewheel", function(e){
+                e.preventDefault();
+                if( !$this.hasClass("dontMove") ) {
+                    const isScrollingUp = e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0;
+                    if (isScrollingUp) {
+                        mousewheel_slick_array[index].slick("slickPrev");
+                    } else {
+                        mousewheel_slick_array[index].slick("slickNext");
+                    }
                 }
-            }
+            });
         });
-    });
+    // });
 </script>
                 </div>
             </div>
@@ -231,54 +244,58 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // custom_slick -->
 <script type="text/javascript">
-    // custom_slick_array
-    const custom_slick_array = new Array;
-    jQuery(".custom_wrap").each(function(i){
-        jQuery(this).find(".custom_slick").addClass("custom_slick" + i);
-        jQuery(this).find(".custom_tab").addClass("custom_tab" + i);
-        const $this_slide = jQuery(".custom_slick" + i);
-        const $this_tab = jQuery(".custom_tab" + i);        
-        custom_slick_array[i] = $this_slide.find("> ul").slick({
-            arrows: true,
-            dots: true,
-            infinite: true,
-            autoplay: true,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
-        });
-        custom_slick_array[i].on("init", function(event, slick){
-            $this_tab.find("> ul li").eq(0).addClass("on");
-            resetTab();
-            activeTab(0);
-        });
-        custom_slick_array[i].on("beforeChange", function(event, slick, currentSlide, nextSlide){
-            resetTab();
-            activeTab(nextSlide);
-        });
-        function resetTab(){
-            $this_tab.find("> ul li").removeClass("on");
-            $this_tab.find("> ul li").each(function(){
-                // jQuery(this).find("img").attr("src", jQuery(this).find("img").attr("src").replace("_on.png", "_off.png"));	
+    // $(document).ready(function () {
+        // custom_slick_array
+        const custom_slick_array = [];
+
+        $(".custom_wrap").each(function (index) {
+            const $this = $(this);
+            $this.find(".custom_slick").addClass("custom_slick" + index);
+            $this.find(".custom_tab").addClass("custom_tab" + index);
+            const $slide = jQuery(".custom_slick" + index);
+            const $tab = jQuery(".custom_tab" + index);
+                
+            custom_slick_array[index] = $slide.find("> ul").slick({
+                arrows: true,
+                dots: true,
+                infinite: true,
+                autoplay: true,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
             });
-        }
-        function activeTab(num){
-            $this_tab.find("> ul li").eq(num).addClass("on");
-            // $this_tab.find("> ul li").eq(num).find("img").attr("src", $this_tab.find("> ul li").eq(num).find("img").attr("src").replace("_off.png", "_on.png"));	
-        }
-        $this_tab.find("> ul li").find(".tab_box").bind("click", function(){
-            const idx = jQuery(this).parent().index();
-            resetTab();
-            activeTab(idx);
-            custom_slick_array[i].slick("slickGoTo", idx);
-            return false;
+
+            custom_slick_array[index].on("init", function(event, slick){
+                $tab.find("> ul li").eq(0).addClass("on");
+                activeTab(0);
+            });
+
+            custom_slick_array[index].on("beforeChange", function(event, slick, currentSlide, nextSlide){
+                activeTab(nextSlide);
+            });
+
+            function activeTab(num){
+                $tab.find("> ul li").removeClass("on").eq(num).addClass("on");
+                // $tab.find("> ul li").each(function(){
+                //     jQuery(this).find("img").attr("src", jQuery(this).find("img").attr("src").replace("_on.png", "_off.png"));	
+                // });
+                // $tab.find("> ul li").eq(num).find("img").attr("src", $tab.find("> ul li").eq(num).find("img").attr("src").replace("_off.png", "_on.png"));	
+            }
+            
+            $tab.find("> ul li .tab_box").bind("click", function(){
+                const idx = jQuery(this).parent().index();
+                activeTab(idx);
+                custom_slick_array[index].slick("slickGoTo", idx);
+                return false;
+            });
+
+            $slide.on("mouseenter", function(){
+                custom_slick_array[index].slick("slickPause");
+            }).on("mouseleave", function(){
+                custom_slick_array[index].slick("slickPlay");
+            });
         });
-        $this_tab.bind("mouseenter", function(){
-            custom_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
-            custom_slick_array[i].slick("slickPlay");
-        });
-    });
+    // });
 </script>
                 </div>
             </div>
@@ -333,42 +350,30 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // table_slick -->
 <script type="text/javascript">
-    // table_slick_array
-    const table_slick_array = new Array;
-    jQuery(".table_slick").each(function(i){
-        jQuery(this).addClass("table_slick" + i);
-        const $this_slide = jQuery(".table_slick" + i);
-        table_slick_array[i] = $this_slide.find("> ul").slick({
-            vertical: true,
-            arrows: false,
-            dots: false,
-            infinite: true,
-            autoplay: true,
-            cssEase: "linear",
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
-        });
-    });
+    // $(document).ready(function () {
+        // table_slick_array
+        const table_slick_array = [];
+        
+        $(".table_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("table_slick" + index);
 
-    /*
-    // table_slick
-    jQuery(".table_slick ul").slick({
-        vertical: true,
-        arrows: false,
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        cssEase: "linear",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        pauseOnHover: false,
-        draggable: false
-    });
-    */
+            table_slick_array[index] = $ul.slick({
+                vertical: true,
+                arrows: false,
+                dots: false,
+                infinite: true,
+                autoplay: true,
+                cssEase: "linear",
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
+        });
+    // });
 </script>
                 </div>
             </div>
@@ -402,42 +407,30 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // vertical_slick -->
 <script type="text/javascript">
-    // vertical_slick_array
-    const vertical_slick_array = new Array;
-    jQuery(".vertical_slick").each(function(i){
-        jQuery(this).addClass("vertical_slick" + i);
-        const $this_slide = jQuery(".vertical_slick" + i);
-        vertical_slick_array[i] = $this_slide.find("> ul").slick({
-            vertical: true,
-            arrows: false,
-            dots: false,
-            infinite: true,
-            autoplay: true,
-            cssEase: "linear",
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
-        });
-    });
+    // $(document).ready(function () {
+        // vertical_slick_array
+        const vertical_slick_array = [];
 
-    /*
-    // vertical_slick
-    jQuery(".vertical_slick ul").slick({
-        vertical: true,
-        arrows: false,
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        cssEase: "linear",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        pauseOnHover: false,
-        draggable: false
-    });
-    */
+        $(".vertical_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("vertical_slick" + index);
+
+            vertical_slick_array[index] = $ul.slick({
+                vertical: true,
+                arrows: false,
+                dots: false,
+                infinite: true,
+                autoplay: true,
+                cssEase: "linear",
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
+        });
+    // });
 </script>
                 </div>
             </div>
@@ -477,44 +470,31 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // ticker_slick -->
 <script type="text/javascript">
-    // ticker_slick_array
-    const ticker_slick_array = new Array;
-    jQuery(".ticker_slick").each(function(i){
-        jQuery(this).addClass("ticker_slick" + i);
-        const $this_slide = jQuery(".ticker_slick" + i);
-        ticker_slick_array[i] = $this_slide.find("> ul").slick({
-            arrows: false,
-            dots: false,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 0,
-            speed: 2000,
-            cssEase: "linear",
-            slidesToShow: 5,
-            slidesToScroll: 1,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
-        });
-    });
+    // $(document).ready(function () {
+        // ticker_slick_array
+        const ticker_slick_array = [];
 
-    /*
-    // ticker_slick
-    jQuery(".ticker_slick ul").slick({
-        arrows: false,
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 0,
-        speed: 2000,
-        cssEase: "linear",
-        slidesToShow: 5,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        pauseOnHover: false,
-        draggable: false
-    });
-    */
+        $(".ticker_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("ticker_slick" + index);
+
+            ticker_slick_array[index] = $ul.slick({
+                arrows: false,
+                dots: false,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 0,
+                speed: 2000,
+                cssEase: "linear",
+                slidesToShow: 5,
+                slidesToScroll: 1,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
+        });
+    // });
 </script>
                 </div>
             </div>
@@ -551,46 +531,32 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // vertical_ticker_slick -->
 <script type="text/javascript">
-    // vertical_ticker_slick_array
-    const vertical_ticker_slick_array = new Array;
-    jQuery(".vertical_ticker_slick").each(function(i){
-        jQuery(this).addClass("vertical_ticker_slick" + i);
-        const $this_slide = jQuery(".vertical_ticker_slick" + i);
-        vertical_ticker_slick_array[i] = $this_slide.find("> ul").slick({
-            vertical: true,
-            arrows: false,
-            dots: false,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 0,
-            speed: 2000,
-            cssEase: "linear",
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            adaptiveHeight: false,
-            pauseOnHover: false,
-            draggable: false
-        });
-    });
+    // $(document).ready(function () {
+        // vertical_ticker_slick_array
+        const vertical_ticker_slick_array = [];
 
-    /*
-    // vertical_ticker_slick
-    jQuery(".vertical_ticker_slick ul").slick({
-        vertical: true,
-        arrows: false,
-        dots: false,
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 0,
-        speed: 2000,
-        cssEase: "linear",
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        adaptiveHeight: false,
-        pauseOnHover: false,
-        draggable: false
-    });
-    */
+        $(".vertical_ticker_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("vertical_ticker_slick" + index);
+
+            vertical_ticker_slick_array[index] = $ul.slick({
+                vertical: true,
+                arrows: false,
+                dots: false,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 0,
+                speed: 2000,
+                cssEase: "linear",
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                adaptiveHeight: false,
+                pauseOnHover: false,
+                draggable: false,
+            });
+        });
+    // });
 </script>
                 </div>
             </div>
@@ -653,36 +619,27 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // txt_slick -->
 <script type="text/javascript">
-    // txt_slick_array
-    const txt_slick_array = new Array;
-    jQuery(".txt_slick").each(function(i){
-        jQuery(this).addClass("txt_slick" + i);
-        const $this_slide = jQuery(".txt_slick" + i);
-        txt_slick_array[i] = $this_slide.find("> ul").slick({
-            centerMode: true,
-            vertical: true,
-            arrows: false,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 3500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-        });
-    });
+    // $(document).ready(function () {
+        // txt_slick_array
+        const txt_slick_array = [];
 
-    /*
-    // txt_slick
-    jQuery(".txt_slick ul").slick({
-        centerMode: true,
-        vertical: true,
-        arrows: false,
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 3500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-    });
-    */
+        $(".txt_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("txt_slick" + index);
+
+            txt_slick_array[index] = $ul.slick({
+                centerMode: true,
+                vertical: true,
+                arrows: false,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 3500,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+            });
+        });
+    // });
 </script>
                 </div>
             </div>
@@ -736,36 +693,43 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // center_slick -->
 <script type="text/javascript">
-    // center_slick_array
-    const center_slick_array = new Array;
-    jQuery(".center_slick").each(function(i){
-        jQuery(this).addClass("center_slick" + i);
-        const $this_slide = jQuery(".center_slick" + i);
-        center_slick_array[i] = $this_slide.find("> ul").slick({
-            centerMode: true,
-            dots: false,
-            arrows: true,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            adaptiveHeight: true,
-            constiableWidth: true,
-            draggable: false
+    // $(document).ready(function () {
+        // center_slick_array
+        const center_slick_array = [];
+
+        $(".center_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("center_slick" + index);
+
+            center_slick_array[index] = $ul.slick({
+                centerMode: true,
+                dots: false,
+                arrows: true,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+                constiableWidth: true,
+                draggable: false,
+            });
+
+            $this.bind("mouseenter", function(){
+                center_slick_array[index].slick("slickPause");
+            }).bind("mouseleave", function(){
+                center_slick_array[index].slick("slickPlay");
+            });
+
+            $this.find("a").bind("click", function(){
+                center_slick_array[index].slick("slickPause");
+                setTimeout(function(){
+                    center_slick_array[index].slick("slickPlay");
+                }, 500);
+            });
         });
-        $this_slide.bind("mouseenter", function(){
-            center_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
-            center_slick_array[i].slick("slickPlay");
-        });
-        $this_slide.find("a").bind("click", function(){
-            center_slick_array[i].slick("slickPause");
-            setTimeout(function(){
-                center_slick_array[i].slick("slickPlay");
-            }, 500);
-        });
-    });
+    // });
 </script>
                 </div>
             </div>
@@ -825,37 +789,44 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // center_slick -->
 <script type="text/javascript">
-    // active_slick_array
-    const active_slick_array = new Array;
-    jQuery(".active_slick").each(function(i){
-        jQuery(this).addClass("active_slick" + i);
-        const $this_slide = jQuery(".active_slick" + i);
-        active_slick_array[i] = $this_slide.find("> ul").slick({
-            centerMode: true,
-            dots: false,
-            arrows: true,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 2500,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            adaptiveHeight: true,
-            constiableWidth: true,
-            draggable: false,
-            cssEase: "linear"
+    // $(document).ready(function () {
+        // active_slick_array
+        const active_slick_array = [];
+
+        $(".active_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("active_slick" + index);
+
+            active_slick_array[index] = $ul.slick({
+                centerMode: true,
+                dots: false,
+                arrows: true,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 2500,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+                constiableWidth: true,
+                draggable: false,
+                cssEase: "linear",
+            });
+
+            $this.bind("mouseenter", function(){
+                active_slick_array[index].slick("slickPause");
+            }).bind("mouseleave", function(){
+                active_slick_array[index].slick("slickPlay");
+            });
+
+            $this.find("a").bind("click", function(){
+                active_slick_array[index].slick("slickPause");
+                setTimeout(function(){
+                    active_slick_array[index].slick("slickPlay");
+                }, 500);
+            });
         });
-        $this_slide.bind("mouseenter", function(){
-            active_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
-            active_slick_array[i].slick("slickPlay");
-        });
-        $this_slide.find("a").bind("click", function(){
-            active_slick_array[i].slick("slickPause");
-            setTimeout(function(){
-                active_slick_array[i].slick("slickPlay");
-            }, 500);
-        });
-    });
+    // });
 </script>
                 </div>
             </div>
@@ -890,30 +861,36 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
 </div>
 <!-- // transform_slick -->
 <script type="text/javascript">
-    // transform_slick_array
-    const transform_slick_array = new Array;
-    jQuery(".transform_slick").each(function(i){
-        jQuery(this).addClass("transform_slick" + i);
-        const $this_slide = jQuery(".transform_slick" + i);
-        transform_slick_array[i] = $this_slide.find("> ul").slick({
-            centerMode: true,
-            dots: false,
-            arrows: false,
-            infinite: true,
-            autoplay: true,
-            autoplaySpeed: 3000,
-            slidesToShow: 3,
-            slidesToScroll: 1,
-            adaptiveHeight: true,
-            constiableWidth: true,
-            draggable: false
+    // $(document).ready(function () {
+        // transform_slick_array
+        const transform_slick_array = [];
+
+        $(".transform_slick").each(function (index) {
+            const $this = $(this);
+            const $ul = $this.find("> ul");
+            $this.addClass("transform_slick" + index);
+
+            transform_slick_array[index] = $ul.slick({
+                centerMode: true,
+                dots: false,
+                arrows: false,
+                infinite: true,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                adaptiveHeight: true,
+                constiableWidth: true,
+                draggable: false, 
+            });
+
+            $this.on("mouseenter", function () {
+                transform_slick_array[index].slick("slickPause");
+            }).on("mouseleave", function () {
+                transform_slick_array[index].slick("slickPlay");
+            });
         });
-        $this_slide.bind("mouseenter", function(){
-            transform_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
-            transform_slick_array[i].slick("slickPlay");
-        });
-    });
+    // });
 </script>
                 </div>
             </div>

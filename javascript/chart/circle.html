@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>chart</title>
+</head>
+<body data-theme="light">
+        
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>chart</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">circle - chatgpt</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .mychart {
+        position: relative;
+        display: inline-block;
+        width: 75px;
+        height: 75px;
+        background-color: #dedede;
+        border-radius: 50%;
+        text-align: center;
+    }
+    .mychart canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .mychart:after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        display: inline-block;
+        width: 65px;
+        height: 65px;
+        background: #fff;
+        border-radius: 100%;
+    }
+    .percent {
+        display: inline-block;
+        line-height: 78px;
+        z-index: 2;
+        color: #0c8b95;
+        font-size: 16px;
+        position: relative;
+        z-index: 2;
+    }
+    .percent:after {
+        content: '%';
+        margin-left: 0.1em;
+        font-size: .8em;
+        color: #0c818b;
+    }
+</style>
+
+<!-- mychart -->
+<span class="mychart" data-percent="20">
+    <span class="percent">20</span>
+    <canvas height="75" width="75"></canvas>
+</span>
+<span class="mychart" data-percent="60">
+    <span class="percent">60</span>
+    <canvas height="75" width="75"></canvas>
+</span>
+<span class="mychart" data-percent="80">
+    <span class="percent">80</span>
+    <canvas height="75" width="75"></canvas>
+</span>
+<span class="mychart" data-percent="100">
+    <span class="percent">100</span>
+    <canvas height="75" width="75"></canvas>
+</span>
+<!-- // mychart -->
+
+<script type="text/javascript">
+    function drawChart(canvas, percent) {
+        const ctx = canvas.getContext('2d');
+        const size = canvas.width;
+        const lineWidth = 6;
+        const trackColor = '#dedede';
+        const barColor = percent === 0 ? trackColor : '#08958f';
+        const radius = (size - lineWidth) / 2;
+        const center = size / 2;
+
+        // Draw the background circle (track) initially
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = trackColor;
+        ctx.beginPath();
+        ctx.arc(center, center, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // Animate the foreground circle (bar)
+        let currentPercent = 0;
+        const animate = () => {
+            // Clear only the animated bar section to retain the track
+            ctx.clearRect(0, 0, size, size);
+
+            // Redraw the track
+            ctx.strokeStyle = trackColor;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            // Draw the animated bar
+            const endAngle = (2 * Math.PI * currentPercent) / 100 - Math.PI / 2;
+            ctx.strokeStyle = barColor;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, -Math.PI / 2, endAngle);
+            ctx.stroke();
+
+            // Update percentage text
+            canvas.parentElement.querySelector('.percent').textContent = Math.round(currentPercent);
+
+            // Increment the current percent until target percent is reached
+            if (currentPercent < percent) {
+                currentPercent += 1;
+                requestAnimationFrame(animate);
+            }
+        };
+        animate();
+    }
+
+    function drawCharts() {
+        document.querySelectorAll('.mychart').forEach(mychart => {
+            const canvas = mychart.querySelector('canvas');
+            const percent = parseInt(mychart.getAttribute('data-percent'), 10);
+            drawChart(canvas, percent);
+        });
+    }
+
+    // Example: Call drawCharts() to start animation
+    drawCharts();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">circle - claude</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    
+</style>
+<script>
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+            
+    </div>
+    <!-- // code_wrap -->
+    
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

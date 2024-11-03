@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>chart</title>
+</head>
+<body data-theme="light">
+        
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>chart</h1>
+        
+        <!-- code_area -->
+        <div class="code_tit">bar - chatgpt</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* horizontal */
+    .horizontal .graph-cont {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 30px 30px 30px 70px;
+        border: 1px solid #eee;
+    }
+    .horizontal .graph-cont .bar {
+        width: 100%;
+        margin-top: 10px;
+        background: #eee;
+    }
+    .horizontal .graph-cont .bar:first-child {
+        margin-top: 0;
+    }
+    .horizontal .graph-cont .bar span {
+        display: block;
+        position: relative;
+        z-index: 0;
+        width: 0; /* 초기 너비를 0으로 설정 */
+        height: 30px;
+        transition: width 1.8s ease; /* 너비에 애니메이션 적용 */
+    }
+    .horizontal .graph-cont .bar span:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #2ecc71;
+    }
+    @keyframes bar-horizontal {
+        0% { width: 0; }
+        100% { width: 100%; }
+    }
+    .horizontal .graph-cont .bar span strong {
+        position: absolute;
+        left: -45px;
+        line-height: 30px;
+        text-align: right;
+        width: 35px;
+    }
+
+    /* vertical */
+    .vertical .graph-cont {
+        box-sizing: border-box;
+        width: 100%;
+        height: 300px;
+        padding: 30px 30px 50px;
+        border: 1px solid #eee;
+    }
+    .vertical .graph-cont .bar {
+        float: left;
+        position: relative;
+        z-index: 0;
+        width: 30px;
+        height: 100%;
+        margin-left: 10px;
+        background: #eee;
+    }
+    .vertical .graph-cont .bar:first-child {
+        margin-left: 0;
+    }
+    .vertical .graph-cont .bar span {
+        display: block;
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0; /* 초기 높이를 0으로 설정 */
+        transition: height 1.8s ease; /* 높이에 애니메이션 적용 */
+    }
+    .vertical .graph-cont .bar span:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #2ecc71;
+    }
+    @keyframes bar-vertical {
+        0% { height: 0; }
+        100% { height: 100%; }
+    }
+    .vertical .graph-cont .bar span strong {
+        position: absolute;
+        left: 0;
+        bottom: -23px;
+        width: 100%;
+        text-align: center;
+    }
+</style>
+
+<div class="horizontal">
+    <div class="graph-cont">
+        <div class="bar"><span data-percentage="100"><strong>100%</strong></span></div>
+        <div class="bar"><span data-percentage="80"><strong>80%</strong></span></div>
+        <div class="bar"><span data-percentage="50"><strong>50%</strong></span></div>
+        <div class="bar"><span data-percentage="30"><strong>30%</strong></span></div>
+        <div class="bar"><span data-percentage="20"><strong>20%</strong></span></div>
+        <div class="bar"><span data-percentage="0"><strong>0%</strong></span></div>
+    </div>
+</div>
+
+<div class="vertical">
+    <div class="graph-cont">
+        <div class="bar"><span data-percentage="100"><strong>100%</strong></span></div>
+        <div class="bar"><span data-percentage="80"><strong>80%</strong></span></div>
+        <div class="bar"><span data-percentage="50"><strong>50%</strong></span></div>
+        <div class="bar"><span data-percentage="30"><strong>30%</strong></span></div>
+        <div class="bar"><span data-percentage="20"><strong>20%</strong></span></div>
+        <div class="bar"><span data-percentage="0"><strong>0%</strong></span></div>
+    </div>
+</div>
+
+<script>
+    // Horizontal bars
+    document.querySelectorAll(".horizontal .bar span").forEach(bar => {
+        const percentage = bar.getAttribute("data-percentage");
+        bar.querySelector("strong").textContent = `${percentage}%`;
+
+        // 일정 시간 후 너비를 설정하여 애니메이션 적용
+        setTimeout(() => {
+            bar.style.width = `${percentage}%`;
+        }, 100); // 100ms 지연 후 애니메이션 시작
+    });
+
+    // Vertical bars
+    document.querySelectorAll(".vertical .bar span").forEach(bar => {
+        const percentage = bar.getAttribute("data-percentage");
+        bar.querySelector("strong").textContent = `${percentage}%`;
+
+        // 일정 시간 후 높이를 설정하여 애니메이션 적용
+        setTimeout(() => {
+            bar.style.height = `${percentage}%`;
+        }, 100); // 100ms 지연 후 애니메이션 시작
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+        
+        <!-- code_area -->
+        <div class="code_tit">bar - claude</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* 공통 스타일 */
+    .chart-wrapper {
+        margin: 20px 0;
+    }
+    
+    /* 가로 차트 스타일 */
+    .horizontal .graph-cont {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 30px 30px 30px 70px;
+        border: 1px solid #eee;
+    }
+    
+    .horizontal .graph-cont .bar {
+        width: 100%;
+        margin-top: 10px;
+        background: #eee;
+    }
+    
+    .horizontal .graph-cont .bar:first-child {
+        margin-top: 0;
+    }
+    
+    .horizontal .graph-cont .bar span {
+        display: block;
+        position: relative;
+        z-index: 0;
+        width: 0;
+        height: 30px;
+        transition: width 1.8s ease-in-out;
+    }
+    
+    .horizontal .graph-cont .bar span:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        top: 0;
+        display: block;
+        width: 100%;
+        height: 30px;
+        background: #2ecc71;
+    }
+    
+    .horizontal .graph-cont .bar span strong {
+        position: absolute;
+        z-index: 0;
+        left: -45px;
+        top: 0;
+        display: block;
+        width: 35px;
+        color: #000;
+        line-height: 30px;
+        text-align: right;
+    }
+    
+    /* 세로 차트 스타일 */
+    .vertical .graph-cont {
+        box-sizing: border-box;
+        width: 100%;
+        height: 300px;
+        padding: 30px 30px 50px;
+        border: 1px solid #eee;
+        display: flex;
+        align-items: flex-end;
+        gap: 10px;
+    }
+    
+    .vertical .graph-cont .bar {
+        position: relative;
+        z-index: 0;
+        width: 30px;
+        height: 100%;
+        background: #eee;
+        flex-shrink: 0;
+    }
+    
+    .vertical .graph-cont .bar span {
+        display: block;
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0;
+        transition: height 1.8s ease-in-out;
+    }
+    
+    .vertical .graph-cont .bar span:after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #2ecc71;
+    }
+    
+    .vertical .graph-cont .bar span strong {
+        position: absolute;
+        z-index: 0;
+        left: 0;
+        bottom: -23px;
+        display: block;
+        width: 100%;
+        color: #000;
+        text-align: center;
+    }
+</style>
+
+<div class="chart-wrapper">
+    <button onclick="addHorizontalChart([100, 80, 50, 30, 20, 0])">Add Horizontal Chart</button>
+    <button onclick="addVerticalChart([100, 80, 50, 30, 20, 0])">Add Vertical Chart</button>
+    <button onclick="addRandomBars()">Add Random Bars</button>
+</div>
+
+<div id="charts-container"></div>
+
+<script>
+    // 차트 ID 생성을 위한 카운터
+    let chartCounter = 0;
+
+    // 초기 차트 생성
+    function createInitialCharts() {
+        addHorizontalChart([100, 30, 20, 0]);
+        addVerticalChart([100, 80, 20, 0]);
+    }
+
+    // 단일 바 추가 함수
+    function addBar(container, percent) {
+        const bar = document.createElement('div');
+        bar.className = 'bar';
+        
+        const span = document.createElement('span');
+        const strong = document.createElement('strong');
+        strong.textContent = percent + '%';
+        
+        span.appendChild(strong);
+        bar.appendChild(span);
+        container.appendChild(bar);
+        
+        // DOM 업데이트를 위한 짧은 지연
+        setTimeout(() => {
+            if (container.closest('.horizontal')) {
+                span.style.width = percent + '%';
+            } else {
+                span.style.height = percent + '%';
+            }
+        }, 50);
+    }
+
+    // 새로운 가로 차트 추가
+    function addHorizontalChart(arr) {
+        const container = document.getElementById('charts-container');
+        const chartId = `horizontal-chart-${chartCounter++}`;
+        
+        const chartDiv = document.createElement('div');
+        chartDiv.className = 'horizontal';
+        chartDiv.innerHTML = `
+            <div class="graph-cont" id="${chartId}">
+            </div>
+        `;
+        container.appendChild(chartDiv);
+        
+        const graphCont = document.getElementById(chartId);
+        const defaultValues = arr;
+        defaultValues.forEach(value => {
+            addBar(graphCont, value);
+        });
+    }
+
+    // 새로운 세로 차트 추가
+    function addVerticalChart(arr) {
+        const container = document.getElementById('charts-container');
+        const chartId = `vertical-chart-${chartCounter++}`;
+        
+        const chartDiv = document.createElement('div');
+        chartDiv.className = 'vertical';
+        chartDiv.innerHTML = `
+            <div class="graph-cont" id="${chartId}">
+            </div>
+        `;
+        container.appendChild(chartDiv);
+        
+        const graphCont = document.getElementById(chartId);
+        const defaultValues = arr;
+        defaultValues.forEach(value => {
+            addBar(graphCont, value);
+        });
+    }
+
+    // 랜덤 값 생성
+    function generateRandomValues(count = 6) {
+        return Array.from({length: count}, () => Math.floor(Math.random() * 100));
+    }
+
+    // 랜덤 바 추가
+    function addRandomBars() {
+        const horizontalCharts = document.querySelectorAll('.horizontal .graph-cont');
+        const verticalCharts = document.querySelectorAll('.vertical .graph-cont');
+        
+        const percent = Math.floor(Math.random() * 100);
+        
+        if (horizontalCharts.length > 0) {
+            addBar(horizontalCharts[horizontalCharts.length - 1], percent);
+        }
+        if (verticalCharts.length > 0) {
+            addBar(verticalCharts[verticalCharts.length - 1], percent);
+        }
+    }
+
+    // 페이지 로드 시 차트 초기화
+    document.addEventListener('DOMContentLoaded', createInitialCharts);
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+            
+    </div>
+    <!-- // code_wrap -->
+    
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

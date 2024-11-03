@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <!-- head -->
+    <script src="/html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>chart</title>
+</head>
+<body data-theme="light">
+        
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>chart</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">half circle - chatgpt</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .mys_graph {
+        position: relative;
+        display: inline-block;
+        margin-top: 15px;
+        width: 145px;
+        height: 70px;
+    }
+    .mys_graph .chart-wrapper {
+        position: relative;
+        overflow: hidden;
+        width: 145px;
+        height: 72px;
+    }
+    .mys_graph .chart-wrapper .chart-bg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: inherit;
+        height: inherit;
+        border: 20px solid rgba(236, 236, 236, 1);
+        border-bottom: none;
+        border-top-left-radius: 175px;
+        border-top-right-radius: 175px;
+    }
+    .mys_graph .chart-wrapper .chart-fill {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: inherit;
+        height: inherit;
+        border: 20px solid #08958f;
+        border-top: none;
+        border-bottom-left-radius: 175px;
+        border-bottom-right-radius: 175px;
+        transform-origin: 50% 0;
+        transform: rotateZ(0deg);
+        animation: chartAnimation 2s linear forwards;
+    }
+    /* 애니메이션 */
+    @keyframes chartAnimation {
+        0% { transform: rotateZ(0deg); }
+        100% { transform: rotateZ(var(--rotate-degree, 0deg)); }
+    }
+</style>
+<!-- 각 차트에 data-percentage로 퍼센트 지정 -->
+<div class="mys_graph" data-percentage="15">
+    <div class="chart-wrapper">
+        <div class="chart-bg"></div>
+        <div class="chart-fill"></div>
+    </div>
+</div>
+<div class="mys_graph" data-percentage="50">
+    <div class="chart-wrapper">
+        <div class="chart-bg"></div>
+        <div class="chart-fill"></div>
+    </div>
+</div>
+<div class="mys_graph" data-percentage="75">
+    <div class="chart-wrapper">
+        <div class="chart-bg"></div>
+        <div class="chart-fill"></div>
+    </div>
+</div>
+<div class="mys_graph" data-percentage="100">
+    <div class="chart-wrapper">
+        <div class="chart-bg"></div>
+        <div class="chart-fill"></div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.mys_graph').forEach(chart => {
+        const percentage = chart.getAttribute('data-percentage');
+        const rotateDegree = (percentage / 100) * 180; // 50% = 90도, 100% = 180도
+
+        const chartFill = chart.querySelector('.chart-fill');
+        chartFill.style.setProperty('--rotate-degree', `${rotateDegree}deg`);
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">half circle - claude</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    .add_chart {
+        margin-bottom: 15px;
+    }
+
+    .mys_graph {
+        position: relative;
+        display: inline-block;
+        margin: 15px;
+        width: 145px;
+        height: 70px;
+    }
+    
+    .mys_graph .chart-container {
+        position: relative;
+        overflow: hidden;
+        width: 145px;
+        height: 72px;
+    }
+    
+    .mys_graph .chart-background {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: inherit;
+        height: inherit;
+        border: 20px solid rgba(236, 236, 236, 1);
+        border-bottom: none;
+        border-top-left-radius: 175px;
+        border-top-right-radius: 175px;
+        box-sizing: border-box;
+    }
+    
+    .mys_graph .chart-value {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: inherit;
+        height: inherit;
+        border: 20px solid;
+        border-top: none;
+        border-bottom-left-radius: 175px;
+        border-bottom-right-radius: 175px;
+        transform-origin: 50% 0;
+        transform: rotate(0deg);
+        box-sizing: border-box;
+        animation: none;
+    }
+    
+    .percent-text {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        font-weight: bold;
+    }
+</style>
+<div id="charts-container">
+    <!-- 차트 추가 -->
+    <div class="add_chart">
+        <button onclick="addChart(75, '#2196F3')">Add 75% Chart</button>
+        <button onclick="addChart(50, '#9C27B0')">Add 50% Chart</button>
+        <button onclick="addChart(100, '#FF9800')">Add 100% Chart</button>
+    </div>
+
+    <!-- 테스트를 위한 다양한 퍼센트 차트 -->
+    <div class="mys_graph">
+        <div class="chart-container">
+            <div class="chart-background"></div>
+            <div class="chart-value" style="border-color: #4CAF50;" data-percent="25"></div>
+        </div>
+        <div class="percent-text">25%</div>
+    </div>
+    <div class="mys_graph">
+        <div class="chart-container">
+            <div class="chart-background"></div>
+            <div class="chart-value" style="border-color: #08958f;" data-percent="50"></div>
+        </div>
+        <div class="percent-text">50%</div>
+    </div>
+    <div class="mys_graph">
+        <div class="chart-container">
+            <div class="chart-background"></div>
+            <div class="chart-value" style="border-color: #ff5722;" data-percent="100"></div>
+        </div>
+        <div class="percent-text">100%</div>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeCharts();
+    });
+    
+    function initializeCharts() {
+        const chartValues = document.querySelectorAll('.chart-value');
+        
+        chartValues.forEach(value => {
+            animateChart(value);
+        });
+    }
+    
+    function animateChart(chartElement) {
+        const percent = parseFloat(chartElement.getAttribute('data-percent'));
+        // 퍼센트에 따른 정확한 각도 계산 (50% = 90도, 100% = 180도)
+        const degrees = percent * 1.8; // 1.8 = 180/100
+        
+        // CSS 애니메이션 키프레임 동적 생성
+        const animationName = `rotateChart${percent}`;
+        const keyframes = `
+            @keyframes ${animationName} {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(${degrees}deg); }
+            }
+        `;
+        
+        // 스타일 태그 생성 및 추가
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = keyframes;
+        document.head.appendChild(styleSheet);
+    
+        // 애니메이션 적용
+        chartElement.style.animation = 'none';
+        setTimeout(() => {
+            chartElement.style.animation = `${animationName} 2s ease-out forwards`;
+        }, 100);
+    }
+    
+    function addChart(percent, color) {
+        const container = document.getElementById('charts-container');
+        
+        const chartDiv = document.createElement('div');
+        chartDiv.className = 'mys_graph';
+        
+        chartDiv.innerHTML = `
+            <div class="chart-container">
+                <div class="chart-background"></div>
+                <div class="chart-value" style="border-color: ${color};" data-percent="${percent}"></div>
+            </div>
+            <div class="percent-text">${percent}%</div>
+        `;
+        
+        container.appendChild(chartDiv);
+        
+        // 새로 추가된 차트 애니메이션 적용
+        const chartValue = chartDiv.querySelector('.chart-value');
+        animateChart(chartValue);
+    }
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+            
+    </div>
+    <!-- // code_wrap -->
+    
+    <!-- foot -->
+    <script src="/html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
