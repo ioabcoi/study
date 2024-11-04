@@ -81,32 +81,29 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // cont_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // cont_swiper_bullets
-        const contSwiperBullets = [];
-
-        document.querySelectorAll('.cont_swiper_bullets').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_bullets' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-
-            contSwiperBullets[index] = new Swiper(swiperSelector, {
+        const cont_swiper_bullets = new Array;
+        jQuery(".cont_swiper_bullets").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("cont_swiper_bullets" + i);
+            const this_swiper = ".cont_swiper_bullets" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";
+            const this_pager = this_swiper + " .swiper-pagination";
+            cont_swiper_bullets[i] = new Swiper(this_swiper + " .swiper", {
                 loop: false,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
                 pagination: {
-                    el: paginationSelector,
-                    type: 'bullets',
+                    el: this_pager,
+                    type: "bullets",
                 },
             });
         });
@@ -142,20 +139,17 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // cont_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // cont_swiper_fraction
-        const contSwiperFraction = [];
-
-        document.querySelectorAll('.cont_swiper_fraction').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_fraction' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-
-            contSwiperFraction[index] = new Swiper(swiperSelector, {
+        const cont_swiper_fraction = new Array;
+        jQuery(".cont_swiper_fraction").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("cont_swiper_fraction" + i);
+            const this_swiper = ".cont_swiper_fraction" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";
+            const this_pager = this_swiper + " .swiper-pagination";
+            cont_swiper_fraction[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 effect: "fade",
                 loopAdditionalSlides: 1,
@@ -164,11 +158,11 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
                     disableOnInteraction: false
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
                 pagination: {
-                    el: paginationSelector,
+                    el: this_pager,
                     type: "fraction",
                     // paging 01, 02 ....
                     // formatFractionCurrent: function (number) {
@@ -223,33 +217,30 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // cont_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // cont_swiper_progressbar
-        const contSwiperProgressbar = [];
-
-        document.querySelectorAll('.cont_swiper_progressbar').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_progressbar' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-            const progressCircle = document.querySelector(swiperSelector + ' .autoplay-progress svg');
-            const progressContent = document.querySelector(swiperSelector + ' .autoplay-progress span');
-
-            contSwiperProgressbar[index] = new Swiper(swiperSelector, {
+        const cont_swiper_progressbar = new Array;
+        jQuery(".cont_swiper_progressbar").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("cont_swiper_progressbar" + i);
+            const this_swiper = ".cont_swiper_progressbar" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";
+            const this_pager = this_swiper + " .swiper-pagination";
+            const progressCircle = document.querySelector(this_swiper + " .autoplay-progress svg");
+            const progressContent = document.querySelector(this_swiper + " .autoplay-progress span");
+            cont_swiper_progressbar[i] = new Swiper(this_swiper + " .swiper", {
                 loop: false,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
                 pagination: {
-                    el: paginationSelector,
+                    el: this_pager,
                     type: "progressbar",
                 },
                 on: {
@@ -293,36 +284,33 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // cont_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // cont_swiper_scrollbar
-        const contSwiperScrollbar = [];
-
-        document.querySelectorAll('.cont_swiper_scrollbar').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_scrollbar' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-            const scrollbarSelector = `.${selector} .swiper-scrollbar`;
-
-            contSwiperScrollbar[index] = new Swiper(swiperSelector, {
+        const cont_swiper_scrollbar = new Array;
+        jQuery(".cont_swiper_scrollbar").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("cont_swiper_scrollbar" + i);
+            const this_swiper = ".cont_swiper_scrollbar" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";
+            const this_pager = this_swiper + " .swiper-pagination";
+            const this_scrollbar = this_swiper + " .swiper-scrollbar";
+            cont_swiper_scrollbar[i] = new Swiper(this_swiper + " .swiper", {
                 loop: false,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
                 pagination: {
-                    el: paginationSelector,
+                    el: this_pager,
                     type: "custom",
                 },
                 scrollbar: {
-                    el: scrollbarSelector,
+                    el: this_scrollbar,
                     hide: true,
                 },
             });
@@ -360,37 +348,35 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // cont_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // cont_swiper_vertical
-        const contSwiperVertical = [];
-
-        document.querySelectorAll('.cont_swiper_vertical').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_vertical' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-            const scrollbarSelector = `.${selector} .swiper-scrollbar`;
-
-            contSwiperVertical[index] = new Swiper(swiperSelector, {
+        const cont_swiper_vertical = new Array;
+        jQuery(".cont_swiper_vertical").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("cont_swiper_vertical" + i);
+            const this_swiper = ".cont_swiper_vertical" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";
+            const this_pager = this_swiper + " .swiper-pagination";
+            const this_scrollbar = this_swiper + " .swiper-scrollbar";
+            cont_swiper_vertical[i] = new Swiper(this_swiper + " .swiper", {
                 direction: "vertical",
                 loop: true,
+                loopAdditionalSlides: 1,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
                 pagination: {
-                    el: paginationSelector,
+                    el: this_pager,
                     type: "fraction",
                 },
                 scrollbar: {
-                    el: scrollbarSelector,
+                    el: this_scrollbar,
                     hide: true,
                 },
             });
@@ -413,13 +399,13 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    /* cont_swiper_mousewheel */
-    .cont_swiper_mousewheel {position:relative;width:400px;height:400px;margin:0 auto;}
-    .cont_swiper_mousewheel:after {opacity:1;position:absolute;z-index:1;left:0;top:0;content:"scroll me";display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:rgba(0,0,0,0.6);color:#fff;font-size:20px;text-align:center;-webkit-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
-    .cont_swiper_mousewheel:hover:after {opacity:0;z-index:0;}
+    /* mousewheel_swiper */
+    .mousewheel_swiper {position:relative;width:400px;height:400px;margin:0 auto;}
+    .mousewheel_swiper:after {opacity:1;position:absolute;z-index:1;left:0;top:0;content:"scroll me";display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:rgba(0,0,0,0.6);color:#fff;font-size:20px;text-align:center;-webkit-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out;}
+    .mousewheel_swiper:hover:after {opacity:0;z-index:0;}
 </style>
-<!-- cont_swiper_mousewheel -->
-<div class="cont_swiper_mousewheel">
+<!-- mousewheel_swiper -->
+<div class="mousewheel_swiper">
     <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide">Slide 1</div>
@@ -429,20 +415,17 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
         <div class="swiper-pagination"></div>
     </div>
 </div>
-<!-- // cont_swiper_mousewheel -->
+<!-- // mousewheel_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // cont_swiper_mousewheel
-        const contSwiperMousewheel = [];
-
-        document.querySelectorAll('.cont_swiper_mousewheel').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_mousewheel' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-
-            contSwiperMousewheel[index] = new Swiper(swiperSelector, {
+    $(document).ready(function () {
+        // mousewheel_swiper
+        const mousewheel_swiper_array = new Array;
+        jQuery(".mousewheel_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("mousewheel_swiper" + i);
+            const this_swiper = ".mousewheel_swiper" + i;
+            const this_pager = this_swiper + " .swiper-pagination";
+            mousewheel_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 direction: "vertical",
                 loop: true,
                 loopAdditionalSlides: 1,
@@ -450,32 +433,28 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
                 spaceBetween: 30,
                 mousewheel: true,
                 pagination: {
-                    el: paginationSelector,
+                    el: this_pager,
                     clickable: true,
                 },
             });
-
-            contSwiperMousewheel[index].on('slideNextTransitionStart', function () {
-                document.querySelector(swiperSelector).classList.add("dontMove");
+            mousewheel_swiper_array[i].on('slideNextTransitionStart', function() {
+                $this_swiper.addClass("dontMove");
             });
-
-            contSwiperMousewheel[index].on('slideNextTransitionEnd', function () {
-                setTimeout(function () {
-                    document.querySelector(swiperSelector).classList.remove("dontMove");
+            mousewheel_swiper_array[i].on('slideNextTransitionEnd', function() {
+                setTimeout(function(){
+                    $this_swiper.removeClass("dontMove");
                 }, 10);
             });
-
-            document.querySelector(swiperSelector).addEventListener("wheel", function (e) {
+            $this_swiper.on("mousewheel", function(e){
                 e.preventDefault();
-                const dontMove = document.querySelector(swiperSelector).classList.contains("dontMove");
-                if (!dontMove) {
-                    if (e.deltaY < 0) {
-                        contSwiperMousewheel[index].slidePrev();
+                if( !$this_swiper.hasClass("dontMove") ) {
+                    if (e.originalEvent.wheelDelta > 0 || e.originalEvent.detail < 0) {
+                        mousewheel_swiper_array[i].slidePrev();
                     } else {
-                        contSwiperMousewheel[index].slideNext();
+                        mousewheel_swiper_array[i].slideNext();
                     }
                 }
-            }, { passive: false });
+            });
         });
     });
 </script>
@@ -528,25 +507,18 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // custom_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // custom_swiper
-        const customSwiperArray = [];
-
-        document.querySelectorAll(".custom_wrap").forEach((wrap, i) => {
-            const tab = wrap.querySelector(".custom_tab ul");
-            const tabItems = Array.from(tab.querySelectorAll("li"));
-            const swiperContainer = wrap.querySelector(".custom_swiper");
-
-            // Add unique classes
-            tab.classList.add("custom_tab" + i);
-            swiperContainer.classList.add("custom_swiper" + i);
-
-            const swiperSelector = `.custom_swiper${i} .swiper`;
-            const nextBtnSelector = `.custom_swiper${i} .swiper-button-next`;
-            const prevBtnSelector = `.custom_swiper${i} .swiper-button-prev`;
-
-            // Initialize Swiper
-            customSwiperArray[i] = new Swiper(swiperSelector, {
+        const custom_swiper_array = new Array;
+        jQuery(".custom_wrap").each(function(i){
+            jQuery(this).find(".custom_tab").addClass("custom_tab" + i);
+            const $this_tab = jQuery(".custom_tab" + i).find(" ul li");
+            const $this_swiper = jQuery(this).find(".custom_swiper");
+            $this_swiper.addClass("custom_swiper" + i);
+            const this_swiper = ".custom_swiper" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";
+            custom_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 loopAdditionalSlides: 1,
                 autoplay: {
@@ -555,38 +527,27 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
             });
-
-            // Function to handle active tab
-            function activeTab(index) {
-                tabItems.forEach((item, idx) => {
-                    item.classList.toggle("on", idx === index);
-                });
-            }
-
-            // Swiper slide change event
-            customSwiperArray[i].on('slidePrevTransitionStart slideNextTransitionStart', function (swiper) {
+            custom_swiper_array[i].on('slidePrevTransitionStart slideNextTransitionStart', function(swiper) {
                 activeTab(swiper.realIndex);
             });
-
-            // Tab click event
-            tabItems.forEach((tabItem, index) => {
-                tabItem.querySelector(".tab_box").addEventListener("click", function (event) {
-                    event.preventDefault();
-                    activeTab(index);
-                    customSwiperArray[i].slideToLoop(index); // Using slideToLoop to handle looping properly
-                });
-
-                // Pause on hover
-                tabItem.addEventListener("mouseenter", function () {
-                    customSwiperArray[i].autoplay.stop();
-                });
-                tabItem.addEventListener("mouseleave", function () {
-                    customSwiperArray[i].autoplay.start();
-                });
+            function activeTab(num){
+                $this_tab.removeClass("on");
+                $this_tab.eq(num).addClass("on");
+            }
+            $this_tab.find(".tab_box").bind("click", function(){
+                let idx = jQuery(this).parent().index();
+                activeTab(idx);
+                custom_swiper_array[i].slideTo(idx);
+                return false;
+            });
+            $this_tab.bind("mouseenter", function(){
+                custom_swiper_array[i].stop();
+            }).bind("mouseleave", function(){
+                custom_swiper_array[i].start();
             });
         });
     });
@@ -647,39 +608,35 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // thumbs_gallery_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // thumbs_swiper, gallery_swiper
-        const thumbsSwiperArray = [];
-        const gallerySwiperArray = [];
-
-        document.querySelectorAll(".thumbs_gallery_swiper").forEach((container, i) => {
-            const thumbsContainer = container.querySelector(".thumbs_swiper");
-            thumbsContainer.classList.add("thumbs_swiper" + i);
-            const thumbsSwiperSelector = `.thumbs_swiper${i} .swiper`;
-
-            thumbsSwiperArray[i] = new Swiper(thumbsSwiperSelector, {
+    $(document).ready(function () {
+        // thumbs_gallery_swiper
+        const thumbs_swiper_array = new Array;
+        const gallery_swiper_array = new Array;
+        jQuery(".thumbs_gallery_swiper").each(function(i){
+            const $this_tab = jQuery(this).find(".thumbs_swiper");
+            $this_tab.addClass("thumbs_swiper" + i);
+            const this_tab = ".thumbs_swiper" + i;
+            thumbs_swiper_array[i] = new Swiper(this_tab + " .swiper", {
                 loop: true,
                 spaceBetween: 1,
                 slidesPerView: 3,
+                // slidesPerGroup: 3,
                 freeMode: true,
                 watchSlidesProgress: true,
             });
-
-            // Set up gallery swiper
-            const galleryContainer = container.querySelector(".gallery_swiper");
-            galleryContainer.classList.add("gallery_swiper" + i);
-            const gallerySwiperSelector = `.gallery_swiper${i} .swiper`;
-            const nextBtnSelector = `.gallery_swiper${i} .swiper-button-next`;
-            const prevBtnSelector = `.gallery_swiper${i} .swiper-button-prev`;
-
-            gallerySwiperArray[i] = new Swiper(gallerySwiperSelector, {
+            const $this_swiper = jQuery(this).find(".gallery_swiper");
+            $this_swiper.addClass("gallery_swiper" + i);
+            const this_swiper = ".gallery_swiper" + i;
+            const this_swiper_next = this_swiper + " .swiper-button-next";
+            const this_swiper_prev = this_swiper + " .swiper-button-prev";
+            gallery_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_swiper_next,
+                    prevEl: this_swiper_prev,
                 },
                 thumbs: {
-                    swiper: thumbsSwiperArray[i],
+                    swiper: thumbs_swiper_array[i],
                 },
             });
         });
@@ -734,17 +691,14 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // table_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // table_swiper
-        const tableSwiper = [];
-
-        document.querySelectorAll('.table_swiper').forEach((contSwiper, index) => {
-            const selector = 'table_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-
-            tableSwiper[index] = new Swiper(swiperSelector, {
+        const table_swiper_array = new Array;
+        jQuery(".table_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("table_swiper" + i);
+            const this_swiper = ".table_swiper" + i;
+            table_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 direction: "vertical",
                 loop: true,
                 loopAdditionalSlides: 1,
@@ -791,17 +745,14 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // vertical_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // vertical_swiper
-        const verticalSwiper = [];
-
-        document.querySelectorAll('.vertical_swiper').forEach((contSwiper, index) => {
-            const selector = 'vertical_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-
-            verticalSwiper[index] = new Swiper(swiperSelector, {
+        const vertical_swiper_array = new Array;
+        jQuery(".vertical_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("vertical_swiper" + i);
+            const this_swiper = ".vertical_swiper" + i;
+            vertical_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 direction: "vertical",
                 loop: true,
                 loopAdditionalSlides: 1,
@@ -853,17 +804,14 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // grid_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // grid_swiper
-        const gridSwiper = [];
-
-        document.querySelectorAll('.grid_swiper').forEach((contSwiper, index) => {
-            const selector = 'grid_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-
-            gridSwiper[index] = new Swiper(swiperSelector, {
+        const grid_swiper_array = new Array;
+        jQuery(".grid_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("grid_swiper" + i);
+            const this_swiper = ".grid_swiper" + i;
+            grid_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: false,
                 slidesPerView: 3,
                 grid: {
@@ -915,17 +863,14 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // text_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // text_swiper
-        const textSwiper = [];
-
-        document.querySelectorAll('.text_swiper').forEach((contSwiper, index) => {
-            const selector = 'text_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-
-            textSwiper[index] = new Swiper(swiperSelector, {
+    $(document).ready(function () {
+        // text_swiper_array
+        const text_swiper_array = new Array;
+        jQuery(".text_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("text_swiper" + i);
+            const this_swiper = ".text_swiper" + i;
+            text_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 direction: "vertical",
                 loop: true,
                 loopAdditionalSlides: 1,
@@ -981,19 +926,16 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // center_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // center_swiper
-        const centerSwiper = [];
-
-        document.querySelectorAll('.center_swiper').forEach((contSwiper, index) => {
-            const selector = 'center_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-
-            centerSwiper[index] = new Swiper(swiperSelector, {
+    $(document).ready(function () {
+        // center_swiper_array
+        const center_swiper_array = new Array;
+        jQuery(".center_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("center_swiper" + i);
+            const this_swiper = ".center_swiper" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";        
+            center_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 loopAdditionalSlides: 1,
                 loopFillGroupWithBlank: true,
@@ -1005,8 +947,8 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
             });
         });
@@ -1055,19 +997,16 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // active_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // active_swiper
-        const activeSwiper = [];
-
-        document.querySelectorAll('.active_swiper').forEach((contSwiper, index) => {
-            const selector = 'active_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-
-            activeSwiper[index] = new Swiper(swiperSelector, {
+    $(document).ready(function () {
+        // active_swiper_array
+        const active_swiper_array = new Array;
+        jQuery(".active_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("active_swiper" + i);
+            const this_swiper = ".active_swiper" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";        
+            active_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 loopAdditionalSlides: 1,
                 loopFillGroupWithBlank: true,
@@ -1080,8 +1019,8 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: this_next,
+                    prevEl: this_prev,
                 },
             });
         });
@@ -1127,19 +1066,16 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // transform_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        // transform_swiper
-        const transformSwiper = [];
-
-        document.querySelectorAll('.transform_swiper').forEach((contSwiper, index) => {
-            const selector = 'transform_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-
-            transformSwiper[index] = new Swiper(swiperSelector, {
+    $(document).ready(function () {
+        // transform_swiper_array
+        const transform_swiper_array = new Array;
+        jQuery(".transform_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("transform_swiper" + i);
+            const this_swiper = ".transform_swiper" + i;
+            const this_next = this_swiper + " .swiper-button-next";
+            const this_prev = this_swiper + " .swiper-button-prev";        
+            transform_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 loopAdditionalSlides: 1,
                 loopFillGroupWithBlank: true,
@@ -1205,17 +1141,18 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // ticker_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $(document).ready(function () {
         // ticker_swiper
-        const tickerSwiper = [];
-
-        document.querySelectorAll('.ticker_swiper').forEach((contSwiper, index) => {
-            const selector = 'ticker_swiper' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-
-            tickerSwiper[index] = new Swiper(swiperSelector, {
+        const ticker_swiper_array = new Array;
+        jQuery(".ticker_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("ticker_swiper" + i);
+            const this_swiper = ".ticker_swiper" + i;
+            const this_scrollbar = this_swiper + " .swiper-scrollbar";
+            $this_swiper.find('.swiper-wrapper .swiper-slide').each(function(){
+                jQuery(this).clone().appendTo(jQuery(this).parents('.swiper-wrapper'))
+            });
+            ticker_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 loop: true,
                 loopAdditionalSlides: 1,
                 loopFillGroupWithBlank: true,
@@ -1250,11 +1187,10 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
                 <div class="code_ui_box">
 <style type="text/css">
     /* vertical_ticker_swiper */
-    .vertical_ticker_swiper {overflow:hidden;position:relative;height:180px;background:rgba(0,0,0,0.1);}
+    .vertical_ticker_swiper {position:relative;height:180px;background:rgba(0,0,0,0.1);}
     .vertical_ticker_swiper .swiper-wrapper {transition-timing-function:linear;}
     .vertical_ticker_swiper .swiper-wrapper .swiper-slide p {padding:30px;color:#000;font-size:20px;text-align:center;}
     .vertical_ticker_swiper .swiper-wrapper .swiper-slide p span {display:block;color:#000;font-size:16px;}
-    .vertical_ticker_swiper .swiper .swiper-slide {text-align:center;}
 </style>
 <!-- vertical_ticker_swiper -->
 <div class="vertical_ticker_swiper">
@@ -1268,9 +1204,14 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
 </div>
 <!-- // vertical_ticker_swiper -->
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelectorAll('.vertical_ticker_swiper').forEach((container, index) => {
-            new Swiper(container.querySelector('.swiper'), {
+    $(document).ready(function () {
+        // vertical_ticker_swiper
+        const vertical_ticker_swiper_array = new Array;
+        jQuery(".vertical_ticker_swiper").each(function(i){
+            const $this_swiper = jQuery(this);
+            $this_swiper.addClass("vertical_ticker_swiper" + i);
+            const this_swiper = ".vertical_ticker_swiper" + i;
+            vertical_ticker_swiper_array[i] = new Swiper(this_swiper + " .swiper", {
                 direction: 'vertical',
                 loop: true,
                 autoplay: {
