@@ -26,6 +26,7 @@
         margin-top: 15px;
         width: 145px;
         height: 70px;
+        text-align: center;
     }
     .mys_graph .chart-wrapper {
         position: relative;
@@ -50,7 +51,7 @@
         left: 0;
         width: inherit;
         height: inherit;
-        border: 20px solid #08958f;
+        border: 20px solid;
         border-top: none;
         border-bottom-left-radius: 175px;
         border-bottom-right-radius: 175px;
@@ -58,44 +59,67 @@
         transform: rotateZ(0deg);
         animation: chartAnimation 2s linear forwards;
     }
+    /* 퍼센트 텍스트 스타일 */
+    .mys_graph .percentage-text {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        font-size: 18px;
+        font-weight: bold;
+    }
     /* 애니메이션 */
     @keyframes chartAnimation {
         0% { transform: rotateZ(0deg); }
         100% { transform: rotateZ(var(--rotate-degree, 0deg)); }
     }
 </style>
-<!-- 각 차트에 data-percentage로 퍼센트 지정 -->
-<div class="mys_graph" data-percentage="15">
+
+<!-- 각 차트에 data-percentage로 퍼센트 및 data-color로 색상 지정 -->
+<div class="mys_graph" data-percentage="15" data-color="#f39c12">
     <div class="chart-wrapper">
         <div class="chart-bg"></div>
         <div class="chart-fill"></div>
+        <div class="percentage-text">15%</div>
     </div>
 </div>
-<div class="mys_graph" data-percentage="50">
+<div class="mys_graph" data-percentage="50" data-color="#e74c3c">
     <div class="chart-wrapper">
         <div class="chart-bg"></div>
         <div class="chart-fill"></div>
+        <div class="percentage-text">50%</div>
     </div>
 </div>
-<div class="mys_graph" data-percentage="75">
+<div class="mys_graph" data-percentage="75" data-color="#3498db">
     <div class="chart-wrapper">
         <div class="chart-bg"></div>
         <div class="chart-fill"></div>
+        <div class="percentage-text">75%</div>
     </div>
 </div>
-<div class="mys_graph" data-percentage="100">
+<div class="mys_graph" data-percentage="100" data-color="#2ecc71">
     <div class="chart-wrapper">
         <div class="chart-bg"></div>
         <div class="chart-fill"></div>
+        <div class="percentage-text">100%</div>
     </div>
 </div>
+
 <script>
     document.querySelectorAll('.mys_graph').forEach(chart => {
         const percentage = chart.getAttribute('data-percentage');
+        const color = chart.getAttribute('data-color') || '#08958f'; // 기본 색상
         const rotateDegree = (percentage / 100) * 180; // 50% = 90도, 100% = 180도
 
+        // 차트 필 색상과 회전 설정
         const chartFill = chart.querySelector('.chart-fill');
         chartFill.style.setProperty('--rotate-degree', `${rotateDegree}deg`);
+        chartFill.style.borderColor = color;
+
+        // 퍼센트 텍스트와 색상 설정
+        const percentageText = chart.querySelector('.percentage-text');
+        percentageText.textContent = `${percentage}%`;
+        percentageText.style.color = color;
     });
 </script>
                 </div>
@@ -171,37 +195,44 @@
         font-weight: bold;
     }
 </style>
+
 <div id="charts-container">
-    <!-- 차트 추가 -->
     <div class="add_chart">
         <button onclick="addChart(75, '#2196F3')">Add 75% Chart</button>
         <button onclick="addChart(50, '#9C27B0')">Add 50% Chart</button>
         <button onclick="addChart(100, '#FF9800')">Add 100% Chart</button>
     </div>
 
-    <!-- 테스트를 위한 다양한 퍼센트 차트 -->
     <div class="mys_graph">
         <div class="chart-container">
             <div class="chart-background"></div>
-            <div class="chart-value" style="border-color: #4CAF50;" data-percent="25"></div>
+            <div class="chart-value" data-color="#f39c12" data-percent="15"></div>
         </div>
-        <div class="percent-text">25%</div>
+        <div class="percent-text">15%</div>
     </div>
     <div class="mys_graph">
         <div class="chart-container">
             <div class="chart-background"></div>
-            <div class="chart-value" style="border-color: #08958f;" data-percent="50"></div>
+            <div class="chart-value" data-color="#e74c3c" data-percent="50"></div>
         </div>
         <div class="percent-text">50%</div>
     </div>
     <div class="mys_graph">
         <div class="chart-container">
             <div class="chart-background"></div>
-            <div class="chart-value" style="border-color: #ff5722;" data-percent="100"></div>
+            <div class="chart-value" data-color="#3498db" data-percent="75"></div>
+        </div>
+        <div class="percent-text">75%</div>
+    </div>
+    <div class="mys_graph">
+        <div class="chart-container">
+            <div class="chart-background"></div>
+            <div class="chart-value" data-color="#2ecc71" data-percent="100"></div>
         </div>
         <div class="percent-text">100%</div>
     </div>
 </div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         initializeCharts();
@@ -217,10 +248,16 @@
     
     function animateChart(chartElement) {
         const percent = parseFloat(chartElement.getAttribute('data-percent'));
-        // 퍼센트에 따른 정확한 각도 계산 (50% = 90도, 100% = 180도)
-        const degrees = percent * 1.8; // 1.8 = 180/100
+        const degrees = percent * 1.8;
+        const color = chartElement.getAttribute('data-color');
         
-        // CSS 애니메이션 키프레임 동적 생성
+        // 차트 컬러 적용
+        chartElement.style.borderColor = color;
+        
+        // 퍼센트 텍스트 컬러 적용
+        const percentText = chartElement.parentElement.nextElementSibling;
+        percentText.style.color = color;
+        
         const animationName = `rotateChart${percent}`;
         const keyframes = `
             @keyframes ${animationName} {
@@ -229,12 +266,10 @@
             }
         `;
         
-        // 스타일 태그 생성 및 추가
         const styleSheet = document.createElement('style');
         styleSheet.textContent = keyframes;
         document.head.appendChild(styleSheet);
     
-        // 애니메이션 적용
         chartElement.style.animation = 'none';
         setTimeout(() => {
             chartElement.style.animation = `${animationName} 2s ease-out forwards`;
@@ -250,14 +285,13 @@
         chartDiv.innerHTML = `
             <div class="chart-container">
                 <div class="chart-background"></div>
-                <div class="chart-value" style="border-color: ${color};" data-percent="${percent}"></div>
+                <div class="chart-value" data-color="${color}" data-percent="${percent}"></div>
             </div>
             <div class="percent-text">${percent}%</div>
         `;
         
         container.appendChild(chartDiv);
         
-        // 새로 추가된 차트 애니메이션 적용
         const chartValue = chartDiv.querySelector('.chart-value');
         animateChart(chartValue);
     }

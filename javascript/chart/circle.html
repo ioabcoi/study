@@ -50,7 +50,6 @@
         display: inline-block;
         line-height: 78px;
         z-index: 2;
-        color: #0c8b95;
         font-size: 16px;
         position: relative;
         z-index: 2;
@@ -59,36 +58,34 @@
         content: '%';
         margin-left: 0.1em;
         font-size: .8em;
-        color: #0c818b;
     }
 </style>
 
 <!-- mychart -->
-<span class="mychart" data-percent="20">
+<span class="mychart" data-percent="20" data-color="#f39c12">
     <span class="percent">20</span>
     <canvas height="75" width="75"></canvas>
 </span>
-<span class="mychart" data-percent="60">
+<span class="mychart" data-percent="60" data-color="#e74c3c">
     <span class="percent">60</span>
     <canvas height="75" width="75"></canvas>
 </span>
-<span class="mychart" data-percent="80">
+<span class="mychart" data-percent="80" data-color="#3498db">
     <span class="percent">80</span>
     <canvas height="75" width="75"></canvas>
 </span>
-<span class="mychart" data-percent="100">
+<span class="mychart" data-percent="100" data-color="#2ecc71">
     <span class="percent">100</span>
     <canvas height="75" width="75"></canvas>
 </span>
 <!-- // mychart -->
 
 <script type="text/javascript">
-    function drawChart(canvas, percent) {
+    function drawChart(canvas, percent, color) {
         const ctx = canvas.getContext('2d');
         const size = canvas.width;
         const lineWidth = 6;
         const trackColor = '#dedede';
-        const barColor = percent === 0 ? trackColor : '#08958f';
         const radius = (size - lineWidth) / 2;
         const center = size / 2;
 
@@ -114,13 +111,15 @@
 
             // Draw the animated bar
             const endAngle = (2 * Math.PI * currentPercent) / 100 - Math.PI / 2;
-            ctx.strokeStyle = barColor;
+            ctx.strokeStyle = color;
             ctx.beginPath();
             ctx.arc(center, center, radius, -Math.PI / 2, endAngle);
             ctx.stroke();
 
-            // Update percentage text
-            canvas.parentElement.querySelector('.percent').textContent = Math.round(currentPercent);
+            // Update percentage text with color
+            const percentText = canvas.parentElement.querySelector('.percent');
+            percentText.style.color = color;
+            percentText.textContent = Math.round(currentPercent);
 
             // Increment the current percent until target percent is reached
             if (currentPercent < percent) {
@@ -135,11 +134,12 @@
         document.querySelectorAll('.mychart').forEach(mychart => {
             const canvas = mychart.querySelector('canvas');
             const percent = parseInt(mychart.getAttribute('data-percent'), 10);
-            drawChart(canvas, percent);
+            const color = mychart.getAttribute('data-color') || '#0c8b95'; // Default color if data-color not set
+            drawChart(canvas, percent, color);
         });
     }
 
-    // Example: Call drawCharts() to start animation
+    // Call drawCharts() to start animation
     drawCharts();
 </script>
                 </div>
@@ -158,9 +158,161 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style type="text/css">
-    
+    .add_chart {
+        margin-bottom: 15px;
+    }
+    .mychart {
+        position: relative;
+        display: inline-block;
+        width: 75px;
+        height: 75px;
+        background-color: #dedede;
+        border-radius: 50%;
+        text-align: center;
+        margin: 10px;
+    }
+    .mychart canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    .mychart:after {
+        content: '';
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        display: inline-block;
+        width: 65px;
+        height: 65px;
+        background: #fff;
+        border-radius: 100%;
+    }
+    .percent {
+        display: inline-block;
+        line-height: 78px;
+        z-index: 2;
+        font-size: 16px;
+        position: relative;
+        z-index: 2;
+    }
+    .percent:after {
+        content: '%';
+        margin-left: 0.1em;
+        font-size: .8em;
+    }
 </style>
-<script>
+
+<div class="add_chart">
+    <button onclick="addChart(75, '#2196F3')">Add 75% Chart</button>
+    <button onclick="addChart(50, '#9C27B0')">Add 50% Chart</button>
+    <button onclick="addChart(100, '#FF9800')">Add 100% Chart</button>
+</div>
+
+<div id="charts-container">
+    <!-- Initial charts -->
+    <span class="mychart" data-percent="20" data-color="#f39c12">
+        <span class="percent">20</span>
+        <canvas height="75" width="75"></canvas>
+    </span>
+    <span class="mychart" data-percent="60" data-color="#e74c3c">
+        <span class="percent">60</span>
+        <canvas height="75" width="75"></canvas>
+    </span>
+    <span class="mychart" data-percent="80" data-color="#3498db">
+        <span class="percent">80</span>
+        <canvas height="75" width="75"></canvas>
+    </span>
+    <span class="mychart" data-percent="100" data-color="#2ecc71">
+        <span class="percent">100</span>
+        <canvas height="75" width="75"></canvas>
+    </span>
+</div>
+
+<script type="text/javascript">
+    function drawChart(canvas, percent, color) {
+        const ctx = canvas.getContext('2d');
+        const size = canvas.width;
+        const lineWidth = 6;
+        const trackColor = '#dedede';
+        const radius = (size - lineWidth) / 2;
+        const center = size / 2;
+
+        // Draw the background circle (track) initially
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = trackColor;
+        ctx.beginPath();
+        ctx.arc(center, center, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // Animate the foreground circle (bar)
+        let currentPercent = 0;
+        const animate = () => {
+            // Clear only the animated bar section to retain the track
+            ctx.clearRect(0, 0, size, size);
+
+            // Redraw the track
+            ctx.strokeStyle = trackColor;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            // Draw the animated bar
+            const endAngle = (2 * Math.PI * currentPercent) / 100 - Math.PI / 2;
+            ctx.strokeStyle = color;
+            ctx.beginPath();
+            ctx.arc(center, center, radius, -Math.PI / 2, endAngle);
+            ctx.stroke();
+
+            // Update percentage text with color
+            const percentText = canvas.parentElement.querySelector('.percent');
+            percentText.style.color = color;
+            percentText.textContent = Math.round(currentPercent);
+
+            // Increment the current percent until target percent is reached
+            if (currentPercent < percent) {
+                currentPercent += 1;
+                requestAnimationFrame(animate);
+            }
+        };
+        animate();
+    }
+
+    function drawCharts() {
+        document.querySelectorAll('.mychart').forEach(mychart => {
+            const canvas = mychart.querySelector('canvas');
+            const percent = parseInt(mychart.getAttribute('data-percent'), 10);
+            const color = mychart.getAttribute('data-color') || '#0c8b95';
+            drawChart(canvas, percent, color);
+        });
+    }
+
+    function addChart(percent, color) {
+        const container = document.getElementById('charts-container');
+        
+        // Create new chart element
+        const chartSpan = document.createElement('span');
+        chartSpan.className = 'mychart';
+        chartSpan.setAttribute('data-percent', percent);
+        chartSpan.setAttribute('data-color', color);
+        
+        // Add inner HTML
+        chartSpan.innerHTML = `
+            <span class="percent">${percent}</span>
+            <canvas height="75" width="75"></canvas>
+        `;
+        
+        // Append to container
+        container.appendChild(chartSpan);
+        
+        // Initialize the new chart
+        const canvas = chartSpan.querySelector('canvas');
+        drawChart(canvas, percent, color);
+    }
+
+    // Initialize existing charts
+    drawCharts();
 </script>
                 </div>
             </div>
