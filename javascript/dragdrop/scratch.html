@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- head -->
-    <script src="../../../html/include/head.js"></script>
+    <script src="../../html/include/head.js"></script>
     <!-- // head -->
     
     <title>dragdrop_scratch</title>
@@ -72,40 +72,40 @@ img {vertical-align:top;}
     100% {-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);}
 }
 /* scratch */
-.mission_wood .scratch_container {overflow:hidden;width:246px;height:123px;background:url('../../images/wood_back.gif') no-repeat 0 0;}
+.mission_wood .scratch_container {overflow:hidden;width:246px;height:123px;background:url('../../../images/wood_back.gif') no-repeat 0 0;}
 .mission_wood .scratch_container canvas {background:transparent;}
-.mission_wood .wood {position:absolute;left:43px;top:97px;background:url('../../images/wood_back3.jpg') no-repeat left bottom;}
+.mission_wood .wood {position:absolute;left:43px;top:97px;background:url('../../../images/wood_back3.jpg') no-repeat left bottom;}
 .mission_wood .wood .coin {position:absolute;left:62px;top:149px;display:none;}
 .mission_wood.finish .scratch_container {background:none;}
 </style>
 <div class="mission_box">
     <!-- mission_tree -->
     <div class="mission mission_tree">
-        <img src="../../images/mission1.jpg" alt="mission1. 어젯밤 수상한 사람이 커다란 나무 아래 무언가를 묻어두었다는 제보를 받았다. 얼른 확인해 보자!" />
+        <img src="../../../images/mission1.jpg" alt="mission1. 어젯밤 수상한 사람이 커다란 나무 아래 무언가를 묻어두었다는 제보를 받았다. 얼른 확인해 보자!" />
         <div class="drag_drop">
             <div class="drop_box">
-                <span class="tree"><img src="../../images/tree.png" alt="나무" /></span>
-                <span class="tree_msg motion_txtup"><img src="../../images/tree_msg.png" alt="삽으로 이곳을 클릭해 보세요" /></span>
+                <span class="tree"><img src="../../../images/tree.png" alt="나무" /></span>
+                <span class="tree_msg motion_txtup"><img src="../../../images/tree_msg.png" alt="삽으로 이곳을 클릭해 보세요" /></span>
             </div>
             <div class="drag_box">
-                <button class="draggable item" draggable="true"><img src="../../images/shovel.png" alt="삽" /></button>
+                <button class="draggable item" draggable="true"><img src="../../../images/shovel.png" alt="삽" /></button>
             </div>
         </div>
-        <div class="success"><img src="../../images/success1.png" alt="success" /></div>
+        <div class="success"><img src="../../../images/success1.png" alt="success" /></div>
     </div>
     <!-- // mission_tree -->
     <!-- mission_wood -->
     <div class="mission mission_wood">
-        <img src="../../images/mission2.jpg" alt="mission2. 어라?! 열심히 삽질을 하다 보니 저기 나무뿌리 근처에 무언가 반짝거리는 게 보이기 시작하는데…" />
+        <img src="../../../images/mission2.jpg" alt="mission2. 어라?! 열심히 삽질을 하다 보니 저기 나무뿌리 근처에 무언가 반짝거리는 게 보이기 시작하는데…" />
         <div class="wood">
-            <img src="../../images/wood.png" alt="나무 기둥" />
+            <img src="../../../images/wood.png" alt="나무 기둥" />
             <div class="scratch_container">
                 <canvas id="canvas_scratch"></canvas>
             </div>
-            <a href="#" class="coin"><img src="../../images/coin.png" alt="코인" /></a>
+            <a href="#" class="coin"><img src="../../../images/coin.png" alt="코인" /></a>
         </div>
-        <div class="dimmed on"><img src="../../images/mission2_dimmed.jpg" alt="mission2." /></div>
-        <div class="success"><img src="../../images/success2.png" alt="응모하러가기" /></div>
+        <div class="dimmed on"><img src="../../../images/mission2_dimmed.jpg" alt="mission2." /></div>
+        <div class="success"><img src="../../../images/success2.png" alt="응모하러가기" /></div>
     </div>
     <!-- // mission_wood -->
 </div>
@@ -309,7 +309,7 @@ try-catch 구문: checkScratch 함수 내부에 try-catch 구문을 추가하여
     <!-- // code_wrap -->
 
     <!-- foot -->
-    <script src="../../../html/include/foot.js"></script>
+    <script src="../../html/include/foot.js"></script>
     <!-- // foot -->
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- head -->
-    <script src="../../../html/include/head.js"></script>
+    <script src="../../html/include/head.js"></script>
     <!-- // head -->
     
     <title>d_day</title>
@@ -128,15 +128,15 @@
         dayElem.innerHTML = ''; // Clear existing spans
         const dayStr = String(days); // days를 문자열로 변환
         for (let i = 0; i < dayStr.length; i++) {
-            dayElem.innerHTML += `<span><img src="../../images/num${dayStr[i]}.png" alt="${dayStr[i]}"></span>`;
+            dayElem.innerHTML += `<span><img src="../../../images/num${dayStr[i]}.png" alt="${dayStr[i]}"></span>`;
         }
 
-        hourElem.innerHTML = `<span><img src="../../images/num${hours[0]}.png" alt="${hours[0]}"></span>
-                            <span><img src="../../images/num${hours[1]}.png" alt="${hours[1]}"></span>`;
-        minElem.innerHTML = `<span><img src="../../images/num${minutes[0]}.png" alt="${minutes[0]}"></span>
-                            <span><img src="../../images/num${minutes[1]}.png" alt="${minutes[1]}"></span>`;
-        secElem.innerHTML = `<span><img src="../../images/num${seconds[0]}.png" alt="${seconds[0]}"></span>
-                            <span><img src="../../images/num${seconds[1]}.png" alt="${seconds[1]}"></span>`;
+        hourElem.innerHTML = `<span><img src="../../../images/num${hours[0]}.png" alt="${hours[0]}"></span>
+                            <span><img src="../../../images/num${hours[1]}.png" alt="${hours[1]}"></span>`;
+        minElem.innerHTML = `<span><img src="../../../images/num${minutes[0]}.png" alt="${minutes[0]}"></span>
+                            <span><img src="../../../images/num${minutes[1]}.png" alt="${minutes[1]}"></span>`;
+        secElem.innerHTML = `<span><img src="../../../images/num${seconds[0]}.png" alt="${seconds[0]}"></span>
+                            <span><img src="../../../images/num${seconds[1]}.png" alt="${seconds[1]}"></span>`;
     }
 
     function startCountdown() {
@@ -163,7 +163,7 @@
     <!-- // code_wrap -->
 
     <!-- foot -->
-    <script src="../../../html/include/foot.js"></script>
+    <script src="../../html/include/foot.js"></script>
     <!-- // foot -->
 </body>
 </html>

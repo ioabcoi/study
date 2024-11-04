@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- head -->
-    <script src="../../../html/include/head.js"></script>
+    <script src="../../html/include/head.js"></script>
     <!-- // head -->
     
     <title>dragdrop</title>
@@ -52,13 +52,13 @@ item.addEventListener('dragstart', (e) => {
     // 만약 이미지가 포함된 버튼이라면, 이미지를 설정할 수 있음
     // if (e.target.classList.contains('image')) {
     //     const img = new Image();
-    //     img.src = "../../images/snoopy.png";
+    //     img.src = "../../../images/snoopy.png";
     //     e.dataTransfer.setDragImage(img, 60, 80);
     // }
 
     if (e.target.classList.contains('image')) {
         const img = document.createElement("img");
-        img.src = "../../images/snoopy.png";
+        img.src = "../../../images/snoopy.png";
         // setDragImage(이미지요소, xOffset, yOffset)
         e.dataTransfer.setDragImage(img, 60, 80); // 사용할 사용자 정의 이미지를 설정
         // console.log('image');
@@ -406,7 +406,7 @@ setData 함수를 호출할때 지정되는 format 문자열을 배열형식�
         <!-- // code_area -->
 
     <!-- foot -->
-    <script src="../../../html/include/foot.js"></script>
+    <script src="../../html/include/foot.js"></script>
     <!-- // foot -->
 </body>
 </html>
