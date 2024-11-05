@@ -7,7 +7,7 @@ document.querySelectorAll(".index_area .list").forEach(list => {
             const hrefValue = link.textContent.trim();
             link.setAttribute("href", hrefValue);
     
-            if (hrefValue.includes("_old")) {
+            if (hrefValue.includes("/old") || hrefValue.includes("_old")) {
                 link.classList.add("old");
             }
     
@@ -43,6 +43,9 @@ if (mobileBox) {
             const height = parseInt(anchor.querySelector('.height').textContent.trim(), 10);
             mobileBox.style.width = `${width}px`;
             mobileBox.style.height = `${height}px`;
+
+            document.querySelectorAll(".mobile_size ul li").forEach(e => e.classList.remove("on"));
+            anchor.parentNode.classList.add("on");
         });
     });
 }

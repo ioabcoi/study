@@ -46,28 +46,39 @@
 <style type="text/css">
     /* board_list */
     .board_list {border-top:1px solid #333;}
-    .board_list thead th {padding:15px 0;color:#222;font-size:14px;font-weight:500;border-bottom:1px solid #333;text-align:center;vertical-align:middle;}
+    .board_list th,
+    .board_list td {padding:15px 0;font-size:14px;font-weight:400;text-align:center;vertical-align:middle;}
+    .board_list th {color:#222;font-weight:500;}
+    .board_list thead th {border-bottom:1px solid #333;}
     .board_list tbody th,
-    .board_list tbody td {padding:15px 0;color:#666;font-size:14px;font-weight:400;border-bottom:1px solid #d9d9d9;text-align:center;vertical-align:middle;}
-    .board_list tbody th {color:#222;font-size:14px;font-weight:500;}
-    .board_list tbody .subject {text-align:left;}
-    .board_list tbody .subject a {display:inline-block;max-width:90%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;vertical-align:middle;text-decoration:none;}
-    .board_list tbody .subject a strong {color:#333;font-size:14px;font-weight:400;}
-    .board_list tbody .subject .new {color:#12938e;font-weight:500;}
-    .board_list tbody .subject .reply {color:#12938e;font-weight:500;}
+    .board_list tbody td {color:#666;font-weight:400;border-bottom:1px solid #d9d9d9;}
+    .board_list tbody .title {text-align:left;}
+    .board_list tbody .title a {display:inline-block;max-width:90%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;vertical-align:middle;text-decoration:none;}
+    .board_list tbody .title a strong {color:#333;}
+    .board_list tbody .title .new,
+    .board_list tbody .title .reply {color:#12938e;font-weight:500;}
     .board_list tbody .point {color:#f00;font-weight:500;}
-    .board_list tbody .noti td,
-    .board_list tbody .noti td a strong {font-weight:500;color:#222;}
-    .board_list tbody .noti td .ico {display:inline-block;line-height:1;}
-    .board_list tbody .noti td .ico img {vertical-align:top;}
+    .board_list tbody .notice td,
+    .board_list tbody .notice td a strong {color:#222;font-weight:500;}
+    .board_list tbody .notice td .icon {display:inline-block;}
+    .board_list tbody .notice td .icon img {vertical-align:top;}
     .board_list tbody .nodata {padding:100px 0;}
-    .board_list tbody td select {-webkit-appearance:none;-moz-appearance:none;-o-appearance:none;appearance:none;width:100%;padding:0 25px 0 15px;height:48px;background:url('https://img.etoos.com/sub2018/fullservice/0601/fullsr_select.png') 95% center no-repeat;border:1px solid #d9d9d9;color:#777;font-size:14px;line-height:48px;outline:none;}
+    .board_list tbody td .radiobox,
+    .board_list tbody td .checkbox {display:inline-flex;align-items:center;justify-content:center;flex-direction:row;box-sizing:border-box;}
+    .board_list tbody td [type="radio"],
+    .board_list tbody td [type="checkbox"],
+    .board_list tbody td label {padding:0;margin:0 3px;}
+    .board_list tbody td select,
+    .board_list tbody td input[type="text"],
+    .board_list tbody td textarea {display:inline-block;box-sizing:border-box;width:100%;height:38px;border:1px solid #d9d9d9;color:#777;font-size:14px;line-height:38px;}
+    .board_list tbody td select {-webkit-appearance:none;-moz-appearance:none;-o-appearance:none;appearance:none;padding:0 25px 0 15px;background:url('https://img.etoos.com/sub2018/fullservice/0601/fullsr_select.png') 98% center no-repeat;outline:none;}
     .board_list tbody td select::-ms-expand {display:none;}
-    .board_list tbody td input[type="text"] {display:inline-block;box-sizing:border-box;width:100%;height:38px;padding:0 15px;border:1px solid #d9d9d9;font-size:14px;line-height:38px;}
-    .board_list tbody td textarea {display:inline-block;box-sizing:border-box;width:100%;height:405px;padding:5px 15px;border:1px solid #d9d9d9;font-size:14px;line-height:38px;resize:none;}
+    .board_list tbody td input[type="text"] {padding:0 15px;}
+    .board_list tbody td textarea {display:inline-block;height:405px;padding:5px 15px;resize:none;}
     .board_list tbody td:has(input) {text-align:left;}
     .board_list.write tbody td {padding:10px 0;}
 </style>
+
 <!-- board_list -->
 <div class="board_list">
     <table cellpadding="0" cellspacing="0">
@@ -86,63 +97,63 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="noti">
-                <td><span class="ico"><img src="../../../images/ico_noti.png" alt="공지"></span></td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
+            <tr class="notice">
+                <td><span class="icon"><img src="../../images/ico_noti.png" alt="공지"></span></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>관리자</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>2</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a> <span class="new">N</span></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a> <span class="new">N</span></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>3</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a> <span class="reply">(10)</span></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a> <span class="reply">(10)</span></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>4</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다.</strong></a> <span class="reply">(10)</span></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다.</strong></a> <span class="reply">(10)</span></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>5</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>6</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다.</strong></a></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다. 제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>7</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>8</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>9</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
             <tr>
                 <td>10</td>
-                <td class="subject"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a></td>
                 <td>홍*동</td>
                 <td>2018.01.01</td>
             </tr>
@@ -153,49 +164,6 @@
     </table>
 </div>
 <!-- // board_list -->
-                </div>
-            </div>
-            <!-- // code_ui -->
-            <!-- code_view -->
-            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
-            <!-- // code_view -->
-        </div>
-        <!-- // code_area -->
-
-        <!-- code_area -->
-        <div class="code_tit">view</div>
-        <div class="code_area" data-style="">
-            <!-- code_ui -->
-            <div class="code_ui">
-                <div class="code_ui_box">
-<style type="text/css">
-    /* board_view */
-    .board_view .view_head {border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;padding:15px 30px;}
-    .board_view .view_head .txt_tit {color:#222;font-size:24px;font-weight:500;}
-    .board_view .view_head .txt_tit .new {color:#12938e;font-size:20px;font-weight:500;}
-    .board_view .view_head .wr_info {margin-top:5px;font-size:14px;color:#666;font-weight:300;}
-    .board_view .view_body {min-height:400px;padding:40px 30px;border-bottom:1px solid #d9d9d9;font-size:16px;color:#666;font-weight:300;}
-    .board_view .view_body img {max-width:100%;}
-    .board_view .view_body a {color:#666;text-decoration:underline;}
-</style>
-<!-- board_view -->
-<div class="board_view">
-    <div class="view_head">
-        <strong class="txt_tit">수능이 다가오니 떨리네요 <span class="new">N</span></strong>
-        <div class="wr_info">김*영(회원번호) · 2018.11.24 </div>
-    </div>
-    <div class="view_body">
-        내용들이 노출되는 영역입니다. 내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.<br>
-        내용들이 노출되는 영역입니다.
-    </div>
-</div>
-<!-- // board_view -->
                 </div>
             </div>
             <!-- // code_ui -->
@@ -226,9 +194,21 @@
                 <td><input type="text"></td>
                 <th scope="row">공지</th>
                 <td>
-                    <span class="etoos_board_check">
-                        <input type="checkbox" id="check1" name="check1">
+                    <span class="checkbox">
+                        <input type="checkbox" id="check1" name="check">
                         <label for="check1">공지사항</label>
+                    </span>
+                    <span class="checkbox">
+                        <input type="checkbox" id="check2" name="check">
+                        <label for="check2">공지사항</label>
+                    </span>
+                    <span class="radiobox">
+                        <input type="radio" id="radio1" name="radio">
+                        <label for="radio1">공지사항</label>
+                    </span>
+                    <span class="radiobox">
+                        <input type="radio" id="radio2" name="radio">
+                        <label for="radio2">공지사항</label>
                     </span>
                 </td>
             </tr>
@@ -239,10 +219,9 @@
             <tr>
                 <th scope="row">본문종류 <span class="point">*</span></th>
                 <td colspan="3" class="txt_l">
-                    <span class="etoos_board_check">
-                        <input type="checkbox" id="check2" name="check2">
-                        <label for="check2">일반</label>
-                    </span>
+                    <select name="" id="">
+                        <option value="">종류</option>
+                    </select>
                 </td>
             </tr>
             <tr>
@@ -263,6 +242,79 @@
         <!-- // code_area -->
 
         <!-- code_area -->
+        <div class="code_tit">view</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* board_view */
+    .board_view .view_head {border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;padding:15px 30px;}
+    .board_view .view_head .title {color:#222;font-size:22px;font-weight:700;}
+    .board_view .view_head .title .new,
+    .board_view .view_head .title .reply {color:#12938e;font-size:20px;}
+    .board_view .view_head .info {margin-top:5px;font-size:14px;color:#666;font-weight:300;}
+    .board_view .view_body {min-height:400px;padding:40px 30px;border-bottom:1px solid #d9d9d9;font-size:16px;color:#666;font-weight:300;}
+    .board_view .view_body img {max-width:100%;}
+    .board_view .view_body a {color:#666;text-decoration:underline;}
+    .board_view + .board_list {border-top:0;}
+</style>
+
+<!-- board_view -->
+<div class="board_view">
+    <div class="view_head">
+        <strong class="title">수능이 다가오니 떨리네요 <span class="reply">(10)</span> <span class="new">N</span> </strong>
+        <div class="info">김*영(회원번호) · 2018.11.24 </div>
+    </div>
+    <div class="view_body">
+        내용들이 노출되는 영역입니다. 내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.<br>
+        내용들이 노출되는 영역입니다.
+    </div>
+</div>
+<!-- // board_view -->
+
+<!-- board_list -->
+<div class="board_list">
+    <table cellpadding="0" cellspacing="0">
+        <colgroup>
+            <col style="width:90px;">
+            <col>
+            <col style="width:100px;">
+            <col style="width:120px;">
+        </colgroup>
+        <tbody>
+            <tr>
+                <td>이전글</td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a> <span class="new">N</span></td>
+                <td>홍*동</td>
+                <td>2018.01.01</td>
+            </tr>
+            <tr>
+                <td>다음글</td>
+                <td class="title"><a href="#"><strong>제목이 노출되는 영역 입니다.</strong></a> <span class="reply">(10)</span></td>
+                <td>홍*동</td>
+                <td>2018.01.01</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- // board_list -->
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
         <div class="code_tit">paging</div>
         <div class="code_area" data-style="">
             <!-- code_ui -->
@@ -270,21 +322,23 @@
                 <div class="code_ui_box">
 <style type="text/css">
     /* paging */
-    .paging {margin-top:30px;text-align:center;letter-spacing:0;}
-    .paging a {display:inline-block;margin:0 5px;text-decoration:none;vertical-align:middle;}
-    .paging .num {color:#666;font-size:12px;}
-    .paging .on {color:#333;font-weight:700;text-decoration:underline;}
-    .paging .prev {position:relative;display:inline-block;padding:4px;border:solid #adadad;border-width:0 1px 1px 0;transform:rotate(135deg);}
-    .paging .prev.first:before {position:absolute;content:"";padding:4px;border:solid #adadad;border-width:0 1px 1px 0;}
-    .paging .next {position:relative;display:inline-block;padding:4px;border:solid #adadad;border-width:0 1px 1px 0;transform:rotate(-45deg);}
-    .paging .next.last:after {position:absolute;content:"";padding:4px;border:solid #adadad;border-width:0 1px 1px 0;}
-    .paging .disabled {opacity:0.3;}
-    /* img */
-    /* .paging .prev {width:15px;height:11px;background:url("../../../images/btn_prev.gif") no-repeat;}
-    .paging .prev.first {background:url("../../../images/btn_fst.gif") no-repeat;}
-    .paging .next {width:15px;height:11px;background:url("../../../images/btn_next.gif") no-repeat;}
-    .paging .next.last {background:url("../../../images/btn_lst.gif") no-repeat;} */
+    .paging {flex-wrap:wrap;display:flex;align-items:center;justify-content:center;flex-direction:row;box-sizing:border-box;margin-top:30px;gap:20px;text-align:center;}
+    .paging .num,
+    .paging .prev
+    .paging .next {display:flex;text-decoration:none;vertical-align:middle;}
+    .paging .num {color:#999666;font-size:13px;}
+    .paging .on {border-bottom:1px solid #333;color:#333;font-weight:700;}
+    .paging .prev,
+    .paging .next {position:relative;padding:4px;border:solid #adadad;border-width:0 1px 1px 0;}
+    .paging .prev.first:before,
+    .paging .next.last:after {position:absolute;content:"";padding:4px;border:solid #adadad;}
+    .paging .prev {transform:rotate(135deg);}
+    .paging .prev.first:before {border-width:0 1px 1px 0;}
+    .paging .next {transform:rotate(-45deg);}
+    .paging .next.last:after {border-width:0 1px 1px 0;}
+    .paging .disabled {opacity:0.3;cursor:default;}
 </style>
+
 <!-- paging -->
 <div class="paging">
     <a href="#" class="prev first disabled"><span class="blind">처음</span></a>
@@ -320,16 +374,18 @@
                 <div class="code_ui_box">
 <style type="text/css">
     /* btn */
-    .btn {display:inline-block;box-sizing:border-box;min-width:103px;height:33px;padding:0 40px;font-family:'Noto Sans KR', 'Malgun Gothic', sans-serif;font-size:13px;font-weight:400;text-align:center;line-height:33px;text-decoration:none;}
+    .btn {display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-width:103px;height:33px;padding:0 40px;font-family:'Noto Sans KR', 'Malgun Gothic', sans-serif;font-size:13px;font-weight:400;text-decoration:none;}
     .bg_black {background:#333;border:1px solid #333;color:#fff;}
     .bg_gray {background:#ccc;border:1px solid #ccc;color:#fff;}
     .bd_black {border:1px solid #333;color:#333;}
     .bd_gray {border:1px solid #ccc;color:#ccc;}
+
     /* board_btn */
     .board_btn {margin-top:15px;text-align:center;}
     .board_btn:after {content:"";display:block;height:0px;clear:both;visibility:hidden;}
     .board_btn.left {text-align:left;}
     .board_btn.right {text-align:right;}
+
     /* flex_btn */
     .flex_btn {display:flex;align-items:center;justify-content:space-between;flex-direction:row;}
     .flex_btn .box_btn {flex:1;text-align:center;}
@@ -337,11 +393,13 @@
     .flex_btn .box_btn:last-child {text-align:right;}
     .flex_btn .box_btn:first-child:last-child {text-align:center;}
 </style>
+
 <!-- board_btn -->
 <div class="board_btn right">
     <a href="#" class="btn bd_black"><span>글쓰기</span></a>
 </div>
 <!-- // board_btn -->
+
 <!-- board_btn -->
 <div class="board_btn left">
     <a href="#" class="btn bd_black"><span>수정</span></a>
@@ -349,12 +407,14 @@
     <a href="#" class="btn bd_black f_r"><span>목록</span></a>
 </div>
 <!-- // board_btn -->
+
 <!-- board_btn -->
 <div class="board_btn">
     <a href="#" class="btn bd_gray"><span>취소</span></a>
     <a href="#" class="btn bd_black"><span>등록</span></a>
 </div>
 <!-- // board_btn -->
+
 <!-- flex_btn -->
 <div class="flex_btn">
     <div class="box_btn">
@@ -363,6 +423,7 @@
     </div>
 </div>
 <!-- // flex_btn -->
+
 <!-- flex_btn -->
 <div class="flex_btn">
     <div class="box_btn">
@@ -373,6 +434,7 @@
     </div>
 </div>
 <!-- // flex_btn -->
+
 <!-- flex_btn -->
 <div class="flex_btn">
     <div class="box_btn">
@@ -404,7 +466,7 @@
                 <div class="code_ui_box">
 <style type="text/css">
     .board_info {margin:10px 0;}
-    .board_info ul li {padding-left:10px;color:#999;font-size:12px;font-weight:400;text-indent:-8px;}
+    .board_info ul li {padding-left:12px;color:#999;font-size:12px;font-weight:400;text-indent:-12px;}
     .board_info ul li .link {color:#333;text-decoration:underline;}
 </style>
 <!-- board_info -->
@@ -412,7 +474,7 @@
     <ul>
         <li>- 회원과 함께 나눌 말, 꿀팁, 질문을 적어주세요.</li>
         <li>- 명예훼손, 비방, 욕설, 음담패설은 회원을 보호하기 위해 예고없이 삭제되며, 게시판 접근이 차단됩니다만, <br>개인적인 법적 절차를 모두 보호하기는 어려울 수 있으니 글 작성 시 주의해주세요.</li>
-        <li>- 바로가기 <a href="#" class="link">마이페이지</a></li>
+        <li>- 바로가기 <a href="#" class="link">마이페이지 &gt;</a></li>
     </ul>
 </div>
 <!-- // board_info -->

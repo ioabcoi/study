@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>calendar</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>calendar</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">calendar</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* Calendar Styles */
+    .calendar {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #12938e;
+        color: #fff;
+        border-bottom: 1px solid #ccc;
+    }
+    .calendar-header button {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 18px;
+        cursor: pointer;
+    }
+    .calendar-header h2 {
+        margin: 0;
+        font-size: 18px;
+    }
+    .calendar-body {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        padding: 10px 10px 20px;
+    }
+    .calendar-day,
+    .calendar-date {
+        box-sizing: border-box;
+        text-align: center;
+        padding: 8px;
+        font-size: 14px;
+        color: #333;
+    }
+    .calendar-day {
+        font-weight: bold;
+        color: #666;
+    }
+    .calendar-date {
+        border: 1px solid #fff;
+    }
+    .calendar-date.today {
+        background-color: #12938e;
+        color: #fff;
+        border-radius: 8px;
+    }
+    .calendar-date.active {
+        border: 1px solid #12938e;
+        border-radius: 8px;
+    }
+    .today-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 30px 0;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+    }
+    .today-box input[type="text"],
+    .today-box button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        height: 38px;
+        margin: 0 5px;
+        padding: 0 10px;
+        border: 1px solid #d9d9d9;
+        border-radius: 3px;
+        color: #777;
+        font-size: 14px;
+    }
+    .today-box input[type="text"] {
+        font-size: 15px;
+        text-align: center;
+    }
+</style>
+
+<!-- calendar -->
+<div class="calendar">
+    <div class="calendar-header">
+        <button onclick="changeMonth(-1)">&lt;</button>
+        <h2 id="calendar-month-year"></h2>
+        <button onclick="changeMonth(1)">&gt;</button>
+    </div>
+    <div class="calendar-body" id="calendar-body">
+        <!-- Calendar days -->
+        <div class="calendar-day">Sun</div>
+        <div class="calendar-day">Mon</div>
+        <div class="calendar-day">Tue</div>
+        <div class="calendar-day">Wed</div>
+        <div class="calendar-day">Thu</div>
+        <div class="calendar-day">Fri</div>
+        <div class="calendar-day">Sat</div>
+        <!-- Calendar dates (filled by JavaScript) -->
+    </div>
+</div>
+<div class="today-box">
+    <button onclick="changeToday()">Today</button>
+    <input type="text" class="today-date" placeholder="YYYY-MM-DD">
+    <button onclick="searchDate()">Search</button>
+</div>
+<!-- // calendar -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const todayDateElement = document.querySelector('.today-date');
+        const today = new Date();
+        
+        // Display today's date in .today-date on page load
+        updateTodayDate(today);
+
+        // Initial display of calendar for current month
+        let currentMonth = today.getMonth();
+        let currentYear = today.getFullYear();
+        displayCalendar(currentMonth, currentYear);
+
+        // Change month handler
+        window.changeMonth = function (monthChange) {
+            currentMonth += monthChange;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            } else if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            displayCalendar(currentMonth, currentYear);
+        };
+
+        // Reset to today when "Today" button is clicked
+        window.changeToday = function () {
+            currentMonth = today.getMonth();
+            currentYear = today.getFullYear();
+            updateTodayDate(today);
+            displayCalendar(currentMonth, currentYear);
+        };
+
+        // Search date handler
+        window.searchDate = function () {
+            const inputDate = todayDateElement.value;
+            const datePattern = /^\d{4}-\d{2}-\d{2}$/;
+            
+            if (datePattern.test(inputDate)) {
+                const selectedDate = new Date(inputDate);
+                currentMonth = selectedDate.getMonth();
+                currentYear = selectedDate.getFullYear();
+                updateTodayDate(selectedDate);
+                displayCalendar(currentMonth, currentYear);
+
+                // Add 'active' class to the searched date
+                const searchedDay = selectedDate.getDate();
+                const dateCells = document.querySelectorAll('.calendar-date');
+                dateCells.forEach(cell => {
+                    if (parseInt(cell.textContent) === searchedDay) {
+                        cell.classList.add('active');
+                    }
+                });
+            } else {
+                alert("Please enter a valid date in the format YYYY-MM-DD.");
+            }
+        };
+
+        // Update .today-date input value with selected date
+        function updateTodayDate(date) {
+            const formattedDate = date.toLocaleDateString("en-CA"); // "en-CA" format for "YYYY-MM-DD"
+            todayDateElement.value = formattedDate;
+        }
+
+        // Display the calendar dates and handle date clicks
+        function displayCalendar(month, year) {
+            const calendarBody = document.getElementById("calendar-body");
+            const monthYear = document.getElementById("calendar-month-year");
+            
+            // Clear only the dates, keep the day labels (7 initial divs for day labels)
+            calendarBody.querySelectorAll('.calendar-date').forEach(el => el.remove());
+
+            // Set month-year header
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            monthYear.textContent = `${monthNames[month]} ${year}`;
+
+            // Get first day and last date of the month
+            const firstDay = new Date(year, month).getDay();
+            const lastDate = new Date(year, month + 1, 0).getDate();
+
+            // Add empty cells for days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement("div");
+                emptyCell.classList.add("calendar-date");
+                calendarBody.appendChild(emptyCell);
+            }
+
+            // Add cells for each day of the month
+            for (let day = 1; day <= lastDate; day++) {
+                const dateCell = document.createElement("div");
+                dateCell.classList.add("calendar-date");
+                dateCell.textContent = day;
+
+                // Highlight today's date
+                if (
+                    day === today.getDate() &&
+                    month === today.getMonth() &&
+                    year === today.getFullYear()
+                ) {
+                    dateCell.classList.add("today");
+                }
+
+                // Date click event to update .today-date and toggle active class
+                dateCell.addEventListener('click', () => {
+                    const selectedDate = new Date(year, month, day);
+                    updateTodayDate(selectedDate);
+
+                    // Remove 'active' class from previously active date
+                    const previouslyActive = document.querySelector('.calendar-date.active');
+                    if (previouslyActive) {
+                        previouslyActive.classList.remove('active');
+                    }
+
+                    // Add 'active' class to the clicked date
+                    dateCell.classList.add('active');
+                });
+
+                calendarBody.appendChild(dateCell);
+            }
+        }
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+        
+        <!-- code_area -->
+        <div class="code_tit">title</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    
+</style>
+<script type="text/javascript">
+
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
