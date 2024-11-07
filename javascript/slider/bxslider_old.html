@@ -88,12 +88,12 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             autoHover : true,
             pager: true
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             cont_slide_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             cont_slide_array[i].startAuto();
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             cont_slide_array[i].stopAuto();
             setTimeout(function(){
                 cont_slide_array[i].startAuto();
@@ -114,12 +114,12 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
         autoHover : true,
         pager: true
     });
-    jQuery(".cont_slide > ul").bind("click mouseenter", function(){
+    jQuery(".cont_slide > ul").on("click mouseenter", function(){
         cont_slide.stopAuto();
-    }).bind("mouseleave", function(){
+    }).on("mouseleave", function(){
         cont_slide.startAuto();
     });
-    jQuery(".cont_slide a").bind("click", function(){
+    jQuery(".cont_slide a").on("click", function(){
         cont_slide.stopAuto();
         setTimeout(function(){
             cont_slide.startAuto();
@@ -324,16 +324,16 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             $this_tab.find("> ul li").eq(num).addClass("on");
             // $this_tab.find("> ul li").eq(num).find("img").attr("src", $this_tab.find("> ul li").eq(num).find("img").attr("src").replace("_off.png", "_on.png"));	
         }
-        $this_tab.find("> ul li").find(".tab_box").bind("click", function(){
+        $this_tab.find("> ul li").find(".tab_box").on("click", function(){
             const idx = jQuery(this).parent().index();
             resetTab();
             activeTab(idx);
             custom_slide_array[i].goToSlide(idx);
             return false;
         });
-        $this_tab.bind("mouseenter", function(){
+        $this_tab.on("mouseenter", function(){
             custom_slide_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             custom_slide_array[i].startAuto();
         });
     });
@@ -373,7 +373,7 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
         jQuery("#custom_tab ul li").eq(num).addClass("on");
         // jQuery("#custom_tab ul li").eq(num).find("img").attr("src", jQuery("#custom_tab ul li").eq(num).find("img").attr("src").replace("_off.png", "_on.png"));	
     }
-    jQuery("#custom_tab ul li").find(".tab_box").bind("click", function(){
+    jQuery("#custom_tab ul li").find(".tab_box").on("click", function(){
         const idx = jQuery(this).parent().index();
         if( jQuery(this).hasClass("on") ){
             resetTab();
@@ -384,9 +384,9 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
         }
         return false;
     });
-    jQuery("#custom_tab").bind("mouseenter", function(){
+    jQuery("#custom_tab").on("mouseenter", function(){
         custom_slide.stopAuto();
-    }).bind("mouseleave", function(){
+    }).on("mouseleave", function(){
         custom_slide.startAuto();										
     });
     */
@@ -716,12 +716,12 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 }
             }
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             text_slide_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             text_slide_array[i].startAuto();
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             text_slide_array[i].stopAuto();
             setTimeout(function(){
                 text_slide_array[i].startAuto();
@@ -840,12 +840,12 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 }
             }
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             center_slide_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             center_slide_array[i].startAuto();
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             center_slide_array[i].stopAuto();
             setTimeout(function(){
                 center_slide_array[i].startAuto();
@@ -933,12 +933,12 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 }
             }
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             active_slide_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             active_slide_array[i].startAuto();
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             active_slide_array[i].stopAuto();
             setTimeout(function(){
                 active_slide_array[i].startAuto();
@@ -1000,9 +1000,9 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
             autoHover : false,
 			useCSS: true, 
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             transform_slide_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             transform_slide_array[i].startAuto();
         });
     });

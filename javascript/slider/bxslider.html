@@ -279,7 +279,7 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 // $tab.find("> ul li").eq(num).find("img").attr("src", $tab.find("> ul li").eq(num).find("img").attr("src").replace("_off.png", "_on.png"));	
             }
 
-            $tab.find("> ul li .tab_box").bind("click", function(){
+            $tab.find("> ul li .tab_box").on("click", function(){
                 const idx = $(this).parent().index();
                 activeTab(idx);
                 custom_slide_array[index].goToSlide(idx);
@@ -648,13 +648,13 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 }
             });
 
-            $this.bind("mouseenter", function(){
+            $this.on("mouseenter", function(){
                 text_slide_array[index].stopAuto();
-            }).bind("mouseleave", function(){
+            }).on("mouseleave", function(){
                 text_slide_array[index].startAuto();
             });
 
-            $this.find("a").bind("click", function(){
+            $this.find("a").on("click", function(){
                 text_slide_array[index].stopAuto();
                 setTimeout(function(){
                     text_slide_array[index].startAuto();
@@ -746,13 +746,13 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 }
             });
 
-            $this.bind("mouseenter", function(){
+            $this.on("mouseenter", function(){
                 center_slide_array[index].stopAuto();
-            }).bind("mouseleave", function(){
+            }).on("mouseleave", function(){
                 center_slide_array[index].startAuto();
             });
 
-            $this.find("a").bind("click", function(){
+            $this.find("a").on("click", function(){
                 center_slide_array[index].stopAuto();
                 setTimeout(function(){
                     center_slide_array[index].startAuto();
@@ -846,13 +846,13 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
                 }
             });
 
-            $this.bind("mouseenter", function(){
+            $this.on("mouseenter", function(){
                 active_slide_array[index].stopAuto();
-            }).bind("mouseleave", function(){
+            }).on("mouseleave", function(){
                 active_slide_array[index].startAuto();
             });
             
-            $this.find("a").bind("click", function(){
+            $this.find("a").on("click", function(){
                 active_slide_array[index].stopAuto();
                 setTimeout(function(){
                     active_slide_array[index].startAuto();

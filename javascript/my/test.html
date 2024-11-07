@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>습관 형성 도우미 앱</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 320px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            color: #4a90e2;
+        }
+
+        .category {
+            margin-bottom: 15px;
+        }
+
+        .category h2 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .habit-list {
+            list-style: none;
+        }
+
+        .habit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .habit-item input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .memo-section {
+            margin-top: 20px;
+        }
+
+        .memo-section textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: none;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="app-header">
+            <h1>습관 형성 도우미</h1>
+        </div>
+
+        <!-- 운동 카테고리 -->
+        <div class="category">
+            <h2>🏃 운동</h2>
+            <ul class="habit-list">
+                <li class="habit-item">
+                    <input type="checkbox" id="run">
+                    <label for="run">달리기</label>
+                </li>
+                <li class="habit-item">
+                    <input type="checkbox" id="stretch">
+                    <label for="stretch">스트레칭</label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 식단 카테고리 -->
+        <div class="category">
+            <h2>🍎 식단</h2>
+            <ul class="habit-list">
+                <li class="habit-item">
+                    <input type="checkbox" id="fruit">
+                    <label for="fruit">과일 섭취</label>
+                </li>
+                <li class="habit-item">
+                    <input type="checkbox" id="water">
+                    <label for="water">물 2L 마시기</label>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 메모 섹션 -->
+        <div class="memo-section">
+            <h2>📝 오늘의 메모</h2>
+            <textarea rows="4" placeholder="오늘의 목표나 느낀 점을 적어보세요"></textarea>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -90,12 +90,12 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
             pauseOnHover: false,
             draggable: false
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             cont_slick_array[i].stopAuto();
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             cont_slick_array[i].startAuto();
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             cont_slick_array[i].stopAuto();
             setTimeout(function(){
                 cont_slick_array[i].startAuto();
@@ -266,16 +266,16 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
             $this_tab.find("> ul li").eq(num).addClass("on");
             // $this_tab.find("> ul li").eq(num).find("img").attr("src", $this_tab.find("> ul li").eq(num).find("img").attr("src").replace("_off.png", "_on.png"));	
         }
-        $this_tab.find("> ul li").find(".tab_box").bind("click", function(){
+        $this_tab.find("> ul li").find(".tab_box").on("click", function(){
             const idx = jQuery(this).parent().index();
             resetTab();
             activeTab(idx);
             custom_slick_array[i].slick("slickGoTo", idx);
             return false;
         });
-        $this_tab.bind("mouseenter", function(){
+        $this_tab.on("mouseenter", function(){
             custom_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             custom_slick_array[i].slick("slickPlay");
         });
     });
@@ -754,12 +754,12 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
             constiableWidth: true,
             draggable: false
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             center_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             center_slick_array[i].slick("slickPlay");
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             center_slick_array[i].slick("slickPause");
             setTimeout(function(){
                 center_slick_array[i].slick("slickPlay");
@@ -844,12 +844,12 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
             draggable: false,
             cssEase: "linear"
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             active_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             active_slick_array[i].slick("slickPlay");
         });
-        $this_slide.find("a").bind("click", function(){
+        $this_slide.find("a").on("click", function(){
             active_slick_array[i].slick("slickPause");
             setTimeout(function(){
                 active_slick_array[i].slick("slickPlay");
@@ -908,9 +908,9 @@ https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js
             constiableWidth: true,
             draggable: false
         });
-        $this_slide.bind("mouseenter", function(){
+        $this_slide.on("mouseenter", function(){
             transform_slick_array[i].slick("slickPause");
-        }).bind("mouseleave", function(){
+        }).on("mouseleave", function(){
             transform_slick_array[i].slick("slickPlay");
         });
     });
