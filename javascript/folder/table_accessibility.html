@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>folder</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>folder</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">table</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+	/* folder_table */
+	.folder_table table {width:100%;border-collapse:collapse;}
+	.folder_table table caption {visibility:hidden;height:0;font-size:0;}
+	.folder_table table thead tr th {padding:15px;border:1px solid #bbb;text-align:center;}
+	.folder_table table tbody tr td {padding:15px;border:1px solid #ddd;text-align:center;}
+	.folder_table .folder_btn .tab {color:#777;text-decoration:none;}
+    .folder_table .folder_btn .tab:hover {text-decoration:underline;color:#555;}
+	.folder_table .folder_btn td:nth-child(2) {text-align:left;}
+	.folder_table .folder_btn.on .tab {color:#333;font-weight:700;text-decoration:underline;}
+	.folder_table .folder_cont {display:none;text-align:left;}
+	.folder_table .folder_cont td {padding:20px;text-align:left;}
+	.folder_table .folder_cont.on {display:table-row;}
+</style>
+<!-- folder_table -->
+<div id="folder_table" class="folder_table">
+    <table>
+        <caption>제목</caption>
+        <colgroup>
+            <col style="width:16%" />
+            <col style="width:84%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="folder_btn">
+                <td>1</td>
+                <td><a href="#" class="tab">제목1</a></td>
+            </tr>
+            <tr class="folder_cont">
+                <td colspan="2">내용1</td>
+            </tr>
+            <tr class="folder_btn">
+                <td>2</td>
+                <td><a href="#" class="tab">제목2</a></td>
+            </tr>
+            <tr class="folder_cont">
+                <td colspan="2">내용2</td>
+            </tr>
+            <tr class="folder_btn">
+                <td>3</td>
+                <td><a href="#" class="tab">제목3</a></td>
+            </tr>
+            <tr class="folder_cont">
+                <td colspan="2">내용3</td>
+            </tr>
+            <tr class="folder_btn">
+                <td>4</td>
+                <td><a href="http://naver.com" target="_blank" class="tab"><span>제목4 - 새창링크</span></a></td>
+            </tr>
+            <tr class="folder_btn">
+                <td>5</td>
+                <td><a href="http://naver.com" class="tab"><span>제목5 - 현재창링크</span></a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- // folder_table -->
+<script type="text/javascript">
+    // folder_table
+    (function() {
+        function FolderTable(selector) {
+            this.table = document.querySelector(selector);
+            this.init();
+        }
+
+        FolderTable.prototype.init = function() {
+            // 동적으로 ID와 aria 속성 추가
+            const rows = this.table.querySelectorAll('.folder_btn');
+            rows.forEach((row, index) => {
+                const tab = row.querySelector('.tab');
+                const content = row.nextElementSibling;
+
+                // content가 존재하는지 확인
+                if (content) {
+                    // 고유한 ID를 생성
+                    const tabId = `tab-${index + 1}`;
+                    const contentId = `content-${index + 1}`;
+
+                    // 탭에 id와 aria-expanded, aria-controls 속성 추가
+                    tab.setAttribute('id', tabId);
+                    tab.setAttribute('aria-expanded', 'false');
+                    tab.setAttribute('aria-controls', contentId);
+
+                    // 내용에 aria-labelledby와 id 추가
+                    content.setAttribute('id', contentId);
+                    content.setAttribute('aria-labelledby', tabId);
+                }
+            });
+
+            // 클릭 이벤트 처리
+            this.table.addEventListener('click', (e) => {
+                const btn = e.target.closest('.tab');
+                if (!btn) return; // 클릭한 것이 tab이 아닐 때
+
+                const href = btn.getAttribute('href');
+                
+                // href에 값이 있으면 링크 이동, 새 창 띄우기
+                if (href && href !== "#") {
+                    // 새 창 띄우기 - target="_blank"인 경우
+                    if (btn.getAttribute('target') === '_blank') {
+                        window.open(href, '_blank');
+                    } else {
+                        // 현재 창에서 링크 이동
+                        window.location.href = href;
+                    }
+                    return; // 링크 이동일 경우 여기서 종료
+                }
+
+                e.preventDefault(); // 링크 이동이 아닌 경우 클릭 기본 동작 막기
+
+                const row = btn.closest('.folder_btn');
+                const content = row.nextElementSibling;
+
+                // content가 존재하는지 확인
+                if (content) {
+                    // 토글 기능 추가: 이미 열려 있으면 닫고, 닫혀 있으면 열기
+                    if (row.classList.contains('on')) {
+                        // 이미 열려 있으면 닫기
+                        row.classList.remove('on');
+                        content.classList.remove('on');
+                        btn.setAttribute('aria-expanded', 'false');
+                    } else {
+                        // 다른 열린 행을 닫기
+                        this.reset();
+
+                        // 클릭한 열 열기
+                        row.classList.add('on');
+                        content.classList.add('on');
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                }
+            });
+        };
+
+        FolderTable.prototype.reset = function() {
+            // 모든 열 닫기
+            const openBtns = this.table.querySelectorAll('.folder_btn.on');
+            const openContents = this.table.querySelectorAll('.folder_cont.on');
+            openBtns.forEach(btn => btn.classList.remove('on'));
+            openContents.forEach(cont => cont.classList.remove('on'));
+            const tabs = this.table.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.setAttribute('aria-expanded', 'false'));
+        };
+
+        // 초기화
+        new FolderTable('#folder_table');
+    })();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>folder</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>folder</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">list</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* folder_tab */
+    .folder_tab {width:100%;border-top:1px solid #333;border-bottom:1px solid #ddd;}
+    .folder_tab .folder_tit {display:flex;align-items:center;justify-content:flex-start;flex-direction:row;padding:11px 0;}
+    .folder_tab .folder_tit span {padding:0 10px;color:#333;text-align:center;}
+    .folder_tab .folder_tit span:first-child {width:10%;}
+    .folder_tab .folder_item {border-top:1px solid #ddd;}
+    .folder_tab .folder_item .folder_tit .tab {display:block;color:#777;text-decoration:none;}
+    .folder_tab .folder_item .folder_tit .tab:hover {color:#555;text-decoration:underline;}
+    .folder_tab .folder_item .folder_cont {display:none;border-top:1px solid #ddd;}
+    .folder_tab .folder_item .folder_cont p {padding:10px;}
+    .folder_tab .folder_item.on .folder_tit .tab {color:#333;font-weight:700;text-decoration:underline;}
+    .folder_tab .folder_item.on .folder_cont {display:block;}
+</style>
+<!-- folder_list -->
+<div id="folder_tab" class="folder_tab">
+    <div class="folder_tit">
+        <span>번호</span>
+        <span>내용</span>
+    </div>
+    <ul class="folder_list">
+        <li class="folder_item">
+            <div class="folder_tit">
+                <span>1</span>
+                <span><a href="#" class="tab">제목1</a></span>
+            </div>
+            <div class="folder_cont">
+                <p>내용</p>
+            </div>
+        </li>
+        <li class="folder_item">
+            <div class="folder_tit">
+                <span>2</span>
+                <span><a href="#" class="tab">제목2</a></span>
+            </div>
+            <div class="folder_cont">
+                <p>내용</p>
+            </div>
+        </li>
+        <li class="folder_item">
+            <div class="folder_tit">
+                <span>3</span>
+                <span><a href="#" class="tab">제목3</a></span>
+            </div>
+            <div class="folder_cont">
+                <p>내용</p>
+            </div>
+        </li>
+        <li class="folder_item">
+            <div class="folder_tit">
+                <span>4</span>
+                <span><a href="http://naver.com" target="_blank" class="tab">제목 - 새창링크</a></span>
+            </div>
+        </li>
+        <li class="folder_item">
+            <div class="folder_tit">
+                <span>5</span>
+                <span><a href="http://naver.com" class="tab">제목 - 현재창링크</a></span>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // folder_list -->
+<script type="text/javascript">
+    (function() {
+        function FolderList(selector) {
+            this.list = document.querySelector(selector);
+            this.init();
+        }
+
+        FolderList.prototype.init = function() {
+            this.list.addEventListener('click', (e) => {
+                const tab = e.target.closest('.tab');
+                if (!tab) return;
+
+                const href = tab.getAttribute('href');
+
+                if (href && href !== "#") {
+                    if (tab.getAttribute('target') === '_blank') {
+                        window.open(href, '_blank');
+                    } else {
+                        window.location.href = href;
+                    }
+                    return;
+                }
+
+                e.preventDefault();
+
+                const folderItem = tab.closest('.folder_item');
+                const isOpen = folderItem.classList.contains('on');
+
+                // 모두 닫기
+                this.reset();
+
+                // 선택한 항목을 열거나 닫기
+                if (!isOpen) {
+                    folderItem.classList.add('on');
+                }
+            });
+        };
+
+        FolderList.prototype.reset = function() {
+            const openItems = this.list.querySelectorAll('.folder_item.on');
+            openItems.forEach(item => {
+                item.classList.remove('on');
+                const tab = item.querySelector('.tab');
+            });
+        };
+
+        new FolderList('#folder_tab');
+    })();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>folder</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>folder</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">list</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style type="text/css">
+    /* folder_tab */
+    .folder_tab {width:100%;border-top:1px solid #333;border-bottom:1px solid #ddd;}
+    .folder_tab .folder_tit {display:flex;align-items:center;justify-content:flex-start;flex-direction:row;padding:11px 0;}
+    .folder_tab .folder_tit span {padding:0 10px;color:#333;text-align:center;}
+    .folder_tab .folder_tit span:first-child {width:10%;}
+    .folder_tab .folder_item {border-top:1px solid #ddd;}
+    .folder_tab .folder_item .folder_tit .tab {display:block;color:#777;text-decoration:none;}
+    .folder_tab .folder_item .folder_tit .tab:hover {color:#555;text-decoration:underline;}
+    .folder_tab .folder_item .folder_cont {display:none;border-top:1px solid #ddd;}
+    .folder_tab .folder_item .folder_cont p {padding:10px;}
+    .folder_tab .folder_item.on .folder_tit .tab {color:#333;font-weight:700;text-decoration:underline;}
+    .folder_tab .folder_item.on .folder_cont {display:block;}
+</style>
+<!-- folder_tab -->
+<div id="folder_tab" class="folder_tab">
+    <div class="folder_tit">
+        <span>번호</span>
+        <span>내용</span>
+    </div>
+    <ul class="folder_list" role="list">
+        <li class="folder_item" role="listitem">
+            <div class="folder_tit">
+                <span>1</span>
+                <span><a href="#" class="tab">제목1</a></span>
+            </div>
+            <div class="folder_cont">
+                <p>내용</p>
+            </div>
+        </li>
+        <li class="folder_item" role="listitem">
+            <div class="folder_tit">
+                <span>2</span>
+                <span><a href="#" class="tab">제목2</a></span>
+            </div>
+            <div class="folder_cont">
+                <p>내용</p>
+            </div>
+        </li>
+        <li class="folder_item" role="listitem">
+            <div class="folder_tit">
+                <span>3</span>
+                <span><a href="#" class="tab">제목3</a></span>
+            </div>
+            <div class="folder_cont">
+                <p>내용</p>
+            </div>
+        </li>
+        <li class="folder_item" role="listitem">
+            <div class="folder_tit">
+                <span>4</span>
+                <span><a href="http://naver.com" target="_blank" class="tab">제목 - 새창링크</a></span>
+            </div>
+        </li>
+        <li class="folder_item" role="listitem">
+            <div class="folder_tit">
+                <span>5</span>
+                <span><a href="http://naver.com" class="tab">제목 - 현재창링크</a></span>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // folder_tab -->
+<script type="text/javascript">
+    (function () {
+        function FolderList(selector) {
+            this.list = document.querySelector(selector);
+            this.init();
+        }
+
+        FolderList.prototype.init = function () {
+            // 모든 탭을 가져와 동적으로 id와 접근성 속성을 할당합니다.
+            const tabs = this.list.querySelectorAll('.tab');
+            tabs.forEach((tab, index) => {
+                // 유일한 id 생성
+                const uniqueId = `tab-${index + 1}`;
+                const contentId = `content-${index + 1}`;
+
+                // 각 탭에 id와 aria-expanded, aria-controls 속성 추가
+                tab.setAttribute('id', uniqueId);
+                tab.setAttribute('aria-expanded', 'false');
+                tab.setAttribute('aria-controls', contentId);
+
+                // 각 컨텐츠에 id와 aria-labelledby 속성 추가
+                const content = tab.closest('.folder_item').querySelector('.folder_cont');
+                if (content) {
+                    content.setAttribute('id', contentId);
+                    content.setAttribute('aria-labelledby', uniqueId);
+                }
+            });
+
+            // 기존 이벤트 설정
+            this.list.addEventListener('click', this.handleToggle.bind(this));
+        };
+
+        FolderList.prototype.handleToggle = function (e) {
+            const btn = e.target.closest('.tab');
+            if (!btn) return; // 클릭한 것이 탭이 아닐 때
+
+            const href = btn.getAttribute('href');
+
+            // 링크 이동 처리
+            if (href && href !== "#") {
+                if (btn.getAttribute('target') === '_blank') {
+                    window.open(href, '_blank');
+                } else {
+                    window.location.href = href;
+                }
+                return;
+            }
+
+            e.preventDefault(); // 링크 이동이 아닐 때 클릭 기본 동작 막기
+
+            const row = btn.closest('.folder_item');
+            const isOpen = row.classList.contains('on');
+
+            // 모든 항목 닫기
+            this.reset();
+
+            // 클릭된 항목이 닫혀 있었을 때만 열기
+            if (!isOpen) {
+                btn.setAttribute('aria-expanded', 'true');
+                row.classList.add('on');
+            }
+        };
+
+        FolderList.prototype.reset = function () {
+            // 모든 항목의 aria-expanded 속성을 false로 설정하고 on 클래스 제거
+            const openTabs = this.list.querySelectorAll('.tab[aria-expanded="true"]');
+            const openItems = this.list.querySelectorAll('.folder_item.on');
+
+            openTabs.forEach(tab => tab.setAttribute('aria-expanded', 'false'));
+            openItems.forEach(item => item.classList.remove('on'));
+        };
+
+        // 초기화
+        new FolderList('#folder_tab');
+    })();
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
