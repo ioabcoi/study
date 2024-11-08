@@ -19,15 +19,15 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
+<style>
     .canvas_wrap {overflow:hidden;position:relative;box-sizing:border-box;width:100%;height:100%;background:#eee;}
     #canvas {display:block;}
 </style>
 <div class="canvas_wrap">
 	<canvas id="canvas" width="100%" height="100%">이 브라우저는 캔버스를 지원하지 않습니다.</canvas>
 </div>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
     $(document).ready(function(){
         // $('#canvas').attr('width', $(window).width() ).attr('height', $(window).height() );
         $('#canvas').attr('width', $('.canvas_wrap').width()).attr('height', $('.canvas_wrap').height());

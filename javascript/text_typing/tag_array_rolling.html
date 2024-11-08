@@ -20,7 +20,7 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <div id="typing_text"></div>
-<script type="text/javascript" >
+<script>
     // TypingEffect 모듈 정의
     const TypingEffect = (function() {
         // private 함수
@@ -45,7 +45,7 @@
     // TypingEffect 사용 예시
     TypingEffect.start("typing_text", "Hello, World!", 100);
 </script>
-<!-- <script type="text/javascript" >
+<!-- <script>
     function typingEffect(elementId, text, speed) {
         let i = 0;
         function type() {
@@ -76,12 +76,12 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 
-<style type="text/css">
+<style>
     .highlight {color:red;font-weight:700;} /* 강조 효과를 위한 클래스 */
 </style>                    
 <div id="typing1" class="typing"></div>
 <div id="typing2" class="typing"></div>
-<script type="text/javascript">
+<script>
     // TypingFunction 모듈 정의
     const TypingFunction = (function() {
         // private 함수
@@ -121,7 +121,7 @@
         TypingFunction.start('#typing2', 'Hello, World! Hello, World!', 80, 0, 6); // 0번째부터 6번째 문자에 강조 효과
     });
 </script>
-<!-- <script type="text/javascript" >
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         function fntypeing(obg, ttl, speed, start, end) {
             const typingArr = ttl.split('');
@@ -166,12 +166,12 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
+<style>
     .typing strong {font-weight:700;}
 </style>
 <div><span id="typing_1" class="typing"></span></div>
 <div><span id="typing_2" class="typing"></span></div>
-<script type="text/javascript">
+<script>
     const TypeEffect = (function() {
         // private 함수
         function type(element, strings, typeSpeed, backSpeed, delay) {
@@ -223,7 +223,7 @@
         TypeEffect.start(document.getElementById('typing_2'), ['원하는 글씨를 순서대로 출력해 줍니다.'], 100, 100, 1000);
     });
 </script>
-<!-- <script type="text/javascript">
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         function typeEffect(element, strings, typeSpeed, backSpeed, delay) {
             let stringIndex = 0;
@@ -278,7 +278,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
+<style>
     /* rolling_typing */
     .rolling_typing ul li {height:20px;background:#eee;line-height:20px;}
     .rolling_typing ul li.on {background:#fff;}
@@ -302,7 +302,7 @@
     </ul>
 </div>
 <!-- // rolling_typing -->
-<script type="text/javascript">
+<script>
     // 타이핑 효과 모듈
     const TypingMotion = (function() {
         function type(element, text, callback) {
@@ -383,7 +383,7 @@
         RollingTyping.init(rollingTyping2, 2000);
     });
 </script>
-<!-- <script type="text/javascript">
+<!-- <script>
     // rolling_typing
     function fntypeing(element, text) {
         const typingArr = text.split('');

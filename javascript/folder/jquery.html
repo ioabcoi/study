@@ -3,7 +3,7 @@
 <head>
     <!-- head -->
     <script src="../../html/include/head.js"></script>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <!-- // head -->
     
     <title>folder_jquery</title>
@@ -20,7 +20,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
+<style>
     /* default */
     .folder_table table tbody .folder_btn.on .f_btn {text-decoration:underline;}
     .folder_table table tbody .folder_cont {display:none;}
@@ -43,7 +43,7 @@
 </style>
 <!-- folder_table -->
 <div id="folder_table" class="board_col folder_table">
-    <table cellspacing="0" cellpadding="0">
+    <table>
         <caption>제목</caption>
         <colgroup>
             <col style="width:16%" />
@@ -112,7 +112,7 @@
     </table>
 </div>
 <!-- // folder_table -->
-<script type="text/javascript" >
+<script>
     jQuery.fn.folder_tableFunc = function() {
         return this.each(function() {
             var $folder = jQuery(this);
@@ -142,7 +142,7 @@
         jQuery("#folder_table").folder_tableFunc();
     });
 </script>
-<!-- <script type="text/javascript" >
+<!-- <script>
 	// folder_table
 	jQuery.fn.folder_tableFunc = function() {
 		return this.each(function() {
@@ -189,7 +189,7 @@
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
-<style type="text/css">
+<style>
     /* default */
     .folder_list .body .folder_btn .f_btn {display:block;text-decoration:none;}
     .folder_list .body .folder_btn.on .f_btn {text-decoration:underline;}
@@ -238,7 +238,7 @@
     </ul>
 </div>
 <!-- // folder_list -->
-<script type="text/javascript" >
+<script>
     jQuery.fn.folder_listFunc = function() {
         return this.each(function() {
             var $folder = jQuery(this);
@@ -268,7 +268,7 @@
         jQuery('#folder_list').folder_listFunc();
     });
 </script>
-<!-- <script type="text/javascript" >
+<!-- <script>
     // folder_list
 	jQuery.fn.folder_listFunc = function() {
 		return this.each(function() {
