@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Scissors Paper</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Noto Sans", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            background: #222831;
+            color: #EEEEEE;
+            text-align: center;
+        }
+
+        body,
+        h1,
+        h2 {
+            margin: 0;
+            padding: 0;
+        }
+
+        input,
+        button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: transparent;
+            display: inline-flex;
+            padding: 0;
+            border: 0;
+            border-radius: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .title {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60%;
+            height: 360px;
+            background: #393E46;
+            transform: translateX(-50%) translateY(-50%);
+            color: #fff;
+            font-family: "Black Han Sans", sans-serif;
+            font-size: 30px;
+        }
+
+        .text {
+            position: absolute;
+            z-index: -1;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222831;
+            font-family: "Black Han Sans", sans-serif;
+            font-size: 45px;
+            transform: translateX(-50%) translateY(-50%);
+            opacity: 0.4;
+        }
+
+        .rsp {
+            font-size: 35px;
+        }
+
+        .you,
+        .me {
+            position: absolute;
+            flex-wrap: wrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            box-sizing: border-box;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .you {
+            left: 0;
+            top: 0;
+        }
+
+        .me {
+            right: 0;
+            bottom: 0;
+        }
+
+
+        .you_open .rsp,
+        .me_open .rsp {
+            font-size: 50px;
+        }
+
+
+        .you_open,
+        .me_open {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 110px;
+            height: 110px;
+            background: #00ADB5;
+            border-radius: 50%;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .you_open {
+            margin-top: -140px;
+        }
+
+        .me_open {
+            margin-top: 140px;
+        }
+
+
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+
+            .title {
+                height: 600px;
+                font-size: 36px;
+            }
+
+            .text {
+                font-size: 80px;
+            }
+
+            .rsp {
+                font-size: 40px;
+            }
+
+            .you,
+            .me {
+                padding: 20px;
+                flex-direction: column;
+            }
+
+            .you_open .rsp,
+            .me_open .rsp {
+                font-size: 100px;
+            }
+
+            .you_open,
+            .me_open {
+                width: 200px;
+                height: 200px;
+            }
+
+            .you_open {
+                margin-top: -240px;
+            }
+
+            .me_open {
+                margin-top: 240px;
+            }
+
+        }
+
+        @media (min-width: 1080px) {
+
+            .text {
+                font-size: 120px;
+            }
+
+            .rsp {
+                font-size: 50px;
+            }
+
+            .you_open .rsp,
+            .me_open .rsp {
+                font-size: 120px;
+            }
+
+            .you_open,
+            .me_open {
+                width: 220px;
+                height: 220px;
+            }
+
+        }
+
+        @media (min-width: 1280px) {
+
+            .title {
+                font-size: 70px;
+            }
+
+            .rsp {
+                font-size: 70px;
+            }
+
+            .you,
+            .me {
+                padding: 50px;
+            }
+
+            .you_open .rsp,
+            .me_open .rsp {
+                font-size: 170px;
+            }
+
+            .you_open,
+            .me_open {
+                width: 320px;
+                height: 320px;
+            }
+
+            .you_open {
+                margin-top: -280px;
+            }
+
+            .me_open {
+                margin-top: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <h1 class="title">Rock Scissors Paper</h1>
+
+            <div class="you">
+                <div class="rsp rock">✊🏻</div>
+                <div class="rsp scissors">✌🏻</div>
+                <div class="rsp paper">🖐🏻</div>
+            </div>
+            <div class="you_open">
+                <strong class="text">You</strong>
+                <!-- result -->
+                <div class="rsp rock">✊🏻</div>
+            </div>
+
+            <div class="me">
+                <button class="rsp rock">✊🏻</button>
+                <button class="rsp scissors">✌🏻</button>
+                <button class="rsp paper">🖐🏻</button>
+            </div>
+            <div class="me_open">
+                <strong class="text">Me</strong>
+                <!-- result -->
+                <div class="rsp rock">✊🏻</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const choices = ["rock", "scissors", "paper"];
+            const resultDisplay = document.createElement("h2"); // 결과를 표시할 요소
+            document.querySelector(".container").appendChild(resultDisplay);
+
+            // 컴퓨터의 선택을 랜덤으로 반환
+            function getComputerChoice() {
+                const randomIndex = Math.floor(Math.random() * choices.length);
+                return choices[randomIndex];
+            }
+
+            // 승패를 판단하는 함수
+            function determineWinner(playerChoice, computerChoice) {
+                if (playerChoice === computerChoice) {
+                    return "무승부!";
+                }
+                if (
+                    (playerChoice === "rock" && computerChoice === "scissors") ||
+                    (playerChoice === "scissors" && computerChoice === "paper") ||
+                    (playerChoice === "paper" && computerChoice === "rock")
+                ) {
+                    return "당신이 이겼습니다!";
+                }
+                return "컴퓨터가 이겼습니다!";
+            }
+
+            // 버튼 클릭 이벤트 핸들러
+            function handlePlayerChoice(event) {
+                const playerChoice = event.target.classList.contains("rock")
+                    ? "rock"
+                    : event.target.classList.contains("scissors")
+                        ? "scissors"
+                        : "paper";
+
+                // 컴퓨터 선택
+                const computerChoice = getComputerChoice();
+
+                // 결과 표시
+                updateResultDisplay(playerChoice, computerChoice);
+                const result = determineWinner(playerChoice, computerChoice);
+                resultDisplay.textContent = result;
+            }
+
+            // 결과를 화면에 업데이트
+            function updateResultDisplay(playerChoice, computerChoice) {
+                // 플레이어의 선택 표시
+                const playerOpen = document.querySelector(".me_open .rsp");
+                playerOpen.className = `rsp ${playerChoice}`;
+                playerOpen.textContent = getEmoji(playerChoice);
+
+                // 컴퓨터의 선택 표시
+                const computerOpen = document.querySelector(".you_open .rsp");
+                computerOpen.className = `rsp ${computerChoice}`;
+                computerOpen.textContent = getEmoji(computerChoice);
+            }
+
+            // 선택에 맞는 이모지 반환
+            function getEmoji(choice) {
+                if (choice === "rock") return "✊🏻";
+                if (choice === "scissors") return "✌🏻";
+                if (choice === "paper") return "🖐🏻";
+            }
+
+            // 버튼 이벤트 리스너 추가
+            const buttons = document.querySelectorAll(".me .rsp");
+            buttons.forEach((button) =>
+                button.addEventListener("click", handlePlayerChoice)
+            );
+        })();
+
+    </script>
+</body>
+
+</html>
