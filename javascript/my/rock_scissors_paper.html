@@ -44,6 +44,17 @@
             justify-content: center;
         }
 
+        .result {
+            position: fixed;
+            left: 0;
+            top: 50px;
+            width: 100%;
+            color: #EEEEEE;
+            font-family: "Black Han Sans", sans-serif;
+            font-size: 20px;
+            text-align: center;
+        }
+
         .title {
             position: fixed;
             left: 50%;
@@ -55,9 +66,9 @@
             height: 360px;
             background: #393E46;
             transform: translateX(-50%) translateY(-50%);
-            color: #fff;
+            color: #EEEEEE;
             font-family: "Black Han Sans", sans-serif;
-            font-size: 30px;
+            font-size: 25px;
         }
 
         .text {
@@ -87,6 +98,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: row;
+            gap: 10px;
             box-sizing: border-box;
             padding: 10px;
             text-align: center;
@@ -95,6 +107,7 @@
         .you {
             left: 0;
             top: 0;
+            display: none;
         }
 
         .me {
@@ -132,11 +145,13 @@
             margin-top: 140px;
         }
 
-
-
         /* Responsive Design */
         @media (min-width: 768px) {
 
+            .result {
+                top: 100px;
+                font-size: 36px;
+            }
             .title {
                 height: 600px;
                 font-size: 36px;
@@ -147,7 +162,7 @@
             }
 
             .rsp {
-                font-size: 40px;
+                font-size: 50px;
             }
 
             .you,
@@ -178,6 +193,11 @@
         }
 
         @media (min-width: 1080px) {
+
+            .result {
+                top: 60px;
+                font-size: 40px;
+            }
 
             .text {
                 font-size: 120px;
@@ -241,6 +261,8 @@
     <div class="wrap">
         <div class="container">
             <h1 class="title">Rock Scissors Paper</h1>
+            <!-- result -->
+            <h2 class="result"></h2>
 
             <div class="you">
                 <div class="rsp rock">✊🏻</div>
@@ -268,7 +290,7 @@
     <script>
         (function () {
             const choices = ["rock", "scissors", "paper"];
-            const resultDisplay = document.createElement("h2"); // 결과를 표시할 요소
+            const resultDisplay = document.querySelector(".result"); // 결과를 표시할 요소
             document.querySelector(".container").appendChild(resultDisplay);
 
             // 컴퓨터의 선택을 랜덤으로 반환
@@ -280,16 +302,16 @@
             // 승패를 판단하는 함수
             function determineWinner(playerChoice, computerChoice) {
                 if (playerChoice === computerChoice) {
-                    return "무승부!";
+                    return "It's a draw!";
                 }
                 if (
                     (playerChoice === "rock" && computerChoice === "scissors") ||
                     (playerChoice === "scissors" && computerChoice === "paper") ||
                     (playerChoice === "paper" && computerChoice === "rock")
                 ) {
-                    return "당신이 이겼습니다!";
+                    return "You win!";
                 }
-                return "컴퓨터가 이겼습니다!";
+                return "Computer wins!";
             }
 
             // 버튼 클릭 이벤트 핸들러
