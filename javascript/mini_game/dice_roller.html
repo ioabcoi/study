@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Roller</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dice-container {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -140px;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        .dice {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: var(--color--fourth);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .question-mark {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            content: '❔';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+
+        .dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: var(--color--first);
+            border-radius: 50%;
+            opacity: 0;
+        }
+
+        #dot-1 {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #dot-2 {
+            top: 20%;
+            left: 20%;
+        }
+
+        #dot-3 {
+            top: 20%;
+            right: 20%;
+        }
+
+        #dot-4 {
+            bottom: 20%;
+            left: 20%;
+        }
+
+        #dot-5 {
+            bottom: 20%;
+            right: 20%;
+        }
+
+        #dot-6 {
+            top: 50%;
+            left: 20%;
+            transform: translateY(-50%);
+        }
+
+        #dot-7 {
+            top: 50%;
+            right: 20%;
+            transform: translateY(-50%);
+        }
+
+        #roll-button {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: var(--color--fourth);
+            background: var(--color--third);
+            border: none;
+            border-radius: 5px;
+            margin-top: 140px;
+            font-family: "Black Han Sans", sans-serif;
+            cursor: pointer;
+            transform: translateX(-50%) translateY(-50%);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .dice-container {
+                margin-top: -240px;
+            }
+
+            .dice {
+                width: 200px;
+                height: 200px;
+            }
+
+            .question-mark {
+                font-size: 100px;
+            }
+
+            .dot {
+                width: 30px;
+                height: 30px;
+            }
+
+            #roll-button {
+                padding: 20px 30px;
+                font-size: 2rem;
+                margin-top: 240px;
+            }
+        }
+
+        @media (min-width: 1080px) {
+            .dice {
+                width: 220px;
+                height: 220px;
+            }
+
+            .question-mark {
+                font-size: 120px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .dice-container {
+                margin-top: -320px;
+            }
+
+            .dice {
+                width: 320px;
+                height: 320px;
+            }
+
+            .question-mark {
+                font-size: 170px;
+            }
+
+            .dot {
+                width: 40px;
+                height: 40px;
+            }
+
+            #roll-button {
+                padding: 30px 40px;
+                font-size: 3rem;
+                margin-top: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <h1 class="title"><strong>Dice Roller</strong></h1>
+            <!-- result -->
+            <h2 class="result"></h2>
+
+            <div class="dice-container">
+                <div class="dice">
+                    <strong class="question-mark">❔</strong>
+                    <div class="dot" id="dot-1"></div>
+                    <div class="dot" id="dot-2"></div>
+                    <div class="dot" id="dot-3"></div>
+                    <div class="dot" id="dot-4"></div>
+                    <div class="dot" id="dot-5"></div>
+                    <div class="dot" id="dot-6"></div>
+                    <div class="dot" id="dot-7"></div>
+                </div>
+            </div>
+
+            <button id="roll-button">Roll Dice</button>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const rollButton = document.getElementById('roll-button'); // 버튼 요소
+            const resultDisplay = document.querySelector(".result"); // 결과 표시 영역
+            const dots = document.querySelectorAll('.dot'); // 주사위의 모든 점 요소
+            const questionMark = document.querySelector('.question-mark'); // 물음표
+
+            // 주사위 숫자에 따라 보이는 점의 매핑
+            const diceFaces = {
+                1: [1],
+                2: [2, 5],
+                3: [2, 1, 5],
+                4: [2, 3, 4, 5],
+                5: [2, 3, 4, 5, 1],
+                6: [2, 3, 4, 5, 6, 7]
+            };
+
+            // 주사위를 굴리는 함수
+            function rollDice() {
+                const diceNumber = Math.floor(Math.random() * 6) + 1; // 1~6 사이의 랜덤 숫자 생성
+
+                // 물음표 숨김
+                questionMark.style.display = 'none';
+                
+                // 모든 점을 숨김 (초기화)
+                dots.forEach(dot => (dot.style.opacity = 0));
+
+                // 랜덤 숫자에 맞는 점을 표시
+                diceFaces[diceNumber].forEach(dotIndex => {
+                    document.getElementById(`dot-${dotIndex}`).style.opacity = 1; // 매핑된 점 표시
+                });
+
+                // 결과 영역에 숫자 표시
+                resultDisplay.textContent = diceNumber;
+            }
+
+            // 버튼 클릭 시 주사위를 굴리는 이벤트 리스너 등록
+            rollButton.addEventListener('click', rollDice);
+        })();
+    </script>
+</body>
+
+</html>

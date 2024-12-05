@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .container {
+            margin-top: 100px;
+            padding: 1rem;
+        }
+
+        .result {
+            color: var(--color--third);
+        }
+
+        .index {
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            align-items: stretch;
+            justify-content: stretch;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem 1rem;
+            background: var(--color--second);
+            border-radius: 10px;
+            font-size: 18px;
+        }
+
+        .item:hover {
+            background: var(--color--third);
+        }
+
+        .item .link {
+            color: var(--color--fourth);
+            font-family: "Black Han Sans", sans-serif;
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .container {
+                margin-top: 200px;
+                padding: 1.5rem;
+            }
+
+            .index {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+                align-items: stretch;
+                justify-content: stretch;
+            }
+
+            .item {
+                padding: 2.5rem 2rem;
+                font-size: 22px;
+            }
+        }
+
+        @media (min-width: 1080px) {
+            .index {
+                width: 1080px;
+                margin: 0 auto;
+            }
+
+            .index {
+                gap: 2rem;
+            }
+
+            .item {
+                padding: 3rem 2rem;
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="container">
+            <h1 class="result">Mini Game</h1>
+
+            <div class="index">
+                <div class="item"><a href="rock_scissors_paper.html" class="link">Rock Scissors Paper</a></div>
+                <div class="item"><a href="dice_roller.html" class="link">Dice<br>Roller</a></div>
+                <div class="item">❤</div>
+                <div class="item">🧡</div>
+                <div class="item">💛</div>
+                <div class="item">💚</div>
+                <div class="item">💙</div>
+                <div class="item">💜</div>
+                <div class="item">🤎</div>
+                <div class="item">🖤</div>
+                <div class="item">🤍</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
