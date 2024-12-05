@@ -58,6 +58,15 @@ button {
     justify-content: center;
 }
 
+.back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0 10px;
+    font-size: 20px;
+    text-decoration: none;
+}
+
 .title strong,
 .result,
 button {
@@ -96,6 +105,11 @@ button {
 
 /* Responsive Design */
 @media (min-width: 768px) {
+    .back {
+        padding: 0 20px;
+        font-size: 50px;
+    }
+
     .title {
         height: 600px;
     }
@@ -111,6 +125,11 @@ button {
 }
 
 @media (min-width: 1080px) {
+    .back {
+        padding: 15px 50px;
+        font-size: 70px;
+    }
+
     .result {
         top: 60px;
         font-size: 40px;
