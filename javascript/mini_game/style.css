@@ -10,14 +10,17 @@
 
 body ::selection {
     background: var(--color--third);
+    color: var(--color--second);
 }
 
 body ::-webkit-selection {
     background: var(--color--third);
+    color: var(--color--second);
 }
 
 body ::-moz-selection {
     background: var(--color--third);
+    color: var(--color--second);
 }
 
 * {
