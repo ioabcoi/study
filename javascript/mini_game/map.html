@@ -12,8 +12,16 @@
             padding: 1rem;
         }
 
-        .result {
-            color: var(--color--third);
+        .text {
+            position: fixed;
+            left: 0;
+            top: 50px;
+            width: 100%;
+            color: var(--color-third);
+            font-family: var(--font-default);
+            font-size: 20px;
+            text-align: center;
+            transition: all 0.25s ease-in-out;
         }
 
         .index {
@@ -27,22 +35,29 @@
 
         .item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem 1rem;
-            background: var(--color--second);
-            border-radius: 10px;
-            font-size: 18px;
-        }
-
-        .item:hover {
-            background: var(--color--third);
+            align-items: stretch;
+            justify-content: stretch;
+            width: 100%;
+            height: 100%;
         }
 
         .item .link {
-            color: var(--color--fourth);
-            font-family: "Black Han Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 1.2rem 1rem;
+            background: var(--color-second);
+            border-radius: 10px;
+            color: var(--color-fourth);
+            font-family: var(--font-default);
+            font-size: 18px;
             text-decoration: none;
+        }
+
+        .item .link:hover {
+            background: var(--color-third);
         }
 
         /* Responsive Design */
@@ -52,32 +67,39 @@
                 padding: 1.5rem;
             }
 
+            .text {
+                top: 100px;
+                font-size: 36px;
+            }
+
             .index {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(4, 1fr);
                 gap: 1.5rem;
                 align-items: stretch;
                 justify-content: stretch;
             }
 
-            .item {
-                padding: 2.5rem 2rem;
+            .item .link {
+                padding: 2.2rem 2rem;
                 font-size: 22px;
             }
         }
 
         @media (min-width: 1080px) {
-            .index {
-                width: 1080px;
-                margin: 0 auto;
+            .text {
+                top: 60px;
+                font-size: 40px;
             }
 
             .index {
                 gap: 2rem;
+                width: 1080px;
+                margin: 0 auto;
             }
 
-            .item {
-                padding: 3rem 2rem;
-                font-size: 26px;
+            .item .link {
+                padding: 2.8rem 2.6rem;
+                font-size: 28px;
             }
         }
     </style>
@@ -86,21 +108,23 @@
 <body>
     <div class="wrap">
         <div class="container">
-            <h1 class="result">Mini Game Map</h1>
+            <h1 class="text">Mini Game Map</h1>
 
             <div class="index">
-                <div class="item"><a href="rock_scissors_paper.html" class="link">Rock Scissors Paper</a></div>
-                <div class="item"><a href="dice_roller.html" class="link">Dice<br>Roller</a></div>
-                <div class="item">🧡</div>
-                <div class="item">💛</div>
-                <div class="item">💚</div>
-                <div class="item">💙</div>
-                <div class="item">💜</div>
-                <div class="item">🤎</div>
-                <div class="item">🖤</div>
-                <div class="item">🤍</div>
-                <div class="item">💗</div>
-                <div class="item">...</div>
+                <div class="item"><a href="lotto.html" class="link">Lotto 🎱</a></div>
+                <div class="item"><a href="game720.html" class="link">Game720 🎱</a></div>
+                <div class="item"><a href="rock_scissors_paper.html" class="link">Rock Scissors Paper ✊🏻✌🏻🖐🏻</a></div>
+                <div class="item"><a href="dice_roller.html" class="link">Dice Roller 🎲</a></div>
+                <div class="item"><span class="link">🧡</span></div>
+                <div class="item"><span class="link">💛</span></div>
+                <div class="item"><span class="link">💚</span></div>
+                <div class="item"><span class="link">💙</span></div>
+                <div class="item"><span class="link">💜</span></div>
+                <div class="item"><span class="link">🤎</span></div>
+                <div class="item"><span class="link">🖤</span></div>
+                <div class="item"><span class="link">🤍</span></div>
+                <div class="item"><span class="link">💗</span></div>
+                <div class="item"><span class="link">...</span></div>
             </div>
         </div>
     </div>

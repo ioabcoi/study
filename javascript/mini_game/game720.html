@@ -4,26 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game720 Number Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Josefin+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
+    <title>Game720</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background: #000;
-        }
-
         #lottoNumbers {
             flex-wrap: wrap;
             display: flex;
-            width: 350px;
+            width: 150px;
             flex-direction: row;
             justify-content: center;
             text-align: center;
@@ -38,15 +25,16 @@
             border-radius: 50%;
             align-items: center;
             justify-content: center;
-            background: #ff0;
-            font-family: 'Black Han Sans', sans-serif;
-            font-size: 24px;
+            background: var(--color-second);
+            color: var(--color-first);
+            font-family: var(--font-default);
+            font-size: 18px;
             text-align: center;
         }
 
         #lottoNumbers .num:nth-child(1) {
+            margin-right: 105px;
             background-color: #c7c7c7;
-            border: 2px solid ##c7c7c7;
         }
 
         #lottoNumbers .num:nth-child(1):after {
@@ -87,41 +75,74 @@
         #generateButton {
             margin: 20px 0;
             padding: 10px 25px;
-            background: #000;
-            border: 1px solid #fff;
-            color: #fff;
-            font-size: 25px;
-            font-family: 'Black Han Sans', sans-serif;
+            background: var(--color-second);
+            color: var(--color-fourth);
+            font-size: 20px;
+            font-family: var(--font-default);
             cursor: pointer;
         }
 
-        @media(max-width:320px) {
+        /* Responsive Design */
+        @media (min-width: 768px) {
             #lottoNumbers {
-                width: 238px;
+                width: 490px;
             }
 
             #lottoNumbers .num {
-                width: 30px;
-                height: 30px;
-                margin: 2px;
-                font-size: 15px;
+                width: 50px;
+                height: 50px;
+                margin: 10px;
+                font-size: 24px;
+            }
+
+            #lottoNumbers .num:nth-child(1) {
+                margin-right: 10px;
             }
 
             #generateButton {
-                font-size: 19px;
+                font-size: 25px;
+            }
+        }
+
+        @media (min-width: 1080px) {
+            #lottoNumbers {
+                width: 770px;
+            }
+
+            #lottoNumbers .num {
+                width: 80px;
+                height: 80px;
+                margin: 15px;
+                font-size: 32px;
+            }
+
+            #lottoNumbers .num:nth-child(1) {
+                margin-right: 15px;
+            }
+
+            #generateButton {
+                margin: 30px 0;
+                padding: 15px 30px;
+                font-size: 30px;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="wrap">
+        <a href="javascript:history.back();" class="back">👈🏻</a>
 
-    <div id="lottoNumbers"></div>
-    <button id="generateButton" onclick="generateTicket()">연금복권720+ 번호 생성</button>
+        <div class="container">
+            <div class="center_column">
+                <div id="lottoNumbers"></div>
+                <button id="generateButton" onclick="generateTicket()">연금복권720+ 번호 생성</button>
+            </div>
+        </div>
+    </div>
 
     <script src="game720_array.js"></script>
     <script>
-
         function generateTicket() {
             const selectedNumbers = [];
 
@@ -177,7 +198,6 @@
                 }
             }
         }
-
     </script>
 
 </body>

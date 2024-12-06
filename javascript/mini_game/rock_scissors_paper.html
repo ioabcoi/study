@@ -7,6 +7,14 @@
     <title>Rock Scissors Paper</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .title .reset {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            padding: 10px;
+            font-size: 35px;
+        }
+
         .text {
             position: absolute;
             z-index: -1;
@@ -15,8 +23,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color--first);
-            font-family: "Black Han Sans", sans-serif;
+            color: var(--color-first);
+            font-family: var(--font-default);
             font-size: 45px;
             transform: translateX(-50%) translateY(-50%);
             opacity: 0.4;
@@ -51,11 +59,6 @@
             bottom: 0;
         }
 
-        .you_open .rsp,
-        .me_open .rsp {
-            font-size: 50px;
-        }
-
         .you_open,
         .me_open {
             position: absolute;
@@ -66,7 +69,7 @@
             justify-content: center;
             width: 110px;
             height: 110px;
-            background: var(--color--third);
+            background: var(--color-third);
             border-radius: 50%;
             transform: translateX(-50%) translateY(-50%);
         }
@@ -79,8 +82,18 @@
             margin-top: 140px;
         }
 
+        .you_open .rsp,
+        .me_open .rsp {
+            font-size: 50px;
+        }
+
         /* Responsive Design */
         @media (min-width: 768px) {
+            .title .reset {
+                padding: 20px;
+                font-size: 50px;
+            }
+
             .text {
                 font-size: 80px;
             }
@@ -93,11 +106,6 @@
             .me {
                 padding: 20px;
                 flex-direction: column;
-            }
-
-            .you_open .rsp,
-            .me_open .rsp {
-                font-size: 100px;
             }
 
             .you_open,
@@ -113,9 +121,18 @@
             .me_open {
                 margin-top: 240px;
             }
+
+            .you_open .rsp,
+            .me_open .rsp {
+                font-size: 100px;
+            }
         }
 
         @media (min-width: 1080px) {
+            .title .reset {
+                font-size: 70px;
+            }
+
             .text {
                 font-size: 100px;
             }
@@ -124,35 +141,30 @@
                 font-size: 70px;
             }
 
-            .you_open .rsp,
-            .me_open .rsp {
-                font-size: 120px;
-            }
-
             .you_open,
             .me_open {
                 width: 220px;
                 height: 220px;
             }
+
+            .you_open .rsp,
+            .me_open .rsp {
+                font-size: 120px;
+            }
         }
 
         @media (min-width: 1280px) {
-            .text {
-                font-size: 120px;
+            .title .reset {
+                padding: 50px;
             }
 
-            .rsp {
-                font-size: 70px;
+            .text {
+                font-size: 120px;
             }
 
             .you,
             .me {
                 padding: 50px;
-            }
-
-            .you_open .rsp,
-            .me_open .rsp {
-                font-size: 170px;
             }
 
             .you_open,
@@ -168,6 +180,11 @@
             .me_open {
                 margin-top: 280px;
             }
+
+            .you_open .rsp,
+            .me_open .rsp {
+                font-size: 170px;
+            }
         }
     </style>
 </head>
@@ -177,9 +194,10 @@
         <a href="javascript:history.back();" class="back">👈🏻</a>
 
         <div class="container">
-            <h1 class="title"><strong>Rock Scissors Paper</strong></h1>
-            <!-- result -->
-            <h2 class="result"></h2>
+            <h1 class="title">
+                <strong class="result">Rock Scissors Paper</strong>
+                <button class="reset">🎰</button>
+            </h1>
 
             <div class="you">
                 <div class="rsp rock">✊🏻</div>
@@ -188,7 +206,7 @@
             </div>
             <div class="you_open">
                 <strong class="text">You</strong>
-                <!-- result -->
+                <!-- 상대방 랜덤 모션 -->
                 <div class="rsp rock">✊🏻</div>
             </div>
 
@@ -199,80 +217,108 @@
             </div>
             <div class="me_open">
                 <strong class="text">Me</strong>
-                <!-- result -->
+                <!-- 플레이어 선택 결과 -->
                 <div class="rsp rock">✊🏻</div>
             </div>
         </div>
     </div>
     <script>
         (function () {
-            const choices = ["rock", "scissors", "paper"];
-            const resultDisplay = document.querySelector(".result"); // 결과를 표시할 요소
-            document.querySelector(".container").appendChild(resultDisplay);
+            const choices = ['rock', 'scissors', 'paper']; // 선택지 배열
+            let youOpen = document.querySelector('.you_open .rsp'); // 상대방 결과 표시
+            let meOpen = document.querySelector('.me_open .rsp'); // 플레이어 결과 표시
+            let result = document.querySelector('.result'); // 결과 메시지
+            let resetBtn = document.querySelector('.reset'); // 리셋 버튼
+            let intervalYou; // 상대방 순서 모션 타이머
+            let intervalMe; // 플레이어 순서 모션 타이머
+            let indexYou = 0; // 상대방 배열 인덱스
+            let indexMe = 0; // 플레이어 배열 인덱스
+            let gameEnded = false; // 게임 상태를 확인하는 플래그
 
-            // 컴퓨터의 선택을 랜덤으로 반환
-            function getComputerChoice() {
-                const randomIndex = Math.floor(Math.random() * choices.length);
-                return choices[randomIndex];
+            // 순서대로 가위바위보 모션 설정 (상대방)
+            function startSequentialMotionYou() {
+                intervalYou = setInterval(() => {
+                    youOpen.textContent = getEmoji(choices[indexYou]);
+                    indexYou = (indexYou + 1) % choices.length; // 순환
+                }, 200); // 0.2초마다 변경
             }
 
-            // 승패를 판단하는 함수
-            function determineWinner(playerChoice, computerChoice) {
-                if (playerChoice === computerChoice) {
-                    return "It's a draw!";
-                }
-                if (
-                    (playerChoice === "rock" && computerChoice === "scissors") ||
-                    (playerChoice === "scissors" && computerChoice === "paper") ||
-                    (playerChoice === "paper" && computerChoice === "rock")
-                ) {
-                    return "You win!";
-                }
-                return "Computer wins!";
+            // 순서대로 가위바위보 모션 설정 (플레이어)
+            function startSequentialMotionMe() {
+                resetBtn.style.display = 'none';
+                intervalMe = setInterval(() => {
+                    meOpen.textContent = getEmoji(choices[indexMe]);
+                    indexMe = (indexMe + 1) % choices.length; // 순환
+                }, 200); // 0.2초마다 변경
             }
 
-            // 버튼 클릭 이벤트 핸들러
-            function handlePlayerChoice(event) {
-                const playerChoice = event.target.classList.contains("rock")
-                    ? "rock"
-                    : event.target.classList.contains("scissors")
-                        ? "scissors"
-                        : "paper";
-
-                // 컴퓨터 선택
-                const computerChoice = getComputerChoice();
-
-                // 결과 표시
-                updateResultDisplay(playerChoice, computerChoice);
-                const result = determineWinner(playerChoice, computerChoice);
-                resultDisplay.textContent = result;
+            // 모션 멈추고 결과 설정 (상대방)
+            function stopSequentialMotionYou() {
+                clearInterval(intervalYou);
+                const finalChoice = choices[indexYou];
+                youOpen.textContent = getEmoji(finalChoice); // 최종 결과 표시
+                return finalChoice;
             }
 
-            // 결과를 화면에 업데이트
-            function updateResultDisplay(playerChoice, computerChoice) {
-                // 플레이어의 선택 표시
-                const playerOpen = document.querySelector(".me_open .rsp");
-                playerOpen.className = `rsp ${playerChoice}`;
-                playerOpen.textContent = getEmoji(playerChoice);
-
-                // 컴퓨터의 선택 표시
-                const computerOpen = document.querySelector(".you_open .rsp");
-                computerOpen.className = `rsp ${computerChoice}`;
-                computerOpen.textContent = getEmoji(computerChoice);
+            // 모션 멈추고 결과 설정 (플레이어)
+            function stopSequentialMotionMe(playerChoice) {
+                clearInterval(intervalMe);
+                meOpen.textContent = getEmoji(playerChoice); // 최종 선택 표시
             }
 
-            // 선택에 맞는 이모지 반환
+            // 가위바위보 이모지 반환
             function getEmoji(choice) {
-                if (choice === "rock") return "✊🏻";
-                if (choice === "scissors") return "✌🏻";
-                if (choice === "paper") return "🖐🏻";
+                switch (choice) {
+                    case 'rock': return '✊🏻';
+                    case 'scissors': return '✌🏻';
+                    case 'paper': return '🖐🏻';
+                }
             }
 
-            // 버튼 이벤트 리스너 추가
-            const buttons = document.querySelectorAll(".me .rsp");
-            buttons.forEach((button) =>
-                button.addEventListener("click", handlePlayerChoice)
-            );
+            // 승부 계산
+            function calculateResult(playerChoice, computerChoice) {
+                if (playerChoice === computerChoice) {
+                    return "Draw!";
+                } else if (
+                    (playerChoice === 'rock' && computerChoice === 'scissors') ||
+                    (playerChoice === 'scissors' && computerChoice === 'paper') ||
+                    (playerChoice === 'paper' && computerChoice === 'rock')
+                ) {
+                    return "You Win!";
+                } else {
+                    return "Computer Wins!";
+                }
+            }
+
+            // 클릭 이벤트 설정
+            document.querySelectorAll('.me .rsp').forEach((button) => {
+                button.addEventListener('click', () => {
+                    if (gameEnded) return; // 게임이 종료되었으면 클릭 막기
+                    gameEnded = true; // 게임 상태를 종료로 변경
+
+                    const playerChoice = button.classList[1]; // 플레이어 선택
+                    stopSequentialMotionMe(playerChoice); // 플레이어 모션 멈추기
+                    const computerChoice = stopSequentialMotionYou(); // 상대방 모션 멈추기
+
+                    // 결과 표시
+                    resetBtn.style.display = 'block';
+                    result.textContent = calculateResult(playerChoice, computerChoice);
+                });
+            });
+
+            // 리셋 버튼 클릭 이벤트
+            resetBtn.addEventListener('click', () => {
+                gameEnded = false; // 게임 상태를 다시 시작으로 변경
+                result.textContent = "Rock Scissors Paper"; // 결과 초기화
+                indexYou = 0; // 상대방 인덱스 초기화
+                indexMe = 0; // 플레이어 인덱스 초기화
+                startSequentialMotionYou(); // 상대방 모션 재개
+                startSequentialMotionMe(); // 플레이어 모션 재개
+            });
+
+            // 초기 실행
+            startSequentialMotionYou();
+            startSequentialMotionMe();
         })();
     </script>
 </body>

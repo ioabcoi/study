@@ -4,26 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Josefin+Sans:ital,wght@1,700&display=swap" rel="stylesheet">
+    <title>Lotto</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            background: #000;
-        }
-
         #lottoNumbers {
             flex-wrap: wrap;
             display: flex;
-            width: 210px;
+            width: 150px;
             flex-direction: row;
             justify-content: center;
             text-align: center;
@@ -31,15 +18,16 @@
 
         #lottoNumbers .num {
             display: flex;
-            width: 50px;
-            height: 50px;
-            margin: 10px;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
-            background: #ff0;
-            font-family: 'Black Han Sans', sans-serif;
-            font-size: 24px;
+            background: var(--color-second);
+            color: var(--color-first);
+            font-family: var(--font-default);
+            font-size: 18px;
             text-align: center;
         }
 
@@ -66,37 +54,62 @@
         #generateButton {
             margin: 20px 0;
             padding: 10px 25px;
-            background: #000;
-            border: 1px solid #fff;
-            color: #fff;
-            font-size: 25px;
-            font-family: 'Black Han Sans', sans-serif;
+            background: var(--color-second);
+            color: var(--color-fourth);
+            font-size: 20px;
+            font-family: var(--font-default);
             cursor: pointer;
         }
 
-        @media(max-width:320px) {
+        /* Responsive Design */
+        @media (min-width: 768px) {
             #lottoNumbers {
-                width: 150px;
+                width: 420px;
             }
 
             #lottoNumbers .num {
-                width: 40px;
-                height: 40px;
-                margin: 5px;
-                font-size: 18px;
+                width: 50px;
+                height: 50px;
+                margin: 10px;
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 1080px) {
+            #lottoNumbers {
+                width: 660px;
+            }
+
+            #lottoNumbers .num {
+                width: 80px;
+                height: 80px;
+                margin: 15px;
+                font-size: 32px;
+            }
+
+            #generateButton {
+                margin: 30px 0;
+                padding: 15px 30px;
+                font-size: 30px;
             }
         }
     </style>
 </head>
 
 <body>
+    <div class="wrap">
+        <a href="javascript:history.back();" class="back">👈🏻</a>
 
-    <div id="lottoNumbers"></div>
-    <button id="generateButton" onclick="generateLottoNumber()">로또 번호 생성</button>
+        <div class="container">
+            <div class="center_column">
+                <div id="lottoNumbers"></div>
+                <button id="generateButton" onclick="generateLottoNumber()">로또 번호 생성</button>
+            </div>
+        </div>
+    </div>
 
     <script src="lotto_array.js"></script>
     <script>
-
         let generatedNumbers = [];
 
         function generateLottoNumber() {

@@ -7,6 +7,14 @@
     <title>Dice Roller</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .title .reset {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            padding: 10px;
+            font-size: 35px;
+        }
+
         .dice-container {
             position: absolute;
             left: 50%;
@@ -22,31 +30,21 @@
             position: relative;
             width: 100px;
             height: 100px;
-            background: var(--color--fourth);
+            background: var(--color-fourth);
             border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .question-mark {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            content: '❔';
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 50px;
-        }
-
         .dot {
             position: absolute;
             width: 14px;
             height: 14px;
-            background: var(--color--first);
+            background: var(--color-first);
             border-radius: 50%;
             opacity: 0;
+            transition: all 0.1s ease-in-out;
         }
 
         #dot-1 {
@@ -93,18 +91,23 @@
             top: 50%;
             padding: 10px 20px;
             font-size: 1rem;
-            color: var(--color--fourth);
-            background: var(--color--third);
+            color: var(--color-fourth);
+            background: var(--color-third);
             border: none;
             border-radius: 5px;
             margin-top: 140px;
-            font-family: "Black Han Sans", sans-serif;
+            font-family: var(--font-default);
             cursor: pointer;
             transform: translateX(-50%) translateY(-50%);
         }
 
         /* Responsive Design */
         @media (min-width: 768px) {
+            .title .reset {
+                padding: 20px;
+                font-size: 50px;
+            }
+
             .dice-container {
                 margin-top: -240px;
             }
@@ -112,10 +115,6 @@
             .dice {
                 width: 200px;
                 height: 200px;
-            }
-
-            .question-mark {
-                font-size: 100px;
             }
 
             .dot {
@@ -131,17 +130,21 @@
         }
 
         @media (min-width: 1080px) {
+            .title .reset {
+                font-size: 70px;
+            }
+
             .dice {
                 width: 220px;
                 height: 220px;
             }
-
-            .question-mark {
-                font-size: 120px;
-            }
         }
 
         @media (min-width: 1280px) {
+            .title .reset {
+                padding: 50px;
+            }
+
             .dice-container {
                 margin-top: -320px;
             }
@@ -149,10 +152,6 @@
             .dice {
                 width: 320px;
                 height: 320px;
-            }
-
-            .question-mark {
-                font-size: 170px;
             }
 
             .dot {
@@ -172,15 +171,15 @@
 <body>
     <div class="wrap">
         <a href="javascript:history.back();" class="back">👈🏻</a>
-        
+
         <div class="container">
-            <h1 class="title"><strong>Dice Roller</strong></h1>
-            <!-- result -->
-            <h2 class="result"></h2>
+            <h1 class="title">
+                <strong class="result">Dice Roller</strong>
+                <button class="reset">🎰</button>
+            </h1>
 
             <div class="dice-container">
                 <div class="dice">
-                    <strong class="question-mark">❔</strong>
                     <div class="dot" id="dot-1"></div>
                     <div class="dot" id="dot-2"></div>
                     <div class="dot" id="dot-3"></div>
@@ -196,12 +195,10 @@
     </div>
     <script>
         (function () {
-            const rollButton = document.getElementById('roll-button'); // 버튼 요소
-            const resultDisplay = document.querySelector(".result"); // 결과 표시 영역
-            const dots = document.querySelectorAll('.dot'); // 주사위의 모든 점 요소
-            const questionMark = document.querySelector('.question-mark'); // 물음표
-
-            // 주사위 숫자에 따라 보이는 점의 매핑
+            const rollButton = document.getElementById('roll-button');
+            const resetButton = document.querySelector('.reset');
+            const resultDisplay = document.querySelector('.result');
+            const dots = document.querySelectorAll('.dot');
             const diceFaces = {
                 1: [1],
                 2: [2, 5],
@@ -211,27 +208,69 @@
                 6: [2, 3, 4, 5, 6, 7]
             };
 
-            // 주사위를 굴리는 함수
-            function rollDice() {
-                const diceNumber = Math.floor(Math.random() * 6) + 1; // 1~6 사이의 랜덤 숫자 생성
+            let intervalId = null; // 랜덤 모션을 위한 인터벌 ID
+            let isRolling = true; // 주사위가 돌고 있는 상태
 
-                // 물음표 숨김
-                questionMark.style.display = 'none';
-                
-                // 모든 점을 숨김 (초기화)
+            // 점을 숨기는 함수
+            function hideAllDots() {
                 dots.forEach(dot => (dot.style.opacity = 0));
-
-                // 랜덤 숫자에 맞는 점을 표시
-                diceFaces[diceNumber].forEach(dotIndex => {
-                    document.getElementById(`dot-${dotIndex}`).style.opacity = 1; // 매핑된 점 표시
-                });
-
-                // 결과 영역에 숫자 표시
-                resultDisplay.textContent = diceNumber;
             }
 
-            // 버튼 클릭 시 주사위를 굴리는 이벤트 리스너 등록
-            rollButton.addEventListener('click', rollDice);
+            // 주어진 숫자에 따라 점을 표시하는 함수
+            function showDiceFace(number) {
+                diceFaces[number].forEach(dotIndex => {
+                    document.getElementById(`dot-${dotIndex}`).style.opacity = 1;
+                });
+            }
+            
+            // 랜덤 모션 함수
+            function startRandomMotion() {
+                isRolling = true; // 상태 초기화
+                resetButton.style.display = 'none';
+                intervalId = setInterval(() => {
+                    const randomFace = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
+                    hideAllDots();
+                    showDiceFace(randomFace);
+                }, 200); // 0.2초 간격
+            }
+
+            // 순차 모션 함수
+            // let currentFace = 1; // 현재 표시할 숫자 초기값
+            // function startSequentialMotion() {
+            //     isRolling = true; // 상태 초기화
+            //     intervalId = setInterval(() => {
+            //         hideAllDots(); // 모든 점 숨김
+            //         showDiceFace(currentFace); // 현재 숫자에 맞는 점 표시
+            //         currentFace = currentFace % 6 + 1; // 1~6 순환
+            //     }, 200); // 0.2초 간격
+            // }
+
+            // Roll Dice 버튼 클릭 이벤트
+            rollButton.addEventListener('click', () => {
+                if (!isRolling) return; // 중복 클릭 방지
+                clearInterval(intervalId); // 랜덤 모션 중지
+                resetButton.style.display = 'block';
+                const diceNumber = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
+                hideAllDots();
+                showDiceFace(diceNumber); // 결과 표시
+                resultDisplay.textContent = `${diceNumber}`;
+                isRolling = false; // 상태 업데이트
+            });
+
+            // Reset 버튼 클릭 이벤트
+            resetButton.addEventListener('click', () => {
+                clearInterval(intervalId); // 기존 인터벌 중지
+                resultDisplay.textContent = 'Dice Roller'; // 결과 초기화
+                startRandomMotion(); // 랜덤 모션 시작
+                // currentFace = 1; // 순서 초기화
+                // startSequentialMotion(); // 순차 모션 시작
+            });
+
+            // 초기 랜덤 모션 시작
+            startRandomMotion();
+
+            // 초기 순차 모션 시작
+            // startSequentialMotion();
         })();
     </script>
 </body>
