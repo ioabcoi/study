@@ -7,36 +7,6 @@
     <title>Dice Roller</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .title .reset {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            padding: 10px;
-            font-size: 35px;
-        }
-
-        .dice-container {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: -140px;
-            transform: translateX(-50%) translateY(-50%);
-        }
-
-        .dice {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            background: var(--color-fourth);
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
         .dot {
             position: absolute;
             width: 16px;
@@ -85,84 +55,20 @@
             transform: translateY(-50%);
         }
 
-        #roll-button {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            padding: 10px 20px;
-            font-size: 1rem;
-            color: var(--color-fourth);
-            background: var(--color-third);
-            border: none;
-            border-radius: 5px;
-            margin-top: 140px;
-            font-family: var(--font-default);
-            cursor: pointer;
-            transform: translateX(-50%) translateY(-50%);
-        }
-
         /* Responsive Design */
         @media (min-width: 768px) {
-            .title .reset {
-                padding: 20px;
-                font-size: 50px;
-            }
-
-            .dice-container {
-                margin-top: -240px;
-            }
-
-            .dice {
-                width: 200px;
-                height: 200px;
-            }
-
             .dot {
                 width: 30px;
                 height: 30px;
             }
-
-            #roll-button {
-                padding: 20px 30px;
-                font-size: 2rem;
-                margin-top: 240px;
-            }
         }
 
-        @media (min-width: 1080px) {
-            .title .reset {
-                font-size: 70px;
-            }
-
-            .dice {
-                width: 220px;
-                height: 220px;
-            }
-        }
+        @media (min-width: 1080px) {}
 
         @media (min-width: 1280px) {
-            .title .reset {
-                padding: 50px;
-            }
-
-            .dice-container {
-                margin-top: -320px;
-            }
-
-            .dice {
-                width: 320px;
-                height: 320px;
-            }
-
             .dot {
                 width: 50px;
                 height: 50px;
-            }
-
-            #roll-button {
-                padding: 30px 40px;
-                font-size: 3rem;
-                margin-top: 300px;
             }
         }
     </style>
@@ -175,11 +81,11 @@
         <div class="container">
             <h1 class="title">
                 <strong class="result">Dice Roller</strong>
-                <button class="reset">🎰</button>
+                <button class="reset">🎲</button>
             </h1>
 
-            <div class="dice-container">
-                <div class="dice">
+            <div class="game-container">
+                <div class="game">
                     <div class="dot" id="dot-1"></div>
                     <div class="dot" id="dot-2"></div>
                     <div class="dot" id="dot-3"></div>
@@ -190,7 +96,7 @@
                 </div>
             </div>
 
-            <button id="roll-button">Roll Dice</button>
+            <button id="roll-button" class="button">Roll Dice</button>
         </div>
     </div>
     <script>
@@ -222,7 +128,7 @@
                     document.getElementById(`dot-${dotIndex}`).style.opacity = 1;
                 });
             }
-            
+
             // 랜덤 모션 함수
             function startRandomMotion() {
                 isRolling = true; // 상태 초기화

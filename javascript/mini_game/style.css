@@ -8,6 +8,7 @@
     --color-third: #00ADB5;
     --color-fourth: #EEEEEE;
 }
+
 /*
 var(--font-default)
 var(--color-first)
@@ -64,6 +65,36 @@ button {
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    color: var(--color-fourth);
+}
+
+input:focus {
+    outline: 0;
+}
+
+input::-webkit-input-placeholder {
+    color: var(--color-fourth);
+    opacity: 0.5;
+}
+
+input::-moz-placeholder {
+    color: var(--color-fourth);
+    opacity: 0.5;
+}
+
+input:-ms-input-placeholder {
+    color: var(--color-fourth);
+    opacity: 0.5;
+}
+
+input:-moz-placeholder {
+    color: var(--color-fourth);
+    opacity: 0.5;
+}
+
+input::placeholder {
+    color: var(--color-fourth);
+    opacity: 0.5;
 }
 
 .back {
@@ -100,6 +131,40 @@ button {
     font-size: 25px;
 }
 
+.title .reset {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+.game-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -140px;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.game {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: var(--color-fourth);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-first);
+    font-size: 1rem;
+    font-family: var(--font-default);
+}
+
 .center_column {
     display: flex;
     flex-direction: column;
@@ -107,6 +172,28 @@ button {
     justify-content: center;
     height: 100vh;
     margin: 0;
+}
+
+.button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    padding: 10px 20px;
+    margin-top: 140px;
+    background: var(--color-third);
+    border: none;
+    border-radius: 5px;
+    color: var(--color-fourth);
+    font-family: var(--font-default);
+    font-size: 1rem;
+    cursor: pointer;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.button * {
+    color: var(--color-fourth);
+    font-family: var(--font-default);
+    font-size: 1rem;
 }
 
 /* Responsive Design */
@@ -123,6 +210,31 @@ button {
     .title strong {
         font-size: 36px;
     }
+
+    .title .reset {
+        padding: 20px;
+        font-size: 50px;
+    }
+
+    .game-container {
+        margin-top: -240px;
+    }
+
+    .game {
+        width: 200px;
+        height: 200px;
+        font-size: 2rem;
+    }
+
+    .button {
+        padding: 20px 30px;
+        font-size: 2rem;
+        margin-top: 240px;
+    }
+
+    .button * {
+        font-size: 2rem;
+    }
 }
 
 @media (min-width: 1080px) {
@@ -130,10 +242,43 @@ button {
         padding: 15px 40px;
         font-size: 70px;
     }
+
+    .title .reset {
+        font-size: 70px;
+    }
+
+    .game {
+        width: 220px;
+        height: 220px;
+    }
 }
 
 @media (min-width: 1280px) {
     .title strong {
         font-size: 70px;
+    }
+
+    .title .reset {
+        padding: 50px;
+    }
+
+    .game-container {
+        margin-top: -320px;
+    }
+
+    .game {
+        width: 320px;
+        height: 320px;
+        font-size: 3rem;
+    }
+
+    .button {
+        padding: 30px 40px;
+        font-size: 3rem;
+        margin-top: 300px;
+    }
+
+    .button * {
+        font-size: 3rem;
     }
 }

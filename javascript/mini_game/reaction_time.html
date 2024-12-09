@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>Reaction Time</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .game {
+            background: var(--color-third);
+            color: var(--color-fourth);
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {}
+
+        @media (min-width: 1080px) {}
+
+        @media (min-width: 1280px) {}
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <a href="javascript:history.back();" class="back">👈🏻</a>
+
+        <div class="container">
+            <h1 class="title">
+                <strong class="result">Reaction Time</strong>
+                <button class="reset">⌚</button></button>
+            </h1>
+
+            <div class="game-container">
+                <div class="game">ready..</div>
+            </div>
+
+            <button id="click-button" class="button">click</button>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const clickButton = document.getElementById('click-button'); // 반응 속도 측정 버튼
+            const resetButton = document.querySelector('.reset'); // 리셋 버튼
+            const resultDisplay = document.querySelector('.result'); // 결과를 표시하는 영역
+            const colorBox = document.querySelector('.game'); // 색상 변경 영역
+
+            let startTime = 0; // 반응 시간 측정을 위한 시작 시간
+            let isClickable = false; // 현재 클릭 가능한 상태인지 여부
+
+            // 랜덤한 시간 후에 색상 및 문구 변경
+            function changeColor() {
+                colorBox.textContent = 'ready...'; // 초기 문구 설정
+                colorBox.style.background = 'var(--color-third)'; // 초기 색상 설정
+
+                const randomTime = Math.floor(Math.random() * 3000) + 1000; // 1초 ~ 3초 사이의 랜덤 시간
+
+                setTimeout(() => {
+                    colorBox.style.background = 'red'; // 색상을 red로 변경
+                    colorBox.textContent = 'click!!'; // 문구를 "click!!"로 변경
+                    startTime = Date.now(); // 현재 시간을 기록
+                    isClickable = true; // 클릭 가능 상태로 변경
+                }, randomTime);
+            }
+
+            // 버튼 클릭 시 반응 시간 측정
+            function checkReaction() {
+                if (!isClickable) {
+                    alert('Wait for the color to change!'); // 색상이 바뀌기 전에 클릭 시 경고
+                    return;
+                }
+
+                const reactionTime = Date.now() - startTime; // 반응 시간 계산
+                resultDisplay.textContent = `${reactionTime} ms`; // 결과 표시
+                isClickable = false; // 클릭 비활성화
+                colorBox.style.background = 'var(--color-third)'; // 초기 색상으로 복원
+                colorBox.textContent = 'oh!!..'; // 초기 문구로 복원
+            }
+
+            // 리셋 버튼 클릭 시 초기화
+            function resetGame() {
+                resultDisplay.textContent = 'Reaction Time'; // 결과 초기화
+                colorBox.style.background = 'var(--color-third)'; // 색상 초기화
+                colorBox.textContent = 'ready...'; // 문구 초기화
+                isClickable = false; // 클릭 비활성화
+                changeColor(); // 새로운 게임 시작
+            }
+
+            // 이벤트 리스너 등록
+            clickButton.addEventListener('click', checkReaction);
+            resetButton.addEventListener('click', resetGame);
+
+            // 초기 게임 시작
+            changeColor();
+        })();
+    </script>
+</body>
+
+</html>

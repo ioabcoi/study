@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>Guess The Number</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .game {
+            width: 10rem;
+        }
+
+        .button {
+            width: 30%;
+        }
+
+        .button input[type="number"] {
+            width: 100%;
+            border-bottom: 1px solid var(--color-fourth);
+            margin-bottom: 0.5rem;
+            line-height: 3rem;
+            text-align: center;
+        }
+
+        .button button {
+            width: 100%;
+            line-height: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .game {
+                width: 24rem;
+            }
+
+            .button input[type="number"] {
+                margin-bottom: 2rem;
+                line-height: 5rem;
+            }
+        }
+
+        @media (min-width: 1080px) {}
+
+        @media (min-width: 1280px) {
+            .game {
+                width: 42rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <a href="javascript:history.back();" class="back">👈🏻</a>
+
+        <div class="container">
+            <h1 class="title">
+                <strong class="result">Guess The Number</strong>
+                <button class="reset">🎯</button></button>
+            </h1>
+
+            <div class="game-container">
+                <div class="game">🏹</div>
+            </div>
+
+            <div class="button">
+                <input type="number" min="1" max="100" id="number-button" placeholder="1~100 ?">
+                <button id="click-button">click</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function () {
+            const resetButton = document.querySelector('.reset'); // 리셋 버튼
+            const clickButton = document.getElementById('click-button'); // 클릭 버튼
+            const numberInput = document.getElementById('number-button'); // 숫자 입력 필드
+            const resultDisplay = document.querySelector('.result'); // 결과 출력 영역
+            const gameDisplay = document.querySelector('.game'); // 힌트 및 상태 표시 영역
+
+            let targetNumber; // 컴퓨터가 정한 숫자
+            let attempts; // 시도 횟수
+
+            // 게임 초기화 함수
+            function initializeGame() {
+                targetNumber = Math.floor(Math.random() * 100) + 1; // 1 ~ 100 사이의 랜덤 숫자 생성
+                attempts = 0; // 시도 횟수 초기화
+                resultDisplay.textContent = 'Guess The Number'; // 초기 결과 표시
+                gameDisplay.textContent = '🏹'; // 초기 힌트 표시
+                numberInput.value = ''; // 입력 필드 초기화
+                numberInput.focus(); // 입력 필드에 포커스
+            }
+
+            // 숫자를 확인하는 함수
+            function checkGuess() {
+                const userGuess = parseInt(numberInput.value, 10); // 사용자가 입력한 숫자
+                if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                    alert('Please enter a valid number between 1 and 100.'); // 유효하지 않은 입력 처리
+                    return;
+                }
+
+                attempts++; // 시도 횟수 증가
+
+                if (userGuess === targetNumber) {
+                    gameDisplay.innerHTML = `🎉 Correct!<br>The number was ${targetNumber}.`; // 정답 메시지
+                    resultDisplay.textContent = `Attempts: ${attempts}`; // 시도 횟수 출력
+                } else if (userGuess < targetNumber) {
+                    gameDisplay.innerHTML = `Too low!<br>Try again. ⬆️` // 숫자가 낮을 때 힌트
+                } else {
+                    gameDisplay.innerHTML = `Too high!<br>Try again. ⬇️`; // 숫자가 높을 때 힌트
+                }
+
+                numberInput.value = ''; // 입력 필드 초기화
+                numberInput.focus(); // 입력 필드에 포커스
+            }
+
+            // 엔터 키 이벤트 핸들러 추가
+            numberInput.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    checkGuess(); // 엔터키를 누르면 숫자 확인 실행
+                }
+            });
+
+            // 이벤트 리스너 등록
+            clickButton.addEventListener('click', checkGuess);
+            resetButton.addEventListener('click', initializeGame);
+
+            // 초기 게임 설정
+            initializeGame();
+        })();
+    </script>
+</body>
+
+</html>
