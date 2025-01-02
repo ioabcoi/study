@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>lottie</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>lottie</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">play</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    #lottie-pop {width:320px;height:320px;}
+    button {width:120px;height:42px;border:none;}
+</style>
+<button type="submit" onclick="lottieToggle()">SUBMIT</button>
+<div id="lottie-pop"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.2/lottie.min.js"></script>
+<script>
+    // https://lottiefiles.com/kr/
+    var lottieAni = bodymovin.loadAnimation({
+        container: document.getElementById('lottie-pop'), // 필수, 애니메이션 들어가는 곳 
+        path: 'https://assets10.lottiefiles.com/packages/lf20_u4rxwy4z.json', // 필수(url 또는 json파일 다운로드 경로)
+        renderer: 'svg',    // 필수
+        loop: false,        // Optional
+        autoplay: false     // Optional
+    });
+
+    function lottieToggle(){
+        lottieAni.stop();
+        lottieAni.play();
+    }
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">auto</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    .lottie {position:relative;width:320px;height:320px;}
+    .lottie .obj1 {position:absolute;top:0;left:0;width:320px;height:320px;}
+    .lottie .obj2 {position:absolute;top:0;left:0;width:320px;height:320px;}
+</style>
+<div class="lottie">
+    <div id="type1" class="obj1"></div>
+    <div id="type2" class="obj2"></div>
+</div>
+<script>
+    // lottie
+    var animData2 = {
+        wrapper: document.getElementById('type1'),
+        animType: 'html',
+        loop: true,
+        prerender: true,
+        autoplay: true,
+        path: '../../images/confetti1.json'
+    };
+    var animData1 = {
+        wrapper: document.getElementById('type2'),
+        animType: 'html',
+        loop: true,
+        prerender: true,
+        autoplay: true,
+        path: '../../images/confetti2.json'
+    };
+    var anim2 = bodymovin.loadAnimation(animData2).setSpeed(1);
+    var anim1 = bodymovin.loadAnimation(animData1).setSpeed(0.8);
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
