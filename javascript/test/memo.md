@@ -186,6 +186,7 @@ Array.prototype.includes()                  // 배열이 특정 요소를 포함
 Array.prototype.every()                     // 배열 안의 모든 요소가 주어진 판별 함수를 통과하는지 테스트합니다. Boolean 값을 반환합니다.
 Array.prototype.some()                      // 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트합니다. 
                                             // 만약 배열에서 주어진 함수가 true을 반환하면 true를 반환합니다. 그렇지 않으면 false를 반환합니다. 이 메서드는 배열을 변경하지 않습니다.
+Array.prototype.at()                        // 
 
 // 배열로 전환하기
 const arrFromArr = [...arr]
@@ -749,5 +750,31 @@ let getLCM = (num1, num2) =>{
     }
   	return lcm
 }
+*/
+```
+
+## Iterator
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Iterator
+```javascript
+/* memo
+Iterator.prototype.drop()               // 이 반복기의 시작 시 주어진 요소 수를 건너뛰는 새 반복기 도우미 개체를 반환합니다. 대략 다음과 같은 작업을 수행합니다.
+                                        // Array.prototype.slice(n) 정규 배열의 경우
+Iterator.prototype.take()               // 이 반복기의 시작부터 주어진 요소의 수를 최대로 가져오는 새 반복기 도우미 개체를 반환합니다. 대략 다음과 같은 작업을 수행합니다.
+                                        // Array.prototype.slice(0, n) 정규 배열의 경우
+Iterator.prototype.some()               // 반복기에 의해 생성된 적어도 하나의 요소가 제공된 함수에 의해 구현된 테스트를 통과하는지 여부를 테스트합니다.
+Iterator.prototype.every()              // 반복기에서 생성된 모든 요소가 제공된 함수에 의해 구현된 테스트를 통과하는지 테스트합니다.
+Iterator.prototype.filter()             // 필터링된 값에 대해 반복자를 반환합니다.
+Iterator.prototype.find()               // 제공된 테스트 기능을 만족하는 반복기에서 생성된 첫 번째 요소를 반환합니다.
+Iterator.prototype.flatMap()            // 평탄한 값에 반복자를 반환합니다.
+Iterator.prototype.forEach()            // 반복자가 생성한 각 요소에 대해 제공된 기능을 한 번씩 실행합니다.
+Iterator.prototype.map()                // 매핑 함수에 의해 변환된 값의 반복자를 반환합니다.
+Iterator.prototype.reduce()             // 반복기에서 생성된 각 요소에 대해 사용자가 제공한 "축소기" 호출 기능을 실행하여 이전 요소의 계산에서 반환 값을 전달합니다.
+Iterator.prototype.toArray()            // 입력된 산출된 값으로 배열을 만듭니다.
+*/
+```
+
+### 
+```javascript
+/* memo
 */
 ```

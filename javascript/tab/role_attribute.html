@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- // head -->
+    
+    <title>role_attribute</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>role_attribute</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">role_attribute</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* box_sort */
+    .box_sort {margin-top:65px;border:2px solid #ccc;}
+    .box_sort dl {display:flex;}
+    .box_sort dl + dl {border-top:1px solid #ccc;}
+    .box_sort dl dt {display:flex;justify-content:center;align-items:center;width:100px;border-right:1px solid #ddd;color:#999;font-size:18px;font-weight:500;text-align:center;}
+    .box_sort dl dd {display:flex;flex-wrap:wrap;justify-content:flex-start;width:calc(100% - 100px);box-sizing:border-box;padding:0 20px;}
+    .box_sort dl dd .link {display:inline-block;margin:15px;color:#b9b9b9;font-size:18px;font-weight:500;text-decoration:none;}
+    .box_sort dl dd .link.on {color:#000;font-weight:600;text-decoration:underline;}
+    .box_sort .cate_subj {display:none;}
+    .box_sort .cate_subj.on {display:flex;}
+    .cate_list {display:none;}
+    .cate_list.on {display:block;}
+
+    /* box_book */
+    .box_book .total {margin:50px 0 10px 0;color:#666;font-size:18px;}
+    .box_book .total .num {color:#0AA1AD;font-weight:600;}
+    .box_list li {position:relative;display:flex;padding:60px 0;border-top:1px solid #ccc;}
+    .box_list li + li {border-top:1px solid #ccc;}
+    .box_list .book_thumb {position:relative;width:200px;}
+    .box_list .book_thumb img {width:200px;height:262px;border:1px solid #ddd;}
+    .box_list .book_cont {position:relative;display:flex;flex-direction:column;justify-content:space-between;width:calc(100% - 200px);padding:0 0 0 35px;color:#1a1a1a;}
+    .box_list .book_cont .cnt_info {margin-bottom:20px;}
+    .box_list .book_cont .cnt_info .tit {font-size:26px;font-weight:600;line-height:120%;}
+    .box_list .book_cont .cnt_info .txt {margin-top:13px;font-size:18px;font-weight:300;}
+    .box_list .book_cont .cnt_add dt {font-size:22px;font-weight:600;}
+    .box_list .book_cont .cnt_add dd {margin-top:5px;padding-right:330px;font-size:18px;font-weight:300;}
+    .box_list .book_cont .cnt_btn {position:absolute;right:0;bottom:0px;display:flex;justify-content:space-between;width:285px;}
+    .box_list .book_cont .cnt_btn .btn {width:138px;height:48px;line-height:47px;font-size:15px;border:1px solid #1a1a1a;text-align:center;font-weight:600;text-decoration:none;}
+    .box_list .book_cont .cnt_btn .btn_basket {background:#fff;color:#1a1a1a;}
+    .box_list .book_cont .cnt_btn .btn_buy {background:#1a1a1a;color:#fff;}
+    .box_list .book_cont .cnt_price {position:absolute;right:0;bottom:65px;text-align:right;}
+    .box_list .book_cont .cnt_price span {line-height:25px;}
+    .box_list .book_cont .cnt_price span strong {font-family:'Tahoma';font-weight:normal;}
+    .box_list .book_cont .cnt_price .before {position:relative;display:inline-block;margin-bottom:3px;color:#999;font-size:16px;}
+    .box_list .book_cont .cnt_price .before:after {position:absolute;left:0;top:50%;content:'';display:block;width:100%;border-bottom:1px solid #999;}
+    .box_list .book_cont .cnt_price .after {display:block;color:#333;font-size:22px;}
+    .box_list .book_cont .cnt_price .after strong {font-size:28px;font-weight:bold;}
+    .no_list {display:flex;justify-content:center;align-items:center;min-height:200px;background:#eee;font-size:22px;font-weight:600;text-align:center;}
+</style>
+<!-- box_sort -->
+<div class="box_sort">
+    <dl>
+        <dt><span>구분</span></dt>
+        <dd>
+            <a href="#cate_subj_kor" class="link" data-role="subject">국어</a>
+            <a href="#cate_subj_math" class="link" data-role="subject">수학</a>
+            <a href="#cate_subj_eng" class="link" data-role="subject">영어</a>
+            <a href="#cate_subj_sci" class="link" data-role="subject">과탐</a>
+        </dd>
+    </dl>
+    <dl id="cate_subj_kor" class="cate_subj">
+        <dt><span>선생님</span></dt>
+        <dd>
+            <a href="#cate_tea_name1" class="link" data-role="teacher">name1</a>
+        </dd>
+    </dl>
+    <dl id="cate_subj_math" class="cate_subj">
+        <dt><span>선생님</span></dt>
+        <dd>
+            <a href="#cate_tea_name2" class="link" data-role="teacher">name2</a>
+        </dd>
+    </dl>
+    <dl id="cate_subj_eng" class="cate_subj">
+        <dt><span>선생님</span></dt>
+        <dd>
+            <a href="#cate_tea_name3" class="link" data-role="teacher">name3</a>
+        </dd>
+    </dl>
+    <dl id="cate_subj_sci" class="cate_subj">
+        <dt><span>선생님</span></dt>
+        <dd>
+            <a href="#cate_tea_name4" class="link" data-role="teacher">name4</a>
+            <a href="#cate_tea_name5" class="link" data-role="teacher">name5</a>
+        </dd>
+    </dl>
+</div>
+<!-- // box_sort -->
+
+<!-- cate_list -->
+<div id="cate_tea_name1" class="cate_list box_book on">
+    <div class="total">총 <em class="num">1</em>권</div>
+    <ul class="box_list">
+        <li>
+            <div class="book_thumb">
+                <img src="https://img.etoos.com/book/book/ebspick100.png" alt="" />
+            </div>
+            <div class="book_cont">
+                <div class="cnt_info">
+                    <strong class="tit">name1 제목 제목 제목</strong>
+                    <p class="txt">
+                        - 상세 설명<br>
+                        - 상세 설명<br>
+                        - 상세 설명
+                    </p>
+                </div>
+                <dl class="cnt_add">
+                    <dt>[안내사항]</dt>
+                    <dd>안내 문구가 들어갑니다.</dd>
+                </dl>
+                <div class="cnt_price">
+                    <span class="before"><strong>35,000</strong>원</span>
+                    <span class="after"><strong>30,000</strong>원</span>
+                </div>
+                <div class="cnt_btn">
+                    <a href="#none" class="btn btn_basket">장바구니</a>
+                    <a href="#none" class="btn btn_buy">구매하기</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // cate_list -->
+
+<!-- cate_list -->
+<div id="cate_tea_name2" class="cate_list box_book">
+    <div class="total">총 <em class="num">1</em>권</div>
+    <ul class="box_list">
+        <li>
+            <div class="book_thumb">
+                <img src="https://img.etoos.com/book/book/ebspick100.png" alt="" />
+            </div>
+            <div class="book_cont">
+                <div class="cnt_info">
+                    <strong class="tit">name2 제목 제목 제목</strong>
+                    <p class="txt">
+                        - 상세 설명<br>
+                        - 상세 설명<br>
+                        - 상세 설명
+                    </p>
+                </div>
+                <dl class="cnt_add">
+                    <dt>[안내사항]</dt>
+                    <dd>안내 문구가 들어갑니다.</dd>
+                </dl>
+                <div class="cnt_price">
+                    <span class="before"><strong>35,000</strong>원</span>
+                    <span class="after"><strong>30,000</strong>원</span>
+                </div>
+                <div class="cnt_btn">
+                    <a href="#none" class="btn btn_basket">장바구니</a>
+                    <a href="#none" class="btn btn_buy">구매하기</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // cate_list -->
+
+<!-- cate_list -->
+<div id="cate_tea_name3" class="cate_list box_book">
+    <div class="total">총 <em class="num">1</em>권</div>
+    <ul class="box_list">
+        <li>
+            <div class="book_thumb">
+                <img src="https://img.etoos.com/book/book/ebspick100.png" alt="" />
+            </div>
+            <div class="book_cont">
+                <div class="cnt_info">
+                    <strong class="tit">name3 제목 제목 제목</strong>
+                    <p class="txt">
+                        - 상세 설명<br>
+                        - 상세 설명<br>
+                        - 상세 설명
+                    </p>
+                </div>
+                <dl class="cnt_add">
+                    <dt>[안내사항]</dt>
+                    <dd>안내 문구가 들어갑니다.</dd>
+                </dl>
+                <div class="cnt_price">
+                    <span class="before"><strong>35,000</strong>원</span>
+                    <span class="after"><strong>30,000</strong>원</span>
+                </div>
+                <div class="cnt_btn">
+                    <a href="#none" class="btn btn_basket">장바구니</a>
+                    <a href="#none" class="btn btn_buy">구매하기</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // cate_list -->
+
+<!-- cate_list -->
+<div id="cate_tea_name4" class="cate_list box_book">
+    <div class="total">총 <em class="num">2</em>권</div>
+    <ul class="box_list">
+        <li>
+            <div class="book_thumb">
+                <img src="https://img.etoos.com/book/book/ebspick100.png" alt="" />
+            </div>
+            <div class="book_cont">
+                <div class="cnt_info">
+                    <strong class="tit">name4 제목 제목 제목</strong>
+                    <p class="txt">
+                        - 상세 설명<br>
+                        - 상세 설명<br>
+                        - 상세 설명
+                    </p>
+                </div>
+                <dl class="cnt_add">
+                    <dt>[안내사항]</dt>
+                    <dd>안내 문구가 들어갑니다.</dd>
+                </dl>
+                <div class="cnt_price">
+                    <span class="before"><strong>35,000</strong>원</span>
+                    <span class="after"><strong>30,000</strong>원</span>
+                </div>
+                <div class="cnt_btn">
+                    <a href="#none" class="btn btn_basket">장바구니</a>
+                    <a href="#none" class="btn btn_buy">구매하기</a>
+                </div>
+            </div>
+        </li>
+        <li>
+            <div class="book_thumb">
+                <img src="https://img.etoos.com/book/book/ebspick100.png" alt="" />
+            </div>
+            <div class="book_cont">
+                <div class="cnt_info">
+                    <strong class="tit">제목 제목 제목 제목</strong>
+                    <p class="txt">
+                        - 상세 설명<br>
+                        - 상세 설명<br>
+                        - 상세 설명
+                    </p>
+                </div>
+                <dl class="cnt_add">
+                    <dt>[안내사항]</dt>
+                    <dd>안내 문구가 들어갑니다.</dd>
+                </dl>
+                <div class="cnt_price">
+                    <span class="before"><strong>35,000</strong>원</span>
+                    <span class="after"><strong>30,000</strong>원</span>
+                </div>
+                <div class="cnt_btn">
+                    <a href="#none" class="btn btn_basket">장바구니</a>
+                    <a href="#none" class="btn btn_buy">구매하기</a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- // cate_list -->
+
+<!-- cate_list -->
+<div id="cate_tea_name5" class="cate_list box_book">
+    <div class="total">총 <em class="num">0</em>권</div>
+    <div class="no_list">
+        <p>구매 가능한 교재가 없습니다.</p>
+    </div>
+</div>
+<!-- // cate_list -->
+<script>
+    // 교재 리스트
+    function initCateTabs() {
+        const subjectLinks = document.querySelectorAll('[data-role="subject"]');
+        const teacherLinks = document.querySelectorAll('[data-role="teacher"]');
+        const subjWraps = document.querySelectorAll('.cate_subj');
+        const contentBoxes = document.querySelectorAll('.cate_list');
+
+        // 1. 과목 클릭
+        subjectLinks.forEach(function (link) {
+            link.classList.remove('on');
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // reset
+                subjectLinks.forEach(l => l.classList.remove('on'));
+                subjWraps.forEach(wrap => wrap.classList.remove('on'));
+                teacherLinks.forEach(t => t.classList.remove('on'));
+                contentBoxes.forEach(c => c.classList.remove('on'));
+
+                // on current subject
+                link.classList.add('on');
+                const targetId = link.getAttribute('href');
+                const targetWrap = document.querySelector(targetId);
+                if (targetWrap) {
+                    targetWrap.classList.add('on');
+
+                    // 첫 번째 선생님 클릭
+                    const firstTeacher = targetWrap.querySelector('[data-role="teacher"]');
+                    if (firstTeacher) {
+                        firstTeacher.click();
+                    }
+                }
+            });
+        });
+
+        // 2. 선생님 클릭
+        teacherLinks.forEach(function (link) {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // reset
+                teacherLinks.forEach(l => l.classList.remove('on'));
+                contentBoxes.forEach(c => c.classList.remove('on'));
+
+                // on current teacher
+                link.classList.add('on');
+                const targetId = link.getAttribute('href');
+                const content = document.querySelector(targetId);
+                if (content) {
+                    content.classList.add('on');
+                }
+            });
+        });
+
+        // 3. 첫 과목 자동 클릭
+        if (subjectLinks.length > 0) {
+            subjectLinks[0].click();
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        initCateTabs();
+    });
+</script>
+<!-- <script>
+    // 교재 리스트
+    function initCateTabs() {
+        const cate = document.querySelectorAll('#cate dd .link');
+        const cate_subj = document.querySelectorAll('.cate_subj');
+        const cate_list = document.querySelectorAll('.cate_list');
+        const tea = document.querySelectorAll('.cate_subj dd .link');
+
+        // 1단계: 과목 클릭 이벤트
+        cate.forEach(function (link) {
+            link.classList.remove('on');
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                // 과목/선생님/콘텐츠 초기화
+                cate.forEach(l => l.classList.remove('on'));
+                cate_subj.forEach(subj => subj.classList.remove('on'));
+                cate_list.forEach(box => box.classList.remove('on'));
+
+                // 현재 과목 on
+                link.classList.add('on');
+                const subjId = link.getAttribute('href');
+                const subjWrap = document.querySelector(subjId);
+                subjWrap.classList.add('on');
+
+                // 이 과목의 첫 선생님 클릭
+                const firstTeacher = subjWrap.querySelector('dd .link');
+                if (firstTeacher) {
+                    firstTeacher.click();
+                }
+            });
+        });
+
+        // 2단계: 선생님 클릭 이벤트
+        tea.forEach(function (link) {
+            link.classList.remove('on');
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // 선생님/콘텐츠 초기화
+                tea.forEach(l => l.classList.remove('on'));
+                cate_list.forEach(box => box.classList.remove('on'));
+
+                // 현재 선생님/콘텐츠 on
+                link.classList.add('on');
+                const targetId = link.getAttribute('href');
+                const contentBox = document.querySelector(targetId);
+                if (contentBox) {
+                    contentBox.classList.add('on');
+                }
+            });
+        });
+
+        // 3단계: 첫 과목 클릭 시뮬레이션
+        if (cate.length > 0) {
+            cate[0].click();
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        initCateTabs(); // 페이지 로딩 후 실행
+    });
+</script> -->
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
