@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- // head -->
+    
+    <title>rolling_tab_component</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>rolling_tab_component</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">common</div>
+        <div class="code_area">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* rolling */
+    .rolling {position:relative;width:100%;} 
+    .rolling ul {display:flex;align-items:center;justify-content:center;margin:0;padding:0;} 
+    .rolling li {list-style:none;flex:1;text-align:center;} 
+    .rolling li a {display:block;height:32px;line-height:32px;background:#ddd;border:1px solid #ccc;text-decoration:none;color:#000;} 
+    .rolling li.on a {background:#fff;color:#ff00ff;} 
+    .rolling .play,
+    .rolling .stop {position:absolute;right:-37px;top:0;width:32px;height:32px;background:#ddd;border:1px solid #ddd;text-indent:-9999px;} 
+    .rolling .play::after {content:"";position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);border-style:solid;border-width:6px 0 6px 10px;border-color:transparent transparent transparent #888;} 
+    .rolling .stop::before,
+    .rolling .stop::after {content:"";position:absolute;top:50%;width:2px;height:12px;background:#888;transform:translateY(-50%);} 
+    .rolling .stop::before {left:12px;} 
+    .rolling .stop::after {left:18px;} 
+    .rolling_contents .cont_box {display:none;margin:5px 0;padding:20px;border:1px solid #ccc;background:#dcdcdc;} 
+    .rolling_contents .cont_box.on {display:block;}
+</style>
+<!-- rolling -->
+<div id="rolling" class="rolling">
+    <ul>
+        <li class="on"><a href="http://naver.com" class="link">link 탭1</a></li>
+        <li class="on"><a href="http://naver.com" target="_blank" class="link">link 탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+        <li><a href="#">탭5</a></li>
+    </ul>
+    <a href="#" class="play">재생</a>
+    <a href="#" class="stop">정지</a>
+</div>
+<!-- // rolling -->
+<script>
+    /**
+     * RollingTabs - 순수 JavaScript 롤링 탭 컴포넌트
+     * 사용 방법:
+     * const rolling = new RollingTabs('#rolling', { speed: 2000, mode: 'auto' });
+     *
+     * mode: 'none' | 'click' | 'hover'
+     */
+
+    class RollingTabs {
+        constructor(selector, options = {}) {
+            this.container = document.querySelector(selector);
+            if (!this.container) return;
+
+            this.options = {
+                speed: options.speed || 2000,
+                mode: options.mode || 'none', // none, click, hover
+            };
+
+            this.items = Array.from(this.container.querySelectorAll('ul > li'));
+            this.playBtn = this.container.querySelector('.play');
+            this.stopBtn = this.container.querySelector('.stop');
+            this.currentIndex = 0;
+            this.timer = null;
+
+            this.init();
+        }
+
+        init() {
+            this.updateUI();
+            this.attachEvents();
+        }
+
+        updateUI() {
+            this.items.forEach((item, idx) => {
+                item.classList.toggle('on', idx === this.currentIndex);
+            });
+
+            this.container.querySelector('ul').className = `on${this.currentIndex + 1}`;
+        }
+
+        startRolling() {
+            this.stopRolling(); // 중복방지
+            this.timer = setInterval(() => {
+                this.currentIndex = (this.currentIndex + 1) % this.items.length;
+                this.updateUI();
+            }, this.options.speed);
+
+            if (this.playBtn) this.playBtn.style.display = 'none';
+            if (this.stopBtn) this.stopBtn.style.display = 'inline-block';
+        }
+
+        stopRolling() {
+            clearInterval(this.timer);
+            this.timer = null;
+
+            if (this.playBtn) this.playBtn.style.display = 'inline-block';
+            if (this.stopBtn) this.stopBtn.style.display = 'none';
+        }
+
+        attachEvents() {
+            if (this.playBtn) {
+                this.playBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.startRolling();
+                });
+            }
+
+            if (this.stopBtn) {
+                this.stopBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.stopRolling();
+                });
+            }
+
+            if (this.options.mode === 'click') {
+                this.items.forEach((item, idx) => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.currentIndex = idx;
+                        this.updateUI();
+                        this.stopRolling();
+                    });
+                });
+            }
+
+            if (this.options.mode === 'hover') {
+                this.items.forEach((item, idx) => {
+                    item.addEventListener('mouseenter', () => {
+                        this.currentIndex = idx;
+                        this.updateUI();
+                        this.stopRolling();
+                    });
+                    item.addEventListener('mouseleave', () => {
+                        this.startRolling();
+                    });
+                });
+            }
+        }
+    }
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">default</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling1" class="rolling">
+    <ul>
+        <li class="on"><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+    <a href="#" class="play">재생</a>
+    <a href="#" class="stop">정지</a>
+</div>
+<!-- // rolling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const rolling = new RollingTabs('#rolling1', {
+            speed: 2000,      // 롤링 간격 (ms)
+            mode: 'none'      // 'none' | 'click' | 'hover'
+        });
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'click'</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling2" class="rolling">
+    <ul>
+        <li class="on"><a href="http://naver.com" class="link">link 탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+    <a href="#" class="play">재생</a>
+    <a href="#" class="stop">정지</a>
+</div>
+<!-- // rolling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const rolling = new RollingTabs('#rolling2', {
+            speed: 2000,      // 롤링 간격 (ms)
+            mode: 'click'      // 'auto' | 'click' | 'hover'
+        });
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'over'</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling3" class="rolling">
+    <ul>
+        <li class="on"><a href="http://naver.com" class="link">link 탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+    <a href="#" class="play">재생</a>
+    <a href="#" class="stop">정지</a>
+</div>
+<!-- // rolling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const rolling = new RollingTabs('#rolling3', {
+            speed: 2000,      // 롤링 간격 (ms)
+            mode: 'hover'      // 'auto' | 'click' | 'hover'
+        });
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'click' + contents</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling4" class="rolling">
+    <ul>
+        <li class="on"><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+    <a href="#" class="play">재생</a>
+    <a href="#" class="stop">정지</a>
+</div>
+<div id="rolling4_contents" class="rolling_contents">
+    <div class="cont_wrap">
+        <div class="cont_box on">
+            cont_box1
+        </div>
+        <div class="cont_box">
+            cont_box2
+        </div>
+        <div class="cont_box">
+            cont_box3
+        </div>
+        <div class="cont_box">
+            cont_box4
+        </div>
+    </div>
+</div>
+<!-- // rolling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const rolling = new RollingTabs('#rolling4', {
+            speed: 2000,      // 롤링 간격 (ms)
+            mode: 'click'      // 'auto' | 'click' | 'hover'
+        });
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'over' + contents</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<!-- rolling -->
+<div id="rolling5_contents" class="rolling_contents">
+    <div class="cont_wrap">
+        <div class="cont_box on">
+            cont_box1
+        </div>
+        <div class="cont_box">
+            cont_box2
+        </div>
+        <div class="cont_box">
+            cont_box3
+        </div>
+        <div class="cont_box">
+            cont_box4
+        </div>
+    </div>
+</div>
+<div id="rolling5" class="rolling over">
+    <ul>
+        <li class="on"><a href="#">탭1</a></li>
+        <li><a href="#">탭2</a></li>
+        <li><a href="#">탭3</a></li>
+        <li><a href="#">탭4</a></li>
+    </ul>
+    <a href="#" class="play">재생</a>
+    <a href="#" class="stop">정지</a>
+</div>
+<!-- // rolling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const rolling = new RollingTabs('#rolling5', {
+            speed: 2000,      // 롤링 간격 (ms)
+            mode: 'hover'      // 'auto' | 'click' | 'hover'
+        });
+    });
+</script>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

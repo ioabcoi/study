@@ -5,13 +5,13 @@
     <script src="../../html/include/head.js"></script>
     <!-- // head -->
     
-    <title>rolling_js2</title>
+    <title>rolling_component</title>
 </head>
 <body data-theme="light">
 
     <!-- code_wrap -->
     <div class="code_wrap">
-        <h1>rolling_js2</h1>
+        <h1>rolling_component</h1>
 
         <!-- code_area -->
         <div class="code_tit">common</div>
@@ -38,95 +38,81 @@
 </div>
 <!-- // rolling -->
 <script>
-    // Rolling Function  
-    var Rolling = function(obj, idx, spd, pus){
-        const target = document.querySelector(obj);
-        // const rolling = Array.from(target.querySelectorAll("ul li")); // ie no
-        const rolling = Array.prototype.slice.call(target.getElementsByTagName("li")); // ie ok
-        // console.log(rolling);
-        const length = rolling.length;
-        const pause = pus;
-        let index = idx - 1;
-        const speed = spd;
-        let timer = setInterval(function(){}, speed);
-        const stepReset = function(){
-            target.querySelector("ul").removeAttribute("class");
-            for (let i=0; i<length; i++) {
-                rolling[i].classList.remove("on");
-            }		
+    /**
+     * RollingTabs 컴포넌트
+     * @param {String|Element} selector - 대상 롤링 요소 선택자 또는 DOM 요소
+     * @param {Object} options - 사용자 설정값 (index, speed, pauseType)
+     * @example
+     * new RollingTabs('#rolling1', { index: 1, speed: 1000, pause: 'click' });
+     */
+    class RollingTabs {
+        constructor(selector, options = {}) {
+            this.container = typeof selector === 'string' ? document.querySelector(selector) : selector;
+            this.items = Array.from(this.container.querySelectorAll('li'));
+            this.length = this.items.length;
+            this.index = (options.index || 1) - 1;
+            this.speed = options.speed || 2000;
+            this.pauseType = options.pause || false;
+            this.timer = null;
+
+            this.init();
         }
-        const stepActive = function(num){
-            index = num;
-            target.querySelector("ul").classList.add("r" + (index + 1));
-            rolling[index].classList.add("on");	
-        }
-        const stepStart = function(num){
-            index = num;
-            stepReset();
-            stepActive(index);
-            stepStop();
-            timer = setInterval(function(){        
-                stepRolling(index);
-            }, speed);
-        }
-        const stepStop = function(){
-            clearInterval(timer);
-        }
-        const stepRolling = function(num){
-            index = num;
-            stepReset();
-            if( index >= length-1 ){
-                index = 0;
-            }else{
-                index++;
+
+        init() {
+            this.startRolling();
+            if (this.pauseType === 'click') {
+                this.items.forEach(item => {
+                    item.addEventListener('click', (e) => this.onClick(e));
+                });
             }
-            stepActive(index);
+            if (this.pauseType === 'hover') {
+                this.items.forEach(item => {
+                    item.addEventListener('mouseenter', (e) => this.onMouseEnter(e));
+                    item.addEventListener('mouseleave', () => this.startRolling());
+                    item.querySelector('a').addEventListener('click', (e) => e.preventDefault());
+                });
+            }
         }
-        const mouseclick = function(e){
-            // console.log("mouseclick", e.target.parentElement);
-            // console.log("mouseclick", rolling.indexOf(e.target.parentElement));
-            index = rolling.indexOf(e.target.parentElement);
-            stepStart(index);
-            stepStop();
-            setTimeout(function(){
-                stepStart(index);
-            }, speed);
+
+        reset() {
+            this.container.querySelector('ul').className = '';
+            this.items.forEach(item => item.classList.remove('on'));
         }
-        const mouseenter = function(e){
-            // console.log("mouseenter", e.target);
-            // console.log("mouseenter", rolling.indexOf(e.target));
-            index = rolling.indexOf(e.target);
-            // console.log(index);
-            stepStart(index);
-            stepStop();
+
+        activate(index) {
+            this.container.querySelector('ul').classList.add(`r${index + 1}`);
+            this.items[index].classList.add('on');
         }
-        const mouseleave = function(e){
-            // console.log("mouseleave", e.target);
-            // console.log("mouseleave", rolling.indexOf(e.target));
-            stepStart(index);
+
+        startRolling() {
+            clearInterval(this.timer);
+            this.reset();
+            this.activate(this.index);
+            this.timer = setInterval(() => this.next(), this.speed);
         }
-        const init = function(){
-            // console.log(target, rolling, length);
-            // console.log(rolling[0]);
-            stepStart(index);
-        };
-        init();
-        if( pause === "click" ){
-            rolling.forEach(function(element) {
-                // console.log(element);  
-                element.addEventListener("click", mouseclick);
-            });
-        }	
-        if( pause === "over" ){
-            rolling.forEach(function(element) {
-                // console.log(element);  
-                element.addEventListener("mouseenter", mouseenter);
-                element.addEventListener("mouseleave", mouseleave);
-                element.addEventListener("click", function(e){ e.preventDefault(); });
-            });
-        }	
+
+        next() {
+            this.index = (this.index + 1) % this.length;
+            this.reset();
+            this.activate(this.index);
+        }
+
+        onClick(e) {
+            e.preventDefault();
+            this.index = this.items.indexOf(e.currentTarget);
+            this.reset();
+            this.activate(this.index);
+            clearInterval(this.timer);
+            setTimeout(() => this.startRolling(), this.speed);
+        }
+
+        onMouseEnter(e) {
+            this.index = this.items.indexOf(e.currentTarget);
+            this.reset();
+            this.activate(this.index);
+            clearInterval(this.timer);
+        }
     }
-    // var rolling1 = new Rolling(target, index, speed, pause);
 </script>
                 </div>
             </div>
@@ -154,7 +140,7 @@
 </div>
 <!-- // rolling -->
 <script>
-    var rolling1 = new Rolling("#rolling1", 1, 1000, false);
+    new RollingTabs('#rolling1');
 </script>
                 </div>
             </div>
@@ -182,7 +168,7 @@
 </div>
 <!-- // rolling -->
 <script>
-    var rolling2 = new Rolling("#rolling2", 1, 1000, "click");
+    new RollingTabs('#rolling2', { index: 1, speed: 1000, pause: 'click' });
 </script>
                 </div>
             </div>
@@ -210,7 +196,7 @@
 </div>
 <!-- // rolling -->
 <script>
-    var rolling3 = new Rolling("#rolling3", 1, 1000, "over");
+    new RollingTabs('#rolling3', { index: 1, speed: 1000, pause: 'hover' });
 </script>
                 </div>
             </div>

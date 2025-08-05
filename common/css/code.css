@@ -144,6 +144,27 @@ h1 {
     padding-top: var(--margin-default);
 }
 
+.markdown {
+    width: 80%;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: var(--padding-default);
+    border: 1px solid var(--color-border-light);
+    background-color: var(--color-bg-white);
+    /* 배경색 분리 */
+    border-radius: var(--border-radius-default);
+}
+
+.markdown .tit {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.markdown ul li {
+    margin-top: 10px;
+    line-height: 150%;
+}
+
 /* 미디어 쿼리: 넓은 화면에서 스타일 */
 @media (min-width: 80rem) {
     .code_area {
@@ -171,6 +192,10 @@ h1 {
         width: 50%;
         margin-top: 0;
         margin-left: -1px;
+    }
+
+    .markdown {
+        padding: 3rem;
     }
 }
 

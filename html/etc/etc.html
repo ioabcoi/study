@@ -221,62 +221,66 @@ $(function(){
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">cookie</div>
+        <div class="code_tit">localStorage</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
 <style>
-    .btn_bookmark {color:#000279;font-size:13px;text-decoration:underline;}
+    .line_banner {position:fixed;top:0;left:0;width:100%;background:#ff0;color:#333;padding:12px 20px;box-shadow:0 2px 6px rgba(0,0,0,0.1);z-index:9999;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;} 
+    .line_banner .controls {display:flex;align-items:center;gap:10px;} 
+    .line_banner .close_btn {background:none;border:1px solid #ccc;padding:4px 10px;cursor:pointer;font-size:13px;border-radius:4px;} 
 </style>
 <div class="wrap">
-    <div class="line_banner">
-
+    <div class="line_banner" style="display: none;">
+        <p>✨ 이벤트 안내: 지금 가입하면 혜택이!</p>
+        <div class="controls">
+            <label><input type="checkbox" id="hideTodayChk"> 오늘 하루 열지 않기</label>
+            <label><input type="checkbox" id="hideWeekChk"> 일주일 간 열지 않기</label>
+            <button class="close_btn" type="button">X 닫기</button>
+        </div>
     </div>
-    <a href="#" class="btn_bookmark">즐겨찾기</a>
 </div>
 <script type="text/javascript">
-    $(window).load(function(e){
-        var $wrap = $('.wrap');
-        var $lineBanner = $('.line_banner');
-        var lineBanner_height = $lineBanner.height();
-        
-        // 라인배너가 존재할 경우 배너 영역 Init();
-        var Cookie = true;
-        if( Cookie ) {
-            lineBannerInit();
+    $(function () {
+        const storageKey = "hideLineBannerUntil";
+        const today = new Date();
+
+        const savedDate = localStorage.getItem(storageKey);
+        if (!savedDate || new Date(savedDate) < today) {
+            $(".line_banner").slideDown();
         }
-    });
 
-    // 라인배너 Init
-    function lineBannerInit(){
-        var defaultH = lineBanner_height;
-        var $quicks_top = $lineBanner.height() + defaultH - $(window).scrollTop();
+        $(".close_btn").on("click", function () {
+            const hideToday = $("#hideTodayChk").is(":checked");
+            const hideWeek = $("#hideWeekChk").is(":checked");
 
-        $wrap.animate({ 'top' : $lineBannerHeight }, {
-            duration: 900,
-            easing: 'easeInOutCubic',
-            start: function(){
-                $quick.css({ 'top' : $quicks_top });
+            // 오늘 또는 일주일 체크되었을 경우
+            if (hideToday || hideWeek) {
+            const hideUntil = new Date();
+            if (hideWeek) {
+                hideUntil.setDate(hideUntil.getDate() + 7);
+            } else if (hideToday) {
+                hideUntil.setDate(hideUntil.getDate() + 1);
+            }
+            localStorage.setItem(storageKey, hideUntil.toISOString());
+            }
+
+            $(".line_banner").slideUp();
+        });
+
+        // 체크박스 중복 방지: 하나만 체크되게
+        $("#hideTodayChk").on("change", function () {
+            if ($(this).is(":checked")) {
+            $("#hideWeekChk").prop("checked", false);
             }
         });
-    }
-
-    // 라인배너 Close
-    function lineBannerClose(){
-        $wrap.animate({ 'top' : '0' }, 900, 'easeInOutCubic', function(){
-            //Quick 메뉴 부분이 라인배너 존재 여부에 따라서 Top 위치가 달라지므로 닫기 이후 Remove
-            $lineBanner.remove();
-            setCookie("line_banner", "done");
+        $("#hideWeekChk").on("change", function () {
+            if ($(this).is(":checked")) {
+            $("#hideTodayChk").prop("checked", false);
+            }
         });
-    };
-
-    // 쿠키 설정, expires 주지 않음 (브라우저 닫기시 삭제됨)
-    function setCookie(name, value) {
-        var todayDate = new Date();
-        todayDate.setDate(todayDate.getDate());
-        document.cookie = name+"="+escape(value)+"; path=/;"
-    }
+    });
 </script>
                 </div>
             </div>
