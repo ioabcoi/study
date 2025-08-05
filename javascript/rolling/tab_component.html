@@ -75,12 +75,24 @@
             this.currentIndex = 0;
             this.timer = null;
 
+            // 컨텐츠 연결
+            const contentId = `${this.container.id}_contents`;
+            const contentWrap = document.getElementById(contentId);
+            if (contentWrap) {
+                this.contentItems = Array.from(contentWrap.querySelectorAll('.cont_box'));
+            } else {
+                this.contentItems = [];
+            }
+
             this.init();
         }
 
         init() {
             this.updateUI();
             this.attachEvents();
+
+            // 항상 자동재생 시작
+            this.startRolling();
         }
 
         updateUI() {
@@ -89,6 +101,13 @@
             });
 
             this.container.querySelector('ul').className = `on${this.currentIndex + 1}`;
+
+            // 컨텐츠 on/off 처리
+            if (this.contentItems.length) {
+                this.contentItems.forEach((content, idx) => {
+                    content.classList.toggle('on', idx === this.currentIndex);
+                });
+            }
         }
 
         startRolling() {
@@ -131,7 +150,7 @@
                         e.preventDefault();
                         this.currentIndex = idx;
                         this.updateUI();
-                        this.stopRolling();
+                        this.stopRolling(); // 클릭 시 멈춤
                     });
                 });
             }
@@ -141,10 +160,10 @@
                     item.addEventListener('mouseenter', () => {
                         this.currentIndex = idx;
                         this.updateUI();
-                        this.stopRolling();
+                        this.stopRolling(); // hover 시 멈춤
                     });
                     item.addEventListener('mouseleave', () => {
-                        this.startRolling();
+                        this.startRolling(); // hover 해제 시 다시 시작
                     });
                 });
             }
