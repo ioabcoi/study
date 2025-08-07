@@ -27,6 +27,10 @@
                             padding: 0 5% 200px;
                         }
 
+                        .msg {
+                            margin-bottom: 10px;
+                        }
+
                         .palettes {
                             display: grid;
                             grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -51,6 +55,10 @@
                             text-align: center;
                         }
 
+                        #color_code {
+                            display: none;
+                        }
+
                         @media (max-width: 1920px) {
                             .palettes {
                                 grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -72,224 +80,250 @@
                             }
                         }
                     </style>
+                    <div id="color_code">color_code</div>
+                    <p class="msg">👉🏻 컬러를 클릭하면 코드값이 복사됩니다!</p>                    
                     <div class="palettes">
                         <div class="item" data-index="1">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="#EEEEEE">#EEEEEE</span></div>
-                                <div class="place c2" style="background-color: rgb(80, 140, 155);"><span data-copy="#508C9B">#508C9B</span></div>
-                                <div class="place c1" style="background-color: rgb(19, 75, 112);"><span data-copy="#134B70">#134B70</span></div>
-                                <div class="place c0" style="background-color: rgb(32, 30, 67);"><span data-copy="#201E43">#201E43</span></div>
+                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="EEEEEE">#EEEEEE</span></div>
+                                <div class="place c2" style="background-color: rgb(80, 140, 155);"><span data-copy="508C9B">#508C9B</span></div>
+                                <div class="place c1" style="background-color: rgb(19, 75, 112);"><span data-copy="134B70">#134B70</span></div>
+                                <div class="place c0" style="background-color: rgb(32, 30, 67);"><span data-copy="201E43">#201E43</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="2">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="#EEEEEE">#EEEEEE</span></div>
-                                <div class="place c2" style="background-color: rgb(0, 173, 181);"><span data-copy="#00ADB5">#00ADB5</span></div>
-                                <div class="place c1" style="background-color: rgb(57, 62, 70);"><span data-copy="#393E46">#393E46</span></div>
-                                <div class="place c0" style="background-color: rgb(34, 40, 49);"><span data-copy="#222831">#222831</span></div>
+                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="EEEEEE">#EEEEEE</span></div>
+                                <div class="place c2" style="background-color: rgb(0, 173, 181);"><span data-copy="00ADB5">#00ADB5</span></div>
+                                <div class="place c1" style="background-color: rgb(57, 62, 70);"><span data-copy="393E46">#393E46</span></div>
+                                <div class="place c0" style="background-color: rgb(34, 40, 49);"><span data-copy="222831">#222831</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="3">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(189, 195, 199);"><span data-copy="#BDC3C7">#BDC3C7</span></div>
-                                <div class="place c2" style="background-color: rgb(236, 240, 241);"><span data-copy="#ECF0F1">#ECF0F1</span></div>
-                                <div class="place c1" style="background-color: rgb(52, 73, 94);"><span data-copy="#34495E">#34495E</span></div>
-                                <div class="place c0" style="background-color: rgb(44, 62, 80);"><span data-copy="#2C3E50">#2C3E50</span></div>
+                                <div class="place c3" style="background-color: rgb(236, 240, 241);"><span data-copy="ECF0F1">#ECF0F1</span></div>
+                                <div class="place c2" style="background-color: rgb(189, 195, 199);"><span data-copy="BDC3C7">#BDC3C7</span></div>
+                                <div class="place c1" style="background-color: rgb(52, 73, 94);"><span data-copy="34495E">#34495E</span></div>
+                                <div class="place c0" style="background-color: rgb(44, 62, 80);"><span data-copy="2C3E50">#2C3E50</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="4">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(240, 236, 229);"><span data-copy="#F0ECE5">#F0ECE5</span></div>
-                                <div class="place c2" style="background-color: rgb(182, 187, 196);"><span data-copy="#B6BBC4">#B6BBC4</span></div>
-                                <div class="place c1" style="background-color: rgb(49, 48, 77);"><span data-copy="#31304D">#31304D</span></div>
-                                <div class="place c0" style="background-color: rgb(22, 26, 48);"><span data-copy="#161A30">#161A30</span></div>
+                                <div class="place c3" style="background-color: rgb(240, 236, 229);"><span data-copy="F0ECE5">#F0ECE5</span></div>
+                                <div class="place c2" style="background-color: rgb(182, 187, 196);"><span data-copy="B6BBC4">#B6BBC4</span></div>
+                                <div class="place c1" style="background-color: rgb(49, 48, 77);"><span data-copy="31304D">#31304D</span></div>
+                                <div class="place c0" style="background-color: rgb(22, 26, 48);"><span data-copy="161A30">#161A30</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="5">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(206, 221, 239);"><span data-copy="#CEDDEF">#CEDDEF</span></div>
-                                <div class="place c2" style="background-color: rgb(88, 147, 212);"><span data-copy="#5893D4">#5893D4</span></div>
-                                <div class="place c1" style="background-color: rgb(31, 60, 136);"><span data-copy="#1F3C88">#1F3C88</span></div>
-                                <div class="place c0" style="background-color: rgb(7, 13, 89);"><span data-copy="#070D59">#070D59</span></div>
+                                <div class="place c3" style="background-color: rgb(206, 221, 239);"><span data-copy="CEDDEF">#CEDDEF</span></div>
+                                <div class="place c2" style="background-color: rgb(88, 147, 212);"><span data-copy="5893D4">#5893D4</span></div>
+                                <div class="place c1" style="background-color: rgb(31, 60, 136);"><span data-copy="1F3C88">#1F3C88</span></div>
+                                <div class="place c0" style="background-color: rgb(7, 13, 89);"><span data-copy="070D59">#070D59</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="6">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(255, 244, 183);"><span data-copy="#FFF4B7">#FFF4B7</span></div>
-                                <div class="place c2" style="background-color: rgb(0, 106, 103);"><span data-copy="#006A67">#006A67</span></div>
-                                <div class="place c1" style="background-color: rgb(0, 49, 97);"><span data-copy="#003161">#003161</span></div>
-                                <div class="place c0" style="background-color: rgb(0, 11, 88);"><span data-copy="#000B58">#000B58</span></div>
+                                <div class="place c3" style="background-color: rgb(255, 244, 183);"><span data-copy="FFF4B7">#FFF4B7</span></div>
+                                <div class="place c2" style="background-color: rgb(0, 106, 103);"><span data-copy="006A67">#006A67</span></div>
+                                <div class="place c1" style="background-color: rgb(0, 49, 97);"><span data-copy="003161">#003161</span></div>
+                                <div class="place c0" style="background-color: rgb(0, 11, 88);"><span data-copy="000B58">#000B58</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="7">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(247, 247, 248);"><span data-copy="#F7F7F8">#F7F7F8</span></div>
-                                <div class="place c2" style="background-color: rgb(55, 149, 189);"><span data-copy="#3795BD">#3795BD</span></div>
-                                <div class="place c1" style="background-color: rgb(78, 49, 170);"><span data-copy="#4E31AA">#4E31AA</span></div>
-                                <div class="place c0" style="background-color: rgb(58, 16, 120);"><span data-copy="#3A1078">#3A1078</span></div>
+                                <div class="place c3" style="background-color: rgb(247, 247, 248);"><span data-copy="F7F7F8">#F7F7F8</span></div>
+                                <div class="place c2" style="background-color: rgb(55, 149, 189);"><span data-copy="3795BD">#3795BD</span></div>
+                                <div class="place c1" style="background-color: rgb(78, 49, 170);"><span data-copy="4E31AA">#4E31AA</span></div>
+                                <div class="place c0" style="background-color: rgb(58, 16, 120);"><span data-copy="3A1078">#3A1078</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="8">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(200, 172, 214);"><span data-copy="#C8ACD6">#C8ACD6</span></div>
-                                <div class="place c2" style="background-color: rgb(67, 61, 139);"><span data-copy="#433D8B">#433D8B</span></div>
-                                <div class="place c1" style="background-color: rgb(46, 35, 108);"><span data-copy="#2E236C">#2E236C</span></div>
-                                <div class="place c0" style="background-color: rgb(23, 21, 59);"><span data-copy="#17153B">#17153B</span></div>
+                                <div class="place c3" style="background-color: rgb(200, 172, 214);"><span data-copy="C8ACD6">#C8ACD6</span></div>
+                                <div class="place c2" style="background-color: rgb(67, 61, 139);"><span data-copy="433D8B">#433D8B</span></div>
+                                <div class="place c1" style="background-color: rgb(46, 35, 108);"><span data-copy="2E236C">#2E236C</span></div>
+                                <div class="place c0" style="background-color: rgb(23, 21, 59);"><span data-copy="17153B">#17153B</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="9">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(255, 245, 215);"><span data-copy="#FFF5D7">#FFF5D7</span></div>
-                                <div class="place c2" style="background-color: rgb(225, 149, 171);"><span data-copy="#E195AB">#E195AB</span></div>
-                                <div class="place c1" style="background-color: rgb(255, 204, 225);"><span data-copy="#FFCCE1">#FFCCE1</span></div>
-                                <div class="place c0" style="background-color: rgb(242, 249, 255);"><span data-copy="#F2F9FF">#F2F9FF</span></div>
+                                <div class="place c3" style="background-color: rgb(255, 245, 215);"><span data-copy="FFF5D7">#FFF5D7</span></div>
+                                <div class="place c2" style="background-color: rgb(225, 149, 171);"><span data-copy="E195AB">#E195AB</span></div>
+                                <div class="place c1" style="background-color: rgb(255, 204, 225);"><span data-copy="FFCCE1">#FFCCE1</span></div>
+                                <div class="place c0" style="background-color: rgb(242, 249, 255);"><span data-copy="F2F9FF">#F2F9FF</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="10">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(255, 225, 255);"><span data-copy="#FFE1FF">#FFE1FF</span></div>
-                                <div class="place c2" style="background-color: rgb(228, 177, 240);"><span data-copy="#E4B1F0">#E4B1F0</span></div>
-                                <div class="place c1" style="background-color: rgb(126, 96, 191);"><span data-copy="#7E60BF">#7E60BF</span></div>
-                                <div class="place c0" style="background-color: rgb(67, 56, 120);"><span data-copy="#433878">#433878</span></div>
+                                <div class="place c3" style="background-color: rgb(255, 225, 255);"><span data-copy="FFE1FF">#FFE1FF</span></div>
+                                <div class="place c2" style="background-color: rgb(228, 177, 240);"><span data-copy="E4B1F0">#E4B1F0</span></div>
+                                <div class="place c1" style="background-color: rgb(126, 96, 191);"><span data-copy="7E60BF">#7E60BF</span></div>
+                                <div class="place c0" style="background-color: rgb(67, 56, 120);"><span data-copy="433878">#433878</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="11">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(234, 216, 177);"><span data-copy="#EAD8B1">#EAD8B1</span></div>
-                                <div class="place c2" style="background-color: rgb(106, 154, 176);"><span data-copy="#6A9AB0">#6A9AB0</span></div>
-                                <div class="place c1" style="background-color: rgb(58, 109, 140);"><span data-copy="#3A6D8C">#3A6D8C</span></div>
-                                <div class="place c0" style="background-color: rgb(0, 31, 63);"><span data-copy="#001F3F">#001F3F</span></div>
+                                <div class="place c3" style="background-color: rgb(234, 216, 177);"><span data-copy="EAD8B1">#EAD8B1</span></div>
+                                <div class="place c2" style="background-color: rgb(106, 154, 176);"><span data-copy="6A9AB0">#6A9AB0</span></div>
+                                <div class="place c1" style="background-color: rgb(58, 109, 140);"><span data-copy="3A6D8C">#3A6D8C</span></div>
+                                <div class="place c0" style="background-color: rgb(0, 31, 63);"><span data-copy="001F3F">#001F3F</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="12">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(236, 223, 204);"><span data-copy="#ECDFCC">#ECDFCC</span></div>
-                                <div class="place c2" style="background-color: rgb(105, 117, 101);"><span data-copy="#697565">#697565</span></div>
-                                <div class="place c1" style="background-color: rgb(60, 61, 55);"><span data-copy="#3C3D37">#3C3D37</span></div>
-                                <div class="place c0" style="background-color: rgb(24, 28, 20);"><span data-copy="#181C14">#181C14</span></div>
+                                <div class="place c3" style="background-color: rgb(236, 223, 204);"><span data-copy="ECDFCC">#ECDFCC</span></div>
+                                <div class="place c2" style="background-color: rgb(105, 117, 101);"><span data-copy="697565">#697565</span></div>
+                                <div class="place c1" style="background-color: rgb(60, 61, 55);"><span data-copy="3C3D37">#3C3D37</span></div>
+                                <div class="place c0" style="background-color: rgb(24, 28, 20);"><span data-copy="181C14">#181C14</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="13">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(66, 66, 66);"><span data-copy="#424242">#424242</span></div>
-                                <div class="place c2" style="background-color: rgb(34, 151, 153);"><span data-copy="#229799">#229799</span></div>
-                                <div class="place c1" style="background-color: rgb(72, 207, 203);"><span data-copy="#48CFCB">#48CFCB</span></div>
-                                <div class="place c0" style="background-color: rgb(245, 245, 245);"><span data-copy="#F5F5F5">#F5F5F5</span></div>
+                                <div class="place c3" style="background-color: rgb(66, 66, 66);"><span data-copy="424242">#424242</span></div>
+                                <div class="place c2" style="background-color: rgb(34, 151, 153);"><span data-copy="229799">#229799</span></div>
+                                <div class="place c1" style="background-color: rgb(72, 207, 203);"><span data-copy="48CFCB">#48CFCB</span></div>
+                                <div class="place c0" style="background-color: rgb(245, 245, 245);"><span data-copy="F5F5F5">#F5F5F5</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="14">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(225, 215, 183);"><span data-copy="#E1D7B7">#E1D7B7</span></div>
-                                <div class="place c2" style="background-color: rgb(30, 42, 94);"><span data-copy="#1E2A5E">#1E2A5E</span></div>
-                                <div class="place c1" style="background-color: rgb(85, 103, 156);"><span data-copy="#55679C">#55679C</span></div>
-                                <div class="place c0" style="background-color: rgb(124, 147, 195);"><span data-copy="#7C93C3">#7C93C3</span></div>
+                                <div class="place c3" style="background-color: rgb(225, 215, 183);"><span data-copy="E1D7B7">#E1D7B7</span></div>
+                                <div class="place c2" style="background-color: rgb(30, 42, 94);"><span data-copy="1E2A5E">#1E2A5E</span></div>
+                                <div class="place c1" style="background-color: rgb(85, 103, 156);"><span data-copy="55679C">#55679C</span></div>
+                                <div class="place c0" style="background-color: rgb(124, 147, 195);"><span data-copy="7C93C3">#7C93C3</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="15">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(235, 244, 246);"><span data-copy="#EBF4F6">#EBF4F6</span></div>
-                                <div class="place c2" style="background-color: rgb(55, 183, 195);"><span data-copy="#37B7C3">#37B7C3</span></div>
-                                <div class="place c1" style="background-color: rgb(8, 131, 149);"><span data-copy="#088395">#088395</span></div>
-                                <div class="place c0" style="background-color: rgb(7, 25, 82);"><span data-copy="#071952">#071952</span></div>
+                                <div class="place c3" style="background-color: rgb(235, 244, 246);"><span data-copy="EBF4F6">#EBF4F6</span></div>
+                                <div class="place c2" style="background-color: rgb(55, 183, 195);"><span data-copy="37B7C3">#37B7C3</span></div>
+                                <div class="place c1" style="background-color: rgb(8, 131, 149);"><span data-copy="088395">#088395</span></div>
+                                <div class="place c0" style="background-color: rgb(7, 25, 82);"><span data-copy="071952">#071952</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="16">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="#EEEEEE">#EEEEEE</span></div>
-                                <div class="place c2" style="background-color: rgb(199, 54, 89);"><span data-copy="#C73659">#C73659</span></div>
-                                <div class="place c1" style="background-color: rgb(169, 29, 58);"><span data-copy="#A91D3A">#A91D3A</span></div>
-                                <div class="place c0" style="background-color: rgb(21, 21, 21);"><span data-copy="#151515">#151515</span></div>
+                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="EEEEEE">#EEEEEE</span></div>
+                                <div class="place c2" style="background-color: rgb(199, 54, 89);"><span data-copy="C73659">#C73659</span></div>
+                                <div class="place c1" style="background-color: rgb(169, 29, 58);"><span data-copy="A91D3A">#A91D3A</span></div>
+                                <div class="place c0" style="background-color: rgb(21, 21, 21);"><span data-copy="151515">#151515</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="17">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="#EEEEEE">#EEEEEE</span></div>
-                                <div class="place c2" style="background-color: rgb(118, 171, 174);"><span data-copy="#76ABAE">#76ABAE</span></div>
-                                <div class="place c1" style="background-color: rgb(49, 54, 63);"><span data-copy="#31363F">#31363F</span></div>
-                                <div class="place c0" style="background-color: rgb(34, 40, 49);"><span data-copy="#222831">#222831</span></div>
+                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="EEEEEE">#EEEEEE</span></div>
+                                <div class="place c2" style="background-color: rgb(118, 171, 174);"><span data-copy="76ABAE">#76ABAE</span></div>
+                                <div class="place c1" style="background-color: rgb(49, 54, 63);"><span data-copy="31363F">#31363F</span></div>
+                                <div class="place c0" style="background-color: rgb(34, 40, 49);"><span data-copy="222831">#222831</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="18">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(61, 61, 61);"><span data-copy="#3D3D3D">#3D3D3D</span></div>
-                                <div class="place c2" style="background-color: rgb(87, 142, 126);"><span data-copy="#578E7E">#578E7E</span></div>
-                                <div class="place c1" style="background-color: rgb(245, 236, 213);"><span data-copy="#F5ECD5">#F5ECD5</span></div>
-                                <div class="place c0" style="background-color: rgb(255, 250, 236);"><span data-copy="#FFFAEC">#FFFAEC</span></div>
+                                <div class="place c3" style="background-color: rgb(61, 61, 61);"><span data-copy="3D3D3D">#3D3D3D</span></div>
+                                <div class="place c2" style="background-color: rgb(87, 142, 126);"><span data-copy="578E7E">#578E7E</span></div>
+                                <div class="place c1" style="background-color: rgb(245, 236, 213);"><span data-copy="F5ECD5">#F5ECD5</span></div>
+                                <div class="place c0" style="background-color: rgb(255, 250, 236);"><span data-copy="FFFAEC">#FFFAEC</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="19">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(220, 215, 201);"><span data-copy="#DCD7C9">#DCD7C9</span></div>
-                                <div class="place c2" style="background-color: rgb(162, 123, 92);"><span data-copy="#A27B5C">#A27B5C</span></div>
-                                <div class="place c1" style="background-color: rgb(63, 78, 79);"><span data-copy="#3F4E4F">#3F4E4F</span></div>
-                                <div class="place c0" style="background-color: rgb(44, 54, 57);"><span data-copy="#2C3639">#2C3639</span></div>
+                                <div class="place c3" style="background-color: rgb(220, 215, 201);"><span data-copy="DCD7C9">#DCD7C9</span></div>
+                                <div class="place c2" style="background-color: rgb(162, 123, 92);"><span data-copy="A27B5C">#A27B5C</span></div>
+                                <div class="place c1" style="background-color: rgb(63, 78, 79);"><span data-copy="3F4E4F">#3F4E4F</span></div>
+                                <div class="place c0" style="background-color: rgb(44, 54, 57);"><span data-copy="2C3639">#2C3639</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="20">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(236, 219, 186);"><span data-copy="#ECDBBA">#ECDBBA</span></div>
-                                <div class="place c2" style="background-color: rgb(200, 75, 49);"><span data-copy="#C84B31">#C84B31</span></div>
-                                <div class="place c1" style="background-color: rgb(52, 103, 81);"><span data-copy="#346751">#346751</span></div>
-                                <div class="place c0" style="background-color: rgb(22, 22, 22);"><span data-copy="#161616">#161616</span></div>
+                                <div class="place c3" style="background-color: rgb(236, 219, 186);"><span data-copy="ECDBBA">#ECDBBA</span></div>
+                                <div class="place c2" style="background-color: rgb(200, 75, 49);"><span data-copy="C84B31">#C84B31</span></div>
+                                <div class="place c1" style="background-color: rgb(52, 103, 81);"><span data-copy="346751">#346751</span></div>
+                                <div class="place c0" style="background-color: rgb(22, 22, 22);"><span data-copy="161616">#161616</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="21">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(246, 244, 240);"><span data-copy="#F6F4F0">#F6F4F0</span></div>
-                                <div class="place c2" style="background-color: rgb(121, 215, 190);"><span data-copy="#79D7BE">#79D7BE</span></div>
-                                <div class="place c1" style="background-color: rgb(77, 161, 169);"><span data-copy="#4DA1A9">#4DA1A9</span></div>
-                                <div class="place c0" style="background-color: rgb(46, 80, 119);"><span data-copy="#2E5077">#2E5077</span></div>
+                                <div class="place c3" style="background-color: rgb(246, 244, 240);"><span data-copy="F6F4F0">#F6F4F0</span></div>
+                                <div class="place c2" style="background-color: rgb(121, 215, 190);"><span data-copy="79D7BE">#79D7BE</span></div>
+                                <div class="place c1" style="background-color: rgb(77, 161, 169);"><span data-copy="4DA1A9">#4DA1A9</span></div>
+                                <div class="place c0" style="background-color: rgb(46, 80, 119);"><span data-copy="2E5077">#2E5077</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="22">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(245, 239, 231);"><span data-copy="#F5EFE7">#F5EFE7</span></div>
-                                <div class="place c2" style="background-color: rgb(216, 196, 182);"><span data-copy="#D8C4B6">#D8C4B6</span></div>
-                                <div class="place c1" style="background-color: rgb(62, 88, 121);"><span data-copy="#3E5879">#3E5879</span></div>
-                                <div class="place c0" style="background-color: rgb(33, 53, 85);"><span data-copy="#213555">#213555</span></div>
+                                <div class="place c3" style="background-color: rgb(245, 239, 231);"><span data-copy="F5EFE7">#F5EFE7</span></div>
+                                <div class="place c2" style="background-color: rgb(216, 196, 182);"><span data-copy="D8C4B6">#D8C4B6</span></div>
+                                <div class="place c1" style="background-color: rgb(62, 88, 121);"><span data-copy="3E5879">#3E5879</span></div>
+                                <div class="place c0" style="background-color: rgb(33, 53, 85);"><span data-copy="213555">#213555</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="23">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(73, 54, 40);"><span data-copy="#493628">#493628</span></div>
-                                <div class="place c2" style="background-color: rgb(171, 136, 109);"><span data-copy="#AB886D">#AB886D</span></div>
-                                <div class="place c1" style="background-color: rgb(214, 192, 179);"><span data-copy="#D6C0B3">#D6C0B3</span></div>
-                                <div class="place c0" style="background-color: rgb(228, 224, 225);"><span data-copy="#E4E0E1">#E4E0E1</span></div>
+                                <div class="place c3" style="background-color: rgb(73, 54, 40);"><span data-copy="493628">#493628</span></div>
+                                <div class="place c2" style="background-color: rgb(171, 136, 109);"><span data-copy="AB886D">#AB886D</span></div>
+                                <div class="place c1" style="background-color: rgb(214, 192, 179);"><span data-copy="D6C0B3">#D6C0B3</span></div>
+                                <div class="place c0" style="background-color: rgb(228, 224, 225);"><span data-copy="E4E0E1">#E4E0E1</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="24">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(184, 0, 31);"><span data-copy="#B8001F">#B8001F</span></div>
-                                <div class="place c2" style="background-color: rgb(252, 250, 238);"><span data-copy="#FCFAEE">#FCFAEE</span></div>
-                                <div class="place c1" style="background-color: rgb(80, 118, 135);"><span data-copy="#507687">#507687</span></div>
-                                <div class="place c0" style="background-color: rgb(56, 75, 112);"><span data-copy="#384B70">#384B70</span></div>
+                                <div class="place c3" style="background-color: rgb(184, 0, 31);"><span data-copy="B8001F">#B8001F</span></div>
+                                <div class="place c2" style="background-color: rgb(252, 250, 238);"><span data-copy="FCFAEE">#FCFAEE</span></div>
+                                <div class="place c1" style="background-color: rgb(80, 118, 135);"><span data-copy="507687">#507687</span></div>
+                                <div class="place c0" style="background-color: rgb(56, 75, 112);"><span data-copy="384B70">#384B70</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="25">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(255, 235, 0);"><span data-copy="#FFEB00">#FFEB00</span></div>
-                                <div class="place c2" style="background-color: rgb(87, 123, 193);"><span data-copy="#577BC1">#577BC1</span></div>
-                                <div class="place c1" style="background-color: rgb(52, 76, 183);"><span data-copy="#344CB7">#344CB7</span></div>
-                                <div class="place c0" style="background-color: rgb(0, 9, 87);"><span data-copy="#000957">#000957</span></div>
+                                <div class="place c3" style="background-color: rgb(255, 235, 0);"><span data-copy="FFEB00">#FFEB00</span></div>
+                                <div class="place c2" style="background-color: rgb(87, 123, 193);"><span data-copy="577BC1">#577BC1</span></div>
+                                <div class="place c1" style="background-color: rgb(52, 76, 183);"><span data-copy="344CB7">#344CB7</span></div>
+                                <div class="place c0" style="background-color: rgb(0, 9, 87);"><span data-copy="000957">#000957</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="26">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="#EEEEEE">#EEEEEE</span></div>
-                                <div class="place c2" style="background-color: rgb(216, 64, 64);"><span data-copy="#D84040">#D84040</span></div>
-                                <div class="place c1" style="background-color: rgb(142, 22, 22);"><span data-copy="#8E1616">#8E1616</span></div>
-                                <div class="place c0" style="background-color: rgb(29, 22, 22);"><span data-copy="#1D1616">#1D1616</span></div>
+                                <div class="place c3" style="background-color: rgb(238, 238, 238);"><span data-copy="EEEEEE">#EEEEEE</span></div>
+                                <div class="place c2" style="background-color: rgb(216, 64, 64);"><span data-copy="D84040">#D84040</span></div>
+                                <div class="place c1" style="background-color: rgb(142, 22, 22);"><span data-copy="8E1616">#8E1616</span></div>
+                                <div class="place c0" style="background-color: rgb(29, 22, 22);"><span data-copy="1D1616">#1D1616</span></div>
                             </div>
                         </div>
                         <div class="item" data-index="27">
                             <div class="palette">
-                                <div class="place c3" style="background-color: rgb(239, 233, 213);"><span data-copy="#EFE9D5">#EFE9D5</span></div>
-                                <div class="place c2" style="background-color: rgb(113, 187, 178);"><span data-copy="#71BBB2">#71BBB2</span></div>
-                                <div class="place c1" style="background-color: rgb(73, 125, 116);"><span data-copy="#497D74">#497D74</span></div>
-                                <div class="place c0" style="background-color: rgb(39, 68, 93);"><span data-copy="#27445D">#27445D</span></div>
+                                <div class="place c3" style="background-color: rgb(239, 233, 213);"><span data-copy="EFE9D5">#EFE9D5</span></div>
+                                <div class="place c2" style="background-color: rgb(113, 187, 178);"><span data-copy="71BBB2">#71BBB2</span></div>
+                                <div class="place c1" style="background-color: rgb(73, 125, 116);"><span data-copy="497D74">#497D74</span></div>
+                                <div class="place c0" style="background-color: rgb(39, 68, 93);"><span data-copy="27445D">#27445D</span></div>
                             </div>
                         </div>
                     </div>
+                    <script type="text/javascript">
+                        document.querySelectorAll('.palettes .item').forEach(function (item) {
+                            item.querySelectorAll('.palette .place').forEach(function (place) {
+                                place.addEventListener('click', function (event) {
+                                    const span = this.querySelector('span');
+                                    if (span) {
+                                        const colorCode = span.getAttribute('data-copy');
+
+                                        // 클립보드에 복사
+                                        navigator.clipboard.writeText(colorCode).then(function () {
+                                            console.log('클립보드 복사 성공:', colorCode);
+                                            // 화면에도 표시하고 싶다면 아래처럼
+                                            document.getElementById('color_code').textContent = colorCode;
+                                        }).catch(function (err) {
+                                            console.error('복사 실패:', err);
+                                        });
+                                    }
+
+                                    event.preventDefault();
+                                });
+                            });
+                        });
+                    </script>
+
 
                 </div>
             </div>
