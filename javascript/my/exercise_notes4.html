@@ -117,6 +117,7 @@
         }
 
         .controls .timer {
+            font-size: 1.25rem;
             font-weight: bold;
         }
 
@@ -478,11 +479,14 @@
 
         function createTimer(seconds, display) {
             let time = seconds;
-            display.textContent = `${time}s`;
+            display.textContent = `⏱ ${time}s`;
             const timer = setInterval(() => {
                 time--;
-                display.textContent = `${time}s`;
-                if (time < 0) clearInterval(timer);
+                display.textContent = `⏱ ${time}s`;
+                if (time < 0) {
+                    clearInterval(timer);
+                    display.textContent = `잘했어!! 👍🏻`;
+                }
             }, 1000);
         }
 
@@ -519,6 +523,7 @@
                 controls.className = "controls";
 
                 [
+                    { label: "10초", sec: 10 },
                     { label: "30초", sec: 30 },
                     { label: "1분", sec: 60 },
                     { label: "1분 30초", sec: 90 },
