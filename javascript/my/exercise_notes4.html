@@ -6,11 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>운동 투두리스트</title>
     <style>
+        :root {
+            /* 🎨 색상 */
+            --color-white: #fff;
+            --color-main-bg: #ECF0F1;
+            --color-main-light: #BDC3C7;
+            --color-main-dark: #2C3E50;
+            --color-main-darker: #2C3E50;
+
+        }
+
         body {
             font-family: sans-serif;
-            background: #EEEEEE;
+            background: var(--color-main-bg);
             padding: 2rem 2rem 5rem;
             margin: auto;
+            color: var(--color-main-darker);
         }
 
         * {
@@ -29,10 +40,10 @@
             padding: 0;
         }
 
-        input[type='text'],
+        input[type="text"],
         textarea {
             padding: 0.5rem;
-            border: 1px solid #ccc;
+            border: 1px solid var(--color-main-light);
             resize: vertical;
             font-size: 0.9rem;
         }
@@ -44,13 +55,19 @@
 
         button {
             display: inline-block;
-            border: 1px solid #ccc;b
-            -webkit-border-radius: 0;
-            border-radius: 0;
+            -webkit-appearance: none;
             -moz-appearance: none;
             -o-appearance: none;
             appearance: none;
             padding: 0.3rem 0.5rem;
+            background: var(--color-main-bg);
+            border: 1px solid var(--color-main-light);
+            border-radius: 0;
+            color: #000;
+        }
+
+        button[type="submit"] {
+            background: var(--color-main-bg);
         }
 
         .guide-message {
@@ -59,8 +76,8 @@
 
         .todoList li,
         .addForm {
-            background: #fff;
-            border: 1px solid #ddd;
+            background: var(--color-white);
+            border: 1px solid var(--color-main-light);
             padding: 1rem;
             margin-bottom: 1.5rem;
             border-radius: 8px;
@@ -121,6 +138,7 @@
 
         .addForm button {
             padding: 0.5rem;
+            
         }
 
         #saveBtn {
@@ -131,14 +149,15 @@
             padding: 1rem;
             font-size: 1rem;
             cursor: pointer;
-            background: #3b82f6;
+            background: var(--color-main-dark);
+            border: 0;
             color: white;
             border: none;
             border-radius: 5px;
         }
 
         #saveBtn:hover {
-            background: #2563eb;
+            background: var(--color-main-darker);
         }
 
         /* 🔸 탭 사이드바 */
@@ -149,8 +168,7 @@
             box-sizing: border-box;
             width: 120px;
             padding: 1rem;
-            background-color: #f1f1f1;
-            border-right: 1px solid #ddd;
+            background-color: var(--color-main-light);
             position: fixed;
             left: 0;
             top: 0;
@@ -160,8 +178,8 @@
 
         .tab-sidebar button {
             padding: 0.75rem 1rem;
-            background-color: #fff;
-            border: 1px solid #ccc;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-main-light);
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
@@ -170,9 +188,9 @@
 
         .tab-sidebar button:hover,
         .tab-sidebar button.active {
-            background-color: #007bff;
+            background-color: var(--color-main-dark);
             color: white;
-            border-color: #007bff;
+            border-color: var(--color-main-dark);
         }
 
         /* 🔹 메인 콘텐츠 */
@@ -180,8 +198,8 @@
             width: 80%;
             max-width: 900px;
             margin: 0 auto;
-            background: #fff;
-            border: 1px solid #ddd;
+            background: var(--color-white);
+            border: 1px solid var(--color-main-light);
             border-radius: 6px;
             overflow: hidden;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
@@ -201,6 +219,7 @@
                 gap: 0.5rem;
                 width: 100%;
                 height: auto;
+                background-color: var(--color-main-bg);
                 position: relative;
                 border-right: none;
                 margin-bottom: 1rem;
