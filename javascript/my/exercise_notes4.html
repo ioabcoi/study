@@ -29,8 +29,21 @@
             padding: 0;
         }
 
-        li,
-        form {
+        input[type='checkbox'] {
+            width: 16px;
+            height: 16px;
+        }
+
+        button {
+            padding: 0.3rem 0.5rem;
+        }
+
+        .guide-message {
+            font-size: 0.8rem;
+        }
+
+        .todoList li,
+        .addForm {
             background: white;
             border: 1px solid #ddd;
             padding: 1rem;
@@ -43,22 +56,13 @@
             font-size: 0.9rem;
         }
 
-        input[type='checkbox'] {
-            width: 16px;
-            height: 16px;
-        }
-
-        .checked {
-            opacity: 0.6;
-        }
-
         .todo-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .todo-title {
+        .todo-header .todo-title {
             font-size: 1.1rem;
         }
 
@@ -72,12 +76,8 @@
             flex-wrap: wrap;
         }
 
-        .timer {
+        .controls .timer {
             font-weight: bold;
-        }
-
-        button {
-            padding: 0.25rem 0.5rem;
         }
 
         .action-buttons {
@@ -86,14 +86,24 @@
             justify-content: flex-end;
         }
 
-        form {
+        .checked {
+            opacity: 0.5;
+        }
+
+        .checked .todo-desc,
+        .checked .controls,
+        .checked .action-buttons {
+            display: none;
+        }
+
+        .addForm {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
         }
 
-        input[type='text'],
-        textarea {
+        .addForm input[type='text'],
+        .addForm textarea {
             padding: 0.5rem;
             border: 1px solid #ccc;
             resize: vertical;
@@ -117,19 +127,7 @@
             background: #2563eb;
         }
 
-        /* 🔸 레이아웃 추가 스타일 */
-        .container {
-            width: 80%;
-            max-width: 900px;
-            margin: 0 auto;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-        }
-
-        /* 🔸 사이드바 탭 버튼 스타일 */
+        /* 🔸 탭 사이드바 */
         .tab-sidebar {
             display: flex;
             flex-direction: column;
@@ -163,12 +161,22 @@
             border-color: #007bff;
         }
 
-        /* 🔸 본문 영역은 탭 메뉴 너비만큼 왼쪽 마진 줘야 안 겹침 */
+        /* 🔹 메인 콘텐츠 */
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
         .main-content {
             padding: 2rem;
         }
 
-        /* 🔸 모바일 반응형 스타일 */
         @media (max-width: 1280px) {
             body {
                 padding: 3rem 5rem 7rem;
@@ -232,10 +240,12 @@
         <div class="main-content">
             <h2><span id="currentCategory">상체</span></h2>
 
-            <ul id="todoList"></ul>
+            <p class="guide-message">👉 운동 항목을 드래그해서 순서를 자유롭게 정해보세요!</p>
+
+            <ul id="todoList" class="todoList"></ul>
 
             <h3>➕ 운동 추가</h3>
-            <form id="addForm">
+            <form id="addForm" class="addForm">
                 <input type="text" id="newTitle" placeholder="운동 제목" required />
                 <textarea id="newDesc" placeholder="운동 설명" rows="4"></textarea>
                 <button type="submit">추가</button>
