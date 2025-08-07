@@ -29,12 +29,27 @@
             padding: 0;
         }
 
+        input[type='text'],
+        textarea {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            resize: vertical;
+            font-size: 0.9rem;
+        }
+
         input[type='checkbox'] {
             width: 16px;
             height: 16px;
         }
 
         button {
+            display: inline-block;
+            border: 1px solid #ccc;b
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
             padding: 0.3rem 0.5rem;
         }
 
@@ -44,7 +59,7 @@
 
         .todoList li,
         .addForm {
-            background: white;
+            background: #fff;
             border: 1px solid #ddd;
             padding: 1rem;
             margin-bottom: 1.5rem;
@@ -68,6 +83,8 @@
 
         .todo-desc {
             margin: 0.3rem 0;
+            font-size: 0.8rem;
+            line-height: 1.5;
         }
 
         .controls {
@@ -102,11 +119,8 @@
             gap: 0.5rem;
         }
 
-        .addForm input[type='text'],
-        .addForm textarea {
+        .addForm button {
             padding: 0.5rem;
-            border: 1px solid #ccc;
-            resize: vertical;
         }
 
         #saveBtn {
@@ -208,6 +222,7 @@
                 padding: 1.5rem;
             }
         }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem 1rem 6rem;
@@ -252,7 +267,7 @@
             </form>
         </div>
     </div>
-    
+
     <button id="saveBtn">💾</button>
 
     <script>
