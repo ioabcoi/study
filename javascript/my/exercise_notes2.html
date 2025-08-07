@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>운동 투두리스트</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f7f7f7;
+            padding: 2rem;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        * {
+            font-family: sans-serif;
+        }
+
+        h1,
+        h2 {
+            margin: 1rem;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li, form {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            cursor: grab;
+            font-size: 0.9rem;
+        }
+
+        .checked {
+            opacity: 0.6;
+        }
+
+        .todo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .todo-desc {
+            margin: 0.3rem 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .timer {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 0.25rem 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input[type='text'],
+        textarea {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        #saveBtn {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #saveBtn:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏋🏻 운동 투두리스트</h1>
+    <ul id="todoList"></ul>
+
+    <h2>➕ 운동 추가</h2>
+    <form id="addForm">
+        <input type="text" id="newTitle" placeholder="운동 제목" required />
+        <textarea id="newDesc" placeholder="운동 설명" rows="4"></textarea>
+        <button type="submit">추가</button>
+    </form>
+
+    <!-- 저장 버튼 추가 -->
+    <button id="saveBtn">💾 저장하기</button>
+
+    <script>
+        // localStorage에서 데이터 불러오기 (없으면 기본 데이터로 초기화)
+        const storedData = localStorage.getItem('exerciseData');
+        const data = storedData ? JSON.parse(storedData) : [
+            {
+                title: "사이드 레그 리프트",
+                description: "옆으로 누워 한쪽 다리 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 15회 × 1세트<br>휴식 없음<br>👉🏻 엉덩이 바깥쪽 라인 정리 + 골반 안정화에 좋아!",
+            },
+            {
+                title: "벽 스쿼트",
+                description: "벽에 등 대고 앉은 자세 유지<br>코로 들이마시고 입으로 내쉬기 반복<br>30초~1분<br>휴식 없음<br>👉🏻 하체 근지구력 향상 + 무릎 안정화에 효과적!",
+            }
+        ];
+
+        const todoList = document.getElementById("todoList");
+        const addForm = document.getElementById("addForm");
+        const newTitle = document.getElementById("newTitle");
+        const newDesc = document.getElementById("newDesc");
+        const saveBtn = document.getElementById("saveBtn");
+
+        addForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const title = newTitle.value.trim();
+            const desc = newDesc.value.trim().replace(/\n/g, "<br>");
+            if (!title) return;
+
+            data.push({ title, description: desc });
+            newTitle.value = "";
+            newDesc.value = "";
+            render();
+        });
+
+        saveBtn.addEventListener('click', () => {
+            localStorage.setItem('exerciseData', JSON.stringify(data));
+            alert('운동 리스트가 저장되었어요!');
+        });
+
+        function createTimer(seconds, display) {
+            let time = seconds;
+            display.textContent = `${time}s`;
+            const timer = setInterval(() => {
+                time--;
+                display.textContent = `${time}s`;
+                if (time < 0) clearInterval(timer);
+            }, 1000);
+        }
+
+        function render() {
+            const sorted = [...data.filter(d => d.checked), ...data.filter(d => !d.checked)];
+            todoList.innerHTML = "";
+            sorted.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = item.checked ? "checked" : "";
+
+                const header = document.createElement("div");
+                header.className = "todo-header";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = !!item.checked;
+                checkbox.addEventListener("change", () => {
+                    item.checked = checkbox.checked;
+                    render();
+                });
+
+                const title = document.createElement("strong");
+                title.innerHTML = item.title;
+
+                header.appendChild(checkbox);
+                header.appendChild(title);
+
+                const desc = document.createElement("div");
+                desc.className = "todo-desc";
+                desc.innerHTML = item.description;
+
+                const controls = document.createElement("div");
+                controls.className = "controls";
+
+                [
+                    { label: "30초", sec: 30 },
+                    { label: "1분", sec: 60 },
+                    { label: "1분 30초", sec: 90 },
+                    { label: "2분", sec: 120 },
+                    { label: "3분", sec: 180 },
+                    { label: "5분", sec: 300 },
+                    { label: "7분", sec: 420 },
+                    { label: "10분", sec: 600 }
+                ].forEach(({ label, sec }) => {
+                    const btn = document.createElement("button");
+                    btn.textContent = label;
+                    btn.className = "start-timer";
+                    btn.addEventListener("click", () => createTimer(sec, timer));
+                    controls.appendChild(btn);
+                });
+
+                const timer = document.createElement("div");
+                timer.className = "timer";
+                controls.appendChild(timer);
+
+                const actionBtns = document.createElement("div");
+                actionBtns.className = "action-buttons";
+
+                const editBtn = document.createElement("button");
+                editBtn.textContent = "✏️ 수정";
+                editBtn.addEventListener("click", () => {
+                    const newTitle = prompt("운동 제목 수정", item.title);
+                    if (newTitle === null) return;
+                    const newDesc = prompt("운동 설명 수정", item.description.replace(/<br>/g, "\n"));
+                    if (newDesc === null) return;
+                    item.title = newTitle.trim();
+                    item.description = newDesc.trim().replace(/\n/g, "<br>");
+                    render();
+                });
+
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "🗑️ 삭제";
+                delBtn.addEventListener("click", () => {
+                    data.splice(index, 1);
+                    render();
+                });
+
+                actionBtns.appendChild(editBtn);
+                actionBtns.appendChild(delBtn);
+
+                li.appendChild(header);
+                li.appendChild(desc);
+                li.appendChild(controls);
+                li.appendChild(actionBtns);
+
+                li.setAttribute("draggable", true);
+                li.addEventListener("dragstart", e => {
+                    e.dataTransfer.setData("text/plain", index);
+                });
+                li.addEventListener("dragover", e => {
+                    e.preventDefault();
+                });
+                li.addEventListener("drop", e => {
+                    e.preventDefault();
+                    const fromIndex = e.dataTransfer.getData("text/plain");
+                    const toIndex = index;
+                    const moved = data.splice(fromIndex, 1)[0];
+                    data.splice(toIndex, 0, moved);
+                    render();
+                });
+
+                todoList.appendChild(li);
+            });
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

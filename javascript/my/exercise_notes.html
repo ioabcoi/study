@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>운동 투두리스트</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f7f7f7;
+            padding: 2rem;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            cursor: grab;
+        }
+
+        .checked {
+            opacity: 0.6;
+        }
+
+        .todo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .timer {
+            font-weight: bold;
+        }
+
+        .start-timer {
+            padding: 0.25rem 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏋🏻 운동 투두리스트</h1>
+    <ul id="todoList"></ul>
+
+    <script>
+        const data = [
+            {
+                title: "사이드 레그 리프트",
+                description: "옆으로 누워 한쪽 다리 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 15회 × 1세트<br>휴식 없음<br>👉🏻 엉덩이 바깥쪽 라인 정리 + 골반 안정화에 좋아!",
+            },
+            {
+                title: "벽 스쿼트",
+                description: "벽에 등 대고 앉은 자세 유지<br>코로 들이마시고 입으로 내쉬기 반복<br>30초~1분<br>휴식 없음<br>👉🏻 하체 근지구력 향상 + 무릎 안정화에 효과적!",
+            }
+        ];
+
+        const todoList = document.getElementById("todoList");
+
+        function createTimer(seconds, display) {
+            let time = seconds;
+            const timer = setInterval(() => {
+                display.textContent = `${time}s`;
+                time--;
+                if (time < 0) clearInterval(timer);
+            }, 1000);
+        }
+
+        function render() {
+            const sorted = [...data.filter(d => d.checked), ...data.filter(d => !d.checked)];
+            todoList.innerHTML = "";
+            sorted.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = item.checked ? "checked" : "";
+
+                const header = document.createElement("div");
+                header.className = "todo-header";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = !!item.checked;
+                checkbox.addEventListener("change", () => {
+                    item.checked = checkbox.checked;
+                    render();
+                });
+
+                const title = document.createElement("strong");
+                title.innerHTML = item.title;
+
+                header.appendChild(checkbox);
+                header.appendChild(title);
+
+                const desc = document.createElement("div");
+                desc.innerHTML = item.description;
+
+                const controls = document.createElement("div");
+                controls.className = "controls";
+
+                [10, 15, 20].forEach((sec) => {
+                    const btn = document.createElement("button");
+                    btn.textContent = `${sec}s`;
+                    btn.className = "start-timer";
+                    btn.addEventListener("click", () => createTimer(sec, timer));
+                    controls.appendChild(btn);
+                });
+
+                const timer = document.createElement("div");
+                timer.className = "timer";
+                controls.appendChild(timer);
+
+                li.appendChild(header);
+                li.appendChild(desc);
+                li.appendChild(controls);
+
+                li.setAttribute("draggable", true);
+                li.addEventListener("dragstart", e => {
+                    e.dataTransfer.setData("text/plain", index);
+                });
+                li.addEventListener("dragover", e => {
+                    e.preventDefault();
+                });
+                li.addEventListener("drop", e => {
+                    e.preventDefault();
+                    const fromIndex = e.dataTransfer.getData("text/plain");
+                    const toIndex = index;
+                    const moved = data.splice(fromIndex, 1)[0];
+                    data.splice(toIndex, 0, moved);
+                    render();
+                });
+
+                todoList.appendChild(li);
+            });
+        }
+
+        render();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>운동 투두리스트</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f7f7f7;
+            padding: 2rem;
+            margin: auto;
+        }
+
+        * {
+            font-family: sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 1rem;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li,
+        form {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            cursor: grab;
+            font-size: 0.9rem;
+        }
+
+        input[type='checkbox'] {
+            width: 16px;
+            height: 16px;
+        }
+
+        .checked {
+            opacity: 0.6;
+        }
+
+        .todo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .todo-desc {
+            margin: 0.3rem 0;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .timer {
+            font-weight: bold;
+        }
+
+        button {
+            padding: 0.25rem 0.5rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        input[type='text'],
+        textarea {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            resize: vertical;
+        }
+
+        #saveBtn {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #saveBtn:hover {
+            background: #2563eb;
+        }
+
+        /* 🔸 레이아웃 추가 스타일 */
+        .container {
+            display: flex;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-sidebar {
+            flex-shrink: 0;
+            width: 120px;
+            background-color: #f0f0f0;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tab-btn {
+            padding: 1rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            transition: background 0.2s;
+            font-size: 1rem;
+        }
+
+        .tab-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .tab-btn.active {
+            background-color: #d0d0d0;
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏋🏻 운동 투두리스트</h1>
+
+    <div class="container">
+        <!-- 🔸 탭 사이드바 -->
+        <div class="tab-sidebar">
+            <button id="tab-upper" class="tab-btn active">상체</button>
+            <button id="tab-lower" class="tab-btn">하체</button>
+        </div>
+
+        <!-- 🔹 메인 콘텐츠 -->
+        <div class="main-content">
+            <h2><span id="currentCategory">상체</span></h2>
+
+            <ul id="todoList"></ul>
+
+            <h3>➕ 운동 추가</h3>
+            <form id="addForm">
+                <input type="text" id="newTitle" placeholder="운동 제목" required />
+                <textarea id="newDesc" placeholder="운동 설명" rows="4"></textarea>
+                <button type="submit">추가</button>
+            </form>
+
+            <button id="saveBtn">💾 저장하기</button>
+        </div>
+    </div>
+
+    <script>
+        const tabUpper = document.getElementById("tab-upper");
+        const tabLower = document.getElementById("tab-lower");
+        const currentCategoryEl = document.getElementById("currentCategory");
+        let currentTab = "upper";
+
+        const STORAGE_KEYS = {
+            upper: "upperBodyData",
+            lower: "lowerBodyData"
+        };
+
+        let data = {
+            upper: [],
+            lower: []
+        };
+
+        function loadData() {
+            Object.keys(STORAGE_KEYS).forEach(key => {
+                const stored = localStorage.getItem(STORAGE_KEYS[key]);
+                data[key] = stored ? JSON.parse(stored) : getDefaultData(key);
+            });
+        }
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEYS[currentTab], JSON.stringify(data[currentTab]));
+            alert("운동 리스트가 저장되었어요!");
+        }
+
+        function getDefaultData(category) {
+            if (category === "upper") {
+                return [
+                    {
+                        title: "팔 벌려 높이 들기",
+                        description: "팔을 옆으로 벌리고 천천히 들어올리기<br>15회 x 2세트<br>👉🏻 어깨라인 정리!"
+                    }
+                ];
+            } else if (category === "lower") {
+                return [
+                    {
+                        title: "사이드 레그 리프트",
+                        description: "옆으로 누워 한쪽 다리 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 15회 × 1세트<br>👉🏻 엉덩이 바깥쪽 라인 정리!"
+                    }
+                ];
+            }
+            return [];
+        }
+
+        const todoList = document.getElementById("todoList");
+        const addForm = document.getElementById("addForm");
+        const newTitle = document.getElementById("newTitle");
+        const newDesc = document.getElementById("newDesc");
+        const saveBtn = document.getElementById("saveBtn");
+
+        addForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const title = newTitle.value.trim();
+            const desc = newDesc.value.trim().replace(/\n/g, "<br>");
+            if (!title) return;
+            data[currentTab].push({ title, description: desc });
+            newTitle.value = "";
+            newDesc.value = "";
+            render();
+        });
+
+        saveBtn.addEventListener("click", saveData);
+
+        tabUpper.addEventListener("click", () => switchTab("upper"));
+        tabLower.addEventListener("click", () => switchTab("lower"));
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+            currentCategoryEl.textContent = tabName === "upper" ? "상체" : "하체";
+
+            // 버튼 활성화 토글
+            tabUpper.classList.remove("active");
+            tabLower.classList.remove("active");
+            document.getElementById(`tab-${tabName}`).classList.add("active");
+
+            render();
+        }
+
+        function createTimer(seconds, display) {
+            let time = seconds;
+            display.textContent = `${time}s`;
+            const timer = setInterval(() => {
+                time--;
+                display.textContent = `${time}s`;
+                if (time < 0) clearInterval(timer);
+            }, 1000);
+        }
+
+        function render() {
+            const sorted = [...data[currentTab].filter(d => d.checked), ...data[currentTab].filter(d => !d.checked)];
+            todoList.innerHTML = "";
+            sorted.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = item.checked ? "checked" : "";
+
+                const header = document.createElement("div");
+                header.className = "todo-header";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = !!item.checked;
+                checkbox.addEventListener("change", () => {
+                    item.checked = checkbox.checked;
+                    render();
+                });
+
+                const title = document.createElement("strong");
+                title.innerHTML = item.title;
+
+                header.appendChild(checkbox);
+                header.appendChild(title);
+
+                const desc = document.createElement("div");
+                desc.className = "todo-desc";
+                desc.innerHTML = item.description;
+
+                const controls = document.createElement("div");
+                controls.className = "controls";
+
+                [
+                    { label: "30초", sec: 30 },
+                    { label: "1분", sec: 60 },
+                    { label: "1분 30초", sec: 90 },
+                    { label: "2분", sec: 120 },
+                    { label: "3분", sec: 180 },
+                    { label: "5분", sec: 300 },
+                    { label: "7분", sec: 420 },
+                    { label: "10분", sec: 600 }
+                ].forEach(({ label, sec }) => {
+                    const btn = document.createElement("button");
+                    btn.textContent = label;
+                    btn.className = "start-timer";
+                    btn.addEventListener("click", () => createTimer(sec, timer));
+                    controls.appendChild(btn);
+                });
+
+                const timer = document.createElement("div");
+                timer.className = "timer";
+                controls.appendChild(timer);
+
+                const actionBtns = document.createElement("div");
+                actionBtns.className = "action-buttons";
+
+                const editBtn = document.createElement("button");
+                editBtn.textContent = "✏️ 수정";
+                editBtn.addEventListener("click", () => {
+                    const newTitle = prompt("운동 제목 수정", item.title);
+                    if (newTitle === null) return;
+                    const newDesc = prompt("운동 설명 수정", item.description.replace(/<br>/g, "\n"));
+                    if (newDesc === null) return;
+                    item.title = newTitle.trim();
+                    item.description = newDesc.trim().replace(/\n/g, "<br>");
+                    render();
+                });
+
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "🗑️ 삭제";
+                delBtn.addEventListener("click", () => {
+                    data[currentTab].splice(index, 1);
+                    render();
+                });
+
+                actionBtns.appendChild(editBtn);
+                actionBtns.appendChild(delBtn);
+
+                li.appendChild(header);
+                li.appendChild(desc);
+                li.appendChild(controls);
+                li.appendChild(actionBtns);
+
+                li.setAttribute("draggable", true);
+                li.addEventListener("dragstart", e => {
+                    e.dataTransfer.setData("text/plain", index);
+                });
+                li.addEventListener("dragover", e => {
+                    e.preventDefault();
+                });
+                li.addEventListener("drop", e => {
+                    e.preventDefault();
+                    const fromIndex = e.dataTransfer.getData("text/plain");
+                    const toIndex = index;
+                    const moved = data[currentTab].splice(fromIndex, 1)[0];
+                    data[currentTab].splice(toIndex, 0, moved);
+                    render();
+                });
+
+                todoList.appendChild(li);
+            });
+        }
+
+        loadData();
+        render();
+    </script>
+</body>
+
+</html>
