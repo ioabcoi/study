@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>운동 투두리스트</title>
+    <style>
+        :root {
+            /* 🎨 색상 */
+            --color-white: #fff;
+            --color-main-bg: #ECF0F1;
+            --color-main-light: #BDC3C7;
+            --color-main-dark: #2C3E50;
+            --color-main-darker: #2C3E50;
+
+        }
+
+        body {
+            font-family: sans-serif;
+            background: var(--color-main-bg);
+            padding: 2rem 2rem 5rem;
+            margin: auto;
+            color: var(--color-main-darker);
+        }
+
+        * {
+            font-family: sans-serif;
+        }
+
+        h1,
+        h2,
+        h3 {
+            margin: 1rem;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        input[type="text"],
+        textarea {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            padding: 0.5rem;
+            border: 1px solid var(--color-main-light);
+            border-radius: 0;
+            resize: vertical;
+            font-size: 0.9rem;
+        }
+
+        input[type='checkbox'] {
+            width: 16px;
+            height: 16px;
+        }
+
+        button {
+            display: inline-block;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            padding: 0.3rem 0.5rem;
+            background: var(--color-main-bg);
+            border: 1px solid var(--color-main-light);
+            border-radius: 0;
+            color: #000;
+        }
+
+        button[type="submit"] {
+            background: var(--color-main-bg);
+            padding: 0.5rem;
+        }
+
+        .guide-message {
+            font-size: 0.8rem;
+        }
+
+        .todoList li,
+        .addForm {
+            background: var(--color-white);
+            border: 1px solid var(--color-main-light);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            cursor: grab;
+            font-size: 0.9rem;
+        }
+
+        .todo-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .todo-header .todo-title {
+            font-size: 1.1rem;
+        }
+
+        .todo-desc {
+            margin: 0.3rem 0;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+
+        .checked {
+            opacity: 0.5;
+        }
+
+        .checked .todo-desc,
+        .checked .controls,
+        .checked .action-buttons {
+            display: none;
+        }
+
+        .addForm {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .addForm button {
+            padding: 0.5rem;
+            
+        }
+
+        #saveBtn {
+            position: fixed;
+            right: 2rem;
+            bottom: 2rem;
+            margin-top: 1rem;
+            padding: 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            background: var(--color-main-dark);
+            border: 0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #saveBtn:hover {
+            background: var(--color-main-darker);
+        }
+
+        /* 🔸 탭 사이드바 */
+        .tab-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-sizing: border-box;
+            width: 120px;
+            padding: 1rem;
+            background-color: var(--color-main-light);
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 10;
+        }
+
+        .tab-sidebar button {
+            padding: 0.75rem 1rem;
+            background-color: var(--color-white);
+            border: 1px solid var(--color-main-light);
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .tab-sidebar button:hover,
+        .tab-sidebar button.active {
+            background-color: var(--color-main-dark);
+            color: white;
+            border-color: var(--color-main-dark);
+        }
+
+        .sidebar-timer-section {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--color-main-light);
+            font-size: 0.9rem;
+        }
+
+        .sidebar-timer-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+            margin: 0.5rem 0;
+        }
+
+        .sidebar-timer-buttons button {
+            font-size: 0.9rem;
+            padding: 0.4rem;
+            border-radius: 4px;
+            background: var(--color-white);
+            border: 1px solid var(--color-main-light);
+            cursor: pointer;
+        }
+
+        .sidebar-timer-buttons button:hover {
+            background: var(--color-main-dark);
+            color: white;
+            border-color: var(--color-main-dark);
+        }
+
+        #sidebar-timer-display {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* 🔹 메인 콘텐츠 */
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border: 1px solid var(--color-main-light);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .main-content {
+            padding: 2rem;
+        }
+
+        @media (max-width: 1280px) {
+            body {
+                padding: 10rem 5rem;
+            }
+
+            .tab-sidebar {
+                display: block;
+                width: 100%;
+                height: auto;
+                background-color: var(--color-main-light);
+                position: fixed;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: auto;
+                border-right: none;
+            }
+
+            .sidebar-timer-section {
+                border-top: 0;
+                padding-top: 0;
+            }
+
+            .sidebar-timer-buttons {
+                display: flex;
+                flex-direction: row;
+            }
+            
+            .container {
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10rem 1rem;
+            }
+
+            .container {
+                background: none;
+                border: 0;
+                box-shadow: none;
+            }
+
+            .main-content {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🏋🏻 운동 투두리스트</h1>
+
+    <!-- 🔸 탭 사이드바 -->
+    <div class="tab-sidebar">
+        <button id="tab-upper" class="active">상체</button>
+        <button id="tab-lower">하체</button>
+
+        <div class="sidebar-timer-section">
+            <div class="sidebar-timer-buttons">
+                <button data-sec="10">10초</button>
+                <button data-sec="30">30초</button>
+                <button data-sec="60">1분</button>
+                <button data-sec="90">1분 30초</button>
+                <button data-sec="120">2분</button>
+                <button data-sec="180">3분</button>
+                <button data-sec="300">5분</button>
+                <button data-sec="420">7분</button>
+                <button data-sec="600">10분</button>
+            </div>
+            <div id="sidebar-timer-display">⏱ 타이머</div>
+        </div>
+    </div>
+
+    <!-- 🔹 메인 콘텐츠 -->
+    <div class="container">
+        <div class="main-content">
+            <h2><span id="currentCategory">상체</span></h2>
+
+            <p class="guide-message">👉🏻 운동 항목을 드래그해서 순서를 자유롭게 정해보세요!</p>
+
+            <ul id="todoList" class="todoList"></ul>
+
+            <h3>➕ 운동 추가</h3>
+            <form id="addForm" class="addForm">
+                <input type="text" id="newTitle" placeholder="운동 제목" required />
+                <textarea id="newDesc" placeholder="운동 설명" rows="4"></textarea>
+                <button type="submit">추가</button>
+            </form>
+        </div>
+    </div>
+
+    <button id="saveBtn">💾</button>
+
+    <script>
+        const tabUpper = document.getElementById("tab-upper");
+        const tabLower = document.getElementById("tab-lower");
+        const currentCategoryEl = document.getElementById("currentCategory");
+        let currentTab = "upper";
+
+        const STORAGE_KEYS = {
+            upper: "upperBodyData",
+            lower: "lowerBodyData"
+        };
+
+        let data = {
+            upper: [],
+            lower: []
+        };
+
+        function loadData() {
+            Object.keys(STORAGE_KEYS).forEach(key => {
+                const stored = localStorage.getItem(STORAGE_KEYS[key]);
+                data[key] = stored ? JSON.parse(stored) : getDefaultData(key);
+            });
+        }
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEYS[currentTab], JSON.stringify(data[currentTab]));
+            alert("운동 리스트가 저장되었어요!");
+        }
+
+        function getDefaultData(category) {
+            if (category === "upper") {
+                return [
+                    {
+                        title: "철봉 매달리기",
+                        description: "어깨 힘 빼고 10초간 매달리기<br>자연스럽게 호흡 유지 (코로 들이마시고 입으로 내쉬기 반복)<br>10초 × 2세트, 세트 사이 1분 휴식<br>👉🏻 등과 어깨 안정화 + 상체 긴장 완화에 좋아!",
+                    },
+                    {
+                        title: "벽 푸쉬업",
+                        description: "벽에서 45도 각도, 천천히 밀기<br>내릴 때 들숨, 밀 때 날숨<br>20회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 가슴 근육과 팔 힘 기르기에 좋아!",
+                    },
+                    {
+                        title: "숄더탭",
+                        description: "플랭크 자세에서 한 손씩 번갈아 반대쪽 어깨 두드리기<br>몸 흔들리지 않도록 복부에 힘 주기<br>20회(양손 10회씩) × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 밸런스와 코어 안정화에 좋아!",
+                    },
+                    {
+                        title: "플랭크",
+                        description: "몸 일직선, 엉덩이 들지 않기<br>자연스럽게 호흡 유지 (코로 들이마시고 입으로 내쉬기 반복)<br>45초 × 2세트, 세트 사이 1분 휴식<br>👉🏻 복부 + 코어 근육 자극에 효과적!",
+                    },
+                    {
+                        title: "철봉 매달려서 하체 들어올리기",
+                        description: "어깨 너비보다 살짝 넓게 잡고 복근에 힘주고 무릎 굽히기<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>10회 × 2세트, 세트 사이 1분 휴식<br>👉🏻 복직근 자극 + 복부 군살 제거에 좋아!",
+                    },
+                    {
+                        title: "레그 레이즈",
+                        description: "바닥에 누워 다리 곧게 펴고 천천히 들어올리기<br>(등, 허리 바닥에 밀착)<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>15회 × 2세트, 세트 사이 1분 휴식<br>👉🏻 아랫배 집중 자극 + 복부 군살 제거에 좋아!",
+                    },
+                    {
+                        title: "덤벨 숄더 프레스",
+                        description: "양손에 덤벨 들고 어깨 높이 → 머리 위로 천천히 밀어 올리기<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 볼륨 + 팔 라인 잡는 데 좋아!",
+                    },
+                    {
+                        title: "덤벨 프론트 레이즈",
+                        description: "양손에 덤벨 들고 정면으로 들어올리기 (어깨 높이까지)<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 앞라인 자극! T셔츠 핏 살아나고, 어깨 둥글게 정리돼!",
+                    },
+                    {
+                        title: "덤벨 사이드 레이즈",
+                        description: "양손에 덤벨 들고 천천히 양옆으로 들어올리기 (어깨 높이까지)<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 라인 정리 + 쇄골 강조 효과!",
+                    },
+                    {
+                        title: "덤벨 바이셉 컬",
+                        description: "양손에 덤벨 들고 팔꿈치 고정 → 천천히 접고 펴기<br>접을 때 내쉬기, 펴면서 들이마시기<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 팔뚝 앞쪽 탄력에 좋아!",
+                    },
+                    {
+                        title: "덤벨 킥백",
+                        description: "상체 45도 정도 숙이고, 팔꿈치 90도 → 뒤로 펴기<br>펴면서 내쉬기, 접으면서 들이마시기<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 팔뚝 뒤쪽 (삼두근) 탄력 + 군살 정리에 최고!",
+                    },
+                    {
+                        title: "덤벨 벤트오버 로우",
+                        description: "상체 45도 정도 숙이고, 덤벨을 양손에 들고 팔꿈치 굽혀 당기기<br>당길 때 내쉬고, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 등 라인 정리 + 승모근 뭉침 완화! 굽은 등 개선에 효과적!",
+                    },
+                    {
+                        title: "덤벨 리버스 플라이",
+                        description: "상체 45도 정도 숙이고, 팔꿈치 약간 굽힌 상태에서 양옆으로 팔 벌리기<br>들 때 내쉬기, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 등 상부 + 어깨 뒷라인 자극! 구부정한 자세 개선에 효과적!",
+                    }
+                ];
+            } else if (category === "lower") {
+                return [
+                    {
+                        title: "힙 브릿지",
+                        description: "엉덩이 천천히 끌어올리기<br>올릴 때 날숨, 내릴 때 들숨<br>50회 × 1세트, 휴식 없음<br>👉🏻 엉덩이 볼륨 업 + 허리 지지 근육 강화!",
+                    },
+                    {
+                        title: "덤벨 힙 브릿지",
+                        description: "바닥에 누워 골반 위에 덤벨 얹고 힙 브릿지<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>30회 × 1세트<br>👉🏻 엉덩이 탄력 + 햄스트링 자극! 탄탄한 힙 라인에 좋아!",
+                    },
+                    {
+                        title: "스쿼트 (기본)",
+                        description: "무릎 발끝 안 넘기기<br>앉을 때 들숨, 일어날 때 날숨<br>30회 × 1세트, 세트 사이 30초 휴식<br>👉🏻 허벅지 앞쪽 + 엉덩이 기본 힘 기르기에 좋아!",
+                    },
+                    {
+                        title: "스쿼트 (와이드)",
+                        description: "다리 넓게, 무릎 바깥 방향<br>앉을 때 들숨, 일어날 때 날숨<br>30회 × 1세트, 세트 사이 30초 휴식<br>👉🏻 내전근과 힙 안쪽 라인 자극에 좋아!",
+                    },
+                    {
+                        title: "덤벨 스쿼트",
+                        description: "양손에 덤벨 들고 기본 스쿼트 동작<br>앉을 때 들숨, 일어날 때 날숨<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 하체 자극 + 상체 안정화 효과도 있어!",
+                    },
+                    {
+                        title: "런지",
+                        description: "좌우 번갈아 깊게 내딛기<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 25회 (총 50회)<br>세트 없음, 1분 휴식<br>👉🏻 허벅지 전체 + 엉덩이 근육 균형 맞추기에 효과적!",
+                    },
+                    {
+                        title: "백워드 런지",
+                        description: "한쪽 다리를 뒤로 내딛고 무릎 굽히기<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 20회 (총 40회)<br>세트 없음, 1분 휴식<br>👉🏻 무릎 부담 줄이면서 힙과 햄스트링 자극!",
+                    },
+                    {
+                        title: "덤벨 런지",
+                        description: "양손에 덤벨 들고 한발씩 내디디며 깊게 런지<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 15회 × 1세트<br>👉🏻 하체 전체 자극 + 균형 감각 향상에 효과적!",
+                    },
+                    {
+                        title: "불가리안 스플릿 스쿼트",
+                        description: "뒷발을 의자에 올리고 앞다리로 스쿼트<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 12~15회<br>세트 없음, 1분 휴식<br>👉🏻 하체 단독 힘 강화 + 골반 안정화에 탁월!",
+                    },
+                    {
+                        title: "힙 에어백 킥",
+                        description: "네발 자세에서 한쪽 다리 뒤로 쭉 펴서 하늘로 차기<br>올릴 때 날숨, 내릴 때 들숨<br>각 다리 20회 × 1세트, 휴식 없음<br>👉🏻 힙업 + 엉덩이 중앙 볼륨 채우기에 효과적!",
+                    },
+                    {
+                        title: "사이드 레그 리프트",
+                        description: "옆으로 누워 한쪽 다리 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 15회 × 1세트, 휴식 없음<br>👉🏻 엉덩이 바깥쪽 라인 정리 + 골반 안정화에 좋아!",
+                    },
+                    {
+                        title: "벽 스쿼트",
+                        description: "벽에 등 대고 앉은 자세 유지<br>코로 들이마시고 입으로 내쉬기 반복<br>30초~1분, 휴식 없음<br>👉🏻 하체 근지구력 향상 + 무릎 안정화에 효과적!",
+                    },
+                    {
+                        title: "카프 레이즈",
+                        description: "발끝으로 천천히 올라갔다가 천천히 내려오기<br>올릴 때 날숨, 내릴 때 들숨<br>20~30회 × 1세트<br>맨발 또는 신발 신고, 벽 짚고 해도 됨<br>휴식 없음<br>👉🏻 종아리 부종 방지 + 발목 안정화에 좋아!",
+                    },
+                    {
+                        title: "덤벨 카프 레이즈",
+                        description: "양손에 덤벨 들고 발끝으로 천천히 올라갔다가 내려오기<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>20~30회 × 1세트, 세트 사이 30초 휴식<br>👉🏻 종아리 탄력 + 발목 안정화 + 하체 마무리 운동으로 최고!",
+                    }
+                ];
+            }
+            return [];
+        }
+
+        const todoList = document.getElementById("todoList");
+        const addForm = document.getElementById("addForm");
+        const newTitle = document.getElementById("newTitle");
+        const newDesc = document.getElementById("newDesc");
+        const saveBtn = document.getElementById("saveBtn");
+
+        addForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const title = newTitle.value.trim();
+            const desc = newDesc.value.trim().replace(/\n/g, "<br>");
+            if (!title) return;
+            data[currentTab].push({ title, description: desc });
+            newTitle.value = "";
+            newDesc.value = "";
+            render();
+        });
+
+        saveBtn.addEventListener("click", saveData);
+
+        tabUpper.addEventListener("click", () => switchTab("upper"));
+        tabLower.addEventListener("click", () => switchTab("lower"));
+
+        function switchTab(tabName) {
+            currentTab = tabName;
+            currentCategoryEl.textContent = tabName === "upper" ? "상체" : "하체";
+
+            // 버튼 활성화 토글
+            tabUpper.classList.remove("active");
+            tabLower.classList.remove("active");
+            document.getElementById(`tab-${tabName}`).classList.add("active");
+
+            render();
+        }
+
+        function createTimer(seconds, display) {
+            let time = seconds;
+            display.textContent = `⏱ ${time}s`;
+            const timer = setInterval(() => {
+                time--;
+                display.textContent = `⏱ ${time}s`;
+                if (time < 0) {
+                    clearInterval(timer);
+                    display.textContent = `잘했어!! 👍🏻`;
+                }
+            }, 1000);
+        }
+
+        function render() {
+            const sorted = [...data[currentTab].filter(d => d.checked), ...data[currentTab].filter(d => !d.checked)];
+            todoList.innerHTML = "";
+            sorted.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.className = item.checked ? "checked" : "";
+
+                const header = document.createElement("label");
+                header.className = "todo-header";
+
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.checked = !!item.checked;
+                checkbox.addEventListener("change", () => {
+                    item.checked = checkbox.checked;
+                    render();
+                });
+
+                const title = document.createElement("strong");
+                title.className = "todo-title";
+                title.innerHTML = item.title;
+
+                header.appendChild(checkbox);
+                header.appendChild(title);
+
+                const desc = document.createElement("div");
+                desc.className = "todo-desc";
+                desc.innerHTML = item.description;
+
+                const actionBtns = document.createElement("div");
+                actionBtns.className = "action-buttons";
+
+                const editBtn = document.createElement("button");
+                editBtn.textContent = "✏️ 수정";
+                editBtn.addEventListener("click", () => {
+                    const newTitle = prompt("운동 제목 수정", item.title);
+                    if (newTitle === null) return;
+                    const newDesc = prompt("운동 설명 수정", item.description.replace(/<br>/g, "\n"));
+                    if (newDesc === null) return;
+                    item.title = newTitle.trim();
+                    item.description = newDesc.trim().replace(/\n/g, "<br>");
+                    render();
+                });
+
+                const delBtn = document.createElement("button");
+                delBtn.textContent = "🗑️ 삭제";
+                delBtn.addEventListener("click", () => {
+                    data[currentTab].splice(index, 1);
+                    render();
+                });
+
+                actionBtns.appendChild(editBtn);
+                actionBtns.appendChild(delBtn);
+
+                li.appendChild(header);
+                li.appendChild(desc);
+                li.appendChild(actionBtns);
+
+                li.setAttribute("draggable", true);
+                li.addEventListener("dragstart", e => {
+                    e.dataTransfer.setData("text/plain", index);
+                });
+                li.addEventListener("dragover", e => {
+                    e.preventDefault();
+                });
+                li.addEventListener("drop", e => {
+                    e.preventDefault();
+                    const fromIndex = e.dataTransfer.getData("text/plain");
+                    const toIndex = index;
+                    const moved = data[currentTab].splice(fromIndex, 1)[0];
+                    data[currentTab].splice(toIndex, 0, moved);
+                    render();
+                });
+
+                todoList.appendChild(li);
+            });
+        }
+
+        // 공용 타이머
+        const sidebarTimerDisplay = document.getElementById("sidebar-timer-display");
+        const sidebarTimerButtons = document.querySelectorAll(".sidebar-timer-buttons button");
+        let sidebarTimer;
+
+        sidebarTimerButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const sec = parseInt(btn.dataset.sec);
+                startSidebarTimer(sec);
+            });
+        });
+
+        function startSidebarTimer(seconds) {
+            let time = seconds;
+            clearInterval(sidebarTimer);
+            updateTimerDisplay(time);
+
+            sidebarTimer = setInterval(() => {
+                time--;
+                updateTimerDisplay(time);
+
+                if (time < 0) {
+                    clearInterval(sidebarTimer);
+                    sidebarTimerDisplay.textContent = "⏰ 종료! 수고했어! 👏🏻";
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay(time) {
+            sidebarTimerDisplay.textContent = `⏱ ${time}s`;
+        }
+
+        loadData();
+        render();
+    </script>
+</body>
+
+</html>
