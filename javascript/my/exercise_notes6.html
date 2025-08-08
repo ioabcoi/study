@@ -138,7 +138,6 @@
             background-color: var(--color-white);
             cursor: pointer;
             position: relative;
-            transition: border-color 0.2s, background-color 0.2s;
             vertical-align: middle;
         }
 
@@ -211,13 +210,13 @@
         .action-buttons button:hover,
         .save-button:hover,
         .addForm button:hover {
-            border-color: var(--color-main-dark);
+            border-color: var(--color-main-light);
         }
 
         .action-buttons button:active,
         .save-button:active,
         .addForm button:active {
-            border-color: var(--color-main-dark);
+            border-color: var(--color-main-light);
         }
 
         .action-buttons button:focus,
@@ -445,7 +444,7 @@
             <h3>🏋🏻 운동 추가</h3>
             <form id="addForm" class="addForm">
                 <input type="text" id="newTitle" placeholder="운동 제목" required />
-                <textarea id="newDesc" placeholder="운동 설명" rows="4"></textarea>
+                <textarea id="newDesc" placeholder="운동 설명" rows="5"></textarea>
                 <button type="submit">➕ 추가</button>
             </form>
         </div>
