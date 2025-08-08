@@ -9,11 +9,40 @@
         :root {
             /* 🎨 색상 */
             --color-white: #fff;
+            --color-black: #000;
+
+            /*
             --color-main-bg: #ECF0F1;
             --color-main-light: #BDC3C7;
             --color-main-dark: #2C3E50;
             --color-main-darker: #2C3E50;
 
+            --color-main-bg: #ECDFCC;
+            --color-main-light: #697565;
+            --color-main-dark: #3C3D37;
+            --color-main-darker: #181C14;
+
+            --color-main-bg: #F5F5F5;
+            --color-main-light: #48CFCB;
+            --color-main-dark: #229799;
+            --color-main-darker: #424242;
+
+            --color-main-bg: #ECDFCC;
+            --color-main-light: #697565;
+            --color-main-dark: #3C3D37;
+            --color-main-darker: #181C14;
+
+            --color-main-bg: #ECF0F1;
+            --color-main-light: #BDC3C7;
+            --color-main-dark: #2C3E50;
+            --color-main-darker: #2C3E50;
+            */
+            
+            --color-main-bg: #EEEEEE;
+            --color-main-light: #B6BBC4;
+            --color-main-dark: #31304D;
+            --color-main-darker: #161A30;
+        
         }
 
         body {
@@ -47,7 +76,8 @@
             -o-appearance: none;
             appearance: none;
             padding: 0.5rem;
-            border: 1px solid var(--color-main-light);
+            background-color: var(--color-main-bg);
+            border: 1px solid var(--color-main-bg);
             border-radius: 0;
             resize: vertical;
             font-size: 0.9rem;
@@ -70,7 +100,7 @@
             background: var(--color-main-light);
             border: 1px solid var(--color-main-light);
             border-radius: 0;
-            color: #000;
+            color: var(--color-main-darker);
         }
 
         button[type="submit"] {
@@ -85,7 +115,7 @@
         .todoList li,
         .addForm {
             background: var(--color-white);
-            border: 1px solid var(--color-main-light);
+            border: 1px solid var(--color-main-bg);
             padding: 1rem;
             margin-bottom: 1.5rem;
             border-radius: 8px;
@@ -103,9 +133,9 @@
             appearance: none;
             width: 20px;
             height: 20px;
-            border: 2px solid #999;
+            border: 2px solid var(--color-main-dark);
             border-radius: 4px;
-            background-color: #fff;
+            background-color: var(--color-white);
             cursor: pointer;
             position: relative;
             transition: border-color 0.2s, background-color 0.2s;
@@ -126,7 +156,7 @@
             left: 5px;
             width: 5px;
             height: 10px;
-            border: solid white;
+            border: solid var(--color-white);
             border-width: 0 2px 2px 0;
             opacity: 0;
             transform: rotate(45deg);
@@ -166,28 +196,33 @@
         }
 
         .action-buttons button,
-        .save-button {
+        .save-button,
+        .addForm button {
             padding: 0.3rem 0.5rem;
             font-size: 14px;
             background-color: var(--color-main-bg);
-            border: 1px solid var(--color-main-light);
+            border: 1px solid var(--color-main-bg);
             border-radius: 6px;
+            color: var(--color-main-darker);
             cursor: pointer;
-            transition: background-color 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .action-buttons button:hover,
-        .save-button:hover {
-            background-color: var(--color-main-light);
+        .save-button:hover,
+        .addForm button:hover {
+            border-color: var(--color-main-dark);
         }
 
         .action-buttons button:active,
-        .save-button:active {
-            background-color: var(--color-main-light);
+        .save-button:active,
+        .addForm button:active {
+            border-color: var(--color-main-dark);
         }
 
         .action-buttons button:focus,
-        .save-button:focus {
+        .save-button:focus,
+        .addForm button:focus {
             outline: none;
         }
 
@@ -209,7 +244,6 @@
 
         .addForm button {
             padding: 0.5rem;
-
         }
 
         #saveBtn {
@@ -220,15 +254,16 @@
             padding: 1rem;
             font-size: 1rem;
             cursor: pointer;
-            background: var(--color-main-dark);
+            background: var(--color-main-light);
             border: 0;
-            color: white;
+            color: var(--color-white);
             border: none;
             border-radius: 5px;
+            transition: all 0.2s ease;
         }
 
         #saveBtn:hover {
-            background: var(--color-main-darker);
+            background: var(--color-main-dark);
         }
 
         /* 🔸 탭 사이드바 */
@@ -250,17 +285,18 @@
         .tab-sidebar button {
             padding: 0.75rem 1rem;
             background-color: var(--color-white);
-            border: 1px solid var(--color-main-light);
+            border: 1px solid var(--color-main-dark);
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             text-align: left;
+            transition: all 0.2s ease;
         }
 
         .tab-sidebar button:hover,
         .tab-sidebar button.active {
             background-color: var(--color-main-dark);
-            color: white;
+            color: var(--color-white);
             border-color: var(--color-main-dark);
         }
 
@@ -289,7 +325,7 @@
 
         .sidebar-timer-buttons button:hover {
             background: var(--color-main-dark);
-            color: white;
+            color: var(--color-white);
             border-color: var(--color-main-dark);
         }
 
@@ -406,11 +442,11 @@
 
             <ul id="todoList" class="todoList"></ul>
 
-            <h3>➕ 운동 추가</h3>
+            <h3>🏋🏻 운동 추가</h3>
             <form id="addForm" class="addForm">
                 <input type="text" id="newTitle" placeholder="운동 제목" required />
                 <textarea id="newDesc" placeholder="운동 설명" rows="4"></textarea>
-                <button type="submit">추가</button>
+                <button type="submit">➕ 추가</button>
             </form>
         </div>
     </div>
