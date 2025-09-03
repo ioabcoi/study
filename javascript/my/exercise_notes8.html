@@ -183,7 +183,6 @@
         }
 
         .todo-desc {
-            margin: 0.3rem 0;
             font-size: 0.8rem;
             line-height: 1.5;
         }
@@ -273,6 +272,7 @@
 
         .tab-sidebar {
             display: flex;
+            justify-content: space-between;
             flex-direction: column;
             gap: 0.25rem;
             box-sizing: border-box;
@@ -287,13 +287,19 @@
         }
 
         .tab-sidebar button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
             padding: 0.5rem;
             background-color: var(--color-white);
             border: 1px solid var(--color-main-light);
             border-radius: 4px;
             cursor: pointer;
+            font-size: 0.8rem;
             font-weight: bold;
-            text-align: left;
+            text-align: center;
             transition: all 0.2s ease;
         }
 
@@ -305,32 +311,17 @@
         }
 
         .sidebar-timer-section {
-            margin-top: auto;
-            padding-top: 1rem;
-            border-top: 1px solid var(--color-main-light);
-            font-size: 0.9rem;
-        }
-
-        .sidebar-timer-buttons {
             display: flex;
             flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-tab-buttons,
+        .sidebar-timer-buttons {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
             gap: 0.25rem;
-            margin: 0.5rem 0;
-        }
-
-        .sidebar-timer-buttons button {
-            font-size: 0.8rem;
-            padding: 0.5rem;
-            border-radius: 4px;
-            background: var(--color-white);
-            border: 1px solid var(--color-main-light);
-            cursor: pointer;
-        }
-
-        .sidebar-timer-buttons button:hover {
-            background: var(--color-main-dark);
-            color: var(--color-white);
-            border-color: var(--color-main-dark);
         }
 
         #sidebar-timer-display {
@@ -357,11 +348,12 @@
 
         @media (max-width: 1280px) {
             body {
-                padding: 10rem 5rem;
+                padding: 7rem 5rem;
             }
 
             .tab-sidebar {
-                display: block;
+                flex-direction: row;
+                align-items: center;
                 width: 100%;
                 height: auto;
                 background-color: var(--color-main-light);
@@ -374,22 +366,23 @@
             }
 
             .sidebar-timer-section {
+                align-items: center;
+                flex-direction: row;
                 border-top: 0;
                 padding-top: 0;
             }
 
+            .sidebar-tab-buttons,
             .sidebar-timer-buttons {
                 display: flex;
-                margin-bottom: 0;
+                margin: 0;
                 flex-direction: row;
                 align-items: center;
             }
 
-            #sidebar-timer-display {
-                position: absolute;
-                right: 0;
-                top: 0;
-                padding: 1rem;
+            .sidebar-tab-buttons,
+            .sidebar-timer-buttons {
+                flex-direction: row;
             }
 
             .container {
@@ -407,6 +400,10 @@
             body {
                 padding: 3rem 1rem 7rem;
                 transition: padding-top 0.3s ease;
+            }
+
+            h1 {
+                display: none;
             }
 
             #saveBtn {
@@ -460,11 +457,11 @@
 
             /* 본문 내용이 사이드바와 겹치지 않게 */
             body.sidebar-open {
-                padding-top: 7rem;
+                padding-top: 4rem;
             }
 
             body.sidebar-open .sidebar-toggle {
-                top: 6rem;
+                top: 4.75rem;
             }
 
             .todoList li,
@@ -505,19 +502,21 @@
     <!-- 🔸 탭 사이드바 -->
     <button id="sidebar-toggle" class="sidebar-toggle">☰</button>
     <div class="tab-sidebar" id="tab-sidebar">
-        <button id="tab-upper" class="active">상체</button>
-        <button id="tab-lower">하체</button>
+        <div class="sidebar-tab-section">
+            <div class="sidebar-tab-buttons">
+                <button id="tab-upper" class="active">상체</button>
+                <button id="tab-lower">하체</button>
+                <button id="tab-all">전신</button>
+            </div>
+        </div>
 
         <div class="sidebar-timer-section">
+            <div id="sidebar-timer-display">⏱ 타이머</div>
             <div class="sidebar-timer-buttons">
-                <button data-sec="10">10s</button>
                 <button data-sec="30">30s</button>
                 <button data-sec="60">60s</button>
                 <button data-sec="90">90s</button>
-                <button data-sec="120">120s</button>
-                <button data-sec="180">180s</button>
             </div>
-            <div id="sidebar-timer-display">⏱ 타이머</div>
         </div>
     </div>
 
@@ -546,17 +545,20 @@
         const tabSidebar = document.getElementById("tab-sidebar");
         const tabUpper = document.getElementById("tab-upper");
         const tabLower = document.getElementById("tab-lower");
+        const tabAll = document.getElementById("tab-all");
         const currentCategoryEl = document.getElementById("currentCategory");
         let currentTab = "upper";
 
         const STORAGE_KEYS = {
             upper: "upperBodyData",
-            lower: "lowerBodyData"
+            lower: "lowerBodyData",
+            all: "allBodyData"
         };
 
         let data = {
             upper: [],
-            lower: []
+            lower: [],
+            all: []
         };
 
         sidebarToggleBtn.addEventListener("click", () => {
@@ -581,102 +583,113 @@
                 return [
                     {
                         title: "철봉 매달리기 (스트레칭)",
-                        description: "어깨 힘 빼고 10초간 매달리기<br>자연스럽게 호흡 유지 (코로 들이마시고 입으로 내쉬기 반복)<br>10초 × 2세트, 세트 사이 1분 휴식<br>👉🏻 등과 어깨 안정화 + 상체 긴장 완화에 좋아!",
+                        description: "어깨 힘 빼고 10초간 매달리기<br>코로 들이마시고 입으로 내쉬기 반복<br>10초 × 3세트<br>👉🏻 등과 어깨 안정화 + 상체 긴장 완화!",
                     },
                     {
                         title: "벽 푸쉬업 (워밍업)",
-                        description: "벽에서 45도 각도, 천천히 밀기<br>내릴 때 들숨, 밀 때 날숨<br>20회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 가슴 근육과 팔 힘 기르기에 좋아!",
+                        description: "벽에서 45도 각도, 천천히 밀기<br>내릴 때 들숨, 밀 때 날숨<br>20회 × 3세트<br>👉🏻 가슴 근육과 팔 힘 기르기!",
+                    },
+                    {
+                        title: "덤벨 숄더 프레스 (어깨 전면/측면·삼두)",
+                        description: "어깨 높이 → 머리 위로 천천히 밀어 올리기<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 3세트<br>👉🏻 어깨 볼륨 + 팔 라인!",
                     },
                     {
                         title: "덤벨 프론트 레이즈 (어깨 전면)",
-                        description: "양손에 덤벨 들고 정면으로 들어올리기 (어깨 높이까지)<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 앞라인 자극! T셔츠 핏 살아나고, 어깨 둥글게 정리돼!",
+                        description: "천천히 정면으로 들어올리기 (어깨 높이까지)<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 3세트<br>👉🏻 어깨 앞라인 자극! 어깨 둥글게 정리돼!",
                     },
                     {
                         title: "덤벨 사이드 레이즈 (어깨 측면)",
-                        description: "양손에 덤벨 들고 천천히 양옆으로 들어올리기 (어깨 높이까지)<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 라인 정리 + 쇄골 강조 효과!",
+                        description: "천천히 양옆으로 들어올리기 (어깨 높이까지)<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 3세트<br>👉🏻 어깨 라인 정리 + 쇄골 강조 효과!",
                     },
                     {
-                        title: "덤벨 숄더 프레스 (어깨 전면/측면+삼두)",
-                        description: "양손에 덤벨 들고 어깨 높이 → 머리 위로 천천히 밀어 올리기<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 볼륨 + 팔 라인 잡는 데 좋아!",
+                        title: "덤벨 리버스 플라이 (어깨 후면·견갑)",
+                        description: "상체 45도 숙이고, 천천히 양옆으로 팔 벌리기<br>들 때 내쉬기, 내릴 때 들이마시기<br>20회 × 3세트<br>👉🏻 등 상부 + 어깨 뒷라인 자극! 구부정한 자세 개선!",
                     },
                     {
-                        title: "덤벨 리버스 플라이 (어깨 후면+견갑)",
-                        description: "상체 45도 정도 숙이고, 팔꿈치 약간 굽힌 상태에서 양옆으로 팔 벌리기<br>들 때 내쉬기, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 등 상부 + 어깨 뒷라인 자극! 구부정한 자세 개선에 효과적!",
-                    },
-                    {
-                        title: "덤벨 벤트오버 로우 (어깨 후면+등)",
-                        description: "상체 45도 정도 숙이고, 덤벨을 양손에 들고 팔꿈치 굽혀 당기기<br>당길 때 내쉬고, 내릴 때 들이마시기<br>12회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 등 라인 정리 + 승모근 뭉침 완화! 굽은 등 개선에 효과적!",
+                        title: "덤벨 벤트오버 로우 (어깨 후면·등)",
+                        description: "상체 45도 숙이고, 팔꿈치 굽혀 당기기<br>당길 때 내쉬고, 내릴 때 들이마시기<br>20회 × 3세트<br>👉🏻 등 라인 정리 + 승모근 뭉침 완화! 굽은 등 개선!",
                     },
                     {
                         title: "덤벨 킥백 (삼두)",
-                        description: "상체 45도 정도 숙이고, 팔꿈치 90도 → 뒤로 펴기<br>펴면서 내쉬기, 접으면서 들이마시기<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 팔뚝 뒤쪽 (삼두근) 탄력 + 군살 정리에 최고!",
+                        description: "상체 45도 숙이고, 팔꿈치 90도 → 뒤로 펴기<br>펴면서 내쉬기, 접으면서 들이마시기<br>20회 × 3세트<br>👉🏻 팔뚝 뒤쪽 (삼두근) 탄력 + 군살 정리!",
                     },
                     {
                         title: "덤벨 바이셉 컬 (이두)",
-                        description: "양손에 덤벨 들고 팔꿈치 고정 → 천천히 접고 펴기<br>접을 때 내쉬기, 펴면서 들이마시기<br>15회 × 2세트, 세트 사이 30초 휴식<br>👉🏻 팔뚝 앞쪽 탄력에 좋아!",
+                        description: "팔꿈치 고정 → 천천히 정면으로 접고 펴기<br>접을 때 내쉬기, 펴면서 들이마시기<br>20회 × 3세트<br>👉🏻 팔뚝 앞쪽 탄력!",
                     },
                     {
-                        title: "숄더탭 (어깨 안정+코어)",
-                        description: "플랭크 자세에서 한 손씩 번갈아 반대쪽 어깨 두드리기<br>몸 흔들리지 않도록 복부에 힘 주기<br>20회(양손 10회씩) × 2세트, 세트 사이 30초 휴식<br>👉🏻 어깨 밸런스와 코어 안정화에 좋아!",
-                    },
-                    {
-                        title: "플랭크 (코어)",
-                        description: "몸 일직선, 엉덩이 들지 않기<br>자연스럽게 호흡 유지 (코로 들이마시고 입으로 내쉬기 반복)<br>45초 × 2세트, 세트 사이 1분 휴식<br>👉🏻 복부 + 코어 근육 자극에 효과적!",
-                    },
-                    {
-                        title: "철봉 매달려서 하체 들어올리기 (복직근)",
-                        description: "어깨 너비보다 살짝 넓게 잡고 복근에 힘주고 무릎 굽히기<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>10회 × 2세트, 세트 사이 1분 휴식<br>👉🏻 복직근 자극 + 복부 군살 제거에 좋아!",
+                        title: "숄더탭 (어깨 안정·코어)",
+                        description: "플랭크 자세에서 한 손씩 번갈아 반대쪽 어깨 두드리기<br>몸 흔들리지 않도록 복부에 힘 주기<br>20회(양손 10회씩) × 2세트<br>👉🏻 어깨 밸런스와 코어 안정화!",
                     },
                     {
                         title: "벤트 니 레이즈 (아랫배)",
-                        description: "바닥에 누워 무릎을 90도로 굽힌 상태에서 천천히 가슴 쪽으로 당기기<br>(등, 허리 바닥에 밀착)<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>15회 × 2세트, 세트 사이 1분 휴식<br>👉🏻 아랫배 자극 + 허리 부담 감소 + 복부 코어 강화에 좋아!",
+                        description: "누워서 무릎을 90도로 굽힌 상태 (등, 허리 바닥에 밀착)<br>→ 천천히 가슴 쪽으로 당기기<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 아랫배 자극 + 허리 부담 감소 + 복부 코어 강화!",
                     },
                     {
                         title: "레그 레이즈 (아랫배)",
-                        description: "바닥에 누워 다리 곧게 펴고 천천히 들어올리기<br>(등, 허리 바닥에 밀착)<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>15회 × 2세트, 세트 사이 1분 휴식<br>👉🏻 아랫배 집중 자극 + 복부 군살 제거에 좋아!",
+                        description: "누워서 다리 곧게 펴고 (등, 허리 바닥에 밀착)<br>→ 천천히 들어올리기다리<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 아랫배 집중 자극 + 복부 군살 제거!",
+                    },
+                    {
+                        title: "철봉 매달려서 하체 들어올리기 (복직근)",
+                        description: "어깨 너비보다 살짝 넓게 잡고 복근에 힘주고 무릎 굽히기<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 복직근 자극 + 복부 군살 제거!",
                     },
                 ];
             } else if (category === "lower") {
                 return [
                     {
-                        title: "벽 스쿼트 (하체 전면+워밍업)",
-                        description: "벽에 등 대고 앉은 자세 유지<br>코로 들이마시고 입으로 내쉬기 반복<br>30초~1분, 휴식 없음<br>👉🏻 하체 근지구력 향상 + 무릎 안정화에 효과적!",
+                        title: "벽 스쿼트 (하체 전면·워밍업)",
+                        description: "벽에 등 대고 앉은 자세 유지<br>코로 들이마시고 입으로 내쉬기 반복<br>1분<br>👉🏻 하체 근지구력 향상 + 무릎 안정화!",
                     },
                     {
-                        title: "스쿼트 (허벅지 앞) + 덤벨",
-                        description: "무릎 발끝 안 넘기기<br>앉을 때 들숨, 일어날 때 날숨<br>30회 × 1세트, 세트 사이 30초 휴식<br>👉🏻 허벅지 앞쪽 + 엉덩이 기본 힘 기르기에 좋아!",
+                        title: "스쿼트 (허벅지 앞)",
+                        description: "무릎 발끝 안 넘기기<br>앉을 때 들숨, 일어날 때 날숨<br>50회 × 1세트<br>👉🏻 허벅지 앞쪽 + 엉덩이 기본 힘 기르기!",
                     },
                     {
-                        title: "와이드 스쿼트 (허벅지 안쪽) + 덤벨",
-                        description: "다리 넓게, 무릎 바깥 방향<br>앉을 때 들숨, 일어날 때 날숨<br>30회 × 1세트, 세트 사이 30초 휴식<br>👉🏻 내전근과 힙 안쪽 라인 자극에 좋아!",
+                        title: "와이드 스쿼트 (허벅지 안쪽)",
+                        description: "다리 넓게, 무릎 바깥 방향, 무릎 발끝 안 넘기기<br>앉을 때 들숨, 일어날 때 날숨<br>50회 × 1세트<br>👉🏻 내전근과 힙 안쪽 라인 자극!",
                     },
                     {
-                        title: "런지 (하체 전면+코어) + 덤벨",
-                        description: "좌우 번갈아 깊게 내딛기<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 25회 (총 50회)<br>세트 없음, 1분 휴식<br>👉🏻 허벅지 전체 + 엉덩이 근육 균형 맞추기에 효과적!",
-                    },
-                    {
-                        title: "백워드 런지 (허벅지 후면+엉덩이) + 덤벨",
-                        description: "한쪽 다리를 뒤로 내딛고 무릎 굽히기<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 20회 (총 40회)<br>세트 없음, 1분 휴식<br>👉🏻 무릎 부담 줄이면서 힙과 햄스트링 자극!",
-                    },
-                    {
-                        title: "불가리안 스플릿 스쿼트 (하체 전면/후면) + 덤벨",
-                        description: "뒷발을 의자에 올리고 앞다리로 스쿼트<br>내려갈 때 들숨, 올라올 때 날숨<br>좌우 각 12~15회<br>세트 없음, 1분 휴식<br>👉🏻 하체 단독 힘 강화 + 골반 안정화에 탁월!",
-                    },
-                    {
-                        title: "힙 브릿지 (허벅지 후면+엉덩이) + 덤벨",
-                        description: "엉덩이 천천히 끌어올리기 + 골반 위에 덤벨 얹기<br>올릴 때 날숨, 내릴 때 들숨<br>50회 × 1세트, 휴식 없음<br>👉🏻 엉덩이 볼륨 업 + 허리 지지 근육 강화!",
-                    },
-                    {
-                        title: "힙 에어백 킥 (하체 후면)",
-                        description: "네발 자세에서 한쪽 다리 뒤로 쭉 펴서 하늘로 차기<br>올릴 때 날숨, 내릴 때 들숨<br>각 다리 20회 × 1세트, 휴식 없음<br>👉🏻 힙업 + 엉덩이 중앙 볼륨 채우기에 효과적!",
+                        title: "슬라이드 스쿼트 (허벅지·엉덩이)",
+                        description: "발 한쪽 옆으로 미끄러뜨리며 스쿼트로 앉았다가 돌아오기<br>내려갈 때 들이마시고, 올라올 때 내쉬기<br>좌우 각 20회 × 2세트<br>👉🏻 허벅지 바깥 + 엉덩이 자극, 균형감각 강화!",
                     },
                     {
                         title: "사이드 레그 리프트 (허벅지 바깥)",
-                        description: "옆으로 누워 한쪽 다리 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 15회 × 1세트, 휴식 없음<br>👉🏻 엉덩이 바깥쪽 라인 정리 + 골반 안정화에 좋아!",
+                        description: "옆으로 누워 한쪽 다리 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 20회 × 2세트<br>👉🏻 엉덩이 바깥쪽 라인 정리 + 골반 안정화!",
                     },
                     {
-                        title: "카프 레이즈 (종아리) + 덤벨",
-                        description: "발끝으로 천천히 올라갔다가 천천히 내려오기<br>올릴 때 날숨, 내릴 때 들숨<br>20~30회 × 1세트<br>맨발 또는 신발 신고, 벽 짚고 해도 됨<br>휴식 없음<br>👉🏻 종아리 부종 방지 + 발목 안정화에 좋아!",
+                        title: "이너싸이 레그 리프트 (허벅지 안쪽)",
+                        description: "옆으로 누워 아래쪽 다리 곧게 펴고 천천히 들어올리기<br>들 때 날숨, 내릴 때 들숨<br>좌우 각 20회 × 2세트<br>👉🏻 허벅지 안쪽 집중 자극 + 하체 라인 정리!",
+                    },
+                    {
+                        title: "힙 브릿지 (허벅지 후면·엉덩이)",
+                        description: "골반 위에 덤벨 얹고 엉덩이 천천히 끌어올리기<br>올릴 때 날숨, 내릴 때 들숨<br>50회 × 1세트<br>👉🏻 엉덩이 볼륨 업 + 허리 지지 근육 강화!",
+                    },
+                    {
+                        title: "카프 레이즈 (종아리)",
+                        description: "발끝으로 천천히 올라갔다가 천천히 내려오기<br>올릴 때 날숨, 내릴 때 들숨<br>30회 × 1세트<br>👉🏻 종아리 부종 방지 + 발목 안정화!",
+                    },
+                ];
+            } else if (category === "all") {
+                return [
+                    {
+                        title: "플랭크 (코어)",
+                        description: "몸 일직선, 엉덩이 들지 않기<br>코로 들이마시고 입으로 내쉬기 반복<br>1분 × 2세트<br>👉🏻 복부 + 코어 근육 자극!",
+                    },
+                    {
+                        title: "버드독 (코어·허리 안정)",
+                        description: "엎드려 네발 자세에서 반대 팔·다리 동시에 뻗어 올리기<br>뻗을 때 내쉬고, 돌아올 때 들이마시기<br>좌우 각 20회 × 2세트<br>👉🏻 코어 안정 + 허리 강화 + 균형감각 업!",
+                    },
+                    {
+                        title: "마운틴 클라이머 (전신·코어·유산소)",
+                        description: "팔꿈치 펴고 플랭크 자세에서 무릎을 번갈아 가슴 쪽으로 빠르게 당기기<br>무릎 당길 때 내쉬고, 돌아갈 때 들이마시기<br>좌우 교차 20회 × 2세트<br>👉🏻 전신 순발력 + 코어 자극 + 유산소 효과!",
+                    },
+                    {
+                        title: "슈퍼맨 (등·코어·엉덩이)",
+                        description: "엎드려 양팔과 다리를 동시에 들어올리기<br>올릴 때 내쉬고, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 허리 안정화 + 등 근육 자극 + 엉덩이 라인 강화!",
+                    },
+                    {
+                        title: "버피 (전신 폭발 운동)",
+                        description: "스쿼트 → 플랭크 → 점프까지 연속 동작으로 이어가기<br>점프할 때 내쉬고, 내려갈 때 들이마시기<br>10회 × 2세트<br>👉🏻 전신 근력 + 유산소 + 체력 폭발 업!",
                     },
                 ];
             }
@@ -704,14 +717,19 @@
 
         tabUpper.addEventListener("click", () => switchTab("upper"));
         tabLower.addEventListener("click", () => switchTab("lower"));
+        tabAll.addEventListener("click", () => switchTab("all"));
 
         function switchTab(tabName) {
             currentTab = tabName;
-            currentCategoryEl.textContent = tabName === "upper" ? "상체" : "하체";
+            currentCategoryEl.textContent = 
+                tabName === "upper" ? "상체" : 
+                tabName === "lower" ? "하체" : 
+                "전신";
 
             // 버튼 활성화 토글
             tabUpper.classList.remove("active");
             tabLower.classList.remove("active");
+            tabAll.classList.remove("active");
             document.getElementById(`tab-${tabName}`).classList.add("active");
 
             render();
