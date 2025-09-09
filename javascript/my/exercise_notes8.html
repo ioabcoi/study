@@ -416,23 +416,37 @@
 
             .sidebar-toggle {
                 position: fixed;
+                z-index: 1;
                 right: 1rem;
                 top: 1rem;
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 width: 50px;
                 height: 50px;
                 font-size: 1rem;
                 cursor: pointer;
                 background: var(--color-main-light);
-                border: 0;
                 color: var(--color-white);
                 border: none;
                 border-radius: 5px;
                 transition: all 0.3s ease;
             }
 
-            .sidebar-toggle:hover {
-                background: var(--color-main-dark);
+            .sidebar-toggle.open::after {
+                position: absolute;
+                left: 0;
+                top: 0;
+                content: '👆🏻';
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                background: var(--color-main-light);
+                color: var(--color-white);
+                border: none;
+                border-radius: 5px;
             }
 
             /* 사이드바를 상단 고정 */
@@ -476,7 +490,8 @@
             }
 
             .todo-desc {
-                margin: 0;
+                margin: 0 0 5px;
+                font-size: 0.75rem;
             }
 
             .todo-title {
@@ -500,7 +515,7 @@
     <h1>🏋🏻 운동 투두리스트</h1>
 
     <!-- 🔸 탭 사이드바 -->
-    <button id="sidebar-toggle" class="sidebar-toggle">☰</button>
+    <button id="sidebar-toggle" class="sidebar-toggle">👇🏻</button>
     <div class="tab-sidebar" id="tab-sidebar">
         <div class="sidebar-tab-section">
             <div class="sidebar-tab-buttons">
@@ -523,13 +538,13 @@
     <!-- 🔹 메인 콘텐츠 -->
     <div class="container">
         <div class="main-content">
-            <h2><span id="currentCategory">상체</span></h2>
+            <h2><span id="currentCategory">상체 💪🏻</span></h2>
 
             <p class="guide-message">👉🏻 운동 항목을 드래그해서 순서를 자유롭게 정해보세요!</p>
 
             <ul id="todoList" class="todoList"></ul>
 
-            <h3>🏋🏻 운동 추가</h3>
+            <h3>🤜🏻 운동 추가 🤛🏻</h3>
             <form id="addForm" class="addForm">
                 <input type="text" id="newTitle" placeholder="운동 제목" required />
                 <textarea id="newDesc" placeholder="운동 설명" rows="5"></textarea>
@@ -562,6 +577,7 @@
         };
 
         sidebarToggleBtn.addEventListener("click", () => {
+            sidebarToggleBtn.classList.toggle("open");
             tabSidebar.classList.toggle("open");
             document.body.classList.toggle("sidebar-open");
         });
@@ -583,7 +599,7 @@
                 return [
                     {
                         title: "철봉 매달리기 (스트레칭)",
-                        description: "어깨 힘 빼고 10초간 매달리기<br>코로 들이마시고 입으로 내쉬기 반복<br>10초 × 3세트<br>👉🏻 등과 어깨 안정화 + 상체 긴장 완화!",
+                        description: "어깨 힘 빼고 매달리기<br>코로 들이마시고 입으로 내쉬기 반복<br>30초 × 2세트<br>👉🏻 등과 어깨 안정화 + 상체 긴장 완화!",
                     },
                     {
                         title: "벽 푸쉬업 (워밍업)",
@@ -619,19 +635,19 @@
                     },
                     {
                         title: "숄더탭 (어깨 안정·코어)",
-                        description: "플랭크 자세에서 한 손씩 번갈아 반대쪽 어깨 두드리기<br>몸 흔들리지 않도록 복부에 힘 주기<br>20회(양손 10회씩) × 2세트<br>👉🏻 어깨 밸런스와 코어 안정화!",
+                        description: "플랭크 자세에서 한 손씩 번갈아 반대쪽 어깨 두드리기<br>몸 흔들리지 않도록 복부에 힘 주기<br>양손 10회 × 2세트<br>👉🏻 어깨 밸런스와 코어 안정화!",
                     },
                     {
-                        title: "벤트 니 레이즈 (아랫배)",
-                        description: "누워서 무릎을 90도로 굽힌 상태 (등, 허리 바닥에 밀착)<br>→ 천천히 가슴 쪽으로 당기기<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 아랫배 자극 + 허리 부담 감소 + 복부 코어 강화!",
+                        title: "행잉 니 레이즈 (복직근)",
+                        description: "철봉에 매달려 무릎을 굽혀 가슴 쪽으로 천천히 끌어올리기<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>10회 × 3세트<br>👉🏻 아랫배부터 복직근 전체를 자극, 초보도 접근하기 좋아!",
                     },
                     {
-                        title: "레그 레이즈 (아랫배)",
-                        description: "누워서 다리 곧게 펴고 (등, 허리 바닥에 밀착)<br>→ 천천히 들어올리기다리<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 아랫배 집중 자극 + 복부 군살 제거!",
+                        title: "행잉 레그 레이즈 (아랫배·코어)",
+                        description: "철봉에 매달려 다리를 곧게 펴고 천천히 들어올리기<br>다리 올릴 때 내쉬고, 내릴 때 들이마시기<br>10회 × 3세트<br>👉🏻 아랫배 집중 자극 + 코어 안정화 + 그립력 강화까지 효과적!",
                     },
                     {
-                        title: "철봉 매달려서 하체 들어올리기 (복직근)",
-                        description: "어깨 너비보다 살짝 넓게 잡고 복근에 힘주고 무릎 굽히기<br>다리 올릴 때 내쉬기, 내릴 때 들이마시기<br>20회 × 2세트<br>👉🏻 복직근 자극 + 복부 군살 제거!",
+                        title: "행잉 레그 레이즈 트위스트 (아랫배·옆구리)",
+                        description: "철봉에 매달려 무릎을 살짝 굽힌 상태에서 다리를 들어올리며 좌우로 번갈아 비틀기<br>올릴 때 내쉬기, 내릴 때 들이마시기<br>좌우 10회씩 × 2세트<br>👉🏻 아랫배 + 옆구리 복사근 자극, 허리라인 정리에 효과적!",
                     },
                 ];
             } else if (category === "lower") {
@@ -722,9 +738,9 @@
         function switchTab(tabName) {
             currentTab = tabName;
             currentCategoryEl.textContent = 
-                tabName === "upper" ? "상체" : 
-                tabName === "lower" ? "하체" : 
-                "전신";
+                tabName === "upper" ? "상체 💪🏻" : 
+                tabName === "lower" ? "하체 🦵🏻" : 
+                "전신 🏋🏻‍♀️";
 
             // 버튼 활성화 토글
             tabUpper.classList.remove("active");
@@ -920,7 +936,7 @@
 
                 if (time < 0) {
                     clearInterval(sidebarTimer);
-                    sidebarTimerDisplay.textContent = "⏰ 종료! 수고했어! 👏🏻";
+                    sidebarTimerDisplay.textContent = "끝!👏🏻";
                 }
             }, 1000);
         }
