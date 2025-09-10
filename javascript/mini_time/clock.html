@@ -7,70 +7,77 @@
     <title>Clock</title>
     <link rel="stylesheet" href="../mini/style.css">
     <style>
-        .dot {
+        .title {
             position: absolute;
-            width: 16px;
-            height: 16px;
-            background: var(--color-first);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 200px;
+            height: 200px;
+            background: var(--color-second);
             border-radius: 50%;
-            opacity: 0;
             transition: all 0.1s ease-in-out;
         }
 
-        #dot-1 {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .title .date {
+            display: block;
+            margin-bottom: 15px;
+            font-size: 15px;
         }
 
-        #dot-2 {
-            top: 20%;
-            left: 20%;
+        .title .meridiem {
+            font-size: 15px;
         }
 
-        #dot-3 {
-            top: 20%;
-            right: 20%;
-        }
-
-        #dot-4 {
-            bottom: 20%;
-            left: 20%;
-        }
-
-        #dot-5 {
-            bottom: 20%;
-            right: 20%;
-        }
-
-        #dot-6 {
-            top: 50%;
-            left: 20%;
-            transform: translateY(-50%);
-        }
-
-        #dot-7 {
-            top: 50%;
-            right: 20%;
-            transform: translateY(-50%);
+        .title .time {
+            font-size: 30px;
         }
 
         /* Responsive Design */
         @media (min-width: 768px) {
-            .dot {
-                width: 30px;
-                height: 30px;
+            .title {
+                width: 500px;
+                height: 500px;
+            }
+
+            .title .date {
+                display: block;
+                margin-bottom: 30px;
+                font-size: 30px;
+            }
+
+            .title .meridiem {
+                font-size: 30px;
+            }
+
+            .title .time {
+                font-size: 70px;
             }
         }
 
-        @media (min-width: 1080px) {}
+        @media (min-width: 1080px) {
+            .title {
+                width: 600px;
+                height: 600px;
+            }
 
-        @media (min-width: 1280px) {
-            .dot {
-                width: 50px;
-                height: 50px;
+            .title .date {
+                display: block;
+                margin-bottom: 40px;
+                font-size: 40px;
+            }
+
+            .title .meridiem {
+                font-size: 40px;
+            }
+
+            .title .time {
+                font-size: 100px;
             }
         }
+
+        @media (min-width: 1280px) {}
     </style>
 </head>
 
@@ -80,105 +87,48 @@
 
         <div class="container">
             <h1 class="title">
-                <strong class="result">Dice Roller</strong>
-                <button class="reset">🎲</button>
+                <strong class="date">0000년 00월 00일 0요일</strong>
+                <strong class="meridiem">AM</strong>
+                <strong class="time">00:00:00</strong>
             </h1>
-
-            <div class="game-container">
-                <div class="game">
-                    <div class="dot" id="dot-1"></div>
-                    <div class="dot" id="dot-2"></div>
-                    <div class="dot" id="dot-3"></div>
-                    <div class="dot" id="dot-4"></div>
-                    <div class="dot" id="dot-5"></div>
-                    <div class="dot" id="dot-6"></div>
-                    <div class="dot" id="dot-7"></div>
-                </div>
-            </div>
-
-            <button id="roll-button" class="button">Roll Dice</button>
         </div>
     </div>
     <script>
-        (function () {
-            const rollButton = document.getElementById('roll-button');
-            const resetButton = document.querySelector('.reset');
-            const resultDisplay = document.querySelector('.result');
-            const dots = document.querySelectorAll('.dot');
-            const diceFaces = {
-                1: [1],
-                2: [2, 5],
-                3: [2, 1, 5],
-                4: [2, 3, 4, 5],
-                5: [2, 3, 4, 5, 1],
-                6: [2, 3, 4, 5, 6, 7]
-            };
+        function updateClock() {
+            const now = new Date();
 
-            let intervalId = null; // 랜덤 모션을 위한 인터벌 ID
-            let isRolling = true; // 주사위가 돌고 있는 상태
+            // 연, 월, 일
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const date = String(now.getDate()).padStart(2, '0');
 
-            // 점을 숨기는 함수
-            function hideAllDots() {
-                dots.forEach(dot => (dot.style.opacity = 0));
-            }
+            // 요일 (0:일 ~ 6:토)
+            const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+            const weekday = weekdays[now.getDay()];
 
-            // 주어진 숫자에 따라 점을 표시하는 함수
-            function showDiceFace(number) {
-                diceFaces[number].forEach(dotIndex => {
-                    document.getElementById(`dot-${dotIndex}`).style.opacity = 1;
-                });
-            }
+            // 시, 분, 초
+            let hours = now.getHours();
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
 
-            // 랜덤 모션 함수
-            function startRandomMotion() {
-                isRolling = true; // 상태 초기화
-                resetButton.style.display = 'none';
-                intervalId = setInterval(() => {
-                    const randomFace = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
-                    hideAllDots();
-                    showDiceFace(randomFace);
-                }, 200); // 0.2초 간격
-            }
+            // AM/PM
+            const meridiem = hours >= 12 ? "PM" : "AM";
 
-            // 순차 모션 함수
-            // let currentFace = 1; // 현재 표시할 숫자 초기값
-            // function startSequentialMotion() {
-            //     isRolling = true; // 상태 초기화
-            //     intervalId = setInterval(() => {
-            //         hideAllDots(); // 모든 점 숨김
-            //         showDiceFace(currentFace); // 현재 숫자에 맞는 점 표시
-            //         currentFace = currentFace % 6 + 1; // 1~6 순환
-            //     }, 200); // 0.2초 간격
-            // }
+            // 12시간제로 변경
+            hours = hours % 12 || 12;
+            hours = String(hours).padStart(2, '0');
 
-            // Roll Dice 버튼 클릭 이벤트
-            rollButton.addEventListener('click', () => {
-                if (!isRolling) return; // 중복 클릭 방지
-                clearInterval(intervalId); // 랜덤 모션 중지
-                resetButton.style.display = 'block';
-                const diceNumber = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
-                hideAllDots();
-                showDiceFace(diceNumber); // 결과 표시
-                resultDisplay.textContent = `${diceNumber}`;
-                isRolling = false; // 상태 업데이트
-            });
+            // DOM 업데이트
+            document.querySelector(".date").textContent = `${year}년 ${month}월 ${date}일 ${weekday}요일`;
+            document.querySelector(".meridiem").textContent = meridiem;
+            document.querySelector(".time").textContent = `${hours}:${minutes}:${seconds}`;
+        }
 
-            // Reset 버튼 클릭 이벤트
-            resetButton.addEventListener('click', () => {
-                clearInterval(intervalId); // 기존 인터벌 중지
-                resultDisplay.textContent = 'Dice Roller'; // 결과 초기화
-                startRandomMotion(); // 랜덤 모션 시작
-                // currentFace = 1; // 순서 초기화
-                // startSequentialMotion(); // 순차 모션 시작
-            });
-
-            // 초기 랜덤 모션 시작
-            startRandomMotion();
-
-            // 초기 순차 모션 시작
-            // startSequentialMotion();
-        })();
+        // 최초 실행 + 1초마다 갱신
+        updateClock();
+        setInterval(updateClock, 1000);
     </script>
+
 </body>
 
 </html>
