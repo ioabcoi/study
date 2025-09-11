@@ -13,71 +13,22 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            width: 200px;
-            height: 200px;
+            width: clamp(280px, 50vw, 600px);
+            height: clamp(280px, 50vw, 600px);
             background: var(--color-second);
             border-radius: 50%;
-            transition: all 0.1s ease-in-out;
         }
 
-        .title .date {
-            display: block;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
+        .title .date,
         .title .meridiem {
-            font-size: 15px;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: clamp(18px, 3vw, 40px);
         }
 
         .title .time {
-            font-size: 30px;
+            font-size: clamp(40px, 10vw, 100px);
         }
-
-        /* Responsive Design */
-        @media (min-width: 768px) {
-            .title {
-                width: 500px;
-                height: 500px;
-            }
-
-            .title .date {
-                display: block;
-                margin-bottom: 30px;
-                font-size: 30px;
-            }
-
-            .title .meridiem {
-                font-size: 30px;
-            }
-
-            .title .time {
-                font-size: 70px;
-            }
-        }
-
-        @media (min-width: 1080px) {
-            .title {
-                width: 600px;
-                height: 600px;
-            }
-
-            .title .date {
-                display: block;
-                margin-bottom: 40px;
-                font-size: 40px;
-            }
-
-            .title .meridiem {
-                font-size: 40px;
-            }
-
-            .title .time {
-                font-size: 100px;
-            }
-        }
-
-        @media (min-width: 1280px) {}
     </style>
 </head>
 

@@ -7,69 +7,92 @@
     <title>Stopwatch</title>
     <link rel="stylesheet" href="../mini/style.css">
     <style>
-        .dot {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: var(--color-first);
-            border-radius: 50%;
-            opacity: 0;
+        .container {
+            padding-top: clamp(20%, 5vw, 50%);
+        }
+
+        .btn_time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 1vw;
+            padding: 2.5rem 0;
             transition: all 0.1s ease-in-out;
         }
 
-        #dot-1 {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        button {
+            padding: 10px 25px;
+            background: var(--color-second);
+            color: var(--color-fourth);
+            font-size: clamp(20px, 3vw, 50px);
+            font-family: var(--font-default);
+            cursor: pointer;
         }
 
-        #dot-2 {
-            top: 20%;
-            left: 20%;
+        button:disabled {
+            opacity: 0.5;
         }
 
-        #dot-3 {
-            top: 20%;
-            right: 20%;
+        .reset {
+            background: var(--color-fourth);
+            color: var(--color-second);
         }
 
-        #dot-4 {
-            bottom: 20%;
-            left: 20%;
+        .start {
+            background: var(--color-third);
         }
 
-        #dot-5 {
-            bottom: 20%;
-            right: 20%;
+        .lap {
+            background: var(--color-fourth);
+            color: var(--color-first);
         }
 
-        #dot-6 {
-            top: 50%;
-            left: 20%;
-            transform: translateY(-50%);
+        .stop {
+            background: var(--color-third);
         }
 
-        #dot-7 {
-            top: 50%;
-            right: 20%;
-            transform: translateY(-50%);
+        .time {
+            font-family: var(--font-default);
+            font-size: clamp(40px, 10vw, 100px);
+            transition: all 0.1s ease-in-out;
         }
 
-        /* Responsive Design */
-        @media (min-width: 768px) {
-            .dot {
-                width: 30px;
-                height: 30px;
-            }
+        .time .msec {
+            font-family: var(--font-default);
+            font-size: 0.75em;
         }
 
-        @media (min-width: 1080px) {}
+        .lap_list {
+            width: clamp(260px, 70vw, 700px);
+            margin: 0 auto;
+        }
 
-        @media (min-width: 1280px) {
-            .dot {
-                width: 50px;
-                height: 50px;
-            }
+        .lap_list ul li {
+            padding: 0.5rem;
+        }
+
+        .lap_list ul {
+            list-style: none;
+            text-align: left;
+        }
+
+        .lap_list ul li+li {
+            border-top: 1px dashed var(--color-fourth);
+        }
+
+        .lap_list ul li strong {
+            margin-left: 2.5vw;
+            font-family: var(--font-default);
+            font-size: clamp(20px, 5.5vw, 40px);
+        }
+
+        .lap_list ul li .num {
+            color: var(--color-third);
+        }
+
+        .none {
+            display: none;
         }
     </style>
 </head>
@@ -79,106 +102,231 @@
         <a href="javascript:history.back();" class="back">👈🏻</a>
 
         <div class="container">
-            <h1 class="title">
-                <strong class="result">Dice Roller</strong>
-                <button class="reset">🎲</button>
+            <h1 class="stopwatch">
+                <strong class="time">00:00<span class="msec">.00</span></strong>
             </h1>
 
-            <div class="game-container">
-                <div class="game">
-                    <div class="dot" id="dot-1"></div>
-                    <div class="dot" id="dot-2"></div>
-                    <div class="dot" id="dot-3"></div>
-                    <div class="dot" id="dot-4"></div>
-                    <div class="dot" id="dot-5"></div>
-                    <div class="dot" id="dot-6"></div>
-                    <div class="dot" id="dot-7"></div>
-                </div>
+            <!-- default 노출 / start 클릭 시 비노출 / stop 클릭 시 노출 -->
+            <div class="btn_time">
+                <button class="reset" disabled>Reset 🔄️</button><!-- default 비활성 / stop 클릭 시 활성화 -->
+                <button class="start">Start ▶️</button>
             </div>
 
-            <button id="roll-button" class="button">Roll Dice</button>
+            <!-- start 클릭 시 노출 / stop 클릭 시 비노출 -->
+            <div class="btn_time none">
+                <button class="lap">Lap ⏱️</button>
+                <button class="stop">Stop ⏹️</button>
+            </div>
+
+            <!-- lap 클릭 시 노출, lap_time/lap_total 쌓임 / reset 클릭 시 리스트 사라짐 -->
+            <div class="lap_list">
+                <ul>
+                    <!-- <li>
+                        <strong class="num">0</strong>
+                        <strong class="time lap_time">00:00<span class="msec">.00</span></strong>
+                        <strong class="time lap_total">00:00<span class="msec">.00</span></strong>
+                    </li> -->
+                </ul>
+            </div>
         </div>
     </div>
     <script>
-        (function () {
-            const rollButton = document.getElementById('roll-button');
-            const resetButton = document.querySelector('.reset');
-            const resultDisplay = document.querySelector('.result');
-            const dots = document.querySelectorAll('.dot');
-            const diceFaces = {
-                1: [1],
-                2: [2, 5],
-                3: [2, 1, 5],
-                4: [2, 3, 4, 5],
-                5: [2, 3, 4, 5, 1],
-                6: [2, 3, 4, 5, 6, 7]
-            };
+        // performance.now() 기반
+        document.addEventListener("DOMContentLoaded", () => {
+            const timeEl = document.querySelector(".stopwatch .time");
+            const msecEl = document.querySelector(".stopwatch .msec");
+            const startBtn = document.querySelector(".start");
+            const stopBtn = document.querySelector(".stop");
+            const resetBtn = document.querySelector(".reset");
+            const lapBtn = document.querySelector(".lap");
+            const btnDefault = document.querySelector(".btn_time");
+            const btnRunning = document.querySelectorAll(".btn_time")[1];
+            const lapList = document.querySelector(".lap_list ul");
+            const lapContainer = document.querySelector(".lap_list");
 
-            let intervalId = null; // 랜덤 모션을 위한 인터벌 ID
-            let isRolling = true; // 주사위가 돌고 있는 상태
+            let startTime = 0;
+            let elapsed = 0; // 누적 경과 시간
+            let running = false;
+            let rafId = null;
+            let lastLapTime = 0;
+            let lapCount = 0;
 
-            // 점을 숨기는 함수
-            function hideAllDots() {
-                dots.forEach(dot => (dot.style.opacity = 0));
+            // 시간 포맷
+            function formatTime(ms) {
+                const totalSeconds = Math.floor(ms / 1000);
+                const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+                const seconds = String(totalSeconds % 60).padStart(2, "0");
+                const msec = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
+                return { minutes, seconds, msec };
             }
 
-            // 주어진 숫자에 따라 점을 표시하는 함수
-            function showDiceFace(number) {
-                diceFaces[number].forEach(dotIndex => {
-                    document.getElementById(`dot-${dotIndex}`).style.opacity = 1;
-                });
+            function updateDisplay(ms) {
+                const { minutes, seconds, msec } = formatTime(ms);
+                timeEl.innerHTML = `${minutes}:${seconds}<span class="msec">.${msec}</span>`;
             }
 
-            // 랜덤 모션 함수
-            function startRandomMotion() {
-                isRolling = true; // 상태 초기화
-                resetButton.style.display = 'none';
-                intervalId = setInterval(() => {
-                    const randomFace = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
-                    hideAllDots();
-                    showDiceFace(randomFace);
-                }, 200); // 0.2초 간격
+            // raf 루프
+            function tick() {
+                const now = performance.now();
+                const diff = now - startTime + elapsed;
+                updateDisplay(diff);
+                rafId = requestAnimationFrame(tick);
             }
 
-            // 순차 모션 함수
-            // let currentFace = 1; // 현재 표시할 숫자 초기값
-            // function startSequentialMotion() {
-            //     isRolling = true; // 상태 초기화
-            //     intervalId = setInterval(() => {
-            //         hideAllDots(); // 모든 점 숨김
-            //         showDiceFace(currentFace); // 현재 숫자에 맞는 점 표시
-            //         currentFace = currentFace % 6 + 1; // 1~6 순환
-            //     }, 200); // 0.2초 간격
-            // }
+            // 시작
+            startBtn.addEventListener("click", () => {
+                if (running) return;
+                running = true;
+                startTime = performance.now();
+                rafId = requestAnimationFrame(tick);
 
-            // Roll Dice 버튼 클릭 이벤트
-            rollButton.addEventListener('click', () => {
-                if (!isRolling) return; // 중복 클릭 방지
-                clearInterval(intervalId); // 랜덤 모션 중지
-                resetButton.style.display = 'block';
-                const diceNumber = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
-                hideAllDots();
-                showDiceFace(diceNumber); // 결과 표시
-                resultDisplay.textContent = `${diceNumber}`;
-                isRolling = false; // 상태 업데이트
+                btnDefault.classList.add("none");
+                btnRunning.classList.remove("none");
+                resetBtn.disabled = true;
             });
 
-            // Reset 버튼 클릭 이벤트
-            resetButton.addEventListener('click', () => {
-                clearInterval(intervalId); // 기존 인터벌 중지
-                resultDisplay.textContent = 'Dice Roller'; // 결과 초기화
-                startRandomMotion(); // 랜덤 모션 시작
-                // currentFace = 1; // 순서 초기화
-                // startSequentialMotion(); // 순차 모션 시작
+            // 중지
+            stopBtn.addEventListener("click", () => {
+                if (!running) return;
+                running = false;
+                cancelAnimationFrame(rafId);
+
+                elapsed += performance.now() - startTime;
+
+                btnDefault.classList.remove("none");
+                btnRunning.classList.add("none");
+                resetBtn.disabled = false;
             });
 
-            // 초기 랜덤 모션 시작
-            startRandomMotion();
+            // 재설정
+            resetBtn.addEventListener("click", () => {
+                elapsed = 0;
+                lastLapTime = 0;
+                lapCount = 0;
+                updateDisplay(0);
+                lapList.innerHTML = "";
+                lapContainer.classList.add("none");
+                resetBtn.disabled = true;
+            });
 
-            // 초기 순차 모션 시작
-            // startSequentialMotion();
-        })();
+            // 랩
+            lapBtn.addEventListener("click", () => {
+                if (!running) return;
+                const now = performance.now();
+                const currentTime = now - startTime + elapsed;
+
+                const lapTime = currentTime - lastLapTime;
+                lastLapTime = currentTime;
+                lapCount++;
+
+                const { minutes, seconds, msec } = formatTime(lapTime);
+                const { minutes: tMin, seconds: tSec, msec: tMsec } = formatTime(currentTime);
+
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <strong class="num">${lapCount}</strong>
+                    <strong class="time lap_time">${minutes}:${seconds}<span class="msec">.${msec}</span></strong>
+                    <strong class="time lap_total">${tMin}:${tSec}<span class="msec">.${tMsec}</span></strong>
+                `;
+                lapList.prepend(li);
+                lapContainer.classList.remove("none");
+            });
+
+            // 초기화
+            updateDisplay(0);
+        });
+
+        /*
+        // setInterval 기반
+        document.addEventListener("DOMContentLoaded", () => {
+            const display = document.querySelector(".stopwatch .time");
+            const msecEl = display.querySelector(".msec");
+            const btnReset = document.querySelector(".btn_time .reset");
+            const btnStart = document.querySelector(".btn_time .start");
+            const btnLap = document.querySelector(".btn_time.none .lap");
+            const btnStop = document.querySelector(".btn_time.none .stop");
+
+            const btnBoxDefault = document.querySelectorAll(".btn_time")[0]; // 시작/재설정
+            const btnBoxRunning = document.querySelectorAll(".btn_time")[1]; // 랩/중지
+            const lapListBox = document.querySelector(".lap_list ul");
+            const lapContainer = document.querySelector(".lap_list");
+
+            let startTime = 0;
+            let elapsedTime = 0;
+            let timerInterval;
+            let lastLapTime = 0;
+            let lapCount = 0;
+
+            // 시간 포맷팅 (mm:ss.ms)
+            function formatTime(ms) {
+                const totalSeconds = Math.floor(ms / 1000);
+                const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+                const seconds = String(totalSeconds % 60).padStart(2, "0");
+                const milliseconds = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
+                return { minutes, seconds, milliseconds };
+            }
+
+            function updateDisplay(ms) {
+                const { minutes, seconds, milliseconds } = formatTime(ms);
+                display.childNodes[0].nodeValue = `${minutes}:${seconds}`;
+                msecEl.textContent = `.${milliseconds}`;
+            }
+
+            // 시작
+            btnStart.addEventListener("click", () => {
+                startTime = Date.now() - elapsedTime;
+                timerInterval = setInterval(() => {
+                    elapsedTime = Date.now() - startTime;
+                    updateDisplay(elapsedTime);
+                }, 10);
+
+                btnBoxDefault.classList.add("none");
+                btnBoxRunning.classList.remove("none");
+                btnReset.disabled = true;
+            });
+
+            // 중지
+            btnStop.addEventListener("click", () => {
+                clearInterval(timerInterval);
+                btnBoxRunning.classList.add("none");
+                btnBoxDefault.classList.remove("none");
+                btnReset.disabled = false;
+            });
+
+            // 재설정
+            btnReset.addEventListener("click", () => {
+                clearInterval(timerInterval);
+                elapsedTime = 0;
+                lastLapTime = 0;
+                lapCount = 0;
+                updateDisplay(0);
+                lapListBox.innerHTML = "";
+                lapContainer.classList.add("none");
+                btnReset.disabled = true;
+            });
+
+            // 랩
+            btnLap.addEventListener("click", () => {
+                const currentLapTime = elapsedTime - lastLapTime;
+                lastLapTime = elapsedTime;
+                lapCount++;
+
+                const lapItem = document.createElement("li");
+                lapItem.innerHTML = `
+                    <strong class="num">${lapCount}</strong>
+                    <strong class="time lap_time">${formatTime(currentLapTime).minutes}:${formatTime(currentLapTime).seconds}<span class="msec">.${formatTime(currentLapTime).milliseconds}</span></strong>
+                    <strong class="time lap_total">${formatTime(elapsedTime).minutes}:${formatTime(elapsedTime).seconds}<span class="msec">.${formatTime(elapsedTime).milliseconds}</span></strong>
+                `;
+                lapListBox.prepend(lapItem); // 최신 기록 위로 추가
+                lapContainer.classList.remove("none");
+            });
+
+            // 초기화 화면 표시
+            updateDisplay(0);
+        });
+        */
     </script>
+
 </body>
 
 </html>

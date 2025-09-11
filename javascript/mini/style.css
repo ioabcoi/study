@@ -97,6 +97,10 @@ input::placeholder {
     opacity: 0.5;
 }
 
+.wrap * {
+    transition: all 0.25s ease-in-out;
+}
+
 .back {
     position: fixed;
     z-index: 1;
@@ -106,12 +110,6 @@ input::placeholder {
     font-size: 25px;
     text-decoration: none;
 }
-
-.title strong,
-button {
-    transition: all 0.25s ease-in-out;
-}
-
 .title {
     position: fixed;
     left: 50%;
