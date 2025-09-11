@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../mini/style.css">
     <style>
         .container {
-            padding-top: clamp(20%, 5vw, 50%);
+            padding-top: clamp(10%, 3vw, 30%);
         }
 
         .btn_time {
@@ -16,7 +16,7 @@
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            gap: 1vw;
+            gap: 1.5vw;
             padding: 2.5rem 0;
             transition: all 0.1s ease-in-out;
         }
@@ -64,17 +64,18 @@
         }
 
         .lap_list {
-            width: clamp(260px, 70vw, 700px);
+            width: clamp(280px, 70vw, 900px);
             margin: 0 auto;
-        }
-
-        .lap_list ul li {
-            padding: 0.5rem;
         }
 
         .lap_list ul {
             list-style: none;
+            padding: 0;
             text-align: left;
+        }
+
+        .lap_list ul li {
+            padding: 0.5rem;
         }
 
         .lap_list ul li+li {
@@ -82,13 +83,46 @@
         }
 
         .lap_list ul li strong {
-            margin-left: 2.5vw;
+            margin-left: 2.75vw;
             font-family: var(--font-default);
             font-size: clamp(20px, 5.5vw, 40px);
         }
 
         .lap_list ul li .num {
+            display: inline-flex;
+            justify-content: center;
+            width: clamp(7vw, 8vw, 100px);
             color: var(--color-third);
+        }
+
+        /* 랩 추가 애니메이션 */
+        .lap-item.added {
+            animation: popIn 0.4s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 최고/최저 하이라이트 */
+        .lap-item.best {
+            color: var(--color-third);
+            font-weight: bold;
+        }
+
+        .lap-item.worst {
         }
 
         .none {
@@ -134,7 +168,6 @@
         // performance.now() 기반
         document.addEventListener("DOMContentLoaded", () => {
             const timeEl = document.querySelector(".stopwatch .time");
-            const msecEl = document.querySelector(".stopwatch .msec");
             const startBtn = document.querySelector(".start");
             const stopBtn = document.querySelector(".stop");
             const resetBtn = document.querySelector(".reset");
@@ -150,6 +183,7 @@
             let rafId = null;
             let lastLapTime = 0;
             let lapCount = 0;
+            let laps = [];
 
             // 시간 포맷
             function formatTime(ms) {
@@ -203,6 +237,7 @@
                 elapsed = 0;
                 lastLapTime = 0;
                 lapCount = 0;
+                laps = [];
                 updateDisplay(0);
                 lapList.innerHTML = "";
                 lapContainer.classList.add("none");
@@ -219,22 +254,57 @@
                 lastLapTime = currentTime;
                 lapCount++;
 
+                laps.push({ num: lapCount, lapTime, total: currentTime });
+
+                // li 생성
                 const { minutes, seconds, msec } = formatTime(lapTime);
                 const { minutes: tMin, seconds: tSec, msec: tMsec } = formatTime(currentTime);
 
                 const li = document.createElement("li");
+                li.classList.add("lap-item");
                 li.innerHTML = `
-                    <strong class="num">${lapCount}</strong>
-                    <strong class="time lap_time">${minutes}:${seconds}<span class="msec">.${msec}</span></strong>
-                    <strong class="time lap_total">${tMin}:${tSec}<span class="msec">.${tMsec}</span></strong>
-                `;
+      <strong class="num">${lapCount}</strong>
+      <strong class="time lap_time">${minutes}:${seconds}<span class="msec">.${msec}</span></strong>
+      <strong class="time lap_total">${tMin}:${tSec}<span class="msec">.${tMsec}</span></strong>
+    `;
                 lapList.prepend(li);
                 lapContainer.classList.remove("none");
+
+                // 애니메이션 효과
+                li.classList.add("added");
+                setTimeout(() => li.classList.remove("added"), 500);
+
+                // 최고/최저 하이라이트 갱신
+                highlightBestWorst();
             });
+
+            // 최고/최저 하이라이트
+            function highlightBestWorst() {
+                if (laps.length < 2) return;
+
+                // lapTime 기준으로 비교
+                const minLap = Math.min(...laps.map(l => l.lapTime));
+                const maxLap = Math.max(...laps.map(l => l.lapTime));
+
+                // 기존 하이라이트 제거
+                lapList.querySelectorAll("li").forEach(li => {
+                    li.classList.remove("best", "worst");
+                });
+
+                // 다시 부여 (num 매칭)
+                laps.forEach(lap => {
+                    const li = [...lapList.children].find(li =>
+                        li.querySelector(".num").textContent == lap.num
+                    );
+                    if (lap.lapTime === minLap) li.classList.add("best");
+                    if (lap.lapTime === maxLap) li.classList.add("worst");
+                });
+            }
 
             // 초기화
             updateDisplay(0);
         });
+
 
         /*
         // setInterval 기반
