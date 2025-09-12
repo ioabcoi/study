@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+    <title>World</title>
+    <link rel="stylesheet" href="../mini/style.css">
+    <style>
+        .container {
+            margin-top: clamp(120px, 20vw, 200px);
+            padding: 1rem;
+        }
+
+        .text {
+            position: fixed;
+            left: 0;
+            top: clamp(30px, 10vw, 100px);
+            width: 100%;
+            color: var(--color-third);
+            font-family: var(--font-default);
+            font-size: clamp(20px, 8vw, 40px);
+            text-align: center;
+        }
+
+        .text:hover {
+            text-shadow: 3px 3px 0 var(--color-fourth);
+        }
+
+        .index {
+            display: grid;
+            width: clamp(280px, 80%, 1080px);
+            margin: 0 auto;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(1vw, 2vw, 20px);
+            align-items: stretch;
+            justify-content: stretch;
+        }
+
+        .item {
+            display: flex;
+            align-items: stretch;
+            justify-content: stretch;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item .box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            padding: clamp(2vw, 5vw, 20px);
+            background: var(--color-second);
+            border-radius: 10px;
+        }
+
+        .item .box * {
+            color: var(--color-fourth);
+            font-family: var(--font-default);
+            font-size: clamp(18px, 4vw, 28px);
+        }
+
+        .item .box .city {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed var(--color-fourth);
+            color: var(--color-third);
+        }
+
+        .item .link:hover {
+            background: var(--color-third);
+            box-shadow: 5px 5px 0 var(--color-fourth);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <a href="javascript:history.back();" class="back">👈🏻</a>
+
+        <div class="container">
+            <div class="world-clock">
+                <h1 class="text">세계 시계</h1>
+                <ul class="index">
+                    <li class="item">
+                        <div class="box">
+                            <strong class="city">대한민국 서울</strong>
+                            <span class="time" data-timezone="Asia/Seoul">00:00:00</span>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="box">
+                            <strong class="city">일본 도쿄</strong>
+                            <span class="time" data-timezone="Asia/Tokyo">00:00:00</span>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="box">
+                            <strong class="city">스위스 취리히</strong>
+                            <span class="time" data-timezone="Europe/Zurich">00:00:00</span>
+                        </div>
+                    </li>
+                    <li class="item">
+                        <div class="box">
+                            <strong class="city">미국 뉴욕</strong>
+                            <span class="time" data-timezone="America/New_York">00:00:00</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateWorldClock() {
+            const timeEls = document.querySelectorAll(".world-clock .time");
+
+            timeEls.forEach(el => {
+                const tz = el.dataset.timezone;
+                const now = new Date();
+
+                const formatter = new Intl.DateTimeFormat("ko-KR", {
+                    timeZone: tz,
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit",
+                    hour12: false
+                });
+
+                el.textContent = formatter.format(now);
+            });
+        }
+
+        // 최초 실행 + 1초마다 갱신
+        updateWorldClock();
+        setInterval(updateWorldClock, 1000);
+    </script>
+
+</body>
+
+</html>

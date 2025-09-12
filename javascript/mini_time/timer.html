@@ -7,69 +7,75 @@
     <title>Timer</title>
     <link rel="stylesheet" href="../mini/style.css">
     <style>
-        .dot {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: var(--color-first);
-            border-radius: 50%;
-            opacity: 0;
+        .container {
+            padding-top: clamp(10%, 3vw, 30%);
+        }
+
+        .btn_time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 1.5vw;
+            padding: 2.5rem 0;
             transition: all 0.1s ease-in-out;
         }
 
-        #dot-1 {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        button {
+            padding: 10px 15px;
+            background: var(--color-second);
+            color: var(--color-fourth);
+            font-size: clamp(20px, 3vw, 50px);
+            font-family: var(--font-default);
+            cursor: pointer;
         }
 
-        #dot-2 {
-            top: 20%;
-            left: 20%;
+        input[type="number"] {
+            width: clamp(60px, 20%, 300px);
+            padding: 12px 15px;
+            background: var(--color-second);
+            color: var(--color-fourth);
+            font-size: clamp(20px, 3vw, 50px);
+            font-family: var(--font-default);
+            text-align: center;
+            cursor: pointer;
         }
 
-        #dot-3 {
-            top: 20%;
-            right: 20%;
+        .set {
+            background: var(--color-third);
+            color: var(--color-fourth);
         }
 
-        #dot-4 {
-            bottom: 20%;
-            left: 20%;
+        .start {
+            background: var(--color-third);
         }
 
-        #dot-5 {
-            bottom: 20%;
-            right: 20%;
+        .reset {
+            background: var(--color-fourth);
+            color: var(--color-second);
         }
 
-        #dot-6 {
-            top: 50%;
-            left: 20%;
-            transform: translateY(-50%);
+        .pause {
+            background: var(--color-second);
         }
 
-        #dot-7 {
-            top: 50%;
-            right: 20%;
-            transform: translateY(-50%);
+        .stop {
+            background: var(--color-second);
         }
 
-        /* Responsive Design */
-        @media (min-width: 768px) {
-            .dot {
-                width: 30px;
-                height: 30px;
-            }
+        .time {
+            font-family: var(--font-default);
+            font-size: clamp(40px, 10vw, 100px);
+            transition: all 0.1s ease-in-out;
         }
 
-        @media (min-width: 1080px) {}
+        .time .msec {
+            font-family: var(--font-default);
+            font-size: 0.75em;
+        }
 
-        @media (min-width: 1280px) {
-            .dot {
-                width: 50px;
-                height: 50px;
-            }
+        .none {
+            display: none;
         }
     </style>
 </head>
@@ -79,106 +85,111 @@
         <a href="javascript:history.back();" class="back">👈🏻</a>
 
         <div class="container">
-            <h1 class="title">
-                <strong class="result">Dice Roller</strong>
-                <button class="reset">🎲</button>
+            <h1 class="timer">
+                <strong class="time">00:00<span class="msec">.00</span></strong>
             </h1>
 
-            <div class="game-container">
-                <div class="game">
-                    <div class="dot" id="dot-1"></div>
-                    <div class="dot" id="dot-2"></div>
-                    <div class="dot" id="dot-3"></div>
-                    <div class="dot" id="dot-4"></div>
-                    <div class="dot" id="dot-5"></div>
-                    <div class="dot" id="dot-6"></div>
-                    <div class="dot" id="dot-7"></div>
-                </div>
+            <!-- 기본 상태 -->
+            <div class="btn_time">
+                <input type="number" class="min" placeholder="분" min="0">
+                <input type="number" class="sec" placeholder="초" min="0" max="59">
+                <button class="set">설정👌🏻</button>
             </div>
 
-            <button id="roll-button" class="button">Roll Dice</button>
+            <!-- 설정 후 -->
+            <div class="btn_time">
+                <button class="start">시작▶️</button>
+                <button class="reset">재설정🔄️</button>
+            </div>
+
+            <!-- 실행 중 -->
+            <div class="btn_time">
+                <button class="pause">일시정지⏸️</button>
+                <button class="stop">중지⏹️</button>
+            </div>
         </div>
     </div>
     <script>
-        (function () {
-            const rollButton = document.getElementById('roll-button');
-            const resetButton = document.querySelector('.reset');
-            const resultDisplay = document.querySelector('.result');
-            const dots = document.querySelectorAll('.dot');
-            const diceFaces = {
-                1: [1],
-                2: [2, 5],
-                3: [2, 1, 5],
-                4: [2, 3, 4, 5],
-                5: [2, 3, 4, 5, 1],
-                6: [2, 3, 4, 5, 6, 7]
-            };
+        document.addEventListener("DOMContentLoaded", () => {
+            const display = document.querySelector(".timer .time");
+            const minInput = document.querySelector(".min");
+            const secInput = document.querySelector(".sec");
+            const setBtn = document.querySelector(".set");
+            const startBtn = document.querySelector(".start");
+            const resetBtn = document.querySelector(".reset");
+            const pauseBtn = document.querySelector(".pause");
+            const stopBtn = document.querySelector(".stop");
 
-            let intervalId = null; // 랜덤 모션을 위한 인터벌 ID
-            let isRolling = true; // 주사위가 돌고 있는 상태
+            let duration = 0;      // 타이머 전체 ms
+            let remaining = 0;     // 남은 시간
+            let startTime = 0;
+            let paused = false;
+            let timerId = null;
 
-            // 점을 숨기는 함수
-            function hideAllDots() {
-                dots.forEach(dot => (dot.style.opacity = 0));
+            function format(ms) {
+                const totalSec = Math.max(0, Math.floor(ms / 1000));
+                const min = String(Math.floor(totalSec / 60)).padStart(2, "0");
+                const sec = String(totalSec % 60).padStart(2, "0");
+                const msec = String(Math.floor((ms % 1000) / 10)).padStart(2, "0");
+                return `${min}:${sec}<span class="msec">.${msec}</span>`;
             }
 
-            // 주어진 숫자에 따라 점을 표시하는 함수
-            function showDiceFace(number) {
-                diceFaces[number].forEach(dotIndex => {
-                    document.getElementById(`dot-${dotIndex}`).style.opacity = 1;
-                });
+            function update() {
+                const now = performance.now();
+                const elapsed = now - startTime;
+                remaining = duration - elapsed;
+
+                display.innerHTML = format(remaining);
+
+                if (remaining <= 0) {
+                    stopTimer();
+                    alert("타이머 종료!");
+                } else {
+                    timerId = requestAnimationFrame(update);
+                }
             }
 
-            // 랜덤 모션 함수
-            function startRandomMotion() {
-                isRolling = true; // 상태 초기화
-                resetButton.style.display = 'none';
-                intervalId = setInterval(() => {
-                    const randomFace = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
-                    hideAllDots();
-                    showDiceFace(randomFace);
-                }, 200); // 0.2초 간격
+            function startTimer() {
+                startTime = performance.now();
+                if (paused) {
+                    startTime -= (duration - remaining);
+                    paused = false;
+                }
+                timerId = requestAnimationFrame(update);
             }
 
-            // 순차 모션 함수
-            // let currentFace = 1; // 현재 표시할 숫자 초기값
-            // function startSequentialMotion() {
-            //     isRolling = true; // 상태 초기화
-            //     intervalId = setInterval(() => {
-            //         hideAllDots(); // 모든 점 숨김
-            //         showDiceFace(currentFace); // 현재 숫자에 맞는 점 표시
-            //         currentFace = currentFace % 6 + 1; // 1~6 순환
-            //     }, 200); // 0.2초 간격
-            // }
+            function pauseTimer() {
+                paused = true;
+                cancelAnimationFrame(timerId);
+            }
 
-            // Roll Dice 버튼 클릭 이벤트
-            rollButton.addEventListener('click', () => {
-                if (!isRolling) return; // 중복 클릭 방지
-                clearInterval(intervalId); // 랜덤 모션 중지
-                resetButton.style.display = 'block';
-                const diceNumber = Math.floor(Math.random() * 6) + 1; // 1~6 랜덤
-                hideAllDots();
-                showDiceFace(diceNumber); // 결과 표시
-                resultDisplay.textContent = `${diceNumber}`;
-                isRolling = false; // 상태 업데이트
+            function stopTimer() {
+                cancelAnimationFrame(timerId);
+                remaining = 0;
+                display.innerHTML = "00:00<span class='msec'>.00</span>";
+            }
+
+            // 설정 버튼
+            setBtn.addEventListener("click", () => {
+                const min = parseInt(minInput.value || 0, 10);
+                const sec = parseInt(secInput.value || 0, 10);
+                duration = (min * 60 + sec) * 1000;
+                remaining = duration;
+                display.innerHTML = format(remaining);
             });
 
-            // Reset 버튼 클릭 이벤트
-            resetButton.addEventListener('click', () => {
-                clearInterval(intervalId); // 기존 인터벌 중지
-                resultDisplay.textContent = 'Dice Roller'; // 결과 초기화
-                startRandomMotion(); // 랜덤 모션 시작
-                // currentFace = 1; // 순서 초기화
-                // startSequentialMotion(); // 순차 모션 시작
+            startBtn.addEventListener("click", startTimer);
+            pauseBtn.addEventListener("click", pauseTimer);
+            stopBtn.addEventListener("click", stopTimer);
+            resetBtn.addEventListener("click", () => {
+                cancelAnimationFrame(timerId);
+                remaining = duration;
+                display.innerHTML = format(remaining);
+                paused = false;
             });
-
-            // 초기 랜덤 모션 시작
-            startRandomMotion();
-
-            // 초기 순차 모션 시작
-            // startSequentialMotion();
-        })();
+        });
     </script>
+
 </body>
 
 </html>
