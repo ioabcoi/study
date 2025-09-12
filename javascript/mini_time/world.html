@@ -70,9 +70,17 @@
             color: var(--color-third);
         }
 
+        .item .box .datetime span {
+            display: block;
+        }
+
         .item .box:hover {
             background: var(--color-third);
             box-shadow: 5px 5px 0 var(--color-fourth);
+        }
+
+        .item .box:hover .city {
+            color: var(--color-first);
         }
     </style>
 </head>
@@ -88,25 +96,37 @@
                     <li class="item">
                         <div class="box">
                             <strong class="city">대한민국 서울</strong>
-                            <span class="time" data-timezone="Asia/Seoul">00:00:00</span>
+                            <div class="datetime">
+                                <span class="date" data-timezone="Asia/Seoul">0000-00-00 (요일)</span>
+                                <span class="time" data-timezone="Asia/Seoul">00:00:00</span>
+                            </div>
                         </div>
                     </li>
                     <li class="item">
                         <div class="box">
                             <strong class="city">일본 도쿄</strong>
-                            <span class="time" data-timezone="Asia/Tokyo">00:00:00</span>
+                            <div class="datetime">
+                                <span class="date" data-timezone="Asia/Tokyo">0000-00-00 (요일)</span>
+                                <span class="time" data-timezone="Asia/Tokyo">00:00:00</span>
+                            </div>
                         </div>
                     </li>
                     <li class="item">
                         <div class="box">
                             <strong class="city">스위스 취리히</strong>
-                            <span class="time" data-timezone="Europe/Zurich">00:00:00</span>
+                            <div class="datetime">
+                                <span class="date" data-timezone="Europe/Zurich">0000-00-00 (요일)</span>
+                                <span class="time" data-timezone="Europe/Zurich">00:00:00</span>
+                            </div>
                         </div>
                     </li>
                     <li class="item">
                         <div class="box">
                             <strong class="city">미국 뉴욕</strong>
-                            <span class="time" data-timezone="America/New_York">00:00:00</span>
+                            <div class="datetime">
+                                <span class="date" data-timezone="America/New_York">0000-00-00 (요일)</span>
+                                <span class="time" data-timezone="America/New_York">00:00:00</span>
+                            </div>
                         </div>
                     </li>
                 </ul>
@@ -115,13 +135,23 @@
     </div>
     <script>
         function updateWorldClock() {
-            const timeEls = document.querySelectorAll(".world-clock .time");
+            const now = new Date();
 
-            timeEls.forEach(el => {
-                const tz = el.dataset.timezone;
-                const now = new Date();
+            document.querySelectorAll(".world-clock .datetime").forEach(wrapper => {
+                const tz = wrapper.querySelector(".date").dataset.timezone;
 
-                const formatter = new Intl.DateTimeFormat("ko-KR", {
+                // 날짜 포맷
+                const dateFormatter = new Intl.DateTimeFormat("ko-KR", {
+                    timeZone: tz,
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    // weekday: "short"
+                    weekday: "long"
+                });
+
+                // 시간 포맷
+                const timeFormatter = new Intl.DateTimeFormat("ko-KR", {
                     timeZone: tz,
                     hour: "2-digit",
                     minute: "2-digit",
@@ -129,7 +159,8 @@
                     hour12: false
                 });
 
-                el.textContent = formatter.format(now);
+                wrapper.querySelector(".date").textContent = dateFormatter.format(now);
+                wrapper.querySelector(".time").textContent = timeFormatter.format(now);
             });
         }
 

@@ -74,6 +74,12 @@
             font-size: 0.75em;
         }
 
+        .end {
+            font-family: var(--font-default);
+            font-size: clamp(24px, 9vw, 88px);
+            transition: all 0.1s ease-in-out;
+        }
+
         .none {
             display: none;
         }
@@ -111,7 +117,8 @@
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const display = document.querySelector(".timer .time");
+            const timerEl = document.querySelector(".timer"); // h1.timer 전체
+            let display = document.querySelector(".timer .time"); // strong.time
             const minInput = document.querySelector(".min");
             const secInput = document.querySelector(".sec");
             const setBtn = document.querySelector(".set");
@@ -139,17 +146,17 @@
                 const elapsed = now - startTime;
                 remaining = duration - elapsed;
 
-                display.innerHTML = format(remaining);
-
                 if (remaining <= 0) {
                     stopTimer();
-                    alert("타이머 종료!");
+                    timerEl.innerHTML = `<strong class="end">타이머 종료!! 🥳</strong>`; // 종료 메시지
                 } else {
+                    display.innerHTML = format(remaining);
                     timerId = requestAnimationFrame(update);
                 }
             }
 
             function startTimer() {
+                if (!duration) return; // 설정 안 하면 실행 안 함
                 startTime = performance.now();
                 if (paused) {
                     startTime -= (duration - remaining);
@@ -166,7 +173,8 @@
             function stopTimer() {
                 cancelAnimationFrame(timerId);
                 remaining = 0;
-                display.innerHTML = "00:00<span class='msec'>.00</span>";
+                timerEl.innerHTML = `<strong class="time">00:00<span class='msec'>.00</span></strong>`;
+                display = document.querySelector(".timer .time"); // 다시 참조
             }
 
             // 설정 버튼
@@ -175,7 +183,8 @@
                 const sec = parseInt(secInput.value || 0, 10);
                 duration = (min * 60 + sec) * 1000;
                 remaining = duration;
-                display.innerHTML = format(remaining);
+                timerEl.innerHTML = `<strong class="time">${format(remaining)}</strong>`;
+                display = document.querySelector(".timer .time"); // 다시 참조
             });
 
             startBtn.addEventListener("click", startTimer);
@@ -184,7 +193,8 @@
             resetBtn.addEventListener("click", () => {
                 cancelAnimationFrame(timerId);
                 remaining = duration;
-                display.innerHTML = format(remaining);
+                timerEl.innerHTML = `<strong class="time">${format(remaining)}</strong>`;
+                display = document.querySelector(".timer .time"); // 다시 참조
                 paused = false;
             });
         });
