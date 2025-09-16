@@ -29,12 +29,13 @@
 
         .index {
             display: grid;
-            width: clamp(280px, 80%, 1080px);
-            margin: 0 auto;
+            place-items: center;
             grid-template-columns: repeat(2, 1fr);
-            gap: clamp(1vw, 2vw, 20px);
             align-items: stretch;
             justify-content: stretch;
+            gap: clamp(1vw, 2vw, 20px);
+            width: clamp(280px, 80%, 1080px);
+            margin: 0 auto;
         }
 
         .item {
@@ -46,6 +47,7 @@
         }
 
         .item .box {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -82,6 +84,53 @@
         .item .box:hover .city {
             color: var(--color-first);
         }
+
+        .box_add {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 1.5vw;
+            width: clamp(280px, 80%, 1080px);
+            margin: 0 auto;
+            padding: 2.5rem 0;
+            transition: all 0.1s ease-in-out;
+        }
+
+        select {
+            display: flex;
+            padding: 15px;
+            background: var(--color-fourth);
+            border: 1px solid var(--color-fourth);
+            color: var(--color-third);
+            font-size: clamp(20px, 3vw, 50px);
+            font-family: var(--font-default);
+            cursor: pointer;
+        }
+
+        select option {
+            font-size: clamp(20px, 3vw, 50px);
+            font-family: var(--font-default);
+        }
+
+        button {
+            display: flex;
+            padding: 10px 15px;
+            background: var(--color-third);
+            border: 1px solid var(--color-third);
+            color: var(--color-fourth);
+            font-size: clamp(20px, 3vw, 50px);
+            font-family: var(--font-default);
+            cursor: pointer;
+        }
+
+        .remove {
+            position: absolute;
+            right: 0.5rem;
+            top: 0.5rem;
+            background: none;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -93,7 +142,7 @@
             <div class="world-clock">
                 <h1 class="text">세계 시계</h1>
                 <ul class="index">
-                    <li class="item">
+                    <!-- <li class="item">
                         <div class="box">
                             <strong class="city">대한민국 서울</strong>
                             <div class="datetime">
@@ -128,8 +177,21 @@
                                 <span class="time" data-timezone="America/New_York">00:00:00</span>
                             </div>
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
+
+                <div class="box_add">
+                    <select name="" id="" class="sel">
+                        <option value="">🗺️ 국가 선택</option>
+                        <option value="Asia/Shanghai" data-city="중국 상하이">중국 상하이</option>
+                        <option value="Europe/London" data-city="영국 런던">영국 런던</option>
+                        <option value="Australia/Sydney" data-city="호주 시드니">호주 시드니</option>
+                        <option value="America/Los_Angeles" data-city="미국 LA">미국 LA</option>
+                        <option value="America/Chicago" data-city="미국 시카고">미국 시카고</option>
+                        <option value="Europe/Paris" data-city="프랑스 파리">프랑스 파리</option>
+                    </select>
+                    <button class="add">➕ 추가</button>
+                </div>
             </div>
         </div>
     </div>
@@ -167,6 +229,90 @@
         // 최초 실행 + 1초마다 갱신
         updateWorldClock();
         setInterval(updateWorldClock, 1000);
+
+        const select = document.querySelector(".sel");
+        const addBtn = document.querySelector(".add");
+        const indexList = document.querySelector(".index");
+
+        // 기본 도시들
+        const defaultCities = [
+            { tz: "Asia/Seoul", city: "대한민국 서울" },
+            { tz: "Asia/Tokyo", city: "일본 도쿄" },
+            { tz: "Europe/Zurich", city: "스위스 취리히" },
+            { tz: "America/New_York", city: "미국 뉴욕" },
+        ];
+
+        // 저장/불러오기 함수
+        function saveCities() {
+            const cities = Array.from(indexList.querySelectorAll(".date")).map(el => ({
+                tz: el.dataset.timezone,
+                city: el.closest(".box").querySelector(".city").textContent
+            }));
+            localStorage.setItem("worldClockCities", JSON.stringify(cities));
+        }
+
+        function loadCities() {
+            const saved = JSON.parse(localStorage.getItem("worldClockCities") || "[]");
+
+            // 저장된 게 있으면 그걸 불러오기
+            if (saved.length > 0) {
+                saved.forEach(({ tz, city }) => createCityItem(tz, city));
+            } else {
+                // 없으면 기본 도시 세팅
+                defaultCities.forEach(({ tz, city }) => createCityItem(tz, city));
+            }
+            updateWorldClock();
+        }
+
+        // li 생성 함수
+        function createCityItem(tz, city) {
+            const li = document.createElement("li");
+            li.className = "item";
+            li.innerHTML = `
+        <div class="box">
+            <strong class="city">${city}</strong>
+            <div class="datetime">
+                <span class="date" data-timezone="${tz}">0000-00-00 (요일)</span>
+                <span class="time" data-timezone="${tz}">00:00:00</span>
+            </div>
+            <button class="remove">➖</button>
+        </div>
+    `;
+            indexList.appendChild(li);
+        }
+
+        // 도시 추가
+        addBtn.addEventListener("click", () => {
+            const option = select.options[select.selectedIndex];
+            const tz = option.value;
+            const city = option.dataset.city;
+
+            if (!tz) return;
+
+            // 중복 체크
+            const exists = Array.from(indexList.querySelectorAll(".date"))
+                .some(el => el.dataset.timezone === tz);
+            if (exists) {
+                alert("이미 추가된 도시예요!");
+                return;
+            }
+
+            createCityItem(tz, city);
+            updateWorldClock();
+            saveCities(); // 추가 후 저장
+        });
+
+        // 삭제 버튼 이벤트 위임
+        indexList.addEventListener("click", (e) => {
+            if (e.target.classList.contains("remove")) {
+                e.target.closest(".item").remove();
+                saveCities(); // 삭제 후 저장
+            }
+        });
+
+        // 페이지 로드 시 저장된 데이터 불러오기
+        document.addEventListener("DOMContentLoaded", loadCities);
+
     </script>
 
 </body>

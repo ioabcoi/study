@@ -22,12 +22,13 @@
 
 .index {
     display: grid;
-    width: clamp(280px, 80%, 1080px);
-    margin: 0 auto;
+    place-items: center;
     grid-template-columns: repeat(2, 1fr);
-    gap: clamp(1vw, 2vw, 20px);
     align-items: stretch;
     justify-content: stretch;
+    gap: clamp(1vw, 2vw, 20px);
+    width: clamp(280px, 80%, 1080px);
+    margin:0 auto;
 }
 
 .item {
