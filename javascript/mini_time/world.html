@@ -29,10 +29,9 @@
 
         .index {
             display: grid;
-            place-items: center;
             grid-template-columns: repeat(2, 1fr);
-            align-items: stretch;
-            justify-content: stretch;
+            align-items: center;
+            justify-content: center;
             gap: clamp(1vw, 2vw, 20px);
             width: clamp(280px, 80%, 1080px);
             margin: 0 auto;
@@ -126,8 +125,8 @@
 
         .remove {
             position: absolute;
-            right: 0.5rem;
-            top: 0.5rem;
+            right: -10px;
+            top: -12px;
             background: none;
             border: 0;
         }
@@ -181,7 +180,7 @@
                 </ul>
 
                 <div class="box_add">
-                    <select name="" id="" class="sel">
+                    <select class="sel">
                         <option value="">🗺️ 국가 선택</option>
                         <option value="Asia/Shanghai" data-city="중국 상하이">중국 상하이</option>
                         <option value="Europe/London" data-city="영국 런던">영국 런던</option>
