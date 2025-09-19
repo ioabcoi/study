@@ -18,6 +18,7 @@
     /* 13px */
     --font-size-h4: 0.75rem;
     /* 12px */
+    --font-weight-normal: 500;
     --font-weight-bold: 700;
 
     /* 패딩 및 마진 */
@@ -36,6 +37,10 @@
     --line-height-default: 1.8;
 }
 
+body * {
+    box-sizing: border-box;
+}
+
 h1,
 h2,
 h3,
@@ -52,7 +57,6 @@ h5 {
     align-items: flex-start;
     justify-content: center;
     flex-direction: row;
-    box-sizing: border-box;
     width: 100%;
     padding: var(--padding-wrap);
     color: var(--color-text-secondary);
@@ -96,9 +100,18 @@ h5 {
 }
 
 .contents .ex {
+    display: block;
+    width: 100%;
     padding: var(--margin-content);
+    border: 0;
     background: var(--color-bg-light);
+    font-weight: var(--font-weight-normal);
+    resize: none;
+}
+
+.contents .ex:focus-visible {
     font-weight: var(--font-weight-bold);
+    outline: none;
 }
 
 .contents .txt {
@@ -116,4 +129,25 @@ h5 {
 
 .contents .txt_list li strong {
     font-weight: var(--font-weight-bold);
+}
+
+/* 미디어 쿼리: 넓은 화면에서 스타일 */
+@media (min-width: 80rem) {
+    .contents .cont {
+        flex-wrap: wrap;
+        display: flex;
+    }
+
+    .contents h2 {
+        width: 30%;
+        padding: var(--padding-content);
+        border-bottom: 0;
+        border-right: 1px solid var(--color-border-light);
+    }
+
+    .contents .box {
+        width: 70%;
+        padding: var(--padding-content);
+        border-bottom: 0;
+    }
 }
