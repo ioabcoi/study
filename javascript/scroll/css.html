@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- // head -->
+    
+    <title>scroll</title>
+</head>
+<body data-theme="light">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>scroll</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">css</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* 
+    참고
+    https://odada.me/330
+    https://www.w3schools.com/cssref/css3_pr_perspective.php
+    - perspective 속성
+    해당 요소의 z = 0 평면과 사용자 사이의 거리
+    transform 효과를 주고자 하는 부모 요소에 적용
+    perspective에 따른 변형 효과
+    perspective: 100px; => 100px만큼 멀어져 보임
+    perspective가 클수록 (거리가 멀수록) 변형 효과가 줄어듦
+    perspective가 작을수록 (거리가 가까울수록) 변형 효과가 커짐
+    */
+    .container1 {position:relative;width:150px;height:150px;margin:60px;border:1px solid blue;}
+    .container1.perspective300 {perspective:300px;}
+    .container1.perspective100 {perspective:100px;perspective-origin:50% 50%;}
+    .container1.perspective50 {perspective:50px;}
+    .container1 .item {position:absolute;padding:50px;border:1px solid black;background:rgba(100,100,100,0.5);transform-style:preserve-3d;transform:rotateX(45deg);text-align:center;}
+</style>
+<div class="container1">perspective 0
+    <div class="item">item0</div>
+</div>
+<div class="container1 perspective300">perspective 300
+    <div class="item">item 300</div>
+</div>
+<div class="container1 perspective100">perspective 100
+    <div class="item">item 100</div>
+</div>
+<div class="container1 perspective50">perspective 50
+    <div class="item">item 50</div>
+</div>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">default</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* 
+    참고
+    https://odada.me/330
+    https://www.w3schools.com/cssref/css3_pr_perspective-origin.php
+    - perspective-origin 속성
+    사용자가 3D 요소를 바라보는 시점을 설정
+    perspective-origin: x y; => perspective의 원점을 x, y로 설정
+    perspective-origin: 50% 50%; => perspective의 원점을 중앙으로 설정
+    perspective-origin: 0% 0%; => perspective의 원점을 왼쪽 상단으로 설정
+    perspective-origin: 100% 100%; => perspective의 원점을 오른쪽 하단으로 설정
+    */
+    .container2 {position:relative;width:150px;height:150px;margin:60px;border:1px solid blue;}
+    .container2.perspective300 {perspective:300px;perspective-origin:100% 100%;}
+    .container2.perspective100 {perspective:100px;perspective-origin:50% 50%;}
+    .container2.perspective50 {perspective:50px;perspective-origin:0 0;}
+    .container2 .item {position:absolute;padding:50px;border:1px solid black;background:rgba(100,100,100,0.5);transform-style:preserve-3d;transform:rotateX(45deg);text-align:center;}
+</style>
+<div class="container2">perspective 0
+    <div class="item">item0</div>
+</div>
+<div class="container2 perspective300">perspective 300
+    <div class="item">item 300</div>
+</div>
+<div class="container2 perspective100">perspective 100
+    <div class="item">item 100</div>
+</div>
+<div class="container2 perspective50">perspective 50
+    <div class="item">item 50</div>
+</div>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'click'</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    /* 
+    참고 
+    https://odada.me/330
+    - CSS를 이용한 패럴랙스 스크롤링
+    container에 perspective 속성을 이용하여 입체감을 주는 효과
+    해당 요소의 z = 0 평면과 사용자 사이의 거리
+    item에 transform translateZ()를 이용하여 z축 방향을 이동
+    */
+    .parallax {height:100vh;overflow-x:hidden;perspective:1px;}
+    .parallax div {position:absolute;top:0;left:0;right:0;font-size:50px;color:#fff;}
+    .parallax .item1 {background-color:#333;height:150rem;}
+    .parallax .item2 {top:800px;background-color:aqua;height:500px;transform:translateZ(-3px);color:red;}
+    .parallax .item3 {top:900px;background-color:blueviolet;height:500px;transform:translateZ(-1px);opacity: 0.7;}
+</style>
+<div class="parallax">
+    <div class="item1">item1</div>
+    <div class="item2">item2</div>
+    <div class="item3">item3</div>
+</div>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'over'</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'click' + contents</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">stop 'over' + contents</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

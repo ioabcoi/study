@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>js2</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        /* 참고 
+        https://odada.me/303
+        */
+        
+        .section {height:100vh;position:relative;overflow:hidden;}
+        .parallax-element {position:absolute;width:100%;height:100%;left:0;top:0;transform:translateZ(0);}
+        .background {position:relative;background:url('https://plus.unsplash.com/premium_photo-1714675626849-ddfa6ff3a7c6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center;background-size:cover;background-attachment:fixed;z-index:1;}
+        .background::after {content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:#000;opacity:0.3;}
+        .circle {top:0;left:-300px;width:500px;height:500px;background-color:aquamarine;z-index:3;opacity:0.2;border-radius:50%;}
+        .square {top:60%;left:auto;right:-100px;width:300px;height:300px;background-color:lightsalmon;z-index:3;opacity:0.3;}
+        .title {position:absolute;font-size:3em;color:white;text-align:center;width:100%;z-index:2;top:50%;/* 초기 위치 조정 */}
+        .extra-content {display:flex;justify-content:center;align-items:center;height:100vh;/* 높이를 충분히 주어 스크롤 생성 */background-color:#333;padding:20px;box-sizing:border-box;font-size:3rem;color:#fff;}
+    </style>
+    <div class="extra-content">
+        <p>Parallax Scrolling (JS)</p>
+    </div>
+    <div class="section">
+        <div class="parallax-element background"></div>
+        <div class="parallax-element square"></div>
+        <div class="parallax-element circle"></div>
+        <strong class="parallax-element title">느림의 중요성을 깨달은 달팽이</strong>
+    </div>
+
+    <div class="extra-content">
+        <p>Parallax Scrolling</p>
+    </div>
+    <div class="section">
+        <div class="parallax-element background"></div>
+        <div class="parallax-element square"></div>
+        <div class="parallax-element circle"></div>
+        <strong class="parallax-element title">그냥 느린 가을이</strong>
+    </div>
+
+    <div class="extra-content">
+        <p>Parallax Scrolling</p>
+    </div>
+    <script>
+        window.addEventListener('scroll', function () {
+            // 스크롤 이벤트 리스너 등록
+            const sections = document.querySelectorAll('.section'); // 모든 섹션을 가져옴
+            sections.forEach(function (section) {
+                // 각 섹션에 대해 반복
+                let bounds = section.getBoundingClientRect(); // 섹션의 위치와 크기 정보를 가져옴
+                const background = section.querySelector('.background'); // 배경 요소
+                const title = section.querySelector('.title'); // 제목 요소
+                const circle = section.querySelector('.circle'); // 원 요소
+                const square = section.querySelector('.square'); // 사각형 요소
+
+                if (bounds.top < window.innerHeight && bounds.bottom >= 0) {
+                    // 섹션이 뷰포트 내에 있을 때
+                    var scrolled = window.pageYOffset - section.offsetTop; // 섹션의 시작점에서 스크롤된 거리를 계산
+                    background.style.transform = `translateY(${scrolled * 0.8}px)`; // 제목을 스크롤 속도의 80%(빠르게)로 이동
+                    title.style.transform = `translateY(${scrolled * 0.3}px)`; // 배경을 스크롤 속도의 30%(느리게)로 이동
+                    circle.style.transform = `translate(${scrolled * 0.5}px, ${scrolled * 0.5}px)`; // circle 왼쪽에서 오른쪽으로 이동
+                    square.style.transform = `translate(${scrolled * -0.5}px)`; // square 오른쪽에서 왼쪽으로 이동
+                }
+            });
+        });
+    </script>
+    
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

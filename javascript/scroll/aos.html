@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>aos</title>
+</head>
+<body data-theme="light">
+
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <style>
+        /* 참고 
+        https://odada.me/303
+        https://github.com/michalsnik/aos
+        */
+        
+        * {box-sizing:border-box;}
+        .item {width:200px;height:200px;margin:50px auto;padding-top:75px;background:#ccc;text-align:center;color:#FFF;font-size:3em;}
+
+        /* Animations */
+        [data-aos="example-anim1"] {transform:skewX(45deg);opacity:0;transition-property:transform, opacity;}
+        [data-aos="example-anim1"].aos-animate {transform:skewX(0);opacity:1;}
+        [data-aos="example-anim2"] {transform:scale(1);background:red;transition-property:background, transform;}
+        [data-aos="example-anim2"].aos-animate {transform:scale(2);background:green;}
+        [data-aos="example-anim3"] {transform:rotate(360deg);opacity:0;transition-property:transform, opacity;}
+        [data-aos="example-anim3"].aos-animate {transform:rotate(0);opacity:1;}
+        .item {width:200px;margin:50px auto;max-height:250px;padding:75px 20px;background:#ccc;text-align:center;color:#FFF;font-size:3em;}
+        .item span {display:block;font-size:1rem;}
+        .item--primary {position:fixed;top:0;bottom:0;margin:auto;right:20px;background:green;}
+        .item--secondary {position:fixed;top:0;bottom:0;margin:auto;left:20px;background:red;}
+        .extra-content {display:flex;justify-content:center;align-items:center;height:100vh;/* 높이를 충분히 주어 스크롤 생성 */background-color:#333;padding:20px;box-sizing:border-box;font-size:3rem;color:#fff;}
+    </style>
+    <div class="extra-content">
+        <p>Parallax Scrolling (AOS)</p>
+    </div>
+    <div class="section">
+        <div class="item" data-aos="example-anim1">1</div>
+        <div id="trigger-left" class="item" data-aos="example-anim2">2</div>
+        <div class="item" data-aos="example-anim3">3</div>
+        <div class="item" data-aos="example-anim1">4</div>
+        <div class="item" data-aos="example-anim2">5</div>
+        <div class="item" data-aos="example-anim3">6</div>
+        <div id="trigger-right" class="item" data-aos="example-anim1">7</div>
+        <div class="item" data-aos="example-anim2">8</div>
+        <div class="item" data-aos="example-anim3">9</div>
+    
+        <div class="item item--secondary" data-aos="fade-right" data-aos-anchor="#trigger-left" data-aos-anchor-placement="top-top">
+            LEFT
+            <span>when top of <strong>2</strong> hits top of window</span>
+        </div>
+    
+        <div class="item item--primary" data-aos="fade-left" data-aos-anchor="#trigger-right" data-aos-anchor-placement="top-center">
+            RIGHT
+            <span>when top of <strong>5</strong> hits center of window</span>
+        </div>
+    </div>
+    <div class="extra-content">
+        <p>Parallax Scrolling</p>
+    </div>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init()
+    </script>
+    
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

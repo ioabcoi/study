@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>gsap2</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        /* 참고 
+        https://odada.me/303
+        https://gsap.com/scroll/
+        https://gsap.com/docs/v3/Installation/
+        */
+        
+        .intro {position:relative;display:flex;justify-content:center;align-items:center;height:200vh;box-sizing:border-box;
+            background: url(https://images.unsplash.com/photo-1693733470033-c628154571b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3000&q=80) 50% 100% / cover no-repeat;}
+        .cover {display:flex;justify-content:center;align-items:center;position:fixed;top:0;left:0;width:100%;height:100%;background:red;font-size:10vw;font-weight:800;mix-blend-mode:lighten;color:#000;background-color:white;}
+        section {overflow:hidden;position:relative;height:80vh;margin:0;padding:100px 0;
+            background-color:#fff;
+            background-image:linear-gradient(rgba(0,0,0,.07) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(0,0,0,.07) 2px, transparent 2px),
+                linear-gradient(rgba(0,0,0,.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,0,0,.06) 1px, transparent 1px);
+            background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+            background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+            border: 5px solid #000;}
+        .box {width:200px;height:200px;margin-bottom:100px;box-sizing:border-box;}
+        .box1 {position:absolute;top:200px;left:50%;transform:translateX(-50%);width:100px;height:100px;border-radius:50%;background:lightblue;}
+        .box2 {background:blue;}
+        .section2 {/* height: 20vh; */}
+    </style>
+    <div class="intro">
+        <div class="cover">ScrollTrigger</div>
+    </div>
+    <section class="section">
+        <div class="box box1"></div>
+    </section>
+    <section class="section2">
+        <div class="box box2"></div>
+    </section>
+    <div class="space">gsap</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.to(".cover", {
+            top: "-100%",
+            // duration: 1,
+            scrollTrigger: {
+                trigger: '.intro',//객체기준범위
+                start: "0% 0%",//시작 지점
+                end: "90% 80%",//끝 지점
+                // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+                scrub: 1,//부드러운 스크러빙
+                markers: false,//개발가이드선
+            },
+        });
+
+        gsap.to(".box1", {
+            scale: 10,
+            borderRadius: 0,
+            duration: 1,
+            scrollTrigger: {
+                trigger: '.section',//객체기준범위
+                start: "0% 30%",//시작 지점
+                end: "100% 80%",//끝 지점
+                // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+                scrub: 1,//부드러운 스크러빙
+                markers: true,//개발가이드선
+            }
+        });
+
+        gsap.to(".box2", {
+            x: 300,
+            y: 200,
+            rotation: 360,
+            scrollTrigger: {
+                trigger: '.section2',//객체기준범위
+                start: "0% 30%",//시작 지점
+                end: "100% 80%",//끝 지점
+                // end: "+=500"//시작 부분부터 500px까지 스크롤 한 후종료
+                scrub: 1,//부드러운 스크러빙
+                markers: false,//개발가이드선
+            }
+        });
+    </script>
+    
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
