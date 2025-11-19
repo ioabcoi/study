@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>sticky_sidebar</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        /* 참고 
+        https://coding-factory.tistory.com/951
+        */
+
+        @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+        * {margin:0;box-sizing:border-box;}
+        html {scroll-behavior:smooth;}
+        body {padding:5%;background-color:#ccc;font-size:20px;font-family:Lato, sans-serif;}
+        header,
+        footer,
+        main,
+        aside {padding:15px;background-color:white;border:5px solid #222;border-radius:10px;color:#222;}
+        main {display:flex;flex-direction:column;width:60%;min-height:3000px;}
+        aside {overflow:auto;position:-webkit-sticky;position:sticky;top:5%;width:35%;height:25vh;min-height:200px;}
+        header,
+        footer {height:200px;}
+        .wrapper {display:flex;justify-content:space-between;margin:5% 0;}
+        section {padding:120px 0;border-bottom:3px dotted #999;min-height:500px;}
+        code, 
+        pre {background-color:#ccc;padding:0 3px;border-radius:5px;}
+        .tabs {position:-webkit-sticky;position:sticky;top:5%;display:flex;gap:10px;margin-bottom:20px;}
+        .tabs button {padding:10px 20px;border:2px solid #222;background:#eee;cursor:pointer;font-size:18px;border-radius:8px;}
+        .tabs button.active {background:#222;color:#fff;}
+        .tabs.unfix {position:static !important;}
+    </style>
+
+    <header>header</header>
+
+    <div class="wrapper">
+        <main>
+            <h2>Main content</h2>
+            <p>Scroll down the page!</p>
+            <h3>How to recreate this</h3>
+            <p>
+                Position the columns with flex. Then apply two lines of CSS to the sidebar to make it sticky:
+                <pre>
+                    aside {
+                        position: sticky;
+                        top: 0;
+                    }
+                </pre>
+            </p>
+
+            <!-- 탭 -->
+            <div class="tabs">
+                <button data-target="sec1" class="active">섹션 1</button>
+                <button data-target="sec2">섹션 2</button>
+                <button data-target="sec3">섹션 3</button>
+            </div>
+
+            <!-- 콘텐츠 -->
+            <section id="sec1">
+                <h2>섹션 1</h2>
+                <p>여기가 첫 번째 콘텐츠.</p>
+            </section>
+
+            <section id="sec2">
+                <h2>섹션 2</h2>
+                <p>여기가 두 번째 콘텐츠.</p>
+            </section>
+
+            <section id="sec3">
+                <h2>섹션 3</h2>
+                <p>여기가 세 번째 콘텐츠.</p>
+            </section>
+        </main>
+
+        <aside>
+            <h3>Sticky sidebar</h3>
+            <p>I will follow you!</p>
+            <p><a href="https://caniuse.com/#search=sticky">caniuse stats</a>
+        </aside>
+    </div>
+
+    <footer>footer</footer>
+
+    <script>
+        // 탭 클릭 이동
+        const tabs = document.querySelectorAll(".tabs button");
+        const sections = document.querySelectorAll("section");
+        const tabMap = {};
+        let isScrollingByClick = false;
+
+        tabs.forEach(tab => {
+            tabMap[tab.dataset.target] = tab
+            tab.addEventListener("click", function(e){
+                e.preventDefault();
+
+                // 클릭 중에는 스크롤 이벤트 잠깐 비활성화
+                isScrollingByClick = true;
+
+                tabs.forEach(t => t.classList.remove("active"));
+                this.classList.add("active");
+
+                const targetSec = document.getElementById(this.dataset.target);
+                targetSec.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                // 스크롤 종료 지점까지 약간 대기 후 true 해제
+                setTimeout(() => {
+                    isScrollingByClick = false;
+                }, 500); // 필요하면 조절 가능!
+            });
+        });
+        
+        function updateActiveByScroll() {
+            if (isScrollingByClick) return; // ← 깜빡임 방지 핵심
+
+            const scrollY = window.scrollY;
+            const offset = 200; // 탭 높이 + 여유값. 필요하면 조정
+
+            sections.forEach(sec => {
+                const rect = sec.getBoundingClientRect();
+                const top = rect.top + scrollY;
+                const bottom = top + sec.offsetHeight;
+
+                if (scrollY + offset >= top && scrollY + offset < bottom) {
+                    tabs.forEach(t => t.classList.remove("active"));
+                    tabMap[sec.id].classList.add("active");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", updateActiveByScroll);
+        window.addEventListener("resize", updateActiveByScroll);
+        updateActiveByScroll();
+
+        // 마지막 섹션 넘어가면 sticky 해제 로직
+        const tabsBox = document.querySelector(".tabs");
+        const lastSec = document.getElementById("sec3");
+
+        function checkStickyEnding(){
+            const rect = lastSec.getBoundingClientRect();
+
+            // 마지막 섹션의 "아랫부분"이 화면 위로 지나가면 sticky 해제
+            const lastSecBottomPass = rect.bottom < 0;
+
+            if(lastSecBottomPass){
+                tabsBox.classList.add("unfix");     // sticky 해제 클래스
+            } else {
+                tabsBox.classList.remove("unfix");  // sticky 정상 유지
+            }
+        }
+
+        window.addEventListener("scroll", checkStickyEnding);
+        window.addEventListener("resize", checkStickyEnding);
+        checkStickyEnding();
+    </script>
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

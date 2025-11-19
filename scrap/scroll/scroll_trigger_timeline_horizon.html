@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>scroll_trigger_timeline_horizon</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        * {margin:0;box-sizing:border-box;}
+        section {position:relative;width:100%;height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;}
+        section p {font-size:40px;margin-bottom:50px;}
+        #section1 {background:yellowgreen;}
+        #section2 {background:goldenrod;overflow:hidden;}
+        #section3 {background:indianred;}
+        #section4 {background:paleturquoise;}
+        .box h1 {font-size:50px;text-align:centerspa;}
+        .box1 {background:darkslategray;}
+        .box2 {background:crimson;}
+        .box3 {background:darkorchid;}
+        .box_wrapper {display:flex;justify-content:space-around;width:100%;}
+        .box {width:200px;height:200px;display:flex;justify-content:center;align-items:center;opacity:1;}
+        header,
+        footer {height:300px;background:black;}
+    </style>
+
+    <header>header</header>
+
+    <section id="section1">
+        <p>section1</p>
+    </section>
+
+    <section id="section2">
+        <p>section2</p>
+        <div class="box_wrapper">
+            <div class="box box1 horizon_box">
+                <h1>1</h1>
+            </div>
+            <div class="box box2 horizon_box">
+                <h1>2</h1>
+            </div>
+            <div class="box box3 horizon_box">
+                <h1>3</h1>
+            </div>
+        </div>
+    </section>
+
+    <section id="section3">
+        <p>section3</p>
+    </section>
+
+    <section id="section4">
+        <p>section4</p>
+    </section>
+
+    <footer>footer</footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script>
+        var $sections = document.querySelectorAll(".horizon_box");
+        var tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#section2",
+                pin: true,
+                scrub: 0.3,
+                start: "top top",
+                end: "+=3000"
+            }
+        });
+        tl.from($sections, { x: '300%', autoAlpha: 0, duration:2, ease: "none", stagger:3 })
+            .to($sections, { duration: 3 });
+    </script>
+    
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

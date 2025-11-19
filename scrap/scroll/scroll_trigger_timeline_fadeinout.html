@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>scroll_trigger_timeline_fadeinout</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        /* 참고 
+        https://coding-factory.tistory.com/951
+        */
+
+        @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+        * {margin:0;padding:0;box-sizing:border-box;}
+        .fadeInOut {height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;pointer-events:none;}
+        .end {height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;}
+        .btn {position:absolute;bottom:5vh;}
+        .active {pointer-events:auto;}
+        
+        header,
+        footer {height:300px;background:black;}
+    </style>
+
+    <header>header</header>
+    
+    <div class="fadeInOut header1">
+        <h1 id="header1">Header 1</h1>
+    </div>
+    <div class="fadeInOut header2">
+        <h1 id="header2">Header 2</h1>
+    </div>
+    <div class="fadeInOut header3">
+        <h1 id="header3">Header 3</h1>
+    </div>
+    <div class="end fadeIn">
+        <h1>End.</h1>
+    </div>
+
+    <footer>footer</footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/ScrollTrigger.min.js"></script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        const items = document.querySelectorAll('.fadeInOut');
+        items.forEach(item => {
+            const name = item.classList[1];
+            let tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: `.${name}`,
+                    scrub: true,
+                    pin: true,
+                    pinSpacing: false,
+                    markers: true,     // 필요없으면 지우면 됨
+                    toggleClass: "active"
+                }
+            });
+            tl.from(item, { opacity: 0, y: 20, duration: 1 })
+                .to(item, { duration: 2 })
+                .to(item, { opacity: 0, y: -20, duration: 1 });
+        });
+
+        // 스택처럼 하나씩 쌓이는 효과
+        gsap.set(".fadeInOut", {
+            zIndex: (i, target, list) => list.length - i
+        });
+    </script>
+    
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
