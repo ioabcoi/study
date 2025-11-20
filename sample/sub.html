@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../html/include/head.js"></script>
+    <link rel="stylesheet" href="css.css">
+    <!-- // head -->
+    
+    <title>test</title>
+</head>
+<body>
+
+    <header>header</header>
+
+    <div class="wrapper">
+        <aside>
+            <h3>Sticky sidebar</h3>
+            <p>I will follow you!</p>
+            <p><a href="https://caniuse.com/#search=sticky">caniuse stats</a>
+        </aside>
+
+        <main>
+            <h2>Main content</h2>
+            <p>Scroll down the page!</p>
+            <h3>How to recreate this</h3>
+            <p>
+                Position the columns with flex. Then apply two lines of CSS to the sidebar to make it sticky:
+                <pre>
+                    aside {
+                        position: sticky;
+                        top: 0;
+                    }
+                </pre>
+            </p>
+
+            <!-- 탭 -->
+            <div class="tabs">
+                <button data-target="sec1" class="active">섹션 1</button>
+                <button data-target="sec2">섹션 2</button>
+                <button data-target="sec3">섹션 3</button>
+            </div>
+
+            <!-- 콘텐츠 -->
+            <section id="sec1">
+                <h2>섹션 1</h2>
+                <p>여기가 첫 번째 콘텐츠.</p>
+            </section>
+
+            <section id="sec2">
+                <h2>섹션 2</h2>
+                <p>여기가 두 번째 콘텐츠.</p>
+            </section>
+
+            <section id="sec3">
+                <h2>섹션 3</h2>
+                <p>여기가 세 번째 콘텐츠.</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>footer</footer>
+
+    <script>
+
+    </script>
+
+    <!-- foot -->
+    <script src="js.js"></script>
+    <!-- // foot -->
+</body>
+</html>

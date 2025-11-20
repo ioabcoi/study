@@ -1,0 +1,97 @@
+@charset "utf-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+    v2.0 | 20110126
+    License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* gu */
+html {
+    scroll-behavior: smooth;
+}
+
+html, body{
+	-webkit-text-size-adjust : none;  /* 크롬, 사파리, 오페라 신버전 */
+	-ms-text-size-adjust : none;  /* IE */
+	-moz-text-size-adjust : none;  /* 파이어폭스 */
+	-o-text-size-adjust : none;  /* 오페라 구버전 */
+}
+
+body,
+button,
+textarea {
+    color: #333;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+div, ul, li, th, td, span, em, strong, textarea {
+    box-sizing: border-box;
+}
+
+/* site */
+body {padding:3%;background-color:#ccc;font-size:20px;font-family:Lato, sans-serif;}
+header,
+footer,
+main,
+aside {padding:15px;background-color:white;border:5px solid #222;border-radius:10px;color:#222;}
+main {display:flex;flex-direction:column;width:100%;min-height:3000px;}
+aside + main {width:70%;}
+aside {overflow:auto;position:-webkit-sticky;position:sticky;top:3%;width:25%;height:25vh;min-height:200px;}
+header,
+footer {height:200px;}
+.wrapper {display:flex;justify-content:space-between;margin:3% 0;gap:3%;}
+section {padding:120px 0;border-bottom:3px dotted #999;min-height:500px;}
+code, 
+pre {background-color:#ccc;padding:0 3px;border-radius:5px;}
+.tabs {position:-webkit-sticky;position:sticky;top:3%;display:flex;gap:10px;margin-bottom:20px;}
+.tabs button {padding:10px 20px;border:2px solid #222;background:#eee;cursor:pointer;font-size:18px;border-radius:8px;}
+.tabs button.active {background:#222;color:#fff;}
+.tabs.unfix {position:static !important;}
