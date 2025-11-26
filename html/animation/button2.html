@@ -234,13 +234,11 @@
             <div class="code_ui">
                 <div class="code_ui_box">
 <style>
-    .btn-light-container {position:relative;display:inline-flex;align-items:center;gap:20px;}
-    .btn-light-wrapper {position:relative;width:280px;height:60px;}
-    .btn-light {position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;border:2px solid transparent;border-radius:30px;color:white;font-size:18px;font-weight:600;cursor:pointer;text-decoration:none;
+    .btn-light {position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;width:280px;height:60px;border-radius:30px;color:white;font-size:18px;font-weight:600;cursor:pointer;text-decoration:none;
         background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         transition:transform 0.3s ease, box-shadow 0.3s ease;        
     }
-    .btn-light:hover {transform:scale(1.05);box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4);}
+    .btn-light .star {display:inline-block;font-size:20px;animation:twinkle 0.6s ease-in-out infinite;}
     .btn-light::before {position:absolute;z-index:2;top:0;left:0;right:0;bottom:0;content:'';padding:2px;border-radius:30px;
         background:linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%);
         background-size:200% 100%;
@@ -251,26 +249,23 @@
         pointer-events:none;
         animation:borderFlow 2s linear infinite;
     }
+    .btn-light:hover {transform:scale(1.05);box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4);}
+    .btn-light:hover .star {animation:twinkle 0.4s ease-in-out infinite;}
     @keyframes borderFlow {
         0% {background-position:200% 0;}
         100% {background-position:0 0;}
     }
-    .btn-light:hover {box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4), 0 0 90px rgba(168, 85, 247, 0.2);}
-    .btn-light .star {display:inline-block;font-size:20px;animation:twinkle 0.6s ease-in-out infinite;}
-    .btn-light:hover .star {animation:twinkle 0.4s ease-in-out infinite;}
     @keyframes twinkle {
         0%, 100% {opacity:1;}
         50% {opacity:0.4;}
     }
 
     /* hover */
-    .btn-light-hover-container {position:relative;display:inline-flex;align-items:center;gap:20px;}
-    .btn-light-hover-wrapper {position:relative;width:280px;height:60px;}
-    .btn-light-hover {position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;border:2px solid transparent;border-radius:30px;color:white;font-size:18px;font-weight:600;cursor:pointer;text-decoration:none;
+    .btn-light-hover {position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;width:280px;height:60px;border-radius:30px;color:white;font-size:18px;font-weight:600;cursor:pointer;text-decoration:none;
         background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         transition:transform 0.3s ease, box-shadow 0.3s ease;        
     }
-    .btn-light-hover:hover {transform:scale(1.05);box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4);}
+    .btn-light-hover .star {display:inline-block;font-size:20px;animation:twinkle 0.6s ease-in-out infinite;}
     .btn-light-hover::before {position:absolute;z-index:2;top:0;left:0;right:0;bottom:0;content:'';padding:2px;border-radius:30px;
         background:linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%);
         background-size:200% 100%;
@@ -280,35 +275,26 @@
         mask-composite:exclude;
         pointer-events:none;
     }
+    .btn-light-hover:hover {transform:scale(1.05);box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4);}
+    .btn-light-hover:hover .star {animation:twinkle 0.4s ease-in-out infinite;}
     .btn-light-hover:hover::before {animation:borderFlow 2s linear infinite;}
     @keyframes borderFlow {
         0% {background-position:200% 0;}
         100% {background-position:0 0;}
     }
-    .btn-light-hover:hover {box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4), 0 0 90px rgba(168, 85, 247, 0.2);}
-    .btn-light-hover .star {display:inline-block;font-size:20px;animation:twinkle 0.6s ease-in-out infinite;}
-    .btn-light-hover:hover .star {animation:twinkle 0.4s ease-in-out infinite;}
     @keyframes twinkle {
         0%, 100% {opacity:1;}
         50% {opacity:0.4;}
     }
 </style>
-<div class="btn-light-container">
-    <div class="btn-light-wrapper">
-        <a href="#" class="btn-light">
-            <span class="star">✨</span>
-            <span>btn-light button</span>
-        </a>
-    </div>
-</div>
-<div class="btn-light-hover-container">
-    <div class="btn-light-hover-wrapper">
-        <a href="#" class="btn-light-hover">
-            <span class="star">✨</span>
-            <span>btn-light button</span>
-        </a>
-    </div>
-</div>
+<a href="#" class="btn-light">
+    <span class="star">✨</span>
+    <span>btn-light button</span>
+</a>
+<a href="#" class="btn-light-hover">
+    <span class="star">✨</span>
+    <span>btn-light button</span>
+</a>
                 </div>
             </div>
             <!-- // code_ui -->
