@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>button</title>
+</head>
+<body data-theme="dark">
+
+    <!-- code_wrap -->
+    <div class="code_wrap">
+        <h1>button</h1>
+
+        <!-- code_area -->
+        <div class="code_tit">neon-gradient</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    .neon-gradient {position:relative;display:inline-flex;align-items:center;justify-content:center;width:200px;height:80px;overflow:hidden;
+      background:linear-gradient(0deg, #000, #272727);
+    }
+    .neon-gradient span {position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:calc(100% - 4px);height:calc(100% - 4px);background:#000;color:#fff;}
+    .neon-gradient::before,
+    .neon-gradient::after {position:absolute;z-index:0;left:-2px;top:-2px;content:'';width:calc(100% + 4px);height:calc(100% + 4px);
+      background:linear-gradient(45deg, #0000ff, #0000ff, #0000ff, #ffff00, #0000ff, #0000ff, #0000ff, #0000ff, #ffff00, #0000ff);
+      background-size:400%;
+      animation:neon-gradient 15s linear infinite;
+    }
+    @keyframes neon-gradient {
+      0% {background-position:0 0;}
+      50% {background-position:400% 0;}
+      100% {background-position:0 0;}
+    }
+    .neon-gradient::after {filter:blur(50px);}
+
+    /* hover */
+    .neon-gradient-hover {position:relative;display:inline-flex;align-items:center;justify-content:center;width:200px;height:80px;overflow:hidden;
+      background:linear-gradient(0deg, #000, #272727);
+    }
+    .neon-gradient-hover span {position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:calc(100% - 4px);height:calc(100% - 4px);background:#000;color:#fff;}
+    .neon-gradient-hover::before,
+    .neon-gradient-hover::after {position:absolute;z-index:0;left:-2px;top:-2px;content:'';width:calc(100% + 4px);height:calc(100% + 4px);
+      background:linear-gradient(45deg, #0000ff, #0000ff, #0000ff, #ffff00, #0000ff, #0000ff, #0000ff, #0000ff, #ffff00, #0000ff);
+      background-size:400%;
+    }
+    .neon-gradient-hover:hover::before,
+    .neon-gradient-hover:hover::after {  
+      animation:neon-gradient-hover 15s linear infinite;
+    }
+    @keyframes neon-gradient-hover {
+      0% {background-position:0 0;}
+      50% {background-position:400% 0;}
+      100% {background-position:0 0;}
+    }
+    .neon-gradient::after {filter:blur(50px);}
+</style>
+<a href="#" class="neon-gradient">
+    <span>neon-gradient button</span>
+</a>
+
+<a href="#" class="neon-gradient-hover">
+    <span>neon-gradient-hover button</span>
+</a>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">neon-line</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    .neon-line {position:relative;display:inline-block;padding:25px 30px;color:#03e9f4;text-decoration:none;transition:0.5s;overflow:hidden;box-sizing:border-box;}
+    .neon-line::before {position:absolute;left:0;top:0;content:'';display:block;width:100%;height:100%;border:2px solid #05595e;overflow:hidden;box-sizing:border-box;}
+    .neon-line span {position:absolute;display:block;}
+    .neon-line:hover {      
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(51, 206, 226, 0.6),
+                    0 0 20px rgba(29, 149, 165, 0.6);
+    }
+    .neon-line .neon-line1 {top:0;left:0;width:100%;height:2px;
+        background:linear-gradient(90deg,transparent,#03e9f4);
+        animation:animate1 2s linear infinite;
+    }
+    @keyframes animate1 {
+        0% {left:-100%;}
+        50%, 100% {left:100%;}
+    }
+    .neon-line .neon-line2 {top:-100%;right:0;width:2px;height:100%;
+        background:linear-gradient(180deg,transparent,#03e9f4);
+        animation:animate2 2s linear infinite;
+        animation-delay:0.5s;
+    }
+    @keyframes animate2 {
+        0% {top:-100%;}
+        50%, 100% {top:100%;}
+    }
+    .neon-line .neon-line3 {bottom:0;right:-100%;width:100%;height:2px;
+        background:linear-gradient(270deg,transparent,#03e9f4);
+        animation:animate3 2s linear infinite;
+        animation-delay:1.0s;
+    }
+    @keyframes animate3 {
+        0% {right:-100%;}
+        50%, 100% {right:100%;}
+    }
+    .neon-line .neon-line4 {bottom:-100%;left:0;width:2px;height:100%;
+        background:linear-gradient(360deg,transparent,#03e9f4);
+        animation:animate4 2s linear infinite;
+        animation-delay:1.5s;
+    }
+    @keyframes animate4 {
+        0% {bottom:-100%;}
+        50%, 100% {bottom:100%;}
+    }
+    .neon-line.yellow {color:#ff0;}
+    .neon-line.yellow::before {border-color:rgb(121, 121, 10);}
+    .neon-line.yellow:hover {
+        box-shadow: 0 0 10px rgb(124, 124, 9),
+                    0 0 20px rgb(121, 121, 10);
+    }
+    .neon-line.yellow .neon-line1 {background:linear-gradient(90deg,transparent,#ff0);}
+    .neon-line.yellow .neon-line2 {background:linear-gradient(180deg,transparent,#ff0);}
+    .neon-line.yellow .neon-line3 {background:linear-gradient(270deg,transparent,#ff0);}
+    .neon-line.yellow .neon-line4 {background:linear-gradient(360deg,transparent,#ff0);}
+
+    /* hover */
+    .neon-line-hover {position:relative;display:inline-block;padding:25px 30px;color:#03e9f4;text-decoration:none;transition:0.5s;overflow:hidden;box-sizing:border-box;}
+    .neon-line-hover::before {position:absolute;left:0;top:0;content:'';display:block;width:100%;height:100%;border:2px solid #05595e;overflow:hidden;box-sizing:border-box;}
+    .neon-line-hover span {position:absolute;display:block;}
+    .neon-line-hover:hover {      
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(51, 206, 226, 0.6),
+                    0 0 20px rgba(29, 149, 165, 0.6);
+    }
+    .neon-line-hover:hover .neon-line1 {top:0;left:0;width:100%;height:2px;
+        background:linear-gradient(90deg,transparent,#03e9f4);
+        animation:animate1 2s linear infinite;
+    }
+    @keyframes animate1 {
+        0% {left:-100%;}
+        50%, 100% {left:100%;}
+    }
+    .neon-line-hover:hover .neon-line2 {top:-100%;right:0;width:2px;height:100%;
+        background:linear-gradient(180deg,transparent,#03e9f4);
+        animation:animate2 2s linear infinite;
+        animation-delay:0.5s;
+    }
+    @keyframes animate2 {
+        0% {top:-100%;}
+        50%, 100% {top:100%;}
+    }
+    .neon-line-hover:hover .neon-line3 {bottom:0;right:-100%;width:100%;height:2px;
+        background:linear-gradient(270deg,transparent,#03e9f4);
+        animation:animate3 2s linear infinite;
+        animation-delay:1.0s;
+    }
+    @keyframes animate3 {
+        0% {right:-100%;}
+        50%, 100% {right:100%;}
+    }
+    .neon-line-hover:hover .neon-line4 {bottom:-100%;left:0;width:2px;height:100%;
+        background:linear-gradient(360deg,transparent,#03e9f4);
+        animation:animate4 2s linear infinite;
+        animation-delay:1.5s;
+    }
+    @keyframes animate4 {
+        0% {bottom:-100%;}
+        50%, 100% {bottom:100%;}
+    }
+    .neon-line-hover.yellow {color:#ff0;}
+    .neon-line-hover.yellow::before {border-color:rgb(121, 121, 10);}
+    .neon-line-hover.yellow:hover {
+        box-shadow: 0 0 10px rgb(124, 124, 9),
+                    0 0 20px rgb(121, 121, 10);
+    }
+    .neon-line-hover.yellow:hover .neon-line1 {background:linear-gradient(90deg,transparent,#ff0);}
+    .neon-line-hover.yellow:hover .neon-line2 {background:linear-gradient(180deg,transparent,#ff0);}
+    .neon-line-hover.yellow:hover .neon-line3 {background:linear-gradient(270deg,transparent,#ff0);}
+    .neon-line-hover.yellow:hover .neon-line4 {background:linear-gradient(360deg,transparent,#ff0);}
+</style>
+<a href="#" class="neon-line">
+    <span class="neon-line1"></span>
+    <span class="neon-line2"></span>
+    <span class="neon-line3"></span>
+    <span class="neon-line4"></span>
+    neon-line button
+</a>
+<a href="#" class="neon-line yellow">
+    <span class="neon-line1"></span>
+    <span class="neon-line2"></span>
+    <span class="neon-line3"></span>
+    <span class="neon-line4"></span>
+    neon-line button
+</a>
+<a href="#" class="neon-line-hover">
+    <span class="neon-line1"></span>
+    <span class="neon-line2"></span>
+    <span class="neon-line3"></span>
+    <span class="neon-line4"></span>
+    neon-line-hover button
+</a>
+<a href="#" class="neon-line-hover yellow">
+    <span class="neon-line1"></span>
+    <span class="neon-line2"></span>
+    <span class="neon-line3"></span>
+    <span class="neon-line4"></span>
+    neon-line-hover button
+</a>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">btn-light</div>
+        <div class="code_area" data-style="">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+<style>
+    .btn-light-container {position:relative;display:inline-flex;align-items:center;gap:20px;}
+    .btn-light-wrapper {position:relative;width:280px;height:60px;}
+    .btn-light {position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;border:2px solid transparent;border-radius:30px;color:white;font-size:18px;font-weight:600;cursor:pointer;text-decoration:none;
+        background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        transition:transform 0.3s ease, box-shadow 0.3s ease;        
+    }
+    .btn-light:hover {transform:scale(1.05);box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4);}
+    .btn-light::before {position:absolute;z-index:2;top:0;left:0;right:0;bottom:0;content:'';padding:2px;border-radius:30px;
+        background:linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%);
+        background-size:200% 100%;
+        -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        mask-composite:exclude;
+        pointer-events:none;
+        animation:borderFlow 2s linear infinite;
+    }
+    @keyframes borderFlow {
+        0% {background-position:200% 0;}
+        100% {background-position:0 0;}
+    }
+    .btn-light:hover {box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4), 0 0 90px rgba(168, 85, 247, 0.2);}
+    .btn-light .star {display:inline-block;font-size:20px;animation:twinkle 0.6s ease-in-out infinite;}
+    .btn-light:hover .star {animation:twinkle 0.4s ease-in-out infinite;}
+    @keyframes twinkle {
+        0%, 100% {opacity:1;}
+        50% {opacity:0.4;}
+    }
+
+    /* hover */
+    .btn-light-hover-container {position:relative;display:inline-flex;align-items:center;gap:20px;}
+    .btn-light-hover-wrapper {position:relative;width:280px;height:60px;}
+    .btn-light-hover {position:absolute;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;width:100%;height:100%;border:2px solid transparent;border-radius:30px;color:white;font-size:18px;font-weight:600;cursor:pointer;text-decoration:none;
+        background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        transition:transform 0.3s ease, box-shadow 0.3s ease;        
+    }
+    .btn-light-hover:hover {transform:scale(1.05);box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4);}
+    .btn-light-hover::before {position:absolute;z-index:2;top:0;left:0;right:0;bottom:0;content:'';padding:2px;border-radius:30px;
+        background:linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.4) 50%, transparent 75%);
+        background-size:200% 100%;
+        -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite:xor;
+        mask-composite:exclude;
+        pointer-events:none;
+    }
+    .btn-light-hover:hover::before {animation:borderFlow 2s linear infinite;}
+    @keyframes borderFlow {
+        0% {background-position:200% 0;}
+        100% {background-position:0 0;}
+    }
+    .btn-light-hover:hover {box-shadow:0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(139, 92, 246, 0.4), 0 0 90px rgba(168, 85, 247, 0.2);}
+    .btn-light-hover .star {display:inline-block;font-size:20px;animation:twinkle 0.6s ease-in-out infinite;}
+    .btn-light-hover:hover .star {animation:twinkle 0.4s ease-in-out infinite;}
+    @keyframes twinkle {
+        0%, 100% {opacity:1;}
+        50% {opacity:0.4;}
+    }
+</style>
+<div class="btn-light-container">
+    <div class="btn-light-wrapper">
+        <a href="#" class="btn-light">
+            <span class="star">✨</span>
+            <span>btn-light button</span>
+        </a>
+    </div>
+</div>
+<div class="btn-light-hover-container">
+    <div class="btn-light-hover-wrapper">
+        <a href="#" class="btn-light-hover">
+            <span class="star">✨</span>
+            <span>btn-light button</span>
+        </a>
+    </div>
+</div>
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">text</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">line</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">scale</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">rotate</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">move</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">2d</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+        <!-- code_area -->
+        <div class="code_tit">3d</div>
+        <div class="code_area" data-style="vertical">
+            <!-- code_ui -->
+            <div class="code_ui">
+                <div class="code_ui_box">
+                </div>
+            </div>
+            <!-- // code_ui -->
+            <!-- code_view -->
+            <div class="code_view"><div class="code_view_box"><textarea class="code_preview"></textarea></div></div>
+            <!-- // code_view -->
+        </div>
+        <!-- // code_area -->
+
+    </div>
+    <!-- // code_wrap -->
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
