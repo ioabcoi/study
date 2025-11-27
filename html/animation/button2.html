@@ -253,10 +253,28 @@
 
         <!-- code_area -->
         <div class="code_tit">text</div>
-        <div class="code_area" data-style="vertical">
+        <div class="code_area" data-style="">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
+<style type="text/css">
+    .btn-gradient {position:relative;display:flex;width:300px;height:50px;color:#fff;text-decoration:none;} 
+    .btn-gradient span {position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:10px;box-shadow:inset 0 0 5px rgba(255, 255, 255, 0.5);background:linear-gradient(90deg,rgba(201, 85, 255, 1) 0%, rgba(129, 88, 252, 1) 100%);border-radius:10px;}
+    .btn-gradient .backbg {position:absolute;top:0;left:0;width:100%;height:100%;}
+    .btn-gradient .backbg::before,
+    .btn-gradient .backbg::after {position:absolute;z-index:0;left:-2px;top:-2px;content:'';width:calc(100% + 4px);height:calc(100% + 4px);background:linear-gradient(45deg, #6644d3, #6644d3, #6644d3, #ec2aff, #6644d3, #6644d3, #6644d3, #6644d3, #ec2aff, #6644d3);background-size:400%;border-radius:10px;
+        animation:steam 15s linear infinite normal;
+    }
+    .btn-gradient .backbg::after {filter:blur(50px);}
+    @keyframes steam {
+        0% {background-position:0 0;}
+        100% {background-position:400% 400%;}
+    }
+</style>
+<a href="#none" class="btn-gradient">
+    <span>btn-gradient button</span>
+    <em class="backbg"></em>
+</a>
                 </div>
             </div>
             <!-- // code_ui -->
