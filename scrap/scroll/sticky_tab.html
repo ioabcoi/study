@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>sticky_sidebar</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        /* 참고 
+        https://coding-factory.tistory.com/951
+        */
+
+        @import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+        * {margin:0;box-sizing:border-box;}
+        html {scroll-behavior:smooth;}
+        body {padding:5%;background-color:#ccc;font-size:20px;font-family:Lora, sans-serif;}
+        header,
+        footer,
+        main,
+        aside {padding:15px;background-color:white;border:5px solid #222;border-radius:10px;color:#222;}
+        main {display:flex;flex-direction:column;width:100%;min-height:3000px;}
+        header,
+        footer {height:200px;}
+        .wrapper {display:flex;justify-content:space-between;margin:5% 0;}
+        section {padding:120px 0;border-bottom:3px dotted #999;min-height:500px;}
+        code, 
+        pre {background-color:#ccc;padding:0 3px;border-radius:5px;}
+
+        /* 탭 스타일 */
+        .tab-component {margin:40px 0;}
+        .tabs {position:sticky;z-index:10;top:0;display:flex;gap:10px;padding:10px 0;background:#fff;border-bottom:2px solid #ddd;transition:all 0.3s;}
+        .tabs.unfix {position:relative;}
+        .tabs button {flex:1;padding:12px 20px;border:1px solid #ddd;background:#f5f5f5;cursor:pointer;font-size:16px;transition:all 0.3s;}
+        .tabs button.active {background:#333;color:#fff;border-color:#333;font-weight:bold;}
+        .tabs button:hover {background:#e0e0e0;}
+        .tabs button.active:hover {background:#555;}
+
+        /* 섹션 스타일 */
+        .tab-content section {padding:40px 0;min-height:400px;border-bottom:1px solid #eee;}
+        .tab-content section h2 {margin-top:0;}
+
+        /* 중첩 탭 스타일 차별화 */
+        .tab-component .tab-component .tabs {background:#f9f9f9;border-bottom:2px solid #999;}
+        .tab-component .tab-component .tabs button {background:#e8e8e8;font-size:14px;}
+        .tab-component .tab-component .tabs button.active {background:#666;}
+    </style>
+
+    <header>header</header>
+
+    <div class="wrapper">
+        <main>
+            <h2>Main content</h2>
+            <p>Scroll down the page!</p>
+            <h3>How to recreate this</h3>
+            <p>
+                Position the columns with flex. Then apply two lines of CSS to the sidebar to make it sticky:
+                <pre>
+                    aside {
+                        position: sticky;
+                        top: 0;
+                    }
+                </pre>
+            </p>
+
+            <!-- 첫 번째 탭 그룹 -->
+            <div class="tab-component">
+                <div class="tabs">
+                    <button>메인 탭 1</button>
+                    <button>메인 탭 2</button>
+                    <button>메인 탭 3</button>
+                </div>
+                <div class="tab-content">
+                    <section>
+                        <h2>메인 섹션 1</h2>
+                        <p>첫 번째 메인 콘텐츠입니다.</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                    </section>
+                    <section>
+                        <h2>메인 섹션 2</h2>
+                        <p>두 번째 메인 콘텐츠입니다.</p>
+                        
+                        <!-- 중첩된 탭 그룹 -->
+                        <div class="tab-component">
+                            <div class="tabs">
+                                <button>서브 탭 A</button>
+                                <button>서브 탭 B</button>
+                            </div>
+                            <div class="tab-content">
+                                <section>
+                                    <h3>서브 섹션 A</h3>
+                                    <p>중첩된 첫 번째 콘텐츠</p>
+                                </section>
+                                <section>
+                                    <h3>서브 섹션 B</h3>
+                                    <p>중첩된 두 번째 콘텐츠</p>
+                                </section>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <h2>메인 섹션 3</h2>
+                        <p>세 번째 메인 콘텐츠입니다.</p>
+                    </section>
+                </div>
+            </div>
+
+            <!-- 두 번째 독립적인 탭 그룹 -->
+            <div class="tab-component">
+                <div class="tabs">
+                    <button>다른 탭 1</button>
+                    <button>다른 탭 2</button>
+                    <button>다른 탭 3</button>
+                    <button>다른 탭 4</button>
+                    <button>다른 탭 5</button>
+                </div>
+                <div class="tab-content">
+                    <section>
+                        <h2>또 다른 섹션 1</h2>
+                        <p>완전히 독립적인 탭 그룹입니다.</p>
+                    </section>
+                    <section>
+                        <h2>또 다른 섹션 2</h2>
+                        <p>5개의 탭도 문제없이 동작합니다.</p>
+                    </section>
+                    <section>
+                        <h2>또 다른 섹션 3</h2>
+                        <p>각 컴포넌트는 독립적으로 작동합니다.</p>
+                    </section>
+                    <section>
+                        <h2>또 다른 섹션 4</h2>
+                        <p>네 번째 섹션</p>
+                    </section>
+                    <section>
+                        <h2>또 다른 섹션 5</h2>
+                        <p>다섯 번째 섹션</p>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>footer</footer>
+
+    <!--
+    주요 특징:
+
+    1. 자동 ID 생성:
+      data-target, id를 수동으로 넣을 필요 없음
+      버튼과 섹션 개수만 맞추면 자동으로 연결
+
+    2. 컴포넌트화:
+      여러 개의 독립적인 탭 그룹 사용 가능
+      중첩된 탭도 문제없이 동작
+
+    3. 간단한 사용법:
+    <div class="tab-component">
+        <div class="tabs">
+            <button>탭 1</button>
+            <button>탭 2</button>
+        </div>
+        <div class="tab-content">
+            <section><h2>콘텐츠 1</h2></section>
+            <section><h2>콘텐츠 2</h2></section>
+        </div>
+    </div>
+
+    4. 자동 기능:
+      버튼과 섹션 자동 매칭
+      스크롤에 따른 탭 활성화
+      마지막 섹션 지나면 sticky 해제
+      각 컴포넌트 독립적으로 동작
+
+    -->
+
+    <script>
+        class TabComponent {
+            constructor(element) {
+                this.component = element;
+                this.tabs = element.querySelector('.tabs');
+                this.buttons = this.tabs.querySelectorAll('button');
+                this.sections = element.querySelector('.tab-content').querySelectorAll(':scope > section');
+                this.isScrollingByClick = false;
+                
+                this.init();
+            }
+
+            init() {
+                // 버튼과 섹션에 자동으로 ID 부여
+                this.buttons.forEach((btn, idx) => {
+                    const id = `tab-${this.generateUniqueId()}-${idx}`;
+                    btn.dataset.target = id;
+                    this.sections[idx].id = id;
+                });
+
+                // 첫 번째 탭 활성화
+                this.buttons[0].classList.add('active');
+
+                // 이벤트 리스너 등록
+                this.bindEvents();
+            }
+
+            generateUniqueId() {
+                return Math.random().toString(36).substr(2, 9);
+            }
+
+            bindEvents() {
+                // 탭 클릭 이벤트
+                this.buttons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.handleTabClick(btn);
+                    });
+                });
+
+                // 스크롤 이벤트
+                window.addEventListener('scroll', () => this.updateActiveByScroll());
+                window.addEventListener('resize', () => this.updateActiveByScroll());
+                window.addEventListener('scroll', () => this.checkStickyEnding());
+                window.addEventListener('resize', () => this.checkStickyEnding());
+            }
+
+            handleTabClick(clickedBtn) {
+                this.isScrollingByClick = true;
+
+                this.buttons.forEach(btn => btn.classList.remove('active'));
+                clickedBtn.classList.add('active');
+
+                const targetId = clickedBtn.dataset.target;
+                const targetSection = document.getElementById(targetId);
+                
+                // sticky 탭의 높이 계산
+                const tabsHeight = this.tabs.offsetHeight;
+                const targetPosition = targetSection.offsetTop - tabsHeight - 10;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                setTimeout(() => {
+                    this.isScrollingByClick = false;
+                }, 500);
+            }
+
+            updateActiveByScroll() {
+                if (this.isScrollingByClick) return;
+
+                const scrollY = window.scrollY;
+                const tabsHeight = this.tabs.offsetHeight;
+                const offset = tabsHeight + 50;
+
+                this.sections.forEach((sec) => {
+                    const rect = sec.getBoundingClientRect();
+                    const top = rect.top + scrollY;
+                    const bottom = top + sec.offsetHeight;
+
+                    if (scrollY + offset >= top && scrollY + offset < bottom) {
+                        this.buttons.forEach(btn => btn.classList.remove('active'));
+                        const activeBtn = Array.from(this.buttons).find(
+                            btn => btn.dataset.target === sec.id
+                        );
+                        if (activeBtn) {
+                            activeBtn.classList.add('active');
+                        }
+                    }
+                });
+            }
+
+            checkStickyEnding() {
+                const lastSection = this.sections[this.sections.length - 1];
+                const rect = lastSection.getBoundingClientRect();
+                const lastSecBottomPass = rect.bottom < 0;
+
+                if (lastSecBottomPass) {
+                    this.tabs.classList.add('unfix');
+                } else {
+                    this.tabs.classList.remove('unfix');
+                }
+            }
+        }
+
+        // 모든 탭 컴포넌트 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabComponents = document.querySelectorAll('.tab-component');
+            tabComponents.forEach(component => {
+                new TabComponent(component);
+            });
+        });
+    </script>
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>

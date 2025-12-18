@@ -19,8 +19,9 @@
         .event_wrap {position:relative;min-width:1080px;width:100%;font-family:"Pretendard", sans-serif;}
         .event_wrap .inner {position:relative;width:1080px;margin:0 auto;text-align:center;}
         .event_wrap .box {height:500px;background:navy;}
+        .event_wrap .frame {overflow:hidden;position:relative;width:100%;height:600px;border-radius:25px;}
 
-        .event_wrap .cont1 {background-color:#171717;}
+        .event_wrap .cont1 {overflow:hidden;background:#171717;}
         .event_wrap .cont1 .inner .left,
         .event_wrap .cont1 .inner .right {position:absolute;left:50%;top:50%;transform:translate(-50%, -50%);}
         .event_wrap .cont1 .inner .left {animation:spin 10s linear infinite;}
@@ -31,21 +32,22 @@
         .event_wrap .cont1 .pin_wrap .scene {opacity:0;position:absolute;width:100%;color:#ffffff66;font-size:76px;font-weight:800;line-height:110px;}
         .event_wrap .cont1 .pin_wrap .scene > span {color:#fff;}
 
-        .event_wrap .cont2 {padding:200px 0; background:#fafafa;}
+        .event_wrap .cont2 {padding:200px 0;background:#fafafa;}
         .event_wrap .cont2 .pin_wrap .observer_section {position:-webkit-sticky;position:sticky;top:150px;}
-        .event_wrap .cont2 .pin_wrap .observer_section + .observer_section {margin-top:200px;}
-        .event_wrap .cont2 .frame {overflow:hidden;position:relative;width:100%;height:600px;border-radius:25px;}
-
-        .event_wrap .cont3 {padding:200px 0;background:#000;}
+        .event_wrap .cont2 .pin_wrap .observer_section + .observer_section {margin-top:100px;}
+        
+        .event_wrap .cont3 {overflow:hidden;padding:200px 0;background:#000;}
         .event_wrap .cont3 .pin_wrap {position:relative;height:100vh;}
         .event_wrap .cont3 .pin_wrap .observer_section {overflow:hidden;position:absolute;left:0;top:0;display:flex;align-items:center;justify-items:center;width:100%;height:calc(100vh - 400px);border-radius:25px;}
-        .event_wrap .cont3 .frame {overflow:hidden;position:relative;width:100%;height:100%;}
+        .event_wrap .cont3 .frame {height:100%;}
 
-        .event_wrap .cont4 {padding:200px 0; background:#fafafa;}
+        .event_wrap .cont4 {padding:200px 0;background:#fafafa;}
         .event_wrap .cont4 .pin_wrap .observer_section {position:-webkit-sticky;position:sticky;bottom:150px;}
-        .event_wrap .cont4 .pin_wrap .observer_section + .observer_section {margin-top:200px;}
-        .event_wrap .cont4 .frame {overflow:hidden;position:relative;width:100%;height:600px;border-radius:25px;}
+        .event_wrap .cont4 .pin_wrap .observer_section + .observer_section {margin-top:100px;}
 
+        .event_wrap .cont5 {overflow:hidden;height:100vh;background:#000;}
+        .event_wrap .cont5 .pin_wrap {will-change:transform;padding:200px 0;}
+        .event_wrap .cont5 .pin_wrap .observer_section + .observer_section {margin-top:100px;}
     </style>
 
     <div class="event_wrap">
@@ -136,6 +138,28 @@
             </div>
         </div>
 
+        <div class="cont5">
+            <div class="inner">
+                <div class="pin_wrap">
+                    <div class="observer_section">
+                        <div class="frame mo1" style="background:red;"></div>
+                    </div>
+                    <div class="observer_section">
+                        <div class="frame mo2" style="background:orange;"></div>
+                    </div>
+                    <div class="observer_section">
+                        <div class="frame mo3" style="background:yellow;"></div>
+                    </div>
+                    <div class="observer_section">
+                        <div class="frame mo4" style="background:green;"></div>
+                    </div>
+                    <div class="observer_section">
+                        <div class="frame mo5" style="background:blue;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="box"></div>
 
     </div>
@@ -186,6 +210,40 @@
             .from(".mo5", { x: '100%', duration: 1 })
             .to(".mo5", { x: 0, duration: 0.8 })
 
+        let motion3 = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".cont5",
+                start: "top top",
+                end: () => {
+                    const innerContent = document.querySelector(".cont5 .pin_wrap");
+                    const cont5 = document.querySelector(".cont5");
+                    // 내부 콘텐츠 높이 - 컨테이너 높이만큼 스크롤
+                    return `+=${innerContent.offsetHeight - cont5.offsetHeight}`;
+                },
+                scrub: 1,
+                pin: true,
+                pinSpacing: true,
+                markers: true
+            }
+        });
+
+        // inner-content를 퍼센트로 이동
+        motion3.fromTo(".cont5 .pin_wrap", 
+            {
+                yPercent: 0  // 시작: 0%
+            },
+            {
+                yPercent: () => {
+                    const innerContent = document.querySelector(".cont5 .pin_wrap");
+                    const cont5 = document.querySelector(".cont5");
+                    // 이동해야 할 거리를 퍼센트로 계산
+                    const moveDistance = innerContent.offsetHeight - cont5.offsetHeight;
+                    const percent = -(moveDistance / innerContent.offsetHeight) * 100;
+                    return percent;
+                },
+                ease: "none"
+            }
+        );
     </script>
 
     <!-- foot -->
