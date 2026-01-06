@@ -938,11 +938,166 @@ https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js
         <!-- // code_area -->
 
         <!-- code_area -->
-        <div class="code_tit">title</div>
+        <div class="code_tit">scroll tab - slide</div>
         <div class="code_area" data-style="vertical">
             <!-- code_ui -->
             <div class="code_ui">
                 <div class="code_ui_box">
+<style type="text/css">
+  /* scroll_tab */
+  .scroll_tab {position:relative;width:100%;height:34px;margin:20px 0;box-sizing:border-box;}
+  .scroll_tab > div {width:100%;height:100%;box-sizing:border-box;text-align:center;}
+  .scroll_tab > div ul {display:inline-flex;align-items:center;justify-content:center;}
+  .scroll_tab > div ul li {display:flex;margin-right:6px;}
+  .scroll_tab > div ul li a {position:relative;display:flex;align-items:center;justify-content:center;height:34px;padding:0 16px;background:#333336;border-radius:17px;color:#fff;font-size:14px;white-space:nowrap;opacity:0.6;}
+  .scroll_tab > div ul li.on a {background:#eee;color:#222;font-weight:500;opacity:1;}
+  .scroll_tab > div ul li:first-child {padding-left:20px;}
+  .scroll_tab > div ul li:last-child {padding-right:20px;}
+  .scroll_tab_cont {width:340px;margin:0 auto;}
+  .scroll_tab_cont ul li {padding:0 10px;}
+
+  /* scroller */
+  .scroller {overflow:hidden;overflow-x:auto;-webkit-overflow-scrolling:touch;scroll-padding:0 20px;scroll-snap-type:x mandatory;}
+  .scroller ul li {scroll-snap-align:start;scroll-snap-stop:normal;}
+  .scroller::-webkit-scrollbar {height:0;background-color:transparent}
+</style>                  
+<!-- scroll_tab_cont -->
+<div class="scroll_tab cont_tab1">
+    <div class="scroller">
+        <ul>
+            <li class="on"><a href="#">탭1 탭1 탭1</a></li>
+            <li><a href="#">탭2 탭2 탭2 탭2</a></li>
+            <li><a href="#">탭3 탭3 탭3</a></li>
+            <li><a href="#">탭4 탭4 탭4 탭4</a></li>
+            <li><a href="#">탭5 탭5</a></li>
+        </ul>
+    </div>
+</div>
+<div class="scroll_tab_cont cont_slide1">
+    <ul>
+        <li><img src="https://picsum.photos/320/320/?random=1" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=2" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=3" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=4" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=5" alt="" /></li>
+    </ul>
+</div>
+<!-- // scroll_tab_cont -->
+<!-- scroll_tab_cont -->
+<div class="scroll_tab cont_tab2">
+    <div class="scroller">
+        <ul>
+            <li class="on"><a href="#">국어</a></li>
+            <li><a href="#">수학</a></li>
+            <li><a href="#">영어</a></li>
+            <li><a href="#">사회탐구</a></li>
+            <li><a href="#">과회탐구</a></li>
+        </ul>
+    </div>
+</div>
+<div class="scroll_tab_cont cont_slide2">
+    <ul>
+        <li><img src="https://picsum.photos/320/320/?random=1" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=2" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=3" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=4" alt="" /></li>
+        <li><img src="https://picsum.photos/320/320/?random=5" alt="" /></li>
+    </ul>
+</div>
+<!-- // scroll_tab_cont -->
+<script type="text/javascript">
+    // 공통 슬라이드 초기화 함수
+    function initBxSlider(slideSelector, tabSelector, sliderArray, options) {
+        jQuery(slideSelector).each(function (i) {
+            const slideClass = slideSelector.replace('.', '') + '_' + i;
+            const tabClass   = tabSelector.replace('.', '') + '_' + i;
+
+            jQuery(this).addClass(slideClass);
+            jQuery(this).prev(tabSelector).addClass(tabClass);
+
+            const $slider   = jQuery('.' + slideClass + ' > ul');
+            const $tabWrap  = jQuery('.' + tabClass);
+            const $scroller = $tabWrap.find('> div');
+
+            let autoTimer = null;
+
+            sliderArray[i] = $slider.bxSlider({
+                pause: 3500,
+                infiniteLoop: true,
+                useCSS: false,
+                controls: false,
+                touchEnabled: true,
+                adaptiveHeight: false,
+                autoHover: true,
+                pager: true,
+                pagerCustom: '.' + tabClass,
+                auto: options.auto,
+
+                onSliderLoad: function () {
+                    const $active = $tabWrap.find('ul li').eq(0).addClass('on');
+                    scrollToActiveTab($scroller, $active);
+                },
+
+                onSlideBefore: function ($slideElement, oldIndex, newIndex) {
+                    const $items = $tabWrap.find('ul li').removeClass('on');
+                    const $active = $items.eq(newIndex).addClass('on');
+                    scrollToActiveTab($scroller, $active);
+                },
+
+                // 스와이프 후 자동 롤링 재시작
+                  onSlideAfter: function () {
+                    if (!options.auto) return;
+
+                    clearTimeout(autoTimer);
+                    autoTimer = setTimeout(function () {
+                        sliderArray[i].stopAuto();
+                        sliderArray[i].startAuto();
+                    }, 500); // 터치 종료 후 0.5초 뒤 재시작
+                }
+            });
+
+            // 탭 클릭
+            $tabWrap.find('ul li a').on('click', function (e) {
+                e.preventDefault();
+
+                const index = jQuery(this).parent().index();
+                const $items = $tabWrap.find('ul li').removeClass('on');
+                const $active = $items.eq(index).addClass('on');
+
+                sliderArray[i].goToSlide(index);
+                scrollToActiveTab($scroller, $active);
+
+                if (options.auto) {
+                    sliderArray[i].stopAuto();
+                    sliderArray[i].startAuto();
+                }
+            });
+        });
+    }
+
+    // 탭 위치 스크롤용 공통 함수
+    function scrollToActiveTab($scroller, $activeItem) {
+        if (!$activeItem.length) return;
+
+        const itemLeft   = $activeItem.position().left;
+        const itemWidth  = $activeItem.outerWidth();
+        const scrollLeft = $scroller.scrollLeft();
+        const scrollerWidth = $scroller.outerWidth();
+
+        // 중앙으로 오게 조정
+        const targetScroll = scrollLeft + itemLeft - (scrollerWidth / 2) + (itemWidth / 2);
+        $scroller.stop().animate({
+            scrollLeft: targetScroll
+        }, 0);
+    }
+
+    var cont_slide1_array = [];
+    var cont_slide2_array = [];
+
+    initBxSlider('.cont_slide1', '.cont_tab1', cont_slide1_array, { auto: false });
+    initBxSlider('.cont_slide2', '.cont_tab2', cont_slide2_array, { auto: true });			
+</script>
+
                 </div>
             </div>
             <!-- // code_ui -->
