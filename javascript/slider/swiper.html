@@ -83,29 +83,22 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
     document.addEventListener('DOMContentLoaded', function () {
         // cont_swiper_bullets
         const contSwiperBullets = [];
-
         document.querySelectorAll('.cont_swiper_bullets').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_bullets' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-
-            contSwiperBullets[index] = new Swiper(swiperSelector, {
+            const swiperEl = container.querySelector('.swiper');
+            contSwiperBullets[index] = new Swiper(swiperEl, {
                 loop: false,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: container.querySelector('.swiper-button-next'),
+                    prevEl: container.querySelector('.swiper-button-prev'),
                 },
                 pagination: {
-                    el: paginationSelector,
+                    el: container.querySelector('.swiper-pagination'),
                     type: 'bullets',
+                    clickable: true,
                 },
             });
         });
@@ -144,43 +137,34 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
     document.addEventListener('DOMContentLoaded', function () {
         // cont_swiper_fraction
         const contSwiperFraction = [];
-
-        document.querySelectorAll('.cont_swiper_fraction').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_fraction' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-
-            contSwiperFraction[index] = new Swiper(swiperSelector, {
+        document.querySelectorAll('.cont_swiper_fraction').forEach((container, index) => {
+            const swiperEl = container.querySelector('.swiper');
+            contSwiperFraction[index] = new Swiper(swiperEl, {
                 loop: true,
-                effect: "fade",
+                speed: 600,
                 loopAdditionalSlides: 1,
+                effect: 'fade',
+                fadeEffect: { crossFade: true },
+                watchOverflow: true, // 슬라이드 1개면 자동 비활성
                 autoplay: {
                     delay: 2500,
-                    disableOnInteraction: false
+                    pauseOnMouseEnter: true,
+                    disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: container.querySelector('.swiper-button-next'),
+                    prevEl: container.querySelector('.swiper-button-prev'),
                 },
                 pagination: {
-                    el: paginationSelector,
-                    type: "fraction",
-                    // paging 01, 02 ....
-                    // formatFractionCurrent: function (number) {
-                    //     return ('0' + number).slice(-2);
-                    // },
-                    // formatFractionTotal: function (number) {
-                    //     return ('0' + number).slice(-2);
-                    // },
-                    // renderFraction: function (currentClass, totalClass) {
-                    //     return '<span class="' + currentClass + '"></span>' +
-                    //         ' - ' +
-                    //         '<span class="' + totalClass + '"></span>';
-                    // }
+                    el: container.querySelector('.swiper-pagination'),
+                    type: 'fraction',
+                    // 필요할 때만 사용
+                    /*
+                    formatFractionCurrent: (number) => ('0' + number).slice(-2),
+                    formatFractionTotal: (number) => ('0' + number).slice(-2),
+                    renderFraction: (currentClass, totalClass) =>
+                        `<span class="${currentClass}"></span> / <span class="${totalClass}"></span>`
+                    */
                 },
             });
         });
@@ -225,38 +209,33 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
     document.addEventListener('DOMContentLoaded', function () {
         // cont_swiper_progressbar
         const contSwiperProgressbar = [];
-
-        document.querySelectorAll('.cont_swiper_progressbar').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_progressbar' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-            const progressCircle = document.querySelector(swiperSelector + ' .autoplay-progress svg');
-            const progressContent = document.querySelector(swiperSelector + ' .autoplay-progress span');
-
-            contSwiperProgressbar[index] = new Swiper(swiperSelector, {
+        document.querySelectorAll('.cont_swiper_progressbar').forEach((container, index) => {
+            const swiperEl = container.querySelector('.swiper');
+            const progressCircle = container.querySelector('.autoplay-progress svg');
+            const progressText = container.querySelector('.autoplay-progress span');
+            contSwiperProgressbar[index] = new Swiper(swiperEl, {
                 loop: false,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: container.querySelector('.swiper-button-next'),
+                    prevEl: container.querySelector('.swiper-button-prev'),
                 },
                 pagination: {
-                    el: paginationSelector,
-                    type: "progressbar",
+                    el: container.querySelector('.swiper-pagination'),
+                    type: 'progressbar',
                 },
                 on: {
-                    autoplayTimeLeft(s, time, progress) {
-                        progressCircle.style.setProperty("--progress", 1 - progress);
-                        progressContent.textContent = `${Math.ceil(time / 1000)}s`;
-                    }
-                }
+                    autoplayTimeLeft(swiper, time, progress) {
+                        progressCircle.style.setProperty(
+                            '--progress',
+                            1 - progress
+                        );
+                        progressText.textContent = `${Math.ceil(time / 1000)}s`;
+                    },
+                },
             });
         });
     });
@@ -295,35 +274,35 @@ https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js<br>
     document.addEventListener('DOMContentLoaded', function () {
         // cont_swiper_scrollbar
         const contSwiperScrollbar = [];
-
-        document.querySelectorAll('.cont_swiper_scrollbar').forEach((contSwiper, index) => {
-            const selector = 'cont_swiper_scrollbar' + index;
-            contSwiper.classList.add(selector);
-
-            const swiperSelector = `.${selector} .swiper`;
-            const nextBtnSelector = `.${selector} .swiper-button-next`;
-            const prevBtnSelector = `.${selector} .swiper-button-prev`;
-            const paginationSelector = `.${selector} .swiper-pagination`;
-            const scrollbarSelector = `.${selector} .swiper-scrollbar`;
-
-            contSwiperScrollbar[index] = new Swiper(swiperSelector, {
+        document.querySelectorAll('.cont_swiper_scrollbar').forEach((container, index) => {
+            const swiperEl = container.querySelector('.swiper');
+            contSwiperScrollbar[index] = new Swiper(swiperEl, {
                 loop: false,
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
                 },
                 navigation: {
-                    nextEl: nextBtnSelector,
-                    prevEl: prevBtnSelector,
+                    nextEl: container.querySelector('.swiper-button-next'),
+                    prevEl: container.querySelector('.swiper-button-prev'),
                 },
                 pagination: {
-                    el: paginationSelector,
-                    type: "custom",
+                    el: container.querySelector('.swiper-pagination'),
+                    type: 'custom',
                 },
                 scrollbar: {
-                    el: scrollbarSelector,
+                    el: container.querySelector('.swiper-scrollbar'),
                     hide: true,
                 },
+                // scrollbar 드래그 시 autoplay 멈추기
+                on: {
+                    scrollbarDragStart() {
+                        this.autoplay.stop();
+                    },
+                    scrollbarDragEnd() {
+                        this.autoplay.start();
+                    }
+                }
             });
         });
     });

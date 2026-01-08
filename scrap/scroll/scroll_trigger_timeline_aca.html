@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- head -->
+    <script src="../../html/include/head.js"></script>
+    <!-- // head -->
+    
+    <title>scroll_trigger_timeline_pin</title>
+</head>
+<body data-theme="light">
+
+    <style>
+        /* 참고 
+        https://hyperacademy.etoos.com/gate/recruit/seasonzero
+        */
+        @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+        * {margin:0;box-sizing:border-box;}
+        .event_wrap {position:relative;min-width:1080px;width:100%;font-family:"Pretendard", sans-serif;}
+        .event_wrap .inner {position:relative;width:1080px;margin:0 auto;text-align:center;}
+
+        @keyframes pageFade {0% {opacity:0;}100% {opacity:1;}}
+				.event_wrap {position:relative;width:100%;min-width:1080px;background-color:#000;animation:pageFade 1s linear forwards;}
+				.event_wrap .inner {position:relative;width:1080px;margin:0 auto;text-align:center;}
+				.event_wrap .wid1200 {margin-left:-60px;width:1200px;}
+				.event_wrap .top {width:100%;height:100vh;overflow:hidden;scroll-snap-align:start;scroll-snap-stop:always;}
+				.event_wrap .top .inner {height:inherit;}
+				.event_wrap .top span {position:absolute;top:0;left:0;}
+				.event_wrap .top .text {top:50%;left:0;width:100%;text-align:center;color:#FFF;text-align:center;text-shadow:0 4px 10px rgba(0, 0, 0, 0.35);font-size:94px;font-weight:800;}
+				.event_wrap .top .text em {color:#4B83FF;font-weight:800;}
+				.event_wrap .top .txt1 {top:50%;left:8px;transform:translateY(-50px);}
+				.event_wrap .top .txt2 {top:50%;left:10px;transform:translateY(-50px);}
+				.event_wrap .top .txt3 {top:50%;left:5px;transform:translateY(-50px);}
+				.event_wrap .top .video {top:0;left:50%;transform:translateX(-50%);}
+				.event_wrap .top .video > video {width:auto;height:100dvh;}
+				.event_wrap .top .video2 {top:0;left:50%;transform:translateX(-50%);}
+				.event_wrap .top .video2:after {content:'';position:absolute;bottom:5px;width:100%;left:0;height:5px;background-color:#000;z-index:1;}
+				.event_wrap .top .video2 > video {width:auto;height:103dvh;}
+				.event_wrap .top .bg {top:50%;left:50%;transform:translate(-50%, -50%);}
+				.event_wrap .top .bg > img {height:100dvh;}
+				.event_wrap .top .flo_bn {position:absolute;top:50px;right:50px;}
+				.event_wrap .top.top3 {background-color:#000;}
+				.event_wrap .top.top3 .s1 .bg {clip-path:inset(100% 0 0 0);transition:clip-path 0.5s linear;}
+				.event_wrap .top.top3 .s2 .bg {clip-path:inset(100% 0 0 0);transition:clip-path 1s linear;}
+				.top_wrap {height:100vh;}
+				.top_wrap .top1, 
+				.top_wrap .top2 {position:absolute;top:0;left:0;}
+				.conts_wrap {position:relative;height:100vh;background-color:#191919;}
+				.conts_wrap .fixed_section .tick {position:absolute;top:50%;left:50%;height:777px;margin-left:calc(-540px + 260px - 388px);margin-top:-388px;transform:scale(0.8);z-index:1;}
+				.conts_wrap .fixed_section .tick .base_wrap {clip-path:inset(0 0 0 383px);}
+				.conts_wrap .fixed_section .tick .base {transform:rotate(0);transition:all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
+				.conts_wrap .fixed_section .tick .second {position:absolute;top:0;left:0;transform:rotate(-131deg);transition:all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
+				.conts_wrap .fixed_section .tick0 .base {transform:rotate(0deg);}
+				.conts_wrap .fixed_section .tick0 .second {transform:rotate(-131deg);}
+				.conts_wrap .fixed_section .tick1 .base {transform:rotate(45deg);}
+				.conts_wrap .fixed_section .tick1 .second {transform:rotate(-86deg);}
+				.conts_wrap .fixed_section .tick2 .base {transform:rotate(90deg);}
+				.conts_wrap .fixed_section .tick2 .second {transform:rotate(-41deg);}
+				.conts_wrap .fixed_section .tick3 .base {transform:rotate(135deg);}
+				.conts_wrap .fixed_section .tick3 .second {transform:rotate(4deg);}
+				.conts_wrap .fixed_section .tick4 .base {transform:rotate(180deg);}
+				.conts_wrap .fixed_section .tick4 .second {transform:rotate(49deg);}
+				.conts {position:absolute;top:0;left:0;width:100%;height:100vh;background-color:#191919;overflow:hidden;}
+				.conts .inner {height:100vh;}
+				.conts .text {position:absolute;top:calc(50vh - 193px);left:0;text-align:left;font-weight:700;font-size:34px;line-height:42px;color:#fff;z-index:1;}
+				.conts img {position:absolute;top:calc(50vh - 250px);left:647px;z-index:1;}
+				.cont5 {position:relative;height:100vh;background-color:#000;z-index:1;overflow:hidden;}
+				.cont5 .video3 {position:absolute;top:0;left:50%;transform:translateX(-50%);}
+				.cont5 .video3 > video {width:auto;height:100dvh;}
+				.cont5 .inner {height:inherit;}
+				.cont5 .text {position:absolute;top:50%;margin-top:-120px;width:100%;text-align:center;color:#FFF;text-align:center;text-shadow:0 4px 10px rgba(0, 0, 0, 0.35);font-size:94px;font-weight:800;}
+				.cont5 .text.txt2 {margin-top:0;}
+				.cont6 {padding-top:155px;height:980px;background:url('https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont6_bg.png') center/100% 100% no-repeat;overflow:hidden;}
+				.cont6 .tit {font-weight:700;font-size:54px;line-height:1.2;color:#fff;}
+				.cont6 .slide_wrap {margin-top:91px;}
+				.cont6 .slide_wrap .swiper-container + .swiper-container {margin-top:20px;}
+				.cont6 .slide_wrap .swiper-container .swiper-wrapper {transition-timing-function:linear;}
+				.cont6 .slide_wrap .swiper-container .swiper-slide {display:flex;flex-direction:column;justify-content:center;align-items:center;width:363px;height:186px;border-radius:5px;background:#0759ff url('https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont6_slidebg.png') center no-repeat;}
+				.cont6 .slide_wrap .swiper-container .swiper-slide .year {font-weight:700;font-size:20px;line-height:1.2;color:#fff;}
+				.cont6 .slide_wrap .swiper-container .swiper-slide .school {font-weight:700;font-size:34px;line-height:1.2;color:#fff;}
+				.cont6 .slide_wrap .swiper-container .swiper-slide .branch_Name {margin-top:7px;font-weight:500;font-size:20px;line-height:1.2;color:#fff;}
+				.cont_branch_link {height:807px;background-color:#071230;}
+				.cont_branch_link .tit {position:absolute;top:221px;left:0;width:100%;font-weight:700;font-size:54px;line-height:1.2;color:#fff;}
+				.cont_branch_link .branch_link_wrap {position:absolute;top:405px;left:0;display:grid;grid-template-columns:repeat(2, 1fr);gap:43px;width:100%;}
+				.cont_branch_link .branch_link_wrap .frame {height:216px;border:1px solid #252e49;border-radius:5px;background-color:rgba(7, 18, 48, 0.8);transition:transform .3s linear;}
+				.cont_branch_link .branch_link_wrap .frame a {display:flex;flex-direction:column;justify-content:center;height:inherit;color:#fff;text-decoration:none;}
+				.cont_branch_link .branch_link_wrap .frame a > span {font-weight:800;font-size:30px;}
+				.cont_branch_link .branch_link_wrap .frame a > p {font-weight:500;font-size:20px;}
+				.cont_branch_link .branch_link_wrap .frame a .type {margin-bottom:2px;text-decoration:underline;}
+				.cont_branch_link .branch_link_wrap .frame a .link_like > span {display:flex;justify-content:center;align-items:center;margin:10px auto 0;width:177px;height:39px;background-color:#000;font-weight:500;font-size:18px;}
+				.cont_branch_link .branch_link_wrap .frame:hover {transform:translateY(-5px);}
+		</style>
+    <!-- event_wrap -->
+    <div class="event_wrap">
+        <div class="top_wrap">
+            <div ref="top1" class="top top1">
+                <div class="inner">
+                    <span class="video">
+                        <video muted autoplay loop>
+                            <source src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/data.mp4" type="video/mp4" />
+                        </video>
+                    </span>
+                    <span class="text txt1">의대생 <em>1,000명의</em> 데이터로</span>
+                </div>
+            </div>
+            <div ref="top2" class="top top2">
+                <div class="inner">
+                    <span class="video2">
+                        <video muted autoplay loop>
+                            <source src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/search.mp4" type="video/mp4" />
+                        </video>
+                    </span>
+                    <span class="text txt2">의대관이 찾았습니다</span>
+                </div>
+            </div>
+        </div>
+        <div ref="top3" class="top top3">
+            <div class="inner">
+                <div class="pin_wrap">
+                    <div class="scene s1">
+                        <span class="bg"><img src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/top3_bg0.png" alt=""></span>
+                        <span class="text txt3">당신이 의대로 가는 길</span>
+                    </div>
+                    <div class="scene s2">
+                        <span class="bg"><img src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/top3_bg.png" alt=""></span>
+                        <span class="text txt3_1">의대 합격 패스트트랙</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conts_wrap">
+            <div class="fixed_section">
+                <div class="tick">
+                    <div class="base_wrap">
+                        <img class="base" src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/img_clock_base.png" alt=""></img>
+                    </div>
+                    <img class="second" src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/img_clock_second.png" alt=""></img>
+                </div>
+            </div>
+            <div ref="cont1" class="cont1 conts">
+                <div class="inner">
+                    <p class="text">
+                        1,000명<br>
+                        의대 합격생 데이터로<br>
+                        개인별 최적 학습 알고리즘을<br>
+                        설계합니다.
+                    </p>
+                    <img src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont1_img.png" alt="">
+                </div>
+            </div>
+            <div ref="cont2" class="cont2 conts">
+                <div class="inner">
+                    <p class="text">
+                        의대 진학 전문 강사진과<br>
+                        의대 연구소가 결합된<br>
+                        국내 유일의 ‘의대관 시스템‘을<br>
+                        운영합니다.
+                    </p>
+                    <img src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont2_img.png" alt="">
+                </div>
+            </div>
+            <div ref="cont3" class="cont3 conts">
+                <div class="inner">
+                    <p class="text">
+                        나와 출발이 같은<br>
+                        의대생의 합격 루트를 따라<br>
+                        매주 학습 과정을<br>
+                        데이터로 관리합니다.
+                    </p>
+                    <img src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont3_img.png" alt="">
+                </div>
+            </div>
+            <div ref="cont4" class="cont4 conts">
+                <div class="inner">
+                    <p class="text">
+                        같은 목표를 향해 가는<br>
+                        최상위권이 모여<br>
+                        시너지를 만들어 내는<br>
+                        학습 공간입니다.
+                    </p>
+                    <img src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont4_img.png" alt="">
+                </div>
+            </div>
+        </div>
+      
+        <div ref="cont5" class="cont5">
+            <span class="video3">
+                <video muted autoplay loop>
+                    <source src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/road.mp4" type="video/mp4" />
+                </video>
+            </span>
+            <div class="pin_wrap">
+                <p class="text txt">선별된 ‘의대 합격 데이터‘를 통해</p>
+                <p class="text txt2">‘의대 합격‘의 길을 제안합니다.</p>
+            </div>
+        </div>
+      
+        <div class="cont6">
+          <div class="inner">
+            <p class="tit">강남하이퍼 의대관은<br>목표를 함께 이뤄냅니다.</p>
+          </div>
+          <div class="slide_wrap">
+              <div class="swiper-container slide1">
+                  <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="swiper-container slide2" dir="rtl">
+                  <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                      <div class="swiper-slide">
+                          <p class="year">0000 학년도</p>
+                          <p class="school">ㅇㅇㅇ ㅇㅇㅇㅇ</p>
+                          <p class="branch_Name">ㅇㅇㅇ <span>|</span> ㅇㅇㅇ</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <div class="cont_branch_link">
+            <div class="inner">
+                <img class="wid1200" src="https://acaimg.etoos.com/hp/pc/images/promotion/fasttrack/cont_branch_link.png" alt="">
+                <p class="tit">당신과 의대를 연결하는<br>강남하이퍼학원 의대관입니다</p>
+                <div class="branch_link_wrap">
+                    <div class="frame">
+                        <a target="_blank" href="item.url" class="item.gtmClass">
+                            <p class="type">통학</p>
+                            <span class="txt">의대관</span>
+                            <p class="link_like"><span>바로가기 ></span></p>
+                        </a>
+                    </div>
+                    <div class="frame">
+                        <a target="_blank" href="item.url" class="item.gtmClass">
+                            <p class="type">기숙</p>
+                            <span class="txt">기숙 의대관</span>
+                            <p class="link_like"><span>바로가기 ></span></p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- event_wrap -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.0/ScrollTrigger.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script type="text/javascript">
+        function topWrapMotion() {
+            // 초기 셋업
+            gsap.set('.top1 .text',{opacity: 1 })
+            gsap.set(['.top2 video','.top2 .text'], { opacity: 0 });
+            
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.top_wrap',
+                    pin: true,
+                    scrub: 1,
+                    start: 'top',
+                    end: '+=2000',
+                }
+            });
+
+            tl.to('.top1 .text', { opacity: 1, duration: 0.5, })
+              .to('.top1 .text', { opacity: 0, duration: 0.5, })
+              .to('.top1 video', { opacity: 0, duration: 0.5, },"<")
+              .to('.top2 .text', { opacity: 1, duration: 0.5, })
+              .to('.top2 video', { opacity: 1, duration: 0.5, })
+              .to('.top2 video', { duration: 0.5, })
+        }
+
+        function top3Motion() {
+            // 초기 셋업
+            gsap.set('.top3 .s1 .txt3', { opacity: 0, y: 0 });
+            gsap.set('.top3 .s2 .txt3_1', { opacity: 0, y: 0 });
+
+            // === 1) pin이 걸리자마자 바로 실행될 독립 트윈 ===
+            gsap.to('.top3 .s1 .bg', {
+                delay: 0.1,
+                clipPath: 'inset(0 0 0 0)',
+                duration: 0.1,
+                // 이 ScrollTrigger는 scrub을 쓰지 않아서 start에 도달하자마자 재생됨
+                scrollTrigger: {
+                    trigger: '.top3',
+                    start: 'top 10%',
+                    // start 지점에 도달하면 play, 뒤로가면 reverse 하려면 아래 사용
+                    toggleActions: 'play none none reverse'
+                    // 만약 한 번만 재생하고 끝내고 싶다면 onEnter에서 kill 해도 됨
+                }
+            });
+
+            // === 2) scrub이 있는 메인 타임라인 (기존 로직) ===
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.top3',
+                    pin: true,
+                    scrub: 0.5,
+                    start: 'top',
+                    end: '+=2400',
+                }
+            });
+
+            tl.to('.top3 .s1 .txt3', { opacity: 1, y: -50, duration: 0.1, })
+              .to('.top3 .s2 .bg', { clipPath: 'inset(0 0 0 0)', duration: 0.1, })
+              .to('.top3 .s2 .txt3_1', { opacity: 1, y: -50, duration: 0.1, delay: 0.1, }, "<")
+              .to('.top3 .s1 .txt3', { opacity: 0, y: 50, duration: 0.1 }, "<")
+              .to('.top3 .s1 .txt3', { duration: 0.1 },);
+        }
+
+        function contsWrapMotion() {
+            const tick = document.querySelector('.conts_wrap  .fixed_section .tick');
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.conts_wrap',
+                    pin: true,
+                    scrub: 1,
+                    start: 'top top',
+                    end: '+=3000',
+                },
+            });
+
+            gsap.set(['.cont1 .text', '.cont1 img' ], { opacity: 1, });
+            gsap.set(['.cont2 .text', '.cont2 img'], { opacity: 0, });
+            gsap.set(['.cont3 .text', '.cont3 img'], { opacity: 0, });
+            gsap.set(['.cont4 .text', '.cont4 img'], { opacity: 0, });
+            gsap.set('.tick ', { className: 'tick', duration: 0, });
+
+            tl.to(['.cont1 .text', '.cont1 img'], { opacity: 1, duration: 0.5 },)
+              .to('.tick', { className: 'tick tick1', duration: 0, }, "<")
+              .to('.tick', { duration: 0.5, },)
+              .to(['.cont1 .text', '.cont1 img'], { opacity: 0, },)
+              .to(['.cont2 .text', '.cont2 img'], { opacity: 1, duration: 0.5 },)
+              .to('.tick', { className: 'tick tick2', duration: 0, }, "<")
+              .to('.tick', { duration: 0.5, },)
+              .to(['.cont2 .text', '.cont2 img'], { opacity: 0, },)
+              .to(['.cont3 .text', '.cont3 img'], { opacity: 1, duration: 0.5 },)
+              .to('.tick', { className: 'tick tick3', duration: 0, }, "<")
+              .to('.tick', { duration: 0.5, },)
+              .to(['.cont3 .text', '.cont3 img'], { opacity: 0, },)
+              .to(['.cont4 .text', '.cont4 img'], { opacity: 1, duration: 0.5 },)
+              .to('.tick', { className: 'tick tick4', duration: 0, }, "<")
+              .to('.tick', { duration: 0.5, },)
+        }
+
+        // 목동 cont6 슬라이드
+        function cont6Slide() {
+            const tar1 = document.querySelector('.cont6 .slide1');
+            const tar2 = document.querySelector('.cont6 .slide2');
+            const option = {
+                loop: true,
+                autoplay: {
+                    delay: 1,
+                },
+                speed: 10000,
+                slidesPerView: 'auto',
+                spaceBetween: 20,
+                allowTouchMove: false,
+            }
+            new Swiper(tar1, option);
+            new Swiper(tar2, option);
+        }
+
+        topWrapMotion();
+        top3Motion();
+        contsWrapMotion();
+        cont6Slide();
+    </script>
+    <!-- // event -->
+
+
+    <!-- foot -->
+    <script src="../../html/include/foot.js"></script>
+    <!-- // foot -->
+</body>
+</html>
